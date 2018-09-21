@@ -1,0 +1,11 @@
+.idea/
+bin/
+lib/
+lib64/
+lib64
+share/
+venv/
+db.sqlite3
+pip-selfcheck.json
+pyvevn.cfg
+__pychache__/
