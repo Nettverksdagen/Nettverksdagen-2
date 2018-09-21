@@ -6,9 +6,13 @@ import router from './router'
 import axios from 'axios'
 import Vuex from 'vuex'
 import 'es6-promise/auto'
+import BootstrapVue from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false
 Vue.use(Vuex)
+Vue.use(BootstrapVue)
 
 /* eslint-disable no-new */
 new Vue({
