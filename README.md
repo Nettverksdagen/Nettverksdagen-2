@@ -19,14 +19,14 @@ source venv/bin/activate
 
 ### 3. Install python deps
 ```bash
-pip install django #or pip3 depending on your configuration
+pip install django
 pip install djangorestframework
 pip install django-cors-headers
 ```
 
 ### 4. Run through migrations
 ```bash
-python3 manage.py migrate
+python manage.py migrate
 ```
 
 ### 5. Install Vue packages
@@ -38,7 +38,7 @@ npm install
 ## Usage
 ### Start Django backend
 ```bash
-python3 manage.py runserver
+python manage.py runserver
 ```
 ### Start Vue frontend
 ```bash
@@ -53,6 +53,6 @@ python manage.py makemigrations
 ```
 Applying:
 ```bash
-python3 manage.py migrate
+python manage.py migrate
 ```
 
