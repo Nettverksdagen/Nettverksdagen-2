@@ -1,15 +1,17 @@
 <template>
   <div class="header">
     <div class="content">
-      <div class="side">
-        <img class="logo" src="@/assets/logo.png">
-        <h1>Nettverksdagen</h1>
-      </div>
+      <b-link :to="'/'" class="logo-link">
+        <div class="side">
+          <img class="logo" src="@/assets/logo.png">
+          <h1>Nettverksdagen</h1>
+        </div>
+      </b-link>
       <div class="side">
         <b-nav class="links">
-          <b-nav-item active>Hjem</b-nav-item>
+          <b-nav-item :to="'/'" active>Hjem</b-nav-item>
           <b-nav-item>Program</b-nav-item>
-          <b-nav-item>Stillinger</b-nav-item>
+          <b-nav-item :to="'stillinger'">Stillinger</b-nav-item>
           <b-nav-item>Om oss</b-nav-item>
        </b-nav>
       </div>
@@ -19,6 +21,7 @@
 
 <style lang="scss" scoped>
   .header {
+    background-color:#fff;
   }
   h1 {
     display:inline;
@@ -49,6 +52,9 @@
       margin:30px 30px 30px 0;
       height:80px;
     }
+  }
+  .logo-link {
+    text-decoration:none !important;
   }
   .content {
     display:flex;

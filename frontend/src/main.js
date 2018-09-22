@@ -3,8 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import axios from 'axios'
 import Vuex from 'vuex'
+import store from './store'
 import 'es6-promise/auto'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -19,15 +19,17 @@ Vue.use(BootstrapVue)
 new Vue({
   el: '#app',
   router,
+  store,
   data () {
     return {
       info: null
     }
   },
   mounted () {
-    axios
-      .get('http://127.0.0.1:8000/api/listing/1/')
-      .then(response => (this.info = response))
+    this.fetchListings()
+  },
+  methods: {
+    ...Vuex.mapActions('listings', ['fetchListings'])
   },
   components: { App },
   template: '<App/>'

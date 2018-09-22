@@ -1,6 +1,6 @@
 <template>
   <div class="hero-text">
-    <h1>Nettverksdagen</h1>
+    <h1>Nettverksdagen 2019</h1>
     <h2>31. januar 2019</h2>
     <span>Glassgården – NTNU</span>
   </div>
