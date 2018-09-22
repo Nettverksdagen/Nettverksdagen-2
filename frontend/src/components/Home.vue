@@ -2,15 +2,19 @@
 <template>
   <div class="home">
     <Header/>
-    <img class="hero" src="@/assets/hero_blur.jpg">
+    <div class="dude">
+      <Hero/>
+    </div>
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header.vue'
+import Hero from '@/components/Hero.vue'
 export default {
   components: {
-    Header
+    Header,
+    Hero
   },
   name: 'Home',
   data () {
@@ -21,9 +25,8 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  .hero {
+<style lang="scss" scoped>
+  .dude {
     width:100%;
   }
 </style>

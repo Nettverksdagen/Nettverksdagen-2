@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="24px"
+   version="1.1"
+   viewBox="0 0 24 24"
+   width="24px"
+   id="svg4766"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="presentation.svg">
+  <metadata
+     id="metadata4780">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1600"
+     inkscape:window-height="837"
+     id="namedview4778"
+     showgrid="false"
+     inkscape:zoom="9.8333333"
+     inkscape:cx="12"
+     inkscape:cy="12"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4766" />
+  <title
+     id="title4768" />
+  <desc
+     id="desc4770" />
+  <defs
+     id="defs4772" />
+  <g
+     fill="none"
+     fill-rule="evenodd"
+     id="miu"
+     stroke="none"
+     stroke-width="1"
+     style="fill:#1e4845;fill-opacity:1">
+    <g
+       id="Artboard-1"
+       transform="translate(-503.000000, -371.000000)"
+       style="fill:#1e4845;fill-opacity:1">
+      <g
+         id="slice"
+         transform="translate(215.000000, 119.000000)"
+         style="fill:#1e4845;fill-opacity:1" />
+      <path
+         d="M507.352941,376 C507.352941,376 505,376 505,378.285714 L505,389.714286 C505,392 507.352941,392 507.352941,392 L522.647059,392 C522.647059,392 525,392 525,389.714286 L525,378.285714 C525,376 522.647059,376 522.647059,376 L507.352941,376 L507.352941,376 Z M507.2,377 C507.2,377 506,377 506,378.166667 L506,389.833333 C506,391 507.2,391 507.2,391 L522.8,391 C522.8,391 524,391 524,389.833333 L524,378.166667 C524,377 522.8,377 522.8,377 L507.2,377 L507.2,377 Z M511,389 C512.656854,389 514,387.656854 514,386 L511,386 L511,383 C509.343146,383 508,384.343146 508,386 C508,387.656854 509.343146,389 511,389 L511,389 Z M504.578947,393 C504.578947,393 504.000001,393 504,393.5 C504,394 504.578947,394 504.578947,394 L525.421053,394 C525.421053,394 526,394 526,393.5 C526,393 525.421053,393 525.421053,393 L504.578947,393 L504.578947,393 Z M504.578947,374 C504.578947,374 504.000001,374 504,374.5 C504,375 504.578947,375 504.578947,375 L525.421053,375 C525.421053,375 526,375 526,374.5 C526,374 525.421053,374 525.421053,374 L504.578947,374 L504.578947,374 Z M516,382 L516,383 L517,383 L517,382 L516,382 L516,382 Z M518,382 L518,383 L522,383 L522,382 L518,382 L518,382 Z M508,379 L508,380 L522,380 L522,379 L508,379 L508,379 Z M516,385 L516,386 L517,386 L517,385 L516,385 L516,385 Z M518,385 L518,386 L522,386 L522,385 L518,385 L518,385 Z M516,388 L516,389 L517,389 L517,388 L516,388 L516,388 Z M518,388 L518,389 L522,389 L522,388 L518,388 Z M514,372 L514,374 L516,374 L516,372 L514,372 Z"
+         fill="#000000"
+         id="device-projector-screen-content-chart-presentation-outline-stroke"
+         style="fill:#1e4845;fill-opacity:1" />
+    </g>
+  </g>
+</svg>

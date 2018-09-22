@@ -26,8 +26,11 @@
     padding:0;
     border:0;
     color:#444;
-    font-size:22px;
+    font-size:20px;
     white-space:nowrap;
+    @media (min-width: 768px) {
+      font-size:22px;
+    }
     @media (min-width: 992px) {
       font-size:30px;
     }
@@ -39,11 +42,11 @@
     height:50px;
     margin:0 11px;
     @media (min-width: 992px) {
-      margin:20px;
+      margin:20px 20px 20px 0;
       height:75px;
     }
     @media (min-width: 1400px) {
-      margin:30px;
+      margin:30px 30px 30px 0;
       height:80px;
     }
   }
@@ -54,7 +57,7 @@
     align-content:stretch;
     flex-wrap: nowrap;
     margin: 0 15px;
-    @media (min-width: 992px) {
+    @media (min-width: 1200px) {
       margin: 0 100px;
     }
     @media (min-width: 1400px) {
