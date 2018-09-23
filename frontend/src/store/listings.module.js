@@ -1,6 +1,5 @@
 const defaultState = {
-  listings: []
-
+  all: []
 }
 
 const state = {...defaultState}
@@ -11,19 +10,15 @@ const actions = {
 
     try {
       const response = await fetch('http://127.0.0.1:8000/api/listing/')
-      const listings = await response.json()
-      commit('fetchSuccessful', listings)
+      const all = await response.json()
+      commit('fetchSuccessful', all)
     } catch (e) {
       commit('fetchFailure', e)
     }
   }
 }
 
-const getters = {
-  all (state) {
-    return state.listings
-  }
-}
+const getters = {}
 
 const mutations = {
   fetchRequest (state) {
@@ -31,7 +26,7 @@ const mutations = {
     state.loading = true
   },
   fetchSuccessful (state, listings) {
-    state.listings = listings
+    state.all = listings
     state.loading = false
     state.loaded = true
   },

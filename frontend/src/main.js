@@ -19,7 +19,7 @@ Vue.use(BootstrapVue)
 new Vue({
   el: '#app',
   router,
-  store,
+  store: store,
   data () {
     return {
       info: null
