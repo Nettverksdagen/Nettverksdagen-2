@@ -25,8 +25,8 @@
 <script>
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import HeroText from '@/components/HeroText.vue'
-import HeroHexBox from '@/components/HeroHexBox.vue'
+import HeroText from '@/components/anon/HeroText.vue'
+import HeroHexBox from '@/components/anon/HeroHexBox.vue'
 export default {
   components: {
     HeroText,

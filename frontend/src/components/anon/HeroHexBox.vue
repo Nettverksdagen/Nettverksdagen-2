@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import HeroHex from '@/components/HeroHex.vue'
+import HeroHex from '@/components/anon/HeroHex.vue'
 export default {
   props: ['hexIcon', 'hexTitle'],
   components: {

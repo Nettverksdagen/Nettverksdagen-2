@@ -1,7 +1,5 @@
-
 <template>
   <div class="home">
-    <Header/>
     <div class="dude">
       <Hero/>
     </div>
@@ -9,11 +7,9 @@
 </template>
 
 <script>
-import Header from '@/components/Header.vue'
-import Hero from '@/components/Hero.vue'
+import Hero from '@/components/anon/Hero.vue'
 export default {
   components: {
-    Header,
     Hero
   },
   name: 'Home',

@@ -1,10 +1,11 @@
 <template>
   <div class="listings">
-    <Header/>
     <Content>
       <b-row>
         <div class="d-none d-md-block col-4">
-          <b-card></b-card>
+          <b-card>
+            <p>Her kommer det sortering</p>
+          </b-card>
         </div>
         <div class="col-12 col-md-8">
           <b-list-group>
@@ -17,13 +18,11 @@
 </template>
 
 <script>
-import Header from '@/components/Header.vue'
-import Content from '@/components/Content.vue'
-import Listing from '@/components/Listing.vue'
+import Content from '@/components/common/Content.vue'
+import Listing from '@/components/anon/Listing.vue'
 export default {
   name: 'Listings',
   components: {
-    Header,
     Content,
     Listing
   },

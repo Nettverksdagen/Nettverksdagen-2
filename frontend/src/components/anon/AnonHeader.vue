@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="anon-header">
     <div class="content">
       <b-link :to="'/'" class="logo-link">
         <div class="side">
@@ -20,7 +20,7 @@
 </template>
 
 <style lang="scss" scoped>
-  .header {
+  .anon-header {
     background-color:#fff;
   }
   h1 {
