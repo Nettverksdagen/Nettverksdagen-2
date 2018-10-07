@@ -1,6 +1,6 @@
 <template>
   <div class="listing">
-    <b-list-group-item class="inside">
+    <b-list-group-item class="inside p-4">
       <div class="side logo-container">
         <img class="logo img-responsive center-block center" src="@/assets/logo.png">
       </div>
@@ -31,7 +31,7 @@ export default {
     min-height:80px;
     min-width:80px;
     position:relative;
-    margin-right:20px;
+    margin-right:23px;
     flex-shrink:0;
   }
   .info-container {
