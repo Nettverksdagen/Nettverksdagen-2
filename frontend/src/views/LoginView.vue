@@ -1,6 +1,6 @@
 <template>
   <div class="login-view">
-    <b-row align-v="center main-container">
+    <b-row align-v="center" class="main-container">
       <b-col>
         <b-row align-h="center">
           <b-col cols="12" sm="10" md="7" lg="6" xl="4">
@@ -15,9 +15,11 @@
               </b-col>
               <b-col cols="12" sm="5" class="form-container">
                 <div class="padder">
-                  <b-form-input class="my-2" type="text" placeholder="Brukernavn"></b-form-input>
-                  <b-form-input class="my-2 mb-4" type="password" placeholder="Passord"></b-form-input>
-                  <b-button size="lg" variant="success" class="mb-1 login-button">Logg inn</b-button>
+                  <b-form-group>
+                    <b-form-input class="my-2" type="text" v-model="credentials.username" placeholder="Brukernavn"></b-form-input>
+                    <b-form-input class="my-2 mb-4" type="password" v-model="credentials.password" placeholder="Passord"></b-form-input>
+                    <b-button size="lg" variant="success" @click="login" class="login-button">Logg inn</b-button>
+                  </b-form-group>
                   <b-link class="forgot-password-link" href="#">Glemt passord?</b-link>
                 </div>
               </b-col>
@@ -31,7 +33,25 @@
 
 <script>
 export default {
-  name: 'LoginView'
+  name: 'LoginView',
+  data () {
+    return {
+      credentials: {
+        username: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    login () {
+      this.$store.dispatch('admin/login', {
+        credentials: this.credentials
+      }).then(() => {
+        console.log('Logged in?')
+        // this.$router.push('/')
+      })
+    }
+  }
 }
 </script>
 
@@ -46,12 +66,12 @@ export default {
       min-height:100vh;
     }
     .login-container {
-      box-shadow:0 2px 10px rgba(0,0,0,0.15);
+      box-shadow:0 2px 10px rgba(0, 0, 0, 0.15);
       overflow: hidden;
       border-radius:5px;
     }
     .text-container {
-      background: $form-color;
+      background: rgba(40, 167, 113, 0.85);
       color:#fff;
       h1 {
         font-weight:600;

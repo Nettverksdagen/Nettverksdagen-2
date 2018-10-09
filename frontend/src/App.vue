@@ -20,7 +20,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   background-color:#f4f6f6;
-  /* background-color:#eee; /* Greyer version to see how things look on my shitty screen*/
   min-height:100vh;
 }
 </style>
