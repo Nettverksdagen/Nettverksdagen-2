@@ -38,6 +38,7 @@ npm install
 ## Usage
 ### Start Django backend
 ```bash
+source venv/bin/activate
 python manage.py runserver
 ```
 ### Start Vue frontend

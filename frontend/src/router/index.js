@@ -4,6 +4,7 @@ import HomeView from '@/views/anon/HomeView'
 import ListingsView from '@/views/anon/ListingsView'
 import AnonBaseView from '@/views/anon/AnonBaseView'
 import AdminBaseView from '@/views/admin/AdminBaseView'
+import LoginView from '@/views/LoginView'
 
 Vue.use(Router)
 
@@ -33,6 +34,11 @@ export default new Router({
       path: '/admin',
       name: 'Admin',
       component: AdminBaseView
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: LoginView
     }
   ]
 })
