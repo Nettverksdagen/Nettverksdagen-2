@@ -55,4 +55,15 @@ Applying:
 ```bash
 python manage.py migrate
 ```
+## Other random things
 
+### Curl examples with authentication
+Login
+```bash
+curl -X POST http://127.0.0.1:8000/rest-auth/login/ -d "username=admin&password=1234"
+```
+
+Create a listing
+```bash
+curl -X POST  http://127.0.0.1:8000/api/listing/ -d "name=test&company_name=test company" -H 'Authorization: Token c56ddd032e56280827fdf4c7c2d5ab338c1a1133'
+``` 
