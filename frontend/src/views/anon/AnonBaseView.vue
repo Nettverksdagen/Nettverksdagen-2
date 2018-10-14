@@ -10,7 +10,7 @@
 import AnonHeader from '@/components/anon/AnonHeader.vue'
 import AnonFooter from '@/components/anon/AnonFooter.vue'
 export default {
-  name: 'AnonBaseView.vue',
+  name: 'AnonBaseView',
   components: {
     AnonHeader,
     AnonFooter

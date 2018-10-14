@@ -52,7 +52,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faFacebook, faLinkedin, faTwitterSquare } from '@fortawesome/free-brands-svg-icons'
 library.add(faFacebook, faLinkedin, faTwitterSquare)
 export default {
-  name: 'AnonFooter.vue',
+  name: 'AnonFooter',
   components: {
     Content
   }
