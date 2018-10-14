@@ -7,7 +7,7 @@ You might need some packages such as the Vue CLI, `virtualenv`, `pip` of course 
 Depending on your setup, you might need to use `python3` and `pip3` instead of `python` and `pip`.
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/sigtot/nvd-new.git
+git clone https://github.com/Nettverksdagen/Nettverksdagen-2.git
 cd nvd-new
 ```
 
