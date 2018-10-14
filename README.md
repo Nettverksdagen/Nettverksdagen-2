@@ -1,10 +1,27 @@
 # Nettverksdagen 2.0
 
 ## Prerequisites
-You might need some packages such as the Vue CLI, `virtualenv`, `pip` of course and many others. Handle any missing ones as you go along.
+Note! Depending on your setup, you might need to use `python3` and `pip3` instead of `python` and `pip`. **It's very important that the project is ran with python 3 and not 2.7!**
 
-## Installation
-Depending on your setup, you might need to use `python3` and `pip3` instead of `python` and `pip`.
+### Install pip
+```bash
+sudo apt install python-pip # Ubuntu based linux
+sudo brew install python-pip # OSX
+```
+
+### Install virtualvenv
+Note: installing virtualenv with a python2 installation of pip, is not recommended.
+```bash
+pip install virtualenv
+```
+
+### Install Vue CLI (optional)
+Vue CLI is used to configure the codebase easily
+```bash
+npm i -g @vue/cli
+```
+
+## Project Installation
 ### 1. Clone the repo
 ```bash
 git clone https://github.com/Nettverksdagen/Nettverksdagen-2.git
@@ -13,8 +30,12 @@ cd nvd-new
 
 ### 2. Set up and enter virtual environment
 ```bash
-virtualenv venv -p
+virtualenv venv
 source venv/bin/activate
+```
+Note: If virtualvenv is set up to use python2, you can specify python3 as the correct version with
+```bash
+virtualvenv venv -p /path/to/python3/executable
 ```
 
 ### 3. Install python deps
@@ -22,6 +43,7 @@ source venv/bin/activate
 pip install django
 pip install djangorestframework
 pip install django-cors-headers
+pip install django-rest-auth
 ```
 
 ### 4. Run through migrations
