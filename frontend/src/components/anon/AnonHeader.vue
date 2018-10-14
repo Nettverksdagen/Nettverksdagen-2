@@ -42,15 +42,15 @@
     }
   }
   .logo {
-    height:50px;
+    height:40px;
     margin:0 11px;
     @media (min-width: 992px) {
-      margin:20px 20px 20px 0;
-      height:75px;
+      margin:15px 15px 15px 0;
+      height:50px;
     }
     @media (min-width: 1400px) {
-      margin:30px 30px 30px 0;
-      height:80px;
+      margin:20px 20px 20px 0;
+      height:60px;
     }
   }
   .logo-link {
@@ -82,9 +82,6 @@
     @media (min-width: 992px) {
       display:flex;
       font-size:20px;
-    }
-    @media (min-width: 1400px) {
-      font-size:26px;
     }
     a {
       color:#444;
