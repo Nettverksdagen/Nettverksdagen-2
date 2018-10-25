@@ -5,6 +5,8 @@ import ListingsView from '@/views/anon/ListingsView'
 import AnonBaseView from '@/views/anon/AnonBaseView'
 import AdminBaseView from '@/views/admin/AdminBaseView'
 import LoginView from '@/views/LoginView'
+import AboutView from '@/views/anon/AboutView'
+import ContactView from '@/views/anon/ContactView'
 
 Vue.use(Router)
 
@@ -27,6 +29,18 @@ export default new Router({
           name: 'Listings',
           component: ListingsView,
           meta: {title: 'Stillingsannonser'}
+        },
+        {
+          path: 'om',
+          name: 'About',
+          component: AboutView,
+          meta: {title: 'Om oss'}
+        },
+        {
+          path: 'kontakt',
+          name: 'Contact',
+          component: ContactView,
+          meta: {title: 'Kontakt oss'}
         }
       ]
     },

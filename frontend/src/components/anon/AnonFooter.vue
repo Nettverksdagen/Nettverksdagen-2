@@ -8,7 +8,6 @@
             Nettverksdagen er en karrieremesse arrangert av studenter på studiet Kybernetikk og Robotikk ved NTNU.
             Hensikten er å gi studentene mulighet til å møte sine fremtidige arbeidsgivere,
             få informasjon om sommerjobber og et innblikk i arbeidslivet.
-            Overskuddet fra dagen går til å finansiere en faglig ekskursjon til Asia.
           </p>
         </b-col>
 

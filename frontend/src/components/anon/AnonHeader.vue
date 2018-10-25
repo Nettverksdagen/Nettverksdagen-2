@@ -12,7 +12,8 @@
           <b-nav-item :to="'/'" active>Hjem</b-nav-item>
           <b-nav-item>Program</b-nav-item>
           <b-nav-item :to="'stillinger'">Stillinger</b-nav-item>
-          <b-nav-item>Om oss</b-nav-item>
+          <b-nav-item :to="'/om'">Om oss</b-nav-item>
+          <b-nav-item :to="'/kontakt'">Kontakt</b-nav-item>
        </b-nav>
       </div>
     </div>
