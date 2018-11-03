@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres
+
+  django:
+    build: .
+    command: "./django-entrypoint.sh"
+    volumes:
+      - .:/nvdnew
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+  vue:
+    build: ./frontend
+    ports:
+      - "8080:8080"
+    command: ["npm", "run", "dev"]
