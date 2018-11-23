@@ -1,5 +1,5 @@
 FROM node
 RUN mkdir frontend
 WORKDIR /frontend
-add . /frontend/
+ADD . /frontend/
 RUN ["npm", "install"]

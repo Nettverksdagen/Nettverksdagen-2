@@ -4,17 +4,22 @@ services:
   postgres:
     image: postgres
 
-  django:
-    build: .
+  api:
+    build: ./api
     command: "./django-entrypoint.sh"
     volumes:
-      - .:/nvdnew
+      - ./api/nvdagen:/api/nvdagen
+      - ./api/nvdnew:/api/nvdnew
     ports:
       - "8000:8000"
     depends_on:
       - postgres
-  vue:
+  frontend:
     build: ./frontend
     ports:
       - "8080:8080"
     command: ["npm", "run", "dev"]
+    volumes:
+      - ./frontend/src:/frontend/src
+      - ./frontend/static:/frontend/static
+      - ./frontend/test:/frontend/test
