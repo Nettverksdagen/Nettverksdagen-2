@@ -9,3 +9,4 @@ db.sqlite3
 pip-selfcheck.json
 pyvevn.cfg
 __pychache__/
+*.swp
