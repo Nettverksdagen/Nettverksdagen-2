@@ -14,6 +14,10 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@coreui/coreui": "^2.1.1",
+    "@coreui/icons": "^0.3.0",
+    "@coreui/vue": "^2.0.2",
+    "@fortawesome/fontawesome-free": "^5.5.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.4",
     "@fortawesome/free-brands-svg-icons": "^5.3.1",
     "@fortawesome/free-regular-svg-icons": "^5.3.1",
@@ -24,8 +28,11 @@
     "bootstrap-vue": "^2.0.0-rc.11",
     "es6-promise": "^4.2.5",
     "eventemitter3": "^3.1.0",
+    "jquery": "^1.9.1",
     "node-sass": "^4.9.3",
+    "perfect-scrollbar": "^1.4.0",
     "sass-loader": "^7.1.0",
+    "simple-line-icons": "^2.4.1",
     "style-loader": "^0.23.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",

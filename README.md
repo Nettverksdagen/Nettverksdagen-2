@@ -70,6 +70,13 @@ python manage.py createsuperuser
 ```
 You will then be guided through the process of creating the user. 
 
+### Install new NPM packages
+When installing a new npm package, the frontend container needs to be rebuilt.
+This can be done with the following command:
+```bash
+docker-compose build --no-cache
+```
+
 ## Other random things
 ### Curl examples with authentication
 #### Login
