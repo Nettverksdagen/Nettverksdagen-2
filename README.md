@@ -1,92 +1,83 @@
 # Nettverksdagen 2.0
 
 ## Prerequisites
-Note! Depending on your setup, you might need to use `python3` and `pip3` instead of `python` and `pip`. **It's very important that the project is ran with python 3 and not 2.7!**
-
-### Install pip
-```bash
-sudo apt install python-pip # Ubuntu based linux
-sudo brew install python-pip # OSX
-```
-
-### Install virtualvenv
-Note: installing virtualenv with a python2 installation of pip, is not recommended.
-```bash
-pip install virtualenv
-```
-
-### Install Vue CLI (optional)
-Vue CLI is used to configure the codebase easily
-```bash
-npm i -g @vue/cli
-```
+* [Docker](https://www.docker.com/)
+* [Docker compose](https://docs.docker.com/compose/)
 
 ## Project Installation
-### 1. Clone the repo
+With docker-compose installed, the project requires minimal setup
 ```bash
 git clone https://github.com/Nettverksdagen/Nettverksdagen-2.git
-cd nvd-new
+cd Nettverksdagen-2
+docker-compose up
 ```
+The webpage should now appear on `localhost:8080` and the django REST api browser on `localhost:8000`. 
 
-### 2. Set up and enter virtual environment
-```bash
-virtualenv venv
-source venv/bin/activate
-```
-Note: If virtualvenv is set up to use python2, you can specify python3 as the correct version with
-```bash
-virtualvenv venv -p /path/to/python3/executable
-```
+## Quick tour of docker and the container setup
+### What is docker and how does it help us?
+Docker is a containerization and virtualization platform that packs individual components of the complete system into small containers that can be easily deployed on different platforms. Each part of the system is run in its own little linux virtual machine with very minimal overhead. With `docker-compose`, setting up a large system with many docker containers can be made relatively painless.
 
-### 3. Install python deps
-```bash
-pip install django
-pip install djangorestframework
-pip install django-cors-headers
-pip install django-rest-auth
-```
+In our case, we have both a single-page vue frontend, a django REST api and a PostgreSQL database. The setup of this 3-part system can through the use of docker be reduced to a single `docker-compose up` command. Deployments can also be simplified tremendously, especially as the system grows, and the development environment can be made to match the production environment much more closely.
 
-### 4. Run through migrations
+### The setup
+Starting the webpage with `docker-compose up` spins up three docker containers.
+A [Vue js](https://vuejs.org/) single page web application, a [Django REST](https://www.django-rest-framework.org/) API as well as a [PostgreSQL](https://www.postgresql.org/) database.
+The communication flow between these three components are shown in the figure below.
+![Docker container setup](https://i.imgur.com/0edj0Ea.png)
+We can retrieve a list of the containers when they are running with the `ps` command:
 ```bash
-python manage.py migrate
+docker ps
 ```
+To enter one of the listed containers and have a look around, copy the name of the container in question from the previous output (or let docker autocomplete it for you with tab) and type 
+```bash
+docker exec -ti nettverksdagen-2_frontend_1_c27e85b4cd47 bash
+```
+replacing `nettverksdagen-2_frontend_1_c27e85b4cd47` with the name of your container.
+This will put you in a familiar bash shell. As you will probably notice, this shell is very limited.
+It does for example not come with a text-editor out of the box, but you can easily install one with `apt-get` if necessary.
 
-### 5. Install Vue packages
-```bash
-cd frontend
-npm install
-```
+### Volumes
+Any folders defined under `volumes` in `docker-compose.yml` will be mirrored into the container. Thus, folders containing the project files, namely
+* `api/nvdagen`
+* `api/nvdnew`
+* `frontend/src`
+* `frontend/static`
+* `frontend/test`
+
+will have any changes made to them reflected in the docker container when when files are saved.
+The frontend even has hot reloading enabled, which means the webpage doesn't need to be reloaded for changes made in `frontend/` to appear in the browser window.
 
 ## Usage
-### Start Django backend
+### Django REST migrations
+Changes in the database need to be reflected in a database migration so that the database schema and any previous data can be updated to the new model correctly. The migrations have to be executed inside the docker container for the api, so to begin, we list the running docker containers with `docker ps` and enter the api container:
 ```bash
-source venv/bin/activate
-python manage.py runserver
+docker exec -ti nettverksdagen-2_api_1_137f29309c2e bash
 ```
-### Start Vue frontend
-```bash
-cd frontend
-npm run dev
-```
-
-### Migrations
-Creating:
+If we then have made changes to the model, we can generate a new migration with
 ```bash
 python manage.py makemigrations
 ```
-Applying:
+and perform migrations with
 ```bash
 python manage.py migrate
 ```
-## Other random things
+Note that the api container has python 3 installed as the default python version, so there is no need to run these commands with `python3`.
 
+### Create superuser for the api
+To create a superuser for the api, execute the following command in the api container:
+```bash
+python manage.py createsuperuser
+```
+You will then be guided through the process of creating the user. 
+
+## Other random things
 ### Curl examples with authentication
-Login
+#### Login
 ```bash
 curl -X POST http://127.0.0.1:8000/rest-auth/login/ -d "username=admin&password=1234"
 ```
 
-Create a listing
+#### Create a listing
 ```bash
 curl -X POST  http://127.0.0.1:8000/api/listing/ -d "name=test&company_name=test company" -H 'Authorization: Token c56ddd032e56280827fdf4c7c2d5ab338c1a1133'
 ``` 
