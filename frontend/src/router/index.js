@@ -11,6 +11,7 @@ import ContactView from '@/views/anon/ContactView'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -47,7 +48,27 @@ export default new Router({
     {
       path: '/admin',
       name: 'Admin',
-      component: AdminBaseView
+      component: AdminBaseView,
+      children: [
+        {
+          path: 'stillinger',
+          name: 'ListingAdmin',
+          component: null,
+          meta: {title: 'Rediger stillinger'}
+        },
+        {
+          path: 'styret',
+          name: 'BoardAdmin',
+          component: null,
+          meta: {title: 'Rediger styret'}
+        },
+        {
+          path: 'sponsorer',
+          name: 'SponsorAdmin',
+          component: null,
+          meta: {title: 'Rediger sponsorer'}
+        }
+      ]
     },
     {
       path: '/login',
