@@ -7,7 +7,7 @@ import AdminBaseView from '@/views/admin/AdminBaseView'
 import LoginView from '@/views/LoginView'
 import AboutView from '@/views/anon/AboutView'
 import ContactView from '@/views/anon/ContactView'
-import { admin } from '../store/admin.module.js'
+import store from '../store/index.js'
 
 Vue.use(Router)
 
@@ -51,8 +51,7 @@ export default new Router({
       name: 'Admin',
       component: AdminBaseView,
       beforeEnter: (to, from, next) => {
-        console.log(admin.getters.loggedIn())
-        if (admin.getters.loggedIn()) {
+        if (store.state.admin.loggedIn) {
           next()
         } else {
           next('/login')
@@ -82,7 +81,14 @@ export default new Router({
     {
       path: '/login',
       name: 'Login',
-      component: LoginView
+      component: LoginView,
+      beforeEnter: (to, from, next) => {
+        if (store.state.admin.loggedIn) {
+          next('/admin')
+        } else {
+          next()
+        }
+      }
     }
   ]
 })

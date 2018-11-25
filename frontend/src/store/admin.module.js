@@ -39,11 +39,7 @@ const actions = {
   }
 }
 
-const getters = {
-  loggedIn () {
-    return state.loggedIn
-  }
-}
+const getters = {}
 
 const mutations = {
   loggingIn (state) {
