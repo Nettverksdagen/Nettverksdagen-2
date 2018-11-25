@@ -16,7 +16,6 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Base',
       component: AnonBaseView,
       meta: {title: 'Nettverksdagen'},
       children: [
