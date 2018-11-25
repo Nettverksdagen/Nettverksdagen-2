@@ -1,6 +1,7 @@
 const defaultState = {
   username: '',
-  token: ''
+  token: '',
+  loggedIn: false
 }
 
 const state = {...defaultState}
@@ -11,7 +12,7 @@ const actions = {
 
     let credentials = credentialObserver.credentials // Get credentials from observer
 
-    fetch('http://127.0.0.1:8000/rest-auth/login/', {
+    await fetch('http://127.0.0.1:8000/rest-auth/login/', {
       method: 'POST',
       body: JSON.stringify({
         username: credentials.username,
@@ -23,10 +24,10 @@ const actions = {
     }).then(response => response.json())
       .then(function (response) {
         if (response.hasOwnProperty('key')) {
-          console.log(response.key)
           commit('loggedInSuccessfully', {
             username: credentials.username,
-            token: response.key
+            token: response.key,
+            loggedIn: true
           })
         } else if (response.hasOwnProperty('non_field_errors')) {
           commit('loginFailure')
@@ -38,7 +39,11 @@ const actions = {
   }
 }
 
-const getters = {}
+const getters = {
+  loggedIn () {
+    return state.loggedIn
+  }
+}
 
 const mutations = {
   loggingIn (state) {
@@ -48,10 +53,12 @@ const mutations = {
     state.username = payload.username
     state.token = payload.token
     state.loggingIn = false
+    state.loggedIn = true
   },
   loginFailure () {
     console.log('Wrong login credentials')
     state.loggingIn = false
+    state.loggedIn = false
   },
   fetchFailure (error) {
     console.log('Could not log in because of an error: ', error)

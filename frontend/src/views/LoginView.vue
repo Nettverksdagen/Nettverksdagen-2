@@ -47,8 +47,7 @@ export default {
       this.$store.dispatch('admin/login', {
         credentials: this.credentials
       }).then(() => {
-        console.log('Logged in?')
-        // this.$router.push('/')
+        this.$router.push('/admin')
       })
     }
   }
