@@ -47,16 +47,21 @@ export default new Router({
     },
     {
       path: '/admin',
-      name: 'Admin',
       component: AdminBaseView,
       beforeEnter: (to, from, next) => {
         if (store.state.admin.loggedIn) {
           next()
         } else {
-          next('/login')
+          next({name: 'Login'})
         }
       },
       children: [
+        {
+          path: '',
+          name: 'AdminOverview',
+          component: null,
+          meta: {title: 'Nvdagen admin'}
+        },
         {
           path: 'stillinger',
           name: 'ListingAdmin',
@@ -83,7 +88,7 @@ export default new Router({
       component: LoginView,
       beforeEnter: (to, from, next) => {
         if (store.state.admin.loggedIn) {
-          next('/admin')
+          next({name: 'AdminOverview'})
         } else {
           next()
         }

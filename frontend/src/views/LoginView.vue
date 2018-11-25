@@ -47,7 +47,7 @@ export default {
       this.$store.dispatch('admin/login', {
         credentials: this.credentials
       }).then(() => {
-        this.$router.push('/admin')
+        this.$router.push({name: 'AdminOverview'})
       })
     }
   }

@@ -43,7 +43,7 @@ export default {
         },
         {
           name: 'Til hovedsiden',
-          url: '/',
+          url: this.$router.resolve({name: 'Home'}).href,
           icon: 'cui-arrow-left'
         },
         {
@@ -52,22 +52,22 @@ export default {
         },
         {
           name: 'Oversikt',
-          url: '/admin',
+          url: this.$router.resolve({name: 'AdminOverview'}).href,
           icon: 'cui-home'
         },
         {
           name: 'Stillingsannonser',
-          url: '/admin/stillinger',
+          url: this.$router.resolve({name: 'ListingAdmin'}).href,
           icon: 'cui-briefcase'
         },
         {
           name: 'Styremedlemmer',
-          url: '/admin/styret',
+          url: this.$router.resolve({name: 'BoardAdmin'}).href,
           icon: 'cui-people'
         },
         {
           name: 'Sponsorer',
-          url: '/admin/sponsorer',
+          url: this.$router.resolve({name: 'SponsorAdmin'}).href,
           icon: 'cui-dollar'
         }
       ]
