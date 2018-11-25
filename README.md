@@ -77,6 +77,13 @@ This can be done with the following command:
 docker-compose build --no-cache
 ```
 
+## Admin user
+The dev environment has a default admin user the following credentials:
+
+| Username | Password |
+| -------- | -------- |
+| admin    | 1234     |
+
 ## Other random things
 ### Curl examples with authentication
 #### Login

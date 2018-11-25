@@ -9,7 +9,10 @@ echo "Entering api dir"
 cd api
 
 echo "Applying all database migrations"
-python3 manage.py migrate
+python manage.py migrate
+
+echo "Loading data from fixtures"
+python manage.py loaddata fixtures.json
 
 echo "Starting server"
-python3 manage.py runserver 0.0.0.0:8000
+python manage.py runserver 0.0.0.0:8000
