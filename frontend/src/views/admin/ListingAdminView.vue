@@ -1,5 +1,16 @@
 <template>
   <div class="listing-admin-view">
+    <b-alert :show="alert.dismissCountDown"
+             dismissible
+             fade
+             :variant="alert.variant"
+             @dismissed="alert.dismissCountDown=0"
+             @dismiss-count-down="countDownChanged"
+             class="mt-4">
+      <h4 class="alert-heading font-weight-bold">{{ alert.heading }}</h4>
+      <hr>
+      {{ alert.message }}
+    </b-alert>
     <b-row class="my-4">
       <div class="col-12 col-md-8">
         <b-card header="Legg ut en ny stillingsannonse" class="h-100">
@@ -7,16 +18,16 @@
             <b-row>
               <div class="col-12 col-md-6">
                 <b-form-group label="Stillingstittel" label-for="listing-name-input">
-                  <b-form-input v-model="name" id="listing-name-input" required placeholder="Velg en tittel" maxlength="100"></b-form-input>
+                  <b-form-input v-model="listing.name" id="listing-name-input" required placeholder="Velg en tittel" maxlength="100"></b-form-input>
                 </b-form-group>
                 <b-form-group label="Firmanavn" label-for="listing-company-input">
-                  <b-form-input v-model="company_name" id="listing-company-input" required placeholder="Skriv inn firmanavn" ></b-form-input>
+                  <b-form-input v-model="listing.company_name" id="listing-company-input" required placeholder="Skriv inn firmanavn" ></b-form-input>
                 </b-form-group>
                 <b-button type="submit" class="d-none d-md-block" size="md" variant="success">Opprett annonse</b-button>
               </div>
               <div class="col-12 col-md-6">
                 <b-form-group label="Søknadsfrist" label-for="listing-deadline">
-                  <datepicker v-model="deadline" :typeable="true" :required="true" format="yyyy-MM-dd" placeholder="Trykk for å velge dato" :bootstrap-styling="true" :monday-first="true" id="listing-deadline"></datepicker>
+                  <datepicker v-model="deadlineDateTime" :typeable="true" :required="true" format="yyyy-MM-dd" placeholder="Trykk for å velge dato" :bootstrap-styling="true" :monday-first="true" id="listing-deadline"></datepicker>
                 </b-form-group>
               </div>
             </b-row>
@@ -49,9 +60,19 @@ export default {
   },
   data: function () {
     return {
-      company_name: '',
-      name: '',
-      deadline: null
+      listing: {
+        company_name: '',
+        name: '',
+        deadline: ''
+      },
+      deadlineDateTime: null,
+      alert: {
+        dismissSecs: 5,
+        dismissCountDown: 0,
+        variant: 'info',
+        heading: '',
+        message: ''
+      }
     }
   },
   computed: {
@@ -64,12 +85,23 @@ export default {
   },
   methods: {
     handleSubmit: function () {
-      this.$data.deadline = this.$data.deadline.toISOString().split('T')[0]
-      axios.post('http://127.0.0.1:8000/api/listing/', this.$data).then(() => {
-        console.log('Successfully created new listing') // TODO: Implement success callback
-      }).catch(() => {
-        console.log('Failed to create listing') // TODO: Implement fail callback
+      this.$data.listing.deadline = this.$data.deadlineDateTime.toISOString().split('T')[0]
+      axios.post('http://127.0.0.1:8000/api/listing/', this.$data.listing).then(() => {
+        this.showAlert('success', 'Suksess!', 'Stillingsannonsen ble opprettet')
+      }).catch((e) => {
+        this.showAlert('danger',
+          'Error ' + e.response.status + ' ' + e.response.statusText,
+          'Stillingsannonsen ble ikke opprettet')
       })
+    },
+    countDownChanged: function (dismissCountDown) {
+      this.alert.dismissCountDown = dismissCountDown
+    },
+    showAlert: function (variant, heading, message) {
+      this.alert.variant = variant
+      this.alert.heading = heading
+      this.alert.message = message
+      this.alert.dismissCountDown = this.alert.dismissSecs
     }
   }
 }
