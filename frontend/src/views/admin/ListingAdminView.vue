@@ -90,6 +90,8 @@ export default {
       axios.post('http://127.0.0.1:8000/api/listing/', this.$data.listing).then(() => {
         this.showAlert('success', 'Suksess!', 'Stillingsannonsen ble opprettet')
         this['listings/addListing'](this.$data.listing)
+        this.$data.listing = {company_name: '', name: '', deadline: ''}
+        this.$data.deadlineDateTime = null
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
