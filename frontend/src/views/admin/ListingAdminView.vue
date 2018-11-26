@@ -29,6 +29,14 @@
                 <b-form-group label="Søknadsfrist" label-for="listing-deadline">
                   <datepicker v-model="deadlineDateTime" :typeable="true" :required="true" format="yyyy-MM-dd" placeholder="Trykk for å velge dato" :bootstrap-styling="true" :monday-first="true" id="listing-deadline"></datepicker>
                 </b-form-group>
+                <div class="d-flex">
+                  <b-form-group class="flex-grow-1" label="Logo" label-for="listing-logo">
+                    <b-form-file v-model="logoFile" placeholder="Velg et bilde" @input="uploadLogo"></b-form-file>
+                  </b-form-group>
+                  <div class="img-preview flex-grow-0" v-bind:class="{ 'show-preview': showImgPreview }">
+                    <b-img center fluid :src="imgPreviewSrc"></b-img>
+                  </div>
+                </div>
               </div>
             </b-row>
             <b-button type="submit" class="d-block d-md-none" size="md" variant="success">Opprett annonse</b-button>
@@ -67,6 +75,9 @@ export default {
         name: '',
         deadline: ''
       },
+      logoFile: null,
+      showImgPreview: false,
+      imgPreviewSrc: '',
       deadlineDateTime: null,
       alert: {
         dismissSecs: 5,
@@ -89,14 +100,14 @@ export default {
     handleSubmit: function () {
       this.$data.listing.deadline = this.$data.deadlineDateTime.toISOString().split('T')[0]
       axios.post('http://127.0.0.1:8000/api/listing/', this.$data.listing).then((response) => {
-        this.showAlert('success', 'Suksess!', 'Stillingsannonsen ble opprettet')
+        this.showAlert('success', 'Suksess!', 'Stillingsannonsen ble opprettet.')
         this['listings/addListing'](response.data)
         this.$data.listing = {company_name: '', name: '', deadline: ''}
         this.$data.deadlineDateTime = null
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
-          'Stillingsannonsen ble ikke opprettet')
+          'Stillingsannonsen ble ikke opprettet.')
       })
     },
     countDownChanged: function (dismissCountDown) {
@@ -108,11 +119,49 @@ export default {
       this.alert.message = message
       this.alert.dismissCountDown = this.alert.dismissSecs
     },
+    uploadLogo: function () {
+      this.$data.showImgPreview = false
+      this.$data.imgPreviewSrc = ''
+      if (this.$data.logoFile === undefined) {
+        return
+      }
+      let formData = new FormData()
+      formData.append('file', this.$data.logoFile)
+      axios.post('http://127.0.0.1:9000/upload/image', formData).then((response) => {
+        this.$data.imgPreviewSrc = 'http://127.0.0.1:9000/' + response.data
+        setTimeout(() => {
+          this.$data.showImgPreview = true
+        }, 30) // The image src can't be set at the same time as the img opacity if we want it to have transition
+      }).catch((e) => {
+        this.showAlert('danger',
+          'Error ' + e.response.status + ' ' + e.response.statusText,
+          'Bildeopplastning feilet, prøv igjen. Kontakt IT om problemet vedvarer.')
+        this.$data.showImgPreview = false
+        this.$data.imgPreviewSrc = ''
+      })
+    },
     ...mapMutations(['listings/addListing'])
   }
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.img-preview {
+  width: 0;
+  height: 100px;
+  transition: width 0.4s;
+  border-radius: 2px;
+  margin:0;
+  &.show-preview {
+    width: 100px;
+    margin-left: 1.2rem;
+    img {
+      opacity: 1 !important;
+    }
+  }
+  img {
+    opacity: 0 !important;
+    transition: opacity 0.4s 0.4s;
+  }
+}
 </style>
