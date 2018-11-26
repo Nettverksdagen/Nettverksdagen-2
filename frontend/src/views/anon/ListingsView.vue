@@ -9,7 +9,7 @@
         </div>
         <div class="col-12 col-md-8">
           <b-list-group>
-            <Listing v-for="listing in listings" :key="listing.id" :company="listing.company_name" :title="listing.name" deadline="20.10.2019"/>
+            <Listing v-for="listing in listings" :key="listing.id" :company="listing.company_name" :title="listing.name" :deadline="listing.deadline"/>
           </b-list-group>
         </div>
       </b-row>

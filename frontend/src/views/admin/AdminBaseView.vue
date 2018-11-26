@@ -22,6 +22,7 @@ import { Header } from '@coreui/vue/src/components/Header'
 import { Sidebar, SidebarNav, SidebarNavTitle, SidebarNavItem, SidebarNavLink, SidebarToggler } from '@coreui/vue/src/components/Sidebar'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios'
 library.add(faBars)
 export default {
   name: 'AdminBaseView',
@@ -72,6 +73,9 @@ export default {
         }
       ]
     }
+  },
+  mounted () {
+    axios.defaults.headers.post['Authorization'] = 'Token ' + this.$store.state.admin.token
   }
 }
 </script>

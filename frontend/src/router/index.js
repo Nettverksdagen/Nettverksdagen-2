@@ -8,6 +8,7 @@ import LoginView from '@/views/LoginView'
 import AboutView from '@/views/anon/AboutView'
 import ContactView from '@/views/anon/ContactView'
 import store from '../store/index.js'
+import ListingAdminView from '@/views/admin/ListingAdminView.vue'
 
 Vue.use(Router)
 
@@ -65,7 +66,7 @@ export default new Router({
         {
           path: 'stillinger',
           name: 'ListingAdmin',
-          component: null,
+          component: ListingAdminView,
           meta: {title: 'Rediger stillinger'}
         },
         {

@@ -48,7 +48,7 @@ will have any changes made to them reflected in the docker container when when f
 The frontend even has hot reloading enabled, which means the webpage doesn't need to be reloaded for changes made in `frontend/` to appear in the browser window.
 
 ## Usage
-### Django REST migrations
+### Django REST: migrations and the database
 Changes in the database need to be reflected in a database migration so that the database schema and any previous data can be updated to the new model correctly. The migrations have to be executed inside the docker container for the api, so to begin, we list the running docker containers with `docker ps` and enter the api container:
 ```bash
 docker exec -ti nettverksdagen-2_api_1_137f29309c2e bash
@@ -62,6 +62,17 @@ and perform migrations with
 python manage.py migrate
 ```
 Note that the api container has python 3 installed as the default python version, so there is no need to run these commands with `python3`.
+
+The data already in the database can be cleared with 
+```bash
+python manage.py flush
+```
+(warning: this will destroy all data)
+
+New fixtures are loaded with
+```bash
+python manage.py loaddata fixtures.json
+```
 
 ### Create superuser for the api
 To create a superuser for the api, execute the following command in the api container:
@@ -78,7 +89,7 @@ docker-compose build --no-cache
 ```
 
 ## Admin user
-The dev environment has a default admin user the following credentials:
+The dev environment has a default admin user with the following credentials:
 
 | Username | Password |
 | -------- | -------- |

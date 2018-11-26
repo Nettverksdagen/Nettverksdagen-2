@@ -5,9 +5,9 @@
         <img class="logo img-responsive center-block center" src="@/assets/logo.png">
       </div>
       <div class="side info-container">
-        <h6 class="company">{{ company }}</h6>
+        <h6 class="company"><span class="font-weight-bold">{{ company }}</span> – Sommerjobb</h6>
         <h5 class="title">{{ title }}</h5>
-        <span class="deadline">{{ deadline }}</span>
+        <span class="deadline">{{ formattedDeadline }}</span>
       </div>
     </b-list-group-item>
   </div>
@@ -15,7 +15,17 @@
 
 <script>
 export default {
-  props: ['company', 'title', 'deadline']
+  props: ['company', 'title', 'deadline'],
+  computed: {
+    formattedDeadline: function () {
+      let deadDate = new Date(this.deadline)
+      return deadDate.toLocaleDateString('no-NO', {
+        year: 'numeric',
+        day: 'numeric',
+        month: 'short'
+      })
+    }
+  }
 }
 </script>
 

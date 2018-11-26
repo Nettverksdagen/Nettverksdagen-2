@@ -68,7 +68,8 @@
         "pk": 1,
         "fields": {
             "name": "Sommerjobb i Kongsberg",
-            "company_name": "Kongsberggruppen"
+            "company_name": "Kongsberggruppen",
+            "deadline": "2019-01-29"
         }
     },
     {
@@ -76,7 +77,8 @@
         "pk": 2,
         "fields": {
             "name": "Verdens beste sommerjobb",
-            "company_name": "Sparebank1"
+            "company_name": "Sparebank1",
+            "deadline": "2019-04-01"
         }
     },
     {
@@ -84,7 +86,8 @@
         "pk": 3,
         "fields": {
             "name": "Sommerjobb hos Norges beste arbeidsplass",
-            "company_name": "Sopra Steria"
+            "company_name": "Sopra Steria",
+            "deadline": "2019-03-18"
         }
     },
     {
@@ -92,7 +95,8 @@
         "pk": 4,
         "fields": {
             "name": "Bli med og skap fremtidens l\u00f8sninger",
-            "company_name": "Evry"
+            "company_name": "Evry",
+            "deadline": "2019-05-03"
         }
     },
     {
@@ -100,7 +104,8 @@
         "pk": 5,
         "fields": {
             "name": "Bli med p\u00e5 en spennende reise",
-            "company_name": "Disruptive Technologies"
+            "company_name": "Disruptive Technologies",
+            "deadline": "2019-02-13"
         }
     },
     {
@@ -108,7 +113,8 @@
         "pk": 6,
         "fields": {
             "name": "Jobb i en spennende ny startup",
-            "company_name": "Ardoq"
+            "company_name": "Ardoq",
+            "deadline": "2019-03-07"
         }
     },
     {
