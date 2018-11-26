@@ -88,6 +88,11 @@ This can be done with the following command:
 docker-compose build --no-cache
 ```
 
+### Restart the file server
+```bash
+docker-compose stop fileserver && docker-compose up --no-deps -d --build fileserver
+```
+
 ## Admin user
 The dev environment has a default admin user with the following credentials:
 

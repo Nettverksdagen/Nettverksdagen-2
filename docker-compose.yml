@@ -23,3 +23,10 @@ services:
       - ./frontend/src:/frontend/src
       - ./frontend/static:/frontend/static
       - ./frontend/test:/frontend/test
+  fileserver:
+    build: ./fileserver
+    ports:
+      - "9000:9000"
+    command: ["./main"]
+    volumes:
+      - ./uploads:/root/uploads
