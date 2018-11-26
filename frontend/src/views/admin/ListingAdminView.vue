@@ -43,7 +43,8 @@
     <b-row>
       <div class="col-12">
         <b-card header="Stillingsannonser">
-          <b-table hover :items="listings"></b-table>
+          <b-table class="d-none d-md-table" hover :items="listings"></b-table>
+          <b-table class="d-block d-md-none" stacked :items="listings"></b-table>
         </b-card>
       </div>
     </b-row>
