@@ -32,6 +32,9 @@ const mutations = {
   },
   fetchFailure () {
     console.log('Failed to fetch listings')
+  },
+  addListing (state, listing) {
+    state.all.push(listing)
   }
 }
 

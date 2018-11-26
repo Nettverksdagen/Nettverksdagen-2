@@ -53,6 +53,7 @@
 <script>
 import Datepicker from 'vuejs-datepicker'
 import axios from 'axios'
+import { mapMutations } from 'vuex'
 export default {
   name: 'ListingAdminView',
   components: {
@@ -88,6 +89,7 @@ export default {
       this.$data.listing.deadline = this.$data.deadlineDateTime.toISOString().split('T')[0]
       axios.post('http://127.0.0.1:8000/api/listing/', this.$data.listing).then(() => {
         this.showAlert('success', 'Suksess!', 'Stillingsannonsen ble opprettet')
+        this['listings/addListing'](this.$data.listing)
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
@@ -102,7 +104,8 @@ export default {
       this.alert.heading = heading
       this.alert.message = message
       this.alert.dismissCountDown = this.alert.dismissSecs
-    }
+    },
+    ...mapMutations(['listings/addListing'])
   }
 }
 </script>
