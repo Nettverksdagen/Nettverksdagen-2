@@ -88,9 +88,9 @@ export default {
   methods: {
     handleSubmit: function () {
       this.$data.listing.deadline = this.$data.deadlineDateTime.toISOString().split('T')[0]
-      axios.post('http://127.0.0.1:8000/api/listing/', this.$data.listing).then(() => {
+      axios.post('http://127.0.0.1:8000/api/listing/', this.$data.listing).then((response) => {
         this.showAlert('success', 'Suksess!', 'Stillingsannonsen ble opprettet')
-        this['listings/addListing'](this.$data.listing)
+        this['listings/addListing'](response.data)
         this.$data.listing = {company_name: '', name: '', deadline: ''}
         this.$data.deadlineDateTime = null
       }).catch((e) => {
