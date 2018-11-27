@@ -20,10 +20,10 @@ Docker is a containerization and virtualization platform that packs individual c
 In our case, we have both a single-page vue frontend, a django REST api and a PostgreSQL database. The setup of this 3-part system can through the use of docker be reduced to a single `docker-compose up` command. Deployments can also be simplified tremendously, especially as the system grows, and the development environment can be made to match the production environment much more closely.
 
 ### The setup
-Starting the webpage with `docker-compose up` spins up three docker containers.
-A [Vue js](https://vuejs.org/) single page web application, a [Django REST](https://www.django-rest-framework.org/) API as well as a [PostgreSQL](https://www.postgresql.org/) database.
-The communication flow between these three components are shown in the figure below.
-![Docker container setup](https://i.imgur.com/0edj0Ea.png)
+Starting the webpage with `docker-compose up` spins up four docker containers.
+A [Vue js](https://vuejs.org/) single page web application, a [Django REST](https://www.django-rest-framework.org/) API that interfaces a [PostgreSQL](https://www.postgresql.org/) database and a simple file uploading/hosting server for handling image uploads.
+The flow of communication between these four components are shown in the figure below.
+![Docker container setup](https://i.imgur.com/A8LzwaW.png)
 We can retrieve a list of the containers when they are running with the `ps` command:
 ```bash
 docker ps
@@ -34,7 +34,10 @@ docker exec -ti nettverksdagen-2_frontend_1_c27e85b4cd47 bash
 ```
 replacing `nettverksdagen-2_frontend_1_c27e85b4cd47` with the name of your container.
 This will put you in a familiar bash shell. As you will probably notice, this shell is very limited.
-It does for example not come with a text-editor out of the box, but you can easily install one with `apt-get` if necessary.
+It does for example not come with a text-editor out of the box, but you can easily install one with `apt-get` if necessary. What is more, the `fileserver` container is based on a [scratch](https://hub.docker.com/_/scratch/) image and so it doesn't even have `bash`. You can however execute single commands with `docker exec` as above. So for example to list files, run: 
+```bash
+docker exec -ti nettverksdagen-2_fileserver_1_c27e85b4cd47 ls
+```
 
 ### Volumes
 Any folders defined under `volumes` in `docker-compose.yml` will be mirrored into the container. Thus, folders containing the project files, namely
