@@ -9,7 +9,12 @@
         </div>
         <div class="col-12 col-md-8">
           <b-list-group>
-            <Listing v-for="listing in listings" :key="listing.id" :company="listing.company_name" :title="listing.name" :deadline="listing.deadline"/>
+            <Listing v-for="listing in listings"
+                     :key="listing.id"
+                     :company="listing.company_name"
+                     :title="listing.name"
+                     :deadline="listing.deadline"
+                     :logo-src="'http://127.0.0.1:9000/' + listing.logo_uri"/>
           </b-list-group>
         </div>
       </b-row>

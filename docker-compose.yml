@@ -29,4 +29,4 @@ services:
       - "9000:9000"
     command: ["./main"]
     volumes:
-      - ./uploads:/root/uploads
+      - ./fileserver/uploads:/root/uploads

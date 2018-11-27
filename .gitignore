@@ -10,4 +10,5 @@ pip-selfcheck.json
 pyvevn.cfg
 __pychache__/
 *.swp
-uploads/
+fileserver/uploads/*
+fileserver/!uploads/static/

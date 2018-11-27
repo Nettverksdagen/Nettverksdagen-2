@@ -73,7 +73,8 @@ export default {
       listing: {
         company_name: '',
         name: '',
-        deadline: ''
+        deadline: '',
+        logo_uri: ''
       },
       logoFile: null,
       showImgPreview: false,
@@ -129,9 +130,10 @@ export default {
       formData.append('file', this.$data.logoFile)
       axios.post('http://127.0.0.1:9000/upload/image', formData).then((response) => {
         this.$data.imgPreviewSrc = 'http://127.0.0.1:9000/' + response.data
+        this.$data.listing.logo_uri = response.data
         setTimeout(() => {
           this.$data.showImgPreview = true
-        }, 30) // The image src can't be set at the same time as the img opacity if we want it to have transition
+        }, 30) // The image src can't be set at the same time as the img opacity or it will lose its transition
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,

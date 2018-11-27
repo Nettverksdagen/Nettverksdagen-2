@@ -2,7 +2,7 @@
   <div class="listing">
     <b-list-group-item class="inside p-4">
       <div class="side logo-container">
-        <img class="logo img-responsive center-block center" src="@/assets/logo.png">
+        <img class="logo img-responsive center-block center" :src="logoSrc">
       </div>
       <div class="side info-container">
         <h6 class="company"><span class="font-weight-bold">{{ company }}</span> – Sommerjobb</h6>
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  props: ['company', 'title', 'deadline'],
+  props: ['company', 'title', 'deadline', 'logoSrc'],
   computed: {
     formattedDeadline: function () {
       let deadDate = new Date(this.deadline)
