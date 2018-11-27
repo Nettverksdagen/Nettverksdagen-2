@@ -5,7 +5,7 @@
         <img class="logo img-responsive center-block center" :src="logoSrc">
       </div>
       <div class="side info-container">
-        <h6 class="company"><span class="font-weight-bold">{{ company }}</span> – Sommerjobb</h6>
+        <h6 class="company"><span class="font-weight-bold">{{ company }}</span> – {{ type }}</h6>
         <h5 class="title">{{ title }}</h5>
         <span class="deadline">{{ formattedDeadline }}</span>
       </div>
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  props: ['company', 'title', 'deadline', 'logoSrc'],
+  props: ['company', 'title', 'deadline', 'logoSrc', 'type'],
   computed: {
     formattedDeadline: function () {
       let deadDate = new Date(this.deadline)

@@ -74,8 +74,8 @@ export default {
       ]
     }
   },
-  mounted () {
-    axios.defaults.headers.post['Authorization'] = 'Token ' + this.$store.state.admin.token
+  beforeCreate () {
+    axios.defaults.headers.common['Authorization'] = 'Token ' + this.$store.state.admin.token
   }
 }
 </script>

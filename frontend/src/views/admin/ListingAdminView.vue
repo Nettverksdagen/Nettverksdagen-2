@@ -23,6 +23,9 @@
                 <b-form-group label="Firmanavn" label-for="listing-company-input">
                   <b-form-input v-model="listing.company_name" id="listing-company-input" required placeholder="Skriv inn firmanavn" ></b-form-input>
                 </b-form-group>
+                <b-form-group label="Stillingstype" label-for="listing-company-type">
+                  <b-form-select v-model="listing.type" :options="listingTypes" id="listing-company-type" required></b-form-select>
+                </b-form-group>
                 <b-button type="submit" class="d-none d-md-block" size="md" variant="success">Opprett annonse</b-button>
               </div>
               <div class="col-12 col-md-6">
@@ -74,7 +77,8 @@ export default {
         company_name: '',
         name: '',
         deadline: '',
-        logo_uri: ''
+        logo_uri: '',
+        type: null
       },
       logoFile: null,
       showImgPreview: false,
@@ -86,7 +90,8 @@ export default {
         variant: 'info',
         heading: '',
         message: ''
-      }
+      },
+      listingTypes: [{value: null, text: 'Velg en stillingstype'}]
     }
   },
   computed: {
@@ -103,7 +108,7 @@ export default {
       axios.post('http://127.0.0.1:8000/api/listing/', this.$data.listing).then((response) => {
         this.showAlert('success', 'Suksess!', 'Stillingsannonsen ble opprettet.')
         this['listings/addListing'](response.data)
-        this.$data.listing = {company_name: '', name: '', deadline: ''}
+        this.$data.listing = {company_name: '', name: '', deadline: '', logo_uri: '', type: null}
         this.$data.deadlineDateTime = null
       }).catch((e) => {
         this.showAlert('danger',
@@ -135,7 +140,7 @@ export default {
           this.$data.showImgPreview = true
         }, 30) // The image src can't be set at the same time as the img opacity or it will lose its transition
       }).catch((e) => {
-        this.showAlert('danger',
+        this.showAlert('error',
           'Error ' + e.response.status + ' ' + e.response.statusText,
           'Bildeopplastning feilet, prøv igjen. Kontakt IT om problemet vedvarer.')
         this.$data.showImgPreview = false
@@ -143,6 +148,17 @@ export default {
       })
     },
     ...mapMutations(['listings/addListing'])
+  },
+  beforeCreate: function () {
+    axios.options('http://127.0.0.1:8000/api/listing/').then((response) => {
+      this.$data.listingTypes = this.$data.listingTypes.concat(response.data.actions.POST.type.choices.map(
+        option => ({value: option.value, text: option.display_name})
+      ))
+    }).catch((e) => {
+      this.showAlert('error',
+        'Error ' + e.response.status + ' ' + e.response.statusText,
+        'Kunne ikke lese skjema fra tjeneren. Prøv å laste siden på nytt.')
+    })
   }
 }
 </script>
