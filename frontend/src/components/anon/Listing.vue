@@ -1,21 +1,23 @@
 <template>
   <div class="listing">
-    <b-list-group-item class="inside p-4">
+    <b-link :href="listingUrl">
+    <b-list-group-item class="inside p-4 listing-item">
       <div class="side logo-container">
         <img class="logo img-responsive center-block center" :src="logoSrc">
       </div>
       <div class="side info-container">
         <h6 class="company"><span class="font-weight-bold">{{ company }}</span> – {{ type }}</h6>
         <h5 class="title">{{ title }}</h5>
-        <span class="deadline">{{ formattedDeadline }}</span>
+        <span class="deadline">Frist: {{ formattedDeadline }}</span>
       </div>
     </b-list-group-item>
+    </b-link>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['company', 'title', 'deadline', 'logoSrc', 'type'],
+  props: ['company', 'title', 'deadline', 'logoSrc', 'type', 'listingUrl'],
   computed: {
     formattedDeadline: function () {
       let deadDate = new Date(this.deadline)
@@ -30,6 +32,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .listing-item:hover {
+    background:#efefef;
+    transition:0.1s;
+  }
   .company, .title, .deadline {
     margin:0;
   }
@@ -69,9 +75,13 @@ export default {
 
     }*/
     font-weight:700;
+    color:#222;
   }
   .deadline {
     font-size:14px;
     color:#888;
+  }
+  a {
+    text-decoration:none;
   }
 </style>

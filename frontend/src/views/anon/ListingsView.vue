@@ -15,7 +15,8 @@
                      :title="listing.name"
                      :deadline="listing.deadline"
                      :logo-src="'http://127.0.0.1:9000/' + listing.logo_uri"
-                     :type="listing.type"/>
+                     :type="listing.type"
+                     :listing-url="listing.listing_url"/>
           </b-list-group>
         </div>
       </b-row>

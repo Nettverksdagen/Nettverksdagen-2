@@ -26,15 +26,17 @@
                 <b-form-group label="Stillingstype" label-for="listing-company-type">
                   <b-form-select v-model="listing.type" :options="listingTypes" id="listing-company-type" required></b-form-select>
                 </b-form-group>
-                <b-button type="submit" class="d-none d-md-block" size="md" variant="success">Opprett annonse</b-button>
               </div>
               <div class="col-12 col-md-6">
                 <b-form-group label="Søknadsfrist" label-for="listing-deadline">
                   <datepicker v-model="deadlineDateTime" :typeable="true" :required="true" format="yyyy-MM-dd" placeholder="Trykk for å velge dato" :bootstrap-styling="true" :monday-first="true" id="listing-deadline"></datepicker>
                 </b-form-group>
+                <b-form-group label="Link til annonse (må starte med https://)" label-for="listing-url-input">
+                  <b-form-input type="url" v-model="listing.listing_url" id="listing-url-input" required placeholder="Skriv inn link" @input="validateLink"></b-form-input>
+                </b-form-group>
                 <div class="d-flex">
                   <b-form-group class="flex-grow-1" label="Logo" label-for="listing-logo">
-                    <b-form-file v-model="logoFile" placeholder="Velg et bilde" @input="uploadLogo"></b-form-file>
+                    <b-form-file v-model="logoFile" required placeholder="Velg et bilde" ref="logoFileInput" @input="uploadLogo"></b-form-file>
                   </b-form-group>
                   <div class="img-preview flex-grow-0" v-bind:class="{ 'show-preview': showImgPreview }">
                     <b-img center fluid :src="imgPreviewSrc"></b-img>
@@ -42,12 +44,17 @@
                 </div>
               </div>
             </b-row>
-            <b-button type="submit" class="d-block d-md-none" size="md" variant="success">Opprett annonse</b-button>
+            <b-button type="submit" size="md" variant="success">Opprett annonse</b-button>
           </b-form>
         </b-card>
       </div>
       <div class="d-none d-md-block col-4">
         <b-jumbotron bg-variant="info" text-variant="white" :header="numListings + ''" lead="åpne stillingsannonser" class="h-100">
+          <hr class="my-4">
+          <p>
+            Her kan du legge inn nye stillingannonser og de vil dukke opp under
+            <b-link :href="listingsLink.href" class="listings-link">{{ listingsLink.location.path }}</b-link>
+          </p>
         </b-jumbotron>
       </div>
     </b-row>
@@ -78,7 +85,8 @@ export default {
         name: '',
         deadline: '',
         logo_uri: '',
-        type: null
+        type: null,
+        listing_url: ''
       },
       logoFile: null,
       showImgPreview: false,
@@ -100,6 +108,9 @@ export default {
     },
     numListings: function () {
       return this.listings.length
+    },
+    listingsLink: function () {
+      return this.$router.resolve({name: 'Listings'})
     }
   },
   methods: {
@@ -108,8 +119,7 @@ export default {
       axios.post('http://127.0.0.1:8000/api/listing/', this.$data.listing).then((response) => {
         this.showAlert('success', 'Suksess!', 'Stillingsannonsen ble opprettet.')
         this['listings/addListing'](response.data)
-        this.$data.listing = {company_name: '', name: '', deadline: '', logo_uri: '', type: null}
-        this.$data.deadlineDateTime = null
+        this.resetForm()
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
@@ -118,6 +128,11 @@ export default {
     },
     countDownChanged: function (dismissCountDown) {
       this.alert.dismissCountDown = dismissCountDown
+    },
+    resetForm: function () {
+      this.$data.listing = {company_name: '', name: '', deadline: '', logo_uri: '', type: null, listing_url: ''}
+      this.$data.deadlineDateTime = null
+      this.$refs.logoFileInput.reset()
     },
     showAlert: function (variant, heading, message) {
       this.alert.variant = variant
@@ -128,7 +143,7 @@ export default {
     uploadLogo: function () {
       this.$data.showImgPreview = false
       this.$data.imgPreviewSrc = ''
-      if (this.$data.logoFile === undefined) {
+      if (this.$data.logoFile === undefined || this.$data.logoFile === null) {
         return
       }
       let formData = new FormData()
@@ -146,6 +161,11 @@ export default {
         this.$data.showImgPreview = false
         this.$data.imgPreviewSrc = ''
       })
+    },
+    validateLink: function () {
+      if (!(this.$data.listing.listing_url.startsWith('https://') || this.$data.listing.listing_url.startsWith('http://'))) {
+        this.$data.listing.listing_url = 'https://'.concat(this.$data.listing.listing_url)
+      }
     },
     ...mapMutations(['listings/addListing'])
   },
@@ -181,5 +201,8 @@ export default {
     opacity: 0 !important;
     transition: opacity 0.4s 0.4s;
   }
+}
+.listings-link {
+  color:#fff;
 }
 </style>

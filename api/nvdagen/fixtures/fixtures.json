@@ -71,7 +71,8 @@
             "company_name": "Kongsberggruppen",
             "deadline": "2019-01-29",
             "logo_uri": "static/kbg.png",
-            "type": "Sommerjobb"
+            "type": "Sommerjobb",
+            "listing_url": "http://example.com"
         }
     },
     {
@@ -82,7 +83,8 @@
             "company_name": "Sparebank1",
             "deadline": "2019-04-01",
             "logo_uri": "static/sb1.png",
-            "type": "Sommerjobb"
+            "type": "Sommerjobb",
+            "listing_url": "http://example.com"
         }
     },
     {
@@ -93,7 +95,8 @@
             "company_name": "Sopra Steria",
             "deadline": "2019-03-18",
             "logo_uri": "static/sopra.png",
-            "type": "Sommerjobb"
+            "type": "Sommerjobb",
+            "listing_url": "http://example.com"
         }
     },
     {
@@ -104,7 +107,8 @@
             "company_name": "Evry",
             "deadline": "2019-05-03",
             "logo_uri": "static/evry.png",
-            "type": "Fast stilling"
+            "type": "Fast stilling",
+            "listing_url": "http://example.com"
         }
     },
     {
@@ -115,7 +119,8 @@
             "company_name": "Disruptive Technologies",
             "deadline": "2019-02-13",
             "logo_uri": "static/disruptive.png",
-            "type": "Trainee"
+            "type": "Trainee",
+            "listing_url": "http://example.com"
         }
     },
     {
@@ -126,7 +131,8 @@
             "company_name": "Ardoq",
             "deadline": "2019-03-07",
             "logo_uri": "static/ardoq.png",
-            "type": "Deltidsstilling"
+            "type": "Deltidsstilling",
+            "listing_url": "http://example.com"
         }
     },
     {
