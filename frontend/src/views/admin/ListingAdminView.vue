@@ -38,9 +38,7 @@
                   <b-form-group class="flex-grow-1" label="Logo" label-for="listing-logo">
                     <b-form-file v-model="logoFile" required placeholder="Velg et bilde" ref="logoFileInput" @input="uploadLogo"></b-form-file>
                   </b-form-group>
-                  <div class="img-preview flex-grow-0" v-bind:class="{ 'show-preview': showImgPreview }">
-                    <b-img center fluid :src="imgPreviewSrc"></b-img>
-                  </div>
+                  <image-preview :imgPreviewSrc="imgPreviewSrc" :showImgPreview="showImgPreview"></image-preview>
                 </div>
               </div>
             </b-row>
@@ -73,10 +71,12 @@
 import Datepicker from 'vuejs-datepicker'
 import axios from 'axios'
 import { mapMutations } from 'vuex'
+import ImagePreview from '@/components/admin/ImagePreview.vue'
 export default {
   name: 'ListingAdminView',
   components: {
-    Datepicker
+    Datepicker,
+    ImagePreview
   },
   data: function () {
     return {
@@ -184,24 +184,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.img-preview {
-  width: 0;
-  height: 100px;
-  transition: width 0.4s;
-  border-radius: 2px;
-  margin:0;
-  &.show-preview {
-    width: 100px;
-    margin-left: 1.2rem;
-    img {
-      opacity: 1 !important;
-    }
-  }
-  img {
-    opacity: 0 !important;
-    transition: opacity 0.4s 0.4s;
-  }
-}
 .listings-link {
   color:#fff;
 }
