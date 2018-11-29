@@ -9,6 +9,7 @@ import AboutView from '@/views/anon/AboutView'
 import ContactView from '@/views/anon/ContactView'
 import store from '../store/index.js'
 import ListingAdminView from '@/views/admin/ListingAdminView.vue'
+import BusinessAdminView from '@/views/admin/BusinessAdminView.vue'
 
 Vue.use(Router)
 
@@ -74,6 +75,12 @@ export default new Router({
           name: 'BoardAdmin',
           component: null,
           meta: {title: 'Rediger styret'}
+        },
+        {
+          path: 'bedrifter',
+          name: 'CompanyAdmin',
+          component: BusinessAdminView,
+          meta: {title: 'Rediger Bedrifter'}
         },
         {
           path: 'sponsorer',

@@ -59,12 +59,17 @@ export default {
         {
           name: 'Stillingsannonser',
           url: this.$router.resolve({name: 'ListingAdmin'}).href,
-          icon: 'cui-briefcase'
+          icon: 'cui-list'
         },
         {
           name: 'Styremedlemmer',
           url: this.$router.resolve({name: 'BoardAdmin'}).href,
           icon: 'cui-people'
+        },
+        {
+          name: 'Bedrifter',
+          url: this.$router.resolve({name: 'CompanyAdmin'}).href,
+          icon: 'cui-briefcase'
         },
         {
           name: 'Sponsorer',
