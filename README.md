@@ -1,4 +1,5 @@
 # Nettverksdagen 2.0
+> We can only see a short distance ahead, but we can see plenty there that needs to be done. *– Alan Turing*
 
 ## Prerequisites
 * [Docker](https://www.docker.com/)
