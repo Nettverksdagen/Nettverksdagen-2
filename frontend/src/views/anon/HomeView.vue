@@ -3,14 +3,17 @@
     <div class="dude">
       <Hero/>
     </div>
+    <businesses></businesses>
   </div>
 </template>
 
 <script>
 import Hero from '@/components/anon/Hero.vue'
+import Businesses from '@/components/anon/Businesses.vue'
 export default {
   components: {
-    Hero
+    Hero,
+    Businesses
   },
   name: 'Home',
   data () {

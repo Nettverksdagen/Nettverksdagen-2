@@ -148,7 +148,7 @@
         "pk": 1,
         "fields": {
             "name": "Kongsberggruppen",
-            "logo_uri": "static/kgb.png",
+            "logo_uri": "static/kbg.png",
             "website_url": "http://example.com"
         }
     },
