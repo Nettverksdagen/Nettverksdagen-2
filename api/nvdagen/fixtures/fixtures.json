@@ -64,6 +64,14 @@
         }
     },
     {
+        "model": "contenttypes.contenttype",
+        "pk": 9,
+        "fields": {
+            "app_label": "nvdagen",
+            "model": "business"
+        }
+    },
+    {
         "model": "nvdagen.listing",
         "pk": 1,
         "fields": {
@@ -133,6 +141,60 @@
             "logo_uri": "static/ardoq.png",
             "type": "Deltidsstilling",
             "listing_url": "http://example.com"
+        }
+    },
+    {
+        "model": "nvdagen.business",
+        "pk": 1,
+        "fields": {
+            "name": "Kongsberggruppen",
+            "logo_uri": "static/kgb.png",
+            "website_url": "http://example.com"
+        }
+    },
+    {
+        "model": "nvdagen.business",
+        "pk": 2,
+        "fields": {
+            "name": "Sparebank1",
+            "logo_uri": "static/sb1.png",
+            "website_url": "http://example.com"
+        }
+    },
+    {
+        "model": "nvdagen.business",
+        "pk": 3,
+        "fields": {
+            "name": "Sopra Steria",
+            "logo_uri": "static/sopra.png",
+            "website_url": "http://example.com"
+        }
+    },
+    {
+        "model": "nvdagen.business",
+        "pk": 4,
+        "fields": {
+            "name": "Evry",
+            "logo_uri": "static/evry.png",
+            "website_url": "http://example.com"
+        }
+    },
+    {
+        "model": "nvdagen.business",
+        "pk": 5,
+        "fields": {
+            "name": "Disruptive Technologies",
+            "logo_uri": "static/disruptive.png",
+            "website_url": "http://example.com"
+        }
+    },
+    {
+        "model": "nvdagen.business",
+        "pk": 6,
+        "fields": {
+            "name": "Ardoq",
+            "logo_uri": "static/ardoq.png",
+            "website_url": "http://example.com"
         }
     },
     {
@@ -421,6 +483,42 @@
             "name": "Can view listing",
             "content_type": 8,
             "codename": "view_listing"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 33,
+        "fields": {
+            "name": "Can add business",
+            "content_type": 9,
+            "codename": "add_business"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 34,
+        "fields": {
+            "name": "Can change business",
+            "content_type": 9,
+            "codename": "change_business"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 35,
+        "fields": {
+            "name": "Can delete business",
+            "content_type": 9,
+            "codename": "delete_business"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 36,
+        "fields": {
+            "name": "Can view business",
+            "content_type": 9,
+            "codename": "view_business"
         }
     },
     {

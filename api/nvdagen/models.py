@@ -25,3 +25,10 @@ class Listing(models.Model):
     logo_uri = models.CharField(max_length=250)
     type = models.CharField(max_length=250, choices=LISTINGTYPECHOICE, default=OTHER_POSITION)
     listing_url = models.CharField(max_length=250)
+
+
+class Business(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=250)
+    logo_uri = models.CharField(max_length=250)
+    website_url = models.CharField(max_length=250)
