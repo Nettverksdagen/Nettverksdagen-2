@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres
+    restart: "always"
+
+  api:
+    build: ./api
+    command: "./django-entrypoint.sh"
+    depends_on:
+      - postgres
+    restart: "always"
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: ./frontend
+    command: ["npm", "run", "dev"]
+    restart: "always"
+    ports:
+      - "8081:8080"
+
+  fileserver:
+    build: ./fileserver
+    command: ["./main"]
+    restart: "always"
+    ports:
+      - "9000:9000"
+
+  reverse-proxy:
+    image: traefik
+    command: --api --docker
+    ports:
+      - "80:80"
+      - "8080:8080" #The Web UI (enabled by --api) (was 8080)
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock #So that Traefik can listen to the Docker events
