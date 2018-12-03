@@ -56,6 +56,7 @@
 import axios from 'axios'
 import ImagePreview from '@/components/admin/ImagePreview.vue'
 import { mapMutations } from 'vuex'
+import { fileUploader } from '@/services'
 export default {
   name: 'BusinessAdminView',
   components: {
@@ -129,22 +130,25 @@ export default {
       if (this.$data.logoFile === undefined || this.$data.logoFile === null) {
         return
       }
-      let formData = new FormData()
-      formData.append('file', this.$data.logoFile)
-      axios.post('http://127.0.0.1:9000/upload/image', formData).then((response) => {
-        this.$data.imgPreviewSrc = 'http://127.0.0.1:9000/' + response.data
-        this.$data.business.logo_uri = response.data
-        setTimeout(() => {
-          this.$data.showImgPreview = true
-        }, 30) // The image src can't be set at the same time as the img opacity or it will lose its transition
-      }).catch((e) => {
-        console.log(e)
-        this.showAlert('error',
-          'Error ' + e.response.status + ' ' + e.response.statusText,
-          'Bildeopplastning feilet, prøv igjen. Kontakt IT om problemet vedvarer.')
-        this.$data.showImgPreview = false
-        this.$data.imgPreviewSrc = ''
-      })
+      fileUploader.uploadImage(this.$data.logoFile)
+        .then((logoUri) => {
+          this.$data.business.logo_uri = logoUri
+          this.$data.imgPreviewSrc = 'http://127.0.0.1:9000/' + logoUri
+          setTimeout(() => {
+            this.$data.showImgPreview = true
+          }, 30) // The image src can't be set at the same time as the img opacity or it will lose its transition
+        })
+        .catch((e) => {
+          let errorTitle = 'Error'
+          if (e.response !== undefined) {
+            errorTitle = 'Error ' + e.response.status + ' ' + e.response.statusText
+          }
+          this.showAlert('danger',
+            errorTitle,
+            'Bildeopplastning feilet, prøv igjen. Kontakt IT om problemet vedvarer.')
+          this.$data.showImgPreview = false
+          this.$data.imgPreviewSrc = ''
+        })
     },
     ...mapMutations(['businesses/addBusiness'])
   }

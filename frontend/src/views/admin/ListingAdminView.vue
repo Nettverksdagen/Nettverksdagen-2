@@ -72,6 +72,7 @@ import Datepicker from 'vuejs-datepicker'
 import axios from 'axios'
 import { mapMutations } from 'vuex'
 import ImagePreview from '@/components/admin/ImagePreview.vue'
+import { fileUploader } from '@/services'
 export default {
   name: 'ListingAdminView',
   components: {
@@ -146,21 +147,24 @@ export default {
       if (this.$data.logoFile === undefined || this.$data.logoFile === null) {
         return
       }
-      let formData = new FormData()
-      formData.append('file', this.$data.logoFile)
-      axios.post('http://127.0.0.1:9000/upload/image', formData).then((response) => {
-        this.$data.imgPreviewSrc = 'http://127.0.0.1:9000/' + response.data
-        this.$data.listing.logo_uri = response.data
-        setTimeout(() => {
-          this.$data.showImgPreview = true
-        }, 30) // The image src can't be set at the same time as the img opacity or it will lose its transition
-      }).catch((e) => {
-        this.showAlert('error',
-          'Error ' + e.response.status + ' ' + e.response.statusText,
-          'Bildeopplastning feilet, prøv igjen. Kontakt IT om problemet vedvarer.')
-        this.$data.showImgPreview = false
-        this.$data.imgPreviewSrc = ''
-      })
+      fileUploader.uploadImage(this.$data.logoFile)
+        .then((logoUri) => {
+          this.$data.imgPreviewSrc = 'http://127.0.0.1:9000/' + logoUri
+          this.$data.listing.logo_uri = logoUri
+          setTimeout(() => {
+            this.$data.showImgPreview = true
+          }, 30) // The image src can't be set at the same time as the img opacity or it will lose its transition
+        }).catch((e) => {
+          let errorTitle = 'Error'
+          if (e.response !== undefined) {
+            errorTitle = 'Error ' + e.response.status + ' ' + e.response.statusText
+          }
+          this.showAlert('danger',
+            errorTitle,
+            'Bildeopplastning feilet, prøv igjen. Kontakt IT om problemet vedvarer.')
+          this.$data.showImgPreview = false
+          this.$data.imgPreviewSrc = ''
+        })
     },
     validateLink: function () {
       if (!(this.$data.listing.listing_url.startsWith('https://') || this.$data.listing.listing_url.startsWith('http://'))) {
