@@ -31,10 +31,12 @@ new Vue({
   mounted () {
     this.fetchListings()
     this.fetchBusinesses()
+    this.fetchSponsors()
   },
   methods: {
     ...Vuex.mapActions('listings', ['fetchListings']),
-    ...Vuex.mapActions('businesses', ['fetchBusinesses'])
+    ...Vuex.mapActions('businesses', ['fetchBusinesses']),
+    ...Vuex.mapActions('sponsors', ['fetchSponsors'])
   },
   components: { App },
   template: '<App/>'

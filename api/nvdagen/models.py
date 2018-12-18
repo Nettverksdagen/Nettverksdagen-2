@@ -27,8 +27,18 @@ class Listing(models.Model):
     listing_url = models.CharField(max_length=250)
 
 
-class Business(models.Model):
-    id = models.AutoField(primary_key=True)
+class BusinessWithLogo(models.Model):
     name = models.CharField(max_length=250)
     logo_uri = models.CharField(max_length=250)
     website_url = models.CharField(max_length=250)
+
+    class Meta:
+        abstract = True
+
+
+class Business(BusinessWithLogo):
+    id = models.AutoField(primary_key=True)
+
+
+class Sponsor(BusinessWithLogo):
+    id = models.AutoField(primary_key=True)

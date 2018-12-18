@@ -72,6 +72,14 @@
         }
     },
     {
+        "model": "contenttypes.contenttype",
+        "pk": 10,
+        "fields": {
+            "app_label": "nvdagen",
+            "model": "sponsor"
+        }
+    },
+    {
         "model": "nvdagen.listing",
         "pk": 1,
         "fields": {
@@ -194,6 +202,42 @@
         "fields": {
             "name": "Ardoq",
             "logo_uri": "static/ardoq.png",
+            "website_url": "http://example.com"
+        }
+    },
+    {
+        "model": "nvdagen.sponsor",
+        "pk": 1,
+        "fields": {
+            "name": "Kjeldsberg kaffe",
+            "logo_uri": "static/kjeldsberg.png",
+            "website_url": "http://example.com"
+        }
+    },
+    {
+        "model": "nvdagen.sponsor",
+        "pk": 2,
+        "fields": {
+            "name": "NTNU",
+            "logo_uri": "static/ntnu.png",
+            "website_url": "http://example.com"
+        }
+    },
+    {
+        "model": "nvdagen.sponsor",
+        "pk": 3,
+        "fields": {
+            "name": "Studentsamskipnaden i Trondheim",
+            "logo_uri": "static/sit.png",
+            "website_url": "http://example.com"
+        }
+    },
+    {
+        "model": "nvdagen.sponsor",
+        "pk": 4,
+        "fields": {
+            "name": "Egon",
+            "logo_uri": "static/egon.png",
             "website_url": "http://example.com"
         }
     },
@@ -519,6 +563,42 @@
             "name": "Can view business",
             "content_type": 9,
             "codename": "view_business"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 37,
+        "fields": {
+            "name": "Can add sponsor",
+            "content_type": 10,
+            "codename": "add_sponsor"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 38,
+        "fields": {
+            "name": "Can change sponsor",
+            "content_type": 10,
+            "codename": "change_sponsor"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 39,
+        "fields": {
+            "name": "Can delete sponsor",
+            "content_type": 10,
+            "codename": "delete_sponsor"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 40,
+        "fields": {
+            "name": "Can view sponsor",
+            "content_type": 10,
+            "codename": "view_sponsor"
         }
     },
     {

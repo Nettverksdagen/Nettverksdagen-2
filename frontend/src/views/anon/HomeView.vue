@@ -4,16 +4,19 @@
       <Hero/>
     </div>
     <businesses></businesses>
+    <sponsors></sponsors>
   </div>
 </template>
 
 <script>
 import Hero from '@/components/anon/Hero.vue'
 import Businesses from '@/components/anon/Businesses.vue'
+import Sponsors from '@/components/anon/Sponsors.vue'
 export default {
   components: {
     Hero,
-    Businesses
+    Businesses,
+    Sponsors
   },
   name: 'Home',
   data () {

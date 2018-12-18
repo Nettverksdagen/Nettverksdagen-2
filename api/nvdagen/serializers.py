@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Listing, Business
+from .models import Listing, Business, Sponsor
 
 
 class ListingSerializer(serializers.ModelSerializer):
@@ -11,4 +11,10 @@ class ListingSerializer(serializers.ModelSerializer):
 class BusinessSerializer(serializers.ModelSerializer):
     class Meta:
         model = Business
+        fields = '__all__'
+
+
+class SponsorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Sponsor
         fields = '__all__'
