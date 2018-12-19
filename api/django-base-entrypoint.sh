@@ -13,6 +13,3 @@ python manage.py migrate
 
 echo "Loading data from fixtures"
 python manage.py loaddata fixtures.json
-
-echo "Starting server"
-python manage.py runserver 0.0.0.0:8000

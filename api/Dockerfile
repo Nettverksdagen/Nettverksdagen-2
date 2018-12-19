@@ -1,5 +1,6 @@
 FROM python:3
 ENV PYTHONUNBUFFERED 1
+ENV DJANGO_SETTINGS_MODULE=nvdnew.settings.prod
 RUN ["apt-get", "update"]
 RUN ["apt-get", "install", "netcat-traditional"]
 RUN mkdir api
