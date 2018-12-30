@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 
 services:
   postgres:
@@ -17,11 +17,12 @@ services:
       - DJANGO_SETTINGS_MODULE=nvdnew.settings.prod
 
   frontend:
-    build: ./frontend
-    command: ["npm", "run", "dev"]
-    restart: "always"
-    ports:
-      - "7000:8080"
+    build:
+      context: ./frontend
+      target: builder
+    volumes:
+      - frontend-files:/frontend
+    command: ["ls"] # No operation
 
   fileserver:
     build: ./fileserver
@@ -31,3 +32,17 @@ services:
       - "7002:9000"
     volumes:
       - ./fileserver/uploads:/root/uploads
+
+  nginx:
+    build: ./nginx
+    restart: "always"
+    ports:
+      - "8765:80"
+      - "8443:443"
+    depends_on:
+      - api
+      - fileserver
+    volumes:
+      - frontend-files:/frontend
+volumes:
+  frontend-files:

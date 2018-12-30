@@ -17,7 +17,9 @@ services:
     depends_on:
       - postgres
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      target: base
     ports:
       - "8080:8080"
     command: ["npm", "run", "dev"]
