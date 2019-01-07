@@ -1,6 +1,14 @@
 server {
-    listen       80;
-    server_name  localhost;
+    listen 80;
+    server_name localhost;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen       443 ssl;
+
+    include /config/nginx/proxy-confs/*.subfolder.conf;
+    include /config/nginx/ssl.conf;
 
     #charset koi8-r;
     #access_log  /var/log/nginx/host.access.log  main;
@@ -11,11 +19,11 @@ server {
     }
 
     location /api {
-        proxy_pass http://127.0.0.1:7001;
+        proxy_pass http://api:8000/api;
     }
 
     location /fileserver {
-        proxy_pass http://127.0.0.1:7002;
+        proxy_pass http://fileserver:9000/;
     }
 
     #error_page  404              /404.html;

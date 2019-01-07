@@ -21,8 +21,8 @@ services:
       context: ./frontend
       target: builder
     volumes:
-      - frontend-files:/frontend
-    command: ["ls"] # No operation
+      - frontend-files:/frontend/dist
+    command: ["echo", "Successfully created static frontend files"] # No operation
 
   fileserver:
     build: ./fileserver
@@ -34,15 +34,25 @@ services:
       - ./fileserver/uploads:/root/uploads
 
   nginx:
-    build: ./nginx
+    image: linuxserver/letsencrypt
     restart: "always"
     ports:
-      - "8765:80"
-      - "8443:443"
+      - "80:80"
+      - "443:443"
+    environment:
+      - PUID=1013
+      - GUID=1015
+      - EMAIL=it@nvdagen.no
+      - URL=nvdagen.no
+      - SUBDOMAINS=www
+      - TZ=Europe/Oslo
+      - VALIDATION=http
+      #- STAGING=true # Uncomment this when testing
     depends_on:
       - api
       - fileserver
     volumes:
+      - ./nginx/config:/config # Todo: Can this volume include the below?
       - frontend-files:/frontend
 volumes:
   frontend-files:

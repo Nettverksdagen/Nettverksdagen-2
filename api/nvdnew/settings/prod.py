@@ -1,5 +1,5 @@
 from .base import *
 
-ALLOWED_HOSTS = ["nvdagen.no"]
+ALLOWED_HOSTS = ["api", "nvdagen.no"]
 
 DEBUG = False
