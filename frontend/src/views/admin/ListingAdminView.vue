@@ -117,7 +117,7 @@ export default {
   methods: {
     handleSubmit: function () {
       this.$data.listing.deadline = this.$data.deadlineDateTime.toISOString().split('T')[0]
-      axios.post('http://127.0.0.1:8000/api/listing/', this.$data.listing).then((response) => {
+      axios.post(process.env.VUE_APP_API_HOST + '/api/listing/', this.$data.listing).then((response) => {
         this.showAlert('success', 'Suksess!', 'Stillingsannonsen ble opprettet.')
         this['listings/addListing'](response.data)
         this.resetForm()
@@ -149,7 +149,7 @@ export default {
       }
       fileUploader.uploadImage(this.$data.logoFile)
         .then((logoUri) => {
-          this.$data.imgPreviewSrc = 'http://127.0.0.1:9000/' + logoUri
+          this.$data.imgPreviewSrc = process.env.VUE_APP_FILESERVER_HOST + '/' + logoUri
           this.$data.listing.logo_uri = logoUri
           setTimeout(() => {
             this.$data.showImgPreview = true
@@ -174,7 +174,7 @@ export default {
     ...mapMutations(['listings/addListing'])
   },
   beforeCreate: function () {
-    axios.options('http://127.0.0.1:8000/api/listing/').then((response) => {
+    axios.options(process.env.VUE_APP_API_HOST + '/api/listing/').then((response) => {
       this.$data.listingTypes = this.$data.listingTypes.concat(response.data.actions.POST.type.choices.map(
         option => ({value: option.value, text: option.display_name})
       ))

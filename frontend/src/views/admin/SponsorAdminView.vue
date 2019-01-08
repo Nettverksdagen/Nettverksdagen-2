@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     handleSubmit: function () {
-      axios.post('http://127.0.0.1:8000/api/sponsor/', this.$data.sponsor).then((response) => {
+      axios.post(process.env.VUE_APP_API_HOST + '/api/sponsor/', this.$data.sponsor).then((response) => {
         this.showAlert('success', 'Suksess!', 'Sponsoren er blitt lagt ut på forsiden.')
         this['sponsors/addSponsor'](response.data)
         this.resetForm()
@@ -133,7 +133,7 @@ export default {
       fileUploader.uploadImage(this.$data.logoFile)
         .then((logoUri) => {
           this.$data.sponsor.logo_uri = logoUri
-          this.$data.imgPreviewSrc = 'http://127.0.0.1:9000/' + logoUri
+          this.$data.imgPreviewSrc = process.env.VUE_APP_FILESERVER_HOST + '/' + logoUri
           setTimeout(() => {
             this.$data.showImgPreview = true
           }, 30) // The image src can't be set at the same time as the img opacity or it will lose its transition

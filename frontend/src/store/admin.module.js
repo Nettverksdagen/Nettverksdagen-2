@@ -12,7 +12,7 @@ const actions = {
 
     let credentials = credentialObserver.credentials // Get credentials from observer
 
-    await fetch('http://127.0.0.1:8000/rest-auth/login/', {
+    await fetch(process.env.VUE_APP_API_HOST + '/rest-auth/login/', {
       method: 'POST',
       body: JSON.stringify({
         username: credentials.username,

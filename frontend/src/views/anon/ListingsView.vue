@@ -14,7 +14,7 @@
                      :company="listing.company_name"
                      :title="listing.name"
                      :deadline="listing.deadline"
-                     :logo-src="'http://127.0.0.1:9000/' + listing.logo_uri"
+                     :logo-src="fileserverHost + '/' + listing.logo_uri"
                      :type="listing.type"
                      :listing-url="listing.listing_url"/>
           </b-list-group>
@@ -32,6 +32,11 @@ export default {
   components: {
     Content,
     Listing
+  },
+  data () {
+    return {
+      fileserverHost: process.env.VUE_APP_FILESERVER_HOST
+    }
   },
   computed: {
     listings: function () {

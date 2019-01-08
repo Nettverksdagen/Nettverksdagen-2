@@ -23,6 +23,7 @@ server {
     }
 
     location /fileserver {
+        rewrite  ^/fileserver/(.*) /$1 break;
         proxy_pass http://fileserver:9000/;
     }
 

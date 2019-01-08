@@ -1,7 +1,7 @@
 <template>
   <div class="business col-6 col-sm-4 col-md-3">
     <a :href="href">
-      <b-img fluid :src="'http://127.0.0.1:9000/' + logo_src"></b-img>
+      <b-img fluid :src="fileserverHost + '/' + logo_src"></b-img>
     </a>
   </div>
 </template>
@@ -9,7 +9,12 @@
 <script>
 export default {
   name: 'Business',
-  props: ['logo_src', 'href']
+  props: ['logo_src', 'href'],
+  data () {
+    return {
+      fileserverHost: process.env.VUE_APP_FILESERVER_HOST
+    }
+  }
 }
 </script>
 

@@ -9,7 +9,7 @@ const actions = {
     commit('fetchRequest')
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/sponsor/')
+      const response = await fetch(process.env.VUE_APP_API_HOST + '/api/sponsor/')
       const all = await response.json()
       commit('fetchSuccessful', all)
     } catch (e) {
