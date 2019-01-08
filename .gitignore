@@ -12,3 +12,5 @@ __pychache__/
 *.swp
 fileserver/uploads/*
 fileserver/!uploads/static/
+nginx/config/*
+!nginx/config/nginx/site-confs/default
