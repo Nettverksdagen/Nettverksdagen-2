@@ -95,7 +95,7 @@
     .logo-link {
       position:relative;
       left:50%;
-      margin-left:-100px;
+      margin-left:-110px;
     }
   }
 </style>
