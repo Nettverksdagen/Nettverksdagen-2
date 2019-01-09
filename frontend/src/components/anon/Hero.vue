@@ -1,7 +1,6 @@
 <template>
-  <div class="hero">
+  <div class="hero" :style="{'background-image': 'url(' + require('@/assets/hero_blur.jpg') + ')'}">
     <div class="wrapper">
-      <img class="hero-img" src="@/assets/hero_blur.jpg">
       <div class="hero-content">
         <HeroText class="hero-txt"/>
         <div class="hexes">
@@ -36,6 +35,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .hero {
+    background: no-repeat top;
+    background-size: auto 100%;
+  }
   .wrapper {
     width:100%;
     position:relative;
