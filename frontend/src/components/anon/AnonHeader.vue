@@ -44,7 +44,7 @@
   }
   .logo {
     height:40px;
-    margin:0 11px;
+    margin:5px 11px;
     @media (min-width: 992px) {
       margin:15px 15px 15px 0;
       height:50px;
@@ -89,6 +89,13 @@
       &:hover {
         color:#111;
       }
+    }
+  }
+  @media (max-width: 767px) {
+    .logo-link {
+      position:relative;
+      left:50%;
+      margin-left:-100px;
     }
   }
 </style>
