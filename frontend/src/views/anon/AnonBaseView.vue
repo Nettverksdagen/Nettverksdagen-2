@@ -1,7 +1,7 @@
 <template>
   <div class="anon-base">
     <AnonHeader/>
-    <Slide width="200" class="sidebar"  @openMenu="handleOpenMenu" @closeMenu="handleCloseMenu">
+    <Slide width="200" class="sidebar"  @openMenu="handleOpenMenu" @closeMenu="handleCloseMenu" disableEsc>
       <router-link :to="{ name: 'Home' }">Hjem</router-link>
       <router-link :to="{ name: 'Listings' }">Stillinger</router-link>
       <router-link :to="{ name: 'About' }">Om oss</router-link>
