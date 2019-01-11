@@ -25,6 +25,7 @@ class Listing(models.Model):
     logo_uri = models.CharField(max_length=250)
     type = models.CharField(max_length=250, choices=LISTINGTYPECHOICE, default=OTHER_POSITION)
     listing_url = models.CharField(max_length=250)
+    city = models.CharField(max_length=250)
 
 
 class BusinessWithLogo(models.Model):

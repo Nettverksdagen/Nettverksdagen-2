@@ -37,7 +37,8 @@
                      :deadline="listing.deadline"
                      :logo-src="fileserverHost + '/' + listing.logo_uri"
                      :type="listing.type"
-                     :listing-url="listing.listing_url"/>
+                     :listing-url="listing.listing_url"
+                     :city="listing.city"/>
           </b-list-group>
         </div>
       </b-row>

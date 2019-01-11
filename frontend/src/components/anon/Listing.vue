@@ -8,7 +8,7 @@
       <div class="side info-container">
         <h6 class="company"><span class="font-weight-bold">{{ company }}</span> – {{ type }}</h6>
         <h5 class="title">{{ title }}</h5>
-        <span class="deadline">Frist: {{ formattedDeadline }}</span>
+        <span class="tinytext"><span class="city">{{ city }}</span> | Frist: {{ formattedDeadline }}</span>
       </div>
     </b-list-group-item>
     </b-link>
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  props: ['company', 'title', 'deadline', 'logoSrc', 'type', 'listingUrl'],
+  props: ['company', 'title', 'deadline', 'logoSrc', 'type', 'listingUrl', 'city'],
   computed: {
     formattedDeadline: function () {
       let deadDate = new Date(this.deadline)
@@ -77,9 +77,12 @@ export default {
     font-weight:700;
     color:#222;
   }
-  .deadline {
+  .tinytext {
     font-size:14px;
     color:#888;
+    .city {
+      font-weight:bold;
+    }
   }
   a {
     text-decoration:none;

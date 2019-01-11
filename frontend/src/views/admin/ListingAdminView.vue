@@ -26,6 +26,9 @@
                 <b-form-group label="Stillingstype" label-for="listing-company-type">
                   <b-form-select v-model="listing.type" :options="listingTypes" id="listing-company-type" required></b-form-select>
                 </b-form-group>
+                <b-form-group label="Sted" label-for="listing-city-input">
+                  <b-form-input v-model="listing.city" id="listing-city-input" required placeholder="Skriv hvor jobben finner sted" maxlength="100"></b-form-input>
+                </b-form-group>
               </div>
               <div class="col-12 col-md-6">
                 <b-form-group label="Søknadsfrist" label-for="listing-deadline">
@@ -87,7 +90,8 @@ export default {
         deadline: '',
         logo_uri: '',
         type: null,
-        listing_url: ''
+        listing_url: '',
+        city: ''
       },
       logoFile: null,
       showImgPreview: false,
@@ -131,7 +135,7 @@ export default {
       this.alert.dismissCountDown = dismissCountDown
     },
     resetForm: function () {
-      this.$data.listing = {company_name: '', name: '', deadline: '', logo_uri: '', type: null, listing_url: ''}
+      this.$data.listing = {company_name: '', name: '', deadline: '', logo_uri: '', type: null, listing_url: '', city: ''}
       this.$data.deadlineDateTime = null
       this.$refs.logoFileInput.reset()
     },
