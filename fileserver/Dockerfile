@@ -1,9 +1,9 @@
 FROM golang:1.11.2 as builder
 RUN mkdir -p /go/src/fileserver
 WORKDIR /go/src/fileserver
-COPY main.go  .
 RUN go get -u github.com/golang/dep/...
 RUN dep init
+COPY main.go  .
 RUN dep ensure 
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
 
