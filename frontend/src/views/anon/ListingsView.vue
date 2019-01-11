@@ -46,7 +46,7 @@
                      :company="listing.company_name"
                      :title="listing.name"
                      :deadline="listing.deadline"
-                     :logo-src="fileserverHost + '/' + listing.logo_uri"
+                     :logo-src="fileserverHost + '/thumb/512/' + listing.logo_uri"
                      :type="listing.type"
                      :listing-url="listing.listing_url"
                      :city="listing.city"/>

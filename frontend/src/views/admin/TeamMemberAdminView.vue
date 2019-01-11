@@ -43,7 +43,7 @@
                     <p class="text-black-50 mt-2">
                       <span class="font-weight-bold">Obs</span>:
                       Bildet blir automatisk plassert i sentrum av et kvadrat, men ikke beskåret eller strukket.
-                      Last opp bilder som allerede er kvadratiske for best effekt.
+                      Last opp bilder som allerede er kvadratiske for best resultat.
                     </p>
                   </b-form-group>
                   <image-preview :imgPreviewSrc="imgPreviewSrc" :showImgPreview="showImgPreview"></image-preview>
@@ -137,7 +137,7 @@ export default {
       fileUploader.uploadImage(this.$data.photoFile)
         .then((photoUri) => {
           this.$data.teamMember.photo_uri = photoUri
-          this.$data.imgPreviewSrc = process.env.VUE_APP_FILESERVER_HOST + '/' + photoUri
+          this.$data.imgPreviewSrc = process.env.VUE_APP_FILESERVER_HOST + '/thumb/256/' + photoUri
           setTimeout(() => {
             this.$data.showImgPreview = true
           }, 30) // The image src can't be set at the same time as the img opacity or it will lose its transition

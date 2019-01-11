@@ -133,7 +133,7 @@ export default {
       fileUploader.uploadImage(this.$data.logoFile)
         .then((logoUri) => {
           this.$data.business.logo_uri = logoUri
-          this.$data.imgPreviewSrc = process.env.VUE_APP_FILESERVER_HOST + '/' + logoUri
+          this.$data.imgPreviewSrc = process.env.VUE_APP_FILESERVER_HOST + '/thumb/256/' + logoUri
           setTimeout(() => {
             this.$data.showImgPreview = true
           }, 30) // The image src can't be set at the same time as the img opacity or it will lose its transition

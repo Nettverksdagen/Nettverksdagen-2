@@ -153,7 +153,7 @@ export default {
       }
       fileUploader.uploadImage(this.$data.logoFile)
         .then((logoUri) => {
-          this.$data.imgPreviewSrc = process.env.VUE_APP_FILESERVER_HOST + '/' + logoUri
+          this.$data.imgPreviewSrc = process.env.VUE_APP_FILESERVER_HOST + '/thumb/256/' + logoUri
           this.$data.listing.logo_uri = logoUri
           setTimeout(() => {
             this.$data.showImgPreview = true

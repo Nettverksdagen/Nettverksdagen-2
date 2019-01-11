@@ -11,6 +11,6 @@ pyvevn.cfg
 __pychache__/
 *.swp
 fileserver/uploads/*
-fileserver/!uploads/static/
+fileserver/!uploads/thumb/512/static/
 nginx/config/*
 !nginx/config/nginx/site-confs/default

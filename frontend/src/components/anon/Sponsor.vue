@@ -1,7 +1,7 @@
 <template>
     <div class="sponsor col-6 col-sm-4 col-md-3">
       <a :href="href">
-        <b-img fluid :src="fileserverHost + '/' + logo_src"></b-img>
+        <b-img fluid :src="fileserverHost + '/thumb/512/' + logo_src"></b-img>
       </a>
     </div>
 </template>

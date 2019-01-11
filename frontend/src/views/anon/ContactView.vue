@@ -76,7 +76,7 @@
             <b-card no-body>
               <b-card-body class="d-flex">
             <div>
-              <b-img rounded="circle" width="150" height="150" :src="$options.fileServerHost + '/' + member.photo_uri"></b-img>
+              <b-img rounded="circle" width="150" height="150" :src="$options.fileServerHost + '/thumb/512/' + member.photo_uri"></b-img>
             </div>
             <div class="ml-3 d-flex justify-content-center flex-column">
               <h4 class="member-name m-0">{{ member.name }}</h4>
