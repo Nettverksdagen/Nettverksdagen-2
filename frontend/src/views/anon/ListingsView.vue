@@ -23,6 +23,17 @@
                       </b-form-checkbox-group>
                     </b-form-group>
                   </b-list-group-item>
+
+                  <b-list-group-item>
+                    <h4>Sted</h4>
+                    <b-form-group>
+                      <b-form-checkbox-group
+                        id="job-location-checkboxes"
+                        v-model="selectedJobLocations"
+                        :options="$options.allJobLocations">
+                      </b-form-checkbox-group>
+                    </b-form-group>
+                  </b-list-group-item>
                 </b-list-group>
               </b-collapse>
             </b-card-body>
@@ -56,10 +67,12 @@ export default {
     Listing
   },
   allPositionTypes: [],
+  allJobLocations: [],
   data () {
     return {
       fileserverHost: process.env.VUE_APP_FILESERVER_HOST,
       selectedPositionTypes: [],
+      selectedJobLocations: [],
       windowWidth: 1000,
       filtersVisible: true
     }
@@ -69,16 +82,22 @@ export default {
       let listings = this.$store.state.listings.all
       // Filter out unchecked position types
       listings = listings.filter(listing => this.$data.selectedPositionTypes.indexOf(listing.type) !== -1)
+
+      // Filter out unchecked job locations
+      listings = listings.filter(listing => this.$data.selectedJobLocations.indexOf(listing.city) !== -1)
       return listings
     }
   },
   mounted () {
-    this.$options.allPositionTypes = this.$store.state.listings.all
-      .map(listing => listing.type)
-      .filter((listing, pos, listings) => {
-        return listings.indexOf(listing) === pos
-      })
+    this.$options.allPositionTypes = this.sortByFrequencyAndRemoveDuplicates(
+      this.$store.state.listings.all.map(listing => listing.type)
+    )
     this.selectedPositionTypes = this.$options.allPositionTypes
+
+    this.$options.allJobLocations = this.sortByFrequencyAndRemoveDuplicates(
+      this.$store.state.listings.all.map(listing => listing.city)
+    )
+    this.selectedJobLocations = this.$options.allJobLocations
   },
   created () {
     window.addEventListener('resize', this.handleResize)
@@ -89,11 +108,29 @@ export default {
   },
   methods: {
     handleResize () {
-      if (window.innerWidth >= 768) {
-        this.filtersVisible = true
-      } else {
-        this.filtersVisible = false
+      this.filtersVisible = window.innerWidth >= 768
+    },
+    sortByFrequencyAndRemoveDuplicates (arr) {
+      // Obtain array of unique elements
+      let uniques = arr.filter((elem, pos, arr) => {
+        return arr.indexOf(elem) === pos
+      })
+
+      // Create empty object of frequencies initialized at zero
+      let frequencies = {}
+      for (let i = 0; i < uniques.length; i++) {
+        frequencies[uniques[i]] = 0
       }
+
+      // Compute the frequencies
+      for (let i = 0; i < arr.length; i++) {
+        frequencies[arr[i]]++
+      }
+
+      // Return unique array sorted by frequency (most common first)
+      return uniques.sort(function (a, b) {
+        return frequencies[b] - frequencies[a]
+      })
     }
   }
 }
