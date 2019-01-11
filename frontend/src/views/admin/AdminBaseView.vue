@@ -63,7 +63,7 @@ export default {
         },
         {
           name: 'Styremedlemmer',
-          url: this.$router.resolve({name: 'BoardAdmin'}).href,
+          url: this.$router.resolve({name: 'TeamMemberAdmin'}).href,
           icon: 'cui-people'
         },
         {

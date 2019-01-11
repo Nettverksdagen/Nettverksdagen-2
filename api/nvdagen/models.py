@@ -28,6 +28,15 @@ class Listing(models.Model):
     city = models.CharField(max_length=250)
 
 
+class TeamMember(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=250)
+    email = models.CharField(max_length=250)
+    photo_uri = models.CharField(max_length=250)
+    team = models.CharField(max_length=250)
+    position = models.CharField(max_length=250)
+
+
 class BusinessWithLogo(models.Model):
     name = models.CharField(max_length=250)
     logo_uri = models.CharField(max_length=250)

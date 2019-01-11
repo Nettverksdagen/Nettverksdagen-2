@@ -11,6 +11,7 @@ import store from '../store/index.js'
 import ListingAdminView from '@/views/admin/ListingAdminView.vue'
 import BusinessAdminView from '@/views/admin/BusinessAdminView.vue'
 import SponsorAdminView from '@/views/admin/SponsorAdminView.vue'
+import TeamMemberAdminView from '@/views/admin/TeamMemberAdminView.vue'
 
 Vue.use(Router)
 
@@ -73,8 +74,8 @@ export default new Router({
         },
         {
           path: 'styret',
-          name: 'BoardAdmin',
-          component: null,
+          name: 'TeamMemberAdmin',
+          component: TeamMemberAdminView,
           meta: {title: 'Rediger styret'}
         },
         {
