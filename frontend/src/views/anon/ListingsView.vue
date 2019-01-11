@@ -3,12 +3,12 @@
     <Content>
       <b-row>
         <div class="col-12 col-md-4">
-          <b-card no-body class="mb-3" header="Filtre og sortering">
+          <b-card no-body class="mb-3" header="Filtrer annonser">
             <b-card-body class="pt-0">
               <b-btn v-b-toggle.filterCollapse variant="secondary" class="d-md-none w-100 mt-3">
                 <span class="when-closed">Vis</span>
                 <span class="when-opened">Skjul</span>
-                filtre
+                filter
               </b-btn>
               <b-collapse id="filterCollapse" class="mt-3" v-model="filtersVisible">
                 <p class="text-secondary text-center">(Listen oppdateres automatisk)</p>
@@ -85,6 +85,14 @@ export default {
 
       // Filter out unchecked job locations
       listings = listings.filter(listing => this.$data.selectedJobLocations.indexOf(listing.city) !== -1)
+
+      // Filter out old listings
+      listings = listings.filter(listing => new Date(listing.deadline) > new Date())
+
+      // Sort by deadline
+      listings = listings.sort(function (a, b) {
+        return new Date(a.deadline) - new Date(b.deadline)
+      })
       return listings
     }
   },
