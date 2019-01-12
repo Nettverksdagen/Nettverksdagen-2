@@ -18,7 +18,22 @@ const actions = {
   }
 }
 
-const getters = {}
+const getters = {
+  levels: state => {
+    let levels = {}
+    for (let i = 0; i < state.all.length; i++) {
+      if (!(state.all[i].level in levels)) {
+        levels[state.all[i].level] = {
+          level: state.all[i].level,
+          businesses: [state.all[i]]
+        }
+      } else {
+        levels[state.all[i].level]['businesses'].push(state.all[i])
+      }
+    }
+    return levels
+  }
+}
 
 const mutations = {
   fetchRequest (state) {

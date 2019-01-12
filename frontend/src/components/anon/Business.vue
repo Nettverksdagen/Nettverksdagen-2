@@ -1,19 +1,28 @@
 <template>
-  <div class="business col-6 col-sm-4 col-md-3">
+  <b-col
+    :cols="$options.colSizes[colSize][0]"
+    :sm="$options.colSizes[colSize][1]"
+    :md="$options.colSizes[colSize][2]"
+    :class="'business ' + colSize">
     <a :href="href" target="_blank" rel="noopener noreferrer">
       <b-img fluid :src="fileserverHost + '/thumb/512/' + logo_src"></b-img>
     </a>
-  </div>
+  </b-col>
 </template>
 
 <script>
 export default {
   name: 'Business',
-  props: ['logo_src', 'href'],
+  props: ['logo_src', 'href', 'colSize'],
   data () {
     return {
       fileserverHost: process.env.VUE_APP_FILESERVER_HOST
     }
+  },
+  colSizes: {
+    'big': [6, 4, 3],
+    'medium': [4, 3, 2],
+    'small': [3, 2, 2]
   }
 }
 </script>
@@ -21,19 +30,49 @@ export default {
 <style lang="scss" scoped>
   .business {
     transition: transform 0.2s;
-    padding: 2rem;
-    @media(min-width: 576px) {
-      // No hover effect on tiny devices
-      padding: 2rem;
-    }
+
     @media(min-width: 768px) {
-      padding: 2rem 2.5rem;
       &:hover {
         transform: scale(1.2);
       }
     }
-    @media(min-width: 992px) {
-      padding: 1.5rem 3.5rem;
+    &.big {
+      padding: 2rem;
+      @media(min-width: 576px) {
+        padding: 2rem;
+      }
+      @media(min-width: 768px) {
+        padding: 2rem 2.5rem;
+      }
+      @media(min-width: 992px) {
+        padding: 1.5rem 3.5rem;
+      }
+    }
+
+    &.medium {
+      padding: 1.6rem;
+      @media(min-width: 576px) {
+        padding: 2rem;
+      }
+      @media(min-width: 768px) {
+        padding: 1.5rem 2rem;
+      }
+      @media(min-width: 992px) {
+        padding: 1.5rem 2rem;
+      }
+    }
+
+    &.small {
+      padding: 1.2rem;
+      @media(min-width: 576px) {
+        padding: 1rem;
+      }
+      @media(min-width: 768px) {
+        padding: 2rem 2.5rem;
+      }
+      @media(min-width: 992px) {
+        padding: 1.5rem 4rem;
+      }
     }
   }
 </style>
