@@ -1,82 +1,37 @@
 [
     {
-        "model": "contenttypes.contenttype",
-        "pk": 1,
+        "model": "auth.user",
         "fields": {
-            "app_label": "admin",
-            "model": "logentry"
+            "password": "pbkdf2_sha256$120000$3fVEudg4GV26$A6wvfWt/Z6FYB7te5eYixHKfHPKAL2bFjItHxb2jztU=",
+            "last_login": "2019-01-12T08:46:54.922Z",
+            "is_superuser": true,
+            "username": "admin",
+            "first_name": "",
+            "last_name": "",
+            "email": "",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2018-11-25T14:36:46.384Z",
+            "groups": [],
+            "user_permissions": []
         }
     },
     {
-        "model": "contenttypes.contenttype",
-        "pk": 2,
+        "model": "sessions.session",
+        "pk": "ic9jtuur2fuaoz00e9s41ew5ay1069xq",
         "fields": {
-            "app_label": "auth",
-            "model": "permission"
+            "session_data": "MDkwMGI5NTVhZDM0NDhjY2FmMDMwNjdjNzFkNmIxNDUzNTNjODQ2ODp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhMmQ2MjIzM2QxMmI5ZjMxYWJmMDIwZGI1Mzg3NTU2Mzg0NWQxODQxIn0=",
+            "expire_date": "2019-01-26T08:46:54.948Z"
         }
     },
     {
-        "model": "contenttypes.contenttype",
-        "pk": 3,
+        "model": "authtoken.token",
+        "pk": "516bca62d93e6726885a68b7fe359b1f389b4678",
         "fields": {
-            "app_label": "auth",
-            "model": "group"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 4,
-        "fields": {
-            "app_label": "auth",
-            "model": "user"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 5,
-        "fields": {
-            "app_label": "contenttypes",
-            "model": "contenttype"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 6,
-        "fields": {
-            "app_label": "sessions",
-            "model": "session"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 7,
-        "fields": {
-            "app_label": "authtoken",
-            "model": "token"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 8,
-        "fields": {
-            "app_label": "nvdagen",
-            "model": "listing"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 9,
-        "fields": {
-            "app_label": "nvdagen",
-            "model": "business"
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 10,
-        "fields": {
-            "app_label": "nvdagen",
-            "model": "sponsor"
+            "user": [
+                "admin"
+            ],
+            "created": "2019-01-12T08:46:54.912Z"
         }
     },
     {
@@ -155,6 +110,129 @@
             "type": "Deltidsstilling",
             "listing_url": "http://example.com",
             "city": "Bergen"
+        }
+    },
+    {
+        "model": "nvdagen.listing",
+        "pk": 7,
+        "fields": {
+            "name": "Fulltidsjobb i BaneNor",
+            "company_name": "BaneNor",
+            "deadline": "2019-04-19",
+            "logo_uri": "24b70bb2-b6eb-42dd-99a5-a6ed35055619.png",
+            "type": "Fast stilling",
+            "listing_url": "https://banenor.no",
+            "city": "Oslo"
+        }
+    },
+    {
+        "model": "nvdagen.teammember",
+        "pk": 1,
+        "fields": {
+            "name": "Magnus Carlsen",
+            "email": "carlsen@nvdagen.no",
+            "photo_uri": "static/carlsen.jpg",
+            "team": "Styret",
+            "position": "Leder"
+        }
+    },
+    {
+        "model": "nvdagen.teammember",
+        "pk": 2,
+        "fields": {
+            "name": "Barack Obama",
+            "email": "obama@nvdagen.no",
+            "photo_uri": "static/obama.jpg",
+            "team": "Styret",
+            "position": "Nestleder"
+        }
+    },
+    {
+        "model": "nvdagen.teammember",
+        "pk": 3,
+        "fields": {
+            "name": "Steve Jobs",
+            "email": "jobs@nvdagen.no",
+            "photo_uri": "static/jobs.jpg",
+            "team": "Styret",
+            "position": "Sponsoransvarlig"
+        }
+    },
+    {
+        "model": "nvdagen.teammember",
+        "pk": 4,
+        "fields": {
+            "name": "Gunnar Bovim",
+            "email": "bovim@nvdagen.no",
+            "photo_uri": "static/bovim.jpg",
+            "team": "Styret",
+            "position": "IT-ansvarlig"
+        }
+    },
+    {
+        "model": "nvdagen.teammember",
+        "pk": 5,
+        "fields": {
+            "name": "Jan Tommy Gravdahl",
+            "email": "jantommy@nvdagen.no",
+            "photo_uri": "static/jantommy.jpg",
+            "team": "Styret",
+            "position": "Bedriftansvarlig"
+        }
+    },
+    {
+        "model": "nvdagen.teammember",
+        "pk": 6,
+        "fields": {
+            "name": "Jan Tommy Gravdahl",
+            "email": "jantommy@nvdagen.no",
+            "photo_uri": "static/jantommy.jpg",
+            "team": "Bedrift",
+            "position": "Leder"
+        }
+    },
+    {
+        "model": "nvdagen.teammember",
+        "pk": 7,
+        "fields": {
+            "name": "Elon Musk",
+            "email": "musk@nvdagen.no",
+            "photo_uri": "static/musk.jpg",
+            "team": "Styret",
+            "position": "Markedsf\u00f8ringsansvarlig"
+        }
+    },
+    {
+        "model": "nvdagen.teammember",
+        "pk": 8,
+        "fields": {
+            "name": "Albert Einstein",
+            "email": "einstein@nvdagen.no",
+            "photo_uri": "static/einstein.jpg",
+            "team": "Bedrift",
+            "position": "Medlem"
+        }
+    },
+    {
+        "model": "nvdagen.teammember",
+        "pk": 9,
+        "fields": {
+            "name": "Marit Bj\u00f8rgen",
+            "email": "marit@nvdagen.no",
+            "photo_uri": "static/marit.jpg",
+            "team": "Bedrift",
+            "position": "Medlem"
+        }
+    },
+    {
+        "model": "nvdagen.teammember",
+        "pk": 10,
+        "fields": {
+            "name": "Jo Nesb\u00f8",
+            "email": "nesbo@nvdagen.no",
+            "photo_uri": "static/nesbo.jpg",
+            "team": "Styret",
+            "position": "Sekret\u00e6r"
         }
     },
     {
@@ -245,384 +323,6 @@
             "name": "Egon",
             "logo_uri": "static/egon.png",
             "website_url": "http://example.com"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 1,
-        "fields": {
-            "name": "Can add log entry",
-            "content_type": 1,
-            "codename": "add_logentry"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 2,
-        "fields": {
-            "name": "Can change log entry",
-            "content_type": 1,
-            "codename": "change_logentry"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 3,
-        "fields": {
-            "name": "Can delete log entry",
-            "content_type": 1,
-            "codename": "delete_logentry"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 4,
-        "fields": {
-            "name": "Can view log entry",
-            "content_type": 1,
-            "codename": "view_logentry"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 5,
-        "fields": {
-            "name": "Can add permission",
-            "content_type": 2,
-            "codename": "add_permission"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 6,
-        "fields": {
-            "name": "Can change permission",
-            "content_type": 2,
-            "codename": "change_permission"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 7,
-        "fields": {
-            "name": "Can delete permission",
-            "content_type": 2,
-            "codename": "delete_permission"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 8,
-        "fields": {
-            "name": "Can view permission",
-            "content_type": 2,
-            "codename": "view_permission"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 9,
-        "fields": {
-            "name": "Can add group",
-            "content_type": 3,
-            "codename": "add_group"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 10,
-        "fields": {
-            "name": "Can change group",
-            "content_type": 3,
-            "codename": "change_group"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 11,
-        "fields": {
-            "name": "Can delete group",
-            "content_type": 3,
-            "codename": "delete_group"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 12,
-        "fields": {
-            "name": "Can view group",
-            "content_type": 3,
-            "codename": "view_group"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 13,
-        "fields": {
-            "name": "Can add user",
-            "content_type": 4,
-            "codename": "add_user"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 14,
-        "fields": {
-            "name": "Can change user",
-            "content_type": 4,
-            "codename": "change_user"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 15,
-        "fields": {
-            "name": "Can delete user",
-            "content_type": 4,
-            "codename": "delete_user"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 16,
-        "fields": {
-            "name": "Can view user",
-            "content_type": 4,
-            "codename": "view_user"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 17,
-        "fields": {
-            "name": "Can add content type",
-            "content_type": 5,
-            "codename": "add_contenttype"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 18,
-        "fields": {
-            "name": "Can change content type",
-            "content_type": 5,
-            "codename": "change_contenttype"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 19,
-        "fields": {
-            "name": "Can delete content type",
-            "content_type": 5,
-            "codename": "delete_contenttype"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 20,
-        "fields": {
-            "name": "Can view content type",
-            "content_type": 5,
-            "codename": "view_contenttype"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 21,
-        "fields": {
-            "name": "Can add session",
-            "content_type": 6,
-            "codename": "add_session"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 22,
-        "fields": {
-            "name": "Can change session",
-            "content_type": 6,
-            "codename": "change_session"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 23,
-        "fields": {
-            "name": "Can delete session",
-            "content_type": 6,
-            "codename": "delete_session"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 24,
-        "fields": {
-            "name": "Can view session",
-            "content_type": 6,
-            "codename": "view_session"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 25,
-        "fields": {
-            "name": "Can add Token",
-            "content_type": 7,
-            "codename": "add_token"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 26,
-        "fields": {
-            "name": "Can change Token",
-            "content_type": 7,
-            "codename": "change_token"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 27,
-        "fields": {
-            "name": "Can delete Token",
-            "content_type": 7,
-            "codename": "delete_token"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 28,
-        "fields": {
-            "name": "Can view Token",
-            "content_type": 7,
-            "codename": "view_token"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 29,
-        "fields": {
-            "name": "Can add listing",
-            "content_type": 8,
-            "codename": "add_listing"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 30,
-        "fields": {
-            "name": "Can change listing",
-            "content_type": 8,
-            "codename": "change_listing"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 31,
-        "fields": {
-            "name": "Can delete listing",
-            "content_type": 8,
-            "codename": "delete_listing"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 32,
-        "fields": {
-            "name": "Can view listing",
-            "content_type": 8,
-            "codename": "view_listing"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 33,
-        "fields": {
-            "name": "Can add business",
-            "content_type": 9,
-            "codename": "add_business"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 34,
-        "fields": {
-            "name": "Can change business",
-            "content_type": 9,
-            "codename": "change_business"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 35,
-        "fields": {
-            "name": "Can delete business",
-            "content_type": 9,
-            "codename": "delete_business"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 36,
-        "fields": {
-            "name": "Can view business",
-            "content_type": 9,
-            "codename": "view_business"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 37,
-        "fields": {
-            "name": "Can add sponsor",
-            "content_type": 10,
-            "codename": "add_sponsor"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 38,
-        "fields": {
-            "name": "Can change sponsor",
-            "content_type": 10,
-            "codename": "change_sponsor"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 39,
-        "fields": {
-            "name": "Can delete sponsor",
-            "content_type": 10,
-            "codename": "delete_sponsor"
-        }
-    },
-    {
-        "model": "auth.permission",
-        "pk": 40,
-        "fields": {
-            "name": "Can view sponsor",
-            "content_type": 10,
-            "codename": "view_sponsor"
-        }
-    },
-    {
-        "model": "auth.user",
-        "pk": 1,
-        "fields": {
-            "password": "pbkdf2_sha256$120000$3fVEudg4GV26$A6wvfWt/Z6FYB7te5eYixHKfHPKAL2bFjItHxb2jztU=",
-            "last_login": "2018-11-25T14:37:49.758Z",
-            "is_superuser": true,
-            "username": "admin",
-            "first_name": "",
-            "last_name": "",
-            "email": "",
-            "is_staff": true,
-            "is_active": true,
-            "date_joined": "2018-11-25T14:36:46.384Z",
-            "groups": [],
-            "user_permissions": []
         }
     }
 ]

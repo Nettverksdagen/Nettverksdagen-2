@@ -32,11 +32,13 @@ new Vue({
     this.fetchListings()
     this.fetchBusinesses()
     this.fetchSponsors()
+    this.fetchTeamMembers()
   },
   methods: {
     ...Vuex.mapActions('listings', ['fetchListings']),
     ...Vuex.mapActions('businesses', ['fetchBusinesses']),
-    ...Vuex.mapActions('sponsors', ['fetchSponsors'])
+    ...Vuex.mapActions('sponsors', ['fetchSponsors']),
+    ...Vuex.mapActions('teamMembers', ['fetchTeamMembers'])
   },
   components: { App },
   template: '<App/>'
