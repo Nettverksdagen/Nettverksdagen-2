@@ -1,28 +1,41 @@
 <template>
   <div class="anon-base">
     <AnonHeader/>
-    <Slide width="200" class="sidebar"  @openMenu="handleOpenMenu" @closeMenu="handleCloseMenu" disableEsc>
-      <router-link :to="{ name: 'Home' }">Hjem</router-link>
-      <router-link :to="{ name: 'Listings' }">Stillinger</router-link>
-      <router-link :to="{ name: 'About' }">Om oss</router-link>
-      <router-link :to="{ name: 'Contact' }">Kontakt</router-link>
-    </Slide>
+    <div class="sidebar">
+      <font-awesome-icon icon="bars" class="hamburger" v-on:click="menuIsOpen = true"></font-awesome-icon>
+      <div class="slider" v-bind:class="{ visible: menuIsOpen }">
+        <ul>
+          <li><router-link :to="{ name: 'Home' }">Hjem</router-link></li>
+          <hr>
+          <li><router-link :to="{ name: 'Listings' }">Stillinger</router-link></li>
+          <hr>
+          <li><router-link :to="{ name: 'About' }">Om oss</router-link></li>
+          <hr>
+          <li><router-link :to="{ name: 'Contact' }">Kontakt</router-link></li>
+          <hr>
+          <li><a href="https://nvdagen.no/blogg">Blogg</a></li>
+        </ul>
+      </div>
+    </div>
     <router-view/>
     <AnonFooter/>
-    <div class="overlay" v-if="menuIsOpen"></div>
+    <div class="overlay" v-if="menuIsOpen" v-on:click="menuIsOpen = false"></div>
   </div>
 </template>
 
 <script>
 import AnonHeader from '@/components/anon/AnonHeader.vue'
 import AnonFooter from '@/components/anon/AnonFooter.vue'
-import { Slide } from 'vue-burger-menu'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+library.add(faBars)
 export default {
   name: 'AnonBaseView',
   components: {
     AnonHeader,
     AnonFooter,
-    Slide
+    FontAwesomeIcon
   },
   data () {
     return {
@@ -44,6 +57,40 @@ export default {
   .sidebar {
     @media (min-width: 768px) {
       display:none;
+    }
+
+    .slider {
+      position: fixed;
+      left: -200px;
+      top: 0;
+      width: 150px;
+      height:100%;
+      transition: 0.5s;
+      background: #333;
+      z-index:200;
+
+      &.visible {
+        left: 0;
+      }
+      ul {
+        padding: 0;
+        list-style: none;
+        li {
+          margin: 1em 1em;
+          a {
+            color: white;
+          }
+        }
+      }
+    }
+
+    .hamburger {
+      position:absolute;
+      left: 15px;
+      top: 15px;
+      width:20px;
+      height:20px;
+      color: #333;
     }
   }
   .bm-burger-button {
