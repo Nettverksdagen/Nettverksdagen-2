@@ -19,33 +19,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.business {
-  transition:0.2s;
-  padding: 1rem;
-  @media(min-width: 576px) {
-    // No hover effect on tiny devices
+  .business {
+    transition: transform 0.2s;
     padding: 2rem;
-  }
-  @media(min-width: 768px) {
-    padding: 3rem;
-    &:hover {
+    @media(min-width: 576px) {
+      // No hover effect on tiny devices
       padding: 2rem;
     }
-  }
-  @media(min-width: 992px) {
-    padding: 4rem;
-    &:hover {
-      padding: 3rem;
+    @media(min-width: 768px) {
+      padding: 2rem 2.5rem;
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+    @media(min-width: 992px) {
+      padding: 1.5rem 3.5rem;
     }
   }
-  @media(min-width: 1200px) {
-    padding: 5rem;
-    &:hover {
-      padding: 4rem;
-    }
-  }
-  &:hover {
-    padding:4rem;
-  }
-}
 </style>

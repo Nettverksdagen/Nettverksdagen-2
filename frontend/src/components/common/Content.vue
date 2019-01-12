@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content flex-grow-1">
     <div class="wrapper">
       <slot></slot>
     </div>

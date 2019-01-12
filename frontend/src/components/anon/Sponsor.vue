@@ -20,32 +20,20 @@ export default {
 
 <style lang="scss" scoped>
   .sponsor {
-    transition:0.2s;
-    padding: 4rem;
+    transition: transform 0.2s;
+    padding: 1rem 4rem;
     @media(min-width: 576px) {
       // No hover effect on tiny devices
-      padding: 5rem;
+      padding: 2rem 4rem;
     }
     @media(min-width: 768px) {
-      padding: 5rem;
+      padding: 2rem 4rem;
       &:hover {
-        padding: 4rem;
+        transform: scale(1.2);
       }
     }
     @media(min-width: 992px) {
-      padding: 6rem;
-      &:hover {
-        padding: 5rem;
-      }
-    }
-    @media(min-width: 1200px) {
-      padding: 7rem;
-      &:hover {
-        padding: 6rem;
-      }
-    }
-    &:hover {
-      padding:6rem;
+      padding: 2rem 5.5rem;
     }
   }
 </style>

@@ -65,4 +65,7 @@ export default {
     left:0;
     position:fixed;
   }
+  .anon-base {
+    min-height: 100vh;
+  }
 </style>

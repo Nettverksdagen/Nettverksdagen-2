@@ -32,7 +32,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.introduction {
-  font-size:18px;
-}
+  .introduction {
+    font-size:18px;
+  }
+  .about-view {
+      min-height: 80vh;
+  }
 </style>
