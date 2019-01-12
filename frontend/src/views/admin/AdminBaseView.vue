@@ -1,7 +1,7 @@
 <template>
     <div class="admin-base app">
       <Header>
-        <SidebarToggler/>
+        <SidebarToggler :mobile="isMobile" :defaultOpen="!isMobile"/>
       </Header>
         <div class="app-body">
           <main class="main">
@@ -77,6 +77,21 @@ export default {
           icon: 'cui-dollar'
         }
       ]
+    }
+  },
+  data () {
+    return { isMobile: this.isMobile }
+  },
+  created () {
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize()
+  },
+  destroyed () {
+    window.removeEventListener('resize', this.handleResize)
+  },
+  methods: {
+    handleResize () {
+      this.isMobile = window.innerWidth <= 1000
     }
   },
   beforeCreate () {
