@@ -25,6 +25,9 @@
                 </b-form-group>
               </div>
               <div class="col-12 col-md-6">
+                <b-form-group label="Pakke" label-for="business-level-input">
+                  <b-form-select v-model="business.level" :options="businessLevels" id="business-level-input" required></b-form-select>
+                </b-form-group>
                 <div class="d-flex">
                   <b-form-group class="flex-grow-1" label="Logo" label-for="business-logo">
                     <b-form-file v-model="logoFile" required placeholder="Velg et bilde" id="business-logo" ref="logoFileInput" @input="uploadLogo"></b-form-file>
@@ -67,7 +70,8 @@ export default {
       business: {
         name: '',
         logo_uri: '',
-        website_url: ''
+        website_url: '',
+        level: null
       },
       logoFile: null,
       showImgPreview: false,
@@ -78,7 +82,8 @@ export default {
         variant: 'info',
         heading: '',
         message: ''
-      }
+      },
+      businessLevels: [{value: null, text: 'Velg en pakke'}]
     }
   },
   computed: {
@@ -88,6 +93,17 @@ export default {
     numBusinesses: function () {
       return this.businesses.length
     }
+  },
+  beforeCreate: function () {
+    axios.options(process.env.VUE_APP_API_HOST + '/api/business/').then((response) => {
+      this.$data.businessLevels = this.$data.businessLevels.concat(response.data.actions.POST.level.choices.map(
+        option => ({value: option.value, text: option.display_name})
+      ))
+    }).catch((e) => {
+      this.showAlert('error',
+        'Error ' + e.response.status + ' ' + e.response.statusText,
+        'Kunne ikke lese skjema fra tjeneren. Prøv å laste siden på nytt.')
+    })
   },
   methods: {
     handleSubmit: function () {
@@ -112,7 +128,7 @@ export default {
       }
     },
     resetForm: function () {
-      this.$data.business = {name: '', logo_uri: '', website_url: ''}
+      this.$data.business = {name: '', logo_uri: '', website_url: '', level: null}
       this.$refs.logoFileInput.reset()
     },
     showAlert: function (variant, heading, message) {

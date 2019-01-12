@@ -16,6 +16,16 @@ LISTINGTYPECHOICE = (
     (OTHER_POSITION, OTHER_POSITION)
 )
 
+GOLD = 'Gull'
+SILVER = 'Sølv'
+BRONZE = 'Bronse'
+
+LEVELTYPECHOICE = (
+    (GOLD, GOLD),
+    (SILVER, SILVER),
+    (BRONZE, BRONZE)
+)
+
 
 class Listing(models.Model):
     id = models.AutoField(primary_key=True)
@@ -48,6 +58,7 @@ class BusinessWithLogo(models.Model):
 
 class Business(BusinessWithLogo):
     id = models.AutoField(primary_key=True)
+    level = models.CharField(max_length=250, choices=LEVELTYPECHOICE, default=GOLD)
 
 
 class Sponsor(BusinessWithLogo):

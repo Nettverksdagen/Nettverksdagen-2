@@ -241,7 +241,8 @@
         "fields": {
             "name": "Kongsberggruppen",
             "logo_uri": "static/kbg.png",
-            "website_url": "http://example.com"
+            "website_url": "http://example.com",
+            "level": "Gull"
         }
     },
     {
@@ -250,7 +251,8 @@
         "fields": {
             "name": "Sparebank1",
             "logo_uri": "static/sb1.png",
-            "website_url": "http://example.com"
+            "website_url": "http://example.com",
+            "level": "Sølv"
         }
     },
     {
@@ -259,7 +261,8 @@
         "fields": {
             "name": "Sopra Steria",
             "logo_uri": "static/sopra.png",
-            "website_url": "http://example.com"
+            "website_url": "http://example.com",
+            "level": "Gull"
         }
     },
     {
@@ -268,7 +271,8 @@
         "fields": {
             "name": "Evry",
             "logo_uri": "static/evry.png",
-            "website_url": "http://example.com"
+            "website_url": "http://example.com",
+            "level": "Sølv"
         }
     },
     {
@@ -277,7 +281,8 @@
         "fields": {
             "name": "Disruptive Technologies",
             "logo_uri": "static/disruptive.png",
-            "website_url": "http://example.com"
+            "website_url": "http://example.com",
+            "level": "Gull"
         }
     },
     {
@@ -286,7 +291,8 @@
         "fields": {
             "name": "Ardoq",
             "logo_uri": "static/ardoq.png",
-            "website_url": "http://example.com"
+            "website_url": "http://example.com",
+            "level": "Bronse"
         }
     },
     {
