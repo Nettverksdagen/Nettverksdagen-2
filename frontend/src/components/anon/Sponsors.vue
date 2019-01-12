@@ -46,7 +46,7 @@ export default {
 <style lang="scss" scoped>
   .sponsor-banner {
     background-color: #ffd600;
-    margin: 2rem;
+    margin: 2rem 2rem 0 2rem;
     border-radius: 0.5rem;
     box-shadow: 0 2px 5px rgba(0,0,0,0.16), 0 2px 5px rgba(0,0,0,0.15);
     transition: 0.2s;

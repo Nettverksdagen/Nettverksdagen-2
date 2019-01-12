@@ -72,19 +72,19 @@
           <b-col cols="12">
             <h3 class="font-weight-bold">{{ team.name }}</h3>
           </b-col>
-          <b-col class="my-3" cols="12" md="6" lg="4" v-bind:key="member.id" v-for="member in team.members">
+          <b-col class="my-md-3 my-1" cols="12" md="6" xl="4" v-bind:key="member.id" v-for="member in team.members">
             <b-card no-body>
               <b-card-body class="d-flex">
-            <div>
-              <b-img rounded="circle" width="150" height="150" :src="$options.fileServerHost + '/thumb/512/' + member.photo_uri"></b-img>
-            </div>
-            <div class="ml-3 d-flex justify-content-center flex-column">
-              <h4 class="member-name m-0">{{ member.name }}</h4>
-              <b-link :href="'mailto:' + member.email">{{ member.email }}</b-link>
-              <span class="font-weight-bold text-black-50">{{ member.position }}</span>
-            </div>
+                <div>
+                  <b-img rounded="circle" class="img-circle" :src="$options.fileServerHost + '/thumb/512/' + member.photo_uri"></b-img>
+                </div>
+                <div class="ml-3 d-flex justify-content-center flex-column">
+                  <h4 class="member-name m-0">{{ member.name }}</h4>
+                  <b-link :href="'mailto:' + member.email">{{ member.email }}</b-link>
+                  <span class="font-weight-bold text-black-50">{{ member.position }}</span>
+                </div>
               </b-card-body>
-              </b-card>
+            </b-card>
           </b-col>
           <b-col cols="12">
             <hr>
@@ -138,5 +138,8 @@ export default {
   .member-name {
     font-weight:bold;
     word-break:break-word;
+  }
+  .img-circle {
+    height: 6rem;
   }
 </style>
