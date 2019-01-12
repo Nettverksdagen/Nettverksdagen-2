@@ -10,6 +10,3 @@ cd api
 
 echo "Applying all database migrations"
 python manage.py migrate
-
-echo "Loading data from fixtures"
-python manage.py loaddata fixtures.json
