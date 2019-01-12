@@ -1,7 +1,7 @@
 <template>
     <div class="sponsors mt-5">
       <Content>
-        <h2 class="text-center font-weight-bold">Våre sponsorer</h2>
+        <h1 class="text-center font-weight-bold">Våre sponsorer</h1>
         <div class="sponsor-banner">
           <a href="http://kjeldsbergkaffe.no/" target="_blank" rel="noopener noreferrer">
             <b-row>

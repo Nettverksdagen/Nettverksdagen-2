@@ -33,19 +33,19 @@ export default {
 
     @media(min-width: 768px) {
       &:hover {
-        transform: scale(1.2);
+        transform: scale(1.15);
       }
     }
     &.big {
-      padding: 2rem;
+      padding: 0.5rem 2rem;
       @media(min-width: 576px) {
         padding: 2rem;
       }
       @media(min-width: 768px) {
-        padding: 2rem 2.5rem;
+        padding: 1rem 2rem;
       }
       @media(min-width: 992px) {
-        padding: 1.5rem 3.5rem;
+        padding: 1rem 3rem;
       }
     }
 
@@ -68,10 +68,10 @@ export default {
         padding: 1rem;
       }
       @media(min-width: 768px) {
-        padding: 2rem 2.5rem;
+        padding: 2rem 2rem;
       }
       @media(min-width: 992px) {
-        padding: 1.5rem 4rem;
+        padding: 1.5rem 3.25rem;
       }
     }
   }

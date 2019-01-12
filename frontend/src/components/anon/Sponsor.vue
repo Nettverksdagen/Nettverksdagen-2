@@ -1,5 +1,5 @@
 <template>
-    <div class="sponsor col-6 col-sm-4 col-md-3">
+    <div class="sponsor col-4 col-md-3">
       <a :href="href" target="_blank" rel="noopener noreferrer">
         <b-img fluid :src="fileserverHost + '/thumb/512/' + logo_src"></b-img>
       </a>
@@ -21,15 +21,15 @@ export default {
 <style lang="scss" scoped>
   .sponsor {
     transition: transform 0.2s;
-    padding: 1rem 4rem;
+    padding: 0.5rem 2rem;
     @media(min-width: 576px) {
       // No hover effect on tiny devices
-      padding: 2rem 4rem;
+      padding: 0.5rem 3rem;
     }
     @media(min-width: 768px) {
       padding: 2rem 4rem;
       &:hover {
-        transform: scale(1.2);
+        transform: scale(1.15);
       }
     }
     @media(min-width: 992px) {
