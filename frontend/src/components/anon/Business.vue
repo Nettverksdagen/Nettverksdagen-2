@@ -1,6 +1,6 @@
 <template>
   <div class="business col-6 col-sm-4 col-md-3">
-    <a :href="href">
+    <a :href="href" target="_blank" rel="noopener noreferrer">
       <b-img fluid :src="fileserverHost + '/thumb/512/' + logo_src"></b-img>
     </a>
   </div>
