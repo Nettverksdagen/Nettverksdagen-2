@@ -7,6 +7,7 @@ server {
 server {
     listen       443 ssl;
 
+    ssl on;
     include /config/nginx/proxy-confs/*.subfolder.conf;
     include /config/nginx/ssl.conf;
 
