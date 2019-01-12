@@ -20,7 +20,7 @@
           </ul>
         </b-col>
 
-        <b-col cols="12" sm="6" md="4" lg="3" class="text-right">
+        <b-col cols="12" sm="6" md="4" lg="3" class="text-md-right">
           <h5>Følg oss</h5>
           <ul class="list-inline social-icons">
             <li class="list-inline-item">

@@ -18,7 +18,7 @@
           <b-card>
           <table class="main-contact">
             <tr>
-              <td>
+              <td class="align-top">
                 <h3>Styret</h3>
                 <b-link href="mailto:styret@nvdagen.no">styret@nvdagen.no</b-link>
               </td>
@@ -30,7 +30,7 @@
             </tr>
 
             <tr>
-              <td>
+              <td class="align-top">
                 <h3>Bedrift</h3>
                 <b-link href="mailto:bedrift@nvdagen.no">bedrift@nvdagen.no</b-link>
               </td>
@@ -45,7 +45,7 @@
             </tr>
 
             <tr>
-              <td>
+              <td class="align-top">
                 <h3>Sponsor</h3>
                 <b-link href="mailto:sponsor@nvdagen.no">sponsor@nvdagen.no</b-link>
               </td>
