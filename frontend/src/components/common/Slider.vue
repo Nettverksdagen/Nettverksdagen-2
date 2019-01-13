@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="sidemenu">
     <font-awesome-icon icon="bars" class="hamburger" v-on:click="menuIsOpen = true"></font-awesome-icon>
     <div class="slider" v-bind:class="{ visible: menuIsOpen }">
       <ul>
@@ -46,7 +46,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .sidebar {
+  .sidemenu {
     @media (min-width: 768px) {
       display:none;
     }
