@@ -1,7 +1,7 @@
 <template>
   <div class="businesses mt-5">
     <Content>
-      <h1 class="text-center font-weight-bold">Bedrifter du kan møte på stand</h1>
+      <h2 class="text-center font-weight-bold">Bedrifter du kan møte på stand</h2>
       <div v-for="(level, index) in levels" :key="index">
         <b-row>
           <Business v-for="(business, index) in level.businesses"
@@ -45,5 +45,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+  h2 {
+    font-size: 2.5rem;
+  }
 </style>

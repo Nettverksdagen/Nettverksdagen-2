@@ -1,7 +1,7 @@
 <template>
     <div class="sponsors mt-5">
       <Content>
-        <h1 class="text-center font-weight-bold">Våre sponsorer</h1>
+        <h2 class="text-center font-weight-bold">Våre sponsorer</h2>
         <div class="sponsor-banner">
           <a href="http://kjeldsbergkaffe.no/" target="_blank" rel="noopener noreferrer">
             <b-row>
@@ -44,6 +44,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  h2 {
+    font-size: 2.5rem;
+  }
   .sponsor-banner {
     background-color: #ffd600;
     margin: 2rem 2rem 0 2rem;
@@ -59,9 +62,25 @@ export default {
       text-decoration:none;
       color: inherit;
     }
+
+    @media(max-width: 576px) {
+      margin: 1rem 1rem 0 1rem;
+    }
   }
   .sponsor-banner-text {
     padding: 3rem 4rem;
+
+    @media(max-width: 576px) {
+      padding: 1.5rem 2.5rem;
+
+      span {
+        font-size: 0.9rem;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+      }
+    }
 
     @media(max-width: 768px) {
       padding-bottom: 0;
@@ -78,7 +97,7 @@ export default {
 
     @media(max-width: 576px) {
       height: 7.5rem;
-      padding: 1rem;
+      padding: 0 1rem 1rem 1rem;
     }
   }
 </style>
