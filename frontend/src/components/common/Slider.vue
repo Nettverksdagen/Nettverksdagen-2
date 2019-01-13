@@ -36,6 +36,7 @@ export default {
       menuIsOpen: false,
       routes: [
         {routeName: 'Home', linkText: 'Hjem'},
+        {routeName: 'Program', linkText: 'Program'},
         {routeName: 'Listings', linkText: 'Stillinger'},
         {routeName: 'About', linkText: 'Om oss'},
         {routeName: 'Contact', linkText: 'Kontakt'}
