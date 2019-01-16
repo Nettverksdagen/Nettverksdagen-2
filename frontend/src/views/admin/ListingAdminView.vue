@@ -31,8 +31,8 @@
                 </b-form-group>
               </div>
               <div class="col-12 col-md-6">
-                <b-form-group label="Søknadsfrist" label-for="listing-deadline">
-                  <datepicker v-model="deadlineDateTime" :typeable="true" :required="true" format="yyyy-MM-dd" placeholder="Trykk for å velge dato" :bootstrap-styling="true" :monday-first="true" id="listing-deadline"></datepicker>
+                <b-form-group label="Søknadsfrist (la stå blank for løpende frist)" label-for="listing-deadline">
+                  <datepicker v-model="deadlineDateTime" :typeable="true" :required="false" format="yyyy-MM-dd" placeholder="Trykk for å velge dato" :bootstrap-styling="true" :monday-first="true" id="listing-deadline"></datepicker>
                 </b-form-group>
                 <b-form-group label="Link til annonse (må starte med https://)" label-for="listing-url-input">
                   <b-form-input type="url" v-model="listing.listing_url" id="listing-url-input" required placeholder="Skriv inn link" @input="validateLink"></b-form-input>
@@ -120,7 +120,11 @@ export default {
   },
   methods: {
     handleSubmit: function () {
-      this.$data.listing.deadline = this.$data.deadlineDateTime.toISOString().split('T')[0]
+      if (this.$data.deadlineDateTime !== null) {
+        this.$data.listing.deadline = this.$data.deadlineDateTime.toISOString().split('T')[0]
+      } else {
+        this.$data.listing.deadline = null
+      }
       axios.post(process.env.VUE_APP_API_HOST + '/api/listing/', this.$data.listing).then((response) => {
         this.showAlert('success', 'Suksess!', 'Stillingsannonsen ble opprettet.')
         this['listings/addListing'](response.data)

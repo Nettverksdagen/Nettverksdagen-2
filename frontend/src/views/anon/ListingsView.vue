@@ -80,11 +80,19 @@ export default {
   computed: {
     listings: function () {
       let listings = this.$store.state.listings.all
+      // Sort by id
+      listings = listings.sort(function (a, b) {
+        return a.id - b.id
+      })
       // Filter out unchecked position types
       listings = listings.filter(listing => this.$data.selectedPositionTypes.indexOf(listing.type) !== -1)
 
       // Filter out unchecked job locations
       listings = listings.filter(listing => this.$data.selectedJobLocations.indexOf(listing.city) !== -1)
+
+      // Separate listings with and without deadline
+      let listingsWithoutDeadline = listings.filter(listing => listing.deadline === null)
+      listings = listings.filter(listing => listing.deadline !== null)
 
       // Filter out old listings
       listings = listings.filter(listing => new Date(listing.deadline) > new Date())
@@ -93,6 +101,9 @@ export default {
       listings = listings.sort(function (a, b) {
         return new Date(a.deadline) - new Date(b.deadline)
       })
+
+      // Spread out non-deadline listings evenly among the other listings
+      listings = this.spread(listings, listingsWithoutDeadline)
       return listings
     }
   },
@@ -139,6 +150,32 @@ export default {
       return uniques.sort(function (a, b) {
         return frequencies[b] - frequencies[a]
       })
+    },
+    // Spreads the shorter array evenly among the elements of the longer array
+    spread (a, b) {
+      let shorter = []
+      let longer = []
+      if (a.length > b.length) {
+        longer = a
+        shorter = b
+      } else {
+        shorter = a
+        longer = b
+      }
+
+      let totalLength = longer.length + shorter.length
+      let freq = Math.ceil(totalLength / shorter.length)
+      let res = []
+      let i = 1
+      while (longer.length > 0 || shorter.length > 0) {
+        if (i % freq === 0 && shorter.length > 0) {
+          res.push(shorter.shift())
+        } else if (longer.length > 0) {
+          res.push(longer.shift())
+        }
+        i++
+      }
+      return res
     }
   }
 }

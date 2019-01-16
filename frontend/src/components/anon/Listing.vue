@@ -8,7 +8,12 @@
       <div class="side info-container">
         <h6 class="company"><span class="font-weight-bold">{{ company }}</span> – {{ type }}</h6>
         <h5 class="title">{{ title }}</h5>
-        <span class="tinytext"><span class="city">{{ city }}</span> | Frist: {{ formattedDeadline }}</span>
+        <span class="tinytext">
+          <span class="city">{{ city }}</span>
+          |
+          <span v-if="deadline !== null">Frist: {{ formattedDeadline }}</span>
+          <span v-else>Løpende frist</span>
+        </span>
       </div>
     </b-list-group-item>
     </b-link>

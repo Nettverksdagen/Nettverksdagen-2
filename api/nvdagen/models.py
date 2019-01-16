@@ -31,7 +31,7 @@ class Listing(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=250)
     company_name = models.CharField(max_length=250)
-    deadline = models.DateField(default="1970-01-01")
+    deadline = models.DateField(default=None, blank=True, null=True)
     logo_uri = models.CharField(max_length=250)
     type = models.CharField(max_length=250, choices=LISTINGTYPECHOICE, default=OTHER_POSITION)
     listing_url = models.CharField(max_length=250)
