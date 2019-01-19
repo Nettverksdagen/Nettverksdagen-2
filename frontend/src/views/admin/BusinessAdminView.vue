@@ -30,13 +30,15 @@
                 </b-form-group>
                 <div class="d-flex">
                   <b-form-group class="flex-grow-1" label="Logo" label-for="business-logo">
-                    <b-form-file v-model="logoFile" required placeholder="Velg et bilde" id="business-logo" ref="logoFileInput" @input="uploadLogo"></b-form-file>
+                    <b-form-file v-model="logoFile" :required="!editing" placeholder="Velg et bilde" id="business-logo" ref="logoFileInput" @input="uploadLogo"></b-form-file>
                   </b-form-group>
-                  <image-preview :imgPreviewSrc="imgPreviewSrc" :showImgPreview="showImgPreview"></image-preview>
+                  <image-preview :imgPreviewSrc="logoSrc" :showImgPreview="showImgPreview"></image-preview>
                 </div>
               </div>
             </b-row>
-            <b-button type="submit" size="md" variant="success">Legg ut bedriften</b-button>
+            <b-button type="submit" size="md" variant="success" v-if="!editing">Legg ut bedriften</b-button>
+            <b-button type="submit" size="md" variant="primary" v-if="editing">Endre bedrift</b-button>
+            <b-button v-on:click="abortEdit()" size="md" variant="secondary" v-if="editing">Avbryt</b-button>
           </b-form>
         </b-card>
       </div>
@@ -48,8 +50,18 @@
     <b-row>
       <div class="col-12">
         <b-card header="Bedrifter">
-          <b-table class="d-none d-md-table" hover :items="businesses"></b-table>
-          <b-table class="d-block d-md-none" stacked :items="businesses"></b-table>
+          <b-table class="d-none d-md-table" hover :fields="fields" :items="businesses">
+            <template slot="edit" slot-scope="businesses">
+              <button v-on:click="edit(businesses.item)">edit</button>
+              <button v-on:click="destroy(businesses.item)">destroy</button>
+            </template>
+          </b-table>
+          <b-table class="d-block d-md-none" stacked :fields="fields" :items="businesses">
+            <template slot="edit" slot-scope="businesses">
+              <button v-on:click="edit(businesses.item)">edit</button>
+              <button v-on:click="destroy(businesses.item)">destroy</button>
+            </template>
+          </b-table>
         </b-card>
       </div>
     </b-row>
@@ -67,6 +79,11 @@ export default {
   },
   data: function () {
     return {
+      fields: [
+        'id', { key: 'name', label: 'Name' }, { key: 'logo_uri', label: 'Logo Uri' },
+        { key: 'website_url', label: 'Website Url' }, { key: 'level', label: 'Level' },
+        { key: 'edit', label: '' }
+      ],
       business: {
         name: '',
         logo_uri: '',
@@ -75,7 +92,7 @@ export default {
       },
       logoFile: null,
       showImgPreview: false,
-      imgPreviewSrc: '',
+      editing: false,
       alert: {
         dismissSecs: 5,
         dismissCountDown: 0,
@@ -92,6 +109,9 @@ export default {
     },
     numBusinesses: function () {
       return this.businesses.length
+    },
+    logoSrc: function () {
+      return process.env.VUE_APP_FILESERVER_HOST + '/thumb/256/' + this.business.logo_uri
     }
   },
   beforeCreate: function () {
@@ -107,14 +127,27 @@ export default {
   },
   methods: {
     handleSubmit: function () {
-      axios.post(process.env.VUE_APP_API_HOST + '/api/business/', this.$data.business).then((response) => {
-        this.showAlert('success', 'Suksess!', 'Bedriften er blitt lagt ut på forsiden.')
-        this['businesses/addBusiness'](response.data)
+      axios[(this.$data.editing ? 'put' : 'post')](process.env.VUE_APP_API_HOST + '/api/business/' +
+            (this.$data.editing ? this.$data.business.id + '/' : ''), this.$data.business).then((response) => {
+        this.showAlert('success', 'Suksess!', 'Bedriften er blitt ' +
+           (this.$data.editing ? 'endret.' : 'lagt ut på forsiden.'))
+        this['businesses/' + (this.$data.editing ? 'updateBusiness' : 'addBusiness')](response.data)
         this.resetForm()
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
           'Bedriften kunne ikke legges ut.')
+      })
+    },
+    destroy: function (business) {
+      axios.delete(process.env.VUE_APP_API_HOST + '/api/business/' +
+        business.id + '/').then((response) => {
+        this.showAlert('success', 'Suksess!', 'Bedriften er blitt slettet')
+        this['businesses/deleteBusiness'](business)
+      }).catch((e) => {
+        this.showAlert('danger',
+          'Error ' + e.response.status + ' ' + e.response.statusText,
+          'Sponsoren kunne ikke legges ut.')
       })
     },
     validateWebsiteUrl: function () {
@@ -130,6 +163,8 @@ export default {
     resetForm: function () {
       this.$data.business = {name: '', logo_uri: '', website_url: '', level: null}
       this.$refs.logoFileInput.reset()
+      this.$data.editing = false
+      this.$data.showImgPreview = false
     },
     showAlert: function (variant, heading, message) {
       this.alert.variant = variant
@@ -149,7 +184,6 @@ export default {
       fileUploader.uploadImage(this.$data.logoFile)
         .then((logoUri) => {
           this.$data.business.logo_uri = logoUri
-          this.$data.imgPreviewSrc = process.env.VUE_APP_FILESERVER_HOST + '/thumb/256/' + logoUri
           setTimeout(() => {
             this.$data.showImgPreview = true
           }, 30) // The image src can't be set at the same time as the img opacity or it will lose its transition
@@ -163,10 +197,18 @@ export default {
             errorTitle,
             'Bildeopplastning feilet, prøv igjen. Kontakt IT om problemet vedvarer.')
           this.$data.showImgPreview = false
-          this.$data.imgPreviewSrc = ''
         })
     },
-    ...mapMutations(['businesses/addBusiness'])
+    edit: function (business) {
+      this.$data.business = business
+      this.$data.showImgPreview = true
+      this.$data.editing = true
+    },
+    abortEdit: function () {
+      this.resetForm()
+      this.$data.editing = false
+    },
+    ...mapMutations(['businesses/addBusiness', 'businesses/deleteBusiness', 'businesses/updateBusiness'])
   }
 }
 </script>

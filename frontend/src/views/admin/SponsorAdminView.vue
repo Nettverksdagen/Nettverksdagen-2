@@ -53,7 +53,12 @@
               <button v-on:click="destroy(sponsors.item)">delete :( </button>
             </template>
           </b-table>
-          <b-table class="d-block d-md-none" stacked :fields="fields" :items="sponsors"></b-table>
+          <b-table class="d-block d-md-none" stacked :fields="fields" :items="sponsors">
+            <template slot="edit" slot-scope="sponsors">
+              <button v-on:click="edit(sponsors.item)">edit :) </button>
+              <button v-on:click="destroy(sponsors.item)">delete :( </button>
+            </template>
+          </b-table>
         </b-card>
       </div>
     </b-row>
@@ -105,15 +110,12 @@ export default {
   },
   methods: {
     handleSubmit: function () {
-      const method = this.$data.editing ? 'put' : 'post'
-      axios[method](process.env.VUE_APP_API_HOST + '/api/sponsor/' +
+      axios[this.$data.editing ? 'put' : 'post'](process.env.VUE_APP_API_HOST + '/api/sponsor/' +
         (this.$data.editing ? this.$data.sponsor.id + '/' : ''), this.$data.sponsor).then((response) => {
         this.showAlert('success', 'Suksess!', 'Sponsoren er blitt ' +
-            (this.$data.editing ? 'endret' : 'lagt ut på forsiden.'))
+            (this.$data.editing ? 'endret.' : 'lagt ut på forsiden.'))
         this['sponsors/' + (this.$data.editing ? 'updateSponsor' : 'addSponsor')](response.data)
         this.resetForm()
-        this.$data.editing = false
-        this.$data.showImgPreview = false
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
@@ -126,7 +128,6 @@ export default {
         this.showAlert('success', 'Suksess!', 'Sponsoren er blitt slettet')
         this['sponsors/deleteSponsor'](sponsor)
       }).catch((e) => {
-        console.log(e)
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
           'Sponsoren kunne ikke legges ut.')
@@ -145,6 +146,8 @@ export default {
     resetForm: function () {
       this.$data.sponsor = {name: '', logo_uri: '', website_url: ''}
       this.$refs.logoFileInput.reset()
+      this.$data.editing = false
+      this.$data.showImgPreview = false
     },
     showAlert: function (variant, heading, message) {
       this.alert.variant = variant
@@ -177,18 +180,15 @@ export default {
             errorTitle,
             'Bildeopplastning feilet, prøv igjen. Kontakt IT om problemet vedvarer.')
           this.$data.showImgPreview = false
-          this.$data.imgPreviewSrc = ''
         })
     },
     edit: function (sponsor) {
       this.$data.sponsor = sponsor
       this.$data.showImgPreview = true
       this.$data.editing = true
-      this.$data.logoFile = sponsor.logo_uri
     },
-    abortEdit: function (abortEdit) {
-      this.$data.sponsor = { name: '', logo_uri: '', website_uri: '' }
-      this.$data.showImgPreview = false
+    abortEdit: function () {
+      this.resetForm()
       this.$data.editing = false
     },
     ...mapMutations(['sponsors/addSponsor', 'sponsors/deleteSponsor', 'sponsors/updateSponsor'])

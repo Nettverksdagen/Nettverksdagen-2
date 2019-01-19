@@ -50,6 +50,13 @@ const mutations = {
   },
   addBusiness (state, business) {
     state.all.push(business)
+  },
+  deleteBusiness (state, business) {
+    state.all = state.all.filter(bus => bus.id !== business.id)
+  },
+  updateBusiness (state, business) {
+    const modify = state.all.findIndex(bus => bus.id === business.id)
+    state.all[modify] = business
   }
 }
 
