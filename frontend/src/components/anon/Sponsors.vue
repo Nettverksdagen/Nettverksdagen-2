@@ -32,13 +32,10 @@ import Sponsor from '@/components/anon/Sponsor.vue'
 export default {
   name: 'Sponsors',
   components: { Content, Sponsor },
-  data: function () {
-    return {
-      sponsors: []
+  computed: {
+    sponsors: function () {
+      return this.$store.state.sponsors.all
     }
-  },
-  mounted: function () {
-    this.$data.sponsors = this.$store.state.sponsors.all
   }
 }
 </script>
