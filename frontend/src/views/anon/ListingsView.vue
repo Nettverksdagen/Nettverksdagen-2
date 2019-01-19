@@ -186,4 +186,8 @@ export default {
   :not(.collapsed) > .when-closed {
     display: none;
   }
+
+  .listings {
+    min-height: 80vh;
+  }
 </style>

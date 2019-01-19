@@ -22,4 +22,7 @@
       margin: 30px 200px;
     }
   }
+  a {
+    color: #187c79;
+  }
 </style>
