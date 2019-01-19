@@ -35,6 +35,13 @@ const mutations = {
   },
   addSponsor (state, sponsor) {
     state.all.push(sponsor)
+  },
+  deleteSponsor (state, sponsor) {
+    state.all = state.all.filter(spons => spons.id !== sponsor.id)
+  },
+  updateSponsor (state, sponsor) {
+    const modify = state.all.findIndex(spons => spons.id === sponsor.id)
+    state.all[modify] = sponsor
   }
 }
 
