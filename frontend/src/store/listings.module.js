@@ -35,6 +35,13 @@ const mutations = {
   },
   addListing (state, listing) {
     state.all.push(listing)
+  },
+  deleteListing (state, listing) {
+    state.all = state.all.filter(lst => lst.id !== listing.id)
+  },
+  updateListing (state, listing) {
+    const modify = state.all.findIndex(lst => lst.id === listing.id)
+    state.all[modify] = listing
   }
 }
 

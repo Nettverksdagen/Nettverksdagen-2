@@ -39,13 +39,15 @@
                 </b-form-group>
                 <div class="d-flex">
                   <b-form-group class="flex-grow-1" label="Logo" label-for="listing-logo">
-                    <b-form-file v-model="logoFile" required placeholder="Velg et bilde" ref="logoFileInput" @input="uploadLogo"></b-form-file>
+                    <b-form-file v-model="logoFile" :required="!editing" placeholder="Velg et bilde" ref="logoFileInput" @input="uploadLogo"></b-form-file>
                   </b-form-group>
-                  <image-preview :imgPreviewSrc="imgPreviewSrc" :showImgPreview="showImgPreview"></image-preview>
+                  <image-preview :imgPreviewSrc="imgSrc" :showImgPreview="showImgPreview"></image-preview>
                 </div>
               </div>
             </b-row>
-            <b-button type="submit" size="md" variant="success">Opprett annonse</b-button>
+            <b-button type="submit" size="md" variant="success" v-if="!editing">Opprett annonse</b-button>
+            <b-button type="submit" size="md" variant="primary" v-if="editing">Endre annonse</b-button>
+            <b-button v-on:click="abortEdit()" size="md" variant="secondary" v-if="editing">Avbryt</b-button>
           </b-form>
         </b-card>
       </div>
@@ -62,8 +64,18 @@
     <b-row>
       <div class="col-12">
         <b-card header="Stillingsannonser">
-          <b-table class="d-none d-md-table" hover :items="listings"></b-table>
-          <b-table class="d-block d-md-none" stacked :items="listings"></b-table>
+          <b-table class="d-none d-md-table" hover :fields="fields" :items="listings">
+            <template slot="edit" slot-scope="listings">
+              <button v-on:click="edit(listings.item)">edit :) </button>
+              <button v-on:click="destroy(listings.item)">delete :) </button>
+            </template>
+          </b-table>
+          <b-table class="d-block d-md-none" stacked :fields="fields" :items="listings">
+            <template slot="edit" slot-scope="listings">
+              <button v-on:click="edit(listings.item)">edit :) </button>
+              <button v-on:click="destroy(listings.item)">delete :) </button>
+            </template>
+          </b-table>
         </b-card>
       </div>
     </b-row>
@@ -84,6 +96,12 @@ export default {
   },
   data: function () {
     return {
+      fields: [
+        'id', { key: 'name', label: 'Name' }, { key: 'company_name', label: 'Company Name' },
+        { key: 'deadline', label: 'deadline' }, { key: 'logo_uri', label: 'Logo Uri' },
+        { key: 'type', label: 'Type' }, { key: 'listing_url', label: 'Listing Url' },
+        { key: 'city', label: 'City' }, { key: 'edit', label: '' }
+      ],
       listing: {
         company_name: '',
         name: '',
@@ -95,8 +113,8 @@ export default {
       },
       logoFile: null,
       showImgPreview: false,
-      imgPreviewSrc: '',
       deadlineDateTime: null,
+      editing: false,
       alert: {
         dismissSecs: 5,
         dismissCountDown: 0,
@@ -116,19 +134,34 @@ export default {
     },
     listingsLink: function () {
       return this.$router.resolve({name: 'Listings'})
+    },
+    imgSrc: function () {
+      return process.env.VUE_APP_FILESERVER_HOST + '/thumb/256/' + this.listing.logo_uri
     }
   },
   methods: {
     handleSubmit: function () {
       this.$data.listing.deadline = this.$data.deadlineDateTime.toISOString().split('T')[0]
-      axios.post(process.env.VUE_APP_API_HOST + '/api/listing/', this.$data.listing).then((response) => {
-        this.showAlert('success', 'Suksess!', 'Stillingsannonsen ble opprettet.')
-        this['listings/addListing'](response.data)
+      axios[this.$data.editing ? 'put' : 'post'](process.env.VUE_APP_API_HOST + '/api/listing/' +
+        (this.$data.editing ? this.$data.listing.id + '/' : ''), this.$data.listing).then((response) => {
+        this.showAlert('success', 'Suksess!', 'Stillingsannonsen ble ' + (this.$data.editing ? 'endret.' : 'opprettet.'))
+        this['listings/' + (this.$data.editing ? 'updateListing' : 'addListing')](response.data)
         this.resetForm()
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
           'Stillingsannonsen ble ikke opprettet.')
+      })
+    },
+    destroy: function (business) {
+      axios.delete(process.env.VUE_APP_API_HOST + '/api/listing/' +
+        business.id + '/').then((response) => {
+        this.showAlert('success', 'Suksess!', 'Annonsen ble slettet')
+        this['listings/deleteListing'](business)
+      }).catch((e) => {
+        this.showAlert('danger',
+          'Error ' + e.response.status + ' ' + e.response.statusText,
+          'Sponsoren kunne ikke legges ut.')
       })
     },
     countDownChanged: function (dismissCountDown) {
@@ -138,6 +171,8 @@ export default {
       this.$data.listing = {company_name: '', name: '', deadline: '', logo_uri: '', type: null, listing_url: '', city: ''}
       this.$data.deadlineDateTime = null
       this.$refs.logoFileInput.reset()
+      this.$data.editing = false
+      this.$data.showImgPreview = false
     },
     showAlert: function (variant, heading, message) {
       this.alert.variant = variant
@@ -153,7 +188,6 @@ export default {
       }
       fileUploader.uploadImage(this.$data.logoFile)
         .then((logoUri) => {
-          this.$data.imgPreviewSrc = process.env.VUE_APP_FILESERVER_HOST + '/thumb/256/' + logoUri
           this.$data.listing.logo_uri = logoUri
           setTimeout(() => {
             this.$data.showImgPreview = true
@@ -167,7 +201,6 @@ export default {
             errorTitle,
             'Bildeopplastning feilet, prøv igjen. Kontakt IT om problemet vedvarer.')
           this.$data.showImgPreview = false
-          this.$data.imgPreviewSrc = ''
         })
     },
     validateLink: function () {
@@ -175,7 +208,17 @@ export default {
         this.$data.listing.listing_url = 'https://'.concat(this.$data.listing.listing_url)
       }
     },
-    ...mapMutations(['listings/addListing'])
+    edit: function (listing) {
+      this.$data.listing = listing
+      this.$data.showImgPreview = true
+      this.$data.editing = true
+      this.$data.deadlineDateTime = new Date(this.$data.listing.deadline)
+    },
+    abortEdit: function () {
+      this.resetForm()
+      this.$data.editing = false
+    },
+    ...mapMutations(['listings/addListing', 'listings/deleteListing', 'listings/updateListing'])
   },
   beforeCreate: function () {
     axios.options(process.env.VUE_APP_API_HOST + '/api/listing/').then((response) => {
