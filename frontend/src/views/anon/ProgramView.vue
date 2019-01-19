@@ -37,7 +37,7 @@
                   <b-img class="img-company" src="@/assets/kjeldsberg.png"></b-img>
                 </div>
                 <div class="ml-md-3 d-flex justify-content-center flex-column">
-                  <h3 class="font-weight-bold m-0">Bedriftspresentasjon med Kjeldsberg Kaffe</h3>
+                  <h4 class="m-0">Bedriftspresentasjon med Kjeldsberg Kaffe</h4>
                 </div>
               </div>
             </div>
@@ -178,7 +178,7 @@ export default {
   }
 
   .img-company {
-    height: 6rem;
+    height: 3rem;
     max-width: 100%;
   }
 
