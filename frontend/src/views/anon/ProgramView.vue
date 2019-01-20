@@ -3,7 +3,7 @@
       <div class="program">
         <h1 class="text-center">Program</h1>
         <p class="text-center description mt-3 mb-2">Dette er det foreløpige programmet for Nettverksdagen 2019. Mer informasjon kommer her etter hvert.</p>
-        <p class="text-center description"><a href="">Se standkart her!</a></p>
+        <p class="text-center description"><a href="#stand-map-header">Se standkart her!</a></p>
         <div class="timeline">
           <div class="timeline-item">
             <div class="timestamp">
@@ -64,6 +64,7 @@
           </div>
         </div>
       </div>
+      <h2 id="stand-map-header" class="text-center mb-5">Standkart</h2>
       <div class="stand-map-placeholder">
         <h5 class="text-center">Standkart kommer her</h5>
       </div>
