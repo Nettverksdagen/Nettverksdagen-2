@@ -2,9 +2,36 @@
     <Content>
       <div class="program">
         <h1 class="text-center">Program</h1>
-        <p class="text-center description mt-3 mb-2">Dette er det foreløpige programmet for Nettverksdagen 2019. Mer informasjon kommer her etter hvert.</p>
-        <p class="text-center description"><a href="#stand-map-header">Se standkart her!</a></p>
+        <p class="text-center description mt-3 mb-2">Dette er det foreløpige programmet for Nettverksdagen 2019. <a href="#stand-map-header">Se standkart her!</a></p>
+        <h3 class="font-weight-bold">30. januar</h3>
         <div class="timeline">
+          <div class="timeline-item timeline-item-company">
+            <div class="timestamp">
+              <h4><span class="font-weight-bold">13.00</span></h4>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h4 class="mb-1">Bedriftspresentasjon med Cisco</h4>
+                <p class="description m-0"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>EL6
+                  <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>13.00 - 14.00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h3 class="font-weight-bold">31. januar</h3>
+        <div class="timeline">
+          <div class="timeline-item timeline-item-company">
+            <div class="timestamp">
+              <h4><span class="font-weight-bold">09.00</span></h4>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h4 class="mb-1">Bedriftspresentasjon med BaneNOR</h4>
+                <p class="description m-0"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>H1
+                  <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>09.00 - 10.00</p>
+              </div>
+            </div>
+          </div>
           <div class="timeline-item">
             <div class="timestamp">
               <h4><span class="font-weight-bold">10.00</span></h4>
@@ -13,6 +40,42 @@
               <div class="card-body">
                 <h3 class="font-weight-bold">Nettverksdagen åpner</h3>
                 <p class="description">Alle bedriftene står klare i Glassgården kl 10 for å slå av en prat.</p>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-item timeline-item-company">
+            <div class="timestamp">
+              <h4><span class="font-weight-bold">10.00</span></h4>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h4 class="mb-1">Bedriftspresentasjon med SINTEF</h4>
+                <p class="description m-0"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>H1
+                  <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>10.00 - 11.00</p>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-item timeline-item-company">
+            <div class="timestamp">
+              <h4><span class="font-weight-bold">11.00</span></h4>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h4 class="mb-1">Bedriftspresentasjon med Disruptive Technologies</h4>
+                <p class="description m-0"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>H1
+                  <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>11.00 - 12.00</p>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-item timeline-item-company">
+            <div class="timestamp">
+              <h4><span class="font-weight-bold">12.00</span></h4>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h4 class="mb-1">Bedriftspresentasjon med Data Respons</h4>
+                <p class="description m-0"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>EL3
+                  <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>12.00 - 13.00</p>
               </div>
             </div>
           </div>
@@ -27,21 +90,30 @@
               </div>
             </div>
           </div>
-          <!--<div class="timeline-item timeline-item-company">
+          <div class="timeline-item timeline-item-company">
             <div class="timestamp">
-              <h4><span class="font-weight-bold">12.05</span></h4>
+              <h4><span class="font-weight-bold">13.00</span></h4>
             </div>
             <div class="card">
-              <div class="card-body d-flex">
-                <div>
-                  <b-img class="img-company" src="@/assets/kjeldsberg.png"></b-img>
-                </div>
-                <div class="ml-md-3 d-flex justify-content-center flex-column">
-                  <h4 class="m-0">Bedriftspresentasjon med Kjeldsberg Kaffe</h4>
-                </div>
+              <div class="card-body">
+                <h4 class="mb-1">Bedriftspresentasjon med Mnemonic</h4>
+                <p class="description m-0"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>EL4
+                  <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>13.00 - 14.00</p>
               </div>
             </div>
-          </div>-->
+          </div>
+          <div class="timeline-item timeline-item-company">
+            <div class="timestamp">
+              <h4><span class="font-weight-bold">13.00</span></h4>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h4 class="mb-1">Bedriftspresentasjon med Sopra Steria</h4>
+                <p class="description m-0"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>EL3
+                  <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>13.00 - 14.00</p>
+              </div>
+            </div>
+          </div>
           <div class="timeline-item">
             <div class="timestamp">
               <h4><span class="font-weight-bold">14.05</span></h4>
@@ -62,17 +134,31 @@
               </div>
             </div>
           </div>
+          <div class="timeline-item timeline-item-company">
+            <div class="timestamp">
+              <h4><span class="font-weight-bold">15.00</span></h4>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h4 class="mb-1">Bedriftspresentasjon med Honeywell</h4>
+                <p class="description m-0"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>EL6
+                  <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>15.00 - 16.00</p>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
       </div>
-      <h2 id="stand-map-header" class="text-center mb-5">Standkart</h2>
-      <div class="stand-map-placeholder">
-        <h5 class="text-center">Standkart kommer her</h5>
-      </div>
+      <h2 id="stand-map-header" class="text-center mb-3">Standkart</h2>
+      <img class="stand-map mb-5" src="@/assets/standoversikt.png">
     </Content>
 </template>
 
 <script>
 import Content from '@/components/common/Content.vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons'
+library.add(faMapMarkerAlt, faClock)
 export default {
   name: 'ProgramView',
   components: {
@@ -85,22 +171,24 @@ export default {
   .description {
     font-size:1.1em;
   }
-  .stand-map-placeholder {
+  .stand-map {
     height: calc(100% - 2em);
-    background: #c3c9c8;
+    background: #dee2e2;
     border-radius: 8px;
-    padding: 4em;
-    h5 {
-      color: #122e2c;
-      font-size:2em;
-      text-align: center;
-      font-weight: bold;
-      position:relative;
-      top: calc(50% - 0.5em);
+    padding: 3em 1em;
+    width: 100%;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.15);
 
-      @media(max-width: 966px) {
-        font-size:1.5em;
-      }
+    @media(min-width: 576px) {
+      padding: 3em 1em;
+    }
+
+    @media(min-width: 768px) {
+      padding: 3em 4em;
+    }
+
+    @media(min-width: 966px) {
+      padding: 4em 14em;
     }
   }
   .timeline {
@@ -152,7 +240,7 @@ export default {
   }
 
   .timeline-item-company::after {
-    background-color: #45b7ae;
+    //background-color: #45b7ae;
   }
 
   .timestamp {
@@ -179,13 +267,18 @@ export default {
   }
 
   .img-company {
-    height: 3rem;
+    height: 2rem;
     max-width: 100%;
+    margin-right: 1rem;
   }
 
   @media(max-width: 966px) {
     h3 {
       font-size: 1.3em;
+    }
+    h4 {
+      font-size: 1.2em;
+
     }
   }
 
