@@ -2,7 +2,8 @@
     <Content>
       <div class="program">
         <h1 class="text-center">Program</h1>
-        <p class="text-center description mt-3 mb-2">Dette er det foreløpige programmet for Nettverksdagen 2019. <a href="#stand-map-header">Se standkart her!</a></p>
+        <p class="text-center description mt-3 mb-2">Dette er det foreløpige programmet for Nettverksdagen 2019.</p>
+        <h4 class="text-center font-weight-bold"><a href="#stand-map-header">Se standkart her!</a></h4>
         <h3 class="font-weight-bold">30. januar</h3>
         <div class="timeline">
           <div class="timeline-item timeline-item-company">
@@ -147,7 +148,6 @@
             </div>
           </div>
         </div>
-        </div>
       </div>
       <h2 id="stand-map-header" class="text-center mb-3">Standkart</h2>
       <img class="stand-map mb-5" src="@/assets/standoversikt.png">
@@ -162,7 +162,7 @@ library.add(faMapMarkerAlt, faClock)
 export default {
   name: 'ProgramView',
   components: {
-    Content
+    Content,
   }
 }
 </script>

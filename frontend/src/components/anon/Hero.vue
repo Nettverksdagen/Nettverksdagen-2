@@ -8,13 +8,18 @@
             Det blir ballongslipp der du kan vinne flotte premier!
             I tillegg har vi mange andre konkurranser i løpet av dagen.
           </HeroHexBox>
-          <HeroHexBox hex-title="Stands" hex-icon="transfer.svg">
-            Hele glassgården fylles med stands! Her har du mulighet for å komme i kontakt med mange spennende bedrifter.
-          </HeroHexBox>
-          <HeroHexBox hex-title="Bedriftpresentasjoner" hex-icon="presentation.svg">
-            Det blir holdt flere bedriftpresentasjoner for de som vil bli bedre kjent med bedriftene.
-            Påmelding gjøres på facebook-siden vår.
-          </HeroHexBox>
+          <b-link :to="'/program'">
+            <HeroHexBox hex-title="Stands" hex-icon="transfer.svg">
+              Hele glassgården fylles med stands! Her har du mulighet for å komme i kontakt med mange spennende bedrifter.
+              Standkartet finner du på programsiden.
+            </HeroHexBox>
+          </b-link>
+          <b-link :to="'/program'">
+            <HeroHexBox hex-title="Bedriftpresentasjoner" hex-icon="presentation.svg">
+              Det blir holdt flere bedriftpresentasjoner for de som vil bli bedre kjent med bedriftene.
+              Påmelding gjøres på facebook-siden vår.
+            </HeroHexBox>
+          </b-link>
         </div>
       </div>
     </div>
@@ -84,6 +89,10 @@ export default {
     justify-content: space-between;
     @media(max-width: 767px) {
       display:none;
+    }
+
+    a {
+      text-decoration: none;
     }
   }
 </style>
