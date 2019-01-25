@@ -149,7 +149,7 @@ export default {
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
-          'Teammedlemmet kunne ikke legges ut.')
+          'Teammedlemmet kunne ikke slettes.')
       })
     },
     resetForm: function () {

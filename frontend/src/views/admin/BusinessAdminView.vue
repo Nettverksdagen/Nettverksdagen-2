@@ -151,7 +151,7 @@ export default {
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
-          'Bedriften kunne ikke legges ut.')
+          'Bedriften kunne ikke slettes.')
       })
     },
     validateWebsiteUrl: function () {

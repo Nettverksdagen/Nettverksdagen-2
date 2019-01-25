@@ -134,7 +134,7 @@ export default {
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
-          'Sponsoren kunne ikke legges ut.')
+          'Sponsoren kunne ikke slettes.')
       })
     },
     validateWebsiteUrl: function () {

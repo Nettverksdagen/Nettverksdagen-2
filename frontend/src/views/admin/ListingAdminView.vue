@@ -165,7 +165,7 @@ export default {
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
-          'Sponsoren kunne ikke legges ut.')
+          'Stillingsannonsen kunne ikke slettes.')
       })
     },
     countDownChanged: function (dismissCountDown) {
