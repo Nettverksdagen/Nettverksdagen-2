@@ -30,7 +30,7 @@
                       <b-form-checkbox-group
                         id="job-location-checkboxes"
                         v-model="selectedJobLocations"
-                        :options="$options.allJobLocations">
+                        :options="allJobLocations">
                       </b-form-checkbox-group>
                     </b-form-group>
                   </b-list-group-item>
@@ -41,7 +41,7 @@
         </div>
         <div class="col-12 col-md-8">
           <b-list-group>
-            <Listing v-for="listing in listings"
+            <Listing v-for="listing in filteredListings"
                      :key="listing.id"
                      :company="listing.company_name"
                      :title="listing.name"
@@ -49,7 +49,7 @@
                      :logo-src="fileserverHost + '/thumb/512/' + listing.logo_uri"
                      :type="listing.type"
                      :listing-url="listing.listing_url"
-                     :city="listing.city"/>
+                     :cities="listing.cities"/>
           </b-list-group>
         </div>
       </b-row>
@@ -67,7 +67,6 @@ export default {
     Listing
   },
   allPositionTypes: [],
-  allJobLocations: [],
   data () {
     return {
       fileserverHost: process.env.VUE_APP_FILESERVER_HOST,
@@ -78,17 +77,18 @@ export default {
     }
   },
   computed: {
-    listings: function () {
+    availableListings: function () {
       let listings = this.$store.state.listings.all
       // Sort by id
       listings = listings.sort(function (a, b) {
         return a.id - b.id
       })
-      // Filter out unchecked position types
-      listings = listings.filter(listing => this.$data.selectedPositionTypes.indexOf(listing.type) !== -1)
 
-      // Filter out unchecked job locations
-      listings = listings.filter(listing => this.$data.selectedJobLocations.indexOf(listing.city) !== -1)
+      // Convert cities string to array of cities
+      listings = listings.filter(listing => {
+        listing.cities = listing.city.split(',').map(city => city.trim())
+        return listing
+      })
 
       // Separate listings with and without deadline
       let listingsWithoutDeadline = listings.filter(listing => listing.deadline === null)
@@ -105,6 +105,23 @@ export default {
       // Spread out non-deadline listings evenly among the other listings
       listings = this.spread(listings, listingsWithoutDeadline)
       return listings
+    },
+    filteredListings: function () {
+      let listings = this.availableListings
+      // Filter out unchecked position types
+      listings = listings.filter(listing => this.$data.selectedPositionTypes.indexOf(listing.type) !== -1)
+
+      // Filter out unchecked job locations
+      listings = listings.filter(listing => {
+        let cityMatches = listing.cities.filter(city => this.$data.selectedJobLocations.indexOf(city) !== -1)
+        return cityMatches !== undefined && cityMatches.length > 0
+      })
+      return listings
+    },
+    allJobLocations: function () {
+      return this.sortByFrequencyAndRemoveDuplicates(
+        [].concat.apply([], this.availableListings.map(listing => listing.cities))
+      )
     }
   },
   mounted () {
@@ -113,10 +130,7 @@ export default {
     )
     this.selectedPositionTypes = this.$options.allPositionTypes
 
-    this.$options.allJobLocations = this.sortByFrequencyAndRemoveDuplicates(
-      this.$store.state.listings.all.map(listing => listing.city)
-    )
-    this.selectedJobLocations = this.$options.allJobLocations
+    this.selectedJobLocations = this.allJobLocations
   },
   created () {
     window.addEventListener('resize', this.handleResize)
@@ -176,6 +190,11 @@ export default {
         i++
       }
       return res
+    }
+  },
+  watch: {
+    allJobLocations: function (allJobLocations) {
+      this.$data.selectedJobLocations = allJobLocations
     }
   }
 }

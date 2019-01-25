@@ -162,7 +162,7 @@ library.add(faMapMarkerAlt, faClock)
 export default {
   name: 'ProgramView',
   components: {
-    Content,
+    Content
   }
 }
 </script>
