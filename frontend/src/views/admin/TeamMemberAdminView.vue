@@ -87,9 +87,6 @@ import axios from 'axios'
 import ImagePreview from '@/components/admin/ImagePreview.vue'
 import { mapMutations } from 'vuex'
 import { fileUploader } from '@/services'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
-library.add(faPencilAlt, faTrashAlt)
 export default {
   name: 'TeamMemberAdminView',
   components: {
