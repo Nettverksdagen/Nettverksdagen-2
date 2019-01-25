@@ -52,14 +52,18 @@
         <b-card header="Bedrifter">
           <b-table class="d-none d-md-table" hover :fields="fields" :items="businesses">
             <template slot="edit" slot-scope="businesses">
-              <button v-on:click="edit(businesses.item)">edit</button>
-              <button v-on:click="destroy(businesses.item)">destroy</button>
+              <font-awesome-icon v-on:click="edit(businesses.item)"
+                :icon="{ prefix: 'fas', iconName: 'pencil-alt' }" size="lg"/>
+              <font-awesome-icon v-on:click="destroy(businesses.item)"
+                :icon="{ prefix: 'fas', iconName: 'trash-alt' }" size="lg"/>
             </template>
           </b-table>
           <b-table class="d-block d-md-none" stacked :fields="fields" :items="businesses">
             <template slot="edit" slot-scope="businesses">
-              <button v-on:click="edit(businesses.item)">edit</button>
-              <button v-on:click="destroy(businesses.item)">destroy</button>
+              <font-awesome-icon v-on:click="edit(businesses.item)"
+                :icon="{ prefix: 'fas', iconName: 'pencil-alt' }" size="lg"/>
+              <font-awesome-icon v-on:click="destroy(businesses.item)"
+                :icon="{ prefix: 'fas', iconName: 'trash-alt' }" size="lg"/>
             </template>
           </b-table>
         </b-card>
@@ -147,7 +151,7 @@ export default {
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
-          'Sponsoren kunne ikke legges ut.')
+          'Bedriften kunne ikke legges ut.')
       })
     },
     validateWebsiteUrl: function () {

@@ -66,14 +66,18 @@
         <b-card header="Stillingsannonser">
           <b-table class="d-none d-md-table" hover :fields="fields" :items="listings">
             <template slot="edit" slot-scope="listings">
-              <button v-on:click="edit(listings.item)">edit :) </button>
-              <button v-on:click="destroy(listings.item)">delete :) </button>
+              <font-awesome-icon v-on:click="edit(listings.item)"
+                :icon="{ prefix: 'fas', iconName: 'pencil-alt' }" size="lg"/>
+              <font-awesome-icon v-on:click="destroy(listings.item)"
+                :icon="{ prefix: 'fas', iconName: 'trash-alt' }" size="lg"/>
             </template>
           </b-table>
           <b-table class="d-block d-md-none" stacked :fields="fields" :items="listings">
             <template slot="edit" slot-scope="listings">
-              <button v-on:click="edit(listings.item)">edit :) </button>
-              <button v-on:click="destroy(listings.item)">delete :) </button>
+              <font-awesome-icon v-on:click="edit(listings.item)"
+                :icon="{ prefix: 'fas', iconName: 'pencil-alt' }" size="lg"/>
+              <font-awesome-icon v-on:click="destroy(listings.item)"
+                :icon="{ prefix: 'fas', iconName: 'trash-alt' }" size="lg"/>
             </template>
           </b-table>
         </b-card>

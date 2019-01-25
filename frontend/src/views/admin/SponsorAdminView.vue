@@ -49,14 +49,18 @@
         <b-card header="Sponsorer">
           <b-table class="d-none d-md-table" hover :fields="fields" :items="sponsors">
             <template slot="edit" slot-scope="sponsors">
-              <button v-on:click="edit(sponsors.item)">edit :) </button>
-              <button v-on:click="destroy(sponsors.item)">delete :( </button>
+              <font-awesome-icon v-on:click="edit(sponsors.item)"
+                :icon="{ prefix: 'fas', iconName: 'pencil-alt' }" size="lg"/>
+              <font-awesome-icon v-on:click="destroy(sponsors.item)"
+                :icon="{ prefix: 'fas', iconName: 'trash-alt' }" size="lg"/>
             </template>
           </b-table>
           <b-table class="d-block d-md-none" stacked :fields="fields" :items="sponsors">
             <template slot="edit" slot-scope="sponsors">
-              <button v-on:click="edit(sponsors.item)">edit :) </button>
-              <button v-on:click="destroy(sponsors.item)">delete :( </button>
+              <font-awesome-icon v-on:click="edit(sponsors.item)"
+                :icon="{ prefix: 'fas', iconName: 'pencil-alt' }" size="lg"/>
+              <font-awesome-icon v-on:click="destroy(sponsors.item)"
+                :icon="{ prefix: 'fas', iconName: 'trash-alt' }" size="lg"/>
             </template>
           </b-table>
         </b-card>
