@@ -66,18 +66,14 @@
         <b-card header="Stillingsannonser">
           <b-table class="d-none d-md-table" hover :fields="fields" :items="listings">
             <template slot="edit" slot-scope="listings">
-              <font-awesome-icon v-on:click="edit(listings.item)"
-                :icon="{ prefix: 'fas', iconName: 'pencil-alt' }" size="lg"/>
-              <font-awesome-icon v-on:click="destroy(listings.item)"
-                :icon="{ prefix: 'fas', iconName: 'trash-alt' }" size="lg"/>
+              <edit-button class="mx-3" @click.native="edit(listings.item)"></edit-button>
+              <delete-button class="mx-3" @click.native="destroy(listings.item)"></delete-button>
             </template>
           </b-table>
           <b-table class="d-block d-md-none" stacked :fields="fields" :items="listings">
             <template slot="edit" slot-scope="listings">
-              <font-awesome-icon v-on:click="edit(listings.item)"
-                :icon="{ prefix: 'fas', iconName: 'pencil-alt' }" size="lg"/>
-              <font-awesome-icon v-on:click="destroy(listings.item)"
-                :icon="{ prefix: 'fas', iconName: 'trash-alt' }" size="lg"/>
+              <edit-button class="mx-3" @click.native="edit(listings.item)"></edit-button>
+              <delete-button class="mx-3" @click.native="destroy(listings.item)"></delete-button>
             </template>
           </b-table>
         </b-card>
@@ -92,11 +88,15 @@ import axios from 'axios'
 import { mapMutations } from 'vuex'
 import ImagePreview from '@/components/admin/ImagePreview.vue'
 import { fileUploader } from '@/services'
+import EditButton from '@/components/admin/EditButton.vue'
+import DeleteButton from '@/components/admin/DeleteButton.vue'
 export default {
   name: 'ListingAdminView',
   components: {
     Datepicker,
-    ImagePreview
+    ImagePreview,
+    EditButton,
+    DeleteButton
   },
   data: function () {
     return {
@@ -157,16 +157,20 @@ export default {
           'Stillingsannonsen ble ikke opprettet.')
       })
     },
-    destroy: function (business) {
+    destroy: function (listing) {
+      if (!confirm('Er du sikker på at du vil slette ' + listing.name + '?')) {
+        return
+      }
       axios.delete(process.env.VUE_APP_API_HOST + '/api/listing/' +
-        business.id + '/').then((response) => {
+        listing.id + '/').then((response) => {
         this.showAlert('success', 'Suksess!', 'Annonsen ble slettet')
-        this['listings/deleteListing'](business)
+        this['listings/deleteListing'](listing)
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
           'Stillingsannonsen kunne ikke slettes.')
       })
+      this.resetForm()
     },
     countDownChanged: function (dismissCountDown) {
       this.alert.dismissCountDown = dismissCountDown

@@ -49,18 +49,14 @@
         <b-card header="Sponsorer">
           <b-table class="d-none d-md-table" hover :fields="fields" :items="sponsors">
             <template slot="edit" slot-scope="sponsors">
-              <font-awesome-icon v-on:click="edit(sponsors.item)"
-                :icon="{ prefix: 'fas', iconName: 'pencil-alt' }" size="lg"/>
-              <font-awesome-icon v-on:click="destroy(sponsors.item)"
-                :icon="{ prefix: 'fas', iconName: 'trash-alt' }" size="lg"/>
+              <edit-button class="mx-3" @click.native="edit(sponsors.item)"></edit-button>
+              <delete-button class="mx-3" @click.native="destroy(sponsors.item)"></delete-button>
             </template>
           </b-table>
           <b-table class="d-block d-md-none" stacked :fields="fields" :items="sponsors">
             <template slot="edit" slot-scope="sponsors">
-              <font-awesome-icon v-on:click="edit(sponsors.item)"
-                :icon="{ prefix: 'fas', iconName: 'pencil-alt' }" size="lg"/>
-              <font-awesome-icon v-on:click="destroy(sponsors.item)"
-                :icon="{ prefix: 'fas', iconName: 'trash-alt' }" size="lg"/>
+              <edit-button class="mx-3" @click.native="edit(sponsors.item)"></edit-button>
+              <delete-button class="mx-3" @click.native="destroy(sponsors.item)"></delete-button>
             </template>
           </b-table>
         </b-card>
@@ -73,10 +69,14 @@ import axios from 'axios'
 import ImagePreview from '@/components/admin/ImagePreview.vue'
 import { mapMutations } from 'vuex'
 import { fileUploader } from '@/services'
+import EditButton from '@/components/admin/EditButton.vue'
+import DeleteButton from '@/components/admin/DeleteButton.vue'
 export default {
   name: 'SponsorAdminView',
   components: {
-    ImagePreview
+    ImagePreview,
+    EditButton,
+    DeleteButton
   },
   data: function () {
     return {
@@ -127,6 +127,9 @@ export default {
       })
     },
     destroy: function (sponsor) {
+      if (!confirm('Er du sikker på at du vil slette ' + sponsor.name + '?')) {
+        return
+      }
       axios.delete(process.env.VUE_APP_API_HOST + '/api/sponsor/' +
         sponsor.id + '/').then((response) => {
         this.showAlert('success', 'Suksess!', 'Sponsoren er blitt slettet')
@@ -136,6 +139,7 @@ export default {
           'Error ' + e.response.status + ' ' + e.response.statusText,
           'Sponsoren kunne ikke slettes.')
       })
+      this.resetForm()
     },
     validateWebsiteUrl: function () {
       this.$data.sponsor.website_url = this.validateLink(this.$data.sponsor.website_url)

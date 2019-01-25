@@ -62,18 +62,14 @@
         <b-card header="Teammedlemmer">
           <b-table class="d-none d-md-table" hover :fields="fields" :items="teamMembers">
             <template slot="edit" slot-scope="teamMembers">
-              <font-awesome-icon v-on:click="edit(teamMembers.item)"
-                :icon="{ prefix: 'fas', iconName: 'pencil-alt' }" size="lg"/>
-              <font-awesome-icon v-on:click="destroy(teamMembers.item)"
-                :icon="{ prefix: 'fas', iconName: 'trash-alt' }" size="lg"/>
+              <edit-button class="mx-3" @click.native="edit(teamMembers.item)"></edit-button>
+              <delete-button class="mx-3" @click.native="destroy(teamMembers.item)"></delete-button>
             </template>
           </b-table>
           <b-table class="d-block d-md-none" stacked :fields="fields" :items="teamMembers">
             <template slot="edit" slot-scope="teamMembers">
-              <font-awesome-icon v-on:click="edit(teamMembers.item)"
-                :icon="{ prefix: 'fas', iconName: 'pencil-alt' }" size="lg"/>
-              <font-awesome-icon v-on:click="destroy(teamMembers.item)"
-                :icon="{ prefix: 'fas', iconName: 'trash-alt' }" size="lg"/>
+              <edit-button class="mx-3" @click.native="edit(teamMembers.item)"></edit-button>
+              <delete-button class="mx-3" @click.native="destroy(teamMembers.item)"></delete-button>
             </template>
           </b-table>
         </b-card>
@@ -87,10 +83,14 @@ import axios from 'axios'
 import ImagePreview from '@/components/admin/ImagePreview.vue'
 import { mapMutations } from 'vuex'
 import { fileUploader } from '@/services'
+import EditButton from '@/components/admin/EditButton.vue'
+import DeleteButton from '@/components/admin/DeleteButton.vue'
 export default {
   name: 'TeamMemberAdminView',
   components: {
-    ImagePreview
+    ImagePreview,
+    EditButton,
+    DeleteButton
   },
   data: function () {
     return {
@@ -142,6 +142,9 @@ export default {
       })
     },
     destroy: function (teamMember) {
+      if (!confirm('Er du sikker på at du vil slette ' + teamMember.name + '?')) {
+        return
+      }
       axios.delete(process.env.VUE_APP_API_HOST + '/api/teammember/' +
         teamMember.id + '/').then((response) => {
         this.showAlert('success', 'Suksess!', 'Teammedlemmet er blitt slettet')
@@ -151,6 +154,7 @@ export default {
           'Error ' + e.response.status + ' ' + e.response.statusText,
           'Teammedlemmet kunne ikke slettes.')
       })
+      this.resetForm()
     },
     resetForm: function () {
       this.$data.teamMember = {name: '', email: '', team: '', position: '', photo_uri: ''}

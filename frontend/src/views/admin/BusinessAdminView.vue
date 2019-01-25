@@ -52,18 +52,14 @@
         <b-card header="Bedrifter">
           <b-table class="d-none d-md-table" hover :fields="fields" :items="businesses">
             <template slot="edit" slot-scope="businesses">
-              <font-awesome-icon v-on:click="edit(businesses.item)"
-                :icon="{ prefix: 'fas', iconName: 'pencil-alt' }" size="lg"/>
-              <font-awesome-icon v-on:click="destroy(businesses.item)"
-                :icon="{ prefix: 'fas', iconName: 'trash-alt' }" size="lg"/>
+              <edit-button class="mx-3" @click.native="edit(businesses.item)"></edit-button>
+              <delete-button class="mx-3" @click.native="destroy(businesses.item)"></delete-button>
             </template>
           </b-table>
           <b-table class="d-block d-md-none" stacked :fields="fields" :items="businesses">
             <template slot="edit" slot-scope="businesses">
-              <font-awesome-icon v-on:click="edit(businesses.item)"
-                :icon="{ prefix: 'fas', iconName: 'pencil-alt' }" size="lg"/>
-              <font-awesome-icon v-on:click="destroy(businesses.item)"
-                :icon="{ prefix: 'fas', iconName: 'trash-alt' }" size="lg"/>
+              <edit-button class="mx-3" @click.native="edit(businesses.item)"></edit-button>
+              <delete-button class="mx-3" @click.native="destroy(businesses.item)"></delete-button>
             </template>
           </b-table>
         </b-card>
@@ -76,10 +72,14 @@ import axios from 'axios'
 import ImagePreview from '@/components/admin/ImagePreview.vue'
 import { mapMutations } from 'vuex'
 import { fileUploader } from '@/services'
+import EditButton from '@/components/admin/EditButton.vue'
+import DeleteButton from '@/components/admin/DeleteButton.vue'
 export default {
   name: 'BusinessAdminView',
   components: {
-    ImagePreview
+    ImagePreview,
+    EditButton,
+    DeleteButton
   },
   data: function () {
     return {
@@ -144,6 +144,9 @@ export default {
       })
     },
     destroy: function (business) {
+      if (!confirm('Er du sikker på at du vil slette ' + business.name + '?')) {
+        return
+      }
       axios.delete(process.env.VUE_APP_API_HOST + '/api/business/' +
         business.id + '/').then((response) => {
         this.showAlert('success', 'Suksess!', 'Bedriften er blitt slettet')
@@ -153,6 +156,7 @@ export default {
           'Error ' + e.response.status + ' ' + e.response.statusText,
           'Bedriften kunne ikke slettes.')
       })
+      this.resetForm()
     },
     validateWebsiteUrl: function () {
       this.$data.business.website_url = this.validateLink(this.$data.business.website_url)
