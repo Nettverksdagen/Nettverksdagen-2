@@ -20,8 +20,8 @@ export default {
     }
   },
   colSizes: {
-    'big': [6, 4, 3],
-    'medium': [4, 3, 2],
+    'big': [6, 4, 4],
+    'medium': [4, 3, 3],
     'small': [3, 2, 2]
   }
 }
@@ -45,20 +45,20 @@ export default {
         padding: 1rem 2rem;
       }
       @media(min-width: 992px) {
-        padding: 1rem 3rem;
+        padding: 0.5rem 5.5rem;
       }
     }
 
     &.medium {
-      padding: 1.6rem;
+      padding: 1.5rem;
       @media(min-width: 576px) {
-        padding: 2rem;
+        padding: 1.5rem;
       }
       @media(min-width: 768px) {
-        padding: 1.5rem 2rem;
+        padding: 1.5rem 2.5rem;
       }
       @media(min-width: 992px) {
-        padding: 1.5rem 2rem;
+        padding: 1.5rem 5rem;
       }
     }
 

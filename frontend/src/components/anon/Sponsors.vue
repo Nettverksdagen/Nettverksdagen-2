@@ -32,13 +32,10 @@ import Sponsor from '@/components/anon/Sponsor.vue'
 export default {
   name: 'Sponsors',
   components: { Content, Sponsor },
-  data: function () {
-    return {
-      sponsors: []
+  computed: {
+    sponsors: function () {
+      return this.$store.state.sponsors.all
     }
-  },
-  mounted: function () {
-    this.$data.sponsors = this.$store.state.sponsors.all
   }
 }
 </script>
@@ -49,7 +46,7 @@ export default {
   }
   .sponsor-banner {
     background-color: #ffd600;
-    margin: 2rem 2rem 0 2rem;
+    margin: 2rem;
     border-radius: 0.5rem;
     box-shadow: 0 2px 5px rgba(0,0,0,0.16), 0 2px 5px rgba(0,0,0,0.15);
     transition: 0.2s;
@@ -64,11 +61,21 @@ export default {
     }
 
     @media(max-width: 576px) {
-      margin: 1rem 1rem 0 1rem;
+      margin: 1rem;
     }
   }
   .sponsor-banner-text {
     padding: 3rem 4rem;
+
+    h3 {
+      color: #221e1f;
+      margin-bottom: 0.5rem;
+      font-size: 1.9rem;
+    }
+
+    span {
+      font-size: 1.2rem;
+    }
 
     @media(max-width: 576px) {
       padding: 1.5rem 2.5rem;
@@ -86,10 +93,6 @@ export default {
       padding-bottom: 0;
     }
 
-    h3 {
-      color: #221e1f;
-      margin-bottom: 0.5rem;
-    }
   }
   .logo-kjeldsberg {
     height: 11rem;

@@ -1,17 +1,24 @@
 <template>
   <div class="anon-footer">
-    <Content class="footer-contents">
+    <Content class="footer-contents text-sm-left text-center">
       <b-row>
-        <b-col cols="12" sm="6" md="4" lg="6">
-          <h5>Nettverksdagen</h5>
-          <p class="text-subtle mr-3">
-            Nettverksdagen er en karrieremesse arrangert av studenter på studiet Kybernetikk og Robotikk ved NTNU.
-            Hensikten er å gi studentene mulighet til å møte sine fremtidige arbeidsgivere,
-            få informasjon om sommerjobber og et innblikk i arbeidslivet.
-          </p>
+        <b-col cols="12" sm="6" md="6" lg="6" class="mb-sm-0 mb-3">
+          <div class="d-md-flex">
+            <div>
+              <img class="img-logo mb-md-0 mb-3" src="@/assets/logo.png"/>
+            </div>
+            <div>
+              <h5>Nettverksdagen</h5>
+              <p class="text-subtle mr-3">
+                Nettverksdagen er en karrieremesse arrangert av studenter på studiet Kybernetikk og Robotikk ved NTNU.
+                Hensikten er å gi studentene mulighet til å møte sine fremtidige arbeidsgivere,
+                få informasjon om sommerjobber og et innblikk i arbeidslivet.
+              </p>
+            </div>
+          </div>
         </b-col>
 
-        <b-col cols="12" sm="6" md="4" lg="3">
+        <b-col cols="12" sm="6" md="4" lg="3" class="mb-sm-0 mb-3">
           <h5>Kontakt</h5>
           <ul class="list-unstyled">
             <li><span class="font-weight-bold">Styret:</span> <a class="green-link" href="mailto:styret@nvdagen.no">styret@nvdagen.no</a></li>
@@ -20,7 +27,7 @@
           </ul>
         </b-col>
 
-        <b-col cols="12" sm="6" md="4" lg="3" class="text-md-right">
+        <b-col cols="12" sm="6" md="2" lg="3" class="text-md-right">
           <h5>Følg oss</h5>
           <ul class="list-inline social-icons">
             <li class="list-inline-item">
@@ -76,5 +83,9 @@ export default {
         color:#fff;
       }
     }
+  }
+  .img-logo{
+    height: 4em;
+    padding-right: 1em;
   }
 </style>

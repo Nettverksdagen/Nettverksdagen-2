@@ -20,15 +20,17 @@ const actions = {
 
 const getters = {
   levels: state => {
-    let levels = {}
+    let levels = [
+      {level: 'Gull', businesses: []},
+      {level: 'Sølv', businesses: []},
+      {level: 'Bronse', businesses: []}
+    ]
     for (let i = 0; i < state.all.length; i++) {
-      if (!(state.all[i].level in levels)) {
-        levels[state.all[i].level] = {
-          level: state.all[i].level,
-          businesses: [state.all[i]]
+      for (let j = 0; j < levels.length; j++) {
+        if (state.all[i].level === levels[j].level) {
+          levels[j].businesses.push(state.all[i])
+          break
         }
-      } else {
-        levels[state.all[i].level]['businesses'].push(state.all[i])
       }
     }
     return levels

@@ -8,7 +8,17 @@
       <div class="side info-container">
         <h6 class="company"><span class="font-weight-bold">{{ company }}</span> – {{ type }}</h6>
         <h5 class="title">{{ title }}</h5>
-        <span class="tinytext"><span class="city">{{ city }}</span> | Frist: {{ formattedDeadline }}</span>
+        <span class="tinytext">
+          <span class="cities">
+            <span :key="city" v-for="(city, key) in cities">
+              {{ city }}<span v-if="key < cities.length - 2">, </span>
+              <span v-else-if="key < cities.length - 1"> eller </span>
+            </span>
+          </span>
+          |
+          <span v-if="deadline !== null">Frist: {{ formattedDeadline }}</span>
+          <span v-else>Løpende frist</span>
+        </span>
       </div>
     </b-list-group-item>
     </b-link>
@@ -17,7 +27,7 @@
 
 <script>
 export default {
-  props: ['company', 'title', 'deadline', 'logoSrc', 'type', 'listingUrl', 'city'],
+  props: ['company', 'title', 'deadline', 'logoSrc', 'type', 'listingUrl', 'cities'],
   computed: {
     formattedDeadline: function () {
       let deadDate = new Date(this.deadline)
@@ -80,7 +90,7 @@ export default {
   .tinytext {
     font-size:14px;
     color:#888;
-    .city {
+    .cities {
       font-weight:bold;
     }
   }
