@@ -27,13 +27,15 @@
               <div class="col-12 col-md-6">
                 <div class="d-flex">
                   <b-form-group class="flex-grow-1" label="Logo" label-for="sponsor-logo">
-                    <b-form-file v-model="logoFile" required placeholder="Velg et bilde" id="sponsor-logo" ref="logoFileInput" @input="uploadLogo"></b-form-file>
+                    <b-form-file v-model="logoFile" :required="!editing" placeholder="Velg et bilde" id="sponsor-logo" ref="logoFileInput" @input="uploadLogo"></b-form-file>
                   </b-form-group>
-                  <image-preview :imgPreviewSrc="imgPreviewSrc" :showImgPreview="showImgPreview"></image-preview>
+                  <image-preview :imgPreviewSrc="logoSrc" :showImgPreview="showImgPreview"></image-preview>
                 </div>
               </div>
             </b-row>
-            <b-button type="submit" size="md" variant="success">Legg ut sponsoren</b-button>
+            <b-button type="submit" size="md" variant="success" v-if="!editing">Legg ut sponsoren</b-button>
+            <b-button type="submit" size="md" variant="primary" v-if="editing">Endre sponsor</b-button>
+            <b-button v-on:click="abortEdit()" size="md" variant="secondary" v-if="editing">Avbryt</b-button>
           </b-form>
         </b-card>
       </div>
@@ -45,8 +47,18 @@
     <b-row>
       <div class="col-12">
         <b-card header="Sponsorer">
-          <b-table class="d-none d-md-table" hover :items="sponsors"></b-table>
-          <b-table class="d-block d-md-none" stacked :items="sponsors"></b-table>
+          <b-table class="d-none d-md-table" hover :fields="fields" :items="sponsors">
+            <template slot="edit" slot-scope="sponsors">
+              <edit-button class="mx-3" @click.native="edit(sponsors.item)"></edit-button>
+              <delete-button class="mx-3" @click.native="destroy(sponsors.item)"></delete-button>
+            </template>
+          </b-table>
+          <b-table class="d-block d-md-none" stacked :fields="fields" :items="sponsors">
+            <template slot="edit" slot-scope="sponsors">
+              <edit-button class="mx-3" @click.native="edit(sponsors.item)"></edit-button>
+              <delete-button class="mx-3" @click.native="destroy(sponsors.item)"></delete-button>
+            </template>
+          </b-table>
         </b-card>
       </div>
     </b-row>
@@ -57,13 +69,21 @@ import axios from 'axios'
 import ImagePreview from '@/components/admin/ImagePreview.vue'
 import { mapMutations } from 'vuex'
 import { fileUploader } from '@/services'
+import EditButton from '@/components/admin/EditButton.vue'
+import DeleteButton from '@/components/admin/DeleteButton.vue'
 export default {
   name: 'SponsorAdminView',
   components: {
-    ImagePreview
+    ImagePreview,
+    EditButton,
+    DeleteButton
   },
   data: function () {
     return {
+      fields: [
+        'id', { key: 'name', label: 'Name' }, { key: 'logo_uri', label: 'Logo Uri' },
+        { key: 'website_url', label: 'Website Url' }, { key: 'edit', label: '' }
+      ],
       sponsor: {
         name: '',
         logo_uri: '',
@@ -71,7 +91,7 @@ export default {
       },
       logoFile: null,
       showImgPreview: false,
-      imgPreviewSrc: '',
+      editing: false,
       alert: {
         dismissSecs: 5,
         dismissCountDown: 0,
@@ -87,19 +107,39 @@ export default {
     },
     numSponsors: function () {
       return this.sponsors.length
+    },
+    logoSrc: function () {
+      return process.env.VUE_APP_FILESERVER_HOST + '/thumb/256/' + this.sponsor.logo_uri
     }
   },
   methods: {
     handleSubmit: function () {
-      axios.post(process.env.VUE_APP_API_HOST + '/api/sponsor/', this.$data.sponsor).then((response) => {
-        this.showAlert('success', 'Suksess!', 'Sponsoren er blitt lagt ut på forsiden.')
-        this['sponsors/addSponsor'](response.data)
+      axios[this.$data.editing ? 'put' : 'post'](process.env.VUE_APP_API_HOST + '/api/sponsor/' +
+        (this.$data.editing ? this.$data.sponsor.id + '/' : ''), this.$data.sponsor).then((response) => {
+        this.showAlert('success', 'Suksess!', 'Sponsoren er blitt ' +
+            (this.$data.editing ? 'endret.' : 'lagt ut på forsiden.'))
+        this['sponsors/' + (this.$data.editing ? 'updateSponsor' : 'addSponsor')](response.data)
         this.resetForm()
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
           'Sponsoren kunne ikke legges ut.')
       })
+    },
+    destroy: function (sponsor) {
+      if (!confirm('Er du sikker på at du vil slette ' + sponsor.name + '?')) {
+        return
+      }
+      axios.delete(process.env.VUE_APP_API_HOST + '/api/sponsor/' +
+        sponsor.id + '/').then((response) => {
+        this.showAlert('success', 'Suksess!', 'Sponsoren er blitt slettet')
+        this['sponsors/deleteSponsor'](sponsor)
+      }).catch((e) => {
+        this.showAlert('danger',
+          'Error ' + e.response.status + ' ' + e.response.statusText,
+          'Sponsoren kunne ikke slettes.')
+      })
+      this.resetForm()
     },
     validateWebsiteUrl: function () {
       this.$data.sponsor.website_url = this.validateLink(this.$data.sponsor.website_url)
@@ -114,6 +154,8 @@ export default {
     resetForm: function () {
       this.$data.sponsor = {name: '', logo_uri: '', website_url: ''}
       this.$refs.logoFileInput.reset()
+      this.$data.editing = false
+      this.$data.showImgPreview = false
     },
     showAlert: function (variant, heading, message) {
       this.alert.variant = variant
@@ -133,7 +175,6 @@ export default {
       fileUploader.uploadImage(this.$data.logoFile)
         .then((logoUri) => {
           this.$data.sponsor.logo_uri = logoUri
-          this.$data.imgPreviewSrc = process.env.VUE_APP_FILESERVER_HOST + '/thumb/256/' + logoUri
           setTimeout(() => {
             this.$data.showImgPreview = true
           }, 30) // The image src can't be set at the same time as the img opacity or it will lose its transition
@@ -147,10 +188,18 @@ export default {
             errorTitle,
             'Bildeopplastning feilet, prøv igjen. Kontakt IT om problemet vedvarer.')
           this.$data.showImgPreview = false
-          this.$data.imgPreviewSrc = ''
         })
     },
-    ...mapMutations(['sponsors/addSponsor'])
+    edit: function (sponsor) {
+      this.$data.sponsor = sponsor
+      this.$data.showImgPreview = true
+      this.$data.editing = true
+    },
+    abortEdit: function () {
+      this.resetForm()
+      this.$data.editing = false
+    },
+    ...mapMutations(['sponsors/addSponsor', 'sponsors/deleteSponsor', 'sponsors/updateSponsor'])
   }
 }
 </script>

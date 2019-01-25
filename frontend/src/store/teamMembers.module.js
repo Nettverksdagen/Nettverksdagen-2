@@ -51,6 +51,13 @@ const mutations = {
   },
   addTeamMember (state, teamMember) {
     state.all.push(teamMember)
+  },
+  deleteTeamMember (state, teamMember) {
+    state.all = state.all.filter(tm => tm.id !== teamMember.id)
+  },
+  updateTeamMember (state, teamMember) {
+    const modify = state.all.findIndex(tm => tm.id === teamMember.id)
+    state.all[modify] = teamMember
   }
 }
 
