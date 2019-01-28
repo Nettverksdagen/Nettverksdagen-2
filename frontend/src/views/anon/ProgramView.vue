@@ -14,7 +14,7 @@
               <div class="card-body">
                 <h4 class="mb-1">Bedriftspresentasjon med Cisco</h4>
                 <p class="description m-0"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>EL6
-                  <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>13.00 - 14.00</p>
+                  <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>17.00 - 18.00</p>
               </div>
             </div>
           </div>
