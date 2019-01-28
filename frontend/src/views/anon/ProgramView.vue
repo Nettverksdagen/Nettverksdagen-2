@@ -21,18 +21,6 @@
         </div>
         <h3 class="font-weight-bold">31. januar</h3>
         <div class="timeline">
-          <div class="timeline-item timeline-item-company">
-            <div class="timestamp">
-              <h4><span class="font-weight-bold">09.00</span></h4>
-            </div>
-            <div class="card">
-              <div class="card-body">
-                <h4 class="mb-1">Bedriftspresentasjon med BaneNOR</h4>
-                <p class="description m-0"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>H1
-                  <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>09.00 - 10.00</p>
-              </div>
-            </div>
-          </div>
           <div class="timeline-item">
             <div class="timestamp">
               <h4><span class="font-weight-bold">10.00</span></h4>
