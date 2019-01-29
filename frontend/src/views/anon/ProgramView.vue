@@ -120,6 +120,7 @@
             <div class="card">
               <div class="card-body">
                 <h3 class="font-weight-bold m-0">Nettverksdagen er over</h3>
+                <p class="description">Standene i Glassgården pakker sammen, men det er enda et par bedriftpresentasjoner å få med seg!</p>
               </div>
             </div>
           </div>
@@ -135,10 +136,22 @@
               </div>
             </div>
           </div>
+          <div class="timeline-item timeline-item-company">
+            <div class="timestamp">
+              <h4><span class="font-weight-bold">16.00</span></h4>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h4 class="mb-1">Bedriftspresentasjon med Imatis</h4>
+                <p class="description m-0"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>EL3
+                  <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>16.00 - 17.00</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <h2 id="stand-map-header" class="text-center mb-3">Standkart</h2>
-      <img class="stand-map mb-5" src="@/assets/standoversikt.png">
+      <img class="stand-map mb-5" src="@/assets/standkart.png">
     </Content>
 </template>
 
