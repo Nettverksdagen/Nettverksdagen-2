@@ -13,7 +13,7 @@
             <div class="card">
               <div class="card-body">
                 <h4 class="mb-1">Bedriftspresentasjon med Cisco</h4>
-                <p class="description m-0"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>EL6
+                <p class="description m-0"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>EL3
                   <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>17.00 - 18.00</p>
               </div>
             </div>
@@ -64,7 +64,7 @@
               <div class="card-body">
                 <h4 class="mb-1">Bedriftspresentasjon med Data Respons</h4>
                 <p class="description m-0"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>EL3
-                  <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>12.00 - 13.00</p>
+                  <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>12.15 - 13.00</p>
               </div>
             </div>
           </div>
