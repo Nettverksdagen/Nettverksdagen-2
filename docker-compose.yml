@@ -34,3 +34,8 @@ services:
     command: ["./main"]
     volumes:
       - ./fileserver/uploads:/root/uploads
+  ghost:
+    image: ghost:1-alpine
+    restart: always
+    ports:
+      - 8090:2368
