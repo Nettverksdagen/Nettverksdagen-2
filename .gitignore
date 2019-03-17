@@ -14,3 +14,6 @@ fileserver/uploads/*
 fileserver/!uploads/thumb/512/static/
 nginx/config/*
 !nginx/config/nginx/site-confs/default
+config.production.json
+ghost/data/*
+!ghost/data/.gitkeep

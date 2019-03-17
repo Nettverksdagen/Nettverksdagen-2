@@ -37,27 +37,28 @@ services:
     image: linuxserver/letsencrypt
     restart: "always"
     ports:
-      - "81:80"
-      - "8443:443"
+      - "80:80"
+      - "443:443"
     environment:
       - PUID=1013
       - GUID=1015
       - EMAIL=it@nvdagen.no
       - URL=nvdagen.no
-      - SUBDOMAINS=www
+      - SUBDOMAINS=www, blogg
       - TZ=Europe/Oslo
       - VALIDATION=http
       #- STAGING=true # Uncomment this when testing
     depends_on:
       - api
       - fileserver
+      - ghost
     volumes:
       - ./nginx/config:/config # Todo: Can this volume include the below?
       - frontend-files:/frontend
   ghost:
-    image: ghost:1-alpine
-    restart: always
-    ports:
-      - 8090:2368
+    build: ./ghost
+    restart: "always"
+    volumes:
+      - ./ghost/data:/var/lib/ghost/content/data
 volumes:
   frontend-files:
