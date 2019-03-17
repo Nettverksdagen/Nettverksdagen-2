@@ -14,7 +14,7 @@
           <b-nav-item :to="{name: 'Listings'}">Stillinger</b-nav-item>
           <b-nav-item :to="{name: 'About'}">Om oss</b-nav-item>
           <b-nav-item :to="{name: 'Contact'}">Kontakt</b-nav-item>
-          <b-nav-item href="blogg.nvdagen.no">Blogg</b-nav-item>
+          <b-nav-item href="https://blogg.nvdagen.no">Blogg</b-nav-item>
        </b-nav>
       </div>
     </div>
