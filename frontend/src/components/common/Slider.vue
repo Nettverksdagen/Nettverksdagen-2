@@ -11,7 +11,7 @@
         </li>
         <li>
           <span v-on:click="menuIsOpen = false">
-            <a href="https://nvdagen.no/blogg">Blogg</a>
+            <a href="https://blogg.nvdagen.no">Blogg</a>
           </span>
           <hr>
         </li>
