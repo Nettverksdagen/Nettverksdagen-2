@@ -22,10 +22,10 @@
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons'
-library.add(faMapMarkerAlt, faClock);
+library.add(faMapMarkerAlt, faClock)
 export default {
-    name: "ProgramItem",
-    props: ['timeStart', 'timeEnd', 'place'],
+  name: 'ProgramItem',
+  props: ['timeStart', 'timeEnd', 'place']
 }
 </script>
 
