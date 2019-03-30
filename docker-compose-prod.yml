@@ -53,6 +53,7 @@ services:
       - api
       - fileserver
       - ghost
+      - deploy
     volumes:
       - ./nginx/config:/config # Todo: Can this volume include the below?
       - frontend-files:/frontend
