@@ -3,6 +3,7 @@ version: '3.7'
 services:
   postgres:
     image: postgres
+    container_name: postgres
 
   api:
     build: ./api

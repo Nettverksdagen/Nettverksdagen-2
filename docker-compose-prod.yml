@@ -4,6 +4,7 @@ services:
   postgres:
     image: postgres
     restart: "always"
+    container_name: postgres
 
   api:
     build: ./api
@@ -52,6 +53,7 @@ services:
       - api
       - fileserver
       - ghost
+      - deploy
     volumes:
       - ./nginx/config:/config # Todo: Can this volume include the below?
       - frontend-files:/frontend
@@ -60,5 +62,10 @@ services:
     restart: "always"
     volumes:
       - ./ghost/data:/var/lib/ghost/content/data
+  deploy:
+    build: ./deploy
+    restart: "always"
+    environment:
+      - GITHUB_WEBHOOKS_SECRET=${GITHUB_WEBHOOKS_SECRET}
 volumes:
   frontend-files:

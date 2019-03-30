@@ -57,6 +57,10 @@ server {
         proxy_pass http://fileserver:9000/;
     }
 
+    location /github {
+        proxy_pass http://deploy:8000/github;
+    }
+
     #error_page  404              /404.html;
 
     # redirect server error pages to the static page /50x.html
