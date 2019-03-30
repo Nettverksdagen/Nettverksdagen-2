@@ -6,7 +6,7 @@
 * [Docker compose](https://docs.docker.com/compose/)
 
 ## Project Installation
-With docker-compose installed, the project requires minimal setup
+With docker-compose installed, the project requires minimal setup.
 ```bash
 git clone https://github.com/Nettverksdagen/Nettverksdagen-2.git
 cd Nettverksdagen-2
