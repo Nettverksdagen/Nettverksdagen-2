@@ -1,6 +1,6 @@
 <template>
   <div class="hero-text">
-    <h1 class="mt-3 hero-header">Nettverksdagen 2019</h1>
+    <h1 class="mt-3 hero-header">Nettverksdagene 2019</h1>
     <hr class="hr-hero">
     <h2 class="font-weight-light">Glassgården NTNU, 31. januar</h2>
   </div>
