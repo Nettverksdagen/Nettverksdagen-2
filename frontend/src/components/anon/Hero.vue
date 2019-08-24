@@ -10,14 +10,14 @@
           </HeroHexBox>
           <b-link :to="'/program'">
             <HeroHexBox hex-title="Stands" hex-icon="transfer.svg">
-              Hele glassgården fylles med stands! Her har du mulighet for å komme i kontakt med mange spennende bedrifter.
+              Hele Glassgården fylles med stands! Her har du mulighet for å komme i kontakt med mange spennende bedrifter.
               Standkartet finner du på programsiden.
             </HeroHexBox>
           </b-link>
           <b-link :to="'/program'">
             <HeroHexBox hex-title="Bedriftpresentasjoner" hex-icon="presentation.svg">
               Det blir holdt flere bedriftpresentasjoner for de som vil bli bedre kjent med bedriftene.
-              Påmelding gjøres på facebook-siden vår.
+              Påmelding gjøres på Facebook-siden vår.
             </HeroHexBox>
           </b-link>
         </div>

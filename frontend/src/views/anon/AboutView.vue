@@ -5,10 +5,10 @@
       <b-row>
         <b-col cols="12" sm="7">
           <p class="introduction">
-            Nettverksdagene er en karrieremesse drevet av studenter ved masterstudiet kybernetikk og robotikk ved NTNU.
+            Nettverksdagene er en karrieremesse drevet av studenter ved masterstudiet Kybernetikk og robotikk ved NTNU.
             Det er et årlig arrangement av studenter fra 3. årstrinn med den hensikt å knytte kontakt mellom studenter og bedrifter innenfor relevante fagområder.
             Arrangementet finner sted i Glassgården i Elektrobygget på Gløshaugen.
-            Dette fungerer som fellesområdet til studenter ved linjene Kybernetikk og Robotikk, Energi og Miljø, Elektronisk systemdesign og innovasjon
+            Dette fungerer som fellesområdet til studenter ved linjene Kybernetikk og robotikk, Energi og miljø, Elektronisk systemdesign og innovasjon
             og Kommunikasjonsteknologi.
           </p>
         </b-col>

@@ -10,7 +10,7 @@
             <div>
               <h5>Nettverksdagene</h5>
               <p class="text-subtle mr-3">
-                Nettverksdagene er en karrieremesse arrangert av studenter på studiet Kybernetikk og Robotikk ved NTNU.
+                Nettverksdagene er en karrieremesse arrangert av studenter på studiet Kybernetikk og robotikk ved NTNU.
                 Hensikten er å gi studentene mulighet til å møte sine fremtidige arbeidsgivere,
                 få informasjon om sommerjobber og et innblikk i arbeidslivet.
               </p>
