@@ -4,7 +4,7 @@
       <b-link :to="'/'" class="logo-link">
         <div class="side">
           <img class="logo" src="@/assets/logo.png">
-          <h1>Nettverksdagen</h1>
+          <h1>Nettverksdagene</h1>
         </div>
       </b-link>
       <div class="side">

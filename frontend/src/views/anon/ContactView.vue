@@ -9,7 +9,7 @@
         <b-col cols="12" md="5">
           <h2>Våre viktigste kanaler</h2>
           <p class="description">
-            Bruk disse kanalene hvis du ikke vet hvem du skal kontakte i Nettverksdagen.
+            Bruk disse kanalene hvis du ikke vet hvem du skal kontakte i Nettverksdagene.
             Lenger ned på siden finnes det en oversikt over kontaktpersoner og deres stillinger hvis du heller vil
             kontakte noen direkte.
           </p>
@@ -20,7 +20,7 @@
             <tr>
               <td class="align-top">
                 <h3>Styret</h3>
-                <b-link href="mailto:styret@nvdagen.no">styret@nvdagen.no</b-link>
+                <b-link href="mailto:styret@nettverksdagene.no">styret@nettverksdagene.no</b-link>
               </td>
               <td>
                 <p>
@@ -32,11 +32,11 @@
             <tr>
               <td class="align-top">
                 <h3>Bedrift</h3>
-                <b-link href="mailto:bedrift@nvdagen.no">bedrift@nvdagen.no</b-link>
+                <b-link href="mailto:bedrift@nettverksdagene.no">bedrift@nettverksdagene.no</b-link>
               </td>
               <td>
                 <p>
-                  Ønsker din bedrift å vise seg fram på Nettverksdagen,
+                  Ønsker din bedrift å vise seg fram på Nettverksdagene,
                   har dere allerede en avtale med oss,
                   eller har dere andre henvendelser angående bedriftspotlight, bedriftpresentasjon, stand osv,
                   ta kontakt med bedriftgruppa.
@@ -47,7 +47,7 @@
             <tr>
               <td class="align-top">
                 <h3>Sponsor</h3>
-                <b-link href="mailto:sponsor@nvdagen.no">sponsor@nvdagen.no</b-link>
+                <b-link href="mailto:sponsor@nettverksdagene.no">sponsor@nettverksdagene.no</b-link>
               </td>
               <td>
                 <p>
