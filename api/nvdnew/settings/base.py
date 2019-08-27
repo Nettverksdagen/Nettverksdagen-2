@@ -68,8 +68,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = (
-    'localhost:8080',
-    '127.0.0.1:8080',
+    'https://localhost:8080',
+    'https://127.0.0.1:8080',
 )
 
 CORS_ORIGIN_ALLOW_ALL = True
