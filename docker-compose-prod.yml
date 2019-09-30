@@ -57,11 +57,6 @@ services:
     volumes:
       - ./nginx/config:/config # Todo: Can this volume include the below?
       - frontend-files:/frontend
-  ghost:
-    build: ./ghost
-    restart: "always"
-    volumes:
-      - ./ghost/data:/var/lib/ghost/content/data
   deploy:
     build: ./deploy
     restart: "always"
