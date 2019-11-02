@@ -9,12 +9,6 @@
           </span>
           <hr>
         </li>
-        <li>
-          <span v-on:click="menuIsOpen = false">
-            <a href="https://blogg.nvdagen.no">Blogg</a>
-          </span>
-          <hr>
-        </li>
       </ul>
     </div>
     <div class="overlay" v-if="menuIsOpen" v-on:click="menuIsOpen = false"></div>
