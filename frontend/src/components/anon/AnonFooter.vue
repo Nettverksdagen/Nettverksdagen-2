@@ -31,7 +31,7 @@
           <h5>Følg oss</h5>
           <ul class="list-inline social-icons">
             <li class="list-inline-item">
-              <a href="https://www.facebook.com/nvdagen" target="_blank">
+              <a href="https://www.facebook.com/nvdagene/" target="_blank">
                 <font-awesome-icon :icon="{ prefix: 'fab', iconName: 'facebook' }"/>
               </a>
             </li>
@@ -41,8 +41,8 @@
               </a>
             </li>
             <li class="list-inline-item">
-              <a href="https://twitter.com/hashtag/nettverksdagene" target="_blank">
-                <font-awesome-icon :icon="{ prefix: 'fab', iconName: 'twitter-square' }"/>
+              <a href="https://www.instagram.com/nettverksdagen_ntnu/" target="_blank">
+                <font-awesome-icon :icon="{ prefix: 'fab', iconName: 'instagram' }"/>
               </a>
             </li>
           </ul>
@@ -55,8 +55,8 @@
 <script>
 import Content from '@/components/common/Content.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faFacebook, faLinkedin, faTwitterSquare } from '@fortawesome/free-brands-svg-icons'
-library.add(faFacebook, faLinkedin, faTwitterSquare)
+import { faFacebook, faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons'
+library.add(faFacebook, faLinkedin, faInstagram)
 export default {
   name: 'AnonFooter',
   components: {
