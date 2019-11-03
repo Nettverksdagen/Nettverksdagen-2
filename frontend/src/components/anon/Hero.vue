@@ -4,10 +4,12 @@
       <div class="hero-content">
         <HeroText class="hero-txt"/>
         <div class="hexes">
-          <HeroHexBox hex-title="Ballongslipp" hex-icon="balloon.svg">
-            Det blir ballongslipp der du kan vinne flotte premier!
-            I tillegg har vi mange andre konkurranser i løpet av dagen.
-          </HeroHexBox>
+          <b-link :to="'/program'">
+            <HeroHexBox hex-title="Ballongslipp" hex-icon="balloon.svg">
+              Det blir ballongslipp der du kan vinne flotte premier!
+              I tillegg har vi mange andre konkurranser i løpet av dagen.
+            </HeroHexBox>
+          </b-link>
           <b-link :to="'/program'">
             <HeroHexBox hex-title="Stands" hex-icon="transfer.svg">
               Hele Glassgården fylles med stands! Her har du mulighet for å komme i kontakt med mange spennende bedrifter.
