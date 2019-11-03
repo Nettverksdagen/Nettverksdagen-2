@@ -43,8 +43,8 @@ services:
     environment:
       - PUID=1013
       - GUID=1015
-      - EMAIL=it@nvdagen.no
-      - URL=nvdagen.no
+      - EMAIL=it@nettverksdagene.no
+      - URL=nettverksdagene.no
       - SUBDOMAINS=www, blogg
       - TZ=Europe/Oslo
       - VALIDATION=http

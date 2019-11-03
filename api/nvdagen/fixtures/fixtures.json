@@ -130,7 +130,7 @@
         "pk": 1,
         "fields": {
             "name": "Magnus Carlsen",
-            "email": "carlsen@nvdagen.no",
+            "email": "carlsen@nettverksdagene.no",
             "photo_uri": "static/carlsen.jpg",
             "team": "Styret",
             "position": "Leder"
@@ -141,7 +141,7 @@
         "pk": 2,
         "fields": {
             "name": "Barack Obama",
-            "email": "obama@nvdagen.no",
+            "email": "obama@nettverksdagene.no",
             "photo_uri": "static/obama.jpg",
             "team": "Styret",
             "position": "Nestleder"
@@ -152,7 +152,7 @@
         "pk": 3,
         "fields": {
             "name": "Steve Jobs",
-            "email": "jobs@nvdagen.no",
+            "email": "jobs@nettverksdagene.no",
             "photo_uri": "static/jobs.jpg",
             "team": "Styret",
             "position": "Sponsoransvarlig"
@@ -163,7 +163,7 @@
         "pk": 4,
         "fields": {
             "name": "Gunnar Bovim",
-            "email": "bovim@nvdagen.no",
+            "email": "bovim@nettverksdagene.no",
             "photo_uri": "static/bovim.jpg",
             "team": "Styret",
             "position": "IT-ansvarlig"
@@ -174,7 +174,7 @@
         "pk": 5,
         "fields": {
             "name": "Jan Tommy Gravdahl",
-            "email": "jantommy@nvdagen.no",
+            "email": "jantommy@nettverksdagene.no",
             "photo_uri": "static/jantommy.jpg",
             "team": "Styret",
             "position": "Bedriftansvarlig"
@@ -185,7 +185,7 @@
         "pk": 6,
         "fields": {
             "name": "Jan Tommy Gravdahl",
-            "email": "jantommy@nvdagen.no",
+            "email": "jantommy@nettverksdagene.no",
             "photo_uri": "static/jantommy.jpg",
             "team": "Bedrift",
             "position": "Leder"
@@ -196,7 +196,7 @@
         "pk": 7,
         "fields": {
             "name": "Elon Musk",
-            "email": "musk@nvdagen.no",
+            "email": "musk@nettverksdagene.no",
             "photo_uri": "static/musk.jpg",
             "team": "Styret",
             "position": "Markedsf\u00f8ringsansvarlig"
@@ -207,7 +207,7 @@
         "pk": 8,
         "fields": {
             "name": "Albert Einstein",
-            "email": "einstein@nvdagen.no",
+            "email": "einstein@nettverksdagene.no",
             "photo_uri": "static/einstein.jpg",
             "team": "Bedrift",
             "position": "Medlem"
@@ -218,7 +218,7 @@
         "pk": 9,
         "fields": {
             "name": "Marit Bj\u00f8rgen",
-            "email": "marit@nvdagen.no",
+            "email": "marit@nettverksdagene.no",
             "photo_uri": "static/marit.jpg",
             "team": "Bedrift",
             "position": "Medlem"
@@ -229,7 +229,7 @@
         "pk": 10,
         "fields": {
             "name": "Jo Nesb\u00f8",
-            "email": "nesbo@nvdagen.no",
+            "email": "nesbo@nettverksdagene.no",
             "photo_uri": "static/nesbo.jpg",
             "team": "Styret",
             "position": "Sekret\u00e6r"
