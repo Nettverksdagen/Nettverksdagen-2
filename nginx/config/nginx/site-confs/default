@@ -6,13 +6,13 @@ server {
 
 server {
     listen 80;
-    server_name nvdagen.no;
+    server_name nvdagen.no www.nvdagen.no;
     return 301 https://nettverksdagene.no$request_uri;
 }
 
 server {
     listen 443 ssl;
-    server_name nvdagen.no;
+    server_name nvdagen.no www.nvdagen.no;
     return 301 https://nettverksdagene.no$request_uri;
 }
 
