@@ -41,8 +41,20 @@ docker exec -ti nettverksdagen-2_fileserver_1_c27e85b4cd47 ls
 ```
 
 ### Webhooks
-to setup the webhooks export the environmental variable `WEBHOOK_SECRET=${secret webhook imported from github}`
-If you want the server to follow multiple branches, setup `WEBHOOK_BRANCH_LIST={master,your_branch}`
+To setup the webhooks export the following environmental variables: 
+```bash
+WEBHOOK_SECRET=${secret webhook imported from github}
+```
+Add the webhooks here:
+```bash
+WEBHOOK_HOOKS_DIR=${imported hook}
+```
+
+If you want the server to follow multiple branches, setup:
+```bash
+WEBHOOK_BRANCH_LIST=${master,your_branch}
+```
+
 
 
 ### Volumes
