@@ -93,3 +93,7 @@ server {
     #    deny  all;
     #}
 }
+
+location /_webhook {
+        proxy_pass http://webhook:8000/;
+    }

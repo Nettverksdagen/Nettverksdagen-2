@@ -63,5 +63,18 @@ services:
     restart: "always"
     environment:
       - GITHUB_WEBHOOKS_SECRET=${GITHUB_WEBHOOKS_SECRET}
+
+  webhook:
+        restart: unless-stopped
+        image: webhooks/docker-webhook
+        volumes:
+            - ./:/code
+            - /var/run/docker.sock:/var/run/docker.sock
+        environment:
+            - WEBHOOK_SECRET=${WEBHOOK_SECRET}
+            - WEBHOOK_HOOKS_DIR=/code/hooks
+            - WEBHOOK_BRANCH_LIST=master
+        expose:
+            - 8000
 volumes:
   frontend-files:
