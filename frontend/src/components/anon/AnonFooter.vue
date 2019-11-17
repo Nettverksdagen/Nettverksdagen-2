@@ -41,7 +41,7 @@
               </a>
             </li>
             <li class="list-inline-item">
-              <a href="https://www.instagram.com/nettverksdagen_ntnu/" target="_blank">
+              <a href="https://www.instagram.com/nettverksdagene_ntnu/" target="_blank">
                 <font-awesome-icon :icon="{ prefix: 'fab', iconName: 'instagram' }"/>
               </a>
             </li>
