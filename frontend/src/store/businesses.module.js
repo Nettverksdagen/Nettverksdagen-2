@@ -21,9 +21,11 @@ const actions = {
 const getters = {
   levels: state => {
     let levels = [
-      {level: 'Gull', businesses: []},
-      {level: 'Sølv', businesses: []},
-      {level: 'Bronse', businesses: []}
+      {level: 'Hovedsamarbeidspartner', levelHeader: 'Hovedsamarbeidspartner', businesses: []},
+      {level: 'Samarbeidspartner', levelHeader: 'Samarbeidspartnere', businesses: []},
+      {level: 'Gull', levelHeader: 'Bedrifter du kan møte på stand', businesses: []},
+      {level: 'Sølv', levelHeader: '', businesses: []},
+      {level: 'Bronse', levelHeader: '', businesses: []}
     ]
     for (let i = 0; i < state.all.length; i++) {
       for (let j = 0; j < levels.length; j++) {

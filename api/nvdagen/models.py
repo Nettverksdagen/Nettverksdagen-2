@@ -16,11 +16,15 @@ LISTINGTYPECHOICE = (
     (OTHER_POSITION, OTHER_POSITION)
 )
 
+MAIN_PARTNER = 'Hovedsamarbeidspartner'
+PARTNER = 'Samarbeidspartner'
 GOLD = 'Gull'
 SILVER = 'Sølv'
 BRONZE = 'Bronse'
 
 LEVELTYPECHOICE = (
+    (MAIN_PARTNER, MAIN_PARTNER),
+    (PARTNER, PARTNER),
     (GOLD, GOLD),
     (SILVER, SILVER),
     (BRONZE, BRONZE)

@@ -1,9 +1,9 @@
 <template>
   <div class="businesses mt-5">
     <Content>
-      <h2 class="text-center font-weight-bold">Bedrifter du kan møte på stand</h2>
       <div v-for="(level, index) in levels" :key="index">
-        <b-row>
+        <h2 class="text-center font-weight-bold">{{ levels[index].levelHeader }}</h2>
+        <b-row class="justify-content-center">
           <Business v-for="(business, index) in level.businesses"
                     :key="index"
                     :logo_src="business.logo_uri"
@@ -37,6 +37,8 @@ export default {
     }
   },
   sizes: {
+    'Hovedsamarbeidspartner': 'big',
+    'Samarbeidspartner': 'big',
     'Gull': 'big',
     'Sølv': 'medium',
     'Bronse': 'small'
