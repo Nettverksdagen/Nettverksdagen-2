@@ -67,3 +67,9 @@ class Business(BusinessWithLogo):
 
 class Sponsor(BusinessWithLogo):
     id = models.AutoField(primary_key=True)
+
+class Form(models.Model):
+    id = models.AutoField(primary_key=True)
+    external_url = models.CharField(max_length=250)
+    internal_url = models.CharField(max_length=250)
+    iframe_height = models.CharField(max_length=250)

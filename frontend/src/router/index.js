@@ -13,6 +13,8 @@ import ListingAdminView from '@/views/admin/ListingAdminView.vue'
 import BusinessAdminView from '@/views/admin/BusinessAdminView.vue'
 import SponsorAdminView from '@/views/admin/SponsorAdminView.vue'
 import TeamMemberAdminView from '@/views/admin/TeamMemberAdminView.vue'
+import FormView from '@/views/anon/FormView'
+import FormAdminView from '@/views/admin/FormAdminView.vue'
 
 Vue.use(Router)
 
@@ -53,6 +55,12 @@ export default new Router({
           name: 'Contact',
           component: ContactView,
           meta: {title: 'Kontakt oss'}
+        },
+        {
+          path: 'skjema/:form_internal_url',
+          name: 'Form',
+          component: FormView,
+          meta: {title: 'Skjema'}
         }
       ]
     },
@@ -96,6 +104,12 @@ export default new Router({
           name: 'SponsorAdmin',
           component: SponsorAdminView,
           meta: {title: 'Rediger sponsorer'}
+        },
+        {
+          path: 'skjemaer',
+          name: 'FormAdmin',
+          component: FormAdminView,
+          meta: {title: 'Rediger skjemaer'}
         }
       ]
     },

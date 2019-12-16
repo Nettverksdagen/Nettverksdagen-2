@@ -75,6 +75,11 @@ export default {
           name: 'Sponsorer',
           url: this.$router.resolve({name: 'SponsorAdmin'}).href,
           icon: 'cui-dollar'
+        },
+        {
+          name: 'Skjemaer',
+          url: this.$router.resolve({name: 'FormAdmin'}).href,
+          icon: 'cui-dollar'
         }
       ]
     }
