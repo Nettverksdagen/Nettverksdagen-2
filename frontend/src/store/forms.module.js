@@ -21,7 +21,6 @@ const actions = {
 const getters = {
   // Get a form by the form's internal url
   form: (state) => (internalUrl) => {
-    console.log(internalUrl)
     for (let i = 0; i < state.all.length; i++) {
       if (state.all[i].internal_url === internalUrl) {
         return state.all[i]
