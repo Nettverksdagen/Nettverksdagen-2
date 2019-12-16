@@ -4,19 +4,26 @@
     :sm="$options.colSizes[colSize][1]"
     :md="$options.colSizes[colSize][2]"
     :class="'business ' + colSize">
-    <a :href="href" target="_blank" rel="noopener noreferrer">
+    <div class="businessContainer" v-b-modal="'businessText' + id">
       <b-img fluid :src="fileserverHost + '/thumb/512/' + logo_src"></b-img>
-    </a>
+      <b-button class="businessTextButton">
+        Les mer om {{ name }}
+      </b-button>
+      <b-modal :id="'businessText' + id" :title="name" hide-footer>
+        <p class="my-4">{{ text }}</p>
+      </b-modal>
+    </div>
   </b-col>
 </template>
 
 <script>
 export default {
   name: 'Business',
-  props: ['logo_src', 'href', 'colSize'],
+  props: ['logo_src', 'href', 'text', 'id', 'name', 'colSize'],
   data () {
     return {
-      fileserverHost: process.env.VUE_APP_FILESERVER_HOST
+      fileserverHost: process.env.VUE_APP_FILESERVER_HOST,
+      showBusinessTextButton: false
     }
   },
   colSizes: {
@@ -28,6 +35,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .businessContainer:hover .businessTextButton {
+    visibility:visible;
+  }
+  .businessTextButton {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    opacity:0.9;
+    visibility:hidden;
+  }
   .business {
     transition: transform 0.2s;
 
