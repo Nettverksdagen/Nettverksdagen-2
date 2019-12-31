@@ -63,6 +63,7 @@ class BusinessWithLogo(models.Model):
 class Business(BusinessWithLogo):
     id = models.AutoField(primary_key=True)
     level = models.CharField(max_length=250, choices=LEVELTYPECHOICE, default=GOLD)
+    text = models.TextField(max_length=1000)
 
 
 class Sponsor(BusinessWithLogo):

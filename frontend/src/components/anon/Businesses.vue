@@ -8,6 +8,9 @@
                     :key="index"
                     :logo_src="business.logo_uri"
                     :href="business.website_url"
+                    :text="business.text"
+                    :id="business.id"
+                    :name="business.name"
                     :colSize="$options.sizes[business.level]">
           </Business>
         </b-row>

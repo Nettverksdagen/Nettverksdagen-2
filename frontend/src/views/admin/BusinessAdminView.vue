@@ -36,6 +36,13 @@
                 </div>
               </div>
             </b-row>
+            <b-row>
+              <div class="col-12">
+                <b-form-group label="Tekst" label-for="business-name-input">
+                  <b-form-textarea v-model="business.text" id="business-text-textarea" required placeholder="Tekst for å presentere bedriften :)" ></b-form-textarea>
+                </b-form-group>
+              </div>
+              </b-row>
             <b-button type="submit" size="md" variant="success" v-if="!editing">Legg ut bedriften</b-button>
             <b-button type="submit" size="md" variant="primary" v-if="editing">Endre bedrift</b-button>
             <b-button v-on:click="abortEdit()" size="md" variant="secondary" v-if="editing">Avbryt</b-button>
@@ -86,6 +93,7 @@ export default {
       fields: [
         'id', { key: 'name', label: 'Name' }, { key: 'logo_uri', label: 'Logo Uri' },
         { key: 'website_url', label: 'Website Url' }, { key: 'level', label: 'Level' },
+        { key: 'text', label: 'Text' },
         { key: 'edit', label: '' }
       ],
       business: {
