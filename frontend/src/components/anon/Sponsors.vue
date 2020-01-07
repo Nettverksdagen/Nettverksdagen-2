@@ -7,7 +7,7 @@
             <b-row>
               <b-col cols="12" md="6" class="sponsor-banner-text align-middle">
                 <h3 class="font-weight-bold">Takk til Kjeldsberg Kaffe!</h3>
-                <span>Vi takker Kjeldsberg Kaffe for årets forsyning av kaffe under hele Nettverksdagen 2019!</span>
+                <span>Vi takker Kjeldsberg Kaffe for årets forsyning av kaffe under hele Nettverksdagen 2020!</span>
               </b-col>
               <b-col cols="12" md="6" class="text-center">
                 <img class="logo-kjeldsberg float-md-right" src="@/assets/kjeldsberg.png">
