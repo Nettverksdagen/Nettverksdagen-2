@@ -2,7 +2,7 @@
     <div class="sponsors mt-5">
       <Content>
         <h2 class="text-center font-weight-bold">Våre sponsorer</h2>
-        <div class="sponsor-banner">
+        <div class="sponsor-banner kjeldsberg-banner">
           <a href="http://kjeldsbergkaffe.no/" target="_blank" rel="noopener noreferrer">
             <b-row>
               <b-col cols="12" md="6" class="sponsor-banner-text align-middle">
@@ -11,6 +11,21 @@
               </b-col>
               <b-col cols="12" md="6" class="text-center">
                 <img class="logo-kjeldsberg float-md-right" src="@/assets/kjeldsberg.png">
+              </b-col>
+            </b-row>
+          </a>
+        </div>
+        <div class="sponsor-banner poption-banner">
+          <a href="http://poption.com/" target="_blank" rel="noopener noreferrer">
+            <b-row>
+              <b-col cols="12" class="sponsor-banner-text align-middle">
+                <h3 class="font-weight-bold">Nettverksdagene 2020 arrangeres i samarbeid med Poption!</h3>
+              </b-col>
+              <b-col cols="12" lg="6" class="sponsor-banner-text align-middle no-padding-top">
+                <span>Poption setter deg i kontakt med de mest interessante bedriftene &mdash; fra startups til veletablerte selskaper. Lag bruker på poption.com og finn drømmejobben!</span>
+              </b-col>
+              <b-col cols="12" lg="6" class="text-center no-padding-top">
+                <img class="logo-poption float-lg-right" src="@/assets/poption.png">
               </b-col>
             </b-row>
           </a>
@@ -45,7 +60,6 @@ export default {
     font-size: 2.5rem;
   }
   .sponsor-banner {
-    background-color: #ffd600;
     margin: 2rem;
     border-radius: 0.5rem;
     box-shadow: 0 2px 5px rgba(0,0,0,0.16), 0 2px 5px rgba(0,0,0,0.15);
@@ -94,6 +108,15 @@ export default {
     }
 
   }
+  .no-padding-top {
+    padding-top:0;
+  }
+  .kjeldsberg-banner {
+    background-color: #ffd600;
+  }
+  .poption-banner {
+    background-color: #fa6352;
+  }
   .logo-kjeldsberg {
     height: 11rem;
     padding: 0.5rem 3rem 1rem 3rem;
@@ -101,6 +124,15 @@ export default {
     @media(max-width: 576px) {
       height: 7.5rem;
       padding: 0 1rem 1rem 1rem;
+    }
+  }
+  .logo-poption {
+    height: 5rem;
+    padding: 0.5rem 3rem 1rem 3rem;
+
+    @media(max-width: 620px) {
+      height: 3rem;
+      padding: 0.5rem 1rem 1rem 1rem;
     }
   }
 </style>
