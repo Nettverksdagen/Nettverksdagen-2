@@ -52,6 +52,6 @@ export default {
 <style lang="scss" scoped>
   h2 {
     font-size: 2.5rem;
-		overflow-wrap: break-word;
+    overflow-wrap: break-word;
   }
 </style>
