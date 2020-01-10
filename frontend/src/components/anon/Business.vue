@@ -12,7 +12,9 @@
       <b-modal :id="'businessText' + id" :title="name" hide-footer>
         <div class="businessText">
           <p>{{ text }}</p>
+          <a :href="href" target="_blank" rel="noopener noreferrer">Gå til {{ name }} sin nettside</a>
         </div>
+        <b-img fluid :src="fileserverHost + '/thumb/512/' + logo_src"></b-img>
       </b-modal>
     </div>
   </b-col>
