@@ -2,7 +2,7 @@
   <div class="businesses mt-5">
     <Content>
       <div v-for="(level, index) in levels" :key="index">
-        <h2 class="text-center font-weight-bold">{{ levels[index].levelHeader }}</h2>
+        <h2 class="text-center font-weight-bold" v-html="levels[index].levelHeader"></h2>
         <b-row class="justify-content-center">
           <Business v-for="(business, index) in level.businesses"
                     :key="index"
