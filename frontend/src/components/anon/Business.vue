@@ -10,7 +10,9 @@
         Les mer om {{ name }}
       </b-button>
       <b-modal :id="'businessText' + id" :title="name" hide-footer>
-        <p class="my-4">{{ text }}</p>
+        <div class="businessText">
+          <p>{{ text }}</p>
+        </div>
       </b-modal>
     </div>
   </b-col>
@@ -91,5 +93,8 @@ export default {
         padding: 1.5rem 3.25rem;
       }
     }
+  }
+  .businessText {
+    white-space: pre-line;
   }
 </style>
