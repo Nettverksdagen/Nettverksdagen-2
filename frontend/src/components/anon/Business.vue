@@ -4,19 +4,14 @@
     :sm="$options.colSizes[colSize][1]"
     :md="$options.colSizes[colSize][2]"
     :class="'business ' + colSize">
-    <div class="businessContainer" v-b-modal="'businessText' + id">
-      <b-img fluid :src="fileserverHost + '/thumb/512/' + logo_src"></b-img>
-      <b-button class="businessTextButton">
-        Les mer om {{ name }}
-      </b-button>
-      <b-modal :id="'businessText' + id" :title="name" hide-footer>
-        <div class="businessText">
-          <p>{{ text }}</p>
-          <a :href="href" target="_blank" rel="noopener noreferrer">Gå til {{ name }} sin nettside</a>
-        </div>
+    <router-link :to="{name: 'Business', params: { businessReferer: nameUrlEncoded }}">
+      <div class="businessContainer">
         <b-img fluid :src="fileserverHost + '/thumb/512/' + logo_src"></b-img>
-      </b-modal>
-    </div>
+        <b-button class="businessTextButton">
+          Les mer om {{ name }}
+        </b-button>
+      </div>
+    </router-link>
   </b-col>
 </template>
 
@@ -27,7 +22,8 @@ export default {
   data () {
     return {
       fileserverHost: process.env.VUE_APP_FILESERVER_HOST,
-      showBusinessTextButton: false
+      showBusinessTextButton: false,
+      nameUrlEncoded: this.name.replace(/\s+/g, '-').toLowerCase()
     }
   },
   colSizes: {

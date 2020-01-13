@@ -15,6 +15,7 @@ import SponsorAdminView from '@/views/admin/SponsorAdminView.vue'
 import TeamMemberAdminView from '@/views/admin/TeamMemberAdminView.vue'
 import FormView from '@/views/anon/FormView'
 import FormAdminView from '@/views/admin/FormAdminView.vue'
+import BusinessDetails from '@/components/anon/BusinessDetails.vue'
 
 Vue.use(Router)
 
@@ -30,7 +31,15 @@ export default new Router({
           path: '',
           name: 'Home',
           component: HomeView,
-          meta: {title: 'Nettverksdagen'}
+          meta: {title: 'Nettverksdagen'},
+          children: [
+            {
+              path: 'bedrift/:businessReferer',
+              name: 'Business',
+              component: BusinessDetails,
+              meta: {title: 'Nettverksdagen'}
+            }
+          ]
         },
         {
           path: 'program',

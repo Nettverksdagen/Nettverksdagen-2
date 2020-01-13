@@ -17,6 +17,7 @@
         <hr>
       </div>
     </Content>
+    <router-view />
   </div>
 </template>
 
