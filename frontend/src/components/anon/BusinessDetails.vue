@@ -37,7 +37,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .dude {
-    width:100%;
+  .businessText {
+    white-space: pre-line;
   }
 </style>

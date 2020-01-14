@@ -92,7 +92,4 @@ export default {
       }
     }
   }
-  .businessText {
-    white-space: pre-line;
-  }
 </style>
