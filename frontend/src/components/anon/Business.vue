@@ -22,14 +22,18 @@ export default {
   data () {
     return {
       fileserverHost: process.env.VUE_APP_FILESERVER_HOST,
-      showBusinessTextButton: false,
-      nameUrlEncoded: this.name.replace(/\s+/g, '-').toLowerCase()
+      showBusinessTextButton: false
     }
   },
   colSizes: {
     'big': [6, 4, 4],
     'medium': [4, 3, 3],
     'small': [3, 2, 2]
+  },
+  computed: {
+    nameUrlEncoded: function () {
+      return this.name.replace(/\s+/g, '-').toLowerCase()
+    }
   }
 }
 </script>
