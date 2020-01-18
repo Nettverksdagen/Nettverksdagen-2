@@ -1,7 +1,7 @@
 <template>
   <b-modal @hide="hideModal" v-model="showModal" :id="'businessText' + business.id" :title="business.name" hide-footer>
     <div class="businessText">
-      <p>{{ business.text }}</p>
+      <p v-html="business.text"></p>
       <a :href="business.website_url" target="_blank" rel="noopener noreferrer">Gå til {{ business.name }} sin nettside</a>
     </div>
     <b-img fluid :src="fileserverHost + '/thumb/512/' + business.logo_uri"></b-img>
