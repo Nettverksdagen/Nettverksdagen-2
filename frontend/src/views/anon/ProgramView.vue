@@ -4,10 +4,65 @@
         <h1 class="text-center">Program</h1>
         <p class="text-center description mt-3 mb-2">Dette er det foreløpige programmet for Nettverksdagene 2020.</p>
         <h4 class="text-center font-weight-bold"><a href="#stand-map-header">Se standkart her!</a></h4>
+        <h3 class="font-weight-bold">28. januar</h3>
+        <div class="timeline">
+          <ProgramItem time-start="17:15" place="EL1, Gamle Elektro">
+            <h3 class="font-weight-bold">Bedrift&shy;presentasjon med Honeywell</h3>
+            <p class="description">Med bespisning på Graffi Grill.</p>
+          </ProgramItem>
+        </div>
         <h3 class="font-weight-bold">29. januar</h3>
         <div class="timeline">
-          <ProgramItem time-start="">
-            <h3 class="font-weight-bold">Nettverksdagene åpner</h3>
+          <ProgramItem time-start="09:15" time-end="10:15" place="EL6, Gamle Elektro">
+            <h3 class="font-weight-bold">Frokost&shy;presentasjon med Sopra Steria</h3>
+            <p class="description">Med servering av baguetter og kaffe.</p>
+          </ProgramItem>
+          <ProgramItem time-start="10:00" place="Glassgården, Elektrobygget">
+            <h3 class="font-weight-bold">Stand&shy;området åpner!</h3>
+          </ProgramItem>
+          <ProgramItem time-start="12:10" place="Glassgården, Elektrobygget">
+            <h3 class="font-weight-bold">Ballong&shy;slipp!</h3>
+          </ProgramItem>
+          <ProgramItem time-start="12:15" time-end="13:00" place="KJL1, Kjelhuset">
+            <h3 class="font-weight-bold">Bedrift&shy;presentasjon med Data Respons R&D</h3>
+          </ProgramItem>
+          <ProgramItem time-start="14:00" place="Glassgården, Elektrobygget">
+            <h3 class="font-weight-bold">Premie&shy;utdeling!</h3>
+          </ProgramItem>
+          <ProgramItem time-start="14:15" time-end="15:00" place="EL1, Gamle Elektro">
+            <h3 class="font-weight-bold">Bedrift&shy;presentasjon med Imatis</h3>
+          </ProgramItem>
+          <ProgramItem time-start="17:15" place="EL1, Gamle Elektro">
+            <h3 class="font-weight-bold">Bedrift&shy;presentasjon med Bekk</h3>
+            <p class="description">Med bespisning etter bedriftpresentasjonen.</p>
+          </ProgramItem>
+        </div>
+        <h3 class="font-weight-bold">30. januar</h3>
+        <div class="timeline">
+          <ProgramItem time-start="09:15" time-end="10:15" place="EL5, Gamle Elektro">
+            <h3 class="font-weight-bold">Frokost&shy;presentasjon med National Oilwell Varco</h3>
+            <p class="description">Med servering av baguetter og kaffe.</p>
+          </ProgramItem>
+          <ProgramItem time-start="10:00" place="Glassgården, Elektrobygget">
+            <h3 class="font-weight-bold">Stand&shy;området åpner</h3>
+            <p class="description">Goodiebags til de første som kommer innom!</p>
+          </ProgramItem>
+          <ProgramItem time-start="11:15" time-end="12:00" place="S8, Stripa (Sentralbygg 2)">
+            <h3 class="font-weight-bold">Lønsj&shy;presentasjon med Maritime Robotics</h3>
+            <p class="description">Med servering av baguetter og kaffe.</p>
+          </ProgramItem>
+          <ProgramItem time-start="12:10" place="Glassgården, Elektrobygget">
+            <h3 class="font-weight-bold">Ballong&shy;slipp!</h3>
+          </ProgramItem>
+          <ProgramItem time-start="12:15" time-end="13:00" place="S1, Stripa (Sentralbygg 1)">
+            <h3 class="font-weight-bold">Bedrift&shy;presentasjon med Data Respons R&D</h3>
+          </ProgramItem>
+          <ProgramItem time-start="14:00" place="Glassgården, Elektrobygget">
+            <h3 class="font-weight-bold">Premie&shy;utdeling!</h3>
+          </ProgramItem>
+          <ProgramItem time-start="14:15" time-end="17:00" place="EL6, Gamle Elektro">
+            <h3 class="font-weight-bold">Kryptografi-skattejakt med DNB</h3>
+            <p class="description">Med servering av baguetter og mineralvann.</p>
           </ProgramItem>
         </div>
       </div>
