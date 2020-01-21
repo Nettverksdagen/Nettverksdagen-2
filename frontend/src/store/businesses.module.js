@@ -36,6 +36,31 @@ const getters = {
       }
     }
     return levels
+  },
+  days: state => {
+    let days = [
+      {day: 'Dag 1', dayHeader: 'Bedrifter du kan møte på stand 29. januar'},
+      {day: 'Dag 2', dayHeader: 'Bedrifter du kan møte på stand 30. januar'}
+    ]
+    for (let i = 0; i < days.length; i++) {
+      days[i]['levels'] = [
+        {level: 'Hovedsamarbeidspartner', businesses: []},
+        {level: 'Samarbeidspartner', businesses: []},
+        {level: 'Gull', businesses: []},
+        {level: 'Sølv', businesses: []},
+        {level: 'Bronse', businesses: []}
+      ]
+    }
+    for (let i = 0; i < state.all.length; i++) {
+      for (let j = 0; j < days.length; j++) {
+        for (let k = 0; k < days[j].levels.length; k++) {
+          if (state.all[i].level === days[j].levels[k].level && (state.all[i].days === days[j].day || state.all[i].days === 'Begge dager')) {
+            days[j].levels[k].businesses.push(state.all[i])
+          }
+        }
+      }
+    }
+    return days
   }
 }
 

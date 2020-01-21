@@ -23,6 +23,9 @@
                 <b-form-group label="Link til nettside (må starte med https://)" label-for="website-url-input">
                   <b-form-input type="url" v-model="business.website_url" id="website-url-input" required placeholder="Skriv inn link" @input="validateWebsiteUrl"></b-form-input>
                 </b-form-group>
+                <b-form-group label="Dager på stand" label-for="business-days-input">
+                  <b-form-select v-model="business.days" :options="businessDays" id="business-days-input" required></b-form-select>
+                </b-form-group>
               </div>
               <div class="col-12 col-md-6">
                 <b-form-group label="Pakke" label-for="business-level-input">
@@ -93,6 +96,7 @@ export default {
       fields: [
         'id', { key: 'name', label: 'Name' }, { key: 'logo_uri', label: 'Logo Uri' },
         { key: 'website_url', label: 'Website Url' }, { key: 'level', label: 'Level' },
+        { key: 'days', label: 'Days' },
         { key: 'text', label: 'Text' },
         { key: 'edit', label: '' }
       ],
@@ -100,7 +104,8 @@ export default {
         name: '',
         logo_uri: '',
         website_url: '',
-        level: null
+        level: null,
+        days: 'Ingen dager'
       },
       logoFile: null,
       showImgPreview: false,
@@ -112,7 +117,8 @@ export default {
         heading: '',
         message: ''
       },
-      businessLevels: [{value: null, text: 'Velg en pakke'}]
+      businessLevels: [{value: null, text: 'Velg en pakke'}],
+      businessDays: []
     }
   },
   computed: {
@@ -129,6 +135,15 @@ export default {
   beforeCreate: function () {
     axios.options(process.env.VUE_APP_API_HOST + '/api/business/').then((response) => {
       this.$data.businessLevels = this.$data.businessLevels.concat(response.data.actions.POST.level.choices.map(
+        option => ({value: option.value, text: option.display_name})
+      ))
+    }).catch((e) => {
+      this.showAlert('error',
+        'Error ' + e.response.status + ' ' + e.response.statusText,
+        'Kunne ikke lese skjema fra tjeneren. Prøv å laste siden på nytt.')
+    })
+    axios.options(process.env.VUE_APP_API_HOST + '/api/business/').then((response) => {
+      this.$data.businessDays = this.$data.businessDays.concat(response.data.actions.POST.days.choices.map(
         option => ({value: option.value, text: option.display_name})
       ))
     }).catch((e) => {

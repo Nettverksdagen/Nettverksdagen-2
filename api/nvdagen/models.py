@@ -30,6 +30,18 @@ LEVELTYPECHOICE = (
     (BRONZE, BRONZE)
 )
 
+DAYS_NONE = 'Ingen dager'
+DAY1 = 'Dag 1'
+DAY2 = 'Dag 2'
+DAYS_BOTH = 'Begge dager'
+
+DAYSCHOICE = (
+    (DAYS_NONE, DAYS_NONE),
+    (DAY1, DAY1),
+    (DAY2, DAY2),
+    (DAYS_BOTH, DAYS_BOTH)
+)
+
 
 class Listing(models.Model):
     id = models.AutoField(primary_key=True)
@@ -64,6 +76,7 @@ class Business(BusinessWithLogo):
     id = models.AutoField(primary_key=True)
     level = models.CharField(max_length=250, choices=LEVELTYPECHOICE, default=GOLD)
     text = models.TextField()
+    days = models.CharField(max_length=250, choices=DAYSCHOICE, default=DAYS_NONE)
 
 
 class Sponsor(BusinessWithLogo):
