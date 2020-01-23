@@ -1,6 +1,6 @@
 <template>
   <div class="listing">
-    <b-link :href="listingUrl">
+    <b-link v-on:click.prevent="gotoListing(listingUrl, internalUrl)" :href="shownUrl">
     <b-list-group-item class="inside p-4 listing-item">
       <div class="side logo-container">
         <img class="logo img-responsive center-block center" :src="logoSrc">
@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  props: ['company', 'title', 'deadline', 'logoSrc', 'type', 'listingUrl', 'cities'],
+  props: ['company', 'title', 'deadline', 'logoSrc', 'type', 'listingUrl', 'cities', 'internalUrl'],
   computed: {
     formattedDeadline: function () {
       let deadDate = new Date(this.deadline)
@@ -36,6 +36,24 @@ export default {
         day: 'numeric',
         month: 'short'
       })
+    },
+    shownUrl: function () {
+      let useInternalUrl = (this.internalUrl !== '' && this.internalUrl !== null)
+      if (useInternalUrl) {
+        return '/stillinger/' + this.internalUrl
+      } else {
+        return this.listingUrl
+      }
+    }
+  },
+  methods: {
+    gotoListing (listingUrl, internalUrl) {
+      let useInternalUrl = (this.internalUrl !== '' && this.internalUrl !== null)
+      if (useInternalUrl) {
+        this.$router.push('/stillinger/' + internalUrl)
+      } else {
+        window.location.href = listingUrl
+      }
     }
   }
 }

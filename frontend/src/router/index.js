@@ -16,6 +16,7 @@ import TeamMemberAdminView from '@/views/admin/TeamMemberAdminView.vue'
 import FormView from '@/views/anon/FormView'
 import FormAdminView from '@/views/admin/FormAdminView.vue'
 import BusinessDetails from '@/components/anon/BusinessDetails.vue'
+import ListingDetails from '@/components/anon/ListingDetails.vue'
 
 Vue.use(Router)
 
@@ -51,7 +52,15 @@ export default new Router({
           path: 'stillinger',
           name: 'Listings',
           component: ListingsView,
-          meta: {title: 'Stillingsannonser'}
+          meta: {title: 'Stillingsannonser'},
+          children: [
+            {
+              path: ':listingReferer',
+              name: 'Listing',
+              component: ListingDetails,
+              meta: {title: 'Nettverksdagen'}
+            }
+          ]
         },
         {
           path: 'om',

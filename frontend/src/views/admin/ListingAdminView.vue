@@ -50,6 +50,16 @@
                 </div>
               </div>
             </b-row>
+            <b-row>
+              <div class="col-12">
+                <b-form-group label="Intern link til annonse" label-for="internal-url-input">
+                  <b-form-input v-model="listing.internal_url" id="internal-url-input" placeholder="Skriv inn intern link"></b-form-input>
+                </b-form-group>
+                <b-form-group label="Tekst" label-for="content-input">
+                  <b-form-textarea v-model="listing.content" id="content-textarea" placeholder="Eventuelt innhold i stillingsannonsen" ></b-form-textarea>
+                </b-form-group>
+              </div>
+            </b-row>
             <b-button type="submit" size="md" variant="success" v-if="!editing">Opprett annonse</b-button>
             <b-button type="submit" size="md" variant="primary" v-if="editing">Endre annonse</b-button>
             <b-button v-on:click="abortEdit()" size="md" variant="secondary" v-if="editing">Avbryt</b-button>
@@ -109,7 +119,8 @@ export default {
         'id', { key: 'name', label: 'Name' }, { key: 'company_name', label: 'Company Name' },
         { key: 'deadline', label: 'deadline' }, { key: 'logo_uri', label: 'Logo Uri' },
         { key: 'type', label: 'Type' }, { key: 'listing_url', label: 'Listing Url' },
-        { key: 'city', label: 'City' }, { key: 'edit', label: '' }
+        { key: 'city', label: 'City' }, { key: 'internal_url', label: 'Internal Url' },
+        { key: 'content', label: 'Content' }, { key: 'edit', label: '' }
       ],
       listing: {
         company_name: '',
@@ -118,7 +129,9 @@ export default {
         logo_uri: '',
         type: null,
         listing_url: '',
-        city: ''
+        city: '',
+        internal_url: '',
+        content: ''
       },
       logoFile: null,
       showImgPreview: false,

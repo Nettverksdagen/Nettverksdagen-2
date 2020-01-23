@@ -49,11 +49,13 @@
                      :logo-src="fileserverHost + '/thumb/512/' + listing.logo_uri"
                      :type="listing.type"
                      :listing-url="listing.listing_url"
-                     :cities="listing.cities"/>
+                     :cities="listing.cities"
+                     :internal-url="listing.internal_url"/>
           </b-list-group>
         </div>
       </b-row>
     </Content>
+    <router-view />
   </div>
 </template>
 

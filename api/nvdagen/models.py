@@ -52,6 +52,8 @@ class Listing(models.Model):
     type = models.CharField(max_length=250, choices=LISTINGTYPECHOICE, default=OTHER_POSITION)
     listing_url = models.CharField(max_length=250)
     city = models.CharField(max_length=250)
+    internal_url = models.CharField(max_length=250, blank=True, null=True)
+    content = models.TextField(blank=True, null=True, default='')
 
 
 class TeamMember(models.Model):
