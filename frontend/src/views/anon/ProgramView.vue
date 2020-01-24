@@ -9,6 +9,7 @@
           <ProgramItem time-start="17:15" place="EL1, Gamle Elektro">
             <h3 class="font-weight-bold">Bedrift&shy;presentasjon med Honeywell</h3>
             <p class="description">Med bespisning på Graffi Grill.</p>
+            <p class="description"><a href="https://forms.gle/SYLUEhka5ubf5WSJ9">Meld deg på her.</a></p>
           </ProgramItem>
         </div>
         <h3 class="font-weight-bold">29. januar</h3>
@@ -16,6 +17,7 @@
           <ProgramItem time-start="09:15" time-end="10:15" place="EL6, Gamle Elektro">
             <h3 class="font-weight-bold">Frokost&shy;presentasjon med Sopra Steria</h3>
             <p class="description">Med servering av baguetter og kaffe.</p>
+            <p class="description"><a href="https://forms.gle/VDMpeunrzZbKtFbU6">Meld deg på her.</a></p>
           </ProgramItem>
           <ProgramItem time-start="10:00" place="Glassgården, Elektrobygget">
             <h3 class="font-weight-bold">Stand&shy;området åpner!</h3>
@@ -25,16 +27,21 @@
           </ProgramItem>
           <ProgramItem time-start="12:15" time-end="13:00" place="KJL1, Kjelhuset">
             <h3 class="font-weight-bold">Bedrift&shy;presentasjon med Data Respons R&D</h3>
+            <p class="description">Vinn AirPods Pro!</p>
+            <p class="description"><a href="https://forms.gle/7ju4nJGncDo4u6NH9">Meld deg på her.</a></p>
           </ProgramItem>
           <ProgramItem time-start="14:00" place="Glassgården, Elektrobygget">
             <h3 class="font-weight-bold">Premie&shy;utdeling!</h3>
           </ProgramItem>
           <ProgramItem time-start="14:15" time-end="15:00" place="EL1, Gamle Elektro">
             <h3 class="font-weight-bold">Bedrift&shy;presentasjon med Imatis</h3>
+            <p class="description">Med servering av baguetter og mineralvann.</p>
+            <p class="description"><a href="https://forms.gle/dKNLYPMhMMkx5cW76">Meld deg på her.</a></p>
           </ProgramItem>
           <ProgramItem time-start="17:15" place="EL1, Gamle Elektro">
             <h3 class="font-weight-bold">Bedrift&shy;presentasjon med Bekk</h3>
-            <p class="description">Med bespisning etter bedriftpresentasjonen.</p>
+            <p class="description">Med bespisning på Olivia Solsiden.</p>
+            <p class="description"><a href="https://forms.gle/GgF1rhkCUXxNaVUP6">Meld deg på her.</a></p>
           </ProgramItem>
         </div>
         <h3 class="font-weight-bold">30. januar</h3>
@@ -42,27 +49,32 @@
           <ProgramItem time-start="09:15" time-end="10:15" place="EL5, Gamle Elektro">
             <h3 class="font-weight-bold">Frokost&shy;presentasjon med National Oilwell Varco</h3>
             <p class="description">Med servering av baguetter og kaffe.</p>
+            <p class="description"><a href="https://forms.gle/EtN6TsYHQnj6jAY68">Meld deg på her.</a></p>
           </ProgramItem>
           <ProgramItem time-start="10:00" place="Glassgården, Elektrobygget">
             <h3 class="font-weight-bold">Stand&shy;området åpner</h3>
-            <p class="description">Goodiebags til de første som kommer innom!</p>
+            <p class="description">Goodiebags til de 50 første som kommer innom!</p>
           </ProgramItem>
           <ProgramItem time-start="11:15" time-end="12:00" place="S8, Stripa (Sentralbygg 2)">
             <h3 class="font-weight-bold">Lønsj&shy;presentasjon med Maritime Robotics</h3>
             <p class="description">Med servering av baguetter og kaffe.</p>
+            <p class="description"><a href="https://forms.gle/h21ysYz8vhCHDbjWA">Meld deg på her.</a></p>
           </ProgramItem>
           <ProgramItem time-start="12:10" place="Glassgården, Elektrobygget">
             <h3 class="font-weight-bold">Ballong&shy;slipp!</h3>
           </ProgramItem>
           <ProgramItem time-start="12:15" time-end="13:00" place="S1, Stripa (Sentralbygg 1)">
             <h3 class="font-weight-bold">Bedrift&shy;presentasjon med Data Respons R&D</h3>
+            <p class="description">Vinn AirPods Pro!</p>
+            <p class="description"><a href="https://forms.gle/wzSMBTzDYdPb7rgx9">Meld deg på her.</a></p>
           </ProgramItem>
           <ProgramItem time-start="14:00" place="Glassgården, Elektrobygget">
             <h3 class="font-weight-bold">Premie&shy;utdeling!</h3>
           </ProgramItem>
           <ProgramItem time-start="14:15" time-end="17:00" place="EL6, Gamle Elektro">
             <h3 class="font-weight-bold">Kryptografi-skattejakt med DNB</h3>
-            <p class="description">Med servering av baguetter og mineralvann.</p>
+            <p class="description">Med servering av baguetter og mineralvann. Premie til vinnerne!</p>
+            <p class="description"><a href="https://forms.gle/GUyN4Cmopbx4xWHA8">Meld deg på her.</a></p>
           </ProgramItem>
         </div>
       </div>
