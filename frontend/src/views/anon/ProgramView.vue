@@ -26,8 +26,8 @@
             <h3 class="font-weight-bold">Ballong&shy;slipp!</h3>
           </ProgramItem>
           <ProgramItem time-start="12:15" time-end="13:00" place="KJL1, Kjelhuset">
-            <h3 class="font-weight-bold">Bedrift&shy;presentasjon med Data Respons R&D</h3>
-            <p class="description">Vinn AirPods Pro!</p>
+            <h3 class="font-weight-bold">Prosjekt&shy;presentasjon med Data Respons R&D Services</h3>
+            <p class="description">Bli med på Kahootkonkurranse og vinn AirPods Pro.</p>
             <p class="description"><a href="https://forms.gle/7ju4nJGncDo4u6NH9">Meld deg på her.</a></p>
           </ProgramItem>
           <ProgramItem time-start="14:00" place="Glassgården, Elektrobygget">
@@ -64,8 +64,8 @@
             <h3 class="font-weight-bold">Ballong&shy;slipp!</h3>
           </ProgramItem>
           <ProgramItem time-start="12:15" time-end="13:00" place="S1, Stripa (Sentralbygg 1)">
-            <h3 class="font-weight-bold">Bedrift&shy;presentasjon med Data Respons R&D</h3>
-            <p class="description">Vinn AirPods Pro!</p>
+            <h3 class="font-weight-bold">Prosjekt&shy;presentasjon med Data Respons R&D Services</h3>
+            <p class="description">Bli med på Kahootkonkurranse og vinn AirPods Pro.</p>
             <p class="description"><a href="https://forms.gle/wzSMBTzDYdPb7rgx9">Meld deg på her.</a></p>
           </ProgramItem>
           <ProgramItem time-start="14:00" place="Glassgården, Elektrobygget">
