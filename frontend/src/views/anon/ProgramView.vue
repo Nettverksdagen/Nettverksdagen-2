@@ -79,7 +79,10 @@
         </div>
       </div>
       <h2 id="stand-map-header" class="text-center mb-3">Standkart</h2>
-      <img class="stand-map mb-5" src="@/assets/standkart.png">
+      <h3 class="text-center mb-3">29. januar</h3>
+      <img class="stand-map mb-5" src="@/assets/standkart-dag1.png">
+      <h3 class="text-center mb-3">30. januar</h3>
+      <img class="stand-map mb-5" src="@/assets/standkart-dag2.png">
     </Content>
 </template>
 
