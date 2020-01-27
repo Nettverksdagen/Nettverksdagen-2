@@ -57,7 +57,7 @@
           </ProgramItem>
           <ProgramItem time-start="11:15" time-end="12:00" place="S8, Stripa (Sentralbygg 2)">
             <h3 class="font-weight-bold">Lønsj&shy;presentasjon med Maritime Robotics</h3>
-            <p class="description">Med servering av baguetter og kaffe.</p>
+            <p class="description">Med servering av baguetter og mineralvann.</p>
             <p class="description"><a href="https://forms.gle/NAapfFEVnDQ1tR1k7">Meld deg på her.</a></p>
           </ProgramItem>
           <ProgramItem time-start="12:10" place="Glassgården, Elektrobygget">
