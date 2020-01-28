@@ -9,7 +9,7 @@
           <ProgramItem time-start="17:15" place="EL1, Gamle Elektro">
             <h3 class="font-weight-bold">Bedrift&shy;presentasjon med Honeywell</h3>
             <p class="description">Med bespisning på Graffi Grill.</p>
-            <p class="description"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdPGtp6HsVyy_Uc9BCA7_K9EfxxN_TPKa3NfqlJb0HHsnCZew/viewform?fbclid=IwAR1CCxFy2NgBUzwGOICKMfj5S03eH57CncQgp0Gc-H0vz0BmJHfGDJJsCco">Meld deg på her.</a></p>
+            <p class="description">Dette arrangementet er fullt.</p>
           </ProgramItem>
         </div>
         <h3 class="font-weight-bold">29. januar</h3>
@@ -41,7 +41,7 @@
           <ProgramItem time-start="17:15" place="EL1, Gamle Elektro">
             <h3 class="font-weight-bold">Bedrift&shy;presentasjon med Bekk</h3>
             <p class="description">Med bespisning på Olivia Solsiden.</p>
-            <p class="description"><a href="https://docs.google.com/forms/d/e/1FAIpQLSfoDUgyp1VM91orkVs4qg8D2GGrGJzAYdV-l4SmR1XkjqhdIg/viewform?fbclid=IwAR1VnDgAF9AfmUdfz2-C0vcVdcZFL8Ep9n2_gO9S_q7EuBlVXBIXyE6tvCs">Meld deg på her.</a></p>
+            <p class="description">Dette arrangementet er fullt.</p>
           </ProgramItem>
         </div>
         <h3 class="font-weight-bold">30. januar</h3>
@@ -58,7 +58,7 @@
           <ProgramItem time-start="11:15" time-end="12:00" place="S8, Stripa (Sentralbygg 2)">
             <h3 class="font-weight-bold">Lønsj&shy;presentasjon med Maritime Robotics</h3>
             <p class="description">Med servering av baguetter og mineralvann.</p>
-            <p class="description"><a href="https://forms.gle/NAapfFEVnDQ1tR1k7">Meld deg på her.</a></p>
+            <p class="description">Dette arrangementet er fullt.</p>
           </ProgramItem>
           <ProgramItem time-start="12:10" place="Glassgården, Elektrobygget">
             <h3 class="font-weight-bold">Ballong&shy;slipp!</h3>
