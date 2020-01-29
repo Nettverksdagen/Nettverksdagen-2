@@ -71,7 +71,7 @@
           <ProgramItem time-start="14:00" place="Glassgården, Elektrobygget">
             <h3 class="font-weight-bold">Premie&shy;utdeling!</h3>
           </ProgramItem>
-          <ProgramItem time-start="14:15" time-end="17:00" place="EL6, Gamle Elektro">
+          <ProgramItem time-start="14:15" time-end="15:30" place="EL6, Gamle Elektro">
             <h3 class="font-weight-bold">Kryptografi-skattejakt med DNB</h3>
             <p class="description">Med servering av baguetter og mineralvann. Premie til vinnerne!</p>
             <p class="description"><a href="https://forms.gle/xV95hqiJRcscKZk96">Meld deg på her.</a></p>
