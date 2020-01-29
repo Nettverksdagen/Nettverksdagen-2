@@ -17,6 +17,7 @@
         <hr>
       </div>
       <div v-for="(day, dindex) in days" :key="'day' + dindex">
+        <div v-if="dindex === 1">
         <h2 class="text-center font-weight-bold" v-html="days[dindex].dayHeader"></h2>
         <b-row class="justify-content-center">
           <template v-for="(level, lindex) in days[dindex].levels">
@@ -32,6 +33,7 @@
           </template>
         </b-row>
         <hr>
+        </div>
       </div>
     </Content>
     <router-view />
