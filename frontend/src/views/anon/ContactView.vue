@@ -64,7 +64,7 @@
 
       <b-row class="mt-5">
         <b-col cols="12">
-          <h2>Kontaktpersoner</h2>
+          <h2>Kontaktpersoner for Nettverksdagene 2020</h2>
         </b-col>
       </b-row>
         <hr>
