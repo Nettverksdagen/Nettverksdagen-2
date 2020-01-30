@@ -2,7 +2,7 @@
     <Content>
       <div class="program">
         <h1 class="text-center">Program</h1>
-        <p class="text-center description mt-3 mb-2">Dette er det foreløpige programmet for Nettverksdagene 2020.</p>
+        <p class="text-center description mt-3 mb-2">Dette var programmet for Nettverksdagene 2020.</p>
         <h4 class="text-center font-weight-bold"><a href="#stand-map-header">Se standkart her!</a></h4>
         <h3 class="font-weight-bold">28. januar</h3>
         <div class="timeline">

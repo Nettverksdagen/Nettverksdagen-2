@@ -39,8 +39,8 @@ const getters = {
   },
   days: state => {
     let days = [
-      {day: 'Dag 1', dayHeader: 'Bedrifter du kan møte på stand 29. januar'},
-      {day: 'Dag 2', dayHeader: 'Bedrifter du kan møte på stand 30. januar'}
+      {day: 'Dag 1', dayHeader: 'Bedrifter du kunne møte på stand 29. januar'},
+      {day: 'Dag 2', dayHeader: 'Bedrifter du kunne møte på stand 30. januar'}
     ]
     for (let i = 0; i < days.length; i++) {
       days[i]['levels'] = [
