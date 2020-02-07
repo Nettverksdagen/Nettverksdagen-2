@@ -97,7 +97,7 @@ export default {
         'id', { key: 'name', label: 'Name' }, { key: 'logo_uri', label: 'Logo Uri' },
         { key: 'website_url', label: 'Website Url' }, { key: 'level', label: 'Level' },
         { key: 'days', label: 'Days' },
-        { key: 'text', label: 'Text' },
+        { key: 'textShort', label: 'Text' },
         { key: 'edit', label: '' }
       ],
       business: {
@@ -123,7 +123,15 @@ export default {
   },
   computed: {
     businesses: function () {
-      return this.$store.state.businesses.all
+      let b = this.$store.state.businesses.all
+      for (let i = 0; i < b.length; i++) {
+        if (b[i].text !== '') {
+          b[i].textShort = b[i].text.substr(0, 30) + '...'
+        } else {
+          b[i].textShort = ''
+        }
+      }
+      return b
     },
     numBusinesses: function () {
       return this.businesses.length

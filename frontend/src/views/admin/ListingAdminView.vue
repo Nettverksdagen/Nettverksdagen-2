@@ -124,7 +124,7 @@ export default {
         { key: 'deadline', label: 'deadline' }, { key: 'logo_uri', label: 'Logo Uri' },
         { key: 'type', label: 'Type' }, { key: 'listing_url', label: 'Listing Url' },
         { key: 'city', label: 'City' }, { key: 'internal_url', label: 'Internal Url' },
-        { key: 'content', label: 'Content' }, { key: 'edit', label: '' }
+        { key: 'contentShort', label: 'Content' }, { key: 'edit', label: '' }
       ],
       listing: {
         company_name: '',
@@ -153,7 +153,15 @@ export default {
   },
   computed: {
     listings: function () {
-      return this.$store.state.listings.all
+      let l = this.$store.state.listings.all
+      for (let i = 0; i < l.length; i++) {
+        if (l[i].content !== '') {
+          l[i].contentShort = l[i].content.substr(0, 30) + '...'
+        } else {
+          l[i].contentShort = ''
+        }
+      }
+      return l
     },
     numListings: function () {
       return this.listings.length
