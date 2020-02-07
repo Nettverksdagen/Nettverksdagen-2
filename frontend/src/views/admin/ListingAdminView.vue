@@ -54,8 +54,12 @@
               <div class="col-12">
                 <b-form-group label="Intern link til annonse" label-for="internal-url-input">
                   <b-form-input v-model="listing.internal_url" id="internal-url-input" placeholder="Skriv inn intern link"></b-form-input>
+                  <p class="text-black-50 mt-2">
+                    <span class="font-weight-bold">Merk</span>:
+                    Skriv kun inn siste del av lenken (f.eks. hvis du skriver inn "telenor", så blir linken https://nettverksdagene.no/stillinger/telenor). Hvis du skriver inn en intern link, så vil stillingsannonsen linkes til en boks med det innholdet som du spesifiserer nedenfor. Hvis du ikke skriver inn en intern link, så linkes stillingsannonsen til den vanlige linken (ovenfor).
+                  </p>
                 </b-form-group>
-                <b-form-group label="Tekst" label-for="content-input">
+                <b-form-group label="Innhold i intern stillingsannonse (kan inneholde html)" label-for="content-input">
                   <b-form-textarea v-model="listing.content" id="content-textarea" placeholder="Eventuelt innhold i stillingsannonsen" ></b-form-textarea>
                 </b-form-group>
               </div>

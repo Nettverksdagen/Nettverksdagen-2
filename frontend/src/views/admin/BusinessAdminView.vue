@@ -41,7 +41,7 @@
             </b-row>
             <b-row>
               <div class="col-12">
-                <b-form-group label="Tekst" label-for="business-name-input">
+                <b-form-group label="Tekst/info om bedrift (kan inneholde html)" label-for="business-name-input">
                   <b-form-textarea v-model="business.text" id="business-text-textarea" required placeholder="Tekst for å presentere bedriften :)" ></b-form-textarea>
                 </b-form-group>
               </div>
