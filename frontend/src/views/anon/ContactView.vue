@@ -20,7 +20,7 @@
             <tr>
               <td class="align-top">
                 <h3>Styret</h3>
-                <b-link href="mailto:styret@nettverksdagene.no">styret@nettverksdagene.no</b-link>
+                <b-link href="mailto:leder@nettverksdagene.no">leder@nettverksdagene.no</b-link>
               </td>
               <td>
                 <p>
@@ -47,7 +47,7 @@
             <tr>
               <td class="align-top">
                 <h3>Sponsor</h3>
-                <b-link href="mailto:sponsor@nettverksdagene.no">sponsor@nettverksdagene.no</b-link>
+                <b-link href="mailto:spons@nettverksdagene.no">spons@nettverksdagene.no</b-link>
               </td>
               <td>
                 <p>
