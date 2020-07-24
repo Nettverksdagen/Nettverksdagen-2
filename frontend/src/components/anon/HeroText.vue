@@ -2,7 +2,7 @@
   <div class="hero-text">
     <h1 class="mt-3 hero-header">27. Og 28. Januar 2021 i Glassgården!</h1>
     <hr class="hr-hero">
-    <h2 class="font-weight-light">Vi ønsker velkommen alle gamle og nye bedrifter og sponsorer!</h2>
+    <h2 class="font-weight-light">Vi ønsker alle gamle og nye bedrifter og sponsorer velkommen!</h2>
   </div>
 </template>
 
