@@ -9,9 +9,7 @@
         <b-col cols="12" md="5">
           <h2>Våre viktigste kanaler</h2>
           <p class="description">
-            Bruk disse kanalene hvis du ikke vet hvem du skal kontakte i Nettverksdagene.
-            Lenger ned på siden finnes det en oversikt over kontaktpersoner og deres stillinger hvis du heller vil
-            kontakte noen direkte.
+            Bruk disse kanalene til å kontakte oss i Nettverksdagene. Under finner du en oversikt over kontaktpersoner og deres stillinger.
           </p>
         </b-col>
         <b-col cols="12" md="7">
