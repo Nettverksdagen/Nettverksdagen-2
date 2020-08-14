@@ -112,6 +112,7 @@ export default {
   },
   computed: {
     teams: function () {
+      // return hardkodet teams her i stedet for det under
       return this.$store.getters['teamMembers/teams']
     },
   },
