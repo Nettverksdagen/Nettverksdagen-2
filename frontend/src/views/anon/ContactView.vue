@@ -106,7 +106,7 @@ export default {
       if(member.photo_uri){
         return member.photo_uri;
       }else{
-        return; // Add default image here;
+        return "https://d2ojdbp0769afo.cloudfront.net/fnd/v4/static/images/BlankProfile.png";
       }
     }
   },

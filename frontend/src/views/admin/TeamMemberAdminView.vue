@@ -126,7 +126,7 @@ export default {
       if(this.teamMember.photo_uri){
         return process.env.VUE_APP_FILESERVER_HOST + '/thumb/256/' + this.teamMember.photo_uri
       }else{
-        return //Default Image;
+        return "https://d2ojdbp0769afo.cloudfront.net/fnd/v4/static/images/BlankProfile.png";
       }
     }
   },
