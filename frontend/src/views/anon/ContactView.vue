@@ -76,7 +76,7 @@
             <b-card no-body>
               <b-card-body class="d-flex">
                 <div>
-                  <b-img rounded="circle" class="img-profile" :src="$options.fileServerHost + '/thumb/512/' + member.photo_uri"></b-img>
+                  <b-img rounded="circle" class="img-profile" :src="memberPhoto(member)"></b-img>
                 </div>
                 <div class="ml-3 d-flex justify-content-center flex-column">
                   <h4 class="member-name m-0">{{ member.name }}</h4>
@@ -103,10 +103,19 @@ export default {
     Content,
     Spacer
   },
+  methods: {
+    memberPhoto(member){
+      if(member.photo_uri){
+        return member.photo_uri;
+      }else{
+        return; // Add default image here;
+      }
+    }
+  },
   computed: {
     teams: function () {
       return this.$store.getters['teamMembers/teams']
-    }
+    },
   },
   fileServerHost: process.env.VUE_APP_FILESERVER_HOST
 }
