@@ -183,7 +183,6 @@ export default {
     font-size: 13px;
   }
   .img-profile {
-    align-self: center;
     height: 50px;
     width: 50px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.3);
