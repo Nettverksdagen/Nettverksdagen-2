@@ -1,8 +1,8 @@
 <template>
   <div class="hero-text">
-    <h1 class="mt-3 hero-header">Nettverksdagene 2020 er vel gjennomført</h1>
+    <h1 class="mt-3 hero-header">27. Og 28. Januar 2021 i Glassgården!</h1>
     <hr class="hr-hero">
-    <h2 class="font-weight-light">Takk til alle partnere, bedrifter og sponsorer. Vi håper å se dere igjen i 2021!</h2>
+    <h2 class="font-weight-light">Vi ønsker alle gamle og nye bedrifter og sponsorer velkommen!</h2>
   </div>
 </template>
 

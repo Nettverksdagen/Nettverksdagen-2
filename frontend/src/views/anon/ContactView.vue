@@ -9,9 +9,7 @@
         <b-col cols="12" md="5">
           <h2>Våre viktigste kanaler</h2>
           <p class="description">
-            Bruk disse kanalene hvis du ikke vet hvem du skal kontakte i Nettverksdagene.
-            Lenger ned på siden finnes det en oversikt over kontaktpersoner og deres stillinger hvis du heller vil
-            kontakte noen direkte.
+            Bruk disse kanalene til å kontakte oss i Nettverksdagene. Under finner du en oversikt over kontaktpersoner og deres stillinger.
           </p>
         </b-col>
         <b-col cols="12" md="7">
@@ -20,7 +18,7 @@
             <tr>
               <td class="align-top">
                 <h3>Styret</h3>
-                <b-link href="mailto:styret@nettverksdagene.no">styret@nettverksdagene.no</b-link>
+                <b-link href="mailto:leder@nettverksdagene.no">leder@nettverksdagene.no</b-link>
               </td>
               <td>
                 <p>
@@ -47,7 +45,7 @@
             <tr>
               <td class="align-top">
                 <h3>Sponsor</h3>
-                <b-link href="mailto:sponsor@nettverksdagene.no">sponsor@nettverksdagene.no</b-link>
+                <b-link href="mailto:spons@nettverksdagene.no">spons@nettverksdagene.no</b-link>
               </td>
               <td>
                 <p>
@@ -64,7 +62,7 @@
 
       <b-row class="mt-5">
         <b-col cols="12">
-          <h2>Kontaktpersoner for Nettverksdagene 2020</h2>
+          <h2>Kontaktpersoner for Nettverksdagene 2021</h2>
         </b-col>
       </b-row>
         <hr>
