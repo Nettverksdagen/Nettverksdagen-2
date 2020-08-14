@@ -102,62 +102,51 @@ export default {
     Spacer
   },
   methods: {
-    memberPhoto(member){
-      if(member.photo_uri){
-        return $options.fileServerHost + '/thumb/512/' + member.photo_uri;
-      }else{
-        return "https://d2ojdbp0769afo.cloudfront.net/fnd/v4/static/images/BlankProfile.png";
+    memberPhoto (member) {
+      if (member.photo_uri) {
+        return process.env.VUE_APP_FILESERVER_HOST + '/thumb/512/' + member.photo_uri
+      } else {
+        return 'https://d2ojdbp0769afo.cloudfront.net/fnd/v4/static/images/BlankProfile.png'
       }
     }
   },
   computed: {
     teams: function () {
       // use this line to get teams from database:
-      //return this.$store.getters['teamMembers/teams'] 
-      
-      
+      // return this.$store.getters['teamMembers/teams']
       let hardCodedTeams = [
         {
-          key: "styret",
-          name: "Styret",
-          members : [
-            {id: "styret1", name: "Marie Øverby", email: "leder@nettverksdagene.no", position: "Leder"},
-            {id: "styret2", name: "Magne Angvik Hovdar", email: "it@nettverksdagene.no", position: "IT-ansvarlig"},
-            {id: "styret3", name: "Helene Semb", email: "spons@nettverksdagene.no", position: " Sponsoransvarlig"},
-            {id: "styret4", name: "Nina Nyegaarden", email: "bedrift@nettverksdagene.no", position: "Bedriftsansvarlig"},
-            {id: "styret5", name: "Eskil Ould-Saada", email: "markedsfoering@nettverksdagene.no", position: "Markedsføringsansvarlig"},
-            {id: "styret6", name: "Mari Linnerud", email: "logistikk@nettverksdagene.no", position: "Logistikkansvarlig"}
-            ]
+          key: 'styret',
+          name: 'Styret',
+          members: [{id: 'styret1', name: 'Marie Øverby', email: 'leder@nettverksdagene.no', position: 'Leder'},
+            {id: 'styret2', name: 'Magne Angvik Hovdar', email: 'it@nettverksdagene.no', position: 'IT-ansvarlig'},
+            {id: 'styret3', name: 'Helene Semb', email: 'spons@nettverksdagene.no', position: 'Sponsoransvarlig'},
+            {id: 'styret4', name: 'Nina Nyegaarden', email: 'bedrift@nettverksdagene.no', position: 'Bedriftsansvarlig'},
+            {id: 'styret5', name: 'Eskil Ould-Saada', email: 'markedsfoering@nettverksdagene.no', position: 'Markedsføringsansvarlig'},
+            {id: 'styret6', name: 'Mari Linnerud', email: 'logistikk@nettverksdagene.no', position: 'Logistikkansvarlig'}]
         },
         {
-          key: "bedriftskontaker",
-          name: "Bedrift",
-          members: [
-            {id: "bedrift1", name: "Eivind Dogger", email: "eivindd@nettverksdagene.no", position: "Bedriftskontakt"},
-            {id: "bedrift2", name: "Erling Syvervseen Lie", email: "erlingsl@nettverksdagene.no", position: "Bedriftskontakt"},
-            {id: "bedrift3", name: "Fred Kwizera", email: "fredk@nettverksdagene.no", position: "Bedriftskontakt"},
-            {id: "bedrift4", name: "Hanne Opseth Rygg", email: "hanneor@nettverksdagene.no", position: "Bedriftskontakt"},
-            {id: "bedrift5", name: "Helene Engebakken Haugen", email: "heleneeh@nettverksdagene.no", position: "Bedriftskontakt"},
-            {id: "bedrift6", name: "Henrik Larsson Hestnes", email: "henriklh@nettverksdagene.no", position: "Bedriftskontakt"},
-            {id: "bedrift7", name: "Kristoffer Eikså", email: "kristoffere@nettverksdagene.no", position: "Bedriftskontakt"},
-            {id: "bedrift8", name: "Lars Eik Breirem", email: "larseb@nettverksdagene.no", position: "Bedriftskontakt"},
-            {id: "bedrift9", name: "Lasse Wardenær", email: "lassetw@nettverksdagene.no", position: "Bedriftskontakt"},
-            {id: "bedrift10", name: "Maja Markusson", email: "majam@nettverksdagene.no", position: "Bedriftskontakt"},
-            {id: "bedrift11", name: "Marie Gjerden", email: "marieg@nettverksdagene.no", position: "Bedriftskontakt"},
-            {id: "bedrift12", name: "Marte Aaberge", email: "marteka@nettverksdagene.no", position: "Bedriftskontakt"},
-            {id: "bedrift13", name: "Mathias Grindvik", email: "mathiasg@nettverksdagene.no", position: "Bedriftskontakt"},
-            {id: "bedrift14", name: "Ole Andreas Wammer", email: "oleaw@nettverksdagene.no", position: "Bedriftskontakt"},
-            {id: "bedrift15", name: "Yngve Kippersund", email: "yngvek@nettverksdagene.no", position: "Bedriftskontakt"}          
-          ]
+          key: 'bedriftskontaker',
+          name: 'Bedrift',
+          members: [{id: 'bedrift1', name: 'Eivind Dogger', email: 'eivindd@nettverksdagene.no', position: 'Bedriftskontakt'},
+            {id: 'bedrift2', name: 'Erling Syvervseen Lie', email: 'erlingsl@nettverksdagene.no', position: 'Bedriftskontakt'},
+            {id: 'bedrift3', name: 'Fred Kwizera', email: 'fredk@nettverksdagene.no', position: 'Bedriftskontakt'},
+            {id: 'bedrift4', name: 'Hanne Opseth Rygg', email: 'hanneor@nettverksdagene.no', position: 'Bedriftskontakt'},
+            {id: 'bedrift5', name: 'Helene Engebakken Haugen', email: 'heleneeh@nettverksdagene.no', position: 'Bedriftskontakt'},
+            {id: 'bedrift6', name: 'Henrik Larsson Hestnes', email: 'henriklh@nettverksdagene.no', position: 'Bedriftskontakt'},
+            {id: 'bedrift7', name: 'Kristoffer Eikså', email: 'kristoffere@nettverksdagene.no', position: 'Bedriftskontakt'},
+            {id: 'bedrift8', name: 'Lars Eik Breirem', email: 'larseb@nettverksdagene.no', position: 'Bedriftskontakt'},
+            {id: 'bedrift9', name: 'Lasse Wardenær', email: 'lassetw@nettverksdagene.no', position: 'Bedriftskontakt'},
+            {id: 'bedrift10', name: 'Maja Markusson', email: 'majam@nettverksdagene.no', position: 'Bedriftskontakt'},
+            {id: 'bedrift11', name: 'Marie Gjerden', email: 'marieg@nettverksdagene.no', position: 'Bedriftskontakt'},
+            {id: 'bedrift12', name: 'Marte Aaberge', email: 'marteka@nettverksdagene.no', position: 'Bedriftskontakt'},
+            {id: 'bedrift13', name: 'Mathias Grindvik', email: 'mathiasg@nettverksdagene.no', position: 'Bedriftskontakt'},
+            {id: 'bedrift14', name: 'Ole Andreas Wammer', email: 'oleaw@nettverksdagene.no', position: 'Bedriftskontakt'},
+            {id: 'bedrift15', name: 'Yngve Kippersund', email: 'yngvek@nettverksdagene.no', position: 'Bedriftskontakt'}]
         }
-      ];
-
-      return hardCodedTeams;
-
-        
-      
-      
-    },
+      ]
+      return hardCodedTeams
+    }
   },
   fileServerHost: process.env.VUE_APP_FILESERVER_HOST
 }
@@ -191,6 +180,7 @@ export default {
     word-break:break-word;
   }
   .img-profile {
+    align-self: center;
     height: 60px;
     width: 60px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.3);
