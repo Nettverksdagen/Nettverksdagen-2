@@ -104,7 +104,7 @@ export default {
   methods: {
     memberPhoto(member){
       if(member.photo_uri){
-        return member.photo_uri;
+        return $options.fileServerHost + '/thumb/512/' + member.photo_uri;
       }else{
         return "https://d2ojdbp0769afo.cloudfront.net/fnd/v4/static/images/BlankProfile.png";
       }
