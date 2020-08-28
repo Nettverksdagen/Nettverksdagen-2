@@ -75,7 +75,7 @@
               <b-card-body class="d-flex">
                 <div>
                   <div v-if="member.photo_uri">
-                    <b-img  rounded="circle" class="img-profile" :src="process.env.VUE_APP_FILESERVER_HOST + '/thumb/512/' + member.photo_uri"></b-img>
+                    <b-img  rounded="circle" class="img-profile" :src="$options.fileServerHost + '/thumb/512/' + member.photo_uri"></b-img>
                   </div>
                   <div v-else>
                     <b-img  rounded="circle" class="img-profile-empty" :src="'https://d2ojdbp0769afo.cloudfront.net/fnd/v4/static/images/BlankProfile.png'"></b-img>
@@ -106,6 +106,7 @@ export default {
     Content,
     Spacer
   },
+
   computed: {
     teams: function () {
       return this.$store.getters['teamMembers/teams']
