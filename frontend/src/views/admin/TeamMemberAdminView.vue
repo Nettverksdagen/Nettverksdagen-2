@@ -39,7 +39,7 @@
                 </b-form-group>
                 <div class="d-flex">
                   <b-form-group class="flex-grow-1" label="Bilde" label-for="member-photo">
-                    <b-form-file v-model="photoFile" :required="!editing" placeholder="Velg et bilde" id="member-photo" ref="photoFileInput" @input="uploadPhoto"></b-form-file>
+                    <b-form-file v-model="photoFile" placeholder="Velg et bilde" id="member-photo" ref="photoFileInput" @input="uploadPhoto"></b-form-file>
                     <p class="text-black-50 mt-2">
                       <span class="font-weight-bold">Obs</span>:
                       Bildet blir automatisk plassert i sentrum av et kvadrat, men ikke beskåret eller strukket.
@@ -123,7 +123,11 @@ export default {
       return this.$store.state.teamMembers.all
     },
     imgSrc: function () {
-      return process.env.VUE_APP_FILESERVER_HOST + '/thumb/256/' + this.teamMember.photo_uri
+      if (this.teamMember.photo_uri) {
+        return process.env.VUE_APP_FILESERVER_HOST + '/thumb/256/' + this.teamMember.photo_uri
+      } else {
+        return 'https://d2ojdbp0769afo.cloudfront.net/fnd/v4/static/images/BlankProfile.png'
+      }
     }
   },
   methods: {

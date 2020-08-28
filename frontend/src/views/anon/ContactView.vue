@@ -71,14 +71,19 @@
             <h3 class="font-weight-bold">{{ team.name }}</h3>
           </b-col>
           <b-col class="my-md-3 my-1" cols="12" md="6" xl="4" v-bind:key="member.id" v-for="member in team.members">
-            <b-card no-body>
+            <b-card no-body class="overflow-hidden">
               <b-card-body class="d-flex">
                 <div>
-                  <b-img rounded="circle" class="img-profile" :src="$options.fileServerHost + '/thumb/512/' + member.photo_uri"></b-img>
+                  <div v-if="member.photo_uri">
+                    <b-img  rounded="circle" class="img-profile" :src="process.env.VUE_APP_FILESERVER_HOST + '/thumb/512/' + member.photo_uri"></b-img>
+                  </div>
+                  <div v-else>
+                    <b-img  rounded="circle" class="img-profile-empty" :src="'https://d2ojdbp0769afo.cloudfront.net/fnd/v4/static/images/BlankProfile.png'"></b-img>
+                  </div>
                 </div>
                 <div class="ml-3 d-flex justify-content-center flex-column">
                   <h4 class="member-name m-0">{{ member.name }}</h4>
-                  <b-link :href="'mailto:' + member.email">{{ member.email }}</b-link>
+                  <b-link class="member-email" :href="'mailto:' + member.email">{{ member.email }}</b-link>
                   <span class="font-weight-bold text-black-50">{{ member.position }}</span>
                 </div>
               </b-card-body>
@@ -137,7 +142,14 @@ export default {
     font-weight:bold;
     word-break:break-word;
   }
-  .img-profile {
+  .img-profile-empty {
+    align-self: center;
+    height: 50px;
+    width: 50px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .img-profile{
+    align-self: center;
     height: 6rem;
     width: 6rem;
     box-shadow: 0 1px 2px rgba(0,0,0,0.3);
