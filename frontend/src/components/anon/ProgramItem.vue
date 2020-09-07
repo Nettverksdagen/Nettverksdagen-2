@@ -1,10 +1,18 @@
 <template>
   <div class="timeline-item">
     <div class="timestamp">
-      <h4><span class="font-weight-bold">{{timeStart}}</span></h4>
+      <h4><span class="font-weight-bold">{{formatTime(timeStart)}}</span></h4>
     </div>
     <div class="card">
       <div class="card-body">
+        <div v-if="header">
+        <h3 class="font-weight-bold">{{header}}</h3>
+        </div>
+        <div v-if="paragraph">
+        <div v-for="line in paragraph" >
+          <p class="description">{{line}}</p>
+        </div>
+        </div>
         <slot></slot>
         <div v-if="place" class="d-inline">
           <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>
@@ -12,7 +20,7 @@
         </div>
         <div v-if="timeEnd" class="d-inline">
           <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>
-          {{timeStart}} - {{timeEnd}}
+          {{formatTime(timeStart)}} - {{formatTime(timeEnd)}}
         </div>
       </div>
     </div>
@@ -25,7 +33,16 @@ import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons'
 library.add(faMapMarkerAlt, faClock)
 export default {
   name: 'ProgramItem',
-  props: ['timeStart', 'timeEnd', 'place']
+  props: ['timeStart','timeEnd', 'place', 'header', 'paragraph'],
+  methods: {
+    formatTime(dateObj){
+      let hours = dateObj.getHours();
+      let minutes = dateObj.getMinutes();
+      hours = (hours>9) ? String(hours) : ('0' + String(hours));
+      minutes = (minutes>9) ? String(minutes) : ('0' + String(minutes));
+      return hours + ':' + minutes
+    }
+  }
 }
 </script>
 
@@ -77,6 +94,10 @@ export default {
     position: absolute;
     left: -92px;
     top: 16px;
+  }
+
+  .description {
+    font-size:1.1em;
   }
 
   @media(max-width: 768px) {
