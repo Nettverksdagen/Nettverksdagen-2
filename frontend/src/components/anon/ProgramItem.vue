@@ -5,22 +5,48 @@
     </div>
     <div class="card">
       <div class="card-body">
-        <div v-if="header">
-        <h3 class="font-weight-bold">{{header}}</h3>
+        <div class="header">
+          <div v-if="header">
+            <h3 class="font-weight-bold">{{header}}</h3>
+          </div>
+          <div v-if="registration && maxRegistered">
+            <h5>{{registered + '/' + maxRegistered + ' påmeldte'}}</h5>
+          </div>
         </div>
         <div v-if="paragraph">
-        <div v-for="line in paragraph" >
-          <p class="description">{{line}}</p>
+          <div v-for="line in paragraph" >
+            <p class="description">{{line}}</p>
+          </div>
         </div>
+        <div v-if="registration" class="button">
+          <button v-if="enableRegistration" type="button" class="btn btn-primary">Påmelding</button>
+          <button v-else type="button" class="btn btn-primary disabled">Påmelding</button>
         </div>
-        <slot></slot>
-        <div v-if="place" class="d-inline">
-          <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>
-          {{place}}
-        </div>
-        <div v-if="timeEnd" class="d-inline">
-          <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>
-          {{formatTime(timeStart)}} - {{formatTime(timeEnd)}}
+        <div class="footer">
+          <div class="inline">
+            <div v-if="place" class="d-inline">
+              <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>
+              {{place}}
+            </div>
+            <div v-if="timeEnd" class="d-inline">
+              <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>
+              {{formatTime(timeStart)}} - {{formatTime(timeEnd)}}
+            </div>
+          </div>
+          <div v-if="registration && cancelEmail">
+              <b-link :href="'mailto:' + cancelEmail">{{'Ønsker du å melde deg av klikk her'}}</b-link>
+          </div>
+          <div v-if="registration">
+              <div v-if="enableRegistration">
+                <div>Påmelding har beggynt</div>
+              </div>
+              <div v-else-if="afterRegistration">
+                <div>Påmelding er ferdig</div>
+              </div>
+              <div v-else>
+              <div>{{'Påmelding begynner ' + formatDate(registrationStart)}}</div>
+              </div>
+          </div>
         </div>
       </div>
     </div>
@@ -33,7 +59,32 @@ import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons'
 library.add(faMapMarkerAlt, faClock)
 export default {
   name: 'ProgramItem',
-  props: ['timeStart','timeEnd', 'place', 'header', 'paragraph'],
+  props: ['timeStart','timeEnd', 'place', 'header', 'paragraph', 'registration', 'maxRegistered', 'registered', 'cancelEmail', 'registrationStart', 'registrationEnd'],
+  computed: {
+    beforeRegistration: function(){
+      let now = new Date();
+      return this.$props.registrationStart.getTime()>now.getTime();
+    },
+    afterRegistration: function(){
+      let now = new Date();
+      if(this.$props.registrationEnd){
+        return this.$props.registrationEnd.getTime()<now.getTime();
+      }
+      return this.$props.timeStart.getTime()<now.getTime()
+    },
+    enableRegistration: function(){
+      if(!this.$props.registration){
+        return false;
+      }
+      if(this.beforeRegistration){
+        return false
+      }
+      if(this.afterRegistration){
+        return false
+      }
+      return true;
+    }
+  },
   methods: {
     formatTime(dateObj){
       let hours = dateObj.getHours();
@@ -41,6 +92,14 @@ export default {
       hours = (hours>9) ? String(hours) : ('0' + String(hours));
       minutes = (minutes>9) ? String(minutes) : ('0' + String(minutes));
       return hours + ':' + minutes
+    },
+    formatDate(dateObj){
+      let day = dateObj.getDate();
+      let month = dateObj.getMonth() + 1;
+      let year = dateObj.getFullYear();
+      day = (day>9) ? String(day) : ('0' + String(day));
+      month = (month>9) ? String(month) : ('0' + String(month));
+      return this.formatTime(dateObj) +' '+ day + '.' +month+'.'+year
     }
   }
 }
@@ -89,6 +148,25 @@ export default {
     z-index: 1;
     left: -13px;
   }
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .footer {
+     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .button {
+    margin-right: 15px;
+    display: flex;
+    flex-direction: row-reverse
+  }
+
 
   .timestamp {
     position: absolute;
