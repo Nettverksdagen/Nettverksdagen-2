@@ -5,15 +5,15 @@
         <HeroText class="hero-txt"/>
         <div class="hexes">
           <b-link :to="'/program'">
-            <HeroHexBox hex-title="Ballongslipp" hex-icon="balloon.svg">
-              Det blir ballongslipp der du kan vinne flotte premier!
-              I tillegg har vi mange andre konkurranser i løpet av dagen.
+            <HeroHexBox hex-title="Vinn premier!" hex-icon="balloon.svg">
+              <!-- Det blir ballongslipp der du kan vinne flotte premier!
+              I tillegg har vi mange andre konkurranser i løpet av dagen. -->
             </HeroHexBox>
           </b-link>
           <b-link :to="'/program'">
-            <HeroHexBox hex-title="Stands" hex-icon="transfer.svg">
-              Hele Glassgården fylles med stands! Her har du mulighet for å komme i kontakt med mange spennende bedrifter.
-              Standkartet finner du på programsiden.
+            <HeroHexBox hex-title="Virtuelle stands" hex-icon="transfer.svg">
+              <!--Hele Glassgården fylles med stands! Her har du mulighet for å komme i kontakt med mange spennende bedrifter.
+              Standkartet finner du på programsiden. -->
             </HeroHexBox>
           </b-link>
           <b-link :to="'/program'">
