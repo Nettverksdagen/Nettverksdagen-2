@@ -140,8 +140,11 @@ export default {
     }
   }
   .member-name {
-    font-weight:bold;
-    word-break:break-word;
+    font-weight: bold;
+    word-break: break-word;
+  }
+  .member-email {
+    word-break: break-word;
   }
   .img-profile-empty {
     align-self: center;
