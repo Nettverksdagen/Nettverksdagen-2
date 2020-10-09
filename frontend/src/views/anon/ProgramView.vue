@@ -4,78 +4,27 @@
         <h1 class="text-center">Program</h1>
         <p class="text-center description mt-3 mb-2">Dette var programmet for Nettverksdagene 2020.</p>
         <h4 class="text-center font-weight-bold"><a href="#stand-map-header">Se standkart her!</a></h4>
-        <h3 class="font-weight-bold">28. januar</h3>
-        <div class="timeline">
-          <ProgramItem time-start="17:15" place="EL1, Gamle Elektro">
-            <h3 class="font-weight-bold">Bedrift&shy;presentasjon med Honeywell</h3>
-            <p class="description">Med bespisning på Graffi Grill.</p>
-            <p class="description">Dette arrangementet er fullt.</p>
-          </ProgramItem>
-        </div>
-        <h3 class="font-weight-bold">29. januar</h3>
-        <div class="timeline">
-          <ProgramItem time-start="09:15" time-end="10:15" place="EL6, Gamle Elektro">
-            <h3 class="font-weight-bold">Frokost&shy;presentasjon med Sopra Steria</h3>
-            <p class="description">Med servering av baguetter og kaffe.</p>
-            <p class="description">Påmeldingen er avsluttet.</p>
-          </ProgramItem>
-          <ProgramItem time-start="10:00" place="Glassgården, Elektrobygget">
-            <h3 class="font-weight-bold">Stand&shy;området åpner!</h3>
-          </ProgramItem>
-          <ProgramItem time-start="12:10" place="Glassgården, Elektrobygget">
-            <h3 class="font-weight-bold">Ballong&shy;slipp!</h3>
-          </ProgramItem>
-          <ProgramItem time-start="12:15" time-end="13:00" place="KJL1, Kjelhuset">
-            <h3 class="font-weight-bold">Prosjekt&shy;presentasjon med Data Respons R&D Services</h3>
-            <p class="description">Bli med på Kahootkonkurranse og vinn AirPods Pro.</p>
-            <p class="description">Påmeldingen er avsluttet.</p>
-          </ProgramItem>
-          <ProgramItem time-start="14:00" place="Glassgården, Elektrobygget">
-            <h3 class="font-weight-bold">Premie&shy;utdeling!</h3>
-          </ProgramItem>
-          <ProgramItem time-start="14:15" time-end="15:00" place="EL1, Gamle Elektro">
-            <h3 class="font-weight-bold">Bedrift&shy;presentasjon med Imatis</h3>
-            <p class="description">Med servering av baguetter og mineralvann.</p>
-            <p class="description">Påmeldingen er avsluttet.</p>
-          </ProgramItem>
-          <ProgramItem time-start="17:15" place="EL1, Gamle Elektro">
-            <h3 class="font-weight-bold">Bedrift&shy;presentasjon med Bekk</h3>
-            <p class="description">Med bespisning på Olivia Solsiden.</p>
-            <p class="description">Dette arrangementet er fullt.</p>
-          </ProgramItem>
-        </div>
-        <h3 class="font-weight-bold">30. januar</h3>
-        <div class="timeline">
-          <ProgramItem time-start="09:15" time-end="10:15" place="EL5, Gamle Elektro">
-            <h3 class="font-weight-bold">Frokost&shy;presentasjon med National Oilwell Varco</h3>
-            <p class="description">Med servering av baguetter og kaffe.</p>
-            <p class="description">Påmeldingen er avsluttet</p>
-          </ProgramItem>
-          <ProgramItem time-start="10:00" place="Glassgården, Elektrobygget">
-            <h3 class="font-weight-bold">Stand&shy;området åpner</h3>
-            <p class="description">Goodiebags til de 50 første som kommer innom!</p>
-          </ProgramItem>
-          <ProgramItem time-start="11:15" time-end="12:00" place="S8, Stripa (Sentralbygg 2)">
-            <h3 class="font-weight-bold">Lønsj&shy;presentasjon med Maritime Robotics</h3>
-            <p class="description">Med servering av baguetter og mineralvann.</p>
-            <p class="description">Påmeldingen er avsluttet.</p>
-          </ProgramItem>
-          <ProgramItem time-start="12:10" place="Glassgården, Elektrobygget">
-            <h3 class="font-weight-bold">Ballong&shy;slipp!</h3>
-          </ProgramItem>
-          <ProgramItem time-start="12:15" time-end="13:00" place="S1, Stripa (Sentralbygg 1)">
-            <h3 class="font-weight-bold">Prosjekt&shy;presentasjon med Data Respons R&D Services</h3>
-            <p class="description">Bli med på Kahootkonkurranse og vinn AirPods Pro.</p>
-            <p class="description">Påmeldingen er avsluttet.</p>
-          </ProgramItem>
-          <ProgramItem time-start="14:00" place="Glassgården, Elektrobygget">
-            <h3 class="font-weight-bold">Premie&shy;utdeling!</h3>
-          </ProgramItem>
-          <ProgramItem time-start="14:15" time-end="15:30" place="EL6, Gamle Elektro">
-            <h3 class="font-weight-bold">Kryptografi-skattejakt med DNB</h3>
-            <p class="description">Med servering av baguetter og mineralvann. Premie til vinnerne!</p>
-            <p class="description">Påmeldingen er avsluttet.</p>
-          </ProgramItem>
+        <div :key="'programDay' + index" v-for=" (day , index) in program">
+          <h3 class="font-weight-bold">{{formatDate(day[0].timeStart)}}</h3>
+          <div class="timeline">
+            <div :key="'dayItem' + index" v-for="(item, index) in day">
+              <ProgramItem
+              :timeStart="item.timeStart"
+              :timeEnd="item.timeEnd"
+              :place="item.place"
+              :header="item.header"
+              :paragraph="item.paragraph"
+              :registration="item.registration"
+              :maxRegistered="item.maxRegistered"
+              :registered="item.registered"
+              :cancelEmail="item.cancelEmail"
+              :registrationStart="item.registrationStart"
+              :registrationEnd="item.registrationEnd"
+              :name="item.key"
+              >
+              </ProgramItem>
+            </div>
+          </div>
         </div>
       </div>
       <h2 id="stand-map-header" class="text-center mb-3">Standkart</h2>
@@ -94,6 +43,195 @@ export default {
   components: {
     Content,
     ProgramItem
+  },
+  methods: {
+    formatDate (dateObj) {
+      let months = ['januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'desember']
+      let date = dateObj.getDate()
+      let month = dateObj.getMonth()
+      return String(date) + '. ' + months[month]
+    }
+  },
+  computed: {
+    program: function () {
+      let prog = [
+        {
+          key: 3,
+          timeStart: new Date(2021, 0, 29, 10, 0, 0, 0),
+          place: 'Glassgården, Elektrobygget',
+          header: 'Standområdet åpner!'
+        },
+        {
+          key: 4,
+          timeStart: new Date(2021, 0, 29, 12, 10, 0, 0),
+          place: 'Glassgården, Elektrobygget',
+          header: 'Ballongslipp!'
+        },
+        {
+          key: 8,
+          timeStart: new Date(2021, 0, 29, 17, 15, 0, 0),
+          place: 'EL1, Gamle Elektro',
+          header: 'Bedriftpresentasjon med Bekk',
+          paragraph: ['Med bespisning på Olivia Solsiden', 'Dette arrangementet er fullt.']
+        },
+        {
+          key: 1,
+          timeStart: new Date(2021, 0, 28, 17, 30, 0, 0),
+          timeEnd: new Date(2021, 0, 28, 18, 30, 0, 0),
+          place: 'EL1, Gamle Elektro',
+          header: 'Bedriftpresentasjon med Honeywell',
+          paragraph: ['Med bespisning på Graffi Grill.', 'Dette arrangementet er fullt.'],
+          registration: true,
+          maxRegistered: 10,
+          registered: 5,
+          cancelEmail: 'kska@stud.ntnu.no',
+          registrationStart: new Date(2020, 8, 18, 10, 33, 0, 0)
+        },
+        {
+          key: 6,
+          timeStart: new Date(2021, 0, 29, 14, 0, 0, 0),
+          place: 'Glassgården, Elektrobygget',
+          header: 'Premieutdeling!'
+        },
+        {
+          key: 7,
+          timeStart: new Date(2021, 0, 29, 14, 15, 0, 0),
+          timeEnd: new Date(2021, 0, 29, 15, 0, 0, 0),
+          place: 'EL1, Gamle Elektro',
+          header: 'Bedriftpresentasjon med Imatis',
+          paragraph: ['Med servering av baguetter og mineralvann.', 'Påmeldingen er avsluttet.']
+        },
+        {
+          key: 5,
+          timeStart: new Date(2021, 0, 29, 12, 15, 0, 0),
+          timeEnd: new Date(2021, 0, 29, 13, 0, 0, 0),
+          place: 'KJL1, Kjelhuset',
+          header: 'Prosjektpresentasjon med Data Respons R&D Services',
+          paragraph: ['Bli med på Kahootkonkurranse og vinn AirPods Pro.', 'Påmeldingen er avsluttet.']
+        },
+        {
+          key: 9,
+          timeStart: new Date(2021, 0, 30, 9, 15, 0, 0),
+          timeEnd: new Date(2021, 0, 30, 10, 15, 0, 0),
+          place: 'EL5, Gamle Elektro',
+          header: 'Frokostpresentasjon med National Oilwell Varco',
+          paragraph: ['Med servering av baguetter og kaffe.', 'Påmeldingen er avsluttet.']
+        },
+        {
+          key: 2,
+          timeStart: new Date(2021, 0, 29, 9, 15, 0, 0),
+          timeEnd: new Date(2021, 0, 29, 10, 15, 0, 0),
+          place: 'EL6, Gamle Elektro',
+          header: 'Frokostpresentasjon med Sopra Steria',
+          paragraph: ['Med servering av baguetter og kaffe.', 'Påmeldingen er avsluttet.']
+        },
+        {
+          key: 11,
+          timeStart: new Date(2021, 0, 30, 11, 15, 0, 0),
+          timeEnd: new Date(2021, 0, 30, 12, 0, 0, 0),
+          place: 'S8, Stripa (Sentralbygg 2)',
+          header: 'Lønsjpresentasjon med Maritime Robotics',
+          paragraph: ['Med servering av baguetter og mineralvann.', 'Påmeldingen er avsluttet.']
+        },
+        {
+          key: 12,
+          timeStart: new Date(2021, 0, 30, 12, 10, 0, 0),
+          place: 'Glassgården, Elektrobygget',
+          header: 'Ballongslipp!'
+        },
+        {
+          key: 13,
+          timeStart: new Date(2021, 0, 30, 12, 15, 0, 0),
+          timeEnd: new Date(2021, 0, 30, 13, 0, 0, 0),
+          place: 'S1, Stripa (Sentralbygg 1)',
+          header: 'Prosjektpresentasjon med Data Respons R&D Services',
+          paragraph: ['Bli med på Kahootkonkurranse og vinn AirPods Pro.', 'Påmeldingen er avsluttet.']
+        },
+        {
+          key: 10,
+          timeStart: new Date(2021, 0, 30, 10, 0, 0, 0),
+          place: 'Glassgården, Elektrobygget',
+          header: 'Standområdet åpner',
+          paragraph: ['Goodiebags til de 50 første som kommer innom!']
+        },
+        {
+          key: 14,
+          timeStart: new Date(2021, 0, 30, 14, 0, 0, 0),
+          place: 'Glassgården, Elektrobygget',
+          header: 'Premieutdeling!'
+        },
+        {
+          key: 15,
+          timeStart: new Date(2021, 0, 30, 14, 15, 0, 0),
+          timeEnd: new Date(2021, 0, 30, 15, 30, 0, 0),
+          place: 'EL6, Gamle Elektro',
+          header: 'Kryptografi-skattejakt med DNB',
+          paragraph: ['Med servering av baguetter og mineralvann. Premie til vinnerne!', 'Påmeldingen er avsluttet.']
+        }
+      ]
+
+      let sortedProgram = []
+      let days = []
+      // It now should sort, but maybe uneficiently
+      prog.forEach((item, index) => {
+        if (index === 0) {
+          sortedProgram.push([item])
+          days.push(item.timeStart.getDate())
+        } else {
+          let newSortedProgram = sortedProgram
+          let dayExists = false
+          let itemInserted = false
+          days.forEach((day, index) => {
+            if (item.timeStart.getDate() === day) {
+              dayExists = true
+              let newDayItems = []
+              for (let j = 0; j < newSortedProgram[index].length; j++) {
+                if (newSortedProgram[index][j].timeStart.getTime() > item.timeStart.getTime() && !itemInserted) {
+                  itemInserted = true
+                  newDayItems.push(item)
+                }
+                newDayItems.push(newSortedProgram[index][j])
+              }
+              if (!itemInserted) {
+                newDayItems.push(item)
+              }
+              newSortedProgram[index] = newDayItems
+            }
+          })
+          if (!dayExists) {
+            let newDate = item.timeStart.getDate()
+            let inserted = false
+            let nextDays = []
+            let nextNewSortedProg = []
+            for (let i = 0; i < days.length; i++) {
+              if (days[i] > newDate && !inserted) {
+                inserted = true
+                nextDays.push(newDate)
+                nextNewSortedProg.push([item])
+              }
+              nextDays.push(days[i])
+              nextNewSortedProg.push(newSortedProgram[i])
+            }
+            newSortedProgram = nextNewSortedProg
+            days = nextDays
+            if (!inserted) {
+              days.push(newDate)
+              newSortedProgram.push([item])
+            }
+          }
+          sortedProgram = newSortedProgram
+        }
+      })
+      /*
+      // Testing if it is sorted
+      sortedProgram.forEach((day) => {
+        day.forEach((item) => {
+          console.log(item.key)
+        })
+      })
+      */
+      return sortedProgram
+    }
   }
 }
 </script>
