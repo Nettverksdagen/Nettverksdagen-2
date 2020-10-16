@@ -5,7 +5,7 @@
         <HeroText class="hero-txt"/>
         <div class="hexes">
           <b-link :to="'/program'">
-            <HeroHexBox hex-title="Vinn premier!" hex-icon="balloon.svg">
+            <HeroHexBox hex-title="Speedintervjuer" hex-icon="balloon.svg">
               <!-- Det blir ballongslipp der du kan vinne flotte premier!
               I tillegg har vi mange andre konkurranser i løpet av dagen. -->
             </HeroHexBox>
@@ -18,8 +18,8 @@
           </b-link>
           <b-link :to="'/program'">
             <HeroHexBox hex-title="Bedriftpresentasjoner" hex-icon="presentation.svg">
-              Det blir holdt flere bedriftpresentasjoner for de som vil bli bedre kjent med bedriftene.
-              Påmelding gjøres på Facebook-siden vår.
+              <!--Det blir holdt flere bedriftpresentasjoner for de som vil bli bedre kjent med bedriftene.
+              Påmelding gjøres på Facebook-siden vår.-->
             </HeroHexBox>
           </b-link>
         </div>

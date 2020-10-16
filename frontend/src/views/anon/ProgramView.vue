@@ -3,7 +3,7 @@
       <div class="program">
         <h1 class="text-center">Program</h1>
         <p class="text-center description mt-3 mb-2">Dette var programmet for Nettverksdagene 2020.</p>
-        <h4 class="text-center font-weight-bold"><a href="#stand-map-header">Se standkart her!</a></h4>
+        <!-- <h4 class="text-center font-weight-bold"><a href="#stand-map-header">Se standkart her!</a></h4> -->
         <div :key="'programDay' + index" v-for=" (day , index) in program">
           <h3 class="font-weight-bold">{{formatDate(day[0].timeStart)}}</h3>
           <div class="timeline">
@@ -27,11 +27,15 @@
           </div>
         </div>
       </div>
+
+      <!-- Uncomment this to get the stand maps from 2020 at the bottom. Disabled for 2021 since it was held digitally.
       <h2 id="stand-map-header" class="text-center mb-3">Standkart</h2>
       <h3 class="text-center mb-3">29. januar</h3>
       <img class="stand-map mb-5" src="@/assets/standkart-dag1.png">
       <h3 class="text-center mb-3">30. januar</h3>
       <img class="stand-map mb-5" src="@/assets/standkart-dag2.png">
+      -->
+
     </Content>
 </template>
 
