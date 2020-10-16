@@ -3,6 +3,7 @@
       <div class="program">
         <h1 class="text-center">Program</h1>
         <p class="text-center description mt-3 mb-2">Dette var programmet for Nettverksdagene 2020.</p>
+        <p class="text-center description mt-3 mb-2">Programmet for 2021 kommer snart!</p>
         <!-- <h4 class="text-center font-weight-bold"><a href="#stand-map-header">Se standkart her!</a></h4> -->
         <div :key="'programDay' + index" v-for=" (day , index) in program">
           <h3 class="font-weight-bold">{{formatDate(day[0].timeStart)}}</h3>
@@ -85,7 +86,7 @@ export default {
           place: 'EL1, Gamle Elektro',
           header: 'Bedriftpresentasjon med Honeywell',
           paragraph: ['Med bespisning på Graffi Grill.', 'Dette arrangementet er fullt.'],
-          registration: true,
+          registration: false,
           maxRegistered: 10,
           registered: 5,
           cancelEmail: 'kska@stud.ntnu.no',
