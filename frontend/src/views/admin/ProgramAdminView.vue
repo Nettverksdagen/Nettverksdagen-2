@@ -69,7 +69,7 @@
                     <b-form-input type="date" v-model="programItem.registrationEndDate" id="item-date-registration-end-input"></b-form-input>
                   </b-form-group>
                   <b-form-group label="Tid for påmeldingsslutt" label-for="item-time-registration-end-input">
-                    <b-form-input type="time"  v-model="programItem.registreationEndTime" id="item-time-registration-end-input"></b-form-input>
+                    <b-form-input type="time"  v-model="programItem.registrationEndTime" id="item-time-registration-end-input"></b-form-input>
                   </b-form-group>
                 </div>
                 <div class="col-12 col-md-6 mt-3" v-if="programItem.registration">
@@ -92,17 +92,17 @@
     </b-row>
     <b-row>
       <div class="col-12">
-        <b-card header="Teammedlemmer">
-          <b-table class="d-none d-md-table" hover :fields="fields" :items="programItems">
-            <template slot="edit" slot-scope="programItems">
-              <edit-button class="mx-3" @click.native="edit(programItems.item)"></edit-button>
-              <delete-button class="mx-3" @click.native="destroy(programItems.item)"></delete-button>
+        <b-card header="Program">
+          <b-table class="d-none d-md-table" hover :fields="fields" :items="program">
+            <template slot="edit" slot-scope="program">
+              <edit-button class="mx-3" @click.native="edit(program.item)"></edit-button>
+              <delete-button class="mx-3" @click.native="destroy(program.item)"></delete-button>
             </template>
           </b-table>
-          <b-table class="d-block d-md-none" stacked :fields="fields" :items="programItems">
-            <template slot="edit" slot-scope="programItems">
-              <edit-button class="mx-3" @click.native="edit(programItems.item)"></edit-button>
-              <delete-button class="mx-3" @click.native="destroy(programItems.item)"></delete-button>
+          <b-table class="d-block d-md-none" stacked :fields="fields" :items="program">
+            <template slot="edit" slot-scope="program">
+              <edit-button class="mx-3" @click.native="edit(program.item)"></edit-button>
+              <delete-button class="mx-3" @click.native="destroy(program.item)"></delete-button>
             </template>
           </b-table>
         </b-card>
@@ -117,18 +117,17 @@ import { mapMutations } from 'vuex'
 import EditButton from '@/components/admin/EditButton.vue'
 import DeleteButton from '@/components/admin/DeleteButton.vue'
 export default {
-  name: 'TeamMemberAdminView',
+  name: 'ProgramAdminView',
   components: {
     EditButton,
     DeleteButton
   },
   data: function () {
     return {
-      programItems: [],
       fields: [
-        'id', { key: 'header', label: 'Header' }, { key: 'paragraph', label: 'Text' },
+        'id',{ key: 'header', label: 'Header' }, { key: 'paragraph', label: 'Text' },
         { key: 'place', label: 'Place' }, { key: 'timeStart', label: 'Staring time' },
-        { key: 'timeEnd', label: 'Ending time' }, { key: 'edit', label: '' }
+        { key: 'timeEnd', label: 'Ending time' }, { key: 'Edit', label: '' }
       ],
       programItem: {
         header: '',
@@ -142,8 +141,8 @@ export default {
         maxRegistered: 0,
         registrationStartDate: '',
         registrationStartTime: '',
-        registreationEndDate: '',
-        registreationEndTime: '',
+        registrationEndDate: '',
+        registrationEndTime: '',
         cancelEmail: ''
       },
       editing: false,
@@ -158,11 +157,58 @@ export default {
   },
   computed: {
     program: function () {
-      //return program from database
-      //return this.$store.state.teamMembers.all
+      return this.$store.getters['program/adminProgram']
     },
   },
   methods: {
+    formatProgramItem: function(programItem) {
+      let newItem = {};
+      if (this.$data.editing) {
+        newItem.id = programItem.id;
+      }      
+      let fields = ['header', 'paragraph', 'place', 'registration'];
+      fields.forEach((field) => {
+        newItem[field] = programItem[field];
+      })
+
+      let date = programItem.date.split('-')
+      let timeStart = programItem.timeStart.split(':')
+      newItem.timeStart = new Date(Number(date[0]), Number(date[1]), Number(date[2]), Number(timeStart[0]), Number(timeStart[1]),0,0).getTime();
+      if (programItem.timeEnd) {
+        let timeEnd = programItem.timeEnd.split(':')
+        newItem.timeEnd = new Date(Number(date[0]), Number(date[1]), Number(date[2]), Number(timeEnd[0]), Number(timeEnd[1]),0,0).getTime();
+      } else {
+        newItem.timeEnd = undefined
+      }
+      
+
+      if (newItem.registration) {
+        let registrationFields = ['maxRegistered', 'registered', 'cancelEmail']
+        registrationFields.forEach((field) => {
+          newItem[field] = programItem[field]
+        })
+        let registrationStartDate = programItem.registrationStartDate.split('-')
+        let registrationStartTime = programItem.registrationStartTime.split(':')
+        newItem.registrationStart = new Date(Number(registrationStartDate[0]), Number(registrationStartDate[1]), Number(registrationStartDate[2]), 
+        Number(registrationStartTime[0]), Number(registrationStartTime[1]),0,0).getTime();
+        
+       console.log(!!programItem.registrationEndDate, !!programItem.registrationEndTime)
+        if (!!programItem.registrationEndDate && !!programItem.registrationEndTime) {
+          let registrationEndDate = programItem.registrationEndDate.split('-')
+          let registrationEndTime = programItem.registrationEndTime.split(':')
+          newItem.registrationEnd = new Date(Number(registrationEndDate[0]), Number(registrationEndDate[1]), Number(registrationEndDate[2]), 
+          Number(registrationEndTime[0]), Number(registrationEndTime[1]),0,0).getTime();
+        } else {
+          newItem.registrationEnd = undefined
+        }
+      } else {
+        let registrationFields = ['maxRegistered', 'registered', 'cancelEmail', 'registrationStart', 'registrationEnd']
+        registrationFields.forEach((field) => {
+          newItem[field] = undefined
+        })
+      }      
+      return newItem
+    },
     handleAddLine: function () {
       console.log(this.$data.programItem.timeStart)
       if (this.$data.programItem.paragraph[this.$data.programItem.paragraph.length -1] !== '') {
@@ -174,26 +220,50 @@ export default {
       this.$data.programItem.paragraph = para.slice(0,index).concat(para.slice(index+1, para.length))
     },
     handleSubmit: function () {
-      
+      let programItem = this.formatProgramItem(this.$data.programItem);
+      axios[(this.$data.editing ? 'put' : 'post')](process.env.VUE_APP_API_HOST +
+        '/api/program/' + (this.$data.editing ? programItem + '/' : ''),
+      programItem).then((response) => {
+        this.showAlert('success', 'Suksess!', 'ProgramItem har blitt' +
+          (this.$data.editing ? 'endret.' : 'lagt ut på forsiden.'))
+        this['program/' + (this.$data.editing ? 'updateProgramItem' : 'addProgramItem')](response.data)
+        this.resetForm()
+      }).catch((e) => {
+        this.showAlert('danger',
+          'Error ' + e.response.status + ' ' + e.response.statusText,
+          'ProgramItem kunne ikke legges ut.')
+      })
     },
-    destroy: function (teamMember) {
-     
+    destroy: function (programItem) {
+     if (!confirm('Er du sikker på at du vil slette ' + programItem.header + '?')) {
+        return
+      }
+      axios.delete(process.env.VUE_APP_API_HOST + '/api/program/' +
+        programItem.id + '/').then((response) => {
+        this.showAlert('success', 'Suksess!', 'ProgramItem er blitt slettet')
+        this['program/deleteProgramItem'](programItem)
+      }).catch((e) => {
+        this.showAlert('danger',
+          'Error ' + e.response.status + ' ' + e.response.statusText,
+          'ProgramItem kunne ikke slettes.')
+      })
+      this.resetForm()
     },
     resetForm: function () {
       this.$data.programItem = {
         header: '',
         paragraph: [''],
         place: '',
-        date: new Date(),
-        timeStart: new Date(),
-        timeEnd: new Date(),
+        date: '',
+        timeStart: '',
+        timeEnd: '',
         registration: false,
         registered: 0,
         maxRegistered: 0,
-        registrationStartDate: new Date(),
-        registrationStartTime: new Date(),
-        registreationEndDate: new Date(),
-        registreationEndTime: new Date(),
+        registrationStartDate: '',
+        registrationStartTime: '',
+        registreationEndDate: '',
+        registreationEndTime: '',
         cancelEmail: ''
       }
       this.$data.editing = false
@@ -209,13 +279,14 @@ export default {
     },
     edit: function (item) {
       this.$data.programItem = item
+      this.$data.editing = true
     },
     abortEdit: function () {
       this.resetForm()
       this.$data.editing = false
     },
-    ...mapMutations(['teamMembers/addTeamMember', 'teamMembers/deleteTeamMember',
-      'teamMembers/updateTeamMember'])
+    ...mapMutations(['program/addProgramItem', 'program/deleteProgramItem',
+      'program/updateProgramItem'])
   }
 }
 </script>
