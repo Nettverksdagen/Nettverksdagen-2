@@ -95,7 +95,7 @@
             variant='primary'
             @click="onSubmit"
           >
-            Submit
+            Submit forms.
           </b-button>
           </div>
       </template>
