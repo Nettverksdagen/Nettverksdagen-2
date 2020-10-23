@@ -7,7 +7,7 @@
         <div :key="'programDay' + index" v-for=" (day , index) in program">
           <h3 class="font-weight-bold">{{formatDate(day[0].timeStart)}}</h3>
           <div class="timeline">
-            <div :key="'dayItem' + index" v-for="(item, index) in day">
+            <div :key="'dayItem' + item.id" v-for="(item) in day">
               <ProgramItem
               :timeStart="item.timeStart"
               :timeEnd="item.timeEnd"
@@ -20,7 +20,7 @@
               :cancelEmail="item.cancelEmail"
               :registrationStart="item.registrationStart"
               :registrationEnd="item.registrationEnd"
-              :name="item.key"
+              :name="item.id"
               >
               </ProgramItem>
             </div>
@@ -56,26 +56,26 @@ export default {
     program: function () {
       let prog = [
         {
-          key: 3,
+          id: 3,
           timeStart: new Date(2021, 0, 29, 10, 0, 0, 0),
           place: 'Glassgården, Elektrobygget',
           header: 'Standområdet åpner!'
         },
         {
-          key: 4,
+          id: 4,
           timeStart: new Date(2021, 0, 29, 12, 10, 0, 0),
           place: 'Glassgården, Elektrobygget',
           header: 'Ballongslipp!'
         },
         {
-          key: 8,
+          id: 8,
           timeStart: new Date(2021, 0, 29, 17, 15, 0, 0),
           place: 'EL1, Gamle Elektro',
           header: 'Bedriftpresentasjon med Bekk',
           paragraph: ['Med bespisning på Olivia Solsiden', 'Dette arrangementet er fullt.']
         },
         {
-          key: 1,
+          id: 1,
           timeStart: new Date(2021, 0, 28, 17, 30, 0, 0),
           timeEnd: new Date(2021, 0, 28, 18, 30, 0, 0),
           place: 'EL1, Gamle Elektro',
@@ -88,13 +88,13 @@ export default {
           registrationStart: new Date(2020, 8, 18, 10, 33, 0, 0)
         },
         {
-          key: 6,
+          id: 6,
           timeStart: new Date(2021, 0, 29, 14, 0, 0, 0),
           place: 'Glassgården, Elektrobygget',
           header: 'Premieutdeling!'
         },
         {
-          key: 7,
+          id: 7,
           timeStart: new Date(2021, 0, 29, 14, 15, 0, 0),
           timeEnd: new Date(2021, 0, 29, 15, 0, 0, 0),
           place: 'EL1, Gamle Elektro',
@@ -102,7 +102,7 @@ export default {
           paragraph: ['Med servering av baguetter og mineralvann.', 'Påmeldingen er avsluttet.']
         },
         {
-          key: 5,
+          id: 5,
           timeStart: new Date(2021, 0, 29, 12, 15, 0, 0),
           timeEnd: new Date(2021, 0, 29, 13, 0, 0, 0),
           place: 'KJL1, Kjelhuset',
@@ -110,7 +110,7 @@ export default {
           paragraph: ['Bli med på Kahootkonkurranse og vinn AirPods Pro.', 'Påmeldingen er avsluttet.']
         },
         {
-          key: 9,
+          id: 9,
           timeStart: new Date(2021, 0, 30, 9, 15, 0, 0),
           timeEnd: new Date(2021, 0, 30, 10, 15, 0, 0),
           place: 'EL5, Gamle Elektro',
@@ -118,7 +118,7 @@ export default {
           paragraph: ['Med servering av baguetter og kaffe.', 'Påmeldingen er avsluttet.']
         },
         {
-          key: 2,
+          id: 2,
           timeStart: new Date(2021, 0, 29, 9, 15, 0, 0),
           timeEnd: new Date(2021, 0, 29, 10, 15, 0, 0),
           place: 'EL6, Gamle Elektro',
@@ -126,7 +126,7 @@ export default {
           paragraph: ['Med servering av baguetter og kaffe.', 'Påmeldingen er avsluttet.']
         },
         {
-          key: 11,
+          id: 11,
           timeStart: new Date(2021, 0, 30, 11, 15, 0, 0),
           timeEnd: new Date(2021, 0, 30, 12, 0, 0, 0),
           place: 'S8, Stripa (Sentralbygg 2)',
@@ -134,13 +134,13 @@ export default {
           paragraph: ['Med servering av baguetter og mineralvann.', 'Påmeldingen er avsluttet.']
         },
         {
-          key: 12,
+          id: 12,
           timeStart: new Date(2021, 0, 30, 12, 10, 0, 0),
           place: 'Glassgården, Elektrobygget',
           header: 'Ballongslipp!'
         },
         {
-          key: 13,
+          id: 13,
           timeStart: new Date(2021, 0, 30, 12, 15, 0, 0),
           timeEnd: new Date(2021, 0, 30, 13, 0, 0, 0),
           place: 'S1, Stripa (Sentralbygg 1)',
@@ -148,20 +148,20 @@ export default {
           paragraph: ['Bli med på Kahootkonkurranse og vinn AirPods Pro.', 'Påmeldingen er avsluttet.']
         },
         {
-          key: 10,
+          id: 10,
           timeStart: new Date(2021, 0, 30, 10, 0, 0, 0),
           place: 'Glassgården, Elektrobygget',
           header: 'Standområdet åpner',
           paragraph: ['Goodiebags til de 50 første som kommer innom!']
         },
         {
-          key: 14,
+          id: 14,
           timeStart: new Date(2021, 0, 30, 14, 0, 0, 0),
           place: 'Glassgården, Elektrobygget',
           header: 'Premieutdeling!'
         },
         {
-          key: 15,
+          id: 15,
           timeStart: new Date(2021, 0, 30, 14, 15, 0, 0),
           timeEnd: new Date(2021, 0, 30, 15, 30, 0, 0),
           place: 'EL6, Gamle Elektro',
