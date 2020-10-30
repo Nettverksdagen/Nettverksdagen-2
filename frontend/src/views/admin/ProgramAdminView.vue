@@ -125,10 +125,7 @@ export default {
   data: function () {
     return {
       fields: [
-        'id',{ key: 'header', label: 'Header' }, { key: 'paragraph', label: 'Text' },
-        { key: 'place', label: 'Place' }, { key: 'timeStart', label: 'Staring time' },
-        { key: 'timeEnd', label: 'Ending time' }, { key: 'Edit', label: '' }
-      ],
+        'id', { key: 'header', label: 'Header' }, { key: 'paragraph', label: 'Text' }, { key: 'place', label: 'Place' }, { key: 'timeStart', label: 'Staring time' }, { key: 'timeEnd', label: 'Ending time' }, { key: 'Edit', label: '' }],
       programItem: {
         header: '',
         paragraph: [''],
@@ -158,30 +155,28 @@ export default {
   computed: {
     program: function () {
       return this.$store.getters['program/adminProgram']
-    },
+    }
   },
   methods: {
-    formatProgramItem: function(programItem) {
-      let newItem = {};
+    formatProgramItem: function (programItem) {
+      let newItem = {}
       if (this.$data.editing) {
-        newItem.id = programItem.id;
-      }      
-      let fields = ['header', 'paragraph', 'place', 'registration'];
+        newItem.id = programItem.id
+      }
+      let fields = ['header', 'paragraph', 'place', 'registration']
       fields.forEach((field) => {
-        newItem[field] = programItem[field];
+        newItem[field] = programItem[field]
       })
 
       let date = programItem.date.split('-')
       let timeStart = programItem.timeStart.split(':')
-      newItem.timeStart = new Date(Number(date[0]), Number(date[1]), Number(date[2]), Number(timeStart[0]), Number(timeStart[1]),0,0).getTime();
+      newItem.timeStart = new Date(Number(date[0]), Number(date[1]), Number(date[2]), Number(timeStart[0]), Number(timeStart[1]), 0, 0).getTime()
       if (programItem.timeEnd) {
         let timeEnd = programItem.timeEnd.split(':')
-        newItem.timeEnd = new Date(Number(date[0]), Number(date[1]), Number(date[2]), Number(timeEnd[0]), Number(timeEnd[1]),0,0).getTime();
+        newItem.timeEnd = new Date(Number(date[0]), Number(date[1]), Number(date[2]), Number(timeEnd[0]), Number(timeEnd[1]), 0, 0).getTime()
       } else {
         newItem.timeEnd = undefined
       }
-      
-
       if (newItem.registration) {
         let registrationFields = ['maxRegistered', 'registered', 'cancelEmail']
         registrationFields.forEach((field) => {
@@ -189,15 +184,11 @@ export default {
         })
         let registrationStartDate = programItem.registrationStartDate.split('-')
         let registrationStartTime = programItem.registrationStartTime.split(':')
-        newItem.registrationStart = new Date(Number(registrationStartDate[0]), Number(registrationStartDate[1]), Number(registrationStartDate[2]), 
-        Number(registrationStartTime[0]), Number(registrationStartTime[1]),0,0).getTime();
-        
-       console.log(!!programItem.registrationEndDate, !!programItem.registrationEndTime)
+        newItem.registrationStart = new Date(Number(registrationStartDate[0]), Number(registrationStartDate[1]), Number(registrationStartDate[2]), Number(registrationStartTime[0]), Number(registrationStartTime[1]), 0, 0).getTime()
         if (!!programItem.registrationEndDate && !!programItem.registrationEndTime) {
           let registrationEndDate = programItem.registrationEndDate.split('-')
           let registrationEndTime = programItem.registrationEndTime.split(':')
-          newItem.registrationEnd = new Date(Number(registrationEndDate[0]), Number(registrationEndDate[1]), Number(registrationEndDate[2]), 
-          Number(registrationEndTime[0]), Number(registrationEndTime[1]),0,0).getTime();
+          newItem.registrationEnd = new Date(Number(registrationEndDate[0]), Number(registrationEndDate[1]), Number(registrationEndDate[2]), Number(registrationEndTime[0]), Number(registrationEndTime[1]), 0, 0).getTime()
         } else {
           newItem.registrationEnd = undefined
         }
@@ -206,21 +197,20 @@ export default {
         registrationFields.forEach((field) => {
           newItem[field] = undefined
         })
-      }      
+      }
       return newItem
     },
     handleAddLine: function () {
-      console.log(this.$data.programItem.timeStart)
-      if (this.$data.programItem.paragraph[this.$data.programItem.paragraph.length -1] !== '') {
+      if (this.$data.programItem.paragraph[this.$data.programItem.paragraph.length - 1] !== '') {
         this.$data.programItem.paragraph.push('')
       }
     },
     handleDeleteParagraphLine: function (index) {
       let para = this.$data.programItem.paragraph
-      this.$data.programItem.paragraph = para.slice(0,index).concat(para.slice(index+1, para.length))
+      this.$data.programItem.paragraph = para.slice(0, index).concat(para.slice(index + 1, para.length))
     },
     handleSubmit: function () {
-      let programItem = this.formatProgramItem(this.$data.programItem);
+      let programItem = this.formatProgramItem(this.$data.programItem)
       axios[(this.$data.editing ? 'put' : 'post')](process.env.VUE_APP_API_HOST +
         '/api/program/' + (this.$data.editing ? programItem + '/' : ''),
       programItem).then((response) => {
@@ -235,7 +225,7 @@ export default {
       })
     },
     destroy: function (programItem) {
-     if (!confirm('Er du sikker på at du vil slette ' + programItem.header + '?')) {
+      if (!confirm('Er du sikker på at du vil slette ' + programItem.header + '?')) {
         return
       }
       axios.delete(process.env.VUE_APP_API_HOST + '/api/program/' +

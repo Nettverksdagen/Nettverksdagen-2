@@ -1,7 +1,7 @@
 const defaultState = {
-    all: []
-  }
-  
+  all: []
+}
+
 const state = {...defaultState}
 
 const actions = {
@@ -16,93 +16,87 @@ const actions = {
     }
   }
 }
-  
+
 const getters = {
   // formatting program as needed
   anonProgram: state => {
-      let programItems = [];
-      state.all.forEach((item) => {
-          let newItem = item;
-          newItem.timeStart = new Date.setTime(item.timeStart);
-          if (item.timeEnd) {
-              newItem.timeEnd = new Date.setTime(item.timeEnd);
-          }
+    let programItems = []
+    state.all.forEach((item) => {
+      let newItem = item
+      newItem.timeStart = new Date.setTime(item.timeStart)
+      if (item.timeEnd) {
+        newItem.timeEnd = new Date.setTime(item.timeEnd)
+      }
 
-          if (item.registration) {
-              newItem.registrationStart = new Date.setTime(item.registrationStart);
-              if (item.registrationEnd) {
-                  newItem.registrationEnd = new Date.setTime(item.registrationEnd);
-              }
-          }
-          programItems.push(newItem)
-      })
-      return programItems
-      // Return the program formated as ProgramView needs it
+      if (item.registration) {
+        newItem.registrationStart = new Date.setTime(item.registrationStart)
+        if (item.registrationEnd) {
+          newItem.registrationEnd = new Date.setTime(item.registrationEnd)
+        }
+      }
+      programItems.push(newItem)
+    })
+    return programItems
+    // Return the program formated as ProgramView needs it
   },
   adminProgram: state => {
-      let programItems = [];
-      state.all.forEach((item) => {
-          let newItem = item;
-          
-          newItem.timeStart = new Date.setTime(item.timeStart);
-          let month = String(newItem.timeStart.getMonth() + 1);
-          month = (month.length < 2) ? "0" + month : month;
-          let day = String(newItem.timeStart.getDay());
-          day = (day.length < 2) ? "0" + day : day;
-          newItem.date = String(newItem.timeStart.getYear()) + "-" + month + "-" + day
-          let hour = String(newItem.timeStart.getHours())
-          hour = (hour.length < 2) ? "0" + hour : hour
-          let min = String(newItem.timeStart.getMinutes())
-          min = (min.length < 2) ? "0" + min : min
-          newItem.timeStart = hour + ":" + min
-          if (item.timeEnd) {
-              newItem.timeEnd = new Date.setTime(item.timeEnd);
-              let hour = String(newItem.timeEnd.getHours())
-              hour = (hour.length < 2) ? "0" + hour : hour
-              let min = String(newItem.timeEnd.getMinutes())
-              min = (min.length < 2) ? "0" + min : min
-              newItem.timeEnd = hour + ":" + min
-          }
+    let programItems = []
+    state.all.forEach((item) => {
+      let newItem = item
+      newItem.timeStart = new Date.setTime(item.timeStart)
+      let month = String(newItem.timeStart.getMonth() + 1)
+      month = (month.length < 2) ? '0' + month : month
+      let day = String(newItem.timeStart.getDay())
+      day = (day.length < 2) ? '0' + day : day
+      newItem.date = String(newItem.timeStart.getYear()) + '-' + month + '-' + day
+      let hour = String(newItem.timeStart.getHours())
+      hour = (hour.length < 2) ? '0' + hour : hour
+      let min = String(newItem.timeStart.getMinutes())
+      min = (min.length < 2) ? '0' + min : min
+      newItem.timeStart = hour + ':' + min
+      if (item.timeEnd) {
+        newItem.timeEnd = new Date.setTime(item.timeEnd)
+        let hour = String(newItem.timeEnd.getHours())
+        hour = (hour.length < 2) ? '0' + hour : hour
+        let min = String(newItem.timeEnd.getMinutes())
+        min = (min.length < 2) ? '0' + min : min
+        newItem.timeEnd = hour + ':' + min
+      }
+      if (item.registration) {
+        newItem.registrationStart = new Date.setTime(item.registrationStart)
+        let month = String(newItem.registrationStart.getMonth() + 1)
+        month = (month.length < 2) ? '0' + month : month
+        let day = String(newItem.registrationStart.getDay())
+        day = (day.length < 2) ? '0' + day : day
+        newItem.registrationStartDate = String(newItem.registrationStart.getYear()) + '-' + month + '-' + day
 
-          if (item.registration) {
-              newItem.registrationStart = new Date.setTime(item.registrationStart);
-              
-              let month = String(newItem.registrationStart.getMonth() + 1);
-              month = (month.length < 2) ? "0" + month : month;
-              let day = String(nnewItem.registrationStart.getDay());
-              day = (day.length < 2) ? "0" + day : day;
-              newItem.registrationStartDate = String(newItem.registrationStart.getYear()) + "-" + month + "-" + day
+        let hour = String(newItem.registrationStart.getHours())
+        hour = (hour.length < 2) ? '0' + hour : hour
+        let min = String(newItem.registrationStart.getMinutes())
+        min = (min.length < 2) ? '0' + min : min
+        newItem.registrationStartTime = hour + ':' + min
 
-              let hour = String(newItem.registrationStart.getHours())
-              hour = (hour.length < 2) ? "0" + hour : hour
-              let min = String(newItem.registrationStart.getMinutes())
-              min = (min.length < 2) ? "0" + min : min
-              newItem.registrationStartTime = hour + ":" + min
-
-
-              if (item.registrationEnd) {
-                  newItem.registrationEnd = new Date.setTime(item.registrationEnd);
-                  
-                  let month = String(newItem.registrationEnd.getMonth() + 1);
-                  month = (month.length < 2) ? "0" + month : month;
-                  let day = String(nnewItem.registrationEnd.getDay());
-                  day = (day.length < 2) ? "0" + day : day;
-                  newItem.registrationEndDate = String(newItem.registrationEnd.getYear()) + "-" + month + "-" + day
-
-                  let hour = String(newItem.registrationEnd.getHours())
-                  hour = (hour.length < 2) ? "0" + hour : hour
-                  let min = String(newItem.registrationEnd.getMinutes())
-                  min = (min.length < 2) ? "0" + min : min
-                  newItem.registrationEndTime = hour + ":" + min
-              }
-          }
-          programItems.push(newItem)
-      })
-      return programItems
-      // Return the program formated as ProgramAdminView needs it
+        if (item.registrationEnd) {
+          newItem.registrationEnd = new Date.setTime(item.registrationEnd)
+          let month = String(newItem.registrationEnd.getMonth() + 1)
+          month = (month.length < 2) ? '0' + month : month
+          let day = String(newItem.registrationEnd.getDay())
+          day = (day.length < 2) ? '0' + day : day
+          newItem.registrationEndDate = String(newItem.registrationEnd.getYear()) + '-' + month + '-' + day
+          let hour = String(newItem.registrationEnd.getHours())
+          hour = (hour.length < 2) ? '0' + hour : hour
+          let min = String(newItem.registrationEnd.getMinutes())
+          min = (min.length < 2) ? '0' + min : min
+          newItem.registrationEndTime = hour + ':' + min
+        }
+      }
+      programItems.push(newItem)
+    })
+    return programItems
+    // Return the program formated as ProgramAdminView needs it
   }
 }
-  
+
 const mutations = {
   fetchRequest (state) {
     state.loaded = false
