@@ -12,14 +12,12 @@ def send_email(request):
         #email, event, authentication
         if request.method == 'POST':
             #initialize
-            email = request.POST['emal_address']
-            event = request.POST['event_address']
-            authentication = request.POST['authentication']
+            data = {'email': request.DATA.get('email_address'), 'event': request.DATA.get('event_address'), 'authentication': request.DATA.get('authentication')}
             #Sending the mail
-            send_mail('Nettverksdagene - Påmelding til ' + event,
-            'Vennligst verifiser din påmelding ved å klikke på denne linken: ' + authentication,
+            send_mail('Nettverksdagene - Påmelding til ' + data.get("event_address"),
+            'Vennligst verifiser din påmelding ved å klikke på denne linken: ' + data.get("authentication"),
             'it@nettverksdagene.no',
-            [email],
+            [data.get("email_address")],
             fail_silently=False)
             html = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html><head>  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>  <title>E-mail</title>  <style></style>  <script></script></head><body>Vennligst sjekk søppelfilteret</body></html>'
             return HttpResponse(html)

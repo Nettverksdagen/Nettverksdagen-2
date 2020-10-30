@@ -22,5 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('rest-auth/', include('rest_auth.urls')),
-    path('email/', views.send_email, {'form' : info}),
+    path('email/', views.send_email),
 ]
