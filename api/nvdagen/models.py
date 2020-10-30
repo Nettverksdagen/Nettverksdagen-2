@@ -1,5 +1,5 @@
 from django.db import models
- from django.contrib.postgres.fields import ArrayField
+#from django.contrib.postgres.fields import ArrayField
 
 SUMMER_INTERNSHIP = 'Sommerjobb'
 FULL_TIME_POSITION = 'Fast stilling'
@@ -98,7 +98,7 @@ class ProgramItem(models.Model):
     place = models.CharField(max_length=250)
     timeStart = models.PositiveBigIntegerField()
     timeEnd= models.PositiveBigIntegerField()
-    paragraph = ArrayField(models.CharField(max_length=250))
+    #paragraph = ArrayField(models.CharField(max_length=250))
     registration = models.BooleanField(default=False)
     maxRegistered = models.IntegerField()
     registered = models.IntegerField()
