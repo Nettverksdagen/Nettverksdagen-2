@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from .models import Listing, Business, Sponsor, TeamMember, Form, ProgramItem
-from .serializers import ListingSerializer, BusinessSerializer, SponsorSerializer, TeamMemberSerializer, FormSerializer, ProgramSerializer
+from .models import Listing, Business, Sponsor, TeamMember, Form
+from .serializers import ListingSerializer, BusinessSerializer, SponsorSerializer, TeamMemberSerializer, FormSerializer
 
 
 class ListingViewSet(viewsets.ModelViewSet):
@@ -26,7 +26,3 @@ class SponsorViewSet(viewsets.ModelViewSet):
 class FormViewSet(viewsets.ModelViewSet):
     serializer_class = FormSerializer
     queryset = Form.objects.all()
-
-class ProgramViewSet(viewsets.ModelViewSet):
-    serializer_class = ProgramSerializer
-    queryset = ProgramItem.objects.all()

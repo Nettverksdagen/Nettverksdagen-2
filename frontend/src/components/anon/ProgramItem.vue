@@ -77,7 +77,6 @@
       >
         <b-form-input
           :id="'input-email' + name"
-          type="email"
           v-model="form.email"
           required
           placeholder='Email'
