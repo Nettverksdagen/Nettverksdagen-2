@@ -1,8 +1,8 @@
 <template>
   <div class="hero-text">
-    <h1 class="mt-3 hero-header">27. og 28. januar 2021 i Glassgården!</h1>
+    <h1 class="mt-3 hero-header">Vi ønsker alle studenter og bedrifter velkommen til et smittevennlig arrangement!</h1>
     <hr class="hr-hero">
-    <h2 class="font-weight-light">Vi ønsker alle studenter og bedrifter velkommen til et smittevennlig arrangement!</h2>
+    <h2 class="font-weight-light">27. og 28. januar 2021</h2>
   </div>
 </template>
 
