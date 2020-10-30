@@ -8,7 +8,7 @@
         <div :key="'programDay' + index" v-for=" (day , index) in program">
           <h3 class="font-weight-bold">{{formatDate(day[0].timeStart)}}</h3>
           <div class="timeline">
-            <div :key="'dayItem' + index" v-for="(item, index) in day">
+            <div :key="'dayItem' + item.id" v-for="(item) in day">
               <ProgramItem
               :timeStart="item.timeStart"
               :timeEnd="item.timeEnd"
@@ -21,7 +21,7 @@
               :cancelEmail="item.cancelEmail"
               :registrationStart="item.registrationStart"
               :registrationEnd="item.registrationEnd"
-              :name="item.key"
+              :name="item.id"
               >
               </ProgramItem>
             </div>
@@ -59,125 +59,10 @@ export default {
   },
   computed: {
     program: function () {
-      let prog = [
-        {
-          key: 3,
-          timeStart: new Date(2021, 0, 29, 10, 0, 0, 0),
-          place: 'Glassgården, Elektrobygget',
-          header: 'Standområdet åpner!'
-        },
-        {
-          key: 4,
-          timeStart: new Date(2021, 0, 29, 12, 10, 0, 0),
-          place: 'Glassgården, Elektrobygget',
-          header: 'Ballongslipp!'
-        },
-        {
-          key: 8,
-          timeStart: new Date(2021, 0, 29, 17, 15, 0, 0),
-          place: 'EL1, Gamle Elektro',
-          header: 'Bedriftpresentasjon med Bekk',
-          paragraph: ['Med bespisning på Olivia Solsiden', 'Dette arrangementet er fullt.']
-        },
-        {
-          key: 1,
-          timeStart: new Date(2021, 0, 28, 17, 30, 0, 0),
-          timeEnd: new Date(2021, 0, 28, 18, 30, 0, 0),
-          place: 'EL1, Gamle Elektro',
-          header: 'Bedriftpresentasjon med Honeywell',
-          paragraph: ['Med bespisning på Graffi Grill.', 'Dette arrangementet er fullt.'],
-          registration: false,
-          maxRegistered: 10,
-          registered: 5,
-          cancelEmail: 'kska@stud.ntnu.no',
-          registrationStart: new Date(2020, 8, 18, 10, 33, 0, 0)
-        },
-        {
-          key: 6,
-          timeStart: new Date(2021, 0, 29, 14, 0, 0, 0),
-          place: 'Glassgården, Elektrobygget',
-          header: 'Premieutdeling!'
-        },
-        {
-          key: 7,
-          timeStart: new Date(2021, 0, 29, 14, 15, 0, 0),
-          timeEnd: new Date(2021, 0, 29, 15, 0, 0, 0),
-          place: 'EL1, Gamle Elektro',
-          header: 'Bedriftpresentasjon med Imatis',
-          paragraph: ['Med servering av baguetter og mineralvann.', 'Påmeldingen er avsluttet.']
-        },
-        {
-          key: 5,
-          timeStart: new Date(2021, 0, 29, 12, 15, 0, 0),
-          timeEnd: new Date(2021, 0, 29, 13, 0, 0, 0),
-          place: 'KJL1, Kjelhuset',
-          header: 'Prosjektpresentasjon med Data Respons R&D Services',
-          paragraph: ['Bli med på Kahootkonkurranse og vinn AirPods Pro.', 'Påmeldingen er avsluttet.']
-        },
-        {
-          key: 9,
-          timeStart: new Date(2021, 0, 30, 9, 15, 0, 0),
-          timeEnd: new Date(2021, 0, 30, 10, 15, 0, 0),
-          place: 'EL5, Gamle Elektro',
-          header: 'Frokostpresentasjon med National Oilwell Varco',
-          paragraph: ['Med servering av baguetter og kaffe.', 'Påmeldingen er avsluttet.']
-        },
-        {
-          key: 2,
-          timeStart: new Date(2021, 0, 29, 9, 15, 0, 0),
-          timeEnd: new Date(2021, 0, 29, 10, 15, 0, 0),
-          place: 'EL6, Gamle Elektro',
-          header: 'Frokostpresentasjon med Sopra Steria',
-          paragraph: ['Med servering av baguetter og kaffe.', 'Påmeldingen er avsluttet.']
-        },
-        {
-          key: 11,
-          timeStart: new Date(2021, 0, 30, 11, 15, 0, 0),
-          timeEnd: new Date(2021, 0, 30, 12, 0, 0, 0),
-          place: 'S8, Stripa (Sentralbygg 2)',
-          header: 'Lønsjpresentasjon med Maritime Robotics',
-          paragraph: ['Med servering av baguetter og mineralvann.', 'Påmeldingen er avsluttet.']
-        },
-        {
-          key: 12,
-          timeStart: new Date(2021, 0, 30, 12, 10, 0, 0),
-          place: 'Glassgården, Elektrobygget',
-          header: 'Ballongslipp!'
-        },
-        {
-          key: 13,
-          timeStart: new Date(2021, 0, 30, 12, 15, 0, 0),
-          timeEnd: new Date(2021, 0, 30, 13, 0, 0, 0),
-          place: 'S1, Stripa (Sentralbygg 1)',
-          header: 'Prosjektpresentasjon med Data Respons R&D Services',
-          paragraph: ['Bli med på Kahootkonkurranse og vinn AirPods Pro.', 'Påmeldingen er avsluttet.']
-        },
-        {
-          key: 10,
-          timeStart: new Date(2021, 0, 30, 10, 0, 0, 0),
-          place: 'Glassgården, Elektrobygget',
-          header: 'Standområdet åpner',
-          paragraph: ['Goodiebags til de 50 første som kommer innom!']
-        },
-        {
-          key: 14,
-          timeStart: new Date(2021, 0, 30, 14, 0, 0, 0),
-          place: 'Glassgården, Elektrobygget',
-          header: 'Premieutdeling!'
-        },
-        {
-          key: 15,
-          timeStart: new Date(2021, 0, 30, 14, 15, 0, 0),
-          timeEnd: new Date(2021, 0, 30, 15, 30, 0, 0),
-          place: 'EL6, Gamle Elektro',
-          header: 'Kryptografi-skattejakt med DNB',
-          paragraph: ['Med servering av baguetter og mineralvann. Premie til vinnerne!', 'Påmeldingen er avsluttet.']
-        }
-      ]
-
+      let prog = this.$store.getters['program/anonProgram']
       let sortedProgram = []
       let days = []
-      // It now should sort, but maybe uneficiently
+      
       prog.forEach((item, index) => {
         if (index === 0) {
           sortedProgram.push([item])
@@ -227,14 +112,6 @@ export default {
           sortedProgram = newSortedProgram
         }
       })
-      /*
-      // Testing if it is sorted
-      sortedProgram.forEach((day) => {
-        day.forEach((item) => {
-          console.log(item.key)
-        })
-      })
-      */
       return sortedProgram
     }
   }
