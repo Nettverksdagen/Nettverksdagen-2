@@ -80,12 +80,6 @@ export default new Router({
           name: 'Form',
           component: FormView,
           meta: {title: 'Skjema'}
-        },
-        {
-          path: 'programadmin',
-          name: 'ProgramAdmin',
-          component: ProgramAdminView,
-          meta: {title: 'Rediger program'}
         }
       ]
     },
@@ -136,7 +130,12 @@ export default new Router({
           component: FormAdminView,
           meta: {title: 'Rediger skjemaer'}
         },
-        
+        {
+          path: 'program',
+          name: 'Program',
+          component: ProgramAdminView,
+          meta: {title: 'Rediger program'}
+        }
       ]
     },
     {
