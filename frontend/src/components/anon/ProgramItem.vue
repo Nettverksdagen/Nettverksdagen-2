@@ -105,8 +105,11 @@
 </template>
 
 <script>
+import axios from 'axios'
+import { mapMutations } from 'vuex'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons'
+
 library.add(faMapMarkerAlt, faClock)
 export default {
   name: 'ProgramItem',
@@ -171,10 +174,30 @@ export default {
       let data = this.$data.form
       if (this.checkValidForm(data)) {
         // Send email here
+        this.sendEmail()
+        // Clear data
+        this.$data.show = false
+        this.$data.form = {email: '', name: ''}
+        this.$data.notSendtEmail = false
+      }else{
+
+        // Send email here
+        this.sendEmail()
+        // Clear data
         this.$data.show = false
         this.$data.form = {email: '', name: ''}
         this.$data.notSendtEmail = false
       }
+    },
+    sendEmail () {
+      axios.post(process.env.VUE_APP_API_HOST +
+        '/participant/', {email: this.$data.email, name: this.$data.name})
+        .then((response) => {this.name = response.name, this})
+      .catch((e) => {
+        this.showAlert('danger',
+          'Error ' + e.response.status + ' ' + e.response.statusText,
+          'Kunne ikke sende mail ut.')
+      })
     },
     onCancel (e) {
       e.preventDefault()

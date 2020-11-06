@@ -16,11 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from .routers import router
-from api/nvdagen/ import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('rest-auth/', include('rest_auth.urls')),
-    path('email/', views.send_email),
 ]

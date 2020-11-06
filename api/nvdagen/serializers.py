@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Listing, Business, Sponsor, TeamMember, Form
+from .models import Listing, Business, Sponsor, TeamMember, Form, Participant
 
 
 class ListingSerializer(serializers.ModelSerializer):
@@ -30,3 +30,11 @@ class FormSerializer(serializers.ModelSerializer):
     class Meta:
         model = Form
         fields = '__all__'
+
+
+class ParticipantSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Participant
+        fields = '__all__'
+
+        

@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.mail import send_mail
+from django.response import Response 
 
 SUMMER_INTERNSHIP = 'Sommerjobb'
 FULL_TIME_POSITION = 'Fast stilling'
@@ -89,3 +91,31 @@ class Form(models.Model):
     external_url = models.CharField(max_length=250)
     internal_url = models.CharField(max_length=250)
     iframe_height = models.CharField(max_length=250)
+
+
+class Participant(models.Model):
+    id = models.AutoField(primary_key=True)
+    event = models.IntField(max_length=250)
+    name = models.CharField(max_length=250)
+    email = models.CharField(max_length=250)
+    
+    def send_email(self, request):
+        try:
+            #email, event, authentication
+            if request.method == 'POST':
+                #initialize
+                data = {'email': request.data.get('email_address'), 'name': request.data.get('name')}
+                #Sending the mail
+                send_mail('Nettverksdagene - Påmelding til ' + data.get("name"),
+                'Vennligst verifiser din påmelding ved å klikke på denne linken: ',
+                'it@nettverksdagene.no',
+                [data.get("email_address")],
+                fail_silently=False)
+                html = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html><head>  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>  <title>E-mail</title>  <style></style>  <script></script></head><body>Vennligst sjekk søppelfilteret</body></html>'
+                response = {'message': 'It works!!'}
+                return Response(response, status = html)
+        except:
+            print("ERROR: Konfigurer email-settings i mail_settings.py")
+            raise Exception('ERROR: Konfigurer email-settings i mail_settings.py')
+
+
