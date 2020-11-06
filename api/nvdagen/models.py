@@ -98,7 +98,7 @@ class ProgramItem(models.Model):
     place = models.CharField(max_length=250)
     timeStart = models.PositiveBigIntegerField()
     timeEnd= models.PositiveBigIntegerField()
-    #paragraph = ArrayField(models.CharField(max_length=250))
+    paragraph = models.CharField(max_length=1000)
     registration = models.BooleanField(default=False)
     maxRegistered = models.IntegerField()
     registered = models.IntegerField()
