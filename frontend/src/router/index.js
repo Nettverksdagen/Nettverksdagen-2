@@ -132,7 +132,7 @@ export default new Router({
         },
         {
           path: 'program',
-          name: 'Program',
+          name: 'ProgramAdmin',
           component: ProgramAdminView,
           meta: {title: 'Rediger program'}
         }
