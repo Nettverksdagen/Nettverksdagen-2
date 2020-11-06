@@ -35,6 +35,6 @@ class FormSerializer(serializers.ModelSerializer):
 class ParticipantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Participant
-        fields = '__all__'
+        fields = ('id', 'event', 'name', 'email', 'send_email')
 
         
