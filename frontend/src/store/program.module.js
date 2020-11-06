@@ -23,11 +23,11 @@ const getters = {
     let programItems = []
     state.all.forEach((item) => {
       let newItem = item
+      newItem.paragraph = item.paragraph.split('\n')
       newItem.timeStart = new Date.setTime(item.timeStart)
       if (item.timeEnd) {
         newItem.timeEnd = new Date.setTime(item.timeEnd)
       }
-
       if (item.registration) {
         newItem.registrationStart = new Date.setTime(item.registrationStart)
         if (item.registrationEnd) {
@@ -43,6 +43,7 @@ const getters = {
     let programItems = []
     state.all.forEach((item) => {
       let newItem = item
+      newItem.paragraph = item.paragraph.split('\n')
       newItem.timeStart = new Date.setTime(item.timeStart)
       let month = String(newItem.timeStart.getMonth() + 1)
       month = (month.length < 2) ? '0' + month : month

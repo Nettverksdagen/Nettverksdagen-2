@@ -163,11 +163,18 @@ export default {
       if (this.$data.editing) {
         newItem.id = programItem.id
       }
-      let fields = ['header', 'paragraph', 'place', 'registration']
+      let fields = ['header', 'place', 'registration']
       fields.forEach((field) => {
         newItem[field] = programItem[field]
       })
-
+      let paragraph = "";
+      programItem.paragraph.forEach((index, line) => {
+        paragraph += line
+        if (index !== programItem.paragraph.length-1) {
+          paragraph += "\n"
+        }
+      })
+      newItem.paragraph = paragraph
       let date = programItem.date.split('-')
       let timeStart = programItem.timeStart.split(':')
       newItem.timeStart = new Date(Number(date[0]), Number(date[1]), Number(date[2]), Number(timeStart[0]), Number(timeStart[1]), 0, 0).getTime()
