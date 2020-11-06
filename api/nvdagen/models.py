@@ -96,7 +96,7 @@ class Form(models.Model):
 
 class Participant(models.Model):
     id = models.AutoField(primary_key=True)
-    event = models.IntField(max_length=250)
+    event = models.IntegerField()
     name = models.CharField(max_length=250)
     email = models.CharField(max_length=250)
     
