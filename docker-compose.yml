@@ -4,6 +4,8 @@ services:
   postgres:
     image: postgres
     container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: 1234
 
   api:
     build: ./api
