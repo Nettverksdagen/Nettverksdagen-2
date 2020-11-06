@@ -167,11 +167,11 @@ export default {
       fields.forEach((field) => {
         newItem[field] = programItem[field]
       })
-      let paragraph = "";
+      let paragraph = ''
       programItem.paragraph.forEach((index, line) => {
         paragraph += line
-        if (index !== programItem.paragraph.length-1) {
-          paragraph += "\n"
+        if (index !== programItem.paragraph.length - 1) {
+          paragraph += '\n'
         }
       })
       newItem.paragraph = paragraph
