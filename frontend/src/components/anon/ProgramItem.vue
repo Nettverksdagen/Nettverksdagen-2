@@ -95,7 +95,7 @@
             variant='primary'
             @click="onSubmit"
           >
-            Submit
+            Submit forms.
           </b-button>
           </div>
       </template>
@@ -105,8 +105,11 @@
 </template>
 
 <script>
+import axios from 'axios'
+import { mapMutations } from 'vuex'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons'
+
 library.add(faMapMarkerAlt, faClock)
 export default {
   name: 'ProgramItem',
@@ -171,10 +174,26 @@ export default {
       let data = this.$data.form
       if (this.checkValidForm(data)) {
         // Send email here
+        this.sendEmail()
+        // Clear data
+        this.$data.show = false
+        this.$data.form = {email: '', name: ''}
+        this.$data.notSendtEmail = false
+      }else{
+
+        // Send email here
+        this.sendEmail()
+        // Clear data
         this.$data.show = false
         this.$data.form = {email: '', name: ''}
         this.$data.notSendtEmail = false
       }
+    },
+    sendEmail () {
+      axios.post(process.env.VUE_APP_API_HOST +
+        '/participant/', this.$data.form)
+        .then((response) => console.log(response))
+        .catch((e) => console.log(e))
     },
     onCancel (e) {
       e.preventDefault()
