@@ -127,6 +127,7 @@ export default {
       fields: [
         'id', { key: 'header', label: 'Header' }, { key: 'paragraph', label: 'Text' }, { key: 'place', label: 'Place' }, { key: 'timeStart', label: 'Staring time' }, { key: 'timeEnd', label: 'Ending time' }, { key: 'Edit', label: '' }],
       programItem: {
+        id: '',
         header: '',
         paragraph: [''],
         place: '',
@@ -219,7 +220,7 @@ export default {
     handleSubmit: function () {
       let programItem = this.formatProgramItem(this.$data.programItem)
       axios[(this.$data.editing ? 'put' : 'post')](process.env.VUE_APP_API_HOST +
-        '/api/program/' + (this.$data.editing ? programItem + '/' : ''),
+        '/api/program/' + (this.$data.editing ? programItem.id + '/' : ''),
       programItem).then((response) => {
         this.showAlert('success', 'Suksess!', 'ProgramItem har blitt' +
           (this.$data.editing ? 'endret.' : 'lagt ut på forsiden.'))
@@ -248,6 +249,7 @@ export default {
     },
     resetForm: function () {
       this.$data.programItem = {
+        id:'',
         header: '',
         paragraph: [''],
         place: '',
