@@ -191,13 +191,9 @@ export default {
     },
     sendEmail () {
       axios.post(process.env.VUE_APP_API_HOST +
-        '/participant/', {email: this.$data.email, name: this.$data.name})
-        .then((response) => {this.name = response.name, this})
-      .catch((e) => {
-        this.showAlert('danger',
-          'Error ' + e.response.status + ' ' + e.response.statusText,
-          'Kunne ikke sende mail ut.')
-      })
+        '/participant/', this.$data.form)
+        .then((response) => console.log(response))
+        .catch((e) => console.log(e))
     },
     onCancel (e) {
       e.preventDefault()

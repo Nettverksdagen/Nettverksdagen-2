@@ -114,7 +114,7 @@ class Participant(models.Model):
                 fail_silently=False)
                 #html = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html><head>  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>  <title>E-mail</title>  <style></style>  <script></script></head><body>Vennligst sjekk søppelfilteret</body></html>'
                 response = {'message': 'It works!!'}
-                return Response(response, status = status.HTTP_200_OK)
+                #return Response(response, status = status.HTTP_200_OK)
         except:
             print("ERROR: Konfigurer email-settings i mail_settings.py")
             raise Exception('ERROR: Konfigurer email-settings i mail_settings.py')
