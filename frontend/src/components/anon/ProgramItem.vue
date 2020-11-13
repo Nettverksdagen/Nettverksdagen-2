@@ -180,20 +180,24 @@ export default {
         this.$data.form = {email: '', name: ''}
         this.$data.notSendtEmail = false
       }else{
-
+        /*
         // Send email here
         this.sendEmail()
         // Clear data
         this.$data.show = false
         this.$data.form = {email: '', name: ''}
         this.$data.notSendtEmail = false
+        */
       }
     },
     sendEmail () {
+      console.log({event: 1, ...this.$data.form})
       axios.post(process.env.VUE_APP_API_HOST +
-        '/participant/', this.$data.form)
+        '/api/participant/', {event: 1, ...this.$data.form})
         .then((response) => console.log(response))
-        .catch((e) => console.log(e))
+        .catch((e) => {
+          console.log("Error in sendEmail")
+          console.log(e)})
     },
     onCancel (e) {
       e.preventDefault()

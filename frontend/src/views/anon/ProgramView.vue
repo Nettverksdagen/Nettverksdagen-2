@@ -86,7 +86,7 @@ export default {
           place: 'EL1, Gamle Elektro',
           header: 'Bedriftpresentasjon med Honeywell',
           paragraph: ['Med bespisning på Graffi Grill.', 'Dette arrangementet er fullt.'],
-          registration: false,
+          registration: true,
           maxRegistered: 10,
           registered: 5,
           cancelEmail: 'kska@stud.ntnu.no',
