@@ -4,8 +4,8 @@
       <Hero/>
     </div>
     <div class="text-center pt-5">
-      <h3>Vil din bedrift delta på Nettverksdagene 2021?</h3>
-      <h3><a href="mailto:bedrift@nettverksdagene.no">Meld interesse allerede nå</a>.</h3>
+      <h3>Vil din bedrift delta på Nettverksdagene</h3>
+      <h3><a href="mailto:bedrift@nettverksdagene.no">Meld interesse her</a>.</h3>
     </div>
     <businesses></businesses>
     <sponsors></sponsors>

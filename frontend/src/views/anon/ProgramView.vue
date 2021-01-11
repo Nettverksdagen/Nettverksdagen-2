@@ -2,8 +2,7 @@
     <Content>
       <div class="program">
         <h1 class="text-center">Program</h1>
-        <p class="text-center description mt-3 mb-2">Dette var programmet for Nettverksdagene 2020.</p>
-        <p class="text-center description mt-3 mb-2">Programmet for 2021 kommer snart!</p>
+        <p class="text-center description mt-3 mb-2">Programmet for Nettverksdagene 2021:</p>
         <!-- <h4 class="text-center font-weight-bold"><a href="#stand-map-header">Se standkart her!</a></h4> -->
         <div :key="'programDay' + index" v-for=" (day , index) in program">
           <h3 class="font-weight-bold">{{formatDate(day[0].timeStart)}}</h3>
@@ -61,117 +60,93 @@ export default {
     program: function () {
       let prog = [
         {
-          key: 3,
-          timeStart: new Date(2021, 0, 29, 10, 0, 0, 0),
-          place: 'Glassgården, Elektrobygget',
-          header: 'Standområdet åpner!'
-        },
-        {
-          key: 4,
-          timeStart: new Date(2021, 0, 29, 12, 10, 0, 0),
-          place: 'Glassgården, Elektrobygget',
-          header: 'Ballongslipp!'
-        },
-        {
-          key: 8,
-          timeStart: new Date(2021, 0, 29, 17, 15, 0, 0),
-          place: 'EL1, Gamle Elektro',
-          header: 'Bedriftpresentasjon med Bekk',
-          paragraph: ['Med bespisning på Olivia Solsiden', 'Dette arrangementet er fullt.']
+          key: 2,
+          timeStart: new Date(2021, 0, 26, 18, 15, 0, 0),
+          timeEnd: new Date(2021, 0, 26, 19, 15, 0, 0),
+          place: 'Digital presentasjon',
+          header: 'Bedriftpresentasjon med Cognite',
+          registration: false
         },
         {
           key: 1,
-          timeStart: new Date(2021, 0, 28, 17, 30, 0, 0),
-          timeEnd: new Date(2021, 0, 28, 18, 30, 0, 0),
-          place: 'EL1, Gamle Elektro',
-          header: 'Bedriftpresentasjon med Honeywell',
-          paragraph: ['Med bespisning på Graffi Grill.', 'Dette arrangementet er fullt.'],
-          registration: true,
-          maxRegistered: 10,
-          registered: 5,
-          cancelEmail: 'kska@stud.ntnu.no',
-          registrationStart: new Date(2020, 8, 18, 10, 33, 0, 0)
+          timeStart: new Date(2021, 0, 25, 15, 0, 0, 0),
+          timeEnd: new Date(2021, 0, 27, 15, 0, 0, 0),
+          place: 'Poption',
+          header: 'Åpent for å bli med på speedintervju i regi av poption!',
+          paragraph: ['Studentene kan vise interesse fra og med mandag 25.januar fra kl. 15.00 til og med onsdag 27. kl 15.00. Utvelgelsen av studenter gjør dere fortløpende og innen kl. 17.00 onsdag 27. Invitasjon til aktuelle studenter sendes ut like etterpå. Kandidater blir automatisk booket til et 15 minutters speedintervju over video. Speedintervjuene gjennomføres torsdag 28. kl 09.00 - 16.00. Etter intervjuene er gjennomført kan bedriftene velge om de ønsker å ta studenten med videre i egen rekrutteringsprosess.'],
+          registration: false
         },
         {
-          key: 6,
-          timeStart: new Date(2021, 0, 29, 14, 0, 0, 0),
-          place: 'Glassgården, Elektrobygget',
-          header: 'Premieutdeling!'
+          key: 3,
+          timeStart: new Date(2021, 0, 27, 9, 15, 0, 0),
+          timeEnd: new Date(2021, 0, 27, 10, 15, 0, 0),
+          place: 'Digital presentasjon',
+          header: 'Morgenbedpress!',
+          registration: false
         },
         {
-          key: 7,
-          timeStart: new Date(2021, 0, 29, 14, 15, 0, 0),
-          timeEnd: new Date(2021, 0, 29, 15, 0, 0, 0),
-          place: 'EL1, Gamle Elektro',
-          header: 'Bedriftpresentasjon med Imatis',
-          paragraph: ['Med servering av baguetter og mineralvann.', 'Påmeldingen er avsluttet.']
+          key: 4,
+          timeStart: new Date(2021, 0, 27, 10, 0, 0, 0),
+          timeEnd: new Date(2021, 0, 27, 14, 0, 0, 0),
+          place: 'nettverksdagene.graduateland.com',
+          header: 'Bli med på nettverksdagene via graduateland!',
+          registration: false
         },
         {
           key: 5,
-          timeStart: new Date(2021, 0, 29, 12, 15, 0, 0),
-          timeEnd: new Date(2021, 0, 29, 13, 0, 0, 0),
-          place: 'KJL1, Kjelhuset',
-          header: 'Prosjektpresentasjon med Data Respons R&D Services',
-          paragraph: ['Bli med på Kahootkonkurranse og vinn AirPods Pro.', 'Påmeldingen er avsluttet.']
+          timeStart: new Date(2021, 0, 27, 13, 15, 0, 0),
+          timeEnd: new Date(2021, 0, 27, 14, 15, 0, 0),
+          place: 'Digital presentasjon',
+          header: 'Bedriftpresentasjon med McKinsey!',
+          registration: false
+        },
+        {
+          key: 6,
+          timeStart: new Date(2021, 0, 27, 15, 15, 0, 0),
+          timeEnd: new Date(2021, 0, 27, 16, 15, 0, 0),
+          place: 'Digital presentasjon',
+          header: 'Bedriftpresentasjon med DataRespons!',
+          registration: false
+        },
+        {
+          key: 7,
+          timeStart: new Date(2021, 0, 27, 17, 15, 0, 0),
+          timeEnd: new Date(2021, 0, 27, 18, 15, 0, 0),
+          place: 'Digital presentasjon',
+          header: 'Kveldsbedpress!',
+          registration: false
+        },
+        {
+          key: 8,
+          timeStart: new Date(2021, 0, 28, 9, 15, 0, 0),
+          timeEnd: new Date(2021, 0, 28, 10, 15, 0, 0),
+          place: 'Digital presentasjon',
+          header: 'Bedriftpresentasjon med DNV GL!',
+          registration: false
         },
         {
           key: 9,
-          timeStart: new Date(2021, 0, 30, 9, 15, 0, 0),
-          timeEnd: new Date(2021, 0, 30, 10, 15, 0, 0),
-          place: 'EL5, Gamle Elektro',
-          header: 'Frokostpresentasjon med National Oilwell Varco',
-          paragraph: ['Med servering av baguetter og kaffe.', 'Påmeldingen er avsluttet.']
-        },
-        {
-          key: 2,
-          timeStart: new Date(2021, 0, 29, 9, 15, 0, 0),
-          timeEnd: new Date(2021, 0, 29, 10, 15, 0, 0),
-          place: 'EL6, Gamle Elektro',
-          header: 'Frokostpresentasjon med Sopra Steria',
-          paragraph: ['Med servering av baguetter og kaffe.', 'Påmeldingen er avsluttet.']
-        },
-        {
-          key: 11,
-          timeStart: new Date(2021, 0, 30, 11, 15, 0, 0),
-          timeEnd: new Date(2021, 0, 30, 12, 0, 0, 0),
-          place: 'S8, Stripa (Sentralbygg 2)',
-          header: 'Lønsjpresentasjon med Maritime Robotics',
-          paragraph: ['Med servering av baguetter og mineralvann.', 'Påmeldingen er avsluttet.']
-        },
-        {
-          key: 12,
-          timeStart: new Date(2021, 0, 30, 12, 10, 0, 0),
-          place: 'Glassgården, Elektrobygget',
-          header: 'Ballongslipp!'
-        },
-        {
-          key: 13,
-          timeStart: new Date(2021, 0, 30, 12, 15, 0, 0),
-          timeEnd: new Date(2021, 0, 30, 13, 0, 0, 0),
-          place: 'S1, Stripa (Sentralbygg 1)',
-          header: 'Prosjektpresentasjon med Data Respons R&D Services',
-          paragraph: ['Bli med på Kahootkonkurranse og vinn AirPods Pro.', 'Påmeldingen er avsluttet.']
+          timeStart: new Date(2021, 0, 28, 13, 15, 0, 0),
+          timeEnd: new Date(2021, 0, 28, 14, 15, 0, 0),
+          place: 'Digital presentasjon',
+          header: 'Bedriftpresentasjon med Galleon!',
+          registration: false
         },
         {
           key: 10,
-          timeStart: new Date(2021, 0, 30, 10, 0, 0, 0),
-          place: 'Glassgården, Elektrobygget',
-          header: 'Standområdet åpner',
-          paragraph: ['Goodiebags til de 50 første som kommer innom!']
+          timeStart: new Date(2021, 0, 28, 17, 15, 0, 0),
+          timeEnd: new Date(2021, 0, 28, 18, 15, 0, 0),
+          place: 'Digital presentasjon',
+          header: 'Surprise bedpress!',
+          registration: false
         },
         {
-          key: 14,
-          timeStart: new Date(2021, 0, 30, 14, 0, 0, 0),
-          place: 'Glassgården, Elektrobygget',
-          header: 'Premieutdeling!'
-        },
-        {
-          key: 15,
-          timeStart: new Date(2021, 0, 30, 14, 15, 0, 0),
-          timeEnd: new Date(2021, 0, 30, 15, 30, 0, 0),
-          place: 'EL6, Gamle Elektro',
-          header: 'Kryptografi-skattejakt med DNB',
-          paragraph: ['Med servering av baguetter og mineralvann. Premie til vinnerne!', 'Påmeldingen er avsluttet.']
+          key: 11,
+          timeStart: new Date(2021, 0, 28, 18, 15, 0, 0),
+          timeEnd: new Date(2021, 0, 28, 21, 15, 0, 0),
+          place: 'Fysisk presentasjon',
+          header: 'Bekk inviterer på bedriftspresentasjon med servering!',
+          registration: false
         }
       ]
 

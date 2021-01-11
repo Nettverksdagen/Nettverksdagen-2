@@ -61,7 +61,7 @@
         <b-form-group
         :id="'input-group-name'+name"
         :label-for="'input-name' + name"
-        description='Skriv inn navnet ditt slik at vi vet hvem som medler seg på'
+        description='Skriv inn navnet ditt slik at vi vet hvem som melder seg på'
       >
         <b-form-input
           :id="'input-name' + name"
@@ -106,7 +106,7 @@
 
 <script>
 import axios from 'axios'
-import { mapMutations } from 'vuex'
+// import { mapMutations } from 'vuex'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons'
 
@@ -179,7 +179,7 @@ export default {
         this.$data.show = false
         this.$data.form = {email: '', name: ''}
         this.$data.notSendtEmail = false
-      }else{
+      } else {
         /*
         // Send email here
         this.sendEmail()
@@ -196,8 +196,9 @@ export default {
         '/api/participant/', {event: 1, ...this.$data.form})
         .then((response) => console.log(response))
         .catch((e) => {
-          console.log("Error in sendEmail")
-          console.log(e)})
+          console.log('Error in sendEmail')
+          console.log(e)
+        })
     },
     onCancel (e) {
       e.preventDefault()
