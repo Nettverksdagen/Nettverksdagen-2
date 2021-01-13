@@ -72,7 +72,7 @@ export default {
           timeStart: new Date(2021, 0, 25, 15, 0, 0, 0),
           timeEnd: new Date(2021, 0, 27, 15, 0, 0, 0),
           place: 'Poption',
-          header: 'Åpent for å bli med på speedintervju i regi av poption!',
+          header: 'Åpent for å bli med på speedintervju i regi av poption',
           paragraph: ['Studentene kan vise interesse fra og med mandag 25.januar fra kl. 15.00 til og med onsdag 27. kl 15.00. Utvelgelsen av studenter gjør dere fortløpende og innen kl. 17.00 onsdag 27. Invitasjon til aktuelle studenter sendes ut like etterpå. Kandidater blir automatisk booket til et 15 minutters speedintervju over video. Speedintervjuene gjennomføres torsdag 28. kl 09.00 - 16.00. Etter intervjuene er gjennomført kan bedriftene velge om de ønsker å ta studenten med videre i egen rekrutteringsprosess.'],
           registration: false
         },
@@ -81,7 +81,7 @@ export default {
           timeStart: new Date(2021, 0, 27, 9, 15, 0, 0),
           timeEnd: new Date(2021, 0, 27, 10, 15, 0, 0),
           place: 'Digital presentasjon',
-          header: 'Morgenbedpress!',
+          header: 'Morgenbedpress',
           registration: false
         },
         {
@@ -89,7 +89,7 @@ export default {
           timeStart: new Date(2021, 0, 27, 10, 0, 0, 0),
           timeEnd: new Date(2021, 0, 27, 14, 0, 0, 0),
           place: 'nettverksdagene.graduateland.com',
-          header: 'Bli med på nettverksdagene via graduateland!',
+          header: 'Bli med på nettverksdagene via graduateland',
           registration: false
         },
         {
@@ -97,7 +97,7 @@ export default {
           timeStart: new Date(2021, 0, 27, 13, 15, 0, 0),
           timeEnd: new Date(2021, 0, 27, 14, 15, 0, 0),
           place: 'Digital presentasjon',
-          header: 'Bedriftpresentasjon med McKinsey!',
+          header: 'Bedriftpresentasjon med McKinsey',
           registration: false
         },
         {
@@ -105,7 +105,7 @@ export default {
           timeStart: new Date(2021, 0, 27, 15, 15, 0, 0),
           timeEnd: new Date(2021, 0, 27, 16, 15, 0, 0),
           place: 'Digital presentasjon',
-          header: 'Bedriftpresentasjon med DataRespons!',
+          header: 'Bedriftpresentasjon med DataRespons',
           registration: false
         },
         {
@@ -113,7 +113,7 @@ export default {
           timeStart: new Date(2021, 0, 27, 17, 15, 0, 0),
           timeEnd: new Date(2021, 0, 27, 18, 15, 0, 0),
           place: 'Digital presentasjon',
-          header: 'Kveldsbedpress!',
+          header: 'Kveldsbedpress',
           registration: false
         },
         {
@@ -121,7 +121,7 @@ export default {
           timeStart: new Date(2021, 0, 28, 9, 15, 0, 0),
           timeEnd: new Date(2021, 0, 28, 10, 15, 0, 0),
           place: 'Digital presentasjon',
-          header: 'Bedriftpresentasjon med DNV GL!',
+          header: 'Bedriftpresentasjon med DNV GL',
           registration: false
         },
         {
@@ -129,23 +129,15 @@ export default {
           timeStart: new Date(2021, 0, 28, 13, 15, 0, 0),
           timeEnd: new Date(2021, 0, 28, 14, 15, 0, 0),
           place: 'Digital presentasjon',
-          header: 'Bedriftpresentasjon med Galleon!',
-          registration: false
-        },
-        {
-          key: 10,
-          timeStart: new Date(2021, 0, 28, 17, 15, 0, 0),
-          timeEnd: new Date(2021, 0, 28, 18, 15, 0, 0),
-          place: 'Digital presentasjon',
-          header: 'Surprise bedpress!',
+          header: 'Bedriftpresentasjon med Galleon',
           registration: false
         },
         {
           key: 11,
           timeStart: new Date(2021, 0, 28, 18, 15, 0, 0),
           timeEnd: new Date(2021, 0, 28, 21, 15, 0, 0),
-          place: 'Fysisk presentasjon',
-          header: 'Bekk inviterer på bedriftspresentasjon med servering!',
+          place: 'Digital presentasjon',
+          header: 'Bedriftpresentasjon med Bekk',
           registration: false
         }
       ]
