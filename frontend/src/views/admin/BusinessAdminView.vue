@@ -61,13 +61,13 @@
       <div class="col-12">
         <b-card header="Bedrifter">
           <b-table class="d-none d-md-table" hover :fields="fields" :items="businesses">
-            <template slot="edit" slot-scope="businesses">
+            <template v-slot:cell(edit)="businesses">
               <edit-button class="mx-3" @click.native="edit(businesses.item)"></edit-button>
               <delete-button class="mx-3" @click.native="destroy(businesses.item)"></delete-button>
             </template>
           </b-table>
           <b-table class="d-block d-md-none" stacked :fields="fields" :items="businesses">
-            <template slot="edit" slot-scope="businesses">
+            <template v-slot:cell(edit)="businesses">
               <edit-button class="mx-3" @click.native="edit(businesses.item)"></edit-button>
               <delete-button class="mx-3" @click.native="destroy(businesses.item)"></delete-button>
             </template>
