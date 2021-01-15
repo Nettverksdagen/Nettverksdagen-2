@@ -37,7 +37,7 @@
               </div>
               <div class="col-12 col-md-6 mb-2">
                 <b-form-group label="Tekst" label-for="item-paragraph-input-0">
-                  <div :key="index" v-for="(line,index) in programItem.paragraph" class="row mb-1 pl-2">
+                  <div :key="index" v-for="(line, index) in programItem.paragraph" class="row mb-1 pl-2">
                       <b-form-input class="col-10 mr-1" v-model="programItem.paragraph[index]" :id="'item-paragraph-input-'+index" placeholder="Linje med brødtekst"></b-form-input>
                       <b-button class="" @click="handleDeleteParagraphLine(index)" variant="danger">
                           Slett
@@ -165,12 +165,22 @@ export default {
       let newItem = {};
       if (this.$data.editing) {
         newItem.id = programItem.id;
-      }      
-      let fields = ['header', 'paragraph', 'place', 'registration'];
+      }
+
+      let fields = ['header','place', 'registration'];
       fields.forEach((field) => {
         newItem[field] = programItem[field];
       })
 
+      let formatedParagraph = '';
+      for (let i = 0; i<programItem.paragraph.length; i++){
+        formatedParagraph+=programItem.paragraph[i]
+        if (i < programItem.paragraph.length-1) {
+          formatedParagraph+="\n";
+        }
+      }
+      
+      newItem.paragraph = formatedParagraph;
       let date = programItem.date.split('-')
       let timeStart = programItem.timeStart.split(':')
       newItem.timeStart = new Date(Number(date[0]), Number(date[1]), Number(date[2]), Number(timeStart[0]), Number(timeStart[1]),0,0).getTime();
@@ -210,7 +220,7 @@ export default {
       return newItem
     },
     handleAddLine: function () {
-      console.log(this.$data.programItem.timeStart)
+      console.log(this.$data.programItem.paragraph)
       if (this.$data.programItem.paragraph[this.$data.programItem.paragraph.length -1] !== '') {
         this.$data.programItem.paragraph.push('')
       }
@@ -221,6 +231,7 @@ export default {
     },
     handleSubmit: function () {
       let programItem = this.formatProgramItem(this.$data.programItem);
+      console.log(programItem);
       axios[(this.$data.editing ? 'put' : 'post')](process.env.VUE_APP_API_HOST +
         '/api/program/' + (this.$data.editing ? programItem + '/' : ''),
       programItem).then((response) => {

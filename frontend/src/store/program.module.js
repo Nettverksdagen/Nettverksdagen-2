@@ -23,15 +23,16 @@ const defaultState = {
         let programItems = [];
         state.all.forEach((item) => {
             let newItem = item;
-            newItem.timeStart = new Date.setTime(item.timeStart);
+            newItem.timeStart = new Date().setTime(item.timeStart);
             if (item.timeEnd) {
-                newItem.timeEnd = new Date.setTime(item.timeEnd);
+                newItem.timeEnd = new Date().setTime(item.timeEnd);
             }
-
+            newItem.paragraph=item.paragraph.split('\n');
+            
             if (item.registration) {
-                newItem.registrationStart = new Date.setTime(item.registrationStart);
+                newItem.registrationStart = new Date().setTime(item.registrationStart);
                 if (item.registrationEnd) {
-                    newItem.registrationEnd = new Date.setTime(item.registrationEnd);
+                    newItem.registrationEnd = new Date().setTime(item.registrationEnd);
                 }
             }
             programItems.push(newItem)
@@ -43,6 +44,8 @@ const defaultState = {
         let programItems = [];
         state.all.forEach((item) => {
             let newItem = item;
+
+            newItem.paragraph=item.paragraph.split('\n');
             
             newItem.timeStart = new Date.setTime(item.timeStart);
             let month = String(newItem.timeStart.getMonth() + 1);
@@ -128,11 +131,10 @@ const defaultState = {
     }
   }
   
-  export const teamMembers = {
+  export const program = {
     namespaced: true,
     state,
     actions,
     getters,
     mutations
   }
-  
