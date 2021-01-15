@@ -1,5 +1,5 @@
 from django.db import models
- from django.contrib.postgres.fields import ArrayField
+# from django.contrib.postgres.fields import ArrayField
 
 SUMMER_INTERNSHIP = 'Sommerjobb'
 FULL_TIME_POSITION = 'Fast stilling'
@@ -92,16 +92,16 @@ class Form(models.Model):
     iframe_height = models.CharField(max_length=250)
 
 
-class ProgramItem(models.Model):
+class Program(models.Model):
     id = models.AutoField(primary_key=True)
     header = models.CharField(max_length=250)
     place = models.CharField(max_length=250)
-    timeStart = models.PositiveBigIntegerField()
-    timeEnd= models.PositiveBigIntegerField()
-    paragraph = ArrayField(models.CharField(max_length=250))
+    timeStart = models.IntegerField()
+    timeEnd= models.IntegerField()
+    paragraph = models.CharField(max_length=10000)
     registration = models.BooleanField(default=False)
-    maxRegistered = models.IntegerField()
-    registered = models.IntegerField()
-    cancelEmail = models.CharField(max_length=250)
-    registrationStart = models.PositiveBigIntegerField()
-    registrationEnd = models.PositiveBigIntegerField()
+    maxRegistered = models.IntegerField( blank=True, null=True)
+    registered = models.IntegerField( blank=True, null=True)
+    cancelEmail = models.CharField(max_length=250, blank=True, null=True)
+    registrationStart = models.IntegerField(blank=True, null=True)
+    registrationEnd = models.IntegerField(blank=True, null=True)

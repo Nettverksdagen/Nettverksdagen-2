@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Listing, Business, Sponsor, TeamMember, Form, ProgramItem
+from .models import Listing, Business, Sponsor, TeamMember, Form, Program
 
 
 class ListingSerializer(serializers.ModelSerializer):
@@ -33,5 +33,5 @@ class FormSerializer(serializers.ModelSerializer):
 
 class ProgramSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ProgramItem
+        model = Program
         fields = '__all__'
