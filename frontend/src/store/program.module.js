@@ -10,6 +10,7 @@ const defaultState = {
       try {
         const response = await fetch(process.env.VUE_APP_API_HOST + '/api/program/')
         const all = await response.json()
+        console.log(all)
         commit('fetchSuccessful', all)
       } catch (e) {
         commit('fetchFailure', e)
@@ -19,35 +20,40 @@ const defaultState = {
   
   const getters = {
     // formatting program as needed
-    anonProgram () {
+    anonProgram: state =>  {
         let programItems = [];
         state.all.forEach((item) => {
-            let newItem = item;
-            newItem.timeStart = new Date().setTime(item.timeStart);
+          console.log(item)
+          let newItem = {};
+            Object.keys(item).forEach((key) => {
+              newItem[key] = item[key]
+            })
+           
+            newItem.timeStart = new Date(item.timeStart*1000)
             if (item.timeEnd) {
-                newItem.timeEnd = new Date().setTime(item.timeEnd);
+                newItem.timeEnd = new Date(item.timeEnd*1000)
             }
-            newItem.paragraph=item.paragraph.split('\n');
+            newItem.paragraph=String(item.paragraph).split('\n');
             
             if (item.registration) {
-                newItem.registrationStart = new Date().setTime(item.registrationStart);
+                newItem.registrationStart = new Date(item.registrationStart*1000)
                 if (item.registrationEnd) {
-                    newItem.registrationEnd = new Date().setTime(item.registrationEnd);
+                    newItem.registrationEnd = new Date(item.registrationEnd*1000)
                 }
             }
             programItems.push(newItem)
         })
+        console.log(programItems)
         return programItems
         // Return the program formated as ProgramView needs it
     },
-    adminProgram () {
+    adminProgram: state =>  {
         let programItems = [];
         state.all.forEach((item) => {
             let newItem = item;
-
-            newItem.paragraph=item.paragraph.split('\n');
+            newItem.paragraph = String(item.paragraph).split('\n');
             
-            newItem.timeStart = new Date.setTime(item.timeStart);
+            newItem.timeStart = new Date(item.timeStart*1000)
             let month = String(newItem.timeStart.getMonth() + 1);
             month = (month.length < 2) ? "0" + month : month;
             let day = String(newItem.timeStart.getDay());
@@ -59,7 +65,7 @@ const defaultState = {
             min = (min.length < 2) ? "0" + min : min
             newItem.timeStart = hour + ":" + min
             if (item.timeEnd) {
-                newItem.timeEnd = new Date.setTime(item.timeEnd);
+                newItem.timeEnd = new Date(item.timeEnd*1000);
                 let hour = String(newItem.timeEnd.getHours())
                 hour = (hour.length < 2) ? "0" + hour : hour
                 let min = String(newItem.timeEnd.getMinutes())
@@ -68,11 +74,10 @@ const defaultState = {
             }
 
             if (item.registration) {
-                newItem.registrationStart = new Date.setTime(item.registrationStart);
-                
+                newItem.registrationStart = new Date(item.registrationStart*1000)                
                 let month = String(newItem.registrationStart.getMonth() + 1);
                 month = (month.length < 2) ? "0" + month : month;
-                let day = String(nnewItem.registrationStart.getDay());
+                let day = String(newItem.registrationStart.getDay());
                 day = (day.length < 2) ? "0" + day : day;
                 newItem.registrationStartDate = String(newItem.registrationStart.getYear()) + "-" + month + "-" + day
 
@@ -84,11 +89,11 @@ const defaultState = {
 
 
                 if (item.registrationEnd) {
-                    newItem.registrationEnd = new Date.setTime(item.registrationEnd);
+                    newItem.registrationEnd = new Date(item.registrationEnd*1000);
                     
                     let month = String(newItem.registrationEnd.getMonth() + 1);
                     month = (month.length < 2) ? "0" + month : month;
-                    let day = String(nnewItem.registrationEnd.getDay());
+                    let day = String(newItem.registrationEnd.getDay());
                     day = (day.length < 2) ? "0" + day : day;
                     newItem.registrationEndDate = String(newItem.registrationEnd.getYear()) + "-" + month + "-" + day
 
@@ -119,13 +124,13 @@ const defaultState = {
     fetchFailure () {
       console.log('Failed to fetch program')
     },
-    addTeamMember (state, programItem) {
+    addProgramItem (state, programItem) {
       state.all.push(programItem)
     },
-    deleteTeamMember (state, programItem) {
+    deleteProgramItem  (state, programItem) {
       state.all = state.all.filter(pi => pi.id !== programItem.id)
     },
-    updateTeamMember (state, programItem) {
+    updateProgramItem  (state, programItem) {
       const modify = state.all.findIndex(pi => pi.id === programItem.id)
       state.all[modify] = programItem
     }
