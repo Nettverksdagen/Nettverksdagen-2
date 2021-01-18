@@ -65,7 +65,11 @@ export default {
           timeEnd: new Date(2021, 0, 26, 19, 0, 0, 0),
           place: 'Digital presentasjon',
           header: 'Bedriftpresentasjon med Cognite',
-          registration: false
+          registration: true,
+          maxRegistered: 10,
+          registered: 5,
+          cancelEmail: 'kska@stud.ntnu.no',
+          registrationStart: new Date(2020, 8, 18, 10, 33, 0, 0)
         },
         {
           key: 1,
@@ -73,7 +77,11 @@ export default {
           timeEnd: new Date(2021, 0, 27, 15, 0, 0, 0),
           place: 'https://www.poption.com/speedintervju/nettverksdagene-2021',
           header: 'Åpent for å bli med på speedintervju i regi av Poption',
-          registration: false
+          registration: true,
+          maxRegistered: 10,
+          registered: 5,
+          cancelEmail: 'kska@stud.ntnu.no',
+          registrationStart: new Date(2020, 8, 18, 10, 33, 0, 0)
         },
         {
           key: 3,
