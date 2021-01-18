@@ -94,13 +94,13 @@
       <div class="col-12">
         <b-card header="Program">
           <b-table class="d-none d-md-table" hover :fields="fields" :items="program">
-            <template slot="edit" slot-scope="program">
+            <template v-slot:cell(edit)="program">
               <edit-button class="mx-3" @click.native="edit(program.item)"></edit-button>
               <delete-button class="mx-3" @click.native="destroy(program.item)"></delete-button>
             </template>
           </b-table>
           <b-table class="d-block d-md-none" stacked :fields="fields" :items="program">
-            <template slot="edit" slot-scope="program">
+            <template v-slot:cell(edit)="program" >
               <edit-button class="mx-3" @click.native="edit(program.item)"></edit-button>
               <delete-button class="mx-3" @click.native="destroy(program.item)"></delete-button>
             </template>
@@ -127,7 +127,7 @@ export default {
       fields: [
         'id',{ key: 'header', label: 'Header' }, { key: 'paragraph', label: 'Text' },
         { key: 'place', label: 'Place' }, { key: 'timeStart', label: 'Staring time' },
-        { key: 'timeEnd', label: 'Ending time' }, { key: 'Edit', label: '' }
+        { key: 'timeEnd', label: 'Ending time' }, { key: 'edit', label: '' }
       ],
       programItem: {
         header: '',
@@ -183,31 +183,32 @@ export default {
       newItem.paragraph = formatedParagraph;
       let date = programItem.date.split('-')
       let timeStart = programItem.timeStart.split(':')
-      newItem.timeStart = new Date(Number(date[0]), Number(date[1]), Number(date[2]), Number(timeStart[0]), Number(timeStart[1]),0,0).getTime();
+      newItem.timeStart = Number((new Date(Number(date[0]), Number(date[1])-1, Number(date[2]), Number(timeStart[0]), Number(timeStart[1]),0,0)).getTime())/1000;
       if (programItem.timeEnd) {
         let timeEnd = programItem.timeEnd.split(':')
-        newItem.timeEnd = new Date(Number(date[0]), Number(date[1]), Number(date[2]), Number(timeEnd[0]), Number(timeEnd[1]),0,0).getTime();
+        newItem.timeEnd = Number((new Date(Number(date[0]), Number(date[1])-1, Number(date[2]), Number(timeEnd[0]), Number(timeEnd[1]),0,0)).getTime())/1000;
       } else {
         newItem.timeEnd = undefined
       }
       
 
       if (newItem.registration) {
-        let registrationFields = ['maxRegistered', 'registered', 'cancelEmail']
+        let registrationFields = ['registered', 'cancelEmail']
         registrationFields.forEach((field) => {
           newItem[field] = programItem[field]
         })
+        newItem.maxRegistered = Number(programItem.maxRegistered);
+
         let registrationStartDate = programItem.registrationStartDate.split('-')
         let registrationStartTime = programItem.registrationStartTime.split(':')
-        newItem.registrationStart = new Date(Number(registrationStartDate[0]), Number(registrationStartDate[1]), Number(registrationStartDate[2]), 
-        Number(registrationStartTime[0]), Number(registrationStartTime[1]),0,0).getTime();
+        newItem.registrationStart = Number((new Date(Number(registrationStartDate[0]), Number(registrationStartDate[1])-1, Number(registrationStartDate[2]), 
+        Number(registrationStartTime[0]), Number(registrationStartTime[1]),0,0)).getTime())/1000;
         
-       console.log(!!programItem.registrationEndDate, !!programItem.registrationEndTime)
         if (!!programItem.registrationEndDate && !!programItem.registrationEndTime) {
           let registrationEndDate = programItem.registrationEndDate.split('-')
           let registrationEndTime = programItem.registrationEndTime.split(':')
-          newItem.registrationEnd = new Date(Number(registrationEndDate[0]), Number(registrationEndDate[1]), Number(registrationEndDate[2]), 
-          Number(registrationEndTime[0]), Number(registrationEndTime[1]),0,0).getTime();
+          newItem.registrationEnd = Number((new Date(Number(registrationEndDate[0]), Number(registrationEndDate[1])-1, Number(registrationEndDate[2]), 
+          Number(registrationEndTime[0]), Number(registrationEndTime[1]),0,0)).getTime())/1000;
         } else {
           newItem.registrationEnd = undefined
         }
@@ -216,11 +217,21 @@ export default {
         registrationFields.forEach((field) => {
           newItem[field] = undefined
         })
-      }      
-      return newItem
+      }
+      
+      let programItemWithoutUndefined = {}
+
+      const keys = Object.keys(newItem)
+
+      keys.forEach((key) => {
+        if (newItem[key] !== undefined ) {
+          programItemWithoutUndefined[key] = newItem[key]
+        }
+      })
+
+      return programItemWithoutUndefined
     },
     handleAddLine: function () {
-      console.log(this.$data.programItem.paragraph)
       if (this.$data.programItem.paragraph[this.$data.programItem.paragraph.length -1] !== '') {
         this.$data.programItem.paragraph.push('')
       }
@@ -231,7 +242,7 @@ export default {
     },
     handleSubmit: function () {
       let programItem = this.formatProgramItem(this.$data.programItem);
-      console.log(programItem);
+      console.log(programItem)
       axios[(this.$data.editing ? 'put' : 'post')](process.env.VUE_APP_API_HOST +
         '/api/program/' + (this.$data.editing ? programItem + '/' : ''),
       programItem).then((response) => {
