@@ -29,4 +29,4 @@ class FormViewSet(viewsets.ModelViewSet):
 
 class ProgramViewSet(viewsets.ModelViewSet):
     serializer_class = ProgramSerializer
-    queryset = Form.objects.all()
+    queryset = Program.objects.all()
