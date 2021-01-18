@@ -82,7 +82,31 @@
           placeholder='Email'
         ></b-form-input>
       </b-form-group>
-      </b-form>
+      <b-form-group
+       :id="'input-group-email'+name"
+       :label-for="'input-email' + name"
+       description='Skriv inn det du studerer.'
+     >
+       <b-form-input
+         :id="'input-email' + name"
+         v-model="form.study"
+         required
+         placeholder='Study'
+       ></b-form-input>
+     </b-form-group>
+     <b-form-group
+      :id="'input-group-email'+name"
+      :label-for="'input-email' + name"
+      description='Skriv inn hvilket år du er på.'
+    >
+      <b-form-input
+        :id="'input-email' + name"
+        v-model="form.year"
+        required
+        placeholder='Year'
+      ></b-form-input>
+    </b-form-group>
+     </b-form>
       <template v-slot:modal-footer>
           <div>
             <b-button
@@ -118,7 +142,9 @@ export default {
     return {
       form: {
         email: '',
-        name: ''
+        name: '',
+        study: '',
+        year: ''
       },
       show: false,
       notSendtEmail: true
@@ -166,7 +192,7 @@ export default {
       return this.formatTime(dateObj) + ' ' + day + '.' + month + '.' + year
     },
     openDialog () {
-      this.$data.form = {email: '', name: ''}
+      this.$data.form = {email: '', name: '', study: '', year: ''}
       this.$data.show = true
     },
     onSubmit (e) {
@@ -177,7 +203,7 @@ export default {
         this.sendEmail()
         // Clear data
         this.$data.show = false
-        this.$data.form = {email: '', name: ''}
+        this.$data.form = {email: '', name: '', study: '', year: ''}
         this.$data.notSendtEmail = false
       } else {
         /*
@@ -185,7 +211,7 @@ export default {
         this.sendEmail()
         // Clear data
         this.$data.show = false
-        this.$data.form = {email: '', name: ''}
+        this.$data.form = {email: '', name: '', study: '', year: ''}
         this.$data.notSendtEmail = false
         */
       }
@@ -202,7 +228,7 @@ export default {
     },
     onCancel (e) {
       e.preventDefault()
-      this.$data.form = {email: '', name: ''}
+      this.$data.form = {email: '', name: '', study: '', year: ''}
       this.$data.show = false
     },
     checkValidForm (check) {
