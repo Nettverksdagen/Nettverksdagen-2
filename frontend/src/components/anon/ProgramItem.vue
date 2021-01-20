@@ -42,7 +42,7 @@
                 <div>Du har blitt sendt påmeldings email</div>
               </div>
               <div v-else-if="enableRegistration">
-                <div>Påmelding har beggynt</div>
+                <div>Påmelding har startet</div>
               </div>
               <div v-else-if="afterRegistration">
                 <div>Påmelding er ferdig</div>

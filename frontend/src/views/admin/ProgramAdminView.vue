@@ -32,7 +32,7 @@
                   <b-form-input type="time" v-model="programItem.timeStart" id="item-timeStart-input" required placeholder="Velg starttid for 'ProgramItem'"></b-form-input>
                 </b-form-group>
                 <b-form-group label="Slutttid" label-for="item-timeEnd-input">
-                  <b-form-input type="time" v-model="programItem.timeEnd" id="item-timeEnd-input" placeholder="Velg slutttid for 'ProgramItem'"></b-form-input>
+                  <b-form-input type="time" v-model="programItem.timeEnd" id="item-timeEnd-input" required placeholder="Velg slutttid for 'ProgramItem'"></b-form-input>
                 </b-form-group>
               </div>
               <div class="col-12 col-md-6 mb-2">
@@ -93,13 +93,13 @@
     <b-row>
       <div class="col-12">
         <b-card header="Program">
-          <b-table class="d-none d-md-table" hover :fields="fields" :items="program">
+          <b-table class="d-none d-md-table" hover :fields="fields" :items="programData">
             <template v-slot:cell(edit)="program">
               <edit-button class="mx-3" @click.native="edit(program.item)"></edit-button>
               <delete-button class="mx-3" @click.native="destroy(program.item)"></delete-button>
             </template>
           </b-table>
-          <b-table class="d-block d-md-none" stacked :fields="fields" :items="program">
+          <b-table class="d-block d-md-none" stacked :fields="fields" :items="programData">
             <template v-slot:cell(edit)="program" >
               <edit-button class="mx-3" @click.native="edit(program.item)"></edit-button>
               <delete-button class="mx-3" @click.native="destroy(program.item)"></delete-button>
@@ -126,10 +126,11 @@ export default {
     return {
       fields: [
         'id',{ key: 'header', label: 'Header' }, { key: 'paragraph', label: 'Text' },
-        { key: 'place', label: 'Place' }, { key: 'timeStart', label: 'Staring time' },
+        { key: 'place', label: 'Place' }, {key: 'date', label: 'Date'},{ key: 'timeStart', label: 'Staring time' },
         { key: 'timeEnd', label: 'Ending time' }, { key: 'edit', label: '' }
       ],
       programItem: {
+        id: 0,
         header: '',
         paragraph: [''],
         place: '',
@@ -152,14 +153,16 @@ export default {
         variant: 'info',
         heading: '',
         message: ''
-      }
+      },
+      programData: []
     }
   },
   computed: {
-    program: function () {
-      return this.$store.getters['program/adminProgram']
-    },
+    
   },
+  mounted: function () {
+      this.$data.programData = this.$store.getters['program/adminProgram']
+    },
   methods: {
     formatProgramItem: function(programItem) {
       let newItem = {};
@@ -193,10 +196,8 @@ export default {
       
 
       if (newItem.registration) {
-        let registrationFields = ['registered', 'cancelEmail']
-        registrationFields.forEach((field) => {
-          newItem[field] = programItem[field]
-        })
+        newItem.cancelEmail = programItem.cancelEmail;
+        newItem.registered = (programItem.registered === undefined || programItem.registered === null) ? 0 : programItem.registered;     
         newItem.maxRegistered = Number(programItem.maxRegistered);
 
         let registrationStartDate = programItem.registrationStartDate.split('-')
@@ -242,14 +243,18 @@ export default {
     },
     handleSubmit: function () {
       let programItem = this.formatProgramItem(this.$data.programItem);
+      console.log("handleSubmit");
       console.log(programItem)
       axios[(this.$data.editing ? 'put' : 'post')](process.env.VUE_APP_API_HOST +
-        '/api/program/' + (this.$data.editing ? programItem + '/' : ''),
+        '/api/program/' + (this.$data.editing ? programItem.id + '/' : ''),
       programItem).then((response) => {
         this.showAlert('success', 'Suksess!', 'ProgramItem har blitt' +
           (this.$data.editing ? 'endret.' : 'lagt ut på forsiden.'))
         this['program/' + (this.$data.editing ? 'updateProgramItem' : 'addProgramItem')](response.data)
         this.resetForm()
+        setTimeout(() => {
+          this.updateProgram()
+        },1000)
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
@@ -270,9 +275,13 @@ export default {
           'ProgramItem kunne ikke slettes.')
       })
       this.resetForm()
+      setTimeout(() => {
+          this.updateProgram()
+        },1000)
     },
     resetForm: function () {
       this.$data.programItem = {
+        id: 0,
         header: '',
         paragraph: [''],
         place: '',
@@ -300,12 +309,15 @@ export default {
       this.alert.dismissCountDown = dismissCountDown
     },
     edit: function (item) {
-      this.$data.programItem = item
+      this.$data.programItem = item;// This needs to be formated
       this.$data.editing = true
     },
     abortEdit: function () {
       this.resetForm()
       this.$data.editing = false
+    },
+    updateProgram: function () {
+      this.$data.programData = this.$store.getters['program/adminProgram']
     },
     ...mapMutations(['program/addProgramItem', 'program/deleteProgramItem',
       'program/updateProgramItem'])

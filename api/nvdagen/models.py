@@ -98,7 +98,7 @@ class Program(models.Model):
     place = models.CharField(max_length=250)
     timeStart = models.IntegerField()
     timeEnd= models.IntegerField()
-    paragraph = models.CharField(max_length=10000)
+    paragraph = models.CharField(max_length=10000,blank=True, null=True)
     registration = models.BooleanField(default=False)
     maxRegistered = models.IntegerField( blank=True, null=True)
     registered = models.IntegerField( blank=True, null=True)

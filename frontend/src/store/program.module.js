@@ -10,7 +10,7 @@ const defaultState = {
       try {
         const response = await fetch(process.env.VUE_APP_API_HOST + '/api/program/')
         const all = await response.json()
-        console.log(all)
+        // console.log(all)
         commit('fetchSuccessful', all)
       } catch (e) {
         commit('fetchFailure', e)
@@ -23,7 +23,7 @@ const defaultState = {
     anonProgram: state =>  {
         let programItems = [];
         state.all.forEach((item) => {
-          console.log(item)
+          // console.log(item)
           let newItem = {};
             Object.keys(item).forEach((key) => {
               newItem[key] = item[key]
@@ -43,7 +43,7 @@ const defaultState = {
             }
             programItems.push(newItem)
         })
-        console.log(programItems)
+        // console.log(programItems)
         return programItems
         // Return the program formated as ProgramView needs it
     },
@@ -51,6 +51,7 @@ const defaultState = {
         let programItems = [];
         state.all.forEach((item) => {
             let newItem = item;
+            console.log(item);
             newItem.paragraph = String(item.paragraph).split('\n');
             
             newItem.timeStart = new Date(item.timeStart*1000)
@@ -58,7 +59,7 @@ const defaultState = {
             month = (month.length < 2) ? "0" + month : month;
             let day = String(newItem.timeStart.getDay());
             day = (day.length < 2) ? "0" + day : day;
-            newItem.date = String(newItem.timeStart.getYear()) + "-" + month + "-" + day
+            newItem.date = String(newItem.timeStart.getFullYear()) + "-" + month + "-" + day;
             let hour = String(newItem.timeStart.getHours())
             hour = (hour.length < 2) ? "0" + hour : hour
             let min = String(newItem.timeStart.getMinutes())
@@ -79,7 +80,7 @@ const defaultState = {
                 month = (month.length < 2) ? "0" + month : month;
                 let day = String(newItem.registrationStart.getDay());
                 day = (day.length < 2) ? "0" + day : day;
-                newItem.registrationStartDate = String(newItem.registrationStart.getYear()) + "-" + month + "-" + day
+                newItem.registrationStartDate = String(newItem.registrationStart.getFullYear()) + "-" + month + "-" + day
 
                 let hour = String(newItem.registrationStart.getHours())
                 hour = (hour.length < 2) ? "0" + hour : hour
@@ -95,7 +96,7 @@ const defaultState = {
                     month = (month.length < 2) ? "0" + month : month;
                     let day = String(newItem.registrationEnd.getDay());
                     day = (day.length < 2) ? "0" + day : day;
-                    newItem.registrationEndDate = String(newItem.registrationEnd.getYear()) + "-" + month + "-" + day
+                    newItem.registrationEndDate = String(newItem.registrationEnd.getFullYear()) + "-" + month + "-" + day
 
                     let hour = String(newItem.registrationEnd.getHours())
                     hour = (hour.length < 2) ? "0" + hour : hour
@@ -132,6 +133,7 @@ const defaultState = {
     },
     updateProgramItem  (state, programItem) {
       const modify = state.all.findIndex(pi => pi.id === programItem.id)
+      console.log(modify);
       state.all[modify] = programItem
     }
   }
