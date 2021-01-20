@@ -11,7 +11,7 @@
         <b-nav class="links">
           <b-nav-item :to="{name: 'Home'}" active>Hjem</b-nav-item>
           <b-nav-item :to="{name: 'Program'}">Program</b-nav-item>
-          <!-- <b-nav-item :to="{name: 'Listings'}">Stillinger</b-nav-item> -->
+          <b-nav-item :to="{name: 'Listings'}">Stillinger</b-nav-item>
           <b-nav-item :to="{name: 'About'}">Om oss</b-nav-item>
           <b-nav-item :to="{name: 'Contact'}">Kontakt</b-nav-item>
        </b-nav>

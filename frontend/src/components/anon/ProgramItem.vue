@@ -61,7 +61,7 @@
         <b-form-group
         :id="'input-group-name'+name"
         :label-for="'input-name' + name"
-        description='Skriv inn navnet ditt slik at vi vet hvem som medler seg på'
+        description='Skriv inn navnet ditt slik at vi vet hvem som melder seg på'
       >
         <b-form-input
           :id="'input-name' + name"
@@ -83,7 +83,31 @@
           placeholder='Email'
         ></b-form-input>
       </b-form-group>
-      </b-form>
+      <b-form-group
+       :id="'input-group-email'+name"
+       :label-for="'input-email' + name"
+       description='Skriv inn det du studerer.'
+     >
+       <b-form-input
+         :id="'input-email' + name"
+         v-model="form.study"
+         required
+         placeholder='Study'
+       ></b-form-input>
+     </b-form-group>
+     <b-form-group
+      :id="'input-group-email'+name"
+      :label-for="'input-email' + name"
+      description='Skriv inn hvilket år du er på.'
+    >
+      <b-form-input
+        :id="'input-email' + name"
+        v-model="form.year"
+        required
+        placeholder='Year'
+      ></b-form-input>
+    </b-form-group>
+     </b-form>
       <template v-slot:modal-footer>
           <div>
             <b-button
@@ -96,7 +120,7 @@
             variant='primary'
             @click="onSubmit"
           >
-            Submit
+            Submit forms.
           </b-button>
           </div>
       </template>
@@ -106,8 +130,11 @@
 </template>
 
 <script>
+import axios from 'axios'
+// import { mapMutations } from 'vuex'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons'
+
 library.add(faMapMarkerAlt, faClock)
 export default {
   name: 'ProgramItem',
@@ -116,7 +143,9 @@ export default {
     return {
       form: {
         email: '',
-        name: ''
+        name: '',
+        study: '',
+        year: ''
       },
       show: false,
       notSendtEmail: true
@@ -164,7 +193,7 @@ export default {
       return this.formatTime(dateObj) + ' ' + day + '.' + month + '.' + year
     },
     openDialog () {
-      this.$data.form = {email: '', name: ''}
+      this.$data.form = {email: '', name: '', study: '', year: ''}
       this.$data.show = true
     },
     onSubmit (e) {
@@ -172,14 +201,35 @@ export default {
       let data = this.$data.form
       if (this.checkValidForm(data)) {
         // Send email here
+        this.sendEmail()
+        // Clear data
         this.$data.show = false
-        this.$data.form = {email: '', name: ''}
+        this.$data.form = {email: '', name: '', study: '', year: ''}
         this.$data.notSendtEmail = false
+      } else {
+        /*
+        // Send email here
+        this.sendEmail()
+        // Clear data
+        this.$data.show = false
+        this.$data.form = {email: '', name: '', study: '', year: ''}
+        this.$data.notSendtEmail = false
+        */
       }
+    },
+    sendEmail () {
+      console.log({event: 1, ...this.$data.form})
+      axios.post(process.env.VUE_APP_API_HOST +
+        '/api/participant/', {event: 1, ...this.$data.form})
+        .then((response) => console.log(response))
+        .catch((e) => {
+          console.log('Error in sendEmail')
+          console.log(e)
+        })
     },
     onCancel (e) {
       e.preventDefault()
-      this.$data.form = {email: '', name: ''}
+      this.$data.form = {email: '', name: '', study: '', year: ''}
       this.$data.show = false
     },
     checkValidForm (check) {
