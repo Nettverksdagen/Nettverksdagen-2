@@ -50,7 +50,7 @@ export default {
   data: function () {
     return {
       fields: [
-        'id',{key: 'name', label: 'name'}, {key: 'email', label: 'Email'}, { key: 'delete', label: '' }
+        'id',{key: 'name', label: 'Navn'}, {key: 'study', label: 'Studie'}, {key: 'year', label: 'Årskull'}, {key: 'email', label: 'Email'}, { key: 'delete', label: '' }
       ],
       alert: {
         dismissSecs: 5,
@@ -113,8 +113,8 @@ export default {
     countDownChanged: function (dismissCountDown) {
       this.alert.dismissCountDown = dismissCountDown
     },
-    //...mapMutations(['participant/addParticipant', 'participant/deleteParticipant',
-      //'participant/updateParticipant'])
+    ...mapMutations(['participant/addParticipant', 'participant/deleteParticipant',
+      'participant/updateParticipant'])
   }
 }
 </script>
