@@ -50,9 +50,9 @@ class ParticipantViewSet(viewsets.ModelViewSet):
         if((len(ParticipantValidationList) == 0) and (ProgramToBeAdded.registered < ProgramToBeAdded.maxRegistered)):
             try:
                 #Sending the mail
-                send_mail('Nettverksdagene - Påmelding til ' + data.get('name'),
-                'Vennligst verifiser din påmelding ved å klikke på denne linken: ',
-                'it@nettverksdagene.no',
+                send_mail('Nettverksdagene - Påmelding bekreftet for ' + data.get('name'),
+                'Vi bekrefter herved at du er påmeldt. Dersom du skulle ønske å melde deg av igjen, vennligst gjør det via nettverksdagene.no/program. Tusen takk for din interesse i Nettverksdagene!',
+                'do-not-reply@nettverksdagene.no',
                 [data.get('email')],
                 fail_silently=False)
 
