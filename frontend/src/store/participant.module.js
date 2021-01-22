@@ -5,7 +5,7 @@ const defaultState = {
   const state = {...defaultState}
   
   const actions = {
-    async fetchProgram ({commit}) {
+    async fetchParticipant ({commit}) {
       commit('fetchRequest')
       try {
         const response = await fetch(process.env.VUE_APP_API_HOST + '/api/participant/')
