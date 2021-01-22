@@ -10,7 +10,6 @@ const defaultState = {
       try {
         const response = await fetch(process.env.VUE_APP_API_HOST + '/api/program/')
         const all = await response.json()
-        // console.log(all)
         commit('fetchSuccessful', all)
       } catch (e) {
         commit('fetchFailure', e)
@@ -23,7 +22,6 @@ const defaultState = {
     anonProgram: state =>  {
         let programItems = [];
         state.all.forEach((item) => {
-          // console.log(item)
           let newItem = {};
             Object.keys(item).forEach((key) => {
               newItem[key] = item[key]
@@ -43,7 +41,6 @@ const defaultState = {
             }
             programItems.push(newItem)
         })
-        // console.log(programItems)
         return programItems
         // Return the program formated as ProgramView needs it
     },
@@ -51,9 +48,7 @@ const defaultState = {
         let programItems = [];
         state.all.forEach((item) => {
             let newItem = item;
-            console.log(item);
             newItem.paragraph = String(item.paragraph).split('\n');
-            
             newItem.timeStart = new Date(item.timeStart*1000)
             let month = String(newItem.timeStart.getMonth() + 1);
             month = (month.length < 2) ? "0" + month : month;
@@ -133,7 +128,6 @@ const defaultState = {
     },
     updateProgramItem  (state, programItem) {
       const modify = state.all.findIndex(pi => pi.id === programItem.id)
-      console.log(modify);
       state.all[modify] = programItem
     }
   }
