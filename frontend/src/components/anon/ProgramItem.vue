@@ -218,9 +218,9 @@ export default {
       }
     },
     sendEmail () {
-      console.log({event: 1, ...this.$data.form})
+      console.log({event: this.$props.name, ...this.$data.form})
       axios.post(process.env.VUE_APP_API_HOST +
-        '/api/participant/', {event: 1, ...this.$data.form})
+        '/api/participant/', {event: this.$props.name, ...this.$data.form})
         .then((response) => console.log(response))
         .catch((e) => {
           console.log('Error in sendEmail')
