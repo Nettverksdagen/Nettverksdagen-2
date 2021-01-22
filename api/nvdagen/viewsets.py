@@ -42,16 +42,12 @@ class ParticipantViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         #Data to be used
-        data = {'email': request.data.get('email'), 'name': request.data.get('name'), 'event': request.data.get('event')}
+        data = {'year': request.data.get('year'), 'study': request.data.get('study'), 'email': request.data.get('email'), 'name': request.data.get('name'), 'event': request.data.get('event')}
         ParticipantValidationList = Participant.objects.filter(email=data['email'], event=data['event'])
         ProgramToBeAdded = Program.objects.filter(id=data['event'])[0]
 
         #Validates that a new Participant can enter the event
         if((len(ParticipantValidationList) == 0) and (ProgramToBeAdded.registered < ProgramToBeAdded.maxRegistered)):
-            #Updating the registrationlist on event
-            ProgramToBeAdded.registered += 1
-            ProgramToBeAdded.save()
-
             try:
                 #Sending the mail
                 send_mail('Nettverksdagene - Påmelding til ' + data.get('name'),
@@ -62,6 +58,10 @@ class ParticipantViewSet(viewsets.ModelViewSet):
 
                 #Using the default django-create function
                 super().create(request)
+
+                #Updating the registrationlist on event
+                ProgramToBeAdded.registered += 1
+                ProgramToBeAdded.save()
 
                 #returning a response
                 response = {'message': 'It works!!'}
