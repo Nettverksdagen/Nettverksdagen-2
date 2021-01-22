@@ -15,6 +15,7 @@
       <div class="col-12">
         <b-card header="Velg event og se deltagere" class="h-100">
             <b-form-select v-model="selectedEvent" :options="events"></b-form-select>
+            <b-link :href="'mailto:' +concatEmails">{{'Send mail til alle deltagere'}}</b-link>
         </b-card>
       </div>
     </b-row>
@@ -80,7 +81,13 @@ export default {
         this.$data.participantList = participants.filter(par => par.id === this.$data.selectedEvent)
         return this.$data.participantList
     },
-    
+    concatEmails: function() {
+      let emailString = '';
+      participantList.forEach((participant) => {
+        emailString+=participant +';'
+      })
+      return emailString
+    }
   },
   methods: {
     destroy: function (participant) {
