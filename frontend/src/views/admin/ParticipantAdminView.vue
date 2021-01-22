@@ -50,7 +50,7 @@ export default {
   data: function () {
     return {
       fields: [
-        'id',{key: 'name', label: 'Navn'}, {key: 'study', label: 'Studie'}, {key: 'year', label: 'Årskull'}, {key: 'email', label: 'Email'}, { key: 'delete', label: '' }
+        'id', {key: 'name', label: 'Navn'}, {key: 'study', label: 'Studie'}, {key: 'year', label: 'Årskull'}, {key: 'email', label: 'Email'}, { key: 'delete', label: '' }
       ],
       alert: {
         dismissSecs: 5,
@@ -64,34 +64,33 @@ export default {
     }
   },
   computed: {
-    events: function() {
-        let program = this.$store.state.program.all;
-        let options = []
-        program.forEach(event => {
-            options.push(
-                {
-                    value: event.id, text: event.header
-                }
-            )
-        });
-        return options
+    events: function () {
+      let program = this.$store.state.program.all
+      let options = []
+      program.forEach(event => {
+        options.push(
+          {
+            value: event.id, text: event.header
+          }
+        )
+      })
+      return options
     },
-    filteredList: function() {
-        let participants = this.$store.state.participant.all;
-        this.$data.participantList = participants.filter(par => par.event === this.$data.selectedEvent)
-        return this.$data.participantList
+    filteredList: function () {
+      let participants = this.$store.state.participant.all
+      return participants.filter(par => par.event === this.$data.selectedEvent)
     },
-    concatEmails: function() {
-      let emailString = '';
+    concatEmails: function () {
+      let emailString = ''
       this.$data.participantList.forEach((participant) => {
-        emailString+=participant.email +';'
+        emailString += participant.email + ';'
       })
       return emailString
     }
   },
   methods: {
     destroy: function (participant) {
-     if (!confirm('Er du sikker på at du vil slette ' + participant.name + '?')) {
+      if (!confirm('Er du sikker på at du vil slette ' + participant.name + '?')) {
         return
       }
       axios.delete(process.env.VUE_APP_API_HOST + '/api/participant/' +

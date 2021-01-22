@@ -125,8 +125,8 @@ export default {
   data: function () {
     return {
       fields: [
-        'id',{ key: 'header', label: 'Header' }, { key: 'paragraph', label: 'Text' },
-        { key: 'place', label: 'Place' }, {key: 'date', label: 'Date'},{ key: 'timeStart', label: 'Staring time' },
+        'id', { key: 'header', label: 'Header' }, { key: 'paragraph', label: 'Text' },
+        { key: 'place', label: 'Place' }, {key: 'date', label: 'Date'}, { key: 'timeStart', label: 'Staring time' },
         { key: 'timeEnd', label: 'Ending time' }, { key: 'edit', label: '' }
       ],
       programItem: {
@@ -158,58 +158,57 @@ export default {
     }
   },
   computed: {
-    
+
   },
   mounted: function () {
-      this.$data.programData = this.$store.getters['program/adminProgram']
-    },
+    this.$data.programData = this.$store.getters['program/adminProgram']
+  },
   methods: {
-    formatProgramItem: function(programItem) {
-      let newItem = {};
+    formatProgramItem: function (programItem) {
+      let newItem = {}
       if (this.$data.editing) {
-        newItem.id = programItem.id;
+        newItem.id = programItem.id
       }
 
-      let fields = ['header','place', 'registration'];
+      let fields = ['header', 'place', 'registration']
       fields.forEach((field) => {
-        newItem[field] = programItem[field];
+        newItem[field] = programItem[field]
       })
 
-      let formatedParagraph = '';
-      for (let i = 0; i<programItem.paragraph.length; i++){
-        formatedParagraph+=programItem.paragraph[i]
-        if (i < programItem.paragraph.length-1) {
-          formatedParagraph+="\n";
+      let formatedParagraph = ''
+      for (let i = 0; i < programItem.paragraph.length; i++) {
+        formatedParagraph += programItem.paragraph[i]
+        if (i < programItem.paragraph.length - 1) {
+          formatedParagraph += '\n'
         }
       }
-      
-      newItem.paragraph = formatedParagraph;
+
+      newItem.paragraph = formatedParagraph
       let date = programItem.date.split('-')
       let timeStart = programItem.timeStart.split(':')
-      newItem.timeStart = Number((new Date(Number(date[0]), Number(date[1])-1, Number(date[2]), Number(timeStart[0]), Number(timeStart[1]),0,0)).getTime())/1000;
+      newItem.timeStart = Number((new Date(Number(date[0]), Number(date[1]) - 1, Number(date[2]), Number(timeStart[0]), Number(timeStart[1]), 0, 0)).getTime()) / 1000
       if (programItem.timeEnd) {
         let timeEnd = programItem.timeEnd.split(':')
-        newItem.timeEnd = Number((new Date(Number(date[0]), Number(date[1])-1, Number(date[2]), Number(timeEnd[0]), Number(timeEnd[1]),0,0)).getTime())/1000;
+        newItem.timeEnd = Number((new Date(Number(date[0]), Number(date[1]) - 1, Number(date[2]), Number(timeEnd[0]), Number(timeEnd[1]), 0, 0)).getTime()) / 1000
       } else {
         newItem.timeEnd = undefined
       }
-      
 
       if (newItem.registration) {
-        newItem.cancelEmail = programItem.cancelEmail;
-        newItem.registered = (programItem.registered === undefined || programItem.registered === null) ? 0 : programItem.registered;     
-        newItem.maxRegistered = Number(programItem.maxRegistered);
+        newItem.cancelEmail = programItem.cancelEmail
+        newItem.registered = (programItem.registered === undefined || programItem.registered === null) ? 0 : programItem.registered
+        newItem.maxRegistered = Number(programItem.maxRegistered)
 
         let registrationStartDate = programItem.registrationStartDate.split('-')
         let registrationStartTime = programItem.registrationStartTime.split(':')
-        newItem.registrationStart = Number((new Date(Number(registrationStartDate[0]), Number(registrationStartDate[1])-1, Number(registrationStartDate[2]), 
-        Number(registrationStartTime[0]), Number(registrationStartTime[1]),0,0)).getTime())/1000;
-        
+        newItem.registrationStart = Number((new Date(Number(registrationStartDate[0]), Number(registrationStartDate[1]) - 1, Number(registrationStartDate[2]),
+          Number(registrationStartTime[0]), Number(registrationStartTime[1]), 0, 0)).getTime()) / 1000
+
         if (!!programItem.registrationEndDate && !!programItem.registrationEndTime) {
           let registrationEndDate = programItem.registrationEndDate.split('-')
           let registrationEndTime = programItem.registrationEndTime.split(':')
-          newItem.registrationEnd = Number((new Date(Number(registrationEndDate[0]), Number(registrationEndDate[1])-1, Number(registrationEndDate[2]), 
-          Number(registrationEndTime[0]), Number(registrationEndTime[1]),0,0)).getTime())/1000;
+          newItem.registrationEnd = Number((new Date(Number(registrationEndDate[0]), Number(registrationEndDate[1]) - 1, Number(registrationEndDate[2]),
+            Number(registrationEndTime[0]), Number(registrationEndTime[1]), 0, 0)).getTime()) / 1000
         } else {
           newItem.registrationEnd = undefined
         }
@@ -219,13 +218,13 @@ export default {
           newItem[field] = undefined
         })
       }
-      
+
       let programItemWithoutUndefined = {}
 
       const keys = Object.keys(newItem)
 
       keys.forEach((key) => {
-        if (newItem[key] !== undefined ) {
+        if (newItem[key] !== undefined) {
           programItemWithoutUndefined[key] = newItem[key]
         }
       })
@@ -233,16 +232,16 @@ export default {
       return programItemWithoutUndefined
     },
     handleAddLine: function () {
-      if (this.$data.programItem.paragraph[this.$data.programItem.paragraph.length -1] !== '') {
+      if (this.$data.programItem.paragraph[this.$data.programItem.paragraph.length - 1] !== '') {
         this.$data.programItem.paragraph.push('')
       }
     },
     handleDeleteParagraphLine: function (index) {
       let para = this.$data.programItem.paragraph
-      this.$data.programItem.paragraph = para.slice(0,index).concat(para.slice(index+1, para.length))
+      this.$data.programItem.paragraph = para.slice(0, index).concat(para.slice(index + 1, para.length))
     },
     handleSubmit: function () {
-      let programItem = this.formatProgramItem(this.$data.programItem);
+      let programItem = this.formatProgramItem(this.$data.programItem)
       axios[(this.$data.editing ? 'put' : 'post')](process.env.VUE_APP_API_HOST +
         '/api/program/' + (this.$data.editing ? programItem.id + '/' : ''),
       programItem).then((response) => {
@@ -252,7 +251,7 @@ export default {
         this.resetForm()
         setTimeout(() => {
           this.updateProgram()
-        },1000)
+        }, 1000)
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
@@ -260,7 +259,7 @@ export default {
       })
     },
     destroy: function (programItem) {
-     if (!confirm('Er du sikker på at du vil slette ' + programItem.header + '?')) {
+      if (!confirm('Er du sikker på at du vil slette ' + programItem.header + '?')) {
         return
       }
       axios.delete(process.env.VUE_APP_API_HOST + '/api/program/' +
@@ -274,8 +273,8 @@ export default {
       })
       this.resetForm()
       setTimeout(() => {
-          this.updateProgram()
-        },1000)
+        this.updateProgram()
+      }, 1000)
     },
     resetForm: function () {
       this.$data.programItem = {
@@ -307,7 +306,7 @@ export default {
       this.alert.dismissCountDown = dismissCountDown
     },
     edit: function (item) {
-      this.$data.programItem = item;// This needs to be formated
+      this.$data.programItem = item// This needs to be formated
       this.$data.editing = true
     },
     abortEdit: function () {

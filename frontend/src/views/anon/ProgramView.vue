@@ -61,7 +61,7 @@ export default {
       let prog = this.$store.getters['program/anonProgram']
       let sortedProgram = []
       let days = []
-      
+
       prog.forEach((item, index) => {
         if (index === 0) {
           sortedProgram.push([item])

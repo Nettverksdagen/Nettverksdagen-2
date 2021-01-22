@@ -42,7 +42,7 @@ new Vue({
     ...Vuex.mapActions('sponsors', ['fetchSponsors']),
     ...Vuex.mapActions('teamMembers', ['fetchTeamMembers']),
     ...Vuex.mapActions('program', ['fetchProgram']),
-    ...Vuex.mapActions('participant', ['fetchParticipant']),
+    ...Vuex.mapActions('participant', ['fetchParticipant'])
   },
   components: { App },
   template: '<App/>'
