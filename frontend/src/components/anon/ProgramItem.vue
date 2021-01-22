@@ -79,8 +79,8 @@
         description='Skriv inn emailen din slik at vi kan sende deg en email for påmelding.'
       >
         <b-form-input
-          :id="'input-Study' + name"
-          type="Study"
+          :id="'input-email' + name"
+          type="email"
           v-model="form.email"
           required
           placeholder='E-post'
@@ -92,7 +92,7 @@
        description='Skriv inn det du studerer.'
      >
        <b-form-input
-         :id="'input-year' + name"
+         :id="'input-study' + name"
          v-model="form.study"
          required
          placeholder='Study'
@@ -104,7 +104,7 @@
       description='Skriv inn hvilket år du er på.'
     >
       <b-form-input
-        :id="'input-email' + name"
+        :id="'input-year' + name"
         v-model="form.year"
         required
         placeholder='Year'
