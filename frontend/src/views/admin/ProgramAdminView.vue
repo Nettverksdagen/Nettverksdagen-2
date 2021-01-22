@@ -243,8 +243,6 @@ export default {
     },
     handleSubmit: function () {
       let programItem = this.formatProgramItem(this.$data.programItem);
-      console.log("handleSubmit");
-      console.log(programItem)
       axios[(this.$data.editing ? 'put' : 'post')](process.env.VUE_APP_API_HOST +
         '/api/program/' + (this.$data.editing ? programItem.id + '/' : ''),
       programItem).then((response) => {

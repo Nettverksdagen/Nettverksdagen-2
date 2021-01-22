@@ -82,9 +82,14 @@ export default {
           icon: 'cui-dollar'
         },
         {
-          name: 'ProgramAdmin',
+          name: 'Program',
           url: this.$router.resolve({name: 'ProgramAdmin'}).href,
           icon: 'cui-dollar'
+        },
+        {
+          name: 'Participants',
+          url: this.$router.resolve({name: 'ParticipantAdmin'}).href,
+          icon: 'cui-dollar',
         }
       ]
     }

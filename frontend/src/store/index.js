@@ -7,6 +7,7 @@ import { admin } from './admin.module'
 import { teamMembers } from './teamMembers.module'
 import { forms } from './forms.module'
 import { program } from './program.module'
+import { participant } from './participant.module'
 import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
@@ -18,7 +19,8 @@ export default new Vuex.Store({
     admin,
     teamMembers,
     forms,
-    program
+    program,
+    participant
   },
   plugins: [createPersistedState()]
 })
