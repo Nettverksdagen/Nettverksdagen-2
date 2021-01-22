@@ -108,14 +108,11 @@ class Program(models.Model):
     registrationStart = models.IntegerField(blank=True, null=True)
     registrationEnd = models.IntegerField(blank=True, null=True)
 
-    
+
 class Participant(models.Model):
     id = models.AutoField(primary_key=True)
     event = models.IntegerField()
     email = models.CharField(max_length=250)
     name = models.CharField(max_length=250)
- 
-    
-   
-
-
+    year = models.CharField(max_length=250)
+    study = models.CharField(max_length=250)
