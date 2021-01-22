@@ -27,7 +27,7 @@
           <div class="inline">
             <div v-if="place" class="d-inline">
               <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>
-              <div v-html="place"/>
+              <div v-html="place" class="d-inline"/>
             </div>
             <div v-if="timeEnd" class="d-inline">
               <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>
