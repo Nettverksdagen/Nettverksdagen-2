@@ -33,7 +33,7 @@ class ProgramViewSet(viewsets.ModelViewSet):
     serializer_class = ProgramSerializer
     queryset = Program.objects.all()
 
-    
+
 class ParticipantViewSet(viewsets.ModelViewSet):
     queryset = Participant.objects.all()
     serializer_class = ParticipantSerializer
@@ -41,32 +41,32 @@ class ParticipantViewSet(viewsets.ModelViewSet):
 
 
     def create(self, request):
-        data = {'email': request.data.get('email'), 'name': request.data.get('name')}
-        # queryset = Participant.objects.all()
-        # print(queryset.filter(email))
-        # if(not queryset.filter(email=data['email']).exists()):
-        try:
-            #email, event, authentication
-            #if request.method == 'POST':
-            #initialize
+        data = {'email': request.data.get('email'), 'name': request.data.get('name'), 'event': request.data.get('event')}
+        ParticipantValidList = Participant.objects.filter(email=data['email'], event=data['event'])
+        if(len(ParticipantValidList) == 0):
+            try:
+                #email, event, authentication
+                #if request.method == 'POST':
+                #initialize
 
-            #Sending the mail
-            send_mail('Nettverksdagene - Påmelding til ' + data.get('name'),
-            'Vennligst verifiser din påmelding ved å klikke på denne linken: ',
-            'it@nettverksdagene.no',
-            [data.get('email')],
-            fail_silently=False)
-            #html = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html><head>  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>  <title>E-mail</title>  <style></style>  <script></script></head><body>Vennligst sjekk søppelfilteret</body></html>'
-            response = {'message': 'It works!!'}
-            return Response(response, status = status.HTTP_200_OK)
-        except:
-            print("ERROR: Konfigurer email-settings i mail_settings.py")
-            raise Exception('ERROR: Konfigurer email-settings i mail_settings.py')
+                #Sending the mail
+                send_mail('Nettverksdagene - Påmelding til ' + data.get('name'),
+                'Vennligst verifiser din påmelding ved å klikke på denne linken: ',
+                'it@nettverksdagene.no',
+                [data.get('email')],
+                fail_silently=False)
+                #html = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html><head>  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>  <title>E-mail</title>  <style></style>  <script></script></head><body>Vennligst sjekk søppelfilteret</body></html>'
+                super().create(request)
+                response = {'message': 'It works!!'}
+                return Response(response, status = status.HTTP_200_OK)
+            except:
+                print("ERROR: Konfigurer email-settings i mail_settings.py")
+                raise Exception('ERROR: Konfigurer email-settings i mail_settings.py')
 
-        return super().create(request)
-        # else:
-        #     print("NONONONONONONONO!")
-        #     return
+
+        else:
+            response = {'message': 'Invalid input, check Participant list. Should not be duplicated'}
+            return Response(response, status = status.HTTP_400_BAD_REQUEST)
 
     # @action(detail=True)
     # def post(self, request):
