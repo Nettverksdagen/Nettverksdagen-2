@@ -41,34 +41,38 @@ class ParticipantViewSet(viewsets.ModelViewSet):
 
 
     def create(self, request):
+        #Data to be used
         data = {'email': request.data.get('email'), 'name': request.data.get('name'), 'event': request.data.get('event')}
-        ParticipantValidList = Participant.objects.filter(email=data['email'], event=data['event'])
-        if(len(ParticipantValidList) == 0):
-            try:
-                #email, event, authentication
-                #if request.method == 'POST':
-                #initialize
+        ParticipantValidationList = Participant.objects.filter(email=data['email'], event=data['event'])
+        ProgramToBeAdded = Program.objects.filter(id=data['event'])[0]
 
+        #Validates that a new Participant can enter the event
+        if((len(ParticipantValidationList) == 0) and (ProgramToBeAdded.registered < ProgramToBeAdded.maxRegistered)):
+            #Updating the registrationlist on event
+            ProgramToBeAdded.registered += 1
+            ProgramToBeAdded.save()
+
+            try:
                 #Sending the mail
                 send_mail('Nettverksdagene - Påmelding til ' + data.get('name'),
                 'Vennligst verifiser din påmelding ved å klikke på denne linken: ',
                 'it@nettverksdagene.no',
                 [data.get('email')],
                 fail_silently=False)
-                #html = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html><head>  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>  <title>E-mail</title>  <style></style>  <script></script></head><body>Vennligst sjekk søppelfilteret</body></html>'
+
+                #Using the default django-create function
                 super().create(request)
+
+                #returning a response
                 response = {'message': 'It works!!'}
                 return Response(response, status = status.HTTP_200_OK)
             except:
+                #An error to be raised if the send_mail function doesn't work
                 print("ERROR: Konfigurer email-settings i mail_settings.py")
                 raise Exception('ERROR: Konfigurer email-settings i mail_settings.py')
 
 
         else:
+            #returning a response
             response = {'message': 'Invalid input, check Participant list. Should not be duplicated'}
             return Response(response, status = status.HTTP_400_BAD_REQUEST)
-
-    # @action(detail=True)
-    # def post(self, request):
-    #     print("HALLOOO!!!")
-    #     serializer_class.send_email(request)
