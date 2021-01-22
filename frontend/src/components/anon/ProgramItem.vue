@@ -35,17 +35,17 @@
             </div>
           </div>
           <div v-if="registration && cancelEmail">
-              <b-link :href="'mailto:' +cancelEmail+'?subject=Jeg%20ønsker%20å%20melde%20meg%20av:%20' + header">{{'Ønsker du å melde deg av klikk her'}}</b-link>
+              <b-link :href="'mailto:' +cancelEmail+'?subject=Jeg%20ønsker%20å%20melde%20meg%20av:%20' + header">{{'Ønsker du å melde deg av? Klikk her.'}}</b-link>
           </div>
           <div v-if="registration">
               <div v-if="!notSendtEmail">
-                <div>Du har blitt sendt påmeldings email</div>
+                <div>Du har blitt sendt email</div>
               </div>
               <div v-else-if="enableRegistration && registered<maxRegistered">
                 <div>Påmelding har startet</div>
               </div>
               <div v-else-if="enableRegistration && (!(registered<maxRegistered))">
-                <div>Det er fult</div>
+                <div>Det er fullt</div>
               </div>
               <div v-else-if="afterRegistration">
                 <div>Påmelding er ferdig</div>
@@ -83,7 +83,7 @@
           type="Study"
           v-model="form.email"
           required
-          placeholder='Study'
+          placeholder='E-post'
         ></b-form-input>
       </b-form-group>
       <b-form-group
@@ -95,7 +95,7 @@
          :id="'input-year' + name"
          v-model="form.study"
          required
-         placeholder='year'
+         placeholder='Study'
        ></b-form-input>
      </b-form-group>
      <b-form-group

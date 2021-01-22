@@ -31,7 +31,7 @@
                 <b-form-group label="Starttid" label-for="item-timeStart-input">
                   <b-form-input type="time" v-model="programItem.timeStart" id="item-timeStart-input" required placeholder="Velg starttid for 'ProgramItem'"></b-form-input>
                 </b-form-group>
-                <b-form-group label="Slutttid" label-for="item-timeEnd-input">
+                <b-form-group label="Sluttid" label-for="item-timeEnd-input">
                   <b-form-input type="time" v-model="programItem.timeEnd" id="item-timeEnd-input" required placeholder="Velg slutttid for 'ProgramItem'"></b-form-input>
                 </b-form-group>
               </div>
@@ -45,7 +45,7 @@
                   </div>
                 </b-form-group>
                 <b-button @click="handleAddLine">
-                    Legg til tekst linje
+                    Legg til tekstlinje
                 </b-button>
               </div>
               <div class="col-12 mt-2 mb-3">
