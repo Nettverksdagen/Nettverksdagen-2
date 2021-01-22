@@ -78,13 +78,13 @@ export default {
     },
     filteredList: function() {
         let participants = this.$store.state.participant.all;
-        this.$data.participantList = participants.filter(par => par.id === this.$data.selectedEvent)
+        this.$data.participantList = participants.filter(par => par.event === this.$data.selectedEvent)
         return this.$data.participantList
     },
     concatEmails: function() {
       let emailString = '';
-      participantList.forEach((participant) => {
-        emailString+=participant +';'
+      this.$data.participantList.forEach((participant) => {
+        emailString+=participant.email +';'
       })
       return emailString
     }
