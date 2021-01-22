@@ -20,7 +20,7 @@
           </div>
         </div>
         <div v-if="registration" class='button'>
-          <b-button v-if="enableRegistration && notSendtEmail" variant='primary' @click="openDialog">Påmelding</b-button>
+          <b-button v-if="enableRegistration && notSendtEmail && registered<maxRegistered" variant='primary' @click="openDialog">Påmelding</b-button>
           <b-button v-else disabled variant="dark">Påmelding</b-button>
         </div>
         <div class="footer">
@@ -41,14 +41,17 @@
               <div v-if="!notSendtEmail">
                 <div>Du har blitt sendt påmeldings email</div>
               </div>
-              <div v-else-if="enableRegistration">
+              <div v-else-if="enableRegistration && registered<maxRegistered">
                 <div>Påmelding har startet</div>
+              </div>
+              <div v-else-if="enableRegistration && (!(registered<maxRegistered))">
+                <div>Det er fult</div>
               </div>
               <div v-else-if="afterRegistration">
                 <div>Påmelding er ferdig</div>
               </div>
               <div v-else>
-              <div>{{'Påmelding begynner ' + formatDate(registrationStart)}}</div>
+              <div>{{'Påmelding starter ' + formatDate(registrationStart)}}</div>
               </div>
           </div>
         </div>
