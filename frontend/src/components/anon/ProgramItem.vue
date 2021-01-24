@@ -39,7 +39,7 @@
           </div>
           <div v-if="registration">
               <div v-if="!notSendtEmail">
-                <div>Du har blitt sendt email</div>
+                <div>Dersom du ble med, har du fått en bekreftelsesmail</div>
               </div>
               <div v-else-if="enableRegistration && registered<maxRegistered">
                 <div>Påmelding har startet</div>
