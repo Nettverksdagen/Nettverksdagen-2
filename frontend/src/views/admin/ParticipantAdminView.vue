@@ -78,6 +78,7 @@ export default {
     },
     filteredList: function () {
       let participants = this.$store.state.participant.all
+      this.setParticipantList(participants)
       return participants.filter(par => par.event === this.$data.selectedEvent)
     },
     concatEmails: function () {
@@ -89,6 +90,9 @@ export default {
     }
   },
   methods: {
+    setParticipantList: function (participants) {
+      this.$data.participantList = participants
+    },
     destroy: function (participant) {
       if (!confirm('Er du sikker på at du vil slette ' + participant.name + '?')) {
         return
