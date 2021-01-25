@@ -84,7 +84,9 @@ export default {
     concatEmails: function () {
       let emailString = ''
       this.$data.participantList.forEach((participant) => {
-        emailString += participant.email + ';'
+        if (participant.event === this.$data.selectedEvent) {
+          emailString += participant.email + ';'
+        }
       })
       return emailString
     }
