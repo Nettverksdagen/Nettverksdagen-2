@@ -5,7 +5,7 @@
           <a href="https://www.poption.com/speedintervju/nettverksdagene-2021" target="_blank" rel="noopener noreferrer">
             <b-row>
               <b-col cols="12" class="sponsor-banner-text align-middle">
-                <h3 class="font-weight-bold">Nettverksdagene 2021 blir arrangert i samarbeid med Poption!</h3>
+                <h3 class="font-weight-bold">Nettverksdagene 2021 ble arrangert i samarbeid med Poption!</h3>
               </b-col>
               <b-col cols="12" lg="6" class="sponsor-banner-text align-middle no-padding-top">
                 <span>Poption setter deg i kontakt med de mest interessante bedriftene &mdash; fra startups til veletablerte selskaper. Trykk på banneret for å se årets speedintervjuer i samarbeid med Poption!</span>
