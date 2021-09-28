@@ -2,6 +2,7 @@
     <b-modal size="lg" @hide="hideModal" v-model="showModal" :id="'listingContent' + listing.id" :title="listing.name" hide-footer>
       <div class="listingText">
         <p v-html="listing.content"></p>
+        <a :href="listing.listing_url">Søk her</a>
       </div>
     </b-modal>
 </template>
