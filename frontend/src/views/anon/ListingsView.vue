@@ -96,7 +96,7 @@ export default {
       let listingsWithoutDeadline = listings.filter(listing => listing.deadline === null)
       listings = listings.filter(listing => listing.deadline !== null)
 
-      Filter out old listings
+      // Filter out old listings
       listings = listings.filter(
         listing => new Date(listing.deadline).setHours(0, 0, 0, 0) >= new Date().setHours(0, 0, 0, 0)
       )
