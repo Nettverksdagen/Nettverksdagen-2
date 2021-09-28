@@ -1,6 +1,7 @@
 <template>
     <div class="sponsors mt-5">
       <Content>
+      <!--
         <div class="sponsor-banner poption-banner">
           <a href="https://www.poption.com/speedintervju/nettverksdagene-2021" target="_blank" rel="noopener noreferrer">
             <b-row>
@@ -16,6 +17,7 @@
             </b-row>
           </a>
         </div>
+        -->
         <h2 class="text-center font-weight-bold">Våre sponsorer</h2>
         <div class="sponsor-banner kjeldsberg-banner">
           <a href="http://kjeldsbergkaffe.no/" target="_blank" rel="noopener noreferrer">
@@ -114,10 +116,11 @@ export default {
   .kjeldsberg-banner {
     background-color: #ffd600;
   }
+  /*
   .poption-banner {
     background-color: #fa6352;
     margin-bottom: 5rem;
-  }
+  } */
   .logo-kjeldsberg {
     height: 11rem;
     padding: 0.5rem 3rem 1rem 3rem;
@@ -127,6 +130,8 @@ export default {
       padding: 0 1rem 1rem 1rem;
     }
   }
+  /*
+  // Removed the poption sponsor. Uncomment to add.
   .logo-poption {
     height: 5rem;
     padding: 0.5rem 3rem 1rem 3rem;
@@ -135,5 +140,5 @@ export default {
       height: 3rem;
       padding: 0.5rem 1rem 1rem 1rem;
     }
-  }
+  } */
 </style>
