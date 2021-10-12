@@ -1,4 +1,7 @@
 from django.db import models
+from django.core.mail import send_mail
+from rest_framework.response import Response
+from rest_framework import status
 
 SUMMER_INTERNSHIP = 'Sommerjobb'
 FULL_TIME_POSITION = 'Fast stilling'
@@ -60,7 +63,7 @@ class TeamMember(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=250)
     email = models.CharField(max_length=250)
-    photo_uri = models.CharField(max_length=250)
+    photo_uri = models.CharField(max_length=250, blank=True, null=True, default='')
     team = models.CharField(max_length=250)
     position = models.CharField(max_length=250)
 
@@ -89,3 +92,27 @@ class Form(models.Model):
     external_url = models.CharField(max_length=250)
     internal_url = models.CharField(max_length=250)
     iframe_height = models.CharField(max_length=250)
+
+
+class Program(models.Model):
+    id = models.AutoField(primary_key=True)
+    header = models.CharField(max_length=250)
+    place = models.CharField(max_length=250)
+    timeStart = models.IntegerField()
+    timeEnd= models.IntegerField()
+    paragraph = models.CharField(max_length=10000,blank=True, null=True)
+    registration = models.BooleanField(default=False)
+    maxRegistered = models.IntegerField( blank=True, null=True)
+    registered = models.IntegerField( blank=True, null=True)
+    cancelEmail = models.CharField(max_length=250, blank=True, null=True)
+    registrationStart = models.IntegerField(blank=True, null=True)
+    registrationEnd = models.IntegerField(blank=True, null=True)
+
+
+class Participant(models.Model):
+    id = models.AutoField(primary_key=True)
+    event = models.IntegerField()
+    email = models.CharField(max_length=250)
+    name = models.CharField(max_length=250)
+    year = models.CharField(max_length=250)
+    study = models.CharField(max_length=250)

@@ -21,9 +21,9 @@
         <b-col cols="12" sm="6" md="4" lg="4" class="mb-sm-0 mb-3">
           <h5>Kontakt</h5>
           <ul class="list-unstyled">
-            <li><span class="font-weight-bold">Styret:</span> <a class="green-link" href="mailto:styret@nettverksdagene.no">styret@nettverksdagene.no</a></li>
+            <li><span class="font-weight-bold">Styret:</span> <a class="green-link" href="mailto:leder@nettverksdagene.no">leder@nettverksdagene.no</a></li>
             <li><span class="font-weight-bold">Bedrift:</span> <a class="green-link" href="mailto:bedrift@nettverksdagene.no">bedrift@nettverksdagene.no</a></li>
-            <li><span class="font-weight-bold">Sponsor:</span> <a class="green-link" href="mailto:sponsor@nettverksdagene.no">sponsor@nettverksdagene.no</a></li>
+            <li><span class="font-weight-bold">Sponsor:</span> <a class="green-link" href="mailto:spons@nettverksdagene.no">spons@nettverksdagene.no</a></li>
           </ul>
         </b-col>
 

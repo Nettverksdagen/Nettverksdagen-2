@@ -21,8 +21,8 @@ const actions = {
 const getters = {
   levels: state => {
     let levels = [
-      {level: 'Hovedsamarbeidspartner', levelHeader: 'Hoved&shy;samarbeids&shy;partner', businesses: []},
-      {level: 'Samarbeidspartner', levelHeader: 'Samarbeids&shy;partnere', businesses: []},
+      {level: 'Hovedsamarbeidspartner', levelHeader: 'Hoved&shy;samarbeids&shy;partner 2022', businesses: []},
+      {level: 'Samarbeidspartner', levelHeader: 'Samarbeids&shy;partner 2022', businesses: []},
       {level: 'Gull', levelHeader: 'Bedrifter du kan møte på stand', businesses: []},
       {level: 'Sølv', levelHeader: '', businesses: []},
       {level: 'Bronse', levelHeader: '', businesses: []}
@@ -39,8 +39,8 @@ const getters = {
   },
   days: state => {
     let days = [
-      {day: 'Dag 1', dayHeader: 'Bedrifter du kunne møte på stand 29. januar'},
-      {day: 'Dag 2', dayHeader: 'Bedrifter du kunne møte på stand 30. januar'}
+      {day: 'Dag 1', dayHeader: 'Bedrifter som deltok med digital stand'}
+      // {day: 'Dag 2', dayHeader: 'Bedrifter du kan møte på stand 28. januar'}
     ]
     for (let i = 0; i < days.length; i++) {
       days[i]['levels'] = [

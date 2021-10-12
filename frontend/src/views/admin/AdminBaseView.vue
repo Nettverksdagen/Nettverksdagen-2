@@ -80,6 +80,16 @@ export default {
           name: 'Skjemaer',
           url: this.$router.resolve({name: 'FormAdmin'}).href,
           icon: 'cui-dollar'
+        },
+        {
+          name: 'Program',
+          url: this.$router.resolve({name: 'ProgramAdmin'}).href,
+          icon: 'cui-dollar'
+        },
+        {
+          name: 'Participants',
+          url: this.$router.resolve({name: 'ParticipantAdmin'}).href,
+          icon: 'cui-dollar'
         }
       ]
     }

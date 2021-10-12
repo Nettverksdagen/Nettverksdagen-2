@@ -1,31 +1,255 @@
 <template>
+<div>
   <div class="timeline-item">
     <div class="timestamp">
-      <h4><span class="font-weight-bold">{{timeStart}}</span></h4>
+      <h4><span class="font-weight-bold">{{formatTime(timeStart)}}</span></h4>
     </div>
     <div class="card">
       <div class="card-body">
-        <slot></slot>
-        <div v-if="place" class="d-inline">
-          <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>
-          {{place}}
+        <div class="header">
+          <div v-if="header">
+            <h3 class="font-weight-bold">{{header}}</h3>
+          </div>
+          <div v-if="registration && maxRegistered">
+            <h5>{{registered + '/' + maxRegistered + ' påmeldte'}}</h5>
+          </div>
         </div>
-        <div v-if="timeEnd" class="d-inline">
-          <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>
-          {{timeStart}} - {{timeEnd}}
+        <div v-if="paragraph">
+          <div :key="name + line" v-for="line in paragraph" >
+            <p class='description'>{{line}}</p>
+          </div>
+        </div>
+        <div v-if="registration" class='button'>
+          <b-button v-if="enableRegistration && notSendtEmail && registered<maxRegistered" variant='primary' @click="openDialog">Påmelding</b-button>
+          <b-button v-else disabled variant="dark">Påmelding</b-button>
+        </div>
+        <div class="footer">
+          <div class="inline">
+            <div v-if="place" class="d-inline">
+              <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>
+              <div v-html="place" class="d-inline"/>
+            </div>
+            <div v-if="timeEnd" class="d-inline">
+              <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>
+              {{formatTime(timeStart)}} - {{formatTime(timeEnd)}}
+            </div>
+          </div>
+          <div v-if="registration && cancelEmail">
+              <b-link :href="'mailto:' +cancelEmail+'?subject=Jeg%20ønsker%20å%20melde%20meg%20av:%20' + header">{{'Ønsker du å melde deg av? Klikk her.'}}</b-link>
+          </div>
+          <div v-if="registration">
+              <div v-if="!notSendtEmail">
+                <div>Dersom du ble med, har du fått en bekreftelsesmail</div>
+              </div>
+              <div v-else-if="enableRegistration && registered<maxRegistered">
+                <div>Påmelding har startet</div>
+              </div>
+              <div v-else-if="enableRegistration && (!(registered<maxRegistered))">
+                <div>Det er fullt</div>
+              </div>
+              <div v-else-if="afterRegistration">
+                <div>Påmelding er ferdig</div>
+              </div>
+              <div v-else>
+              <div>{{'Påmelding starter ' + formatDate(registrationStart)}}</div>
+              </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <div>
+    <b-modal :id="'dialogForm'+name" :title="'Meld deg på: '+header" v-model="show">
+      <b-form>
+        <b-form-group
+        :id="'input-group-name'+name"
+        :label-for="'input-name' + name"
+        description='Skriv inn navnet ditt slik at vi vet hvem som melder seg på'
+      >
+        <b-form-input
+          :id="'input-name' + name"
+          v-model="form.name"
+          required
+          placeholder='Navn'
+        ></b-form-input>
+      </b-form-group>
+       <b-form-group
+        :id="'input-group-email'+name"
+        :label-for="'input-email' + name"
+        description='Skriv inn emailen din slik at vi kan sende deg en email for påmelding.'
+      >
+        <b-form-input
+          :id="'input-email' + name"
+          type="email"
+          v-model="form.email"
+          required
+          placeholder='E-post'
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group
+       :id="'input-group-study'+name"
+       :label-for="'input-study' + name"
+       description='Skriv inn det du studerer.'
+     >
+       <b-form-input
+         :id="'input-study' + name"
+         v-model="form.study"
+         required
+         placeholder='Study'
+       ></b-form-input>
+     </b-form-group>
+     <b-form-group
+      :id="'input-group-year'+name"
+      :label-for="'input-year' + name"
+      description='Skriv inn hvilket år du er på.'
+    >
+      <b-form-input
+        :id="'input-year' + name"
+        v-model="form.year"
+        required
+        placeholder='Year'
+      ></b-form-input>
+    </b-form-group>
+     </b-form>
+      <template v-slot:modal-footer>
+          <div>
+            <b-button
+            variant='outline-secondary'
+            @click="onCancel"
+          >
+            Cancel
+          </b-button>
+          <b-button
+            variant='primary'
+            @click="onSubmit"
+          >
+            Submit forms.
+          </b-button>
+          </div>
+      </template>
+    </b-modal>
+  </div>
+</div>
 </template>
 
 <script>
+import axios from 'axios'
+// import { mapMutations } from 'vuex'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons'
+
 library.add(faMapMarkerAlt, faClock)
 export default {
   name: 'ProgramItem',
-  props: ['timeStart', 'timeEnd', 'place']
+  props: ['timeStart', 'timeEnd', 'place', 'header', 'paragraph', 'registration', 'maxRegistered', 'registered', 'cancelEmail', 'registrationStart', 'registrationEnd', 'name'],
+  data () {
+    return {
+      form: {
+        email: '',
+        name: '',
+        study: '',
+        year: ''
+      },
+      show: false,
+      notSendtEmail: true
+    }
+  },
+  computed: {
+    beforeRegistration: function () {
+      let now = new Date()
+      return this.$props.registrationStart.getTime() > now.getTime()
+    },
+    afterRegistration: function () {
+      let now = new Date()
+      if (this.$props.registrationEnd) {
+        return this.$props.registrationEnd.getTime() < now.getTime()
+      }
+      return this.$props.timeStart.getTime() < now.getTime()
+    },
+    enableRegistration: function () {
+      if (!this.$props.registration) {
+        return false
+      }
+      if (this.beforeRegistration) {
+        return false
+      }
+      if (this.afterRegistration) {
+        return false
+      }
+      return true
+    }
+  },
+  methods: {
+    formatTime (dateObj) {
+      let hours = dateObj.getHours()
+      let minutes = dateObj.getMinutes()
+      hours = (hours > 9) ? String(hours) : ('0' + String(hours))
+      minutes = (minutes > 9) ? String(minutes) : ('0' + String(minutes))
+      return hours + ':' + minutes
+    },
+    formatDate (dateObj) {
+      let day = dateObj.getDate()
+      let month = dateObj.getMonth() + 1
+      let year = dateObj.getFullYear()
+      day = (day > 9) ? String(day) : ('0' + String(day))
+      month = (month > 9) ? String(month) : ('0' + String(month))
+      return this.formatTime(dateObj) + ' ' + day + '.' + month + '.' + year
+    },
+    openDialog () {
+      this.$data.form = {email: '', name: '', study: '', year: ''}
+      this.$data.show = true
+    },
+    onSubmit (e) {
+      e.preventDefault()
+      let data = this.$data.form
+      if (this.checkValidForm(data)) {
+        // Send email here
+        this.sendEmail()
+        // Clear data
+        this.$data.show = false
+        this.$data.form = {email: '', name: '', study: '', year: ''}
+        this.$data.notSendtEmail = false
+      } else {
+        /*
+        // Send email here
+        this.sendEmail()
+        // Clear data
+        this.$data.show = false
+        this.$data.form = {email: '', name: '', study: '', year: ''}
+        this.$data.notSendtEmail = false
+        */
+      }
+    },
+    sendEmail () {
+      console.log({event: this.$props.name, ...this.$data.form})
+      axios.post(process.env.VUE_APP_API_HOST +
+        '/api/participant/', {event: this.$props.name, ...this.$data.form})
+        .then((response) => console.log(response))
+        .catch((e) => {
+          console.log('Error in sendEmail')
+          console.log(e)
+        })
+    },
+    onCancel (e) {
+      e.preventDefault()
+      this.$data.form = {email: '', name: '', study: '', year: ''}
+      this.$data.show = false
+    },
+    checkValidForm (check) {
+      for (let key in check) {
+        if (check[key] === '') {
+          return false
+        } else if (key === 'email') {
+          let at = check[key].split('@')
+          let dot = at[at.length - 1].split('.')
+          if (at.length < 2 || dot.length < 2 || dot[dot.length - 1].length === 0) {
+            return false
+          }
+        }
+      }
+      return true
+    }
+  }
 }
 </script>
 
@@ -73,10 +297,32 @@ export default {
     left: -13px;
   }
 
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .footer {
+     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .button {
+    margin-right: 15px;
+    display: flex;
+    flex-direction: row-reverse
+  }
+
   .timestamp {
     position: absolute;
     left: -92px;
     top: 16px;
+  }
+
+  .description {
+    font-size:1.1em;
   }
 
   @media(max-width: 768px) {

@@ -9,9 +9,7 @@
         <b-col cols="12" md="5">
           <h2>Våre viktigste kanaler</h2>
           <p class="description">
-            Bruk disse kanalene hvis du ikke vet hvem du skal kontakte i Nettverksdagene.
-            Lenger ned på siden finnes det en oversikt over kontaktpersoner og deres stillinger hvis du heller vil
-            kontakte noen direkte.
+            Bruk disse kanalene til å kontakte oss i Nettverksdagene. Under finner du en oversikt over kontaktpersoner og deres stillinger.
           </p>
         </b-col>
         <b-col cols="12" md="7">
@@ -20,7 +18,7 @@
             <tr>
               <td class="align-top">
                 <h3>Styret</h3>
-                <b-link href="mailto:styret@nettverksdagene.no">styret@nettverksdagene.no</b-link>
+                <b-link href="mailto:leder@nettverksdagene.no">leder@nettverksdagene.no</b-link>
               </td>
               <td>
                 <p>
@@ -47,7 +45,7 @@
             <tr>
               <td class="align-top">
                 <h3>Sponsor</h3>
-                <b-link href="mailto:sponsor@nettverksdagene.no">sponsor@nettverksdagene.no</b-link>
+                <b-link href="mailto:spons@nettverksdagene.no">spons@nettverksdagene.no</b-link>
               </td>
               <td>
                 <p>
@@ -64,7 +62,7 @@
 
       <b-row class="mt-5">
         <b-col cols="12">
-          <h2>Kontaktpersoner for Nettverksdagene 2020</h2>
+          <h2>Kontaktpersoner for Nettverksdagene 2022</h2>
         </b-col>
       </b-row>
         <hr>
@@ -73,14 +71,19 @@
             <h3 class="font-weight-bold">{{ team.name }}</h3>
           </b-col>
           <b-col class="my-md-3 my-1" cols="12" md="6" xl="4" v-bind:key="member.id" v-for="member in team.members">
-            <b-card no-body>
+            <b-card no-body class="overflow-hidden">
               <b-card-body class="d-flex">
                 <div>
-                  <b-img rounded="circle" class="img-profile" :src="$options.fileServerHost + '/thumb/512/' + member.photo_uri"></b-img>
+                  <div v-if="member.photo_uri">
+                    <b-img  rounded="circle" class="img-profile" :src="$options.fileServerHost + '/thumb/512/' + member.photo_uri"></b-img>
+                  </div>
+                  <div v-else>
+                    <b-img  rounded="circle" class="img-profile-empty" :src="'https://d2ojdbp0769afo.cloudfront.net/fnd/v4/static/images/BlankProfile.png'"></b-img>
+                  </div>
                 </div>
                 <div class="ml-3 d-flex justify-content-center flex-column">
                   <h4 class="member-name m-0">{{ member.name }}</h4>
-                  <b-link :href="'mailto:' + member.email">{{ member.email }}</b-link>
+                  <b-link class="member-email" :href="'mailto:' + member.email">{{ member.email }}</b-link>
                   <span class="font-weight-bold text-black-50">{{ member.position }}</span>
                 </div>
               </b-card-body>
@@ -103,6 +106,7 @@ export default {
     Content,
     Spacer
   },
+
   computed: {
     teams: function () {
       return this.$store.getters['teamMembers/teams']
@@ -136,10 +140,20 @@ export default {
     }
   }
   .member-name {
-    font-weight:bold;
-    word-break:break-word;
+    font-weight: bold;
+    word-break: break-word;
   }
-  .img-profile {
+  .member-email {
+    word-break: break-word;
+  }
+  .img-profile-empty {
+    align-self: center;
+    height: 50px;
+    width: 50px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .img-profile{
+    align-self: center;
     height: 6rem;
     width: 6rem;
     box-shadow: 0 1px 2px rgba(0,0,0,0.3);

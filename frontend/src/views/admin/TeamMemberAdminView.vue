@@ -39,7 +39,7 @@
                 </b-form-group>
                 <div class="d-flex">
                   <b-form-group class="flex-grow-1" label="Bilde" label-for="member-photo">
-                    <b-form-file v-model="photoFile" :required="!editing" placeholder="Velg et bilde" id="member-photo" ref="photoFileInput" @input="uploadPhoto"></b-form-file>
+                    <b-form-file v-model="photoFile" placeholder="Velg et bilde" id="member-photo" ref="photoFileInput" @input="uploadPhoto"></b-form-file>
                     <p class="text-black-50 mt-2">
                       <span class="font-weight-bold">Obs</span>:
                       Bildet blir automatisk plassert i sentrum av et kvadrat, men ikke beskåret eller strukket.
@@ -61,13 +61,13 @@
       <div class="col-12">
         <b-card header="Teammedlemmer">
           <b-table class="d-none d-md-table" hover :fields="fields" :items="teamMembers">
-            <template slot="edit" slot-scope="teamMembers">
+            <template v-slot:cell(edit)="teamMembers">
               <edit-button class="mx-3" @click.native="edit(teamMembers.item)"></edit-button>
               <delete-button class="mx-3" @click.native="destroy(teamMembers.item)"></delete-button>
             </template>
           </b-table>
           <b-table class="d-block d-md-none" stacked :fields="fields" :items="teamMembers">
-            <template slot="edit" slot-scope="teamMembers">
+            <template v-slot:cell(edit)="teamMembers">
               <edit-button class="mx-3" @click.native="edit(teamMembers.item)"></edit-button>
               <delete-button class="mx-3" @click.native="destroy(teamMembers.item)"></delete-button>
             </template>
@@ -123,7 +123,11 @@ export default {
       return this.$store.state.teamMembers.all
     },
     imgSrc: function () {
-      return process.env.VUE_APP_FILESERVER_HOST + '/thumb/256/' + this.teamMember.photo_uri
+      if (this.teamMember.photo_uri) {
+        return process.env.VUE_APP_FILESERVER_HOST + '/thumb/256/' + this.teamMember.photo_uri
+      } else {
+        return 'https://d2ojdbp0769afo.cloudfront.net/fnd/v4/static/images/BlankProfile.png'
+      }
     }
   },
   methods: {

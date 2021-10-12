@@ -39,13 +39,13 @@
       <div class="col-12">
         <b-card header="Skjemaer">
           <b-table class="d-none d-md-table" hover :fields="fields" :items="forms">
-            <template slot="edit" slot-scope="forms">
+            <template v-slot:cell(edit)="forms">
               <edit-button class="mx-3" @click.native="edit(forms.item)"></edit-button>
               <delete-button class="mx-3" @click.native="destroy(forms.item)"></delete-button>
             </template>
           </b-table>
           <b-table class="d-block d-md-none" stacked :fields="fields" :items="forms">
-            <template slot="edit" slot-scope="forms">
+            <template v-slot:cell(edit)="forms">
               <edit-button class="mx-3" @click.native="edit(forms.item)"></edit-button>
               <delete-button class="mx-3" @click.native="destroy(forms.item)"></delete-button>
             </template>
