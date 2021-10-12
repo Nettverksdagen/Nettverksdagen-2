@@ -19,7 +19,7 @@
         </div>
         -->
         <h2 class="text-center font-weight-bold">Våre sponsorer</h2>
-        <div class="sponsor-banner kjeldsberg-banner">
+        <!-- <div class="sponsor-banner kjeldsberg-banner">
           <a href="http://kjeldsbergkaffe.no/" target="_blank" rel="noopener noreferrer">
             <b-row>
               <b-col cols="12" md="6" class="sponsor-banner-text align-middle">
@@ -31,7 +31,7 @@
               </b-col>
             </b-row>
           </a>
-        </div>
+        </div> -->
         <b-row>
           <Sponsor v-for="(sponsor, index) in sponsors"
                    :key="index"
