@@ -84,13 +84,13 @@
       <div class="col-12">
         <b-card header="Stillingsannonser">
           <b-table class="d-none d-md-table" hover :fields="fields" :items="listings">
-            <template slot="edit" slot-scope="listings">
+            <template v-slot:cell(edit)="listings">
               <edit-button class="mx-3" @click.native="edit(listings.item)"></edit-button>
               <delete-button class="mx-3" @click.native="destroy(listings.item)"></delete-button>
             </template>
           </b-table>
           <b-table class="d-block d-md-none" stacked :fields="fields" :items="listings">
-            <template slot="edit" slot-scope="listings">
+            <template v-slot:cell(edit)="listings">
               <edit-button class="mx-3" @click.native="edit(listings.item)"></edit-button>
               <delete-button class="mx-3" @click.native="destroy(listings.item)"></delete-button>
             </template>
@@ -279,5 +279,8 @@ export default {
 <style scoped lang="scss">
 .listings-link {
   color:#fff;
+}
+.d-md-table {
+  table-layout: fixed;
 }
 </style>

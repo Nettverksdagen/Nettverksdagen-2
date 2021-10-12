@@ -20,14 +20,14 @@
           </div>
         </div>
         <div v-if="registration" class='button'>
-          <b-button v-if="enableRegistration && notSendtEmail" variant='primary' @click="openDialog">Påmelding</b-button>
+          <b-button v-if="enableRegistration && notSendtEmail && registered<maxRegistered" variant='primary' @click="openDialog">Påmelding</b-button>
           <b-button v-else disabled variant="dark">Påmelding</b-button>
         </div>
         <div class="footer">
           <div class="inline">
             <div v-if="place" class="d-inline">
               <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>
-              {{place}}
+              <div v-html="place" class="d-inline"/>
             </div>
             <div v-if="timeEnd" class="d-inline">
               <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>
@@ -35,20 +35,23 @@
             </div>
           </div>
           <div v-if="registration && cancelEmail">
-              <b-link :href="'mailto:' +cancelEmail+'?subject=Jeg%20ønsker%20å%20melde%20meg%20av:%20' + header">{{'Ønsker du å melde deg av klikk her'}}</b-link>
+              <b-link :href="'mailto:' +cancelEmail+'?subject=Jeg%20ønsker%20å%20melde%20meg%20av:%20' + header">{{'Ønsker du å melde deg av? Klikk her.'}}</b-link>
           </div>
           <div v-if="registration">
               <div v-if="!notSendtEmail">
-                <div>Du har blitt sendt påmeldings email</div>
+                <div>Dersom du ble med, har du fått en bekreftelsesmail</div>
               </div>
-              <div v-else-if="enableRegistration">
-                <div>Påmelding har beggynt</div>
+              <div v-else-if="enableRegistration && registered<maxRegistered">
+                <div>Påmelding har startet</div>
+              </div>
+              <div v-else-if="enableRegistration && (!(registered<maxRegistered))">
+                <div>Det er fullt</div>
               </div>
               <div v-else-if="afterRegistration">
                 <div>Påmelding er ferdig</div>
               </div>
               <div v-else>
-              <div>{{'Påmelding begynner ' + formatDate(registrationStart)}}</div>
+              <div>{{'Påmelding starter ' + formatDate(registrationStart)}}</div>
               </div>
           </div>
         </div>
@@ -61,7 +64,7 @@
         <b-form-group
         :id="'input-group-name'+name"
         :label-for="'input-name' + name"
-        description='Skriv inn navnet ditt slik at vi vet hvem som medler seg på'
+        description='Skriv inn navnet ditt slik at vi vet hvem som melder seg på'
       >
         <b-form-input
           :id="'input-name' + name"
@@ -77,12 +80,37 @@
       >
         <b-form-input
           :id="'input-email' + name"
+          type="email"
           v-model="form.email"
           required
-          placeholder='Email'
+          placeholder='E-post'
         ></b-form-input>
       </b-form-group>
-      </b-form>
+      <b-form-group
+       :id="'input-group-study'+name"
+       :label-for="'input-study' + name"
+       description='Skriv inn det du studerer.'
+     >
+       <b-form-input
+         :id="'input-study' + name"
+         v-model="form.study"
+         required
+         placeholder='Study'
+       ></b-form-input>
+     </b-form-group>
+     <b-form-group
+      :id="'input-group-year'+name"
+      :label-for="'input-year' + name"
+      description='Skriv inn hvilket år du er på.'
+    >
+      <b-form-input
+        :id="'input-year' + name"
+        v-model="form.year"
+        required
+        placeholder='Year'
+      ></b-form-input>
+    </b-form-group>
+     </b-form>
       <template v-slot:modal-footer>
           <div>
             <b-button
@@ -106,7 +134,7 @@
 
 <script>
 import axios from 'axios'
-import { mapMutations } from 'vuex'
+// import { mapMutations } from 'vuex'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons'
 
@@ -118,7 +146,9 @@ export default {
     return {
       form: {
         email: '',
-        name: ''
+        name: '',
+        study: '',
+        year: ''
       },
       show: false,
       notSendtEmail: true
@@ -166,7 +196,7 @@ export default {
       return this.formatTime(dateObj) + ' ' + day + '.' + month + '.' + year
     },
     openDialog () {
-      this.$data.form = {email: '', name: ''}
+      this.$data.form = {email: '', name: '', study: '', year: ''}
       this.$data.show = true
     },
     onSubmit (e) {
@@ -177,31 +207,32 @@ export default {
         this.sendEmail()
         // Clear data
         this.$data.show = false
-        this.$data.form = {email: '', name: ''}
+        this.$data.form = {email: '', name: '', study: '', year: ''}
         this.$data.notSendtEmail = false
-      }else{
+      } else {
         /*
         // Send email here
         this.sendEmail()
         // Clear data
         this.$data.show = false
-        this.$data.form = {email: '', name: ''}
+        this.$data.form = {email: '', name: '', study: '', year: ''}
         this.$data.notSendtEmail = false
         */
       }
     },
     sendEmail () {
-      console.log({event: 1, ...this.$data.form})
+      console.log({event: this.$props.name, ...this.$data.form})
       axios.post(process.env.VUE_APP_API_HOST +
-        '/api/participant/', {event: 1, ...this.$data.form})
+        '/api/participant/', {event: this.$props.name, ...this.$data.form})
         .then((response) => console.log(response))
         .catch((e) => {
-          console.log("Error in sendEmail")
-          console.log(e)})
+          console.log('Error in sendEmail')
+          console.log(e)
+        })
     },
     onCancel (e) {
       e.preventDefault()
-      this.$data.form = {email: '', name: ''}
+      this.$data.form = {email: '', name: '', study: '', year: ''}
       this.$data.show = false
     },
     checkValidForm (check) {

@@ -17,6 +17,8 @@ import FormView from '@/views/anon/FormView'
 import FormAdminView from '@/views/admin/FormAdminView.vue'
 import BusinessDetails from '@/components/anon/BusinessDetails.vue'
 import ListingDetails from '@/components/anon/ListingDetails.vue'
+import ProgramAdminView from '@/views/admin/ProgramAdminView.vue'
+import ParticipantAdminView from '@/views/admin/ParticipantAdminView.vue'
 
 Vue.use(Router)
 
@@ -128,6 +130,18 @@ export default new Router({
           name: 'FormAdmin',
           component: FormAdminView,
           meta: {title: 'Rediger skjemaer'}
+        },
+        {
+          path: 'program',
+          name: 'ProgramAdmin',
+          component: ProgramAdminView,
+          meta: {title: 'Rediger program'}
+        },
+        {
+          path: 'participant',
+          name: 'ParticipantAdmin',
+          component: ParticipantAdminView,
+          meta: {title: 'Rediger deltagere'}
         }
       ]
     },

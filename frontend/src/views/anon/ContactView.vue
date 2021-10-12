@@ -62,7 +62,7 @@
 
       <b-row class="mt-5">
         <b-col cols="12">
-          <h2>Kontaktpersoner for Nettverksdagene 2021</h2>
+          <h2>Kontaktpersoner for Nettverksdagene 2022</h2>
         </b-col>
       </b-row>
         <hr>

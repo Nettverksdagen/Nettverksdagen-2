@@ -11,7 +11,7 @@
             </HeroHexBox>
           </b-link>
           <b-link :to="'/program'">
-            <HeroHexBox hex-title="Virtuelle stands" hex-icon="transfer.svg">
+            <HeroHexBox hex-title="Stands" hex-icon="transfer.svg">
               <!--Hele Glassgården fylles med stands! Her har du mulighet for å komme i kontakt med mange spennende bedrifter.
               Standkartet finner du på programsiden. -->
             </HeroHexBox>

@@ -48,13 +48,13 @@
       <div class="col-12">
         <b-card header="Sponsorer">
           <b-table class="d-none d-md-table" hover :fields="fields" :items="sponsors">
-            <template slot="edit" slot-scope="sponsors">
+            <template v-slot:cell(edit)="sponsors">
               <edit-button class="mx-3" @click.native="edit(sponsors.item)"></edit-button>
               <delete-button class="mx-3" @click.native="destroy(sponsors.item)"></delete-button>
             </template>
           </b-table>
           <b-table class="d-block d-md-none" stacked :fields="fields" :items="sponsors">
-            <template slot="edit" slot-scope="sponsors">
+            <template v-slot:cell(edit)="sponsors">
               <edit-button class="mx-3" @click.native="edit(sponsors.item)"></edit-button>
               <delete-button class="mx-3" @click.native="destroy(sponsors.item)"></delete-button>
             </template>
