@@ -35,7 +35,7 @@
             </div>
           </div>
           <div v-if="registration && cancelEmail">
-              <b-link :href="'mailto:' +cancelEmail+'?subject=Jeg%20ønsker%20å%20melde%20meg%20av:%20' + header">{{'Ønsker du å melde deg av? Klikk her.'}}</b-link>
+              <b-link @click.native="destroy(name)">Ønsker du å melde deg av? Klikk her.</b-link>
           </div>
           <div v-if="registration">
               <div v-if="!notSendtEmail">
@@ -248,6 +248,41 @@ export default {
         }
       }
       return true
+    },
+    destroy: function (name) {
+      let event = name
+      let email = prompt('Vennligst skriv inn emailen din:')
+      let participants = this.$store.state.participant.all
+      let participant = participants.filter(par => par.email === email && par.event === event)[0]
+
+      if (participant !== undefined) {
+        // Lag tilfeldig kode på 6 tegn
+        let code = Array(6).fill(0).map(x => Math.random().toString(36).charAt(2)).join('').toUpperCase()
+
+        // Send kode på epost
+        console.log(code)
+
+        // Be om kode, og hvis den matcher, slett participant
+        let yn = 'y'
+        while (yn === 'y') {
+          let inputedCode = prompt('Vennligst skriv inn koden som ble sendt til ' + participant.email + ':')
+          if (inputedCode === code) {
+            if (confirm('Er du sikker på at du vil melde av ' + participant.name + '?')) {
+              axios.delete(process.env.VUE_APP_API_HOST + '/api/participant/' +
+                participant.id + '/').then(_ => {
+                alert(participant.name + ' er nå avmeldt.')
+              }).catch(_ => {
+                alert('Det oppsto en feil under avmeldingen. Vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
+              })
+            }
+            break
+          } else {
+            yn = prompt('Feil kode. Vil du prøve igjen? y/n')
+          }
+        }
+      } else {
+        alert('Fant ingen deltakere med denne epost-adressen på dette arrangementet.')
+      }
     }
   }
 }
