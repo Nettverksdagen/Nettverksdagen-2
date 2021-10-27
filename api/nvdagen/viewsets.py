@@ -76,3 +76,17 @@ class ParticipantViewSet(viewsets.ModelViewSet):
             #returning a response
             response = {'message': 'Invalid input, check Participant list. Should not be duplicated'}
             return Response(response, status = status.HTTP_400_BAD_REQUEST)
+
+    def destroy(self, request, pk):
+        
+        participant = Participant.objects.get(id=pk)
+        program_id = participant.event
+
+        response = super().destroy(request)
+
+        if status.is_success(response.status_code):
+            program = Program.objects.get(id=program_id)
+            program.registered -= 1
+            program.save()
+        
+        return response
