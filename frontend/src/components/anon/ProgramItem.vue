@@ -202,6 +202,8 @@ export default {
     onSubmit (e) {
       e.preventDefault()
       let data = this.$data.form
+      // Generate and include 6-character random deregistering code
+      data.code = Array(6).fill(0).map(x => Math.random().toString(36).charAt(2)).join('').toUpperCase()
       if (this.checkValidForm(data)) {
         // Send email here
         this.sendEmail()
@@ -256,30 +258,31 @@ export default {
       let participant = participants.filter(par => par.email === email && par.event === event)[0]
 
       if (participant !== undefined) {
-        // Lag tilfeldig kode på 6 tegn
-        let code = Array(6).fill(0).map(x => Math.random().toString(36).charAt(2)).join('').toUpperCase()
-
-        // Send kode på epost
-        console.log(code)
-
-        // Be om kode, og hvis den matcher, slett participant
-        let yn = 'y'
-        while (yn === 'y') {
-          let inputedCode = prompt('Vennligst skriv inn koden som ble sendt til ' + participant.email + ':')
-          if (inputedCode === code) {
-            if (confirm('Er du sikker på at du vil melde av ' + participant.name + '?')) {
-              axios.delete(process.env.VUE_APP_API_HOST + '/api/participant/' +
-                participant.id + '/').then(_ => {
-                alert(participant.name + ' er nå avmeldt.')
-              }).catch(_ => {
-                alert('Det oppsto en feil under avmeldingen. Vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
-              })
+        // Send deregistering code
+        let code = participant.code
+        axios.get(process.env.VUE_APP_API_HOST + '/api/participant/' +
+          participant.id + '/').then(_ => {
+          // Prompt user for code, and delete participant if input matches
+          let yn = 'y'
+          while (yn === 'y') {
+            let inputedCode = prompt('Vennligst skriv inn koden som ble sendt til ' + participant.email + '. Hvis du ikke mottar mailen, vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
+            if (inputedCode === code) {
+              if (confirm('Er du sikker på at du vil melde av ' + participant.name + '?')) {
+                axios.delete(process.env.VUE_APP_API_HOST + '/api/participant/' +
+                  participant.id + '/').then(_ => {
+                  alert(participant.name + ' er nå avmeldt.')
+                }).catch(_ => {
+                  alert('Det oppsto en feil under avmeldingen. Vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
+                })
+              }
+              break
+            } else {
+              yn = prompt('Feil kode. Vil du prøve igjen? y/n')
             }
-            break
-          } else {
-            yn = prompt('Feil kode. Vil du prøve igjen? y/n')
           }
-        }
+        }).catch(_ => {
+          alert('Det oppsto en feil under sendingen av avmeldingskoden. Vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
+        })
       } else {
         alert('Fant ingen deltakere med denne epost-adressen på dette arrangementet.')
       }
