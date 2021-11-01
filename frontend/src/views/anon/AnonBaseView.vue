@@ -1,7 +1,7 @@
 <template>
   <div class="anon-base">
     <AnonHeader/>
-    <Slider/>
+    <!-- <Slider/> -->
     <router-view/>
     <AnonFooter/>
   </div>

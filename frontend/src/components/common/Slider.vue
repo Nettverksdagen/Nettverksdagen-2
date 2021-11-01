@@ -1,6 +1,6 @@
 <template>
   <div class="sidemenu">
-    <font-awesome-icon icon="bars" class="hamburger" v-on:click="menuIsOpen = true"></font-awesome-icon>
+    <font-awesome-icon icon="bars" class="hamburger stick" v-on:click="menuIsOpen = true"></font-awesome-icon>
     <div class="slider" v-bind:class="{ visible: menuIsOpen }">
       <ul>
         <li v-for="route in routes" :key="route.routeName">
@@ -18,8 +18,8 @@
 <script>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
-library.add(faBars)
+import { faBars, faAdjust, faInfoCircle, faHome } from '@fortawesome/free-solid-svg-icons'
+library.add(faBars, faAdjust, faInfoCircle, faHome)
 export default {
   name: 'Slider',
   components: {
@@ -42,22 +42,22 @@ export default {
 
 <style lang="scss" scoped>
   .sidemenu {
-    @media (min-width: 768px) {
+    @media (min-width: 1300px) {
       display:none;
     }
 
     .slider {
       position: fixed;
-      left: -200px;
+      right: -200px;
       top: 0;
       width: 150px;
       height:100%;
       transition: 0.5s;
-      background: #333;
+      background: var(--slider-color);
       z-index:200;
 
       &.visible {
-        left: 0;
+        right: 0;
       }
       ul {
         padding: 0;
@@ -67,7 +67,7 @@ export default {
           span {
             margin: 0 1em;
             a {
-              color: white;
+              color: var(--text-primary-color);
             }
           }
         }
@@ -76,11 +76,17 @@ export default {
 
     .hamburger {
       position:absolute;
-      left: 15px;
-      top: 15px;
-      width:20px;
-      height:20px;
-      color: #333;
+      margin: 0 18px 0 0;
+      cursor: pointer;
+      right: 15px;
+      top: 20px;
+      width: 30px;
+      height: 30px;
+      color: var(--header-text-color);
+      z-index: 50;
+    }
+    .stick {
+      position: sticky;
     }
   }
   .overlay {

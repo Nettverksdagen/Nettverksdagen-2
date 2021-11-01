@@ -1,5 +1,8 @@
 <template>
   <div class="listings">
+    <div class="test">
+      <h1>Stillingsannonser</h1>
+    </div>
     <Content>
       <b-row>
         <div class="col-12 col-md-4">
@@ -205,12 +208,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
   .collapsed > .when-opened,
   :not(.collapsed) > .when-closed {
     display: none;
   }
-
   .listings {
     min-height: 80vh;
+    margin: 36px 0 0 80px;
+    background: var(--background-color-primary);
+  }
+  h1 {
+    font: 700 48px/1.2 "Poppins", sans-serif;
+    margin-bottom: 10px;
+    margin: 0 0 0 200px;
+  }
+  .headeren {
+    background: var(--background-color-primary);
   }
 </style>
