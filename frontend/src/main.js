@@ -11,6 +11,12 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'babel-polyfill'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+// import VueGtag from 'vue-gtag'
+// eller vue-analytics
+
+// Vue.use(VueGtag, {
+//   config: { id: 'G-SQW62N0Y3V' }
+// }, router)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
