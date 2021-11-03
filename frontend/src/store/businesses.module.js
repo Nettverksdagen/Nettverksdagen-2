@@ -39,7 +39,7 @@ const getters = {
   },
   days: state => {
     let days = [
-      {day: 'Dag 1', dayHeader: 'Bedrifter som deltok med digital stand'}
+      {day: 'Dag 1', dayHeader: 'Bedrifter du kan møte på stand'}
       // {day: 'Dag 2', dayHeader: 'Bedrifter du kan møte på stand 28. januar'}
     ]
     for (let i = 0; i < days.length; i++) {
