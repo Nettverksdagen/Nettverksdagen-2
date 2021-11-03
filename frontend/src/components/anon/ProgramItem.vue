@@ -263,8 +263,8 @@ export default {
         axios.get(process.env.VUE_APP_API_HOST + '/api/participant/' +
           participant.id + '/').then(_ => {
           // Prompt user for code, and delete participant if input matches
-          let yn = 'y'
-          while (yn === 'y') {
+          let retry = true
+          while (retry) {
             let inputedCode = prompt('Vennligst skriv inn koden som ble sendt til ' + participant.email + '. Hvis du ikke mottar mailen, vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
             if (inputedCode === code) {
               if (confirm('Er du sikker på at du vil melde av ' + participant.name + '?')) {
@@ -277,7 +277,7 @@ export default {
               }
               break
             } else {
-              yn = prompt('Feil kode. Vil du prøve igjen? y/n')
+              retry = confirm('Feil kode. Vil du prøve igjen?')
             }
           }
         }).catch(_ => {

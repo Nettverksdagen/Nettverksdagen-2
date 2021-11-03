@@ -95,3 +95,17 @@ class ParticipantViewSet(viewsets.ModelViewSet):
             #An error to be raised if the send_mail function doesn't work
             print("ERROR: Konfigurer email-settings i mail_settings.py")
             raise Exception('ERROR: Konfigurer email-settings i mail_settings.py')
+
+    def destroy(self, request, pk):
+        
+        participant = Participant.objects.get(id=pk)
+        program_id = participant.event
+
+        response = super().destroy(request)
+
+        if status.is_success(response.status_code):
+            program = Program.objects.get(id=program_id)
+            program.registered -= 1
+            program.save()
+        
+        return response
