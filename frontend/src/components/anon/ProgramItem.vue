@@ -11,7 +11,12 @@
             <h3 class="font-weight-bold">{{header}}</h3>
           </div>
           <div v-if="registration && maxRegistered">
-            <h5>{{registered + '/' + maxRegistered + ' påmeldte'}}</h5>
+            <h5 v-if="registered<=maxRegistered">
+              {{registered + '/' + maxRegistered + ' påmeldte'}}
+            </h5>
+            <h5 v-else>
+              {{maxRegistered + ' påmeldte, ' + (registered-maxRegistered) + ' på venteliste'}}
+            </h5>
           </div>
         </div>
         <div v-if="paragraph">
@@ -20,7 +25,7 @@
           </div>
         </div>
         <div v-if="registration" class='button'>
-          <b-button v-if="enableRegistration && notSendtEmail && registered<maxRegistered" variant='primary' @click="openDialog">Påmelding</b-button>
+          <b-button v-if="enableRegistration && notSendtEmail" variant='primary' @click="openDialog">Påmelding</b-button>
           <b-button v-else disabled variant="dark">Påmelding</b-button>
         </div>
         <div class="footer">
@@ -44,8 +49,8 @@
               <div v-else-if="enableRegistration && registered<maxRegistered">
                 <div>Påmelding har startet</div>
               </div>
-              <div v-else-if="enableRegistration && (!(registered<maxRegistered))">
-                <div>Det er fullt</div>
+              <div v-else-if="enableRegistration && registered>=maxRegistered">
+                <div>Du vil bli satt på venteliste</div>
               </div>
               <div v-else-if="afterRegistration">
                 <div>Påmelding er ferdig</div>
