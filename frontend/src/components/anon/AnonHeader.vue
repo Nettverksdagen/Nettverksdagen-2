@@ -80,7 +80,8 @@ export default {
     window.removeEventListener('scroll', this.handleScroll)
   },
   mounted () {
-    const initUserTheme = this.getMediaPreference()
+    // const initUserTheme = this.getMediaPreference()
+    const initUserTheme = 'light-theme'
     this.setTheme(initUserTheme)
     console.log(initUserTheme)
   }
@@ -111,18 +112,17 @@ export default {
     vertical-align: middle;
   }
   .round-button {
+    padding: 2px 0 0 0;
     margin: 0 5px 0px 5px;
     width: 40px;
     height: 40px;
     background: var(--background-color-primary);
     color: var(--header-text-color);
     display: inline-flex;
-    align-items: center;
     justify-content: center;
     cursor: pointer;
     border-radius: 50%;
     border: none;
-    text-decoration: none;
     transition: background 0.5s;
     &:hover {
       background:var(--header-text-secondary-color);
@@ -130,16 +130,12 @@ export default {
   }
   .round-long-button {
     margin: 0 5px 0px 5px;
-    height: 100%;
-    background: var(--background-color-primary);
-    color: var(--header-text-color);
+    padding: 2px 0 0 0;
     display: inline-flex;
-    align-items: center;
     justify-content: center;
-    cursor: pointer;
+    text-align: center;
     border-radius: 23px;
     border: none;
-    text-decoration: none;
     transition: background 0.5s;
     &:hover {
       background:var(--header-text-secondary-color);
@@ -163,7 +159,7 @@ export default {
     display:flex;
   }
   .links {
-    margin: 8px 20px 0 0;
+    margin: 2px 15px 0 0;
     display:none;
     align-items: center;
     vertical-align: middle;

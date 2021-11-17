@@ -76,7 +76,7 @@ export default {
 
     .hamburger {
       position:absolute;
-      margin: 0 18px 0 0;
+      margin: 0 -2px 0 0;
       cursor: pointer;
       right: 15px;
       top: 20px;
