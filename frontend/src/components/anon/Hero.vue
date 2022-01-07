@@ -43,6 +43,7 @@ export default {
 
 <style lang="scss" scoped>
   .hero {
+    margin-top: 300px;
     background: no-repeat top;
     background-size: auto 100%;
   }

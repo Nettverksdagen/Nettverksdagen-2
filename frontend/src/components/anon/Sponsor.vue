@@ -1,8 +1,10 @@
 <template>
-    <div class="sponsor col-4 col-sm-3">
+    <div class="row col-12" align="center">
+    <div class="sponsor col-3">
       <a :href="href" target="_blank" rel="noopener noreferrer">
         <b-img fluid :src="fileserverHost + '/thumb/512/' + logo_src"></b-img>
       </a>
+    </div>
     </div>
 </template>
 
@@ -19,21 +21,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .allsponsors {
+    position:relative;
+    //width:80%;
+    left:10%;
+  }
   .sponsor {
-    transition: transform 0.2s;
-    padding: 0.5rem 1.5rem;
-    @media(min-width: 576px) {
-      // No hover effect on tiny devices
-      padding: 0.5rem 2.5rem;
-    }
-    @media(min-width: 768px) {
-      padding: 2rem 3rem;
-      &:hover {
-        transform: scale(1.15);
-      }
-    }
-    @media(min-width: 992px) {
-      padding: 2rem 5.5rem;
-    }
+    width: 200px;
+    //width: 80%;
+    //display:flex;
+    //flex-direction:row;
+    //justify-content: space-between;
+    //width: 10%;
+    transition: transform 300ms, filter 500ms;
+    filter: brightness(0) invert(20%) sepia(12%) saturate(2012%) hue-rotate(125deg) brightness(94%) contrast(94%);
+    //padding: 0.5rem 1.5rem;
+  }
+  .sponsor:hover {
+    filter: none;
+    transform: scale(1.15);
+    transition: filter 0.5s, transform 0.3s;
   }
 </style>
