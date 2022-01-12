@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from .models import Listing, Business, Sponsor, TeamMember, Form, Participant, Program
 from .serializers import ListingSerializer, BusinessSerializer, SponsorSerializer, TeamMemberSerializer, FormSerializer, ParticipantSerializer, ProgramSerializer
 from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 class ListingViewSet(viewsets.ModelViewSet):
     queryset = Listing.objects.all()
@@ -51,7 +53,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
             try:
                 #Sending the mail
                 html_message=render_to_string('Nettverksdagen-2/api/nvdagen/mail.html')
-                plain_message=strip_tags(html_message))
+                plain_message=strip_tags(html_message)
 
                 send_mail('Nettverksdagene - Påmelding bekreftet for ' + data.get('name'),
                 # 'Vi bekrefter herved at du er påmeldt. Dersom du skulle ønske å melde deg av igjen, vennligst gjør det via nettverksdagene.no/program. Tusen takk for din interesse i Nettverksdagene!',
