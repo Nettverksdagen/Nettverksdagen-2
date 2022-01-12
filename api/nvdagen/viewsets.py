@@ -48,40 +48,16 @@ class ParticipantViewSet(viewsets.ModelViewSet):
 
         #Validates that a new Participant can enter the event
         if (len(ParticipantValidationList) == 0):
-            # If program not full, send confirmation email
-            if (ProgramToBeAdded.registered < ProgramToBeAdded.maxRegistered):
-                try:
-                    #Using the default django-create function
-                    super().create(request)
+            #Using the default django-create function
+            super().create(request)
 
-                    #Updating the registrationlist on event
-                    ProgramToBeAdded.registered += 1
-                    ProgramToBeAdded.save()
+            #Updating the registrationlist on event
+            ProgramToBeAdded.registered += 1
+            ProgramToBeAdded.save()
 
-                    #Sending the mail
-                    send_mail('Nettverksdagene - Påmelding bekreftet for ' + data.get('name'),
-                    'Vi bekrefter herved at du er påmeldt ' + ProgramToBeAdded.header + '. Dersom du skulle ønske å melde deg av, vennligst gjør det via nettverksdagene.no/program. Tusen takk for din interesse i Nettverksdagene!',
-                    'do-not-reply@nettverksdagene.no',
-                    [data.get('email')],
-                    fail_silently=False)
-
-                    #returning a response
-                    response = {'message': 'It works!!'}
-                    return Response(response, status = status.HTTP_200_OK)
-                except:
-                    #An error to be raised if the send_mail function doesn't work
-                    print("ERROR: Konfigurer email-settings i mail_settings.py")
-                    raise Exception('ERROR: Konfigurer email-settings i mail_settings.py')
-            else:
+            try:
                 # If program is full, send waiting list email
-                try:
-                    #Using the default django-create function
-                    super().create(request)
-                    
-                    #Updating the registrationlist on event
-                    ProgramToBeAdded.registered += 1
-                    ProgramToBeAdded.save()
-
+                if (ProgramToBeAdded.registered > ProgramToBeAdded.maxRegistered):
                     waitingListIndex = ProgramToBeAdded.registered - ProgramToBeAdded.maxRegistered
 
                     #Sending the mail
@@ -94,10 +70,22 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                     #returning a response
                     response = {'message': 'It works!!'}
                     return Response(response, status = status.HTTP_200_OK)
-                except:
-                    #An error to be raised if the send_mail function doesn't work
-                    print("ERROR: Konfigurer email-settings i mail_settings.py")
-                    raise Exception('ERROR: Konfigurer email-settings i mail_settings.py')
+                # If program not full, send confirmation email
+                else:
+                    #Sending the mail
+                    send_mail('Nettverksdagene - Påmelding bekreftet for ' + data.get('name'),
+                    'Vi bekrefter herved at du er påmeldt ' + ProgramToBeAdded.header + '. Dersom du skulle ønske å melde deg av, vennligst gjør det via nettverksdagene.no/program. Tusen takk for din interesse i Nettverksdagene!',
+                    'do-not-reply@nettverksdagene.no',
+                    [data.get('email')],
+                    fail_silently=False)
+
+                    #returning a response
+                    response = {'message': 'It works!!'}
+                    return Response(response, status = status.HTTP_200_OK)                
+            except:
+                #An error to be raised if the send_mail function doesn't work
+                print("ERROR: Konfigurer email-settings i mail_settings.py")
+                raise Exception('ERROR: Konfigurer email-settings i mail_settings.py')
 
         else:
             #returning a response
