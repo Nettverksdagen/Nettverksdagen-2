@@ -95,9 +95,9 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                     response = {'message': 'It works!!'}
                     return Response(response, status = status.HTTP_200_OK)
                 except:
-                        #An error to be raised if the send_mail function doesn't work
-                        print("ERROR: Konfigurer email-settings i mail_settings.py")
-                        raise Exception('ERROR: Konfigurer email-settings i mail_settings.py')
+                    #An error to be raised if the send_mail function doesn't work
+                    print("ERROR: Konfigurer email-settings i mail_settings.py")
+                    raise Exception('ERROR: Konfigurer email-settings i mail_settings.py')
 
         else:
             #returning a response

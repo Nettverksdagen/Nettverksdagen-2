@@ -288,7 +288,7 @@ export default {
         }).catch(_ => {
           alert('Det oppsto en feil under sendingen av avmeldingskoden. Vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
         })
-      } else {
+      } else if (email !== null) {
         alert('Fant ingen deltakere med denne epost-adressen på dette arrangementet.')
       }
     }
