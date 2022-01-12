@@ -50,11 +50,16 @@ class ParticipantViewSet(viewsets.ModelViewSet):
         if((len(ParticipantValidationList) == 0) and (ProgramToBeAdded.registered < ProgramToBeAdded.maxRegistered)):
             try:
                 #Sending the mail
+                html_message=render_to_string('Nettverksdagen-2/api/nvdagen/mail.html')
+                plain_message=strip_tags(html_message))
+
                 send_mail('Nettverksdagene - Påmelding bekreftet for ' + data.get('name'),
-                'Vi bekrefter herved at du er påmeldt. Dersom du skulle ønske å melde deg av igjen, vennligst gjør det via nettverksdagene.no/program. Tusen takk for din interesse i Nettverksdagene!',
+                # 'Vi bekrefter herved at du er påmeldt. Dersom du skulle ønske å melde deg av igjen, vennligst gjør det via nettverksdagene.no/program. Tusen takk for din interesse i Nettverksdagene!',
+                plain_message,
                 'do-not-reply@nettverksdagene.no',
                 [data.get('email')],
-                fail_silently=False)
+                fail_silently=False,
+                html_message=html_message)
 
                 #Using the default django-create function
                 super().create(request)
