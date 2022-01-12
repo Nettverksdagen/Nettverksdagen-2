@@ -52,7 +52,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
         if((len(ParticipantValidationList) == 0) and (ProgramToBeAdded.registered < ProgramToBeAdded.maxRegistered)):
             try:
                 #Sending the mail
-                html_message=render_to_string('Nettverksdagen-2/api/nvdagen/mail.html')
+                html_message=render_to_string('mail.html')
                 plain_message=strip_tags(html_message)
 
                 send_mail('Nettverksdagene - Påmelding bekreftet for ' + data.get('name'),
