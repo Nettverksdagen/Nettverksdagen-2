@@ -35,7 +35,7 @@
             </div>
           </div>
           <div v-if="registration && cancelEmail">
-              <b-link @click.native="destroy(name)">Ønsker du å melde deg av? Klikk her.</b-link>
+              <b-link @click.native="destroy_participant(name)">Ønsker du å melde deg av? Klikk her.</b-link>
           </div>
           <div v-if="registration">
               <div v-if="!notSendtEmail">
@@ -251,8 +251,8 @@ export default {
       }
       return true
     },
-    destroy: function (name) {
-      let event = name
+    destroy_participant: function (eventName) {
+      let event = eventName
       let email = prompt('Vennligst skriv inn emailen din:')
       let participants = this.$store.state.participant.all
       let participant = participants.filter(par => par.email === email && par.event === event)[0]
