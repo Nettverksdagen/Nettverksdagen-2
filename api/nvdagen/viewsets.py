@@ -141,6 +141,8 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                 except:
                     #An error to be raised if the send_mail function doesn't work
                     print("ERROR: Konfigurer email-settings i mail_settings.py")
-                    raise Exception('ERROR: Konfigurer email-settings i mail_settings.py')                
+                    raise Exception('ERROR: Konfigurer email-settings i mail_settings.py')
+        else:
+            raise Exception(f'ERROR: DELETE request returned {response.status_code}.')
         
         return response
