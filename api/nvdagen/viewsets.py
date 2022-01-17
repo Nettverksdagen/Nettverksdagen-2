@@ -43,30 +43,29 @@ class ParticipantViewSet(viewsets.ModelViewSet):
 
 
     def create(self, request):
-        #Data to be used
-        data = {'year': request.data.get('year'), 'study': request.data.get('study'), 'email': request.data.get('email'), 'name': request.data.get('name'), 'event': request.data.get('event'), 'code': request.data.get('code')}
-        ParticipantValidationList = Participant.objects.filter(email=data['email'], event=data['event'])
-        ProgramToBeAdded = Program.objects.filter(id=data['event'])[0]
+        data = request.data
+        notRegistered = Participant.objects.filter(email=data['email'], event=data['event']).count() == 0
+        program = Program.objects.get(id=data['event'])
 
         #Validates that a new Participant can enter the event
-        if (len(ParticipantValidationList) == 0):
+        if (notRegistered):
             #Using the default django-create function
             super().create(request)
 
             #Updating the registrationlist on event
-            ProgramToBeAdded.registered += 1
-            ProgramToBeAdded.save()
+            program.registered += 1
+            program.save()
 
             try:
                 # If program is full, send waiting list email
-                if (ProgramToBeAdded.registered > ProgramToBeAdded.maxRegistered):
-                    waitingListIndex = ProgramToBeAdded.registered - ProgramToBeAdded.maxRegistered
+                if (program.registered > program.maxRegistered):
+                    waitingListIndex = program.registered - program.maxRegistered
 
                     #Sending the mail
                     send_mail('Nettverksdagene - Du står på venteliste',
-                    'Vi bekrefter herved at du står på venteliste til ' + ProgramToBeAdded.header + '. Din plass på ventelisten er ' + str(waitingListIndex) + '. Dersom du skulle ønske å melde deg av, vennligst gjør det via nettverksdagene.no/program. Tusen takk for din interesse i Nettverksdagene!',
+                    'Vi bekrefter herved at du står på venteliste til ' + program.header + '. Din plass på ventelisten er ' + str(waitingListIndex) + '. Dersom du skulle ønske å melde deg av, vennligst gjør det via nettverksdagene.no/program. Tusen takk for din interesse i Nettverksdagene!',
                     'do-not-reply@nettverksdagene.no',
-                    [data.get('email')],
+                    [data['email']],
                     fail_silently=False)
 
                     #returning a response
@@ -75,10 +74,10 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                 # If program not full, send confirmation email
                 else:
                     #Sending the mail
-                    send_mail('Nettverksdagene - Påmelding bekreftet for ' + data.get('name'),
-                    'Vi bekrefter herved at du er påmeldt ' + ProgramToBeAdded.header + '. Dersom du skulle ønske å melde deg av, vennligst gjør det via nettverksdagene.no/program. Tusen takk for din interesse i Nettverksdagene!',
+                    send_mail('Nettverksdagene - Påmelding bekreftet for ' + data['name'],
+                    'Vi bekrefter herved at du er påmeldt ' + program.header + '. Dersom du skulle ønske å melde deg av, vennligst gjør det via nettverksdagene.no/program. Tusen takk for din interesse i Nettverksdagene!',
                     'do-not-reply@nettverksdagene.no',
-                    [data.get('email')],
+                    [data['email']],
                     fail_silently=False)
 
                     #returning a response
