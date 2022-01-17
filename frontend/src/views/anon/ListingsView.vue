@@ -1,6 +1,7 @@
 <template>
   <div class="listings">
     <Content>
+      <h1>Stillingsannonser</h1>
       <b-row>
         <div class="col-12 col-md-4">
           <b-card no-body class="mb-3" header="Filtrer annonser">

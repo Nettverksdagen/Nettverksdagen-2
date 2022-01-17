@@ -2,7 +2,7 @@
   <div class="hero-text">
     <h1 class="mt-3 hero-header">Påmelding for bedrifter til Nettverksdagene 2022 har nå åpnet!</h1>
     <hr class="hr-hero">
-    <h2 class="font-weight-light">26. og 27. januar 2022</h2>
+    <h2 class="font-weight-light">2. og 3. mars 2022</h2>
   </div>
 </template>
 

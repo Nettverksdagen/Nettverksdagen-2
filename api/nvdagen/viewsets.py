@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from .models import Listing, Business, Sponsor, TeamMember, Form, Participant, Program
 from .serializers import ListingSerializer, BusinessSerializer, SponsorSerializer, TeamMemberSerializer, FormSerializer, ParticipantSerializer, ProgramSerializer
 from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 class ListingViewSet(viewsets.ModelViewSet):
     queryset = Listing.objects.all()

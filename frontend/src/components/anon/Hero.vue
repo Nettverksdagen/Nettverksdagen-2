@@ -5,7 +5,7 @@
         <HeroText class="hero-txt"/>
         <div class="hexes">
           <b-link :to="'/program'">
-            <HeroHexBox hex-title="Speedintervjuer" hex-icon="balloon.svg">
+            <HeroHexBox hex-title="Ballongslipp" hex-icon="balloon.svg">
               <!-- Det blir ballongslipp der du kan vinne flotte premier!
               I tillegg har vi mange andre konkurranser i løpet av dagen. -->
             </HeroHexBox>

@@ -1,7 +1,6 @@
 <template>
   <div class="anon-base">
     <AnonHeader/>
-    <Slider/>
     <router-view/>
     <AnonFooter/>
   </div>
@@ -10,13 +9,11 @@
 <script>
 import AnonHeader from '@/components/anon/AnonHeader.vue'
 import AnonFooter from '@/components/anon/AnonFooter.vue'
-import Slider from '@/components/common/Slider.vue'
 export default {
   name: 'AnonBaseView',
   components: {
     AnonHeader,
-    AnonFooter,
-    Slider
+    AnonFooter
   }
 }
 </script>

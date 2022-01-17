@@ -280,4 +280,7 @@ export default {
 .listings-link {
   color:#fff;
 }
+.d-md-table {
+  table-layout: fixed;
+}
 </style>
