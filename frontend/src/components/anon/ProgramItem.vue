@@ -256,10 +256,11 @@ export default {
 <style scoped lang="scss">
   .card {
     position: relative;
-    border:none;
-    border-radius: 0.5em;
+    border-radius: 15px;
+    border-width: 2px;
+    border-color: var(--line-border-color);
     background-color: white;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.15);
+    //box-shadow: 0 1px 2px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.15);
   }
 
   .timeline-item {

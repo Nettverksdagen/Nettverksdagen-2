@@ -1,12 +1,12 @@
 <template>
-  <div class="home">
+  <div>
     <HomeScreen/>
     <!-- <div class="text-center pt-5">
       <h3>Vil din bedrift delta på Nettverksdagene 2022?</h3>
       <h3><a href="mailto:bedrift@nettverksdagene.no">Meld interesse her</a>.</h3>
     </div> -->
     <businesses></businesses>
-    <sponsors></sponsors>
+    <sponsors class="sponsors"></sponsors>
   </div>
 </template>
 
@@ -32,4 +32,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .sponsors {
+    margin-bottom: 60px;
+  }
 </style>

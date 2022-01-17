@@ -20,7 +20,7 @@
         </li>
       </ul>
     </div>
-    <div class="overlay" v-if="menuIsOpen" v-on:click="menuIsOpen = false"></div>
+    <div class="overlay" v-bind:class="{ visible: menuIsOpen }" v-if="menuIsOpen" v-on:click="menuIsOpen = false"></div>
   </div>
 </template>
 
@@ -59,7 +59,7 @@ export default {
     cursor: pointer;
     //overflow: hidden;
     &:hover {
-      opacity: 0.9;
+      filter: brightness(0%) invert(29%) sepia(47%) saturate(587%) hue-rotate(124deg) brightness(94%) contrast(89%);
     }
   }
   p {
@@ -85,7 +85,7 @@ export default {
     transition: .5s ease-in-out;
     cursor: pointer;
     margin-top: 8px;
-    margin-right: 75px;
+    margin-right: 60px;
   }
   .burger span {
     display: block;
@@ -201,12 +201,20 @@ export default {
     }
   }
   .overlay {
-    background: rgba(0, 0, 0, 0.01);
+    background-color: var(--background-color-primary);
     width:100%;
     height:100%;
-    top:200px;
+    top:379px;
     left:0;
     position:fixed;
-    z-index:100;
+    opacity: 1;
+    transition: all 0.5s;
+    //z-index:-1;
+  }
+  .overlay.visible {
+    opacity: 1;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    background-color: rgba(0, 0, 0, 0.02);
   }
 </style>

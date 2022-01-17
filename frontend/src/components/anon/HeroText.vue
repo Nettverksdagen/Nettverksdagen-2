@@ -15,24 +15,82 @@
 <style lang="scss" scoped>
   .hero-text {
     color: var(--primary-color);
+    width: 100%;
+    text-align: center;
+    @media(min-width: 768px) {
+      width: 60%;
+    }
+    @media(min-width: 992px) {
+      width: 70%;
+    }
+    @media(min-width: 1200px) {
+      width: 50%;
+    }
   }
   .hero-header {
     text-shadow: 0 3px 5px rgba(0,0,0,0.4);
   }
   h1 {
-    font-size: 90px;
+    font-size: 10vw;
     font-weight: 700;
-    margin-left: -4px;
+    //margin-left: -4px;
+    @media(min-width: 480px) {
+      font-size: 10vw;
+    }
+    @media(min-width: 768px) {
+      font-size: 40px;
+    }
+    @media(min-width: 992px) {
+      font-size: 60px;
+    }
+    @media(min-width: 1200px) {
+      font-size: 80px;
+    }
+    @media(min-width: 1430px) {
+      font-size: 90px;
+    }
   }
   h2 {
-    font-size: 36px;
+    font-size: 7vw;
     font-weight: 400;
-    margin-left: 430px;
-    margin-top: 10px;
+    margin-top: 12px;
+    @media(min-width: 480px) {
+      font-size: 6.5vw;
+    }
+    @media(min-width: 768px) {
+      font-size: 30px;
+      text-align: right;
+    }
+    @media(min-width: 992px) {
+      font-size: 34px;
+    }
+    @media(min-width: 1200px) {
+      font-size: 40px;
+    }
+    @media(min-width: 1430px) {
+      font-size: 44px;
+    }
   }
   h3 {
-    font-size: 30px;
+    font-size: 4vw;
     font-weight: 400;
+    @media(min-width: 480px) {
+      font-size: 4.2vw;
+    }
+    @media(min-width: 768px) {
+      font-size: 22px;
+      text-align: left;
+      margin-top: 60px;
+    }
+    @media(min-width: 992px) {
+      font-size: 24px;
+    }
+    @media(min-width: 1200px) {
+      font-size: 36px;
+    }
+    @media(min-width: 1430px) {
+      font-size: 38px;
+    }
   }
   // @media (min-width: 992px) {
   //   h1 {

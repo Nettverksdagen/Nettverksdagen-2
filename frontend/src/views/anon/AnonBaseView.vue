@@ -39,10 +39,10 @@ export default {
       width: 95%;
     }
     @media(min-width: 768px) {
-      width: 700px;
+      width: 95%;
     }
     @media(min-width: 992px) {
-      width: 740px;
+      width: 980px;
     }
     @media(min-width: 1200px) {
       width: 1100px;

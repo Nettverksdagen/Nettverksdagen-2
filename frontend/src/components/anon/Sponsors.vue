@@ -33,7 +33,7 @@
           </a>
         </div> -->
         <b-row>
-          <Sponsor v-for="(sponsor, index) in sponsors"
+          <Sponsor  v-for="(sponsor, index) in sponsors"
                    :key="index"
                    :logo_src="sponsor.logo_uri"
                    :href="sponsor.website_url">
@@ -60,6 +60,26 @@ export default {
 <style lang="scss" scoped>
   h2 {
     font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--primary-color);
+    //margin-top: 40px;
+    margin-bottom: 0px;
+    @media(min-width: 480px) {
+      
+    }
+    @media(min-width: 768px) {
+      
+    }
+    @media(min-width: 992px) {
+      
+    }
+    @media(min-width: 1200px) {
+      margin-bottom: 40px;
+    }
+    @media(min-width: 1430px) {
+  
+    }
   }
   .sponsor-banner {
     margin: 2rem;

@@ -1,5 +1,7 @@
 <template>
   <div class="anon-footer">
+    <div class="line">
+    </div>
     <Content class="footer-contents text-sm-left text-center">
       <b-row>
         <b-col cols="12" sm="6" md="6" lg="6" class="mb-sm-0 mb-3">
@@ -67,9 +69,12 @@ export default {
 
 <style scoped lang="scss">
   .anon-footer {
+    width: 100%;
+    margin-top: 40px;
+    position: relative;
     background: var(--background-primary-color);
     color: var(--primary-color);
-    padding: 15px 0;
+    //padding: 15px 0;
     .green-link {
       color: #388f89;
     }
@@ -84,9 +89,20 @@ export default {
       }
     }
   }
+  .footer-contents {
+    margin-top: 30px;
+  }
+  .line {
+    content: "";
+    position: relative;
+    width: 100%;
+    height: 2.5px;
+    background-color: var(--line-border-color);
+    margin-bottom: 30px;
+  }
   .img-logo{
     height: 4em;
-    padding-right: 1em;
+    //padding-right: 1em;
   }
   .facebook {
     &:hover {

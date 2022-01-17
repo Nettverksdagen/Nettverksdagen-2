@@ -1,6 +1,8 @@
 <template>
   <div class="anon-header">
-    <div class="content" :class="scrolled ? 'box-shadow' : 'line-border'">
+    <div class="whitebackground">
+    </div>
+    <div class="content" :class="scrolled ? 'box-shadow' : 'line-border'">  
       <b-link :to="'/'" class="logo-link">
         <div class="side">
           <!-- <img class="newlogo" v-if="userTheme === 'dark-theme'" src="@/assets/textlogo_dark.png"> -->
@@ -115,6 +117,7 @@ export default {
     height:44px;
     display: inline-block;
     vertical-align: middle;
+    z-index: 3;
   }
   .newlogo:hover {
     opacity: 0.9;
@@ -165,20 +168,20 @@ export default {
   }
   .side {
     align-items: center;
-    margin-left: auto;
-    margin-right: -15px;
+    //margin-left: auto;
+    margin: 0 0 0 auto;
     display:flex;
     float: right;
   }
   .links {
     margin-top: 20px;
+    margin-right: -14px;
     //align-items: center;
     //vertical-align: middle;
     @media (min-width: 992px) {
       display:flex;
       font-size:18px;
-      font-family: 'Spline Sans', sans-serif;
-      font-weight: 450;
+      font-weight: 500;
     }
     @media(max-width: 767px) {
       visibility: hidden;
@@ -215,6 +218,13 @@ export default {
     width: 100%;
     height: 2.5px;
     background-color: var(--line-border-color);
+  }
+  .whitebackground {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    background-color: var(--background-color-primary);
   }
   // .box-shadow{
   //   box-shadow: 0px 0px 6px 3px rgba(0,0,0,0.3);

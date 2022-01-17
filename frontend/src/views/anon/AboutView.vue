@@ -31,6 +31,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  h1 {
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--primary-color);
+    margin-top: 40px;
+  }
   .introduction {
     font-size:18px;
   }
