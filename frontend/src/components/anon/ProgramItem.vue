@@ -11,7 +11,12 @@
             <h3 class="font-weight-bold">{{header}}</h3>
           </div>
           <div v-if="registration && maxRegistered">
-            <h5>{{registered + '/' + maxRegistered + ' påmeldte'}}</h5>
+            <h5 v-if="registered<=maxRegistered">
+              {{registered + '/' + maxRegistered + ' påmeldte'}}
+            </h5>
+            <h5 v-else>
+              {{maxRegistered + ' påmeldte, ' + (registered-maxRegistered) + ' på venteliste'}}
+            </h5>
           </div>
         </div>
         <div v-if="paragraph">
@@ -20,7 +25,7 @@
           </div>
         </div>
         <div v-if="registration" class='button'>
-          <b-button v-if="enableRegistration && notSendtEmail && registered<maxRegistered" variant='primary' @click="openDialog">Påmelding</b-button>
+          <b-button v-if="enableRegistration && notSendtEmail" variant='primary' @click="openDialog">Påmelding</b-button>
           <b-button v-else disabled variant="dark">Påmelding</b-button>
         </div>
         <div class="footer">
@@ -35,7 +40,7 @@
             </div>
           </div>
           <div v-if="registration && cancelEmail">
-              <b-link :href="'mailto:' +cancelEmail+'?subject=Jeg%20ønsker%20å%20melde%20meg%20av:%20' + header">{{'Ønsker du å melde deg av? Klikk her.'}}</b-link>
+              <b-link @click.native="destroy_participant(name)">Ønsker du å melde deg av? Klikk her.</b-link>
           </div>
           <div v-if="registration">
               <div v-if="!notSendtEmail">
@@ -44,8 +49,8 @@
               <div v-else-if="enableRegistration && registered<maxRegistered">
                 <div>Påmelding har startet</div>
               </div>
-              <div v-else-if="enableRegistration && (!(registered<maxRegistered))">
-                <div>Det er fullt</div>
+              <div v-else-if="enableRegistration && registered>=maxRegistered">
+                <div>Du vil bli satt på venteliste</div>
               </div>
               <div v-else-if="afterRegistration">
                 <div>Påmelding er ferdig</div>
@@ -202,6 +207,8 @@ export default {
     onSubmit (e) {
       e.preventDefault()
       let data = this.$data.form
+      // Generate and include 6-character random deregistering code
+      data.code = Array(6).fill(0).map(x => Math.random().toString(36).charAt(2)).join('').toUpperCase()
       if (this.checkValidForm(data)) {
         // Send email here
         this.sendEmail()
@@ -248,6 +255,42 @@ export default {
         }
       }
       return true
+    },
+    destroy_participant: function (eventName) {
+      let event = eventName
+      let email = prompt('Vennligst skriv inn emailen din:')
+      let participants = this.$store.state.participant.all
+      let participant = participants.filter(par => par.email === email && par.event === event)[0]
+
+      if (participant !== undefined) {
+        // Send deregistering code
+        let code = participant.code
+        axios.get(process.env.VUE_APP_API_HOST + '/api/participant/' +
+          participant.id + '/').then(_ => {
+          // Prompt user for code, and delete participant if input matches
+          let retry = true
+          while (retry) {
+            let inputedCode = prompt('Vennligst skriv inn koden som ble sendt til ' + participant.email + '. Hvis du ikke mottar mailen, vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
+            if (inputedCode === code) {
+              if (confirm('Er du sikker på at du vil melde av ' + participant.name + '?')) {
+                axios.delete(process.env.VUE_APP_API_HOST + '/api/participant/' +
+                  participant.id + '/').then(_ => {
+                  alert(participant.name + ' er nå avmeldt.')
+                }).catch(_ => {
+                  alert('Det oppsto en feil under avmeldingen. Vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
+                })
+              }
+              break
+            } else {
+              retry = confirm('Feil kode. Vil du prøve igjen?')
+            }
+          }
+        }).catch(_ => {
+          alert('Det oppsto en feil under sendingen av avmeldingskoden. Vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
+        })
+      } else if (email !== null) {
+        alert('Fant ingen deltakere med denne epost-adressen på dette arrangementet.')
+      }
     }
   }
 }
