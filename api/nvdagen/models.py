@@ -116,3 +116,4 @@ class Participant(models.Model):
     name = models.CharField(max_length=250)
     year = models.CharField(max_length=250)
     study = models.CharField(max_length=250)
+    code = models.CharField(max_length=250)
