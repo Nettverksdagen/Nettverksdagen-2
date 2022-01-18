@@ -1,7 +1,7 @@
 <template>
   <div class="businesses mt-5">
     <Content>
-      <div v-for="(level, index) in levels.slice(0,2)" :key="index">
+      <div v-for="(level, index) in levels.slice(0,2)" :key="index" class="samarbeidspartnere">
         <h2 class="text-center font-weight-bold" v-html="levels[index].levelHeader"></h2>
         <b-row class="justify-content-center">
           <Business v-for="(business, index) in level.businesses"
@@ -81,5 +81,14 @@ export default {
   h2 {
     font-size: 2.5rem;
     overflow-wrap: break-word;
+  }
+  .samarbeidspartnere {
+    margin-top: 20px;
+  }
+  hr {
+    height: 3px;
+    margin-bottom: 50px;
+    background: var(--line-border-color);
+    border:none;
   }
 </style>

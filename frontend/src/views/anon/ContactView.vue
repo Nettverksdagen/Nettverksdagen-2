@@ -2,9 +2,6 @@
   <div class="contact-view">
     <Content>
       <h1>Kontakt oss</h1>
-
-      <hr>
-
       <b-row>
         <b-col cols="12" md="5">
           <h2>Våre viktigste kanaler</h2>
@@ -13,7 +10,7 @@
           </p>
         </b-col>
         <b-col cols="12" md="7">
-          <b-card>
+          <b-card class="overview">
           <table class="main-contact">
             <tr>
               <td class="align-top">
@@ -21,7 +18,7 @@
                 <b-link href="mailto:leder@nettverksdagene.no">leder@nettverksdagene.no</b-link>
               </td>
               <td>
-                <p>
+                <p class="info">
                   Har du generelle henvendelser, eller er usikker på hvem du skal kontakte, kan du kontakte styret direkte.
                 </p>
               </td>
@@ -33,7 +30,7 @@
                 <b-link href="mailto:bedrift@nettverksdagene.no">bedrift@nettverksdagene.no</b-link>
               </td>
               <td>
-                <p>
+                <p class="info">
                   Ønsker din bedrift å vise seg fram på Nettverksdagene,
                   har dere allerede en avtale med oss,
                   eller har dere andre henvendelser angående bedriftspotlight, bedriftpresentasjon, stand osv,
@@ -48,7 +45,7 @@
                 <b-link href="mailto:spons@nettverksdagene.no">spons@nettverksdagene.no</b-link>
               </td>
               <td>
-                <p>
+                <p class="info">
                   For henvendelser angående sponsorsamarbeid, kontakt sponsorgruppa.
                 </p>
               </td>
@@ -65,13 +62,12 @@
           <h2>Kontaktpersoner for Nettverksdagene 2022</h2>
         </b-col>
       </b-row>
-        <hr>
         <b-row v-bind:key="team.key" v-for="team in teams">
-          <b-col cols="12">
+          <!-- <b-col cols="12">
             <h3 class="font-weight-bold">{{ team.name }}</h3>
-          </b-col>
-          <b-col class="my-md-3 my-1" cols="12" md="6" xl="4" v-bind:key="member.id" v-for="member in team.members">
-            <b-card no-body class="overflow-hidden">
+          </b-col> -->
+          <b-col class="my-md-3 my-2" cols="12" md="6" xl="4" v-bind:key="member.id" v-for="member in team.members">
+            <b-card no-body class="overflow-hidden columns">
               <b-card-body class="d-flex">
                 <div>
                   <div v-if="member.photo_uri">
@@ -90,7 +86,6 @@
             </b-card>
           </b-col>
           <b-col cols="12">
-            <hr>
           </b-col>
         </b-row>
     </Content>
@@ -117,8 +112,40 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  h1 {
+    font-size: 36px;
+    font-weight: 600;
+    text-align: center;
+    color: black;
+    margin-bottom: 30px;
+    margin-top: 40px;
+    @media(min-width: 768px) {
+      text-align: left;
+    }
+  }
   .description {
     font-size: 18px;
+    text-align: center;
+    @media(min-width: 768px) {
+      text-align: left;
+    }
+  }
+  .info {
+    margin-left: 0px;
+    @media(min-width: 768px) {
+      margin-left: 10px;
+    }
+  }
+  h2 {
+    text-align: center;
+    @media(min-width: 768px) {
+    text-align: left;
+    }
+  }
+  .overview {
+    border-radius: 20px;
+    border-width: 2px;
+    border-color: var(--line-border-color);
   }
   .main-contact {
     border-spacing: 5em 1em;
@@ -135,9 +162,17 @@ export default {
     p {
       @media (min-width:768px) {
         font-size:18px;
-        margin-left:1em;
+        // margin-left:1em;
       }
     }
+  }
+  .columns {
+    color: var(--primary-color);
+    border-radius: 20px;
+    background-color: white;
+    border-width: 2px;
+    border-color: var(--line-border-color);
+    text-align: left;
   }
   .member-name {
     font-weight: bold;
@@ -145,17 +180,21 @@ export default {
   }
   .member-email {
     word-break: break-word;
+    font-size: 14px;
+    @media (min-width: 992px) {
+      font-size: 16px;
+    }
   }
   .img-profile-empty {
     align-self: center;
     height: 50px;
     width: 50px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    //box-shadow: 0 1px 2px rgba(0,0,0,0.3);
   }
   .img-profile{
     align-self: center;
     height: 6rem;
     width: 6rem;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    //box-shadow: 0 1px 2px rgba(0,0,0,0.3);
   }
 </style>
