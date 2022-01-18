@@ -1,37 +1,41 @@
 <template>
   <div class="listings">
-    <Content>
+    <Content class="content">
       <h1>Stillingsannonser</h1>
       <b-row>
-        <div class="col-12 col-md-4">
-          <b-card no-body class="mb-3" header="Filtrer annonser">
+        <div class="col-12 col-md-4 col-lg-3 background">
+          <b-card no-body class="mb-3 box">
+            <span class="filter">Filtrer annonser</span>
             <b-card-body class="pt-0">
-              <b-btn v-b-toggle.filterCollapse variant="secondary" class="d-md-none w-100 mt-3">
+              <b-btn v-b-toggle.filterCollapse variant="secondary" class="d-md-none w-100 mt-3 button">
                 <span class="when-closed">Vis</span>
                 <span class="when-opened">Skjul</span>
                 filter
               </b-btn>
-              <b-collapse id="filterCollapse" class="mt-3" v-model="filtersVisible">
-                <p class="text-secondary text-center">(Listen oppdateres automatisk)</p>
+              <b-collapse id="filterCollapse" class="mt-2 dropdown" v-model="filtersVisible">
                 <b-list-group>
-                  <b-list-group-item>
+                  <b-list-group-item class="checkbox-group">
                     <h4>Stillingstype</h4>
-                    <b-form-group>
+                    <b-form-group class="checkbox">
                       <b-form-checkbox-group
                         id="position-type-checkboxes"
                         v-model="selectedPositionTypes"
-                        :options="$options.allPositionTypes">
+                        :options="$options.allPositionTypes"
+                        stacked
+                        size="lg">
                       </b-form-checkbox-group>
                     </b-form-group>
                   </b-list-group-item>
 
-                  <b-list-group-item>
+                  <b-list-group-item class="checkbox-group">
                     <h4>Sted</h4>
-                    <b-form-group>
+                    <b-form-group class="checkbox">
                       <b-form-checkbox-group
                         id="job-location-checkboxes"
                         v-model="selectedJobLocations"
-                        :options="allJobLocations">
+                        :options="allJobLocations"
+                        stacked
+                        size="lg">
                       </b-form-checkbox-group>
                     </b-form-group>
                   </b-list-group-item>
@@ -40,7 +44,7 @@
             </b-card-body>
           </b-card>
         </div>
-        <div class="col-12 col-md-8">
+        <div class="col-12 col-md-8 col-lg-9">
           <b-list-group>
             <Listing v-for="listing in filteredListings"
                      :key="listing.id"
@@ -51,7 +55,8 @@
                      :type="listing.type"
                      :listing-url="listing.listing_url"
                      :cities="listing.cities"
-                     :internal-url="listing.internal_url"/>
+                     :internal-url="listing.internal_url"
+                     class="annonser"/>
           </b-list-group>
         </div>
       </b-row>
@@ -213,5 +218,62 @@ export default {
 
   .listings {
     min-height: 80vh;
+    margin-top: 40px;
+    color: black;
+  }
+  h1 {
+    font-size: 36px;
+    font-weight: 600;
+    text-align: center;
+    color: black;
+    margin-bottom: 30px;
+    @media(min-width: 768px) {
+      text-align: left;
+    }
+  }
+  .checkbox {
+    background-color: white;
+    border: none;
+  }
+  .checkbox-group {
+    border:none;
+    margin-bottom: -20px;
+    text-align: left;
+  }
+  .background {
+    color: black;
+    border-radius: 15px;
+    border:none;
+    background: none;
+  }
+  .box {
+    background-color: white;
+    border-color: var(--line-border-color);
+    border-width: 2px;
+    border-radius: 15px;
+    -webkit-position: sticky;
+    position: sticky;
+    top: 76px;
+    text-align: center;
+  }
+  .filter {
+    margin-top: 12px;
+    border-radius: 15px;
+    border: none;
+    background-color: white;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .button {
+    border-radius: 10px;
+    background-color: var(--primary-color);
+    left: 0;
+    font-weight: 400;
+  }
+  /deep/ .custom-control-input:checked ~ .custom-control-label::before {
+    color: #fff;
+    border-color: var(--primary-color);
+    background-color: var(--primary-color);
   }
 </style>

@@ -30,12 +30,12 @@
         </div>
         <div class="footer">
           <div class="inline">
-            <div v-if="place" class="d-inline">
+            <div v-if="place" class="d-block d-md-inline">
               <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>
               <div v-html="place" class="d-inline"/>
             </div>
             <div v-if="timeEnd" class="d-inline">
-              <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-1 ml-2"/>
+              <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-md-1 ml-md-2"/>
               {{formatTime(timeStart)}} - {{formatTime(timeEnd)}}
             </div>
           </div>
@@ -64,7 +64,7 @@
     </div>
   </div>
   <div>
-    <b-modal :id="'dialogForm'+name" :title="'Meld deg på: '+header" v-model="show">
+    <b-modal :id="'dialogForm'+name" :title="'Meld deg på: '+header" v-model="show" centered>
       <b-form>
         <b-form-group
         :id="'input-group-name'+name"
@@ -122,13 +122,13 @@
             variant='outline-secondary'
             @click="onCancel"
           >
-            Cancel
+            Avbryt
           </b-button>
           <b-button
             variant='primary'
             @click="onSubmit"
           >
-            Submit forms.
+            Meld på
           </b-button>
           </div>
       </template>
@@ -299,16 +299,20 @@ export default {
 <style scoped lang="scss">
   .card {
     position: relative;
-    border:none;
-    border-radius: 0.5em;
+    border-radius: 20px;
+    border-width: 2px;
+    border-color: var(--line-border-color);
     background-color: white;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.15);
+  }
+  .numberofpeople {
+    display: inline;
   }
 
   .timeline-item {
     padding: 15px 0 15px 40px;
     position: relative;
     background-color: inherit;
+    width: 100%;
   }
 
   /* Add arrows to the right container (pointing left) */
@@ -320,7 +324,6 @@ export default {
     width: 0;
     z-index: 1;
     left: 30px;
-    border: medium solid white;
     border-width: 10px 10px 10px 0;
     border-color: transparent white transparent transparent;
   }
@@ -333,7 +336,7 @@ export default {
     height: 25px;
     right: -17px;
     background-color: white;
-    border: 4px solid #1d4844;
+    border: 4px solid var(--primary-color);
     top: 18px;
     border-radius: 50%;
     z-index: 1;
@@ -342,20 +345,35 @@ export default {
 
   .header {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
+    margin-bottom: 20px;
+    overflow-wrap: break-word;
+    @media(min-width: 992px) {
+      flex-direction: row;
+      margin-bottom: 0;
+    }
   }
 
   .footer {
-     display: flex;
-    flex-direction: row;
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    margin-bottom: 0px;
+    @media(min-width: 992px) {
+      flex-direction: row;
+      margin-bottom: 0;
+    }
   }
 
   .button {
-    margin-right: 15px;
     display: flex;
-    flex-direction: row-reverse
+    flex-direction: row;
+    margin-bottom: 10px;
+    @media(min-width: 768px) {
+      margin-right: 15px;
+      flex-direction: row-reverse;
+    }
   }
 
   .timestamp {
@@ -368,6 +386,22 @@ export default {
     font-size:1.1em;
   }
 
+  /deep/ .modal-content {
+    border: none;
+    border-radius: 20px;
+    background-color: var(--line-border-color);
+    color: black;
+  }
+  /deep/ .modal-header {
+    border-bottom: none;
+  }
+  /deep/ .modal-footer {
+    border: none;
+  }
+  /deep/ .modal-title {
+    text-align: center;
+    width: 100%;
+  }
   @media(max-width: 768px) {
     .timestamp {
       top: 30px;

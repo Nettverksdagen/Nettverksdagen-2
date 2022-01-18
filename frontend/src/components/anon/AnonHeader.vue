@@ -1,25 +1,21 @@
 <template>
   <div class="anon-header">
-    <div class="content" :class="scrolled ? 'box-shadow' : 'line-border'">
+    <div class="whitebackground">
+    </div>
+    <div class="content">
       <b-link :to="'/'" class="logo-link">
         <div class="side">
-          <img class="newlogo" v-if="userTheme === 'dark-theme'" src="@/assets/textlogo_dark.png">
-          <img class="newlogo" v-else src="@/assets/textlogo_light.png">
+          <!-- <img class="newlogo" v-if="userTheme === 'dark-theme'" src="@/assets/textlogo_dark.png"> -->
+          <!-- <img class="newlogo" v-else src="@/assets/textlogo_light.png"> -->
+          <img class="newlogo" src="@/assets/nettverksdagenesvg.svg">
         </div>
       </b-link>
       <div class="side">
         <b-nav class="links">
-          <b-nav-item class="round-long-button" :to="{name: 'Program'}">PROGRAM</b-nav-item>
-          <b-nav-item class="round-long-button" :to="{name: 'Listings'}">STILLINGSANNONSER</b-nav-item>
-          <b-nav-item class="round-long-button" :to="{name: 'About'}">OM OSS</b-nav-item>
-          <!-- <b-nav-item class="round-long-button" :to="{name: 'About'}">FOR BEDRIFTER</b-nav-item> -->
-          <b-nav-item class="round-long-button" :to="{name: 'Contact'}">KONTAKT</b-nav-item>
-          <b-nav-item class="round-button" title="Hjem" :to="{name: 'Home'}" active>
-            <font-awesome-icon icon="home"></font-awesome-icon>
-          </b-nav-item>
-          <b-nav-item class="round-button" title="Info" :to="{name: 'About'}">
-            <font-awesome-icon icon="info-circle"></font-awesome-icon>
-          </b-nav-item>
+          <b-nav-item :to="{name: 'Program'}"><p>Program</p></b-nav-item>
+          <b-nav-item :to="{name: 'Listings'}"><p>Stillingsannonser</p></b-nav-item>
+          <b-nav-item :to="{name: 'About'}"><p>Om oss</p></b-nav-item>
+          <b-nav-item :to="{name: 'Contact'}"><p>Kontakt</p></b-nav-item>
           <!-- UNCOMMENT TO SHOW "TOGGLE THEME BUTTON"-->
           <!-- <b-nav-item class="round-button" title="Endre tema" v-on:click="toggleTheme">
             <font-awesome-icon icon="adjust"></font-awesome-icon>
@@ -27,6 +23,8 @@
        </b-nav>
        <Slider/>
       </div>
+    </div>
+    <div class="line">
     </div>
   </div>
 </template>
@@ -89,7 +87,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import url('https://fonts.googleapis.com/css2?family=Overpass&display=swap');
   .anon-header {
     background:var(--background-color-primary);
     margin:0 auto;
@@ -98,7 +95,7 @@ export default {
     -webkit-position: sticky;
     position: sticky;
     top: 0px;
-    z-index: 1;
+    z-index: 10;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
   }
@@ -106,82 +103,84 @@ export default {
     box-sizing:border-box;
   }
   .newlogo {
-    margin: 7px 0 7px 20px;
-    height:56px;
+    margin: 8px 0 8px 5px;
+    height:44px;
     display: inline-block;
     vertical-align: middle;
+    z-index: 3;
   }
-  .round-button {
-    padding: 2px 0 0 0;
-    margin: 0 5px 0px 5px;
-    width: 40px;
-    height: 40px;
-    background: var(--background-color-primary);
-    color: var(--header-text-color);
-    display: inline-flex;
-    justify-content: center;
-    cursor: pointer;
-    border-radius: 50%;
-    border: none;
-    transition: background 0.5s;
-    &:hover {
-      background:var(--header-text-secondary-color);
-    }
-  }
-  .round-long-button {
-    margin: 0 5px 0px 5px;
-    padding: 2px 0 0 0;
-    display: inline-flex;
-    justify-content: center;
-    text-align: center;
-    border-radius: 23px;
-    border: none;
-    transition: background 0.5s;
-    &:hover {
-      background:var(--header-text-secondary-color);
-    }
+  .newlogo:hover {
+    opacity: 0.9;
+    transition: opacity 300ms, transform 500ms;
   }
   .logo-link {
     text-decoration:none !important;
   }
   .content {
-    width: inherit;
+    width: 100%;
     display:flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-content:stretch;
-    vertical-align: middle;
-    flex-wrap: nowrap;
-    height:70px;
+    height:60px;
   }
   .side {
     align-items: center;
+    margin: 0 0 0 auto;
     display:flex;
+    float: right;
   }
   .links {
-    margin: 2px 15px 0 0;
-    display:none;
-    align-items: center;
-    vertical-align: middle;
-    @media (min-width: 1000px) {
+    margin-top: 20px;
+    font-weight: 500;
+    @media (min-width: 992px) {
       display:flex;
-      font-size:16px;
-      font-family: 'Overpass', sans-serif;
+      font-size:18px;
+      font-weight: 500;
+    }
+    @media(max-width: 767px) {
+      visibility: hidden;
     }
     a {
-      color:var(--header-text-color);
+      color:var(--primary-color);
     }
   }
-  .box-shadow{
-    box-shadow: 0px 0px 6px 3px rgba(0,0,0,0.3);
-    transition: box-shadow 0.5s;
+  p {
+    margin: 5px 0 0 0 0;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
   }
-  .line-border{
-    border-bottom: 1px solid var(--line-border-color);
+  p::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    opacity: 0;
+    transition: transform 100ms;
   }
-  @media (max-width: 1000px) {
-    .logo-link {
-      margin-left: -12px;
-    }
+  p:hover::after {
+    opacity: 1;
+    transform: translate3d(0, -0.1em, 0);
+    transition: opacity 300ms, transform 150ms;
   }
+  .line {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2.5px;
+    background-color: var(--line-border-color);
+  }
+  .whitebackground {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    background-color: var(--background-color-primary);
+  }
+  .nav-link {
+    padding-right: 0;
+    padding-left: 2rem;
+}
 </style>

@@ -7,9 +7,9 @@
     <router-link :to="{name: 'Business', params: { businessReferer: nameUrlEncoded }}">
       <div class="businessContainer">
         <b-img fluid :src="fileserverHost + '/thumb/512/' + logo_src"></b-img>
-        <b-button class="businessTextButton">
+        <!-- <b-button class="businessTextButton">
           Les mer om {{ name }}
-        </b-button>
+        </b-button> -->
       </div>
     </router-link>
   </b-col>

@@ -32,5 +32,23 @@ export default {
   }
   .anon-base {
     min-height: 100vh;
+    width: 95%;
+    min-width: 320px;
+    margin: 0 auto;
+    @media(min-width: 480px) {
+      width: 95%;
+    }
+    @media(min-width: 768px) {
+      width: 95%;
+    }
+    @media(min-width: 992px) {
+      width: 980px;
+    }
+    @media(min-width: 1200px) {
+      width: 1100px;
+    }
+    @media(min-width: 1430px) {
+      width: 1400px;
+    }
   }
 </style>

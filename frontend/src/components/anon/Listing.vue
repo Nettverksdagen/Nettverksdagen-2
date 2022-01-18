@@ -60,9 +60,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .listing-item {
+    border-radius: 20px;
+    border-width: 2px;
+    margin-bottom: 15px;
+    border-color: var(--line-border-color);
+  }
   .listing-item:hover {
-    background:#efefef;
+    background: var(--line-border-color);
     transition:0.1s;
+  }
+  .listing-item:hover .logo {
+    filter: none;
+    transition: filter 0.5s, transform 0.3s;
   }
   .company, .title, .deadline {
     margin:0;
@@ -93,15 +103,17 @@ export default {
     left: 0;
     right: 0;
     margin: auto;
+    //filter: brightness(0) invert(20%) sepia(12%) saturate(2012%) hue-rotate(125deg) brightness(94%) contrast(94%);
+    &:hover {
+      filter: none;
+      transition: filter 0.5s, transform 0.3s;
+    }
   }
   .company {
     font-weight:400;
     color:#333;
   }
   .title {
-    /*@media (max-width:400px) {
-
-    }*/
     font-weight:700;
     color:#222;
   }
