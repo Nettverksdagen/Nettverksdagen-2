@@ -60,7 +60,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .listing-item {
+  /deep/ .list-group-item {
+    border-radius: 20px;
+    border-width: 2px;
+    margin-bottom: 15px;
+    border-color: var(--line-border-color);
+  }
+  /deep/ .info-container {
+    text-decoration: none;
+  }
+  /deep/ .listing-item {
     border-radius: 20px;
     border-width: 2px;
     margin-bottom: 15px;

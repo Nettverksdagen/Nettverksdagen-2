@@ -110,7 +110,9 @@ export default {
     z-index: 3;
   }
   .newlogo:hover {
-    opacity: 0.9;
+    @media(min-width: 768px) {
+      opacity: 0.9;
+    }
     transition: opacity 300ms, transform 500ms;
   }
   .logo-link {
@@ -129,7 +131,7 @@ export default {
     float: right;
   }
   .links {
-    margin-top: 20px;
+    //margin-top: 20px;
     font-weight: 500;
     @media (min-width: 992px) {
       display:flex;
@@ -140,7 +142,8 @@ export default {
       visibility: hidden;
     }
     a {
-      color:var(--primary-color);
+      //color:var(--primary-color);
+      color: black;
     }
   }
   p {
@@ -156,7 +159,8 @@ export default {
     left: 0;
     width: 100%;
     height: 3px;
-    background-color: var(--primary-color);
+    //background-color: var(--primary-color);
+    background-color: black;
     opacity: 0;
     transition: transform 100ms;
   }

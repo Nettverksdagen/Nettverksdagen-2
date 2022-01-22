@@ -1,8 +1,10 @@
 <template>
-  <b-modal @hide="hideModal" v-model="showModal" :id="'businessText' + business.id" :title="business.name" hide-footer>
+  <b-modal @hide="hideModal" v-model="showModal" :id="'businessText' + business.id" :title="business.name" hide-footer centered>
     <div class="businessText">
       <p v-html="business.text"></p>
-      <a :href="business.website_url" target="_blank" rel="noopener noreferrer">Gå til {{ business.name }} sin nettside</a>
+      <div class="button">
+          <b-button :href="business.website_url" target="_blank" rel="noopener noreferrer" size="lg" variant="primary">Besøk {{ business.name }} sin nettside</b-button>
+      </div>
     </div>
     <b-img fluid :src="fileserverHost + '/thumb/512/' + business.logo_uri"></b-img>
   </b-modal>
@@ -39,5 +41,36 @@ export default {
 <style lang="scss" scoped>
   .businessText {
     white-space: pre-line;
+  }
+    /deep/ .modal-content {
+    border: none;
+    border-radius: 20px;
+    background-color: var(--line-border-color);
+    color: black;
+    text-align: center;
+  }
+  /deep/ .modal-header {
+    border-bottom: none;
+  }
+  /deep/ .modal-title {
+    text-align: center;
+    width: 100%;
+  }
+  /deep/ .btn-primary {
+    color: #fff;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    border-radius: 7px;
+    margin-top: 5px;
+  }
+  .button {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  /deep/ h5 {
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: -10px;
+    font-size: 26px;
   }
 </style>

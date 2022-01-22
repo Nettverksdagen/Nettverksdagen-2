@@ -91,4 +91,7 @@ export default {
     background: var(--line-border-color);
     border:none;
   }
+  .mt-5 {
+    margin-top: 0px !important;
+  }
 </style>

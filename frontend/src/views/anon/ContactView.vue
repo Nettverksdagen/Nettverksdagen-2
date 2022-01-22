@@ -2,7 +2,7 @@
   <div class="contact-view">
     <Content>
       <h1>Kontakt oss</h1>
-      <b-row>
+      <b-row class="firstrow">
         <b-col cols="12" md="5">
           <h2>Våre viktigste kanaler</h2>
           <p class="description">
@@ -123,6 +123,9 @@ export default {
       text-align: left;
     }
   }
+  .firstrow {
+    margin-bottom: -40px;
+  }
   .description {
     font-size: 18px;
     text-align: center;
@@ -139,7 +142,7 @@ export default {
   h2 {
     text-align: center;
     @media(min-width: 768px) {
-    text-align: left;
+      text-align: left;
     }
   }
   .overview {
@@ -173,6 +176,7 @@ export default {
     border-width: 2px;
     border-color: var(--line-border-color);
     text-align: left;
+    margin-bottom: -10px;
   }
   .member-name {
     font-weight: bold;

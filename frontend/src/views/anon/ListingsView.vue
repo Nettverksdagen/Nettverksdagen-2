@@ -258,7 +258,7 @@ export default {
   }
   .filter {
     margin-top: 12px;
-    border-radius: 15px;
+    border-radius: 20px;
     border: none;
     background-color: white;
     text-align: center;

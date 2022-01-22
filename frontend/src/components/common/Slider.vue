@@ -57,7 +57,7 @@ export default {
   .button {
     cursor: pointer;
     &:hover {
-      filter: brightness(0%) invert(29%) sepia(47%) saturate(587%) hue-rotate(124deg) brightness(94%) contrast(89%);
+      //filter: brightness(0%) invert(29%) sepia(47%) saturate(587%) hue-rotate(124deg) brightness(94%) contrast(89%);
     }
   }
   p {
@@ -172,7 +172,7 @@ export default {
               text-decoration: none;
             }
             a:hover {
-              opacity: 0.8;
+              opacity: 1;
             }
           }
         }

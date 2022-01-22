@@ -56,7 +56,7 @@ export default {
     margin-top: 20px;
   }
   .firstrow {
-    height: 250px;
+    height: 280px;
     @media(min-width: 768px) {
         height: 630px;
     }
@@ -79,7 +79,7 @@ export default {
     }
   }
   .hometext {
-    margin-top: 70px;
+    margin-top: 85px;
     z-index: 10;
     @media(min-width: 768px) {
         margin-top: 140px;
