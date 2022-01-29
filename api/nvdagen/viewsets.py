@@ -4,8 +4,7 @@ from rest_framework.response import Response
 from .models import Listing, Business, Sponsor, TeamMember, Form, Participant, Program
 from .serializers import ListingSerializer, BusinessSerializer, SponsorSerializer, TeamMemberSerializer, FormSerializer, ParticipantSerializer, ProgramSerializer
 from django.core.mail import send_mail
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
+
 
 class ListingViewSet(viewsets.ModelViewSet):
     queryset = Listing.objects.all()
@@ -95,8 +94,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, pk):
         participant = Participant.objects.get(id=pk)
-        program_id = participant.event
-        program = Program.objects.get(id=program_id)
+        program = Program.objects.get(id=participant.event)
 
         try:
             send_mail('Nettverksdagene - Avmeldingskode for ' + participant.name,
@@ -115,32 +113,32 @@ class ParticipantViewSet(viewsets.ModelViewSet):
     def destroy(self, request, pk):
         
         participant = Participant.objects.get(id=pk)
-        program_id = participant.event
 
         response = super().destroy(request)
 
         if status.is_success(response.status_code):
-            program = Program.objects.get(id=program_id)
+            program = Program.objects.get(id=participant.event)
             program.registered -= 1
             program.save()
 
-            if program.registered >= program.maxRegistered:
-                new_participant = Participant.objects.order_by('id')[program.maxRegistered-1]
-                try:
-                    #Sending the mail
-                    send_mail('Nettverksdagene - Påmelding bekreftet for ' + new_participant.name,
-                    'Du sto på ventelisten for ' + program.header + ', og har nå fått plass. Dersom du skulle ønske å melde deg av, vennligst gjør det via nettverksdagene.no/program. Tusen takk for din interesse i Nettverksdagene!',
-                    'do-not-reply@nettverksdagene.no',
-                    [new_participant.email],
-                    fail_silently=False)
+            if program.registered >= program.maxRegistered: # If last participant exists
+                lastParticipant = Participant.objects.order_by('id')[program.maxRegistered-1]
+                if participant.id < lastParticipant.id: # If lastParticipant is new
+                    try:
+                        #Sending the mail
+                        send_mail('Nettverksdagene - Påmelding bekreftet for ' + lastParticipant.name,
+                        'Du sto på ventelisten for ' + program.header + ', og har nå fått plass. Dersom du skulle ønske å melde deg av, vennligst gjør det via nettverksdagene.no/program. Tusen takk for din interesse i Nettverksdagene!',
+                        'do-not-reply@nettverksdagene.no',
+                        [lastParticipant.email],
+                        fail_silently=False)
 
-                    #returning a response
-                    response = {'message': 'It works!!'}
-                    return Response(response, status = status.HTTP_200_OK)
-                except:
-                    #An error to be raised if the send_mail function doesn't work
-                    print("ERROR: Konfigurer email-settings i mail_settings.py")
-                    raise Exception('ERROR: Konfigurer email-settings i mail_settings.py')
+                        #returning a response
+                        response = {'message': 'It works!!'}
+                        return Response(response, status = status.HTTP_200_OK)
+                    except:
+                        #An error to be raised if the send_mail function doesn't work
+                        print("ERROR: Konfigurer email-settings i mail_settings.py")
+                        raise Exception('ERROR: Konfigurer email-settings i mail_settings.py')
         else:
             raise Exception(f'ERROR: DELETE request returned {response.status_code}.')
         
