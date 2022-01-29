@@ -109,7 +109,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
             program.save()
 
             if program.registered >= program.maxRegistered: # If last participant exists
-                lastParticipant = Participant.objects.order_by('id')[program.maxRegistered-1]
+                lastParticipant = Participant.objects.filter(event=participant.event).order_by('id')[program.maxRegistered-1]
                 if participant.id < lastParticipant.id: # If lastParticipant is new
                     try:
                         send_mail('Nettverksdagene - Påmelding bekreftet for ' + lastParticipant.name,
