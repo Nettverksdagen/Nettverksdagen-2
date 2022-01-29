@@ -46,12 +46,9 @@ class ParticipantViewSet(viewsets.ModelViewSet):
         notRegistered = Participant.objects.filter(email=data['email'], event=data['event']).count() == 0
         program = Program.objects.get(id=data['event'])
 
-        #Validates that a new Participant can enter the event
         if (notRegistered):
-            #Using the default django-create function
-            super().create(request)
+            response = super().create(request)
 
-            #Updating the registrationlist on event
             program.registered += 1
             program.save()
 
@@ -59,37 +56,27 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                 # If program is full, send waiting list email
                 if (program.registered > program.maxRegistered):
                     waitingListIndex = program.registered - program.maxRegistered
-
-                    #Sending the mail
                     send_mail('Nettverksdagene - Du står på venteliste',
                     'Vi bekrefter herved at du står på venteliste til ' + program.header + '. Din plass på ventelisten er ' + str(waitingListIndex) + '. Dersom du skulle ønske å melde deg av, vennligst gjør det via nettverksdagene.no/program. Tusen takk for din interesse i Nettverksdagene!',
                     'do-not-reply@nettverksdagene.no',
                     [data['email']],
                     fail_silently=False)
-
-                    #returning a response
-                    response = {'message': 'It works!!'}
-                    return Response(response, status = status.HTTP_200_OK)
                 # If program not full, send confirmation email
                 else:
-                    #Sending the mail
                     send_mail('Nettverksdagene - Påmelding bekreftet for ' + data['name'],
                     'Vi bekrefter herved at du er påmeldt ' + program.header + '. Dersom du skulle ønske å melde deg av, vennligst gjør det via nettverksdagene.no/program. Tusen takk for din interesse i Nettverksdagene!',
                     'do-not-reply@nettverksdagene.no',
                     [data['email']],
                     fail_silently=False)
-
-                    #returning a response
-                    response = {'message': 'It works!!'}
-                    return Response(response, status = status.HTTP_200_OK)                
             except:
-                #An error to be raised if the send_mail function doesn't work
-                print("ERROR: Konfigurer email-settings i mail_settings.py")
-                raise Exception('ERROR: Konfigurer email-settings i mail_settings.py')
+                print("ERROR: Could not send email. Is mail_settings.py correct?")
+                response = {'message': 'Could not send email'}
+                return Response(response, status = status.HTTP_500_INTERNAL_SERVER_ERROR)                
+
+            return response
 
         else:
-            #returning a response
-            response = {'message': 'Invalid input, check Participant list. Should not be duplicated'}
+            response = {'message': 'Invalid input. Is participant already registered?'}
             return Response(response, status = status.HTTP_400_BAD_REQUEST)
 
     def retrieve(self, request, pk):
@@ -102,13 +89,13 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                 'do-not-reply@nettverksdagene.no',
                 [participant.email],
                 fail_silently=False)
-            #returning a response
-            response = {'message': 'It works!!'}
-            return Response(response, status = status.HTTP_200_OK)
         except:
-            #An error to be raised if the send_mail function doesn't work
-            print("ERROR: Konfigurer email-settings i mail_settings.py")
-            raise Exception('ERROR: Konfigurer email-settings i mail_settings.py')
+            print("ERROR: Could not send email. Is mail_settings.py correct?")
+            response = {'message': 'Could not send email'}
+            return Response(response, status = status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        response = {'message': 'Participant code sent successfully'}
+        return Response(response, status = status.HTTP_200_OK)
 
     def destroy(self, request, pk):
         
@@ -125,21 +112,14 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                 lastParticipant = Participant.objects.order_by('id')[program.maxRegistered-1]
                 if participant.id < lastParticipant.id: # If lastParticipant is new
                     try:
-                        #Sending the mail
                         send_mail('Nettverksdagene - Påmelding bekreftet for ' + lastParticipant.name,
                         'Du sto på ventelisten for ' + program.header + ', og har nå fått plass. Dersom du skulle ønske å melde deg av, vennligst gjør det via nettverksdagene.no/program. Tusen takk for din interesse i Nettverksdagene!',
                         'do-not-reply@nettverksdagene.no',
                         [lastParticipant.email],
                         fail_silently=False)
-
-                        #returning a response
-                        response = {'message': 'It works!!'}
-                        return Response(response, status = status.HTTP_200_OK)
                     except:
-                        #An error to be raised if the send_mail function doesn't work
-                        print("ERROR: Konfigurer email-settings i mail_settings.py")
-                        raise Exception('ERROR: Konfigurer email-settings i mail_settings.py')
-        else:
-            raise Exception(f'ERROR: DELETE request returned {response.status_code}.')
-        
+                        print("ERROR: Could not send email. Is mail_settings.py correct?")
+                        response = {'message': 'Could not send email'}
+                        return Response(response, status = status.HTTP_500_INTERNAL_SERVER_ERROR)
+
         return response
