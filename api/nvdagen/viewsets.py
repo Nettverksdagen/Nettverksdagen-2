@@ -49,13 +49,12 @@ class ParticipantViewSet(viewsets.ModelViewSet):
         if (notRegistered):
             response = super().create(request)
 
-            program.registered += 1
-            program.save()
+            registered = program.participant_set.all().count()
 
             try:
                 # If program is full, send waiting list email
-                if (program.registered > program.maxRegistered):
-                    waitingListIndex = program.registered - program.maxRegistered
+                if (registered > program.maxRegistered):
+                    waitingListIndex = registered - program.maxRegistered
                     send_mail('Nettverksdagene - Du står på venteliste',
                     'Vi bekrefter herved at du står på venteliste til ' + program.header + '. Din plass på ventelisten er ' + str(waitingListIndex) + '. Dersom du skulle ønske å melde deg av, vennligst gjør det via nettverksdagene.no/program. Tusen takk for din interesse i Nettverksdagene!',
                     'do-not-reply@nettverksdagene.no',
@@ -81,7 +80,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, pk):
         participant = Participant.objects.get(id=pk)
-        program = Program.objects.get(id=participant.event)
+        program = participant.event
 
         try:
             send_mail('Nettverksdagene - Avmeldingskode for ' + participant.name,
@@ -104,12 +103,11 @@ class ParticipantViewSet(viewsets.ModelViewSet):
         response = super().destroy(request)
 
         if status.is_success(response.status_code):
-            program = Program.objects.get(id=participant.event)
-            program.registered -= 1
-            program.save()
+            program = participant.event
+            registered = program.participant_set.all().count()
 
-            if program.registered >= program.maxRegistered: # If last participant exists
-                lastParticipant = Participant.objects.filter(event=participant.event).order_by('id')[program.maxRegistered-1]
+            if registered >= program.maxRegistered: # If last participant exists
+                lastParticipant = program.participant_set.all().order_by('id')[program.maxRegistered-1]
                 if participant.id < lastParticipant.id: # If lastParticipant is new
                     try:
                         send_mail('Nettverksdagene - Påmelding bekreftet for ' + lastParticipant.name,

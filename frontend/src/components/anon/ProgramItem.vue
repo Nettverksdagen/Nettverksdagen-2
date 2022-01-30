@@ -146,7 +146,7 @@ import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons'
 library.add(faMapMarkerAlt, faClock)
 export default {
   name: 'ProgramItem',
-  props: ['timeStart', 'timeEnd', 'place', 'header', 'paragraph', 'registration', 'maxRegistered', 'registered', 'cancelEmail', 'registrationStart', 'registrationEnd', 'name'],
+  props: ['timeStart', 'timeEnd', 'place', 'header', 'paragraph', 'registration', 'maxRegistered', 'cancelEmail', 'registrationStart', 'registrationEnd', 'name'],
   data () {
     return {
       form: {
@@ -160,6 +160,9 @@ export default {
     }
   },
   computed: {
+    registered: function () {
+      return this.$store.state.participant.all.filter(par => par.event.id === this.$props.id).length
+    },
     beforeRegistration: function () {
       let now = new Date()
       return this.$props.registrationStart.getTime() > now.getTime()
@@ -246,8 +249,7 @@ export default {
       }
       return true
     },
-    destroy_participant: function (eventName) {
-      let event = eventName
+    destroy_participant: function (event) {
       let email = prompt('Vennligst skriv inn emailen din:')
       let participants = this.$store.state.participant.all
       let participant = participants.filter(par => par.email === email && par.event === event)[0]
