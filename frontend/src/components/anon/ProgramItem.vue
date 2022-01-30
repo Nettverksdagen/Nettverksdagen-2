@@ -25,7 +25,7 @@
           </div>
         </div>
         <div v-if="registration" class='button'>
-          <b-button v-if="enableRegistration && notSendtEmail" variant='primary' @click="openDialog">Påmelding</b-button>
+          <b-button v-if="enableRegistration && !submitted" variant='primary' @click="openDialog">Påmelding</b-button>
           <b-button v-else disabled variant="dark">Påmelding</b-button>
         </div>
         <div class="footer">
@@ -43,7 +43,7 @@
               <b-link @click.native="destroy_participant(name)">Ønsker du å melde deg av? Klikk her.</b-link>
           </div>
           <div v-if="registration">
-              <div v-if="!notSendtEmail">
+              <div v-if="submitted">
                 <div>Dersom du ble med, har du fått en bekreftelsesmail</div>
               </div>
               <div v-else-if="enableRegistration && registered<maxRegistered">
@@ -146,7 +146,7 @@ import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons'
 library.add(faMapMarkerAlt, faClock)
 export default {
   name: 'ProgramItem',
-  props: ['timeStart', 'timeEnd', 'place', 'header', 'paragraph', 'registration', 'maxRegistered', 'registered', 'cancelEmail', 'registrationStart', 'registrationEnd', 'name'],
+  props: ['timeStart', 'timeEnd', 'place', 'header', 'paragraph', 'registration', 'maxRegistered', 'cancelEmail', 'registrationStart', 'registrationEnd', 'name'],
   data () {
     return {
       form: {
@@ -156,10 +156,13 @@ export default {
         year: ''
       },
       show: false,
-      notSendtEmail: true
+      submitted: false
     }
   },
   computed: {
+    registered: function () {
+      return this.$store.state.participant.all.filter(par => par.event.id === this.$props.id).length
+    },
     beforeRegistration: function () {
       let now = new Date()
       return this.$props.registrationStart.getTime() > now.getTime()
@@ -210,30 +213,20 @@ export default {
       // Generate and include 6-character random deregistering code
       data.code = Array(6).fill(0).map(x => Math.random().toString(36).charAt(2)).join('').toUpperCase()
       if (this.checkValidForm(data)) {
-        // Send email here
-        this.sendEmail()
+        this.submitForm()
         // Clear data
         this.$data.show = false
         this.$data.form = {email: '', name: '', study: '', year: ''}
-        this.$data.notSendtEmail = false
-      } else {
-        /*
-        // Send email here
-        this.sendEmail()
-        // Clear data
-        this.$data.show = false
-        this.$data.form = {email: '', name: '', study: '', year: ''}
-        this.$data.notSendtEmail = false
-        */
+        this.$data.submitted = true
       }
     },
-    sendEmail () {
+    submitForm () {
       console.log({event: this.$props.name, ...this.$data.form})
       axios.post(process.env.VUE_APP_API_HOST +
         '/api/participant/', {event: this.$props.name, ...this.$data.form})
         .then((response) => console.log(response))
         .catch((e) => {
-          console.log('Error in sendEmail')
+          console.log('Error in submitForm')
           console.log(e)
         })
     },
@@ -256,8 +249,7 @@ export default {
       }
       return true
     },
-    destroy_participant: function (eventName) {
-      let event = eventName
+    destroy_participant: function (event) {
       let email = prompt('Vennligst skriv inn emailen din:')
       let participants = this.$store.state.participant.all
       let participant = participants.filter(par => par.email === email && par.event === event)[0]
