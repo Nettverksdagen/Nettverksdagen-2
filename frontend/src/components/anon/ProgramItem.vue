@@ -161,7 +161,7 @@ export default {
   },
   computed: {
     registered: function () {
-      return this.$store.state.participant.all.filter(par => par.event.id === this.$props.id).length
+      return this.$store.state.participant.all.filter(par => par.event === this.$props.name).length
     },
     beforeRegistration: function () {
       let now = new Date()
