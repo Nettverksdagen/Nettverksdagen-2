@@ -21,9 +21,9 @@
           <b-link :to="'/program'">
             <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" box-text="Glassgården fylles med stands! Kom i kontakt med mange spennende bedrifter."/>
           </b-link>
-          <b-link :to="'/program'">
+          <router-link :to="{name: 'Program', hash: '#bankett'}" @click.native="scrollToId('bankett')">
             <HomeScreenBox box-title="Bankett" box-icon="glass-cheers-solid.svg" box-text="Nyhet! Nettverksdagene arrangerer en bankett. Mer info kommer."/>
-          </b-link>
+          </router-link>
           <b-link :to="'/program'">
             <HomeScreenBox box-title="Bedpres" box-icon="utensils-solid.svg" box-text="Det blir holdt flere bedrifts- presentasjoner for de som vil bli bedre kjent med bedriftene."/>
           </b-link>
@@ -45,6 +45,11 @@ export default {
   components: {
     HeroText,
     HomeScreenBox
+  },
+  methods: {
+    scrollToId (id) {
+      document.getElementById(id).scrollIntoView()
+    }
   }
 }
 </script>
