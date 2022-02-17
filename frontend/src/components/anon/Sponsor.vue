@@ -1,5 +1,5 @@
 <template>
-    <div class="sponsor col-3 col-xl-2">
+    <div class="sponsor col-4 col-md-3">
       <a :href="href" target="_blank" rel="noopener noreferrer">
         <b-img fluid :src="fileserverHost + '/thumb/512/' + logo_src"></b-img>
       </a>
@@ -25,6 +25,7 @@ export default {
     margin: auto;
     margin-bottom: 30px;
     transition: transform 300ms, filter 500ms;
+    transform: scale(0.7);
     // filter: brightness(0) invert(20%) sepia(12%) saturate(2012%) hue-rotate(125deg) brightness(94%) contrast(94%);
     // @media(min-width: 768px) {
     //   transform: scale(0.8);

@@ -159,12 +159,14 @@ export default new Router({
     }
   ],
   scrollBehavior (to, from, savedPosition) {
-    if (to.hash) {
-      return {
-        selector: to.hash,
-        behavior: 'smooth'
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      const position = {}
+      if (to.hash) {
+        position.selector = to.hash
+        return false
       }
     }
-    return { x: 0, y: 0 }
   }
 })

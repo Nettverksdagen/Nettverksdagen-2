@@ -60,21 +60,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  /deep/ .list-group-item {
-    border-radius: 20px;
-    border-width: 2px;
-    margin-bottom: 15px;
-    border-color: var(--line-border-color);
-  }
-  /deep/ .info-container {
-    text-decoration: none;
-  }
-  /deep/ .listing-item {
-    border-radius: 20px;
-    border-width: 2px;
-    margin-bottom: 15px;
-    border-color: var(--line-border-color);
-  }
   .listing-item:hover {
     background: var(--line-border-color);
     transition:0.1s;
