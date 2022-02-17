@@ -26,6 +26,8 @@
             </div>
           </div>
         </div>
+        <div id="bankett">
+        </div>
       </div>
 
       <!-- Uncomment this to get the stand maps from 2020 at the bottom. Disabled for 2021 since it was held digitally.

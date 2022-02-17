@@ -32,6 +32,8 @@ export default{
   .home-box:hover .showme {
     @media(min-width: 1430px) {
       opacity: 1;
+      transition: opacity 400ms;
+      transition-delay: 150ms;
     }
   }
   .container {
@@ -76,7 +78,8 @@ export default{
     }
   }
   .showme {
-    transition: opacity 200ms;
+    transition: opacity 100ms;
+    transition-delay: 0ms;
     opacity: 0;
   }
 </style>

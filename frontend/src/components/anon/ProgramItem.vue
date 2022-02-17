@@ -378,7 +378,7 @@ export default {
 
   .timestamp {
     position: absolute;
-    left: -92px;
+    left: -82px;
     top: 16px;
   }
 

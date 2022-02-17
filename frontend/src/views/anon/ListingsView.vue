@@ -251,10 +251,13 @@ export default {
     border-color: var(--line-border-color);
     border-width: 2px;
     border-radius: 15px;
-    -webkit-position: sticky;
-    position: sticky;
-    top: 76px;
+    top: 0;
     text-align: center;
+    @media(min-width: 768px) {
+      -webkit-position: sticky;
+      position: sticky;
+      top: 76px;
+    }
   }
   .filter {
     margin-top: 12px;
@@ -275,5 +278,14 @@ export default {
     color: #fff;
     border-color: var(--primary-color);
     background-color: var(--primary-color);
+  }
+  /deep/ .list-group-item {
+    border-radius: 20px;
+    border-width: 2px;
+    margin-bottom: 15px;
+    border-color: var(--line-border-color);
+  }
+  /deep/ .info-container {
+    text-decoration: none;
   }
 </style>
