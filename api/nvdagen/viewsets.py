@@ -47,14 +47,11 @@ class ParticipantViewSet(viewsets.ModelViewSet):
         program = Program.objects.get(id=data['event'])
 
         if (notRegistered):
-            response = super().create(request)
-
-            registered = program.participant_set.all().count()
-
+            currentlyRegistered = program.participant_set.all().count()
             try:
                 # If program is full, send waiting list email
-                if (registered > program.maxRegistered):
-                    waitingListIndex = registered - program.maxRegistered
+                if (currentlyRegistered >= program.maxRegistered):
+                    waitingListIndex = currentlyRegistered - program.maxRegistered + 1
                     send_mail('Nettverksdagene - Du står på venteliste',
                     'Vi bekrefter herved at du står på venteliste til ' + program.header + '. Din plass på ventelisten er ' + str(waitingListIndex) + '. Dersom du skulle ønske å melde deg av, vennligst gjør det via nettverksdagene.no/program. Tusen takk for din interesse i Nettverksdagene!',
                     'do-not-reply@nettverksdagene.no',
@@ -72,7 +69,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                 response = {'message': 'Could not send email'}
                 return Response(response, status = status.HTTP_500_INTERNAL_SERVER_ERROR)                
 
-            return response
+            return super().create(request)
 
         else:
             response = {'message': 'Invalid input. Is participant already registered?'}
