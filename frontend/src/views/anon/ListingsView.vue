@@ -253,11 +253,6 @@ export default {
     border-radius: 15px;
     top: 0;
     text-align: center;
-    @media(min-width: 768px) {
-      -webkit-position: sticky;
-      position: sticky;
-      top: 76px;
-    }
   }
   .filter {
     margin-top: 12px;
@@ -282,10 +277,19 @@ export default {
   /deep/ .list-group-item {
     border-radius: 20px;
     border-width: 2px;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
     border-color: var(--line-border-color);
   }
   /deep/ .info-container {
     text-decoration: none;
+  }
+  /deep/ .list-group-item:first-child {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+  /deep/ .list-group-item:last-child {
+    margin-bottom: 12px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
   }
 </style>

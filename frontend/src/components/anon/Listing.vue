@@ -68,6 +68,9 @@ export default {
     filter: none;
     transition: filter 0.5s, transform 0.3s;
   }
+  .listing-item {
+    text-decoration: none;
+  }
   .company, .title, .deadline {
     margin:0;
   }
@@ -120,5 +123,24 @@ export default {
   }
   a {
     text-decoration:none;
+  }
+  /deep/ .list-group-item {
+    border-radius: 20px;
+    border-width: 2px;
+    margin-bottom: 0px;
+    border-color: var(--line-border-color);
+    text-decoration:none;
+  }
+  /deep/ .info-container {
+    text-decoration: none;
+  }
+  /deep/ .list-group-item:first-child {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+  /deep/ .list-group-item:last-child {
+    margin-bottom: 12px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
   }
 </style>
