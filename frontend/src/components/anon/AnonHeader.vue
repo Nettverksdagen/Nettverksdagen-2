@@ -140,7 +140,7 @@ export default {
     float: right;
   }
   .links {
-    //margin-top: 20px;
+    margin-top: 20px;
     font-weight: 500;
     @media (min-width: 992px) {
       display:flex;

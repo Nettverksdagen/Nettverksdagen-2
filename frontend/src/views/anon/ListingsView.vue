@@ -250,8 +250,10 @@ export default {
     background-color: white;
     border-color: var(--line-border-color);
     border-width: 2px;
-    border-radius: 15px;
-    top: 0;
+    border-radius: 20px;
+    top: 80px;
+    position: sticky;
+    position: -webkit-sticky;
     text-align: center;
   }
   .filter {
