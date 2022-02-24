@@ -6,6 +6,7 @@ from .serializers import ListingSerializer, BusinessSerializer, SponsorSerialize
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from time import localtime, strftime
 
 
 class ListingViewSet(viewsets.ModelViewSet):
@@ -56,7 +57,8 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                     waitingListIndex = currentlyRegistered - program.maxRegistered + 1
                     data['waitingListIndex'] = waitingListIndex
                     data['place'] = program.place
-                    data['timeStart'] = program.startTime # OBS!! Epoch, konverter til noe lesbart
+                    # OBS! Første test av overføring fra epoch til datetime
+                    data['timeStart'] = strftime('%d. mars klokken %H:%M', localtime(program.startTime)) 
                     data['header'] = program.header
                     html_message = render_to_string('on_waiting_list.html', context=data)
                     plain_message = strip_tags(html_message)
@@ -98,6 +100,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
             data = {}
             data['name'] = participant.name
             data['header'] = program.header
+            data['code'] = participant.code
             html_message = render_to_string('deregister_code.html', context=data)
             plain_message = strip_tags(html_message)
             send_mail('Nettverksdagene - Avmeldingskode for ' + participant.name,
