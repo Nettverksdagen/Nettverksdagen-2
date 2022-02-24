@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from .models import Listing, Business, Sponsor, TeamMember, Form, Participant, Program
 from .serializers import ListingSerializer, BusinessSerializer, SponsorSerializer, TeamMemberSerializer, FormSerializer, ParticipantSerializer, ProgramSerializer
 from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 
 class ListingViewSet(viewsets.ModelViewSet):
@@ -52,18 +54,31 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                 # If program is full, send waiting list email
                 if (currentlyRegistered >= program.maxRegistered):
                     waitingListIndex = currentlyRegistered - program.maxRegistered + 1
+                    data['waitingListIndex'] = waitingListIndex
+                    data['place'] = program.place
+                    data['timeStart'] = program.startTime # OBS!! Epoch, konverter til noe lesbart
+                    data['header'] = program.header
+                    html_message = render_to_string('on_waiting_list.html', context=data)
+                    plain_message = strip_tags(html_message)
                     send_mail('Nettverksdagene - Du står på venteliste',
-                    'Vi bekrefter herved at du står på venteliste til ' + program.header + '. Din plass på ventelisten er ' + str(waitingListIndex) + '. Dersom du skulle ønske å melde deg av, vennligst gjør det via nettverksdagene.no/program. Tusen takk for din interesse i Nettverksdagene!',
-                    'do-not-reply@nettverksdagene.no',
-                    [data['email']],
-                    fail_silently=False)
+                        plain_message,
+                        'do-not-reply@nettverksdagene.no',
+                        [data['email']],
+                        fail_silently=False,
+                        html_message=html_message)
                 # If program not full, send confirmation email
                 else:
+                    data['place'] = program.place
+                    data['timeStart'] = program.startTime # OBS!! Epoch, konverter til noe lesbart
+                    data['header'] = program.header
+                    html_message = render_to_string('registered_email.html', context=data)
+                    plain_message = strip_tags(html_message)
                     send_mail('Nettverksdagene - Påmelding bekreftet for ' + data['name'],
-                    'Vi bekrefter herved at du er påmeldt ' + program.header + '. Dersom du skulle ønske å melde deg av, vennligst gjør det via nettverksdagene.no/program. Tusen takk for din interesse i Nettverksdagene!',
-                    'do-not-reply@nettverksdagene.no',
-                    [data['email']],
-                    fail_silently=False)
+                        plain_message,
+                        'do-not-reply@nettverksdagene.no',
+                        [data['email']],
+                        fail_silently=False,
+                        html_message=html_message)
             except:
                 print("ERROR: Could not send email. Is mail_settings.py correct?")
                 response = {'message': 'Could not send email'}
@@ -80,11 +95,17 @@ class ParticipantViewSet(viewsets.ModelViewSet):
         program = participant.event
 
         try:
+            data = {}
+            data['name'] = participant.name
+            data['header'] = program.header
+            html_message = render_to_string('deregister_code.html', context=data)
+            plain_message = strip_tags(html_message)
             send_mail('Nettverksdagene - Avmeldingskode for ' + participant.name,
-                'Din avmeldingskode for ' + program.header + ' er: ' + participant.code + '. Tusen takk for din interesse i Nettverksdagene!',
+                plain_message,
                 'do-not-reply@nettverksdagene.no',
-                [participant.email],
-                fail_silently=False)
+                [data['email']],
+                fail_silently=False,
+                html_message=html_message)
         except:
             print("ERROR: Could not send email. Is mail_settings.py correct?")
             response = {'message': 'Could not send email'}
@@ -107,11 +128,17 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                 lastParticipant = program.participant_set.all().order_by('id')[program.maxRegistered-1]
                 if participant.id < lastParticipant.id: # If lastParticipant is new
                     try:
+                        data = {}
+                        data['name'] = lastParticipant.name
+                        data['header'] = program.header
+                        html_message = render_to_string('off_waiting_list.html', context=data)
+                        plain_message = strip_tags(html_message)
                         send_mail('Nettverksdagene - Påmelding bekreftet for ' + lastParticipant.name,
-                        'Du sto på ventelisten for ' + program.header + ', og har nå fått plass. Dersom du skulle ønske å melde deg av, vennligst gjør det via nettverksdagene.no/program. Tusen takk for din interesse i Nettverksdagene!',
-                        'do-not-reply@nettverksdagene.no',
-                        [lastParticipant.email],
-                        fail_silently=False)
+                            plain_message,
+                            'do-not-reply@nettverksdagene.no',
+                            [data['email']],
+                            fail_silently=False,
+                            html_message=html_message)
                     except:
                         print("ERROR: Could not send email. Is mail_settings.py correct?")
                         response = {'message': 'Could not send email'}
