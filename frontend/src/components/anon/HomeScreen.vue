@@ -58,7 +58,7 @@ export default {
   .loading-page {
     width: 100%;
     overflow: hidden;
-    margin-top: 20px;
+    margin-top: 0px;
   }
   .firstrow {
     height: 280px;
