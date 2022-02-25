@@ -58,7 +58,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                     data['waitingListIndex'] = waitingListIndex
                     data['place'] = program.place
                     # OBS! Første test av overføring fra epoch til datetime
-                    data['timeStart'] = strftime('%d. mars klokken %H:%M', localtime(program.startTime)) 
+                    data['timeStart'] = strftime('%d. mars klokken %H:%M', localtime(program.timeStart)) 
                     data['header'] = program.header
                     html_message = render_to_string('on_waiting_list.html', context=data)
                     plain_message = strip_tags(html_message)
@@ -71,7 +71,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                 # If program not full, send confirmation email
                 else:
                     data['place'] = program.place
-                    data['timeStart'] = program.startTime # OBS!! Epoch, konverter til noe lesbart
+                    data['timeStart'] = strftime('%d. mars klokken %H:%M', localtime(program.timeStart)) 
                     data['header'] = program.header
                     html_message = render_to_string('registered_email.html', context=data)
                     plain_message = strip_tags(html_message)
@@ -106,7 +106,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
             send_mail('Nettverksdagene - Avmeldingskode for ' + participant.name,
                 plain_message,
                 'do-not-reply@nettverksdagene.no',
-                [data['email']],
+                [participant.email],
                 fail_silently=False,
                 html_message=html_message)
         except:
@@ -134,12 +134,14 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                         data = {}
                         data['name'] = lastParticipant.name
                         data['header'] = program.header
+                        data['timeStart'] = strftime('%d. mars klokken %H:%M', localtime(program.timeStart)) 
+                        data['place'] = program.place
                         html_message = render_to_string('off_waiting_list.html', context=data)
                         plain_message = strip_tags(html_message)
                         send_mail('Nettverksdagene - Påmelding bekreftet for ' + lastParticipant.name,
                             plain_message,
                             'do-not-reply@nettverksdagene.no',
-                            [data['email']],
+                            [lastParticipant.email],
                             fail_silently=False,
                             html_message=html_message)
                     except:
