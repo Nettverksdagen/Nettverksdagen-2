@@ -10,6 +10,7 @@ With docker-compose installed, the project requires minimal setup
 ```bash
 git clone https://github.com/Nettverksdagen/Nettverksdagen-2.git
 cd Nettverksdagen-2
+cp api/nvdnew/settings/mail_settings_default.py api/nvdnew/settings/mail_settings.py
 docker-compose up
 ```
 The webpage should now appear on `localhost:8080` and the django REST api browser on `localhost:8000`. 
