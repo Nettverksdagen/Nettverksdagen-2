@@ -1,18 +1,17 @@
 <template>
   <div class="contact-view">
     <Content>
-     <!-- <h1>Kontakt oss</h1> -->
+    <!-- <h1>Kontakt oss</h1> -->
     <h2>Kontakt oss for Nettverksdagene 2023</h2>
     <b-row class="firstrow">
        <!-- <b-col cols="12" md="5">
           <p class="description">
             Her finner du kontaktinformasjon for å bli med eller stille spørsmål til Nettverksdagene 2023.
-          </p> 
+          </p>
         </b-col>-->
         <b-col cols="12" md="7">
           <b-card class="overview">
           <table class="main-contact">
-
             <tr>
               <td class="align-top">
                 <h3>Bedrift</h3>
@@ -38,8 +37,6 @@
                 </p>
               </td>
             </tr>
-
-
             <tr>
               <td class="align-top">
                 <h3>Sponsor</h3>
