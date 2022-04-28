@@ -1,25 +1,23 @@
-<template>
-  <div class="hero" :style="{'background-image': 'url(' + require('@/assets/hero_blur.jpg') + ')'}">
+<!-- <template>
+ <div class="hero" :style="{'background-image': 'url(' + require('@/assets/hero_blur.jpg') + ')'}">
+  <div class="hero">
     <div class="wrapper">
       <div class="hero-content">
         <HeroText class="hero-txt"/>
         <div class="hexes">
           <b-link :to="'/program'">
             <HeroHexBox hex-title="Ballongslipp" hex-icon="balloon.svg">
-              <!-- Det blir ballongslipp der du kan vinne flotte premier!
-              I tillegg har vi mange andre konkurranser i løpet av dagen. -->
+               Det blir ballongslipp der du kan vinne flotte premier!
             </HeroHexBox>
           </b-link>
           <b-link :to="'/program'">
             <HeroHexBox hex-title="Stands" hex-icon="transfer.svg">
-              <!--Hele Glassgården fylles med stands! Her har du mulighet for å komme i kontakt med mange spennende bedrifter.
-              Standkartet finner du på programsiden. -->
+              Hele Glassgården fylles med stands! Her har du mulighet for å komme i kontakt med mange spennende bedrifter.
             </HeroHexBox>
           </b-link>
           <b-link :to="'/program'">
             <HeroHexBox hex-title="Bedriftpresentasjoner" hex-icon="presentation.svg">
-              <!--Det blir holdt flere bedriftpresentasjoner for de som vil bli bedre kjent med bedriftene.
-              Påmelding gjøres på Facebook-siden vår.-->
+              Det blir holdt bedriftpresentasjoner for de som vil bli bedre kjent med bedriftene.
             </HeroHexBox>
           </b-link>
         </div>
@@ -27,7 +25,7 @@
     </div>
   </div>
 </template>
-
+-->
 <script>
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'

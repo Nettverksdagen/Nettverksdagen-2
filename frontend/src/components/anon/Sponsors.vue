@@ -18,7 +18,7 @@
           </a>
         </div>
         -->
-        <h2 class="text-center font-weight-bold">Våre sponsorer</h2>
+        <h2 class="text-center font-weight-bold">Sponsorer i 2022</h2>
         <!-- <div class="sponsor-banner kjeldsberg-banner">
           <a href="http://kjeldsbergkaffe.no/" target="_blank" rel="noopener noreferrer">
             <b-row>

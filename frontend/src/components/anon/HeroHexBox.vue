@@ -26,7 +26,7 @@ export default {
     @media(min-width: 992px) {
       width:300px;
     }
-    color:#fff;
+    color:#194743;
     //text-shadow: 0 1px 2px rgba(0,0,0,0.7);
     text-align:center;
   }
