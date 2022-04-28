@@ -1,17 +1,32 @@
 <template>
   <div class="contact-view">
     <Content>
-      <h1>Kontakt oss</h1>
-      <b-row class="firstrow">
-        <b-col cols="12" md="5">
-          <h2>Våre viktigste kanaler</h2>
+     <!-- <h1>Kontakt oss</h1> -->
+    <h2>Kontakt oss for Nettverksdagene 2023</h2>
+    <b-row class="firstrow">
+       <!-- <b-col cols="12" md="5">
           <p class="description">
-            Bruk disse kanalene til å kontakte oss i Nettverksdagene. Under finner du en oversikt over kontaktpersoner og deres stillinger.
-          </p>
-        </b-col>
+            Her finner du kontaktinformasjon for å bli med eller stille spørsmål til Nettverksdagene 2023.
+          </p> 
+        </b-col>-->
         <b-col cols="12" md="7">
           <b-card class="overview">
           <table class="main-contact">
+
+            <tr>
+              <td class="align-top">
+                <h3>Bedrift</h3>
+                <b-link href="mailto:bedrift@nettverksdagene.no">bedrift@nettverksdagene.no</b-link>
+              </td>
+              <td>
+                <p class="info">
+                  Ønsker din bedrift å vise seg fram på Nettverksdagene
+                  eller har dere henvendelser angående bedriftpresentasjon eller stand,
+                  ta kontakt med bedriftgruppa.
+                </p>
+              </td>
+            </tr>
+
             <tr>
               <td class="align-top">
                 <h3>Styret</h3>
@@ -24,20 +39,6 @@
               </td>
             </tr>
 
-            <tr>
-              <td class="align-top">
-                <h3>Bedrift</h3>
-                <b-link href="mailto:bedrift@nettverksdagene.no">bedrift@nettverksdagene.no</b-link>
-              </td>
-              <td>
-                <p class="info">
-                  Ønsker din bedrift å vise seg fram på Nettverksdagene,
-                  har dere allerede en avtale med oss,
-                  eller har dere andre henvendelser angående bedriftspotlight, bedriftpresentasjon, stand osv,
-                  ta kontakt med bedriftgruppa.
-                </p>
-              </td>
-            </tr>
 
             <tr>
               <td class="align-top">
@@ -54,7 +55,7 @@
           </b-card>
         </b-col>
       </b-row>
-
+<!--
       <Spacer/>
 
       <b-row class="mt-5">
@@ -63,9 +64,9 @@
         </b-col>
       </b-row>
         <b-row v-bind:key="team.key" v-for="team in teams">
-          <!-- <b-col cols="12">
+            <b-col cols="12">
             <h3 class="font-weight-bold">{{ team.name }}</h3>
-          </b-col> -->
+          </b-col>
           <b-col class="my-md-3 my-2" cols="12" md="6" xl="4" v-bind:key="member.id" v-for="member in team.members">
             <b-card no-body class="overflow-hidden columns">
               <b-card-body class="d-flex">
@@ -87,7 +88,7 @@
           </b-col>
           <b-col cols="12">
           </b-col>
-        </b-row>
+        </b-row>-->
     </Content>
   </div>
 </template>
