@@ -37,7 +37,6 @@
                 </p>
               </td>
             </tr>
-            
             <tr>
               <td class="align-top">
                 <h3>Sponsor</h3>
