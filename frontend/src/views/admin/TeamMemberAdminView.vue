@@ -195,7 +195,7 @@ export default {
           }
           this.showAlert('danger',
             errorTitle,
-            'Bildeopplastning feilet, prøv igjen. Kontakt IT om problemet vedvarer.')
+            'Bildeopplastning feilet, prøv igjen. Kontakt IT om problemet vedvarer. IT: Prøv å restart serveren.')
           this.$data.showImgPreview = false
         })
     },

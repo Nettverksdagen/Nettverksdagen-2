@@ -52,12 +52,11 @@
           </b-card>
         </b-col>
       </b-row>
-<!--
       <Spacer/>
 
       <b-row class="mt-5">
         <b-col cols="12">
-          <h2>Kontaktpersoner for Nettverksdagene 2022</h2>
+          <h2>Kontaktpersoner for Nettverksdagene 2023</h2>
         </b-col>
       </b-row>
         <b-row v-bind:key="team.key" v-for="team in teams">
@@ -85,7 +84,7 @@
           </b-col>
           <b-col cols="12">
           </b-col>
-        </b-row>-->
+        </b-row>
     </Content>
   </div>
 </template>
