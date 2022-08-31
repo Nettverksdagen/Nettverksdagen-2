@@ -19,6 +19,8 @@ import BusinessDetails from '@/components/anon/BusinessDetails.vue'
 import ListingDetails from '@/components/anon/ListingDetails.vue'
 import ProgramAdminView from '@/views/admin/ProgramAdminView.vue'
 import ParticipantAdminView from '@/views/admin/ParticipantAdminView.vue'
+import HomeViewTemp from '@/views/anon/HomeViewTemp.vue'
+import HomeView2022 from '@/views/anon/HomeView2022.vue'
 
 Vue.use(Router)
 
@@ -33,8 +35,22 @@ export default new Router({
         {
           path: '',
           name: 'Home',
-          component: HomeView,
+          component: HomeViewTemp,
           meta: {title: 'Nettverksdagen'},
+          children: [
+            {
+              path: 'bedrift/:businessReferer',
+              name: 'Business',
+              component: BusinessDetails,
+              meta: {title: 'Nettverksdagen'}
+            }
+          ]
+        },
+        {
+          path: '2022',
+          name: '2022',
+          component: ProgramView2022,
+          meta: {title: 'Program 2022'},
           children: [
             {
               path: 'bedrift/:businessReferer',
