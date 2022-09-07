@@ -20,7 +20,7 @@ import ListingDetails from '@/components/anon/ListingDetails.vue'
 import ProgramAdminView from '@/views/admin/ProgramAdminView.vue'
 import ParticipantAdminView from '@/views/admin/ParticipantAdminView.vue'
 import HomeViewTemp from '@/views/anon/HomeViewTemp.vue'
-import HomeView2022 from '@/views/anon/HomeView2022.vue'
+import ProgramView2022 from '@/views/anon/ProgramView2022.vue'
 
 Vue.use(Router)
 
