@@ -15,21 +15,18 @@
             <img class="overlay" src="@/assets/background_overlay.png">
         </div>
     </b-row>
+      <div class="temp-link">
+        <b-link :to="'/2022'">
+          <HomeScreenBox box-title="Trykk her for fjorårets program" box-icon="store-alt-solid.svg" box-text="Se hvilke arrangementer som ble foregikk under Nettverksdagene 2022"/>
+        </b-link>
+      </div>
     <div class="wrapper">
       <div class="hero-content">
         <div class="boxes">
-          <b-link :to="'/program'">
             <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" box-text="Glassgården fylles med stands! Kom i kontakt med mange spennende bedrifter."/>
-          </b-link>
-          <router-link :to="{name: 'Program', hash: '#bankett'}" @click.native="scrollToId('bankett')">
-            <HomeScreenBox box-title="Bankett" box-icon="glass-cheers-solid.svg" box-text="Nettverksdagene avsluttes med en bankett på Thon Hotel Prinsen. Trykk for info."/>
-          </router-link>
-          <b-link :to="'/program'">
+            <HomeScreenBox box-title="Bankett" box-icon="glass-cheers-solid.svg" box-text="Nettverksdagene avsluttes med en bankett på Thon Hotel Prinsen."/>
             <HomeScreenBox box-title="Bedpres" box-icon="utensils-solid.svg" box-text="Det blir holdt flere bedrifts- presentasjoner for de som vil bli bedre kjent med bedriftene."/>
-          </b-link>
-          <b-link :to="'/program'">
             <HomeScreenBox box-title="Ballongslipp" box-icon="gift-solid.svg" box-text="Vinn flotte premier når Nettverksdagene åpner med ballongslipp."/>
-          </b-link>
         </div>
       </div>
     </div>
@@ -274,5 +271,10 @@ export default {
     a {
        text-decoration: none;
      }
+    }
+  .temp-link {
+    width: 100%;
+    display: none;
+    height: inherit;
   }
 </style>

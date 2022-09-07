@@ -6,15 +6,13 @@
     </div>
     <div class="dude">
       <!--<Hero/> -->
-      <HomeScreen/>
+      <HomeScreenTemp/>
     </div>
   </div>
 </template>
 
 <script>
 import Hero from '@/components/anon/Hero.vue'
-import Businesses from '@/components/anon/Businesses.vue'
-import Sponsors from '@/components/anon/Sponsors.vue'
 import HomeScreenTemp from '@/components/anon/HomeScreenTemp.vue'
 export default {
   components: {
