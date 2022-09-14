@@ -12,10 +12,11 @@
       </b-link>
       <div class="side">
         <b-nav class="links">
-          <b-nav-item :to="{name: 'Program'}"><p>Program</p></b-nav-item>
-          <b-nav-item :to="{name: 'Listings'}"><p>Stillingsannonser</p></b-nav-item>
-          <b-nav-item :to="{name: 'About'}"><p>Om oss</p></b-nav-item>
-          <b-nav-item :to="{name: 'Contact'}"><p>Kontakt</p></b-nav-item>
+          <b-nav-item :to="{name: 'Program'}"><p>Program 2022</p></b-nav-item>
+          <b-nav-item :to="{name: 'Listings'}"><p>{{$t('stillingsannonser')}}</p></b-nav-item>
+          <b-nav-item :to="{name: 'About'}"><p>{{$t('omoss')}}</p></b-nav-item>
+          <b-nav-item :to="{name: 'Contact'}"><p>{{$t('kontakt')}}</p></b-nav-item>
+          <b-nav-item v-on:click="toggleLanguage"><p>{{$t('lang')}}</p></b-nav-item>
           <!-- UNCOMMENT TO SHOW "TOGGLE THEME BUTTON"-->
           <!-- <b-nav-item class="round-button" title="Endre tema" v-on:click="toggleTheme">
             <font-awesome-icon icon="adjust"></font-awesome-icon>
@@ -31,6 +32,7 @@
 
 <script>
 import Slider from '@/components/common/Slider.vue'
+import {i18n} from '@/translations.js'
 export default {
   data () {
     return {
@@ -58,6 +60,13 @@ export default {
         this.setTheme('dark-theme')
       } else {
         this.setTheme('light-theme')
+      }
+    },
+    toggleLanguage () {
+      if (i18n.locale === 'en') {
+        i18n.locale = 'nb'
+      } else {
+        i18n.locale = 'en'
       }
     },
     getMediaPreference () {

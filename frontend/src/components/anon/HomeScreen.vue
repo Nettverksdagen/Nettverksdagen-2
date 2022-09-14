@@ -3,7 +3,7 @@
     <b-row class="firstrow">
         <div class="col-12 col-xl-6 firsthalf" :style="{'background-image': 'url(' + require('@/assets/iphonebakgrunn.svg') + ')'}">
             <div class="hometext">
-                <h3>Møt din fremtidige arbeidsgiver på</h3>
+                <h3>{{$t('fremtidig')}}</h3>
                 <h1>Nettverksdagene</h1>
                 <h2>31.01-02.02 2023</h2>
             </div>
