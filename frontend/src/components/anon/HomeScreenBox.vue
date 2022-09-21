@@ -46,7 +46,14 @@ export default{
     width: 20%;
     z-index: 5;
     filter: invert(20%) sepia(12%) saturate(2012%) hue-rotate(125deg) brightness(94%) contrast(94%);
+    transition-duration: 400ms;
   }
+
+  .home-box:hover .icon{
+    filter: invert(20%) sepia(12%) saturate(2012%) hue-rotate(125deg) brightness(130%) contrast(94%);
+    transition-duration: 400ms;
+  }
+
   h5 {
     font-size: 18px;
     color: var(--primary-color);

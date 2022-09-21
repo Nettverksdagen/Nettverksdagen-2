@@ -45,8 +45,15 @@ export default{
     right: 30px;
     width: 10%;
     z-index: 5;
-
+    filter: brightness(150%);
+    transition-duration: 400ms;
   }
+
+  .home-box:hover .icon{
+    filter: brightness(200%);
+    transition-duration: 400ms;
+  }
+
   h5 {
     font-size: 18px;
     color: var(--primary-color);
