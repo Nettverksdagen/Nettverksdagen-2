@@ -19,7 +19,7 @@
       <div class="hero-content">
         <div class="boxes">
           <b-link :to="'/2022'" class="temp-link">
-            <HomeScreenBoxTemp box-title="Fjorårets program" box-icon="nettverksdagenesvg.svg" box-text="Nettverksdagene 2023 Trykk her for å se hvilke arrangementer som foregikk under Nettverksdagene 2022!"/>
+            <HomeScreenBoxTemp box-title="Fjorårets program" box-icon="nettverksdagenesvg.svg" box-text="Trykk her for å se hvilke arrangementer som foregikk under Nettverksdagene 2022!"/>
           </b-link>
           <b-link :to="'/program'">
             <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" box-text="Glassgården fylles med stands! Kom i kontakt med mange spennende bedrifter."/>
