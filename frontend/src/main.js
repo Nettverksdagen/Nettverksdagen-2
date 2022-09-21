@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'babel-polyfill'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { i18n } from './translations'
+import { i18n } from './translations/translations'
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

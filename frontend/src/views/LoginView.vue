@@ -7,10 +7,10 @@
             <b-row class="login-container">
               <b-col cols="7" class="d-none d-sm-block text-container">
                 <div class="padder">
-                  <h1>Logg inn</h1>
-                  <span>Det er på tide at noe blir gjort her</span>
+                  <h1>{{$t('login')}}</h1>
+                  <span>{{$t('itstime')}}</span>
                   <hr>
-                  <span class="subtitle faded">Har du ikke bruker? Kontakt IT.</span>
+                  <span class="subtitle faded">{{$t('nouser')}}</span>
                 </div>
               </b-col>
               <b-col cols="12" sm="5" class="form-container">
@@ -20,7 +20,7 @@
                     <b-form-input class="my-2 mb-4" type="password" v-model="credentials.password" placeholder="Passord"></b-form-input>
                     <b-button size="lg" variant="success" @click="login" class="login-button">Logg inn</b-button>
                   </b-form-group>
-                  <b-link class="forgot-password-link" href="#">Glemt passord?</b-link>
+                  <b-link class="forgot-password-link" href="#">{{$t('glemtpassord')}}</b-link>
                 </div>
               </b-col>
             </b-row>

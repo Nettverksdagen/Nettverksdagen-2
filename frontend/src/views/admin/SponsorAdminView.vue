@@ -33,9 +33,9 @@
                 </div>
               </div>
             </b-row>
-            <b-button type="submit" size="md" variant="success" v-if="!editing">Legg ut sponsoren</b-button>
-            <b-button type="submit" size="md" variant="primary" v-if="editing">Endre sponsor</b-button>
-            <b-button v-on:click="abortEdit()" size="md" variant="secondary" v-if="editing">Avbryt</b-button>
+            <b-button type="submit" size="md" variant="success" v-if="!editing">{{('leggut')}}</b-button>
+            <b-button type="submit" size="md" variant="primary" v-if="editing">{{$t('edit') + ' sponsor'}}</b-button>
+            <b-button v-on:click="abortEdit()" size="md" variant="secondary" v-if="editing">{{$t('abort')}}</b-button>
           </b-form>
         </b-card>
       </div>

@@ -32,7 +32,7 @@
 
 <script>
 import Slider from '@/components/common/Slider.vue'
-import {i18n} from '@/translations.js'
+import {i18n} from '@/translations/translations.js'
 export default {
   data () {
     return {

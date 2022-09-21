@@ -12,10 +12,10 @@
           </div>
           <div v-if="registration && maxRegistered">
             <h5 v-if="registered<=maxRegistered">
-              {{registered + '/' + maxRegistered + ' påmeldte'}}
+              {{registered + '/' + maxRegistered + ' ' + $t('påmeldte')}}
             </h5>
             <h5 v-else>
-              {{maxRegistered + ' påmeldte, ' + (registered-maxRegistered) + ' på venteliste'}}
+              {{maxRegistered + $t('påmeldte') + ', '  + (registered-maxRegistered) + $t('onthe') + ' ' +$t('venteliste')}}
             </h5>
           </div>
         </div>
@@ -25,8 +25,8 @@
           </div>
         </div>
         <div v-if="registration" class='button'>
-          <b-button v-if="enableRegistration && !submitted" variant='primary' @click="openDialog">Påmelding</b-button>
-          <b-button v-else disabled variant="dark">Påmelding</b-button>
+          <b-button v-if="enableRegistration && !submitted" variant='primary' @click="openDialog">{{$t('påmelding')}}</b-button>
+          <b-button v-else disabled variant="dark">{{$t('påmelding')}}</b-button>
         </div>
         <div class="footer">
           <div class="inline">
@@ -40,23 +40,23 @@
             </div>
           </div>
           <div v-if="registration && cancelEmail">
-              <b-link @click.native="destroy_participant(name)">Ønsker du å melde deg av? Klikk her.</b-link>
+              <b-link @click.native="destroy_participant(name)">{{$t('destroypart')}}</b-link>
           </div>
           <div v-if="registration">
               <div v-if="submitted">
-                <div>Dersom du ble med, har du fått en bekreftelsesmail</div>
+                <div>{{$t('submitted')}}</div>
               </div>
               <div v-else-if="enableRegistration && registered<maxRegistered">
-                <div>Påmelding har startet</div>
+                <div>{{$t('påmeldingstart')}}</div>
               </div>
               <div v-else-if="enableRegistration && registered>=maxRegistered">
-                <div>Du vil bli satt på venteliste</div>
+                <div>{{$t('venteliste')}}</div>
               </div>
               <div v-else-if="afterRegistration">
-                <div>Påmelding er ferdig</div>
+                <div>{{$t('regfinish')}}</div>
               </div>
               <div v-else>
-              <div>{{'Påmelding starter ' + formatDate(registrationStart)}}</div>
+              <div>{{$t('regtobegin') + ' ' + formatDate(registrationStart)}}</div>
               </div>
           </div>
         </div>

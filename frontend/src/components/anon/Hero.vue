@@ -7,17 +7,17 @@
         <div class="hexes">
           <b-link :to="'/program'">
             <HeroHexBox hex-title="Ballongslipp" hex-icon="balloon.svg">
-               Det blir ballongslipp der du kan vinne flotte premier!
+               {{$t('ballong')}}
             </HeroHexBox>
           </b-link>
           <b-link :to="'/program'">
             <HeroHexBox hex-title="Stands" hex-icon="transfer.svg">
-              Hele Glassgården fylles med stands! Her har du mulighet for å komme i kontakt med mange spennende bedrifter.
+              {{$t('glassgard')}}
             </HeroHexBox>
           </b-link>
           <b-link :to="'/program'">
             <HeroHexBox hex-title="Bedriftpresentasjoner" hex-icon="presentation.svg">
-              Det blir holdt bedriftpresentasjoner for de som vil bli bedre kjent med bedriftene.
+              {{$t('bedpres')}}
             </HeroHexBox>
           </b-link>
         </div>

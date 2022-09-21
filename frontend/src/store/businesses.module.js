@@ -1,3 +1,5 @@
+import {i18n} from '../translations/translations'
+
 const defaultState = {
   all: []
 }
@@ -42,6 +44,11 @@ const getters = {
       {day: 'Dag 1', dayHeader: 'Bedrifter du kunne møte på stand i 2022'}
       // {day: 'Dag 2', dayHeader: 'Bedrifter du kan møte på stand 28. januar'}
     ]
+    if (i18n.lang === 'nb') {
+      days[0]['dayHeader'] = 'asdf'
+    } else {
+      days[0]['dayHeader'] = 'fdsa'
+    }
     for (let i = 0; i < days.length; i++) {
       days[i]['levels'] = [
         {level: 'Hovedsamarbeidspartner', businesses: []},

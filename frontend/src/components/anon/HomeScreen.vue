@@ -3,8 +3,8 @@
     <b-row class="firstrow">
         <div class="col-12 col-xl-6 firsthalf" :style="{'background-image': 'url(' + require('@/assets/iphonebakgrunn.svg') + ')'}">
             <div class="hometext">
-                <h3>{{$t('fremtidig')}}</h3>
-                <h1>Nettverksdagene</h1>
+                <h3>{{$t('homescreen.fremtidig')}}</h3>
+                <h1>{{$t('nettverksdagene')}}</h1>
                 <h2>31.01-02.02 2023</h2>
             </div>
         </div>
@@ -19,16 +19,16 @@
       <div class="hero-content">
         <div class="boxes">
           <b-link :to="'/program'">
-            <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" box-text="Glassgården fylles med stands! Kom i kontakt med mange spennende bedrifter."/>
+            <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" :box-text="$t('standtext')"/>
           </b-link>
           <router-link :to="{name: 'Program', hash: '#bankett'}" @click.native="scrollToId('bankett')">
-            <HomeScreenBox box-title="Bankett" box-icon="glass-cheers-solid.svg" box-text="Nettverksdagene avsluttes med en bankett på Thon Hotel Prinsen. Trykk for info."/>
+            <HomeScreenBox :box-title="$t('bankett')" box-icon="glass-cheers-solid.svg" :box-text="$t('programtext')"/>
           </router-link>
           <b-link :to="'/program'">
-            <HomeScreenBox box-title="Bedpres" box-icon="utensils-solid.svg" box-text="Det blir holdt flere bedrifts- presentasjoner for de som vil bli bedre kjent med bedriftene."/>
+            <HomeScreenBox box-title="Bedpres" box-icon="utensils-solid.svg" :box-text="$t('bedprestext')"/>
           </b-link>
           <b-link :to="'/program'">
-            <HomeScreenBox box-title="Ballongslipp" box-icon="gift-solid.svg" box-text="Vinn flotte premier når Nettverksdagene åpner med ballongslipp."/>
+            <HomeScreenBox :box-title="$t('ballongslipp')" box-icon="gift-solid.svg" :box-text="$t('ballongslipptext')"/>
           </b-link>
         </div>
       </div>

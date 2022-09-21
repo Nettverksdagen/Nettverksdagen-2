@@ -8,14 +8,14 @@
               <img class="img-logo mb-md-0 mb-3" src="@/assets/nettverksdagenesvg.svg"/>
             </div>
             <div>
-              <h5>Nettverksdagene</h5>
+              <h5>{{$t('nettverksdagene')}}</h5>
               <p class="text-subtle mr-3">{{$t('hensikt')}}</p>
             </div>
           </div>
         </b-col>
 
         <b-col cols="12" sm="12" md="3" lg="3" class="mb-sm-0 mb-3">
-          <h5>Kontakt</h5>
+          <h5>{{$t('kontakt')}}</h5>
           <ul class="list-unstyled">
             <li><span class="font-weight-bold">Styret:</span> <a class="green-link" href="mailto:leder@nettverksdagene.no">leder@nettverksdagene.no</a></li>
             <li><span class="font-weight-bold">Bedrift:</span> <a class="green-link" href="mailto:bedrift@nettverksdagene.no">bedrift@nettverksdagene.no</a></li>
@@ -24,7 +24,7 @@
         </b-col>
 
         <b-col cols="12" sm="12" md="3" lg="3" class="text-md-right">
-          <h5>Følg oss</h5>
+          <h5>{{$t('folgos')}}</h5>
           <ul class="list-inline social-icons">
             <li class="list-inline-item facebook">
               <a href="https://www.facebook.com/nvdagene/" target="_blank">

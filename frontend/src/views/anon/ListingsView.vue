@@ -1,21 +1,21 @@
 <template>
   <div class="listings">
     <Content class="content">
-      <h1>Stillingsannonser</h1>
+      <h1>{{$t('stillingsannonser')}}</h1>
       <b-row>
         <div class="col-12 col-md-4 col-lg-3 background">
           <b-card no-body class="mb-3 box">
-            <span class="filter">Filtrer annonser</span>
+            <span class="filter">{{$t('filter')}}</span>
             <b-card-body class="pt-0">
               <b-btn v-b-toggle.filterCollapse variant="secondary" class="d-md-none w-100 mt-3 button">
-                <span class="when-closed">Vis</span>
-                <span class="when-opened">Skjul</span>
+                <span class="when-closed">{{$t('show')}}</span>
+                <span class="when-opened">{{$t('hide')}}</span>
                 filter
               </b-btn>
               <b-collapse id="filterCollapse" class="mt-2 dropdown" v-model="filtersVisible">
                 <b-list-group>
                   <b-list-group-item class="checkbox-group">
-                    <h4>Stillingstype</h4>
+                    <h4>{{$t('stillingstype')}}</h4>
                     <b-form-group class="checkbox">
                       <b-form-checkbox-group
                         id="position-type-checkboxes"
@@ -28,7 +28,7 @@
                   </b-list-group-item>
 
                   <b-list-group-item class="checkbox-group">
-                    <h4>Sted</h4>
+                    <h4>{{$t('sted')}}</h4>
                     <b-form-group class="checkbox">
                       <b-form-checkbox-group
                         id="job-location-checkboxes"

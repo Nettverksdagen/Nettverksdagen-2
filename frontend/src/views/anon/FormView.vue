@@ -7,7 +7,7 @@
           v-bind:src="form.external_url"
           v-bind:height="form.iframe_height"
           width="100%"
-          frameborder="0" marginheight="0" marginwidth="0">Laster inn ...</iframe>
+          frameborder="0" marginheight="0" marginwidth="0">{{$t('loadingmsg')}}</iframe>
       </b-row>
     </Content>
   </div>
