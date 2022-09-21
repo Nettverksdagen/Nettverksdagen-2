@@ -1,12 +1,12 @@
 <template>
   <div class="contact-view">
     <Content>
-    <!-- <h1>Kontakt oss</h1> -->
-    <h2>Kontakt oss for Nettverksdagene 2023</h2>
+    <!-- <h1>{{$t('kontakt')}}</h1> -->
+    <h2>{{$t('kontakt') + ' for ' + $t('nettverksdagene')  + ' 2023'}}</h2>
     <b-row class="firstrow">
        <!-- <b-col cols="12" md="5">
           <p class="description">
-            Her finner du kontaktinformasjon for å bli med eller stille spørsmål til Nettverksdagene 2023.
+            {{$t('contactinfo')}}
           </p>
         </b-col>-->
         <b-col cols="12" md="7">
@@ -14,14 +14,12 @@
           <table class="main-contact">
             <tr>
               <td class="align-top">
-                <h3>Bedrift</h3>
+                <h3>{{$t('bedrift')}}</h3>
                 <b-link href="mailto:bedrift@nettverksdagene.no">bedrift@nettverksdagene.no</b-link>
               </td>
               <td>
                 <p class="info">
-                  Ønsker din bedrift å vise seg fram på Nettverksdagene
-                  eller har dere henvendelser angående bedriftpresentasjon eller stand,
-                  ta kontakt med bedriftgruppa.
+                  {{$t('doyourshow')}}
                 </p>
               </td>
             </tr>
@@ -33,7 +31,7 @@
               </td>
               <td>
                 <p class="info">
-                  Har du generelle henvendelser, eller er usikker på hvem du skal kontakte, kan du kontakte styret direkte.
+                  {{$t('genquest')}}
                 </p>
               </td>
             </tr>
@@ -44,7 +42,7 @@
               </td>
               <td>
                 <p class="info">
-                  For henvendelser angående sponsorsamarbeid, kontakt sponsorgruppa.
+                  {{$t('sponsquest')}}
                 </p>
               </td>
             </tr>
@@ -56,7 +54,7 @@
 
       <b-row class="mt-5">
         <b-col cols="12">
-          <h2>Kontaktpersoner for Nettverksdagene 2023</h2>
+          <h2>{{$t('contactpeople')}}</h2>
         </b-col>
       </b-row>
         <b-row v-bind:key="team.key" v-for="team in teams">

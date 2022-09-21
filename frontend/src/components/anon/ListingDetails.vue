@@ -4,7 +4,7 @@
       <div class="listingText">
         <p v-html="listing.content"></p>
         <div class="button">
-          <b-button :href="listing.listing_url" size="lg" variant="primary">Søk her</b-button>
+          <b-button :href="listing.listing_url" size="lg" variant="primary">{{$t('sokher')}}</b-button>
         </div>
       </div>
     </b-modal>

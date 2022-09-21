@@ -17,7 +17,7 @@
           </span>
           |
           <span v-if="deadline !== null">Frist: {{ formattedDeadline }}</span>
-          <span v-else>Løpende frist</span>
+          <span v-else>{{$t('deadline')}}</span>
         </span>
       </div>
     </b-list-group-item>

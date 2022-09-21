@@ -15,7 +15,7 @@
       <div class="col-12">
         <b-card header="Velg event og se deltagere" class="h-100">
             <b-form-select v-model="selectedEvent" :options="events"></b-form-select>
-            <b-link :href="'mailto:' +concatEmails">{{'Send mail til alle deltagere'}}</b-link>
+            <b-link :href="'mailto:' +concatEmails">{{$t('sendtoall')}}</b-link>
         </b-card>
       </div>
     </b-row>
