@@ -55,6 +55,7 @@ export default{
     top: 59%;
     margin-left: 47px;
     margin-right: 30px;
+    
   }
   .home-box:hover h3 {
     transition: opacity 300ms, transform 400ms;
@@ -64,16 +65,26 @@ export default{
   }
   h3 {
     position: absolute;
-    margin-top: -7%;
-    margin-left: -7%;
-    font-size: 30px;
+    margin-top: -10%;
+    margin-left: 2%;
+    font-size: 34px;
     font-weight: 600;
     color: var(--primary-color);
     text-decoration: none;
     transition: opacity 300ms, transform 400ms;
     overflow-wrap: break-word;
+    @media(min-width: 768px) {
+      margin-top: -8%;
+      margin-left: -7%;
+    }
+    @media(min-width: 992px) {
+      margin-top: -7%;
+      margin-left: 2%;
+    }
     @media(min-width: 1430px) {
       font-size: 54px;
+      margin-top: -7%;
+      margin-left: -7%;
     }
   }
   .showme {

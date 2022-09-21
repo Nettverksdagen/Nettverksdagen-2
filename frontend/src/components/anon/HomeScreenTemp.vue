@@ -7,7 +7,7 @@
                 <h1>Nettverksdagene</h1>
                 <h2>31.01-02.02 2023</h2>
             </div>
-        </div>
+        </div>  
         <div class="col-12 col-lg-6 homevideo">
             <video class ="video" muted loop autoplay>
                 <source src="@/assets/timelapse.mp4" type="video/mp4">
@@ -232,12 +232,12 @@ export default {
   .wrapper {
     width:100%;
     position:relative;
-    height:0px;
+    height: 120px;
     @media(min-width: 768px) {
-      height: 0px;
+      height: 620px;
     }
     @media(min-width: 1200px) {
-      height: 200px;
+      height: 400px;
     }
     @media(min-width: 1430px) {
       height: 500px;
@@ -261,27 +261,35 @@ export default {
   }
   .boxes {
     width: 100%;
-    display: none;
+    margin-left: 0%;
+    display: inline-grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     height: inherit;
     grid-gap: 30px;
     @media(min-width: 768px) {
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
+      width: 60%;
+      margin-left: 20%;
     }
     @media(min-width: 992px) {
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
+      width: 70%;
+      margin-left: 15%;
     }
     @media(min-width: 1200px) {
       grid-template-rows: 1fr 1fr;
       grid-template-columns: 1fr 1fr 1fr 1fr;
       display:inline-grid;
+      width: 100%;
+      margin-left: 0%;
     }
     a {
        text-decoration: none;
      }
     }
   .temp-link {
-    grid-column: span 4;
+    grid-column: span 2;
+    @media(min-width: 1200px) {
+      grid-column: span 4;
+    }
   }
 </style>
