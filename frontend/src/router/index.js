@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HomeView from '@/views/anon/HomeView'
+//import HomeView from '@/views/anon/HomeView'
 import ListingsView from '@/views/anon/ListingsView'
 import AnonBaseView from '@/views/anon/AnonBaseView'
 import AdminBaseView from '@/views/admin/AdminBaseView'

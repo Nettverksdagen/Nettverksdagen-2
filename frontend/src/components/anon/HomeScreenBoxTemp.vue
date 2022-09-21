@@ -1,7 +1,7 @@
 <template>
   <div class="home-box">
     <div class="box">
-      <img src="@/assets/homebox.svg">
+      <img src="@/assets/homeboxtemp.svg">
       <img class="icon" :src="require(`@/assets/${boxIcon}`)" :alt="boxIconAlt">
       <div class="container">
         <h3>{{ boxTitle }}</h3>
@@ -43,37 +43,37 @@ export default{
     position: absolute;
     top: 30px;
     right: 30px;
-    width: 20%;
+    width: 10%;
     z-index: 5;
-    filter: invert(20%) sepia(12%) saturate(2012%) hue-rotate(125deg) brightness(94%) contrast(94%);
+
   }
   h5 {
     font-size: 18px;
     color: var(--primary-color);
     text-decoration: none;
     position: absolute;
-    top: 47%;
-    margin-left: 37px;
+    top: 59%;
+    margin-left: 47px;
     margin-right: 30px;
   }
   .home-box:hover h3 {
     transition: opacity 300ms, transform 400ms;
     @media(min-width: 1430px) {
-      transform: translate3d(0, -270%, 0);
+      transform: translate3d(0, -150%, 0);
     }
   }
   h3 {
     position: absolute;
-    margin-top: -20%;
-    margin-left: 7%;
-    font-size: 26px;
+    margin-top: -7%;
+    margin-left: -7%;
+    font-size: 30px;
     font-weight: 600;
     color: var(--primary-color);
     text-decoration: none;
     transition: opacity 300ms, transform 400ms;
     overflow-wrap: break-word;
     @media(min-width: 1430px) {
-      font-size: 30px;
+      font-size: 54px;
     }
   }
   .showme {

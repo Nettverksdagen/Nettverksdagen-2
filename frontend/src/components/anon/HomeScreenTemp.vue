@@ -15,18 +15,24 @@
             <img class="overlay" src="@/assets/background_overlay.png">
         </div>
     </b-row>
-      <div class="temp-link">
-        <b-link :to="'/2022'">
-          <HomeScreenBox box-title="Trykk her for fjorårets program" box-icon="store-alt-solid.svg" box-text="Se hvilke arrangementer som ble foregikk under Nettverksdagene 2022"/>
-        </b-link>
-      </div>
     <div class="wrapper">
       <div class="hero-content">
         <div class="boxes">
+          <b-link :to="'/2022'" class="temp-link">
+            <HomeScreenBoxTemp box-title="Fjorårets program" box-icon="nettverksdagenesvg.svg" box-text="Nettverksdagene 2023 Trykk her for å se hvilke arrangementer som foregikk under Nettverksdagene 2022!"/>
+          </b-link>
+          <b-link :to="'/program'">
             <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" box-text="Glassgården fylles med stands! Kom i kontakt med mange spennende bedrifter."/>
+          </b-link>
+          <router-link :to="{name: 'Program', hash: '#bankett'}" @click.native="scrollToId('bankett')">
             <HomeScreenBox box-title="Bankett" box-icon="glass-cheers-solid.svg" box-text="Nettverksdagene avsluttes med en bankett på Thon Hotel Prinsen."/>
+          </router-link>
+          <b-link :to="'/program'">
             <HomeScreenBox box-title="Bedpres" box-icon="utensils-solid.svg" box-text="Det blir holdt flere bedrifts- presentasjoner for de som vil bli bedre kjent med bedriftene."/>
+          </b-link>
+          <b-link :to="'/program'">
             <HomeScreenBox box-title="Ballongslipp" box-icon="gift-solid.svg" box-text="Vinn flotte premier når Nettverksdagene åpner med ballongslipp."/>
+          </b-link>
         </div>
       </div>
     </div>
@@ -38,10 +44,12 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import HeroText from '@/components/anon/HeroText.vue'
 import HomeScreenBox from '@/components/anon/HomeScreenBox.vue'
+import HomeScreenBoxTemp from './HomeScreenBoxTemp.vue'
 export default {
   components: {
     HeroText,
-    HomeScreenBox
+    HomeScreenBox,
+    HomeScreenBoxTemp
   },
   methods: {
     scrollToId (id) {
@@ -232,7 +240,7 @@ export default {
       height: 200px;
     }
     @media(min-width: 1430px) {
-      height: 250px;
+      height: 500px;
     }
   }
   .hero-content {
@@ -253,7 +261,7 @@ export default {
   }
   .boxes {
     width: 100%;
-    display:none;
+    display: none;
     height: inherit;
     grid-gap: 30px;
     @media(min-width: 768px) {
@@ -265,6 +273,7 @@ export default {
       grid-template-rows: 1fr 1fr;
     }
     @media(min-width: 1200px) {
+      grid-template-rows: 1fr 1fr;
       grid-template-columns: 1fr 1fr 1fr 1fr;
       display:inline-grid;
     }
@@ -273,8 +282,6 @@ export default {
      }
     }
   .temp-link {
-    width: 100%;
-    display: none;
-    height: inherit;
+    grid-column: span 4;
   }
 </style>
