@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="text-center pt-5">
+    <div class="text-center pt-5 card">
       <h3>Vil din bedrift delta på Nettverksdagene 2023?</h3>
       <h3><a href="mailto:bedrift@nettverksdagene.no"> Send mail til bedrift@nettverksdagene.no </a></h3>
     </div>
@@ -37,5 +37,12 @@ export default {
 <style lang="scss" scoped>
   .dude {
     width:100%;
+  }
+  .card {
+    position: relative;
+    border-radius: 20px;
+    border-width: 2px;
+    border-color: var(--line-border-color);
+    background-color: white;
   }
 </style>
