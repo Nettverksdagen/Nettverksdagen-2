@@ -289,8 +289,6 @@ export default {
   .box {
     display: none;
     @media(min-width: 768px) {
-      width: 60%;
-      margin-left: 20%;
       display: block;
     }
   }

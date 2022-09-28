@@ -81,8 +81,8 @@ export default{
     transition: opacity 300ms, transform 400ms;
     overflow-wrap: break-word;
     @media(min-width: 768px) {
-      margin-top: -8%;
-      margin-left: -7%;
+      margin-top: -12%;
+      margin-left: 1%;
     }
     @media(min-width: 992px) {
       margin-top: -7%;
