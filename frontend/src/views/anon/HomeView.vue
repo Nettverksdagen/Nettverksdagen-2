@@ -1,9 +1,5 @@
 <template>
   <div class="home">
-    <div class="text-center pt-5 card">
-      <h3>Vil din bedrift delta på Nettverksdagene 2023?</h3>
-      <h3><a href="mailto:bedrift@nettverksdagene.no"> Send mail til bedrift@nettverksdagene.no </a></h3>
-    </div>
     <div class="dude">
       <!--<Hero/> -->
       <HomeScreen/>
