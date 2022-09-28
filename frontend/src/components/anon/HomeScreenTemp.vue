@@ -18,21 +18,21 @@
     <div class="wrapper">
       <div class="hero-content">
         <div class="boxes">
-          <b-link :to="'/2022'" class="temp-link">
+          <b-link :to="'/program'" class="temp-link">
             <HomeScreenBoxTemp box-title="Fjorårets program" box-icon="nettverksdagenesvg.svg" box-text="Trykk her for å se hvilke arrangementer som foregikk under Nettverksdagene 2022!"/>
           </b-link>
-          <b-link :to="'/program'">
+          <!--  <b-link :to="'/program'"> -->
             <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" box-text="Glassgården fylles med stands! Kom i kontakt med mange spennende bedrifter."/>
-          </b-link>
-          <router-link :to="{name: 'Program', hash: '#bankett'}" @click.native="scrollToId('bankett')">
-            <HomeScreenBox box-title="Bankett" box-icon="glass-cheers-solid.svg" box-text="Nettverksdagene avsluttes med en bankett på Thon Hotel Prinsen."/>
-          </router-link>
-          <b-link :to="'/program'">
+          <!-- </b-link> -->
+          <!-- <router-link :to="{name: 'Program', hash: '#bankett'}" @click.native="scrollToId('bankett')"> -->
+            <HomeScreenBox box-title="Bankett" box-icon="glass-cheers-solid.svg" box-text="Nettverksdagene avsluttes med en bankett."/>
+          <!-- </router-link> -->
+          <!--  <b-link :to="'/program'"> -->
             <HomeScreenBox box-title="Bedpres" box-icon="utensils-solid.svg" box-text="Det blir holdt flere bedrifts- presentasjoner for de som vil bli bedre kjent med bedriftene."/>
-          </b-link>
-          <b-link :to="'/program'">
+          <!-- </b-link> -->
+          <!--  <b-link :to="'/program'"> -->
             <HomeScreenBox box-title="Ballongslipp" box-icon="gift-solid.svg" box-text="Vinn flotte premier når Nettverksdagene åpner med ballongslipp."/>
-          </b-link>
+          <!-- </b-link> -->
         </div>
       </div>
     </div>
