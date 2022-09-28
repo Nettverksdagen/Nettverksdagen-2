@@ -7,16 +7,22 @@
     <div class="dude">
       <!--<Hero/> -->
       <HomeScreenTemp/>
+      <businesses></businesses>
+      <sponsors></sponsors>
     </div>
   </div>
 </template>
 
 <script>
 import Hero from '@/components/anon/Hero.vue'
+import Businesses from '@/components/anon/Businesses.vue'
+import Sponsors from '@/components/anon/Sponsors.vue'
 import HomeScreenTemp from '@/components/anon/HomeScreenTemp.vue'
 export default {
   components: {
     Hero,
+    Businesses,
+    Sponsors,
     HomeScreenTemp
   },
   name: 'Home',
