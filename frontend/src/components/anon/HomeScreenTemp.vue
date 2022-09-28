@@ -18,9 +18,6 @@
     <div class="wrapper">
       <div class="hero-content">
         <div class="boxes">
-          <b-link :to="'/program'" class="temp-link">
-            <HomeScreenBoxTemp box-title="Fjorårets program" box-icon="nettverksdagenesvg.svg" box-text="Trykk her for å se hvilke arrangementer som foregikk under Nettverksdagene 2022!"/>
-          </b-link>
           <!--  <b-link :to="'/program'"> -->
             <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" box-text="Glassgården fylles med stands! Kom i kontakt med mange spennende bedrifter." class="box"/>
           <!-- </b-link> -->
@@ -33,6 +30,9 @@
           <!--  <b-link :to="'/program'"> -->
             <HomeScreenBox box-title="Ballongslipp" box-icon="gift-solid.svg" box-text="Vinn flotte premier når Nettverksdagene åpner med ballongslipp." class="box"/>
           <!-- </b-link> -->
+          <b-link :to="'/program'" class="temp-link">
+            <HomeScreenBoxTemp box-title="Fjorårets program" box-icon="nettverksdagenesvg.svg" box-text="Trykk her for å se hvilke arrangementer som foregikk under Nettverksdagene 2022!"/>
+          </b-link>
         </div>
       </div>
     </div>
@@ -287,10 +287,11 @@ export default {
      }
     }
   .box {
+    display: none;
     @media(min-width: 768px) {
       width: 60%;
       margin-left: 20%;
-      display:none;
+      display: block;
     }
   }
   .temp-link {
