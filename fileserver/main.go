@@ -23,8 +23,8 @@ const uploadDir = "./uploads"
 const thumbNailDir = uploadDir + "/thumb"
 
 var legalContentTypes = map[string]bool{
-    "image/png":     true,
-    "image/jpeg":    true,
+	"image/png":     true,
+	"image/jpeg":    true,
 	"image/svg+xml": true,
 }
 
