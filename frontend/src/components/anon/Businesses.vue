@@ -61,7 +61,7 @@ export default {
     }
   },
   sizesLevels: {
-    'Hovedsamarbeidspartner': 'big',
+    'Hovedsamarbeidspartner': 'very_big',
     'Samarbeidspartner': 'big',
     'Gull': 'big',
     'Sølv': 'medium',
