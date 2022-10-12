@@ -55,15 +55,9 @@ services:
     depends_on:
       - api
       - fileserver
-      #- deploy
     volumes:
       - ./nginx/config:/config # Todo: Can this volume include the below?
       - frontend-files:/frontend
 
-  #deploy:
-  #  build: ./deploy
-  #  restart: "always"
-  #  environment:
-  #    - GITHUB_WEBHOOKS_SECRET=${GITHUB_WEBHOOKS_SECRET}
 volumes:
   frontend-files:
