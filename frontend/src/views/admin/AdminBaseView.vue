@@ -48,6 +48,11 @@ export default {
           icon: 'cui-arrow-left'
         },
         {
+          name: 'Logg ut',
+          url: 'javascript:logout()',
+          icon: 'cui-account-logout',
+        },
+        {
           divider: true,
           class: 'sidebar-nav-divider'
         },
@@ -107,12 +112,19 @@ export default {
   methods: {
     handleResize () {
       this.isMobile = window.innerWidth <= 1000
+    },
+    logout () {
+        this.$store.dispatch('admin/logout', {}).then(() => {
+        this.$router.push({name: 'Home'})
+      })
     }
   },
   beforeCreate () {
     axios.defaults.headers.common['Authorization'] = 'Token ' + this.$store.state.admin.token
   }
 }
+            
+
 </script>
 
 <style lang="scss">

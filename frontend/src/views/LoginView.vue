@@ -8,9 +8,9 @@
               <b-col cols="7" class="d-none d-sm-block text-container">
                 <div class="padder">
                   <h1>Logg inn</h1>
-                  <span>Det er på tide at noe blir gjort her</span>
+                  <span>For å endre på serveren.</span>
                   <hr>
-                  <span class="subtitle faded">Har du ikke bruker? <a href="mailto:it@nettverksdagene.no?subject=Innlogging på adminsiden" target="_self" class="contact-link">Kontakt IT.</a></span>
+                  <span class="subtitle faded">Trenger du tilgang? <a href="mailto:it@nettverksdagene.no?subject=Innlogging på adminsiden" target="_self" class="contact-link">Kontakt IT.</a></span>
                 </div>
               </b-col>
               <b-col cols="12" sm="5" class="form-container">

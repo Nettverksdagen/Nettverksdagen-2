@@ -36,7 +36,16 @@ const actions = {
         }
       })
       .catch(error => commit('fetchFailure', error))
-  }
+  },
+  async logout({commit}){
+    commit('loggingOut')
+
+    commit('loggedOutSuccessfully', {
+      username: '',
+      token: '',
+      loggedIn: false
+    })
+  } 
 }
 
 const getters = {}
@@ -45,7 +54,16 @@ const mutations = {
   loggingIn (state) {
     state.loggingIn = true
   },
+  loggingOut (state) {
+    state.loggingIn = false
+  },
   loggedInSuccessfully (state, payload) {
+    state.username = payload.username
+    state.token = payload.token
+    state.loggingIn = false
+    state.loggedIn = true
+  },
+  loggedOutSuccessfully (state, payload) {
     state.username = payload.username
     state.token = payload.token
     state.loggingIn = false
