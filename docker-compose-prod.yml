@@ -5,6 +5,9 @@ services:
     image: postgres
     restart: "always"
     container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: '1234'
 
   api:
     build: ./api
@@ -35,33 +38,32 @@ services:
       - ./fileserver/uploads:/root/uploads
 
   nginx:
-    image: linuxserver/letsencrypt
+    image: linuxserver/swag
     restart: "always"
     ports:
       - "80:80"
       - "443:443"
     environment:
-      - PUID=1013
-      - GUID=1015
+      - PUID=1002
+      - GUID=1003
       - EMAIL=it@nettverksdagene.no
       - URL=nettverksdagene.no
-      - SUBDOMAINS=www, blogg
-      - EXTRA_DOMAINS=nvdagen.no,www.nvdagen.no
+      - SUBDOMAINS=www,blogg
       - TZ=Europe/Oslo
       - VALIDATION=http
       #- STAGING=true # Uncomment this when testing
     depends_on:
       - api
       - fileserver
-      - deploy
+      #- deploy
     volumes:
       - ./nginx/config:/config # Todo: Can this volume include the below?
       - frontend-files:/frontend
 
-  deploy:
-    build: ./deploy
-    restart: "always"
-    environment:
-      - GITHUB_WEBHOOKS_SECRET=${GITHUB_WEBHOOKS_SECRET}
+  #deploy:
+  #  build: ./deploy
+  #  restart: "always"
+  #  environment:
+  #    - GITHUB_WEBHOOKS_SECRET=${GITHUB_WEBHOOKS_SECRET}
 volumes:
   frontend-files:
