@@ -10,7 +10,7 @@
                   <h1>Logg inn</h1>
                   <span>Det er på tide at noe blir gjort her</span>
                   <hr>
-                  <span class="subtitle faded">Har du ikke bruker? Kontakt IT.</span>
+                  <span class="subtitle faded">Har du ikke bruker? <a href="mailto:it@nettverksdagene.no?subject=Innlogging på adminsiden" target="_self" class="contact-link">Kontakt IT.</a></span>
                 </div>
               </b-col>
               <b-col cols="12" sm="5" class="form-container">
@@ -20,7 +20,6 @@
                     <b-form-input class="my-2 mb-4" type="password" v-model="credentials.password" placeholder="Passord"></b-form-input>
                     <b-button size="lg" variant="success" @click="login" class="login-button">Logg inn</b-button>
                   </b-form-group>
-                  <b-link class="forgot-password-link" href="#">Glemt passord?</b-link>
                 </div>
               </b-col>
             </b-row>
@@ -97,9 +96,10 @@ export default {
       background-color:$form-color;
       border-color:$form-color;
     }
-    .forgot-password-link {
-      color:#999;
+    .contact-link {
+      color:rgb(255, 255, 255);
       font-size:15px;
     }
+    
   }
 </style>
