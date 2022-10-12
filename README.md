@@ -41,6 +41,23 @@ It does for example not come with a text-editor out of the box, but you can easi
 docker exec -ti nettverksdagen-2_fileserver_1_c27e85b4cd47 ls
 ```
 
+### Webhooks
+To setup the webhooks export the following environmental variables: 
+```bash
+WEBHOOK_SECRET=${secret webhook imported from github}
+```
+Add the webhooks here:
+```bash
+WEBHOOK_HOOKS_DIR=${imported hook}
+```
+
+If you want the server to follow multiple branches, setup:
+```bash
+WEBHOOK_BRANCH_LIST=${master,your_branch}
+```
+
+
+
 ### Volumes
 Any folders defined under `volumes` in `docker-compose.yml` will be mirrored into the container. Thus, folders containing the project files, namely
 * `api/nvdagen`
