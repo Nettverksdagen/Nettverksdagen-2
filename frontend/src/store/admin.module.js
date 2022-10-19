@@ -45,6 +45,7 @@ const actions = {
       token: '',
       loggedIn: false
     })
+    console.log("Logged out");
   } 
 }
 
@@ -55,7 +56,7 @@ const mutations = {
     state.loggingIn = true
   },
   loggingOut (state) {
-    state.loggingIn = false
+    state.loggingOut = true
   },
   loggedInSuccessfully (state, payload) {
     state.username = payload.username
@@ -66,8 +67,8 @@ const mutations = {
   loggedOutSuccessfully (state, payload) {
     state.username = payload.username
     state.token = payload.token
-    state.loggingIn = false
-    state.loggedIn = true
+    state.loggingOut = false
+    state.loggedIn = false
   },
   loginFailure () {
     console.log('Wrong login credentials')

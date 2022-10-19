@@ -11,6 +11,9 @@
           </main>
           <Sidebar>
             <SidebarNav :navItems="navItems">
+              <SideBarNavItem @click="logout">
+                <SidebarNavLink href="" @click="logout">Logout</SidebarNavLink>
+              </SidebarNavItem>
             </SidebarNav>
           </Sidebar>
         </div>
@@ -49,8 +52,11 @@ export default {
         },
         {
           name: 'Logg ut',
-          url: 'javascript:logout()',
+          url: '',
           icon: 'cui-account-logout',
+          attributes: {
+            onclick: 'event.preventDefault(); logout(); console.log("loggingout");',
+          }
         },
         {
           divider: true,
@@ -112,16 +118,19 @@ export default {
   methods: {
     handleResize () {
       this.isMobile = window.innerWidth <= 1000
-    },
+    }, 
     logout () {
-        this.$store.dispatch('admin/logout', {}).then(() => {
-        this.$router.push({name: 'Home'})
+      console.log("Logout2");
+        this.$store.dispatch('admin/logout', {
+        }).then(() => {
+          this.$router.push({name: 'Home'})
       })
     }
   },
   beforeCreate () {
     axios.defaults.headers.common['Authorization'] = 'Token ' + this.$store.state.admin.token
-  }
+  },
+  
 }
             
 
