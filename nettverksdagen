@@ -1,0 +1,61 @@
+#!/bin/bash
+
+backup_root_dir="/opt/backups"
+
+backup() {
+	local backup_time="$(date --rfc-3339='seconds' | sed 's/\ /_/g')"
+	local backup_dir="$backup_root_dir/$backup_time"
+	rsync -a fileserver/uploads "$backup_dir" &> /dev/null
+	rsync -a ghost/data "$backup_dir" &> /dev/null
+	docker exec postgres pg_dumpall -c -U postgres > "$backup_dir/api_db.sql"
+	echo "$backup_time"
+}
+
+restore() {
+	local backup_time="$1"
+	local backup_dir="$backup_root_dir/$backup_time"
+	rsync -a "$backup_dir/uploads" fileserver &> /dev/null
+	rsync -a "$backup_dir/data" ghost &> /dev/null
+	docker exec -i postgres psql -q -U postgres < "$backup_dir/api_db.sql" &> /dev/null
+	echo "$backup_time"
+}
+
+start() {
+	git reset --hard origin/master
+	git pull --ff-only
+	docker compose -f docker-compose-prod.yml up --build --detach
+}
+
+stop() {
+	local backup_time="$(backup)"
+	docker compose -f docker-compose-prod.yml down --volumes &> /dev/null
+	echo "$backup_time"
+}
+
+case $1 in
+  backup)
+  	backup_time="$(backup)"
+    echo "$backup_time"
+    ;;
+  restore)
+  	backup_time="$(restore $2)"
+    echo "$backup_time"
+    ;;
+  start)
+    start
+    ;;
+  stop)
+    backup_time="$(stop)"
+    echo "$backup_time"
+    ;;
+  restart)
+    backup_time="$(stop)"
+	start
+	backup_time="$(restore $backup_time)"
+	echo "$backup_time"
+	;;
+  *)
+    echo "Unknown subcommand"
+    exit 1
+    ;;
+esac
