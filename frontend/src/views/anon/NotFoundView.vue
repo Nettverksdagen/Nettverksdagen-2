@@ -1,10 +1,10 @@
 <template>
     <div class="not-found-view">
       <Content>
-        <b-row>
+        <b-row class="row justify-content-center">
           <b-col cols="12" lg="6">
             <h1>Oisann! Den siden finnes ikke</h1>
-            <p class="introduction">
+            <p class="desc">
                 Sjekk at du har stavet addressen riktig, eller gå tilbake til <router-link to="/">hjemmesiden</router-link>.
             </p>
           </b-col>
@@ -27,7 +27,7 @@
   </script>
   
   <style lang="scss" scoped>
-    .introduction {
+    .desc {
       font-size: 30px;
       text-align: center;
     }
@@ -47,6 +47,7 @@
       margin-top: 20px;
       margin-bottom: 20px;
       width: 60%;
+      display: block;
       margin: auto;
       @media(min-width: 768px) {
         margin-top: 0px;
