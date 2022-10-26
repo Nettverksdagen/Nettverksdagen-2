@@ -28,16 +28,22 @@
   
   <style lang="scss" scoped>
     .desc {
-      font-size: 30px;
+      font-size: 24px;
       text-align: center;
+      @media(min-width: 768px) {
+        font-size: 30px;
+      }
     }
     h1 {
-      font-size: 42px;
+      font-size: 30px;
       font-weight: 600;
       text-align: center;
       color: black;
       margin-bottom: 30px;
       margin-top: 40px;
+      @media(min-width: 768px) {
+        font-size: 42px;
+      }
     }
     .image {
       border-style: solid;
@@ -47,11 +53,13 @@
       margin-top: 20px;
       margin-bottom: 20px;
       width: 60%;
-      display: block;
+      display: none;
       margin: auto;
       @media(min-width: 768px) {
         margin-top: 0px;
+        display: block;
       }
+
     }
     .about-view {
         min-height: 80vh;
