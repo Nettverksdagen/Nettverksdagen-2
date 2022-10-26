@@ -62,7 +62,6 @@ export default{
     top: 59%;
     margin-left: 47px;
     margin-right: 30px;
-    
   }
   .home-box:hover h3 {
     transition: opacity 300ms, transform 400ms;

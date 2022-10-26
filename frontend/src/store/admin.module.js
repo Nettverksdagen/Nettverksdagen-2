@@ -65,8 +65,8 @@ const mutations = {
     state.loggedIn = true
   },
   loggedOutSuccessfully (state, payload) {
-    state.username = payload.username
-    state.token = payload.token
+    state.username = ''
+    state.token = ''
     state.loggingOut = false
     state.loggedIn = false
   },

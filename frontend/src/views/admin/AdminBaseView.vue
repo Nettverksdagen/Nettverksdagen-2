@@ -11,8 +11,8 @@
           </main>
           <Sidebar>
             <SidebarNav :navItems="navItems">
-              <SideBarNavItem @click="logout">
-                <SidebarNavLink href="" @click="logout">Logout</SidebarNavLink>
+              <SidebarNavItem>
+                <SidebarNavLink @click="logout" href="" name="Logg ut" icon="cui-account-logout"></SidebarNavLink>
               </SidebarNavItem>
             </SidebarNav>
           </Sidebar>
@@ -49,14 +49,6 @@ export default {
           name: 'Til hovedsiden',
           url: this.$router.resolve({name: 'Home'}).href,
           icon: 'cui-arrow-left'
-        },
-        {
-          name: 'Logg ut',
-          url: '',
-          icon: 'cui-account-logout',
-          attributes: {
-            onclick: 'event.preventDefault(); logout(); console.log("loggingout");',
-          }
         },
         {
           divider: true,
