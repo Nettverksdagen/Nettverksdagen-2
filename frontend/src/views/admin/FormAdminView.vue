@@ -147,6 +147,7 @@ export default {
       this.alert.heading = heading
       this.alert.message = message
       this.alert.dismissCountDown = this.alert.dismissSecs
+      window.scrollTo({top: 0, behavior:'smooth'})
     },
     countDownChanged: function (dismissCountDown) {
       this.alert.dismissCountDown = dismissCountDown

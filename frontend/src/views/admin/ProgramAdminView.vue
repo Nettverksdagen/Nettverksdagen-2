@@ -245,7 +245,7 @@ export default {
       axios[(this.$data.editing ? 'put' : 'post')](process.env.VUE_APP_API_HOST +
         '/api/program/' + (this.$data.editing ? programItem.id + '/' : ''),
       programItem).then((response) => {
-        this.showAlert('success', 'Suksess!', 'ProgramItem har blitt' +
+        this.showAlert('success', 'Suksess!', 'ProgramItem har blitt ' +
           (this.$data.editing ? 'endret.' : 'lagt ut på forsiden.'))
         this['program/' + (this.$data.editing ? 'updateProgramItem' : 'addProgramItem')](response.data)
         this.resetForm()
@@ -301,6 +301,7 @@ export default {
       this.alert.heading = heading
       this.alert.message = message
       this.alert.dismissCountDown = this.alert.dismissSecs
+      window.scrollTo({top: 0, behavior:'smooth'})
     },
     countDownChanged: function (dismissCountDown) {
       this.alert.dismissCountDown = dismissCountDown
