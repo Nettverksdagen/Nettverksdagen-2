@@ -84,14 +84,6 @@ export default new Router({
           component: FormView,
           meta: {title: 'Skjema'}
         },
-        {
-          path: '/:catchAll(.*)',
-          name: '404NotFound',
-          component: NotFoundView,
-          meta: {title: '404 - Not Found'}
-        }
-      ]
-    },
     {
       path: '/admin',
       component: AdminBaseView,
@@ -164,7 +156,15 @@ export default new Router({
           next()
         }
       }
+    },
+    {
+      path: '/:catchAll(.*)',
+      name: '404NotFound',
+      component: NotFoundView,
+      meta: {title: '404 - Not Found'}
     }
+  ]
+},
   ],
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
