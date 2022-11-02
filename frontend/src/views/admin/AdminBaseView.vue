@@ -89,7 +89,7 @@ export default {
         {
           name: 'Participants',
           url: this.$router.resolve({name: 'ParticipantAdmin'}).href,
-          icon: 'cui-dollar',
+          icon: 'cui-dollar'
         }
       ]
     }

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-//import HomeView from '@/views/anon/HomeView'
+// import HomeView from '@/views/anon/HomeView'
 import ListingsView from '@/views/anon/ListingsView'
 import AnonBaseView from '@/views/anon/AnonBaseView'
 import AdminBaseView from '@/views/admin/AdminBaseView'
@@ -83,7 +83,9 @@ export default new Router({
           name: 'Form',
           component: FormView,
           meta: {title: 'Skjema'}
-        },
+        }
+      ]
+    },
     {
       path: '/admin',
       component: AdminBaseView,
@@ -163,8 +165,6 @@ export default new Router({
       component: NotFoundView,
       meta: {title: '404 - Not Found'}
     }
-  ]
-},
   ],
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
