@@ -21,7 +21,7 @@ restore() {
 }
 
 start() {
-	git reset --hard origin/master
+	#git reset --hard origin/master
 	git pull --ff-only
 	docker compose -f docker-compose-prod.yml up --build --detach
 }
@@ -32,9 +32,19 @@ stop() {
 	echo "$backup_time"
 }
 
+restart() {
+	#git reset --hard origin/master
+	git pull --ff-only
+	docker compose -f docker-compose-prod.yml build --pull
+	local backup_time="$(backup)"
+	docker compose -f docker-compose-prod.yml down --volumes
+	docker compose -f docker-compose-prod.yml up --build --detach
+	restore "$backup_time"
+}
+
 case $1 in
   backup)
-  	backup_time="$(backup)"
+    backup_time="$(backup)"
     echo "$backup_time"
     ;;
   restore)
@@ -49,10 +59,13 @@ case $1 in
     echo "$backup_time"
     ;;
   restart)
-    backup_time="$(stop)"
+	backup_time="$(stop)"
 	start
-	backup_time="$(restore $backup_time)"
+	restore "$backup_time" &> /dev/null
 	echo "$backup_time"
+	;;
+  fast-restart)
+	restart
 	;;
   *)
     echo "Unknown subcommand"
