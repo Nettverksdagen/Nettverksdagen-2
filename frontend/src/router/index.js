@@ -20,6 +20,7 @@ import ListingDetails from '@/components/anon/ListingDetails.vue'
 import ProgramAdminView from '@/views/admin/ProgramAdminView.vue'
 import ParticipantAdminView from '@/views/admin/ParticipantAdminView.vue'
 import HomeViewTemp from '@/views/anon/HomeViewTemp.vue'
+import NotFoundView from '@/views/anon/NotFoundView.vue'
 
 Vue.use(Router)
 
@@ -29,19 +30,19 @@ export default new Router({
     {
       path: '/',
       component: AnonBaseView,
-      meta: {title: 'Nettverksdagen'},
+      meta: {title: 'Nettverksdagene'},
       children: [
         {
           path: '',
           name: 'Home',
           component: HomeViewTemp,
-          meta: {title: 'Nettverksdagen'},
+          meta: {title: 'Nettverksdagene'},
           children: [
             {
               path: 'bedrift/:businessReferer',
               name: 'Business',
               component: BusinessDetails,
-              meta: {title: 'Nettverksdagen'}
+              meta: {title: 'Nettverksdagene'}
             }
           ]
         },
@@ -61,7 +62,7 @@ export default new Router({
               path: ':listingReferer',
               name: 'Listing',
               component: ListingDetails,
-              meta: {title: 'Nettverksdagen'}
+              meta: {title: 'Nettverksdagene'}
             }
           ]
         },
@@ -82,9 +83,7 @@ export default new Router({
           name: 'Form',
           component: FormView,
           meta: {title: 'Skjema'}
-        }
-      ]
-    },
+        },
     {
       path: '/admin',
       component: AdminBaseView,
@@ -157,7 +156,15 @@ export default new Router({
           next()
         }
       }
+    },
+    {
+      path: '/:catchAll(.*)',
+      name: '404NotFound',
+      component: NotFoundView,
+      meta: {title: '404 - Not Found'}
     }
+  ]
+},
   ],
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {

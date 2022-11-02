@@ -9,7 +9,8 @@ services:
       POSTGRES_PASSWORD: '1234'
 
   api:
-    build: ./api
+    build: 
+      context: ./api
     command: "./django-dev-entrypoint.sh"
     volumes:
       - ./api/nvdagen:/api/nvdagen
