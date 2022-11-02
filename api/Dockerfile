@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3.10
 ENV PYTHONUNBUFFERED 1
 ENV DJANGO_SETTINGS_MODULE=nvdnew.settings.prod
 RUN ["apt-get", "update"]
