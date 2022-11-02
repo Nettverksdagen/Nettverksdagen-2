@@ -11,9 +11,11 @@
           </main>
           <Sidebar>
             <SidebarNav :navItems="navItems">
-              <SidebarNavItem>
-                <SidebarNavLink @click="logout" href="" name="Logg ut" icon="cui-account-logout"></SidebarNavLink>
-              </SidebarNavItem>
+              <div @click="logout">
+                <SidebarNavItem>
+                  <SidebarNavLink href="" name="Logg ut" icon="cui-account-logout"></SidebarNavLink>
+                </SidebarNavItem>
+              </div>
             </SidebarNav>
           </Sidebar>
         </div>
@@ -133,5 +135,9 @@ export default {
   @import '~@coreui/coreui/scss/coreui.scss';
   .sidebar-nav-divider {
     border-top: 1px solid rgba(0,0,0,0.2);
+  }
+  .sidebar .nav {
+    min-height: 0;
+    max-height: fit-content;
   }
 </style>
