@@ -7,6 +7,8 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from time import gmtime, strftime
+from datetime import date, datetime, time
+from babel.dates import format_date, format_datetime, format_time
 
 
 class ListingViewSet(viewsets.ModelViewSet):
@@ -58,7 +60,8 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                     data['waitingListIndex'] = waitingListIndex
                     data['place'] = program.place
                     # OBS! Første test av overføring fra epoch til datetime
-                    data['timeStart'] = strftime('%d. %b klokken %H:%M', gmtime(program.timeStart+3600))
+                    data['timeStart'] = strftime('%. %B klokken %H:%M', gmtime(program.timeStart+3600))
+                    
                     data['header'] = program.header
                     html_message = render_to_string('on_waiting_list.html', context=data)
                     plain_message = strip_tags(html_message)
@@ -71,7 +74,9 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                 # If program not full, send confirmation email
                 else:
                     data['place'] = program.place
-                    data['timeStart'] = strftime('%d. %b klokken %H:%M', gmtime(program.timeStart+3600))
+                    #data['timeStart'] = strftime('%d. %b klokken %H:%M', gmtime(program.timeStart+3600))
+                    #Ny formatering av dato
+                    data['timeStart'] = format_datetime(datetime.fromtimestamp(program.timeStart+3600), "EEEE dd. MMMM, 'klokken' H:MM ", locale='nb_NO')
                     data['header'] = program.header
                     html_message = render_to_string('registered_email.html', context=data)
                     plain_message = strip_tags(html_message)
