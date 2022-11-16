@@ -79,9 +79,15 @@ export default {
 
 <style lang="scss" scoped>
   h2 {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     overflow-wrap: break-word;
     color: var(--primary-color);
+    @media(min-width: 576px) {
+      font-size: 2.0rem;
+    }
+    @media(min-width: 768px) {
+      font-size: 2.5rem;
+    }
   }
   .samarbeidspartnere {
     margin-top: 20px;
