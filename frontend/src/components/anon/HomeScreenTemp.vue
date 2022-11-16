@@ -7,7 +7,7 @@
                 <h1>Nettverksdagene</h1>
                 <h2>31.01-02.02 2023</h2>
             </div>
-        </div>  
+        </div>
         <div class="col-12 col-lg-6 homevideo">
             <video class ="video" muted loop autoplay>
                 <source src="@/assets/timelapse.mp4" type="video/mp4">

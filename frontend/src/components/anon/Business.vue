@@ -26,7 +26,7 @@ export default {
     }
   },
   colSizes: {
-    'very_big':[10, 6, 6],
+    'very_big': [10, 6, 6],
     'big': [6, 4, 4],
     'medium': [4, 3, 3],
     'small': [3, 2, 2]
@@ -71,7 +71,6 @@ export default {
         padding: 0.5rem 5.5rem;
       }
     }
-
 
     &.big {
       padding: 0.5rem 2rem;

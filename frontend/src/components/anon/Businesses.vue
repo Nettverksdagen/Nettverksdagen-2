@@ -81,6 +81,7 @@ export default {
   h2 {
     font-size: 2.5rem;
     overflow-wrap: break-word;
+    color: var(--primary-color);
   }
   .samarbeidspartnere {
     margin-top: 20px;
