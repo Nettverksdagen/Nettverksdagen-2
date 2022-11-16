@@ -1,8 +1,9 @@
 <template>
   <div class="home">
     <div class="text-center pt-5 card">
-      <h3 class="linktext">Vil din bedrift delta på Nettverksdagene 2023?</h3>
-      <h3><a href="mailto:bedrift@nettverksdagene.no"> Send mail til bedrift@nettverksdagene.no </a></h3>
+      <h3 class="linktext">Vil din bedrift delta på Nettverksdagene 2023?<br>
+        <a href="mailto:bedrift@nettverksdagene.no"> Send mail til bedrift@nettverksdagene.no </a>
+      </h3>
     </div>
     <div class="dude">
       <!--<Hero/> -->
@@ -51,6 +52,9 @@ export default {
 
   .linktext {
     color: var(--primary-color);
-    font-size: 2rem;
+    font-size: 1rem;
+    @media(min-width: 768px) {
+      font-size: 32px;
+    }
   }
 </style>

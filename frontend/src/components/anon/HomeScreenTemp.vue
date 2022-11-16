@@ -66,7 +66,13 @@ export default {
     margin-top: 0px;
   }
   .firstrow {
-    height: 280px;
+    height: 350px;
+    @media(min-width: 500px) {
+        height: 400px;
+    }
+    @media(min-width: 600px) {
+        height: 500px;
+    }
     @media(min-width: 768px) {
         height: 630px;
     }

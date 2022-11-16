@@ -47,6 +47,14 @@ export default{
     z-index: 5;
     filter: brightness(150%);
     transition-duration: 400ms;
+    @media(max-width: 768px) {
+      top: 10px;
+      right: 20px;
+    }
+    @media(max-width: 992px) {
+      top: 15px;
+      right: 20px;
+    }
   }
 
   .home-box:hover .icon{
@@ -71,26 +79,39 @@ export default{
   }
   h3 {
     position: absolute;
-    margin-top: -10%;
-    margin-left: 2%;
-    font-size: 34px;
+    margin-top: -11%;
+    margin-left: 4%;
+    font-size: 26px;
     font-weight: 600;
     color: var(--primary-color);
     text-decoration: none;
     transition: opacity 300ms, transform 400ms;
     overflow-wrap: break-word;
-    @media(min-width: 768px) {
+    @media(min-width: 576px) {
       margin-top: -12%;
-      margin-left: 1%;
+      margin-left: 0%;
+      font-size: 35px;
+    }
+    @media(min-width: 768px) {
+      margin-top: -11%;
+      margin-left: 2%;
+      font-size: 35px;
     }
     @media(min-width: 992px) {
+      margin-top: -9%;
+      margin-left: 2%;
+      font-size: 40px;
+    }
+    @media(min-width: 1200px) {
       margin-top: -7%;
       margin-left: 2%;
+      font-size: 40px;
     }
     @media(min-width: 1430px) {
       font-size: 54px;
       margin-top: -7%;
       margin-left: -7%;
+      font-size: 50px;
     }
   }
   .showme {

@@ -59,13 +59,19 @@ export default {
 
 <style lang="scss" scoped>
   h2 {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     font-weight: 700;
     text-align: center;
     color: var(--primary-color);
     margin-bottom: 30px;
     @media(min-width: 1200px) {
       margin-bottom: 50px;
+    }
+    @media(min-width: 576px) {
+      font-size: 2.0rem;
+    }
+    @media(min-width: 768px) {
+      font-size: 2.5rem;
     }
   }
   .sponsor-banner {

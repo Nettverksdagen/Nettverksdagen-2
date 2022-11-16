@@ -45,6 +45,7 @@ export default {
     background-size: auto 100%;
   }
   .wrapper {
+    color: var(--text-primary-color);
     width:100%;
     position:relative;
     overflow:hidden;

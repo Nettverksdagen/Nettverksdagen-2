@@ -26,6 +26,7 @@ export default {
     }
   },
   colSizes: {
+    'very_big': [10, 6, 6],
     'big': [6, 4, 4],
     'medium': [4, 3, 3],
     'small': [3, 2, 2]
@@ -57,6 +58,20 @@ export default {
         transform: scale(1.15);
       }
     }
+
+    &.very_big {
+      padding: 0.5rem 2rem;
+      @media(min-width: 576px) {
+        padding: 2rem;
+      }
+      @media(min-width: 768px) {
+        padding: 1rem 2rem;
+      }
+      @media(min-width: 992px) {
+        padding: 0.5rem 5.5rem;
+      }
+    }
+
     &.big {
       padding: 0.5rem 2rem;
       @media(min-width: 576px) {
