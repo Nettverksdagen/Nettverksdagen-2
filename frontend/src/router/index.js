@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import HomeView from '@/views/anon/HomeView'
+import HomeView from '@/views/anon/HomeView'
 import ListingsView from '@/views/anon/ListingsView'
 import AnonBaseView from '@/views/anon/AnonBaseView'
 import AdminBaseView from '@/views/admin/AdminBaseView'
@@ -19,7 +19,7 @@ import BusinessDetails from '@/components/anon/BusinessDetails.vue'
 import ListingDetails from '@/components/anon/ListingDetails.vue'
 import ProgramAdminView from '@/views/admin/ProgramAdminView.vue'
 import ParticipantAdminView from '@/views/admin/ParticipantAdminView.vue'
-import HomeViewTemp from '@/views/anon/HomeViewTemp.vue'
+//import HomeViewTemp from '@/views/anon/HomeViewTemp.vue'
 import NotFoundView from '@/views/anon/NotFoundView.vue'
 
 Vue.use(Router)
@@ -35,7 +35,8 @@ export default new Router({
         {
           path: '',
           name: 'Home',
-          component: HomeViewTemp,
+          component: HomeView,
+          //component: HomeViewTemp,
           meta: {title: 'Nettverksdagene'},
           children: [
             {

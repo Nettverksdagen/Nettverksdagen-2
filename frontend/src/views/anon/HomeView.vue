@@ -35,6 +35,9 @@ export default {
     width:100%;
   }
   .card {
+    width: fit-content;
+    margin: auto;
+    padding: 2%;
     position: relative;
     border-radius: 20px;
     border-width: 2px;
