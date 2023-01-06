@@ -1,6 +1,7 @@
 #!/bin/bash
 
 backup_root_dir="/opt/backups"
+max_backups=10
 
 backup() {
 	local backup_time="$(date --rfc-3339='seconds' | sed 's/\ /_/g')"
@@ -42,6 +43,18 @@ restart() {
 	restore "$backup_time"
 }
 
+prune() {
+	local backups=$(/bin/ls $backup_root_dir)
+	local num_backups=$(echo "$backups" | wc -l)
+	if (( "$num_backups" > "$max_backups" )); then
+	    local old_backups=$(echo "$backups" | head -n $(("$num_backups"-"$max_backups")))
+	    for old_backup in $old_backups; do
+			rm -r "$backup_root_dir/$old_backup"
+	    done
+	    echo "$old_backups"
+	fi
+}
+
 case $1 in
   backup)
     backup_time="$(backup)"
@@ -67,6 +80,13 @@ case $1 in
   fast-restart)
 	restart
 	;;
+  prune)
+    deleted_backups="$(prune)"
+    if [[ ! -z "$deleted_backups" ]]; then
+	    num_deleted_backups=$(echo "$deleted_backups" | wc -l)
+	    echo "Deleted $num_deleted_backups backups"
+    fi
+    ;;
   *)
     echo "Unknown subcommand"
     exit 1
