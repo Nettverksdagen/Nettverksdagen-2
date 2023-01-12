@@ -45,13 +45,18 @@ restart() {
 
 prune() {
 	local backups=$(/bin/ls $backup_root_dir)
-	local num_backups=$(echo "$backups" | wc -l)
-	if (( "$num_backups" > "$max_backups" )); then
-	    local old_backups=$(echo "$backups" | head -n $(("$num_backups"-"$max_backups")))
-	    for old_backup in $old_backups; do
-			rm -r "$backup_root_dir/$old_backup"
-	    done
-	    echo "$old_backups"
+	# 'backups' is an empty string if no backups are present,
+	# and 'wc -l' returns 1 for an empty string, so we check if
+	# 'backups' is empty before proceeding
+	if [[ ! -z "$backups" ]]; then
+		local num_backups=$(echo "$backups" | wc -l)
+		if (( "$num_backups" > "$max_backups" )); then
+	    		local old_backups=$(echo "$backups" | head -n $(("$num_backups" - "$max_backups")))
+	    		for old_backup in $old_backups; do
+				rm -r "$backup_root_dir/$old_backup"
+	    		done
+	    		echo "$old_backups"
+		fi
 	fi
 }
 
@@ -82,6 +87,10 @@ case $1 in
 	;;
   prune)
     deleted_backups="$(prune)"
+    # 'deleted_backups' is an empty string if no backups were deleted,
+    # and 'wc -l' returns 1 for an empty string, so we have to check if
+    # 'deleted_backups' is empty to avoid printing that a backup was
+    # deleted
     if [[ ! -z "$deleted_backups" ]]; then
 	    num_deleted_backups=$(echo "$deleted_backups" | wc -l)
 	    echo "Deleted $num_deleted_backups backups"
