@@ -19,7 +19,7 @@ import BusinessDetails from '@/components/anon/BusinessDetails.vue'
 import ListingDetails from '@/components/anon/ListingDetails.vue'
 import ProgramAdminView from '@/views/admin/ProgramAdminView.vue'
 import ParticipantAdminView from '@/views/admin/ParticipantAdminView.vue'
-//import HomeViewTemp from '@/views/anon/HomeViewTemp.vue'
+// import HomeViewTemp from '@/views/anon/HomeViewTemp.vue'
 import NotFoundView from '@/views/anon/NotFoundView.vue'
 
 Vue.use(Router)
@@ -36,7 +36,7 @@ export default new Router({
           path: '',
           name: 'Home',
           component: HomeView,
-          //component: HomeViewTemp,
+          // component: HomeViewTemp,
           meta: {title: 'Nettverksdagene'},
           children: [
             {
