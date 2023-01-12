@@ -18,20 +18,35 @@
           </a>
         </div>
         -->
-        <h2 class="text-center font-weight-bold">Sponsorer i 2022</h2>
-        <!-- <div class="sponsor-banner kjeldsberg-banner">
-          <a href="http://kjeldsbergkaffe.no/" target="_blank" rel="noopener noreferrer">
-            <b-row>
-              <b-col cols="12" md="6" class="sponsor-banner-text align-middle">
-                <h3 class="font-weight-bold">Takk til Kjeldsberg Kaffe!</h3>
-                <span>Vi takker Kjeldsberg Kaffe for forsyning av kaffe under hele Nettverksdagene 2021!</span>
-              </b-col>
-              <b-col cols="12" md="6" class="text-center">
-                <img class="logo-kjeldsberg float-md-right" src="@/assets/kjeldsberg.png">
-              </b-col>
-            </b-row>
-          </a>
-        </div> -->
+        <h2 class="text-center font-weight-bold">Sponsorer</h2>
+          <!-- Sponsorbanner for coffeesponsor -->
+          <div class="sponsor-banner extra-banner">
+            <a href="https://coop.no/extra/" target="_blank" rel="noopener noreferrer">
+              <b-row>
+                <b-col cols="12" md="6" class="sponsor-banner-text align-middle">
+                  <h3 class="font-weight-bold">Takk til Coop Extra!</h3>
+                  <span>Vi takker Coop Extra for forsyning av kaffe under Nettverksdagene 2023!</span>
+                </b-col>
+                <b-col cols="12" md="6" class="text-center">
+                  <img class="logo-extra float-md-right" src="@/assets/extra.png">
+                </b-col>
+              </b-row>
+            </a>
+          </div>
+
+          <!-- <div class="sponsor-banner bunnpris-banner">
+            <a href="https://bunnpris.no/" target="_blank" rel="noopener noreferrer">
+              <b-row>
+                <b-col cols="12" md="6" class="sponsor-banner-text align-middle">
+                  <h3 class="font-weight-bold">Takk til Bunnpris!</h3>
+                  <span>Vi takker Bunnpris for forsyning av kaffe under Nettverksdagene 2023!</span>
+                </b-col>
+                <b-col cols="12" md="6" class="text-center">
+                  <img class="logo-bunnpris float-md-right" src="@/assets/bunnpris.png">
+                </b-col>
+              </b-row>
+            </a>
+          </div> -->
         <b-row>
           <Sponsor  v-for="(sponsor, index) in sponsors"
                    :key="index"
@@ -119,6 +134,13 @@ export default {
   .kjeldsberg-banner {
     background-color: #ffd600;
   }
+  .extra-banner {
+    background-color: #e4002b;
+  }
+
+  .bunnpris-banner {
+    background-color: #f2e200;
+  }
   /*
   .poption-banner {
     background-color: #fa6352;
@@ -127,6 +149,22 @@ export default {
   .logo-kjeldsberg {
     height: 11rem;
     padding: 0.5rem 3rem 1rem 3rem;
+    @media(max-width: 576px) {
+      height: 7.5rem;
+      padding: 0 1rem 1rem 1rem;
+    }
+  }
+  .logo-extra {
+    height: 11rem;
+    padding: 0.5rem 2.5rem 1rem 3rem;
+    @media(max-width: 576px) {
+      height: 7.5rem;
+      padding: 0 1rem 1rem 1rem;
+    }
+  }
+  .logo-bunnpris {
+    height: 9rem;
+    padding: 1.5rem 2.5rem 0rem 2rem;
     @media(max-width: 576px) {
       height: 7.5rem;
       padding: 0 1rem 1rem 1rem;
