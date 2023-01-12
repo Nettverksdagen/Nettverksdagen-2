@@ -4,3 +4,4 @@ django-cors-headers
 django-rest-auth
 psycopg2==2.8.6
 gunicorn
+Babel

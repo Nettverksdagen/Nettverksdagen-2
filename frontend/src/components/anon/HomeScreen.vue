@@ -18,17 +18,20 @@
     <div class="wrapper">
       <div class="hero-content">
         <div class="boxes">
-          <b-link :to="'/program'">
-            <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" box-text="Glassgården fylles med stands! Kom i kontakt med mange spennende bedrifter."/>
-          </b-link>
-          <router-link :to="{name: 'Program', hash: '#bankett'}" @click.native="scrollToId('bankett')">
-            <HomeScreenBox box-title="Bankett" box-icon="glass-cheers-solid.svg" box-text="Nettverksdagene avsluttes med en bankett på Thon Hotel Prinsen. Trykk for info."/>
-          </router-link>
-          <b-link :to="'/program'">
-            <HomeScreenBox box-title="Bedpres" box-icon="utensils-solid.svg" box-text="Det blir holdt flere bedrifts- presentasjoner for de som vil bli bedre kjent med bedriftene."/>
-          </b-link>
-          <b-link :to="'/program'">
-            <HomeScreenBox box-title="Ballongslipp" box-icon="gift-solid.svg" box-text="Vinn flotte premier når Nettverksdagene åpner med ballongslipp."/>
+          <!--  <b-link :to="'/program'"> -->
+            <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" box-text="Glassgården fylles med stands! Kom i kontakt med mange spennende bedrifter." class="box"/>
+          <!-- </b-link> -->
+          <!-- <router-link :to="{name: 'Program', hash: '#bankett'}" @click.native="scrollToId('bankett')"> -->
+            <HomeScreenBox box-title="Bankett" box-icon="glass-cheers-solid.svg" box-text="Nettverksdagene avsluttes med en bankett. " class="box"/>
+          <!-- </router-link> -->
+          <!--  <b-link :to="'/program'"> -->
+            <HomeScreenBox box-title="Bedpres" box-icon="utensils-solid.svg" box-text="Det blir holdt flere bedrifts- presentasjoner for de som vil bli bedre kjent med bedriftene." class="box"/>
+          <!-- </b-link> -->
+          <!--  <b-link :to="'/program'"> -->
+            <HomeScreenBox box-title="Ballongslipp" box-icon="gift-solid.svg" box-text="Vinn flotte premier når Nettverksdagene åpner med ballongslipp." class="box"/>
+          <!-- </b-link> -->
+          <b-link :to="'/program'" class="temp-link">
+            <HomeScreenBoxTemp box-title="Fjorårets program" box-icon="nettverksdagenesvg.svg" box-text="Trykk her for å se hvilke arrangementer som foregikk under Nettverksdagene 2022!"/>
           </b-link>
         </div>
       </div>
@@ -41,10 +44,12 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import HeroText from '@/components/anon/HeroText.vue'
 import HomeScreenBox from '@/components/anon/HomeScreenBox.vue'
+import HomeScreenBoxTemp from './HomeScreenBoxTemp.vue'
 export default {
   components: {
     HeroText,
-    HomeScreenBox
+    HomeScreenBox,
+    HomeScreenBoxTemp
   },
   methods: {
     scrollToId (id) {
@@ -61,7 +66,13 @@ export default {
     margin-top: 0px;
   }
   .firstrow {
-    height: 280px;
+    height: 350px;
+    @media(min-width: 500px) {
+        height: 400px;
+    }
+    @media(min-width: 600px) {
+        height: 500px;
+    }
     @media(min-width: 768px) {
         height: 630px;
     }
@@ -227,15 +238,15 @@ export default {
   .wrapper {
     width:100%;
     position:relative;
-    height:0px;
+    height: 120px;
     @media(min-width: 768px) {
-      height: 0px;
+      height: 620px;
     }
     @media(min-width: 1200px) {
-      height: 200px;
+      height: 400px;
     }
     @media(min-width: 1430px) {
-      height: 250px;
+      height: 500px;
     }
   }
   .hero-content {
@@ -256,23 +267,41 @@ export default {
   }
   .boxes {
     width: 100%;
-    display:none;
+    margin-left: 0%;
+    display: inline-grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     height: inherit;
     grid-gap: 30px;
     @media(min-width: 768px) {
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
+      width: 60%;
+      margin-left: 20%;
     }
     @media(min-width: 992px) {
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
+      width: 70%;
+      margin-left: 15%;
     }
     @media(min-width: 1200px) {
+      grid-template-rows: 1fr 1fr;
       grid-template-columns: 1fr 1fr 1fr 1fr;
       display:inline-grid;
+      width: 100%;
+      margin-left: 0%;
     }
     a {
        text-decoration: none;
      }
+    }
+  .box {
+    display: none;
+    @media(min-width: 768px) {
+      display: block;
+    }
+  }
+  .temp-link {
+    grid-column: span 2;
+    @media(min-width: 1200px) {
+      grid-column: span 4;
+    }
   }
 </style>

@@ -47,6 +47,7 @@
               </b-row>
             </a>
           </div> -->
+
         <b-row>
           <Sponsor  v-for="(sponsor, index) in sponsors"
                    :key="index"
