@@ -20,7 +20,7 @@
         -->
         <h2 class="text-center font-weight-bold">Sponsorer</h2>
           <!-- Sponsorbanner for coffeesponsor -->
-          <div class="sponsor-banner extra-banner">
+          <!--<div class="sponsor-banner extra-banner">
             <a href="https://coop.no/extra/" target="_blank" rel="noopener noreferrer">
               <b-row>
                 <b-col cols="12" md="6" class="sponsor-banner-text align-middle">
@@ -32,9 +32,9 @@
                 </b-col>
               </b-row>
             </a>
-          </div>
+          </div>-->
 
-          <!-- <div class="sponsor-banner bunnpris-banner">
+          <div class="sponsor-banner bunnpris-banner">
             <a href="https://bunnpris.no/" target="_blank" rel="noopener noreferrer">
               <b-row>
                 <b-col cols="12" md="6" class="sponsor-banner-text align-middle">
@@ -46,7 +46,7 @@
                 </b-col>
               </b-row>
             </a>
-          </div> -->
+          </div>
 
         <b-row>
           <Sponsor  v-for="(sponsor, index) in sponsors"
