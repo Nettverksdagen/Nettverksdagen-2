@@ -51,11 +51,11 @@ prune() {
 	if [[ ! -z "$backups" ]]; then
 		local num_backups=$(echo "$backups" | wc -l)
 		if (( "$num_backups" > "$max_backups" )); then
-	    		local old_backups=$(echo "$backups" | head -n $(("$num_backups" - "$max_backups")))
-	    		for old_backup in $old_backups; do
+	    	local old_backups=$(echo "$backups" | head -n $(("$num_backups" - "$max_backups")))
+	    	for old_backup in $old_backups; do
 				rm -r "$backup_root_dir/$old_backup"
-	    		done
-	    		echo "$old_backups"
+	   		done
+	   		echo "$old_backups"
 		fi
 	fi
 }
