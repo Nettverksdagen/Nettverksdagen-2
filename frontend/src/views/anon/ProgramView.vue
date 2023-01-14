@@ -2,7 +2,7 @@
     <Content>
       <div class="program">
         <h1 class="text-center">Program</h1>
-        <p class="text-center description mt-3 mb-2">Slik så programmet for Nettverksdagene 2022 ut:</p>
+        <p class="text-center description mt-3 mb-2">Programmet for Nettverksdagene 2023:</p>
         <!-- <h4 class="text-center font-weight-bold"><a href="#stand-map-header">Se standkart her!</a></h4> -->
         <div :key="'programDay' + index" v-for=" (day , index) in program">
           <h3 class="font-weight-bold">{{formatDate(day[0].timeStart)}}</h3>
