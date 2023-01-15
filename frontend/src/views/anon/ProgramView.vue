@@ -4,7 +4,7 @@
         <h1 class="text-center">Program</h1>
         <p class="text-center description mt-3 mb-2">Programmet for Nettverksdagene 2023:</p>
         <!-- <h4 class="text-center font-weight-bold"><a href="#stand-map-header">Se standkart her!</a></h4> -->
-        <div :key="'programDay' + index" v-for=" (day , index) in program">
+        <div :key="'programDay' + index" v-for="(day, index) in program">
           <h3 class="font-weight-bold">{{formatDate(day[0].timeStart)}}</h3>
           <div class="timeline">
             <div :key="'dayItem' + item.id" v-for="(item) in day">
@@ -44,6 +44,15 @@
 <script>
 import Content from '@/components/common/Content.vue'
 import ProgramItem from '@/components/anon/ProgramItem.vue'
+
+function isSameDay (lhs, rhs) {
+  return (
+    lhs.getFullYear() === rhs.getFullYear() &&
+    lhs.getMonth() === rhs.getMonth() &&
+    lhs.getDate() === rhs.getDate()
+  )
+}
+
 export default {
   name: 'ProgramView',
   components: {
@@ -61,59 +70,27 @@ export default {
   computed: {
     program: function () {
       let prog = this.$store.getters['program/anonProgram']
-      let sortedProgram = []
-      let days = []
 
-      prog.forEach((item, index) => {
-        if (index === 0) {
-          sortedProgram.push([item])
-          days.push(item.timeStart.getDate())
+      // Sort the program by start time
+      let sortedProg = [...prog].sort((lhs, rhs) => {
+        return lhs.timeStart - rhs.timeStart
+      })
+
+      let days = [[sortedProg.at(0)]]
+      sortedProg.slice(1).forEach((item) => {
+        let lastItem = days.at(-1).at(-1)
+        if (isSameDay(item.timeStart, lastItem.timeStart)) {
+          // This program item has the same start date as the last one, so we
+          // add the item to the current day
+          days.at(-1).push(item)
         } else {
-          let newSortedProgram = sortedProgram
-          let dayExists = false
-          let itemInserted = false
-          days.forEach((day, index) => {
-            if (item.timeStart.getDate() === day) {
-              dayExists = true
-              let newDayItems = []
-              for (let j = 0; j < newSortedProgram[index].length; j++) {
-                if (newSortedProgram[index][j].timeStart.getTime() > item.timeStart.getTime() && !itemInserted) {
-                  itemInserted = true
-                  newDayItems.push(item)
-                }
-                newDayItems.push(newSortedProgram[index][j])
-              }
-              if (!itemInserted) {
-                newDayItems.push(item)
-              }
-              newSortedProgram[index] = newDayItems
-            }
-          })
-          if (!dayExists) {
-            let newDate = item.timeStart.getDate()
-            let inserted = false
-            let nextDays = []
-            let nextNewSortedProg = []
-            for (let i = 0; i < days.length; i++) {
-              if (days[i] > newDate && !inserted) {
-                inserted = true
-                nextDays.push(newDate)
-                nextNewSortedProg.push([item])
-              }
-              nextDays.push(days[i])
-              nextNewSortedProg.push(newSortedProgram[i])
-            }
-            newSortedProgram = nextNewSortedProg
-            days = nextDays
-            if (!inserted) {
-              days.push(newDate)
-              newSortedProgram.push([item])
-            }
-          }
-          sortedProgram = newSortedProgram
+          // This program item has a different start date from the last one, so
+          // we add a new day to the program containing this item
+          days.push([item])
         }
       })
-      return sortedProgram
+
+      return days
     }
   }
 }
