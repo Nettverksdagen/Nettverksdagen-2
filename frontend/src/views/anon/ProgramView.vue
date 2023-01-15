@@ -93,7 +93,7 @@ export default {
           })
           if (!dayExists) {
             let newDate = item.timeStart.getDate()
-            let newMonth = dateObj.getMonth()
+            let newMonth = item.timeStart.getMonth()
             let inserted = false
             let nextDays = []
             let nextMonths = []
