@@ -44,6 +44,15 @@
 <script>
 import Content from '@/components/common/Content.vue'
 import ProgramItem from '@/components/anon/ProgramItem.vue'
+
+function isSameDay (lhs, rhs) {
+  return (
+    lhs.getFullYear() === rhs.getFullYear() &&
+    lhs.getMonth() === rhs.getMonth() &&
+    lhs.getDate() === rhs.getDate()
+  )
+}
+
 export default {
   name: 'ProgramView',
   components: {
@@ -70,7 +79,7 @@ export default {
       let days = [[sortedProg.at(0)]]
       sortedProg.slice(1).forEach((item) => {
         let lastItem = days.at(-1).at(-1)
-        if (item.timeStart.getDate() === lastItem.timeStart.getDate()) {
+        if (isSameDay(item.timeStart, lastItem.timeStart)) {
           // This program item has the same start date as the last one, so we
           // add the item to the current day
           days.at(-1).push(item)
