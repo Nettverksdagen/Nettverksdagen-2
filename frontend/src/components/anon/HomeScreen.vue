@@ -239,17 +239,17 @@ export default {
     width:100%;
     position:relative;
     height: 320px;
-    @media(min-width: 300) {
+    @media(min-width: 300px) {
       height: 520px;
     }
     @media(min-width: 768px) {
-      height: 620px;
+      height: 500px;
     }
     @media(min-width: 1200px) {
-      height: 400px;
+      height: 300px;
     }
     @media(min-width: 1430px) {
-      height: 500px;
+      height: 400px;
     }
   }
   .hero-content {
