@@ -63,11 +63,13 @@ export default {
       let prog = this.$store.getters['program/anonProgram']
       let sortedProgram = []
       let days = []
+      let months = []
 
       prog.forEach((item, index) => {
         if (index === 0) {
           sortedProgram.push([item])
           days.push(item.timeStart.getDate())
+          months.push(item.timeStart.getMonth())
         } else {
           let newSortedProgram = sortedProgram
           let dayExists = false
@@ -91,22 +93,28 @@ export default {
           })
           if (!dayExists) {
             let newDate = item.timeStart.getDate()
+            let newMonth = dateObj.getMonth()
             let inserted = false
             let nextDays = []
+            let nextMonths = []
             let nextNewSortedProg = []
             for (let i = 0; i < days.length; i++) {
-              if (days[i] > newDate && !inserted) {
+              if ((days[i] > newDate || months[i] > newMonth) && !inserted) {
                 inserted = true
                 nextDays.push(newDate)
+                nextMonths.push(newMonth)
                 nextNewSortedProg.push([item])
               }
               nextDays.push(days[i])
+              nextMonths.push(months[i])
               nextNewSortedProg.push(newSortedProgram[i])
             }
             newSortedProgram = nextNewSortedProg
             days = nextDays
+            months = nextMonths
             if (!inserted) {
               days.push(newDate)
+              months.push(newMonth)
               newSortedProgram.push([item])
             }
           }
