@@ -26,10 +26,8 @@
                 <b-form-group label="Team" label-for="member-team-input">
                   <b-form-input v-model="teamMember.team" id="member-team-input" required placeholder="F.eks Styret"></b-form-input>
                   <p class="text-black-50 mt-2">
-                    <span class="font-weight-bold">Merk</span>:
-                    Medlemmer grupperes på kontaktsiden etter hvilket team de hører hjemme i.
-                    Pass på at alle i samme team skrives opp med nøyaktig samme teamnavn, ellers vil de havne i forskjellige kategorier.
-                    Det er lurt å dobbeltsjekke på kontaktsiden om alt stemmer etter du har lagt inn et medlem
+                    <span class="font-weight-bold">{{$t('merk')}}</span>:
+                    {{$t('medlemgruppe')}}
                   </p>
                 </b-form-group>
               </div>
@@ -41,18 +39,17 @@
                   <b-form-group class="flex-grow-1" label="Bilde" label-for="member-photo">
                     <b-form-file v-model="photoFile" placeholder="Velg et bilde" id="member-photo" ref="photoFileInput" @input="uploadPhoto"></b-form-file>
                     <p class="text-black-50 mt-2">
-                      <span class="font-weight-bold">Obs</span>:
-                      Bildet blir automatisk plassert i sentrum av et kvadrat, men ikke beskåret eller strukket.
-                      Last opp bilder som allerede er kvadratiske for best resultat.
+                      <span class="font-weight-bold">NB!</span>:
+                      {{$('squarephoto')}}
                     </p>
                   </b-form-group>
                   <image-preview :imgPreviewSrc="imgSrc" :showImgPreview="showImgPreview"></image-preview>
                 </div>
               </div>
             </b-row>
-            <b-button type="submit" size="md" variant="success" v-if="!editing">Legg ut medlemmet</b-button>
-            <b-button type="submit" size="md" variant="primary" v-if="editing">Endre medlem</b-button>
-            <b-button v-on:click="abortEdit()" size="md" variant="secondary" v-if="editing">Avbryt</b-button>
+            <b-button type="submit" size="md" variant="success" v-if="!editing">{{$t('leggut')}}</b-button>
+            <b-button type="submit" size="md" variant="primary" v-if="editing">{{$t('edit')}}</b-button>
+            <b-button v-on:click="abortEdit()" size="md" variant="secondary" v-if="editing">{{$t('abort')}}</b-button>
           </b-form>
         </b-card>
       </div>

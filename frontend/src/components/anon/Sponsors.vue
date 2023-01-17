@@ -24,8 +24,8 @@
             <a href="https://coop.no/extra/" target="_blank" rel="noopener noreferrer">
               <b-row>
                 <b-col cols="12" md="6" class="sponsor-banner-text align-middle">
-                  <h3 class="font-weight-bold">Takk til Coop Extra!</h3>
-                  <span>Vi takker Coop Extra for forsyning av kaffe under Nettverksdagene 2023!</span>
+                  <h3 class="font-weight-bold">{{$t('thankscoop')}}</h3>
+                  <span>{{$t('thankscooptext')}}</span>
                 </b-col>
                 <b-col cols="12" md="6" class="text-center">
                   <img class="logo-extra float-md-right" src="@/assets/extra.png">
@@ -38,8 +38,8 @@
             <a href="https://bunnpris.no/" target="_blank" rel="noopener noreferrer">
               <b-row>
                 <b-col cols="12" md="6" class="sponsor-banner-text align-middle">
-                  <h3 class="font-weight-bold">Takk til Bunnpris!</h3>
-                  <span>Vi takker Bunnpris for forsyning av kaffe under Nettverksdagene 2023!</span>
+                  <h3 class="font-weight-bold">{{$t('thanksbunn')}}</h3>
+                  <span>{{$t('thanksbunntext')}}</span>
                 </b-col>
                 <b-col cols="12" md="6" class="text-center">
                   <img class="logo-bunnpris float-md-right" src="@/assets/bunnpris.png">

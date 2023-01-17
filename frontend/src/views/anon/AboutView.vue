@@ -1,14 +1,14 @@
 <template>
   <div class="about-view">
     <Content>
-      <h1>Om Nettverksdagene</h1>
+      <h1>{{$t('about') + ' ' + $t('nettverksdagene')}}</h1>
       <b-row>
         <b-col cols="12" lg="6">
           <p class="introduction">
-            Nettverksdagene er en årlig karrieremesse arrangert av tredjeårsstudenter på masterstudiet Kybernetikk og robotikk ved NTNU. Målet er å knytte kontakt mellom studenter og bedrifter innenfor relevante fagområder.
+            {{$t('nettis')}}
             <br>
             <br>
-            Inntektene fra Nettverksdagene vil gå til studietur med faglig innhold for studenter ved Kybernetikk og robotikk. Den vil gi en mulighet til å se hvordan nyskapende teknologi brukes i andre land og gi studentene større innsikt i hvordan problemer løses ute i store internasjonale bedrifter. Støtte til Nettverksdagene vil derfor gi uvurderlig kunnskap som vil bidra til å gjøre studentene ekstra verdifulle i fremtiden.
+            {{$t('inntektene')}}
           </p>
         </b-col>
         <b-col cols="12" lg="6" class="d-block d-sm-block">
