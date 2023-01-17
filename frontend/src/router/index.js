@@ -84,6 +84,11 @@ export default new Router({
           name: 'Form',
           component: FormView,
           meta: {title: 'Skjema'}
+        },
+        {
+          path: 'lykkehjul',
+          redirect: 'static/lykkehjul',
+          name: 'Lykkehjul'
         }
       ]
     },
