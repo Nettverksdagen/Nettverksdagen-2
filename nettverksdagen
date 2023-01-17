@@ -40,6 +40,7 @@ restart() {
 	local backup_time="$(backup)"
 	docker compose -f docker-compose-prod.yml down --volumes
 	docker compose -f docker-compose-prod.yml up --build --detach
+	sleep 10
 	restore "$backup_time"
 }
 
@@ -79,6 +80,7 @@ case $1 in
   restart)
 	backup_time="$(stop)"
 	start
+	sleep 10
 	restore "$backup_time" &> /dev/null
 	echo "$backup_time"
 	;;
