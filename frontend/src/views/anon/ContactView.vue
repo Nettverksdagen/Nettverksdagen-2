@@ -26,7 +26,7 @@
 
             <tr>
               <td class="align-top">
-                <h3>Styret</h3>
+                <h3>{{$t('Styret')}}</h3>
                 <b-link href="mailto:leder@nettverksdagene.no">leder@nettverksdagene.no</b-link>
               </td>
               <td>
