@@ -52,7 +52,7 @@ const getters = {
       newItem.timeStart = new Date(item.timeStart * 1000)
       let month = String(newItem.timeStart.getMonth() + 1)
       month = (month.length < 2) ? '0' + month : month
-      let day = String(newItem.timeStart.getDay())
+      let day = String(newItem.timeStart.getDate())
       day = (day.length < 2) ? '0' + day : day
       newItem.date = String(newItem.timeStart.getFullYear()) + '-' + month + '-' + day
       let hour = String(newItem.timeStart.getHours())
@@ -73,7 +73,7 @@ const getters = {
         newItem.registrationStart = new Date(item.registrationStart * 1000)
         let month = String(newItem.registrationStart.getMonth() + 1)
         month = (month.length < 2) ? '0' + month : month
-        let day = String(newItem.registrationStart.getDay())
+        let day = String(newItem.registrationStart.getDate())
         day = (day.length < 2) ? '0' + day : day
         newItem.registrationStartDate = String(newItem.registrationStart.getFullYear()) + '-' + month + '-' + day
 
@@ -88,7 +88,7 @@ const getters = {
 
           let month = String(newItem.registrationEnd.getMonth() + 1)
           month = (month.length < 2) ? '0' + month : month
-          let day = String(newItem.registrationEnd.getDay())
+          let day = String(newItem.registrationEnd.getDate())
           day = (day.length < 2) ? '0' + day : day
           newItem.registrationEndDate = String(newItem.registrationEnd.getFullYear()) + '-' + month + '-' + day
 
