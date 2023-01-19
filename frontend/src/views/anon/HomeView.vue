@@ -1,9 +1,9 @@
 <template>
   <div class="home">
-    <div class="text-center pt-5">
+    <!-- <div class="text-center pt-5">
       <h3>{{$t('doyour')}}</h3>
       <h3><a href="mailto:bedrift@nettverksdagene.no">{{$t('sendmailto') + ' bedrift@nettverksdagene.no' }}</a></h3>
-    </div>
+    </div> -->
     <div class="dude">
       <!--<Hero/> -->
       <HomeScreen/>
