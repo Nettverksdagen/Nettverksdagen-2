@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="no"><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<html lang="no">
+    <head>
         <meta charset="utf-8">
         <title>Lykkehjul</title>
-        <link rel="stylesheet" href="Lykkehjul_files/mainStylesheet.css">
-        <link rel="stylesheet" href="Lykkehjul_files/wheel.css">
-        <link rel="stylesheet" href="Lykkehjul_files/arrow.css">
-        <link rel="stylesheet" href="Lykkehjul_files/initWindow.css">
+        <link rel="stylesheet" href="css/mainStylesheet.css">
+        <link rel="stylesheet" href="css/wheel.css">
+        <link rel="stylesheet" href="css/arrow.css">
+        <link rel="stylesheet" href="css/initWindow.css">
     </head>
     <body>
         <!-- Lykkehjul!! -->
@@ -20,42 +20,43 @@
             <div id="arrowb4" class="arrowbody white"></div>
             <div id="arrowh4" class="arrowhead white"></div>
             <div id="arrowb5" class="arrowbody blue"></div>
-            <div id="arrowtext" style="visibility: hidden;">Eirik</div>
+            <div id="arrowtext">Ingen csv fil valgt</div>
             <div id="arrowh5" class="arrowhead blue"></div>
             <div id="arrowb6" class="arrowbody white"></div>
             <div id="arrowh6" class="arrowhead white"></div>
-            <button id="startButton" class="startButton" onclick="startSpin()" style="visibility: visible;"> Spinn </button>
+            <button id= 'startButton' class = 'startButton' onclick = 'startSpin()' > Spinn </button>
             
         </div>
         <div class="wheelarea">
-            <div class="wheel" id="wheel" style="transform: translateY(-50%) rotate(0deg);">
+            <div class="wheel" id="wheel">
                 <!--<div class="sector" style="transform: rotate(105deg) skew(-30deg);"></div>-->
             </div>
         </div>
 
-        <div class="initWindow" id="initWindow">
+        <div class = "initWindow" id = "initWindow">
             <h1>Instillinger</h1>
             <input id="InputFile" type="file">
-            <button id="BtnUpload" class="numInp" onclick="readFile()">Last opp</button>
+            <button id ="BtnUpload" class = "numInp" onclick="readFile()">Last opp</button>
             <br><br>
-            Hjulradius: <input type="number" class="numInp" id="radiusInp" value="800" onchange="updateRaduis()">
+            Hjulradius: <input type = "number" class = "numInp" id = "radiusInp" value = "800" onchange="updateRaduis()">
             <br><br>
-            <button class="readyBtn" id="readyBtn" onclick="applySettings()">Klar</button>
+            <button class = "readyBtn" id = "readyBtn" onclick = "applySettings()">Klar</button>
 
         </div>
 
-        <img src="Lykkehjul_files/NVD_logo.svg" alt="Nettverksdagene logo" class="logo">
+        <img src="NVD_logo.svg" alt="Nettverksdagene logo" class="logo">
+        <img src="NVDmask.svg" alt="mask" class="mask" id="mask">
         
 
         
-        <script type="text/javascript" src="Lykkehjul_files/main.js"></script>
-        <script type="text/javascript" src="Lykkehjul_files/csvToObject.js"></script>
-        <script type="text/javascript" src="Lykkehjul_files/wheel.js"></script>
-        <script type="text/javascript" src="Lykkehjul_files/arrow.js"></script>
-        <script type="text/javascript" src="Lykkehjul_files/initWindow.js"></script>
-        <script type="text/javascript" src="Lykkehjul_files/party.min.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+        <script type="text/javascript" src="js/csvToObject.js"></script>
+        <script type="text/javascript" src="js/wheel.js"></script>
+        <script type="text/javascript" src="js/arrow.js"></script>
+        <script type="text/javascript" src="js/initWindow.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/party-js@latest/bundle/party.min.js"></script>
+        <script type="text/javascript" src="js/mask.js"></script>
 
-    
+    </body>
+</html>
 
-
-</body></html>

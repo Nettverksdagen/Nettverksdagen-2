@@ -1,0 +1,25 @@
+.initWindow {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 350px;
+    transform: translateY(-50%) translateX(-50%);
+    padding: 20px;
+    padding-top: 0px;
+    border: 5px solid #0a211f;
+    background-color: whitesmoke;
+    z-index: 10;
+}
+
+.readyBtn {
+    width: 150px;
+    height: 40px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    font-size: large;
+}
+
+.numInp {
+    position: absolute;
+    right: 20px;
+}
