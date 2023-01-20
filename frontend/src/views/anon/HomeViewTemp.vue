@@ -1,10 +1,10 @@
 <template>
   <div class="home">
-    <div class="text-center pt-5 card">
-      <h3 class="linktext">Vil din bedrift delta på Nettverksdagene 2023?<br>
+    <!-- <div class="text-center pt-5 card">
+      <h3 class="linktext">Vil din bedrift delta på Nettverksdagene 2024?<br>
         <a href="mailto:bedrift@nettverksdagene.no"> Send mail til bedrift@nettverksdagene.no </a>
       </h3>
-    </div>
+    </div> -->
     <div class="dude">
       <!--<Hero/> -->
       <HomeScreenTemp/>
