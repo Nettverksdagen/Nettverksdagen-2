@@ -21,15 +21,31 @@
     </b-row>
     <b-row>
       <div class="col-12">
-        <b-card header="Participants">
-          <b-table class="d-none d-md-table" hover :fields="fields" :items="filteredList">
-            <template v-slot:cell(delete)="filteredList">
-              <delete-button class="mx-3" @click.native="destroy(filteredList.item)"></delete-button>
+        <b-card header="Deltagere">
+          <b-table class="d-none d-md-table" hover :fields="fields" :items="participantList">
+            <template v-slot:cell(delete)="participantList">
+              <delete-button class="mx-3" @click.native="destroy(participantList.item)"></delete-button>
             </template>
           </b-table>
-          <b-table class="d-block d-md-none" stacked :fields="fields" :items="filteredList">
-            <template v-slot:cell(delete)="filteredList" >
-              <delete-button class="mx-3" @click.native="destroy(filteredList.item)"></delete-button>
+          <b-table class="d-block d-md-none" stacked :fields="fields" :items="participantList">
+            <template v-slot:cell(delete)="participantList" >
+              <delete-button class="mx-3" @click.native="destroy(participantList.item)"></delete-button>
+            </template>
+          </b-table>
+        </b-card>
+      </div>
+    </b-row>
+    <b-row>
+      <div class="col-12">
+        <b-card header="Venteliste">
+          <b-table class="d-none d-md-table" hover :fields="fields" :items="waitingList">
+            <template v-slot:cell(delete)="waitingList">
+              <delete-button class="mx-3" @click.native="destroy(waitingList.item)"></delete-button>
+            </template>
+          </b-table>
+          <b-table class="d-block d-md-none" stacked :fields="fields" :items="waitingList">
+            <template v-slot:cell(delete)="waitingList" >
+              <delete-button class="mx-3" @click.native="destroy(waitingList.item)"></delete-button>
             </template>
           </b-table>
         </b-card>
@@ -50,7 +66,7 @@ export default {
   data: function () {
     return {
       fields: [
-        'id', {key: 'name', label: 'Navn'}, {key: 'study', label: 'Studie'}, {key: 'year', label: 'Årskull'}, {key: 'email', label: 'Email'}, { key: 'delete', label: '' }
+        'id', {key: 'name', label: 'Navn'}, {key: 'study', label: 'Studie'}, {key: 'year', label: 'Årskull'}, {key: 'email', label: 'Email'}, {key: 'delete', label: ''}
       ],
       alert: {
         dismissSecs: 5,
@@ -59,8 +75,11 @@ export default {
         heading: '',
         message: ''
       },
-      selectedEvent: 1,
-      participantList: []
+      selectedEvent: {
+        id: 1,
+        header: '',
+        maxRegistered: 0
+      }
     }
   },
   computed: {
@@ -70,31 +89,37 @@ export default {
       program.forEach(event => {
         options.push(
           {
-            value: event.id, text: event.header
+            value: event, text: event.header
           }
         )
       })
       return options
     },
-    filteredList: function () {
+    participants: function () {
       let participants = this.$store.state.participant.all
-      this.setParticipantList(participants)
-      return participants.filter(par => par.event === this.$data.selectedEvent)
+
+      let filteredParticipants = participants.filter(par => par.event === this.$data.selectedEvent.id)
+      let sortedParticipants = filteredParticipants.sort((a, b) => {
+        return a.id - b.id
+      })
+
+      return sortedParticipants
+    },
+    participantList: function () {
+      return this.participants.slice(0, this.$data.selectedEvent.maxRegistered)
+    },
+    waitingList: function () {
+      return this.participants.slice(this.$data.selectedEvent.maxRegistered)
     },
     concatEmails: function () {
       let emailString = ''
-      this.$data.participantList.forEach((participant) => {
-        if (participant.event === this.$data.selectedEvent) {
-          emailString += participant.email + ';'
-        }
+      this.participants.forEach((participant) => {
+        emailString += participant.email + ';'
       })
       return emailString
     }
   },
   methods: {
-    setParticipantList: function (participants) {
-      this.$data.participantList = participants
-    },
     destroy: function (participant) {
       if (!confirm('Er du sikker på at du vil slette ' + participant.name + '?')) {
         return
