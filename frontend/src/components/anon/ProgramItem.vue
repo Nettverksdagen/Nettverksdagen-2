@@ -15,7 +15,7 @@
               {{registered + '/' + maxRegistered + ' ' + $t('påmeldte')}}
             </h5>
             <h5 v-else>
-              {{maxRegistered + ' ' + $t('påmeldte') + ', '  + (registered-maxRegistered) + $t('onthe') + ' ' +$t('venteliste')}}
+              {{maxRegistered + ' ' + $t('påmeldte') + ', '  + (registered-maxRegistered) + ' ' + $t('onthe') + ' ' +$t('venteliste')}}
             </h5>
           </div>
         </div>
