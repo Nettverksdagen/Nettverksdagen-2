@@ -96,7 +96,7 @@ function move()
     document.getElementById("wheel").style.transform = "translateY(-50%) rotate("+ rotation + "deg)";
 }
 
-object.addEventListener("keydown", (event)=>{
+document.addEventListener("keydown", (event)=>{
     if (event.keyCode == 49) {//Clicked Space
         speed = 0
         hasSpun = 0
