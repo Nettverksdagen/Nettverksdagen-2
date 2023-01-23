@@ -47,6 +47,7 @@ function testCandidates(dict)
 function startSpin()
 {
     speed = 20 + Math.random()*20 ;
+    rotation += Math.random()*360;
     var startBtn = document.getElementById("startButton");
     startBtn.style.visibility = "hidden";
     const arrowText = document.getElementById("arrowtext")
@@ -97,10 +98,13 @@ function move()
 }
 
 document.addEventListener("keydown", (event)=>{
-    if (event.keyCode == 49) {//Clicked Space
+    if (event.key == " " || event.code == "Space" || event.keyCode == 32 ) {//Clicked Space
         speed = 0
         hasSpun = 0
-
+        
+        const arrowText = document.getElementById("arrowtext")
+        const startBtn  = document.getElementById("startButton");
+        
         startBtn.style.visibility = "visible";
         arrowText.style.visibility = "hidden";
     }
