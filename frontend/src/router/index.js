@@ -87,7 +87,7 @@ export default new Router({
         },
         {
           path: 'lykkehjul',
-          redirect: 'static/lykkehjul',
+          redirect: 'static/lykkehjul/lykkehjul.html',
           name: 'Lykkehjul'
         }
       ]
