@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <StandMap></StandMap>
     <!-- <div class="text-center pt-5">
       <h3>{{$t('doyour')}}</h3>
       <h3><a href="mailto:bedrift@nettverksdagene.no">{{$t('sendmailto') + ' bedrift@nettverksdagene.no' }}</a></h3>
@@ -8,6 +9,7 @@
       <!--<Hero/> -->
       <HomeScreen/>
     </div>
+    
     <businesses></businesses>
     <sponsors></sponsors>
   </div>
@@ -18,12 +20,14 @@ import Hero from '@/components/anon/Hero.vue'
 import Businesses from '@/components/anon/Businesses.vue'
 import Sponsors from '@/components/anon/Sponsors.vue'
 import HomeScreen from '@/components/anon/HomeScreen.vue'
+import StandMap from '@/components/anon/StandMap.vue'
 export default {
   components: {
     Hero,
     Businesses,
     Sponsors,
-    HomeScreen
+    HomeScreen,
+    StandMap
   },
   name: 'Home',
   data () {
