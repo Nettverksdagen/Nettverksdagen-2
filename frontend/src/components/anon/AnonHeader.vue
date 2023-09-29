@@ -12,7 +12,7 @@
       </b-link>
       <div class="side">
         <b-nav class="links">
-          <b-nav-item :to="{name: 'Program'}"><p>Program 2023</p></b-nav-item>
+          <b-nav-item :to="{name: 'Program'}"><p>Program 2024</p></b-nav-item>
           <b-nav-item :to="{name: 'Listings'}"><p>{{$t('stillingsannonser')}}</p></b-nav-item>
           <b-nav-item :to="{name: 'About'}"><p>{{$t('omoss')}}</p></b-nav-item>
           <b-nav-item :to="{name: 'Contact'}"><p>{{$t('kontakt')}}</p></b-nav-item>
