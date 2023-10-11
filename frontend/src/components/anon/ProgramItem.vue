@@ -8,7 +8,7 @@
       <div class="card-body">
         <div class="header">
           <div v-if="header">
-            <h3 class="font-weight-bold">{{header}}</h3>
+            <a href="/program/test"><h3 class="font-weight-bold">{{header}}</h3></a>
           </div>
           <div v-if="registration && maxRegistered">
             <h5 v-if="registered<=maxRegistered">
