@@ -10,16 +10,7 @@
             <div :key="'dayItem' + item.id" v-for="(item) in day">
               <ProgramItem
               :timeStart="item.timeStart"
-              :timeEnd="item.timeEnd"
-              :place="item.place"
               :header="item.header"
-              :paragraph="item.paragraph"
-              :registration="item.registration"
-              :maxRegistered="item.maxRegistered"
-              :registered="item.registered"
-              :cancelEmail="item.cancelEmail"
-              :registrationStart="item.registrationStart"
-              :registrationEnd="item.registrationEnd"
               :name="item.id"
               >
               </ProgramItem>
@@ -30,13 +21,13 @@
         </div>
       </div>
 
-      <!-- Uncomment this to get the stand maps from 2020 at the bottom. Disabled for 2021 since it was held digitally.
-      <h2 id="stand-map-header" class="text-center mb-3">Standkart</h2>
+      <!-- Uncomment this to get the stand maps from 2020 at the bottom. Disabled for 2021 since it was held digitally. -->
+      <!-- <h2 id="stand-map-header" class="text-center mb-3">Standkart</h2>
       <h3 class="text-center mb-3">29. januar</h3>
       <img class="stand-map mb-5" src="@/assets/standkart-dag1.png">
       <h3 class="text-center mb-3">30. januar</h3>
-      <img class="stand-map mb-5" src="@/assets/standkart-dag2.png">
-      -->
+      <img class="stand-map mb-5" src="@/assets/standkart-dag2.png"> -->
+     
 
     </Content>
 </template>
@@ -149,8 +140,8 @@ export default {
   }
 
   h1 {
-    font-size: 36px;
-    font-weight: 600;
+    font-size: 30px;
+    font-weight: 60;
     text-align: center;
     color: black;
     margin-bottom: 30px;
@@ -162,10 +153,10 @@ export default {
 
   @media(max-width: 966px) {
     h3 {
-      font-size: 1.3em;
+      font-size: 1em;
     }
     h4 {
-      font-size: 1.2em;
+      font-size: 0.8em;
 
     }
   }
