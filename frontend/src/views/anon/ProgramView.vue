@@ -4,16 +4,20 @@
         <h1 class="text-center">Program</h1>
         <!-- <p class="text-center description mt-3 mb-2">{{$t('program22')}}</p> -->
         <!-- <h4 class="text-center font-weight-bold"><a href="#stand-map-header">Se standkart her!</a></h4> -->
-        <div :key="'programDay' + index" v-for="(day, index) in program">
-          <h3 class="font-weight-bold">{{formatDate(day[0].timeStart)}}</h3>
-          <div class="timeline">
-            <div :key="'dayItem' + item.id" v-for="(item) in day">
-              <ProgramItem
-              :timeStart="item.timeStart"
-              :header="item.header"
-              :name="item.id"
-              >
-              </ProgramItem>
+        <div class="timelineParent">
+          <div :key="'programDay' + index" v-for="(day, index) in program">  
+            <div class="timelineChild">
+              <h3 class="font-weight-bold">{{formatDate(day[0].timeStart)}}</h3>
+              <div class="timeline">
+                <div :key="'dayItem' + item.id" v-for="(item) in day">
+                  <ProgramItem
+                  :timeStart="item.timeStart"
+                  :header="item.header"
+                  :name="item.id"
+                  >
+                  </ProgramItem>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -114,10 +118,30 @@ export default {
   .timeline {
     position: relative;
     margin: 1em 0 3em 6em;
+    padding: 1rem 1rem;
+    vertical-align: center;
   }
+  
+  .timelineParent {
+    display: flex;
+    margin: 1rem;
+    padding: 2rem 2rem;
+    text-align: center;
+  }
+
+  .timelineChild {
+    display: block;
+    border: 1px solid rgb(160, 160, 160);
+    margin-left: 30px;
+    margin-right: 30px;
+    border-radius: 20px;
+    padding: 1rem 1rem;
+  }
+
   .timeline::after {
     content: '';
     position: absolute;
+    left:16px;
     width: 6px;
     background-color: #1d4844;
     top: 0;
