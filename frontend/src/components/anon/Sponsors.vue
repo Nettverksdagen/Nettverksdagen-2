@@ -18,8 +18,7 @@
           </a>
         </div>
         -->
-        <h2 class="text-center font-weight-bold">Sponsorer</h2>
-          <!-- Sponsorbanner for coffeesponsor -->
+        <!-- <h2 class="text-center font-weight-bold">Sponsorer</h2>
           <div class="sponsor-banner extra-banner">
             <a href="https://coop.no/extra/" target="_blank" rel="noopener noreferrer">
               <b-row>
@@ -32,7 +31,7 @@
                 </b-col>
               </b-row>
             </a>
-          </div>
+          </div> -->
 
           <!--<div class="sponsor-banner bunnpris-banner">
             <a href="https://bunnpris.no/" target="_blank" rel="noopener noreferrer">
