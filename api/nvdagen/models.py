@@ -119,5 +119,6 @@ class Participant(models.Model):
 
 class SpinTheWheel(models.Model):
     id = models.AutoField(primary_key=True)
+    business = models.ForeignKey(Business, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
     email = models.CharField(max_length=250)

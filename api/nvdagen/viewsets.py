@@ -9,6 +9,8 @@ from django.utils.html import strip_tags
 from datetime import datetime, time
 from babel.dates import format_datetime, format_time
 
+from .permissions import AllowPostOnlyPermission
+
 
 class ListingViewSet(viewsets.ModelViewSet):
     queryset = Listing.objects.all()
@@ -154,4 +156,17 @@ class ParticipantViewSet(viewsets.ModelViewSet):
 class SpinTheWheelViewSet(viewsets.ModelViewSet):
     serializer_class = SpinTheWheelSerializer
     queryset = SpinTheWheel.objects.all()
-    permission_classes = (AllowAny,)
+    permission_classes = (AllowPostOnlyPermission,)
+
+    def create(self, request):
+        data = request.data
+        if not SpinTheWheel.objects.filter(business=data['business'], email=data['email']).exists():
+            return super().create(request)
+        else:
+            response = {'message': 'Already registered'}
+            return Response(response, status = status.HTTP_400_BAD_REQUEST)
+
+
+
+
+        

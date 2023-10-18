@@ -76,7 +76,7 @@ export default {
     submitForm () {
       console.log({id: this.$route.params.id, ...this.$data.form})
       axios.post(process.env.VUE_APP_API_HOST +
-        '/api/spinthewheel/', {id: this.$route.params.id, ...this.$data.form})
+        '/api/spinthewheel/', {business: this.$route.params.id, ...this.$data.form})
         .then((response) => console.log(response))
         .catch((e) => {
           console.log('Error in submitForm')
