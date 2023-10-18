@@ -8,6 +8,7 @@ import LoginView from '@/views/LoginView'
 import AboutView from '@/views/anon/AboutView'
 import ContactView from '@/views/anon/ContactView'
 import ProgramView from '@/views/anon/ProgramView.vue'
+import ProgramInformationView from '@/views/anon/ProgramInformationView.vue'
 import store from '../store/index.js'
 import ListingAdminView from '@/views/admin/ListingAdminView.vue'
 import BusinessAdminView from '@/views/admin/BusinessAdminView.vue'
@@ -51,7 +52,21 @@ export default new Router({
           path: 'program',
           name: 'Program',
           component: ProgramView,
-          meta: {title: 'Program'}
+          meta: {title: 'Program'},
+          // children: [
+          //   {
+          //     path: ':programReferer',
+          //     name: 'ProgramDetails',
+          //     component: ProgramInformationView, // This should be different
+          //     meta: {title: 'TitleName'}
+          //   }
+          // ]
+        },
+        {
+          path: 'program/:programReferer',
+          name: 'ProgramDetails',
+          component: ProgramInformationView, // This should be different
+          meta: {title: 'TitleName'}
         },
         {
           path: 'stillinger',
