@@ -154,3 +154,4 @@ class ParticipantViewSet(viewsets.ModelViewSet):
 class SpinTheWheelViewSet(viewsets.ModelViewSet):
     serializer_class = SpinTheWheelSerializer
     queryset = SpinTheWheel.objects.all()
+    permission_classes = (AllowAny,)
