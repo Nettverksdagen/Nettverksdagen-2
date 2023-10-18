@@ -26,6 +26,9 @@
                 <b-form-group label="Dager på stand" label-for="business-days-input">
                   <b-form-select v-model="business.days" :options="businessDays" id="business-days-input" required></b-form-select>
                 </b-form-group>
+                <b-form-group label="Standnummer" label-for="standnummer">
+                  <b-form-input v-model="business.standnumber" id="standnummer" type="number" required></b-form-input>
+                </b-form-group>
               </div>
               <div class="col-12 col-md-6">
                 <b-form-group label="Pakke" label-for="business-level-input">
@@ -98,6 +101,7 @@ export default {
         { key: 'website_url', label: 'Website Url' }, { key: 'level', label: 'Level' },
         { key: 'days', label: 'Days' },
         { key: 'textShort', label: 'Text' },
+        { key: 'standnumber', label: 'Standnummer' },
         { key: 'edit', label: '' }
       ],
       business: {
