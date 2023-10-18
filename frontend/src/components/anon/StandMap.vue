@@ -245,7 +245,7 @@
     </svg>
     <svg class="standkart" viewBox="0 0 2116 2123">
         <line v-for="(circle, index) in circles" :key="index" :x1="circle.x" :y1="circle.y" :x2="circle.x" :y2="circle.y" stroke="#D9D9D9" class="_circle"></line>
-        <text v-for="name in names" :x="name.x" :y="name.y" dominant-baseline="middle" text-anchor="middle" font-size="50px" fill="black">{{name.text}}</text>
+        <text v-for="name in names" :x="name.text_pos.x" :y="name.text_pos.y" dominant-baseline="middle" text-anchor="middle" font-size="50px" fill="#D9D9D9">{{name.text}}</text>
         <!--write some text-->
         <!-- <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="50px" fill="black">Hello
             World</text> -->
@@ -254,7 +254,6 @@
 
 </div>
 </template>
-
 
 <script>
 import StandPositionData from '@/assets/StandPositions.json'
@@ -267,8 +266,17 @@ export default {
         }
     },
     created() {
-        this.stand = StandPositionData;
-    }
+    const data = StandPositionData;
+    this.circles = data.map(item => {
+      return { x: item.position.x, y: item.position.y };
+    });
+    this.names = data.map((item, index) => {
+      const newX = 1200 + Math.floor(index / 15) * 400; // Starting from 445 and adding 160 every 15 elements
+      const newY = 200 + 40*(index%15);
+      //const newText = index + item.name;
+      return { ...item, text_pos: { ...item.text_pos, x: newX, y: newY } };
+    });
+  }
 }
 
 </script>
