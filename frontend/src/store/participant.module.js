@@ -7,9 +7,12 @@ const state = {...defaultState}
 const actions = {
   async fetchParticipant ({commit}) {
     commit('fetchRequest')
-    try {
+    try { 
+      //This must be changed to only fetch number of participants, requires changes other places first
       const response = await fetch(process.env.VUE_APP_API_HOST + '/api/participant/')
+      console.log(response)
       const all = await response.json()
+      console.log(all)
       commit('fetchSuccessful', all)
     } catch (e) {
       commit('fetchFailure', e)
