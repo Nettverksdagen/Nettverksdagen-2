@@ -8,7 +8,7 @@
       <div class="card-body">
         <div class="header">
           <div v-if="header">
-            <a href="/program/test"><h3 class="font-weight-bold">{{header}}</h3></a>
+            <a href="/program/test"><h3 class="font-header">{{header}}</h3></a>
           </div>
           <div v-if="registration && maxRegistered">
             <h5 v-if="registered<=maxRegistered">
@@ -32,7 +32,7 @@
           <div class="inline">
             <div v-if="place" class="d-block d-md-inline">
               <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>
-              <div v-html="place" class="d-inline"/>
+              <div v-html="place" class="d-inline"/><br>
             </div>
             <div v-if="timeEnd" class="d-inline">
               <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-md-1 ml-md-2"/>
@@ -294,17 +294,17 @@ export default {
     border-radius: 20px;
     border-width: 2px;
     border-color: var(--line-border-color);
-    background-color: white;
+    background-color: #f4f4f4;
   }
   .numberofpeople {
     display: inline;
   }
 
   .timeline-item {
-    padding: 15px 0 15px 40px;
+    padding: 0px 0 0px 40px;
     position: relative;
     background-color: inherit;
-    width: 100%;
+    width: 105%;
   }
 
   /* Add arrows to the right container (pointing left) */
@@ -345,6 +345,13 @@ export default {
       flex-direction: row;
       margin-bottom: 0;
     }
+  }
+
+  .font-header {
+    font-size: 25px;
+    color: #252525;
+    text-align: left;
+    font-weight: bold;
   }
 
   .footer {
