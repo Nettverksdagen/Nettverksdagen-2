@@ -1,54 +1,53 @@
 <template>
-  <div>
-    <div class="timeline-item">
-      <div class="timestamp">
-        <h4><span class="font-weight-bold">{{ formatTime(timeStart) }}</span></h4>
-      </div>
-      <div class="card">
-        <div class="card-body">
-          <div class="header">
-            <div v-if="header">
-              <router-link :to="{ name: 'ProgramDetails', params: { programReferer: nameUrlEncoded } }">
-                <div class="businessContainer">
+<div>
+  <div class="timeline-item">
+    <div class="timestamp">
+      <h4><span class="font-weight-bold">{{formatTime(timeStart)}}</span></h4>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="header">
+          <div v-if="header">
+            <router-link :to="{ name: 'ProgramDetails', params: { programReferer: nameUrlEncoded } }">
+              <h3 class='font-header'>{{ header }}</h3>  
+              <!-- <div class="businessContainer">
                   <p class='description'>{{ header }}</p>
-                </div>
+                </div> -->
               </router-link>
+          </div>
+          <div v-if="registration && maxRegistered">
+            <h5 v-if="registered<=maxRegistered">
+              {{registered + '/' + maxRegistered + ' ' + $t('påmeldte')}}
+            </h5>
+            <h5 v-else>
+              {{maxRegistered + ' ' + $t('påmeldte') + ', '  + (registered-maxRegistered) + ' ' + $t('onthe') + ' ' +$t('venteliste')}}
+            </h5>
+          </div>
+        </div>
+        <div v-if="paragraph">
+          <div :key="name + line" v-for="line in paragraph" >
+            <p class='description'>{{line}}</p>
+          </div>
+        </div>
+        <div v-if="registration" class='button'>
+          <b-button v-if="enableRegistration && !submitted" variant='primary' @click="openDialog">{{$t('påmelding')}}</b-button>
+          <b-button v-else disabled variant="dark">{{$t('påmelding')}}</b-button>
+        </div>
+        <div class="footer">
+          <div class="inline">
+            <div v-if="place" class="d-block d-md-inline">
+              <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>
+              <div v-html="place" class="d-inline"/><br>
             </div>
-            <div v-if="registration && maxRegistered">
-              <h5 v-if="registered <= maxRegistered">
-                {{ registered + '/' + maxRegistered + ' ' + $t('påmeldte') }}
-              </h5>
-              <h5 v-else>
-                {{ maxRegistered + ' ' + $t('påmeldte') + ', ' + (registered - maxRegistered) + ' ' + $t('onthe') + ' '
-                  + $t('venteliste') }}
-              </h5>
+            <div v-if="timeEnd" class="d-inline">
+              <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-md-1 ml-md-2"/>
+              {{formatTime(timeStart)}} - {{formatTime(timeEnd)}}
             </div>
           </div>
-          <div v-if="paragraph">
-            <div :key="name + line" v-for="line in paragraph">
-              <p class='description'>{{ line }}</p>
-            </div>
+          <div v-if="registration && cancelEmail">
+              <b-link @click.native="destroy_participant(name)">{{$t('destroypart')}}</b-link>
           </div>
-          <div v-if="registration" class='button'>
-            <b-button v-if="enableRegistration && !submitted" variant='primary'
-              @click="openDialog">{{ $t('påmelding') }}</b-button>
-            <b-button v-else disabled variant="dark">{{ $t('påmelding') }}</b-button>
-          </div>
-          <div class="footer">
-            <div class="inline">
-              <div v-if="place" class="d-block d-md-inline">
-                <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1" />
-                <div v-html="place" class="d-inline" />
-              </div>
-              <div v-if="timeEnd" class="d-inline">
-                <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-md-1 ml-md-2" />
-                {{ formatTime(timeStart) }} - {{ formatTime(timeEnd) }}
-              </div>
-            </div>
-            <div v-if="registration && cancelEmail">
-              <b-link @click.native="destroy_participant(name)">{{ $t('destroypart') }}</b-link>
-            </div>
-            <div v-if="registration">
+          <div v-if="registration">
               <div v-if="submitted">
                 <div>{{ $t('submitted') }}</div>
               </div>
@@ -153,6 +152,9 @@ export default {
         return false
       }
       return true
+    },
+    nameUrlEncoded: function () {
+      return this.header.replace(/\s+/g, '-').toLowerCase()
     }
   },
   methods: {
@@ -257,24 +259,23 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.card {
-  position: relative;
-  border-radius: 20px;
-  border-width: 2px;
-  border-color: var(--line-border-color);
-  background-color: white;
-}
+  .card {
+    position: relative;
+    border-radius: 20px;
+    border-width: 2px;
+    border-color: var(--line-border-color);
+    background-color: white;
+  }
+  .numberofpeople {
+    display: inline;
+  }
 
-.numberofpeople {
-  display: inline;
-}
-
-.timeline-item {
-  padding: 15px 0 15px 40px;
-  position: relative;
-  background-color: inherit;
-  width: 100%;
-}
+  .timeline-item {
+    padding: 15px 0 15px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 100%;
+  }
 
 /* Add arrows to the right container (pointing left) */
 .timeline-item::before {
@@ -304,18 +305,23 @@ export default {
   left: -13px;
 }
 
-.header {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  overflow-wrap: break-word;
-
-  @media(min-width: 992px) {
-    flex-direction: row;
-    margin-bottom: 0;
+  .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    overflow-wrap: break-word;
+    @media(min-width: 992px) {
+      flex-direction: row;
+      margin-bottom: 0;
+    }
   }
-}
+  .font-header {
+    font-size: 25px;
+    color: #252525;
+    text-align: left;
+    font-weight: bold;
+  }
 
 .footer {
   display: flex;
