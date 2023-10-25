@@ -264,7 +264,7 @@ export default {
     border-radius: 20px;
     border-width: 2px;
     border-color: var(--line-border-color);
-    background-color: white;
+    background-color: #f4f4f4;
   }
   .numberofpeople {
     display: inline;
