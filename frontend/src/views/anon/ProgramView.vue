@@ -4,43 +4,22 @@
       <h1 class="text-center">Program</h1>
       <Carousel :perPage="itemsPerPage">
         <Slide class="program-day" :key="'programDay' + index" v-for="(day, index) in program">
-              <div class="timeline-child">
-                <h3 class="font-weight-bold">{{ formatDate(day[0].timeStart) }}</h3>
-                <div class="timeline">
-                  <div :key="'dayItem' + item.id" v-for="(item) in day">
-                    <ProgramItem  :timeStart="item.timeStart" 
-                                  :header="item.header" 
-                                  :name="item.id"
-                                  :timeEnd="item.timeEnd"
-                                  :place="item.place">
-                    </ProgramItem>
-                  </div>
-                </div>
+          <div class="timeline-child">
+            <h3 class="font-weight-bold">{{ formatDate(day[0].timeStart) }}</h3>
+            <div class="timeline">
+              <div :key="'dayItem' + item.id" v-for="(item) in day">
+                <ProgramItem  :timeStart="item.timeStart"
+                              :header="item.header"
+                              :name="item.id"
+                              :timeEnd="item.timeEnd"
+                              :place="item.place">
+                </ProgramItem>
               </div>
-            </Slide>
-      </Carousel>
-      <!-- <h1 class="text-center">Program</h1>
-      <div class="timeline-parent">
-          <div class="program-day" :key="'programDay' + index" v-for="(day, index) in program">
-              <div class="timeline-child">
-                <h3 class="font-weight-bold">{{ formatDate(day[0].timeStart) }}</h3>
-                <div class="timeline">
-                  <div :key="'dayItem' + item.id" v-for="(item) in day">
-                    <ProgramItem  :timeStart="item.timeStart" 
-                                  :header="item.header" 
-                                  :name="item.id"
-                                  :timeEnd="item.timeEnd"
-                                  :place="item.place">
-                    </ProgramItem>
-                  </div>
-                </div>
-              </div>
+            </div>
           </div>
-      </div>
-      <div id="bankett">
-      </div>  -->
+        </Slide>
+      </Carousel>
     </div>
-
 
   </Content>
 </template>
@@ -50,7 +29,7 @@ import Content from '@/components/common/Content.vue'
 import ProgramItem from '@/components/anon/ProgramItem.vue'
 import {Carousel, Slide} from 'vue-carousel'
 
-function isSameDay(lhs, rhs) {
+function isSameDay (lhs, rhs) {
   return (
     lhs.getFullYear() === rhs.getFullYear() &&
     lhs.getMonth() === rhs.getMonth() &&
@@ -67,29 +46,29 @@ export default {
     Slide
   },
 
-  data() {
+  data () {
     return {
-      itemsPerPage: 3 //Deafault number of days shown 
-    };
+      itemsPerPage: 3 // Deafault number of days shown
+    }
   },
 
   methods: {
-    formatDate(dateObj) {
+    formatDate (dateObj) {
       let months = ['januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'desember']
       let date = dateObj.getDate()
       let month = dateObj.getMonth()
       return String(date) + '. ' + months[month]
     },
 
-    updateItemsPerPage() {
-      if (window.innerWidth < 1000) {
-        this.itemsPerPage = 1;
+    updateItemsPerPage () {
+      if (window.innerWidth < 768) {
+        this.itemsPerPage = 1
       } else if (window.innerWidth < 1430) {
-        this.itemsPerPage = 2;
+        this.itemsPerPage = 2
       } else {
-        this.itemsPerPage = 3;
+        this.itemsPerPage = 3
       }
-    },
+    }
 
   },
   computed: {
@@ -117,17 +96,17 @@ export default {
       })
 
       return days
-    },
+    }
   },
 
-  mounted() {
-    this.updateItemsPerPage;
-    window.addEventListener('resize', this.updateItemsPerPage);
+  mounted () {
+    this.updateItemsPerPage()
+    window.addEventListener('resize', this.updateItemsPerPage)
   },
 
-  beforeDestroy() {
+  beforeDestroy () {
   // Remove the window resize event listener when the component is destroyed
-  window.removeEventListener('resize', this.updateItemsPerPage);
+    window.removeEventListener('resize', this.updateItemsPerPage)
   }
 
 }
@@ -138,32 +117,23 @@ export default {
   font-size: 1.1em;
 }
 
-.carousel-main {
-  perPage: "1";
-}
-
 .timeline {
   position: relative;
-  margin: 1em 0 3em 6em;
+  margin: 0em 0 3em 6em;
   padding: 1rem 1rem;
   vertical-align: center;
-}
-
-.timeline-parent {
-  display: grid;
-  position: relative;
-  grid-template-columns: 33.3% 33.3% 33.3%;
-  text-align: center;
+  height: 88%;
 }
 
 .timeline-child {
-  display: block;
+  //display: block;
   border: 1px solid rgb(160, 160, 160);
   border-radius: 20px;
   background-color: #f4f4f4;
   padding: 1rem 1rem;
-  margin-left: 30px;
-  margin-right: 30px;
+  margin-left: 8%;
+  margin-right: 8%;
+  height: 100%;
 }
 
 .timeline::after {
@@ -174,7 +144,7 @@ export default {
   background-color: #1d4844;
   top: 0;
   bottom: 0;
-  margin-left: -3px;
+  margin-left: -20px;
 }
 
 .btn-primary {
@@ -215,36 +185,26 @@ h1 {
 //   }
 // }
 
-// @media(max-width: 1430px) {
-//   .timeline::after {
-//     margin-left: -20px;
-//   }
-// }
+@media(max-width: 768px) {
+  .timeline::after {
+    margin-left: -37px;
+  }
 
-// @media(max-width: 1430px) {
-//   .timeline-parent {
-//     display: flex;
-//     overflow-x: scroll;
-//     scroll-snap-type: x mandatory;
-//     -ms-overflow-style: none;  /* IE and Edge */
-//      scrollbar-width: none;  /* Firefox */ 
-//   }
+  .timeline-parent::-webkit-scrollbar {
+    display: none;
+  }
 
-//   .timeline-parent::-webkit-scrollbar {
-//     display: none;
-//   }
+  .program-day {
+    width: 100vw;
+    min-width: 100vw;
+    //scroll-snap-align: start;
+  }
 
-//   .program-day {
-//     width: 100vw;
-//     min-width: 100vw;
-//     scroll-snap-align: start;
-//   }
-
-//   .timeline-child {
-//     width: 90%;
-//     margin-left: auto;
-//     margin-right: auto;
-//     max-width: 350px;
-//   }
-// }
+  .timeline-child {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 350px;
+  }
+}
 </style>

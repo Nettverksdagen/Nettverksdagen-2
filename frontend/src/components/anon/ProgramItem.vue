@@ -271,10 +271,20 @@ export default {
   }
 
   .timeline-item {
-    padding: 15px 0 15px 40px;
+    padding: 15px 0 0px 0px;
     position: relative;
     background-color: inherit;
     width: 100%;
+  }
+
+  .card-body {
+    padding-right: 0;
+    padding-top: 0;
+    @media(max-width: 768px) {
+      margin-right: 15px;
+      flex-direction: row-reverse;
+      padding-top: 13px;
+    }
   }
 
 /* Add arrows to the right container (pointing left) */
@@ -302,7 +312,7 @@ export default {
   top: 18px;
   border-radius: 50%;
   z-index: 1;
-  left: -13px;
+  left:  -30px;
 }
 
   .header {
@@ -321,6 +331,10 @@ export default {
     color: #252525;
     text-align: left;
     font-weight: bold;
+    margin-right: -10px;
+    @media(max-width: 768px) {
+      margin-right: -42px;
+    }
   }
 
 .footer {
@@ -348,7 +362,7 @@ export default {
 
 .timestamp {
   position: absolute;
-  left: -82px;
+  left: -99px;
   top: 16px;
 }
 
@@ -379,6 +393,7 @@ export default {
 @media(max-width: 768px) {
   .timestamp {
     top: 30px;
+    margin-left: 0px
 
     h4 {
       font-size: 1.2em;
@@ -387,15 +402,15 @@ export default {
 
   .timeline-item::after {
     top: 30px;
-    left: -30px;
+    left: -32px;
   }
 
   .timeline-item {
-    padding-left: 16px;
+    margin-left: -15px;
   }
 
   .timeline-item::before {
-    left: 8px;
+    left: 0px;
     top: 32px;
   }
 }
