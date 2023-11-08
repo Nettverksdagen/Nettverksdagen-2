@@ -56,8 +56,9 @@
         </b-card>
       </div>
       <div class="d-none d-md-block col-4">
-        <b-jumbotron bg-variant="success" text-variant="white" :header="numBusinesses + ' bedrifter'" lead="lagt ut så langt." class="h-100">
-        </b-jumbotron>
+        <stand-map :isAdminPage=true style="width: 100%;"></stand-map>
+        <!-- <b-jumbotron bg-variant="success" text-variant="white" :header="numBusinesses + ' bedrifter'" lead="lagt ut så langt." class="h-100">
+        </b-jumbotron> -->
       </div>
     </b-row>
     <b-row>
@@ -87,13 +88,15 @@ import { mapMutations } from 'vuex'
 import { fileUploader } from '@/services'
 import EditButton from '@/components/admin/EditButton.vue'
 import DeleteButton from '@/components/admin/DeleteButton.vue'
+import StandMap from '../../components/anon/StandMap.vue'
 export default {
   name: 'BusinessAdminView',
   components: {
     ImagePreview,
     EditButton,
-    DeleteButton
-  },
+    DeleteButton,
+    StandMap
+},
   data: function () {
     return {
       fields: [

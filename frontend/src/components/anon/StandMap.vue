@@ -1,5 +1,4 @@
 <template>
-    
     <div class="standkart_holder">
         <svg class="standkart" width="2116" height="2123" viewBox="0 0 2116 2123" fill="none"
             xmlns="http://www.w3.org/2000/svg">
@@ -160,6 +159,15 @@
             font-size="80px" 
             fill="#D9D9D9"
         >Standkart</text>
+        <line v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap" 
+            :x1="StandPosition.x" 
+            :y1="StandPosition.y" 
+            :x2="StandPosition.x" 
+            :y2="StandPosition.y" 
+            stroke="#898989" 
+            class="_circle"
+            :id="'circle-' + index"
+        ></line>
         <line v-for="business in businesses" 
             :x1="StandPositionMap[business.standnumber].x" 
             :y1="StandPositionMap[business.standnumber].y" 
@@ -169,7 +177,18 @@
             class="_circle"
             :id="'circle-' + business.standnumber"
         ></line>
-        <text v-for="(business, index) in businesses" 
+        <text v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap" 
+            :key="index" 
+            :x="StandPosition.x" 
+            :y="StandPosition.y" 
+            dominant-baseline="middle" 
+            text-anchor="middle" 
+            font-size="20px" 
+            fill="#000000"
+            @mouseover="handleTextMouseOver(business.standnumber)"
+            @mouseout="handleTextMouseOut(business.standnumber)"
+        >{{index}}</text>
+        <text v-if="!isAdminPage" v-for="(business, index) in businesses" 
             :key="index" 
             :x="StandPositionMap[business.standnumber].x" 
             :y="StandPositionMap[business.standnumber].y" 
@@ -192,21 +211,21 @@
             @mouseout="handleTextMouseOut(business.standnumber)"
         >{{index + 1}}. {{ business.name }}</text>
 
-        <!--write some text-->
-        <!-- <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="50px" fill="black">Hello
-            World</text> -->
     </svg>
 
- <!-- Should be changed to segmented control -->
+    
+
     <div class="toggle_holder">
-        <label class="switch">  
-            <input
-            :checked="checked"
-            @change="changeInput"     
-            @input="$emit('input', $event.target.checked)"
-            value="1"  type="checkbox">  
-            <span class="slider round"></span>
-        </label>
+        <VueToggles
+            height="30"
+            width="90"
+            checkedText="Dag 1"
+            uncheckedText="Dag 2"
+            checkedBg="#b4d455"
+            uncheckedBg="lightgrey"
+            :value="value"
+            @click="value = !value"
+            />
     </div>
 </div>
 
@@ -215,10 +234,12 @@
 
 <script>
 import StandPositionData from '@/assets/StandPositions.json'
+import VueToggles from 'vue-toggles'
 
 export default {
     props: {
-     value: { type: Boolean, default: false }
+     value: { type: Boolean, default: false },
+     isAdminPage: { type: Boolean, default: false }
     },
     computed: {
         businesses: function () {
@@ -231,7 +252,7 @@ export default {
             circles: [],
             names: [],
             StandPositionMap: [],
-            checked: this.value
+            isDayOne: true
         }
     },
     watch: {
@@ -275,13 +296,13 @@ template{
     margin: 0;
 }
 .standkart_holder{
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     position: relative;
 }
 .standkart {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     position: absolute;
 }
 
@@ -303,6 +324,8 @@ template{
 }
 
 
+
+/*button*/
 .toggle_holder{
     position: relative;
     left: 70vw;
