@@ -2,15 +2,17 @@
   <Content>
     <div class="program">
       <h1 class="text-center">Program</h1>
-      <!-- <p class="text-center description mt-3 mb-2">{{$t('program22')}}</p> -->
-      <!-- <h4 class="text-center font-weight-bold"><a href="#stand-map-header">Se standkart her!</a></h4> -->
-      <div class="timeline-parent">
-        <div class="program-day" :key="'programDay' + index" v-for="(day, index) in program">
+      <Carousel :perPage="itemsPerPage">
+        <Slide class="program-day" :key="'programDay' + index" v-for="(day, index) in program">
           <div class="timeline-child">
             <h3 class="font-weight-bold">{{ formatDate(day[0].timeStart) }}</h3>
             <div class="timeline">
               <div :key="'dayItem' + item.id" v-for="(item) in day">
+<<<<<<< HEAD
                 <ProgramItem  :timeStart="item.timeStart" 
+=======
+                <ProgramItem  :timeStart="item.timeStart"
+>>>>>>> 9c6686a46a2101635554b85189635a8c6866820f
                               :header="item.header"
                               :name="item.id"
                               :timeEnd="item.timeEnd"
@@ -20,19 +22,9 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div id="bankett">
-      </div>
+        </Slide>
+      </Carousel>
     </div>
-
-    <!-- Uncomment this to get the stand maps from 2020 at the bottom. Disabled for 2021 since it was held digitally. -->
-    <!-- <h2 id="stand-map-header" class="text-center mb-3">Standkart</h2>
-      <h3 class="text-center mb-3">29. januar</h3>
-      <img class="stand-map mb-5" src="@/assets/standkart-dag1.png">
-      <h3 class="text-center mb-3">30. januar</h3>
-      <img class="stand-map mb-5" src="@/assets/standkart-dag2.png"> -->
-
 
   </Content>
 </template>
@@ -40,8 +32,9 @@
 <script>
 import Content from '@/components/common/Content.vue'
 import ProgramItem from '@/components/anon/ProgramItem.vue'
+import {Carousel, Slide} from 'vue-carousel'
 
-function isSameDay(lhs, rhs) {
+function isSameDay (lhs, rhs) {
   return (
     lhs.getFullYear() === rhs.getFullYear() &&
     lhs.getMonth() === rhs.getMonth() &&
@@ -53,17 +46,38 @@ export default {
   name: 'ProgramView',
   components: {
     Content,
-    ProgramItem
+    ProgramItem,
+    Carousel,
+    Slide
   },
+
+  data () {
+    return {
+      itemsPerPage: 3 // Deafault number of days shown
+    }
+  },
+
   methods: {
-    formatDate(dateObj) {
+    formatDate (dateObj) {
       let months = ['januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'desember']
       let date = dateObj.getDate()
       let month = dateObj.getMonth()
       return String(date) + '. ' + months[month]
+    },
+
+    updateItemsPerPage () {
+      if (window.innerWidth < 768) {
+        this.itemsPerPage = 1
+      } else if (window.innerWidth < 1430) {
+        this.itemsPerPage = 2
+      } else {
+        this.itemsPerPage = 3
+      }
     }
+
   },
   computed: {
+
     program: function () {
       let prog = this.$store.getters['program/anonProgram']
 
@@ -88,7 +102,18 @@ export default {
 
       return days
     }
+  },
+
+  mounted () {
+    this.updateItemsPerPage()
+    window.addEventListener('resize', this.updateItemsPerPage)
+  },
+
+  beforeDestroy () {
+  // Remove the window resize event listener when the component is destroyed
+    window.removeEventListener('resize', this.updateItemsPerPage)
   }
+
 }
 </script>
 
@@ -97,49 +122,23 @@ export default {
   font-size: 1.1em;
 }
 
-.stand-map {
-  height: calc(100% - 2em);
-  background: #dee2e2;
-  border-radius: 8px;
-  padding: 3em 1em;
-  width: 100%;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.15);
-
-  @media(min-width: 576px) {
-    padding: 3em 1em;
-  }
-
-  @media(min-width: 768px) {
-    padding: 3em 4em;
-  }
-
-  @media(min-width: 966px) {
-    padding: 4em 14em;
-  }
-}
-
 .timeline {
   position: relative;
-  margin: 1em 0 3em 6em;
+  margin: 0em 0 3em 6em;
   padding: 1rem 1rem;
   vertical-align: center;
-}
-
-.timeline-parent {
-  display: grid;
-  position: relative;
-  grid-template-columns: 33.3% 33.3% 33.3%;
-  text-align: center;
+  height: 88%;
 }
 
 .timeline-child {
-  display: block;
+  //display: block;
   border: 1px solid rgb(160, 160, 160);
   border-radius: 20px;
   background-color: #f4f4f4;
   padding: 1rem 1rem;
-  margin-left: 30px;
-  margin-right: 30px;
+  margin-left: 8%;
+  margin-right: 8%;
+  height: 100%;
 }
 
 .timeline::after {
@@ -150,7 +149,7 @@ export default {
   background-color: #1d4844;
   top: 0;
   bottom: 0;
-  margin-left: -3px;
+  margin-left: -20px;
 }
 
 .btn-primary {
@@ -180,30 +179,20 @@ h1 {
   }
 }
 
-@media(max-width: 966px) {
-  h3 {
-    font-size: 1em;
-  }
+// @media(max-width: 966px) {
+//   h3 {
+//     font-size: 1em;
+//   }
 
-  h4 {
-    font-size: 0.8em;
+//   h4 {
+//     font-size: 0.8em;
 
-  }
-}
+//   }
+// }
 
 @media(max-width: 768px) {
   .timeline::after {
-    margin-left: -20px;
-  }
-}
-
-@media(max-width: 768px) {
-  .timeline-parent {
-    display: flex;
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
-    -ms-overflow-style: none;  /* IE and Edge */
-     scrollbar-width: none;  /* Firefox */ 
+    margin-left: -37px;
   }
 
   .timeline-parent::-webkit-scrollbar {
@@ -213,7 +202,7 @@ h1 {
   .program-day {
     width: 100vw;
     min-width: 100vw;
-    scroll-snap-align: start;
+    //scroll-snap-align: start;
   }
 
   .timeline-child {
