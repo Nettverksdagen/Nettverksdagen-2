@@ -154,7 +154,7 @@ export default {
       return true
     },
     nameUrlEncoded: function () {
-      return this.header.replace(/\s+/g, '-').toLowerCase()
+      return this.name.replace(/\s+/g, '-').toLowerCase()
     }
   },
   methods: {

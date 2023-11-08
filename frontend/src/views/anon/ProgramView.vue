@@ -11,10 +11,11 @@
             <div class="timeline">
               <div :key="'dayItem' + item.id" v-for="(item) in day">
                 <ProgramItem  :timeStart="item.timeStart" 
-                              :header="item.header" 
+                              :header="item.header"
                               :name="item.id"
                               :timeEnd="item.timeEnd"
-                              :place="item.place">
+                              :place="item.place"
+                              >
                 </ProgramItem>
               </div>
             </div>
