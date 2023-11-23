@@ -9,7 +9,7 @@
         <div class="header">
           <div v-if="header">
             <router-link :to="{ name: 'ProgramDetails', params: { programReferer: nameUrlEncoded } }">
-              <h3 class='font-header'>{{ header }}</h3>  
+              <h3 class='font-header'>{{ header }}</h3>
               <!-- <div class="businessContainer">
                   <p class='description'>{{ header }}</p>
                 </div> -->
@@ -36,11 +36,11 @@
         <div class="footer">
           <div class="inline">
             <div v-if="place" class="d-block d-md-inline">
-              <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>
-              <div v-html="place" class="d-inline"/><br>
+              <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="map"/>
+              <div v-html="place" class="d-inline map-text"/><br>
             </div>
             <div v-if="timeEnd" class="d-inline">
-              <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-md-1 ml-md-2"/>
+              <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="clock"/>
               {{formatTime(timeStart)}} - {{formatTime(timeEnd)}}
             </div>
           </div>
@@ -114,7 +114,7 @@ library.add(faMapMarkerAlt, faClock)
 export default {
   name: 'ProgramItem',
   props: ['timeStart', 'timeEnd', 'place', 'header', 'paragraph', 'registration', 'maxRegistered', 'cancelEmail', 'registrationStart', 'registrationEnd', 'name'],
-  data() {
+  data () {
     return {
       form: {
         email: '',
@@ -158,14 +158,14 @@ export default {
     }
   },
   methods: {
-    formatTime(dateObj) {
+    formatTime (dateObj) {
       let hours = dateObj.getHours()
       let minutes = dateObj.getMinutes()
       hours = (hours > 9) ? String(hours) : ('0' + String(hours))
       minutes = (minutes > 9) ? String(minutes) : ('0' + String(minutes))
       return hours + ':' + minutes
     },
-    formatDate(dateObj) {
+    formatDate (dateObj) {
       let day = dateObj.getDate()
       let month = dateObj.getMonth() + 1
       let year = dateObj.getFullYear()
@@ -173,11 +173,11 @@ export default {
       month = (month > 9) ? String(month) : ('0' + String(month))
       return this.formatTime(dateObj) + ' ' + day + '.' + month + '.' + year
     },
-    openDialog() {
+    openDialog () {
       this.$data.form = { email: '', name: '', study: '', year: '' }
       this.$data.show = true
     },
-    onSubmit(e) {
+    onSubmit (e) {
       e.preventDefault()
       let data = this.$data.form
       // Generate and include 6-character random deregistering code
@@ -190,7 +190,7 @@ export default {
         this.$data.submitted = true
       }
     },
-    submitForm() {
+    submitForm () {
       console.log({ event: this.$props.name, ...this.$data.form })
       axios.post(process.env.VUE_APP_API_HOST +
         '/api/participant/', { event: this.$props.name, ...this.$data.form })
@@ -200,12 +200,12 @@ export default {
           console.log(e)
         })
     },
-    onCancel(e) {
+    onCancel (e) {
       e.preventDefault()
       this.$data.form = { email: '', name: '', study: '', year: '' }
       this.$data.show = false
     },
-    checkValidForm(check) {
+    checkValidForm (check) {
       for (let key in check) {
         if (check[key] === '') {
           return false
@@ -229,27 +229,27 @@ export default {
         let code = participant.code
         axios.get(process.env.VUE_APP_API_HOST + '/api/participant/' +
           participant.id + '/').then(_ => {
-            // Prompt user for code, and delete participant if input matches
-            let retry = true
-            while (retry) {
-              let inputedCode = prompt('Vennligst skriv inn koden som ble sendt til ' + participant.email + '. Hvis du ikke mottar mailen, vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
-              if (inputedCode === code) {
-                if (confirm('Er du sikker på at du vil melde av ' + participant.name + '?')) {
-                  axios.delete(process.env.VUE_APP_API_HOST + '/api/participant/' +
+          // Prompt user for code, and delete participant if input matches
+          let retry = true
+          while (retry) {
+            let inputedCode = prompt('Vennligst skriv inn koden som ble sendt til ' + participant.email + '. Hvis du ikke mottar mailen, vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
+            if (inputedCode === code) {
+              if (confirm('Er du sikker på at du vil melde av ' + participant.name + '?')) {
+                axios.delete(process.env.VUE_APP_API_HOST + '/api/participant/' +
                     participant.id + '/').then(_ => {
-                      alert(participant.name + ' er nå avmeldt.')
-                    }).catch(_ => {
-                      alert('Det oppsto en feil under avmeldingen. Vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
-                    })
-                }
-                break
-              } else {
-                retry = confirm('Feil kode. Vil du prøve igjen?')
+                  alert(participant.name + ' er nå avmeldt.')
+                }).catch(_ => {
+                  alert('Det oppsto en feil under avmeldingen. Vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
+                })
               }
+              break
+            } else {
+              retry = confirm('Feil kode. Vil du prøve igjen?')
             }
-          }).catch(_ => {
-            alert('Det oppsto en feil under sendingen av avmeldingskoden. Vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
-          })
+          }
+        }).catch(_ => {
+          alert('Det oppsto en feil under sendingen av avmeldingskoden. Vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
+        })
       } else if (email !== null) {
         alert('Fant ingen deltakere med denne epost-adressen på dette arrangementet.')
       }
@@ -349,6 +349,17 @@ export default {
   }
 }
 
+.map {
+  margin-left: 2px;
+}
+.map-text {
+  margin-left: 4px;
+}
+
+.clock {
+  margin-right: 2px;
+}
+
 .button {
   display: flex;
   flex-direction: row;
@@ -362,7 +373,7 @@ export default {
 
 .timestamp {
   position: absolute;
-  left: -99px;
+  left: -105px;
   top: 16px;
 }
 
@@ -392,7 +403,8 @@ export default {
 
 @media(max-width: 768px) {
   .timestamp {
-    top: 30px;
+    top: 28px;
+    left: -102px;
     margin-left: 0px
 
     h4 {
