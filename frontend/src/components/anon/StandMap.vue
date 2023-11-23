@@ -167,6 +167,8 @@
             stroke="#898989" 
             class="_circle"
             :id="'circle-' + index"
+            @mouseover="handleTextMouseOver(business.standnumber)"
+            @mouseout="handleTextMouseOut(business.standnumber)"
         ></line>
         <line v-for="business in businesses" 
             :x1="StandPositionMap[business.standnumber].x" 
@@ -176,7 +178,37 @@
             stroke="#D9D9D9" 
             class="_circle"
             :id="'circle-' + business.standnumber"
+            @mouseover="handleTextMouseOver(business.standnumber)"
+            @mouseout="handleTextMouseOut(business.standnumber)"
         ></line>
+        <text v-if="isAdminPage" v-for="StandPosition in StandPositionMap"
+            dominant-baseline="middle"
+            :x="StandPosition.x + 30*StandPosition.text_offset_x"
+            :y="StandPosition.y + 0*StandPosition.text_offset_y " 
+            :transform="'rotate(' + StandPosition.text_rotation + ',' + StandPosition.x + ',' + StandPosition.y + ')' + 'translate(' + '' +
+  (StandPosition.text_rotation > 90 && StandPosition.text_rotation < 270
+    ? (2 * (StandPosition.x + 0 * StandPosition.text_offset_x)) + ',' + (2 * (StandPosition.y + 0 * StandPosition.text_offset_y))
+    : '0,0'
+  ) +
+') scale(' + (StandPosition.text_rotation > 90 && StandPosition.text_rotation < 270 ? '-1, -1' : '1, 1') + ')' "
+            stroke = "#e3e3e1"
+            fill="#e3e3e1"
+            font-size="1.5em"
+            class="_business"
+            pointer-events="none"
+        >Bedriftsnavn</text>
+        <text v-if="!isAdminPage" v-for="business in businesses"
+            dominant-baseline="middle"
+            :x="StandPositionMap[business.standnumber].x + 30*StandPositionMap[business.standnumber].text_offset_x"
+            :y="StandPositionMap[business.standnumber].y + 0*StandPositionMap[business.standnumber].text_offset_y " 
+            :transform="'rotate(' + StandPositionMap[business.standnumber].text_rotation + ','+ (StandPositionMap[business.standnumber].x ) + ','+ (StandPositionMap[business.standnumber].y )+ ')'"
+            stroke = "#e3e3e1"
+            fill="#e3e3e1"
+            font-size="1.5em"
+            class="_business"
+            :id="'business-' + business.standnumber"
+            pointer-events="none"
+        >{{ business.name }}</text>
         <text v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap" 
             :key="index" 
             :x="StandPosition.x" 
@@ -185,8 +217,6 @@
             text-anchor="middle" 
             font-size="20px" 
             fill="#000000"
-            @mouseover="handleTextMouseOver(business.standnumber)"
-            @mouseout="handleTextMouseOut(business.standnumber)"
         >{{index}}</text>
         <text v-if="!isAdminPage" v-for="(business, index) in businesses" 
             :key="index" 
@@ -196,8 +226,6 @@
             text-anchor="middle" 
             font-size="20px" 
             fill="#000000"
-            @mouseover="handleTextMouseOver(business.standnumber)"
-            @mouseout="handleTextMouseOut(business.standnumber)"
         >{{index + 1}}</text>
         <text v-for="(business, index) in businesses" 
             :key="index" 
@@ -221,8 +249,9 @@
             width="90"
             checkedText="Dag 1"
             uncheckedText="Dag 2"
-            checkedBg="#b4d455"
-            uncheckedBg="lightgrey"
+            checkedBg="#e3e3e1"
+            uncheckedBg="#ffffff"
+            
             :value="value"
             @click="value = !value"
             />
@@ -237,6 +266,9 @@ import StandPositionData from '@/assets/StandPositions.json'
 import VueToggles from 'vue-toggles'
 
 export default {
+    components: {
+        VueToggles
+    },
     props: {
      value: { type: Boolean, default: false },
      isAdminPage: { type: Boolean, default: false }
@@ -276,10 +308,14 @@ export default {
     handleTextMouseOver(standnumber) {
       const circle = document.getElementById(`circle-${standnumber}`);
       circle.classList.add('hovered');
+      const business = document.getElementById(`business-${standnumber}`);
+      business.classList.add('hovered');
     },
     handleTextMouseOut(standnumber) {
       const circle = document.getElementById(`circle-${standnumber}`);
       circle.classList.remove('hovered');
+      const business = document.getElementById(`business-${standnumber}`);
+      business.classList.remove('hovered');
     },
     changeInput() {
        this.checked = !this.checked
@@ -321,6 +357,10 @@ template{
 }
 ._circle.hovered {
   stroke-width: 60;
+}
+
+._business.hovered{
+    font-size: 4em;
 }
 
 
