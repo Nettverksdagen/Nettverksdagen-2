@@ -8,16 +8,11 @@
             <h3 class="font-weight-bold">{{ formatDate(day[0].timeStart) }}</h3>
             <div class="timeline">
               <div :key="'dayItem' + item.id" v-for="(item) in day">
-<<<<<<< HEAD
-                <ProgramItem  :timeStart="item.timeStart" 
-=======
-                <ProgramItem  :timeStart="item.timeStart"
->>>>>>> 9c6686a46a2101635554b85189635a8c6866820f
-                              :header="item.header"
-                              :name="item.id"
-                              :timeEnd="item.timeEnd"
-                              :place="item.place"
-                              >
+                <ProgramItem :timeStart="item.timeStart"
+                             :header="item.header"
+                             :name="item.id"
+                             :timeEnd="item.timeEnd"
+                             :place="item.place">
                 </ProgramItem>
               </div>
             </div>

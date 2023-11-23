@@ -153,9 +153,19 @@ export default {
       }
       return true
     },
-    nameUrlEncoded: function () {
-      return this.name.replace(/\s+/g, '-').toLowerCase()
+
+    nameUrlEncoded () {
+      if (typeof this.name === 'string') {
+        return this.name.replace(/\s+/g, '-')
+      } else {
+      // Handle the case where this.name is not a string
+        console.error('Unexpected type for this.name:', typeof this.name)
+        return '' // Or provide a default value or handle it accordingly
+      }
     }
+    // nameUrlEncoded: function () {
+    //   // return this.name.replace(/\s+/g, '-').toLowerCase()
+    // }
   },
   methods: {
     formatTime (dateObj) {
