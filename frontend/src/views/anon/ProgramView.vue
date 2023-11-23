@@ -126,13 +126,11 @@ export default {
 }
 
 .timeline-child {
-  //display: block;
   border: 1px solid rgb(160, 160, 160);
   border-radius: 20px;
   background-color: #f4f4f4;
   padding: 1rem 1rem;
-  margin-left: 8%;
-  margin-right: 8%;
+  margin: 0 8%;
   height: 100%;
 }
 
