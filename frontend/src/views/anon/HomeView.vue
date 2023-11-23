@@ -9,7 +9,9 @@
       <HomeScreen/>
     </div>
     <businesses></businesses>
-    <StandMap style="width: 100vw; height: 100vh;"></StandMap>
+    <div style="width: 100vw; display: flex; justify-content: center; align-items: center;">
+      <StandMap style="width: 100vmin; height: 100vmin; "></StandMap>
+    </div>
     <sponsors></sponsors>
   </div>
 </template>

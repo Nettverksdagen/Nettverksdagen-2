@@ -170,7 +170,7 @@
             @mouseover="handleTextMouseOver(business.standnumber)"
             @mouseout="handleTextMouseOut(business.standnumber)"
         ></line>
-        <line v-for="business in businesses" 
+        <line v-for="business in filteredDayBusinesses" 
             :x1="StandPositionMap[business.standnumber].x" 
             :y1="StandPositionMap[business.standnumber].y" 
             :x2="StandPositionMap[business.standnumber].x" 
@@ -183,21 +183,17 @@
         ></line>
         <text v-if="isAdminPage" v-for="StandPosition in StandPositionMap"
             dominant-baseline="middle"
-            :x="StandPosition.x + 30*StandPosition.text_offset_x"
+            :x="StandPosition.x + ((StandPosition.text_rotation > 90 && StandPosition.text_rotation < 270) ? -30*StandPosition.text_offset_x : 30*StandPosition.text_offset_x)"
             :y="StandPosition.y + 0*StandPosition.text_offset_y " 
-            :transform="'rotate(' + StandPosition.text_rotation + ',' + StandPosition.x + ',' + StandPosition.y + ')' + 'translate(' + '' +
-  (StandPosition.text_rotation > 90 && StandPosition.text_rotation < 270
-    ? (2 * (StandPosition.x + 0 * StandPosition.text_offset_x)) + ',' + (2 * (StandPosition.y + 0 * StandPosition.text_offset_y))
-    : '0,0'
-  ) +
-') scale(' + (StandPosition.text_rotation > 90 && StandPosition.text_rotation < 270 ? '-1, -1' : '1, 1') + ')' "
+            :text-anchor = "(StandPosition.text_rotation > 90 && StandPosition.text_rotation < 270) ? 'end' : 'start'"
+            :transform="'rotate(' + ((StandPosition.text_rotation > 90 && StandPosition.text_rotation < 270) ? StandPosition.text_rotation - 180 : StandPosition.text_rotation )+ ',' + StandPosition.x + ',' + StandPosition.y + ')'"
             stroke = "#e3e3e1"
             fill="#e3e3e1"
             font-size="1.5em"
             class="_business"
             pointer-events="none"
         >Bedriftsnavn</text>
-        <text v-if="!isAdminPage" v-for="business in businesses"
+        <text v-if="!isAdminPage" v-for="business in filteredDayBusinesses"
             dominant-baseline="middle"
             :x="StandPositionMap[business.standnumber].x + 30*StandPositionMap[business.standnumber].text_offset_x"
             :y="StandPositionMap[business.standnumber].y + 0*StandPositionMap[business.standnumber].text_offset_y " 
@@ -210,7 +206,6 @@
             pointer-events="none"
         >{{ business.name }}</text>
         <text v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap" 
-            :key="index" 
             :x="StandPosition.x" 
             :y="StandPosition.y" 
             dominant-baseline="middle" 
@@ -218,8 +213,7 @@
             font-size="20px" 
             fill="#000000"
         >{{index}}</text>
-        <text v-if="!isAdminPage" v-for="(business, index) in businesses" 
-            :key="index" 
+        <text v-if="!isAdminPage" v-for="(business, index) in filteredDayBusinesses"  
             :x="StandPositionMap[business.standnumber].x" 
             :y="StandPositionMap[business.standnumber].y" 
             dominant-baseline="middle" 
@@ -227,8 +221,7 @@
             font-size="20px" 
             fill="#000000"
         >{{index + 1}}</text>
-        <text v-for="(business, index) in businesses" 
-            :key="index" 
+        <text v-for="(business, index) in filteredDayBusinesses" 
             :x="1000" 
             :y="200 + index * 50" 
             dominant-baseline="middle" 
@@ -251,9 +244,10 @@
             uncheckedText="Dag 2"
             checkedBg="#e3e3e1"
             uncheckedBg="#ffffff"
-            
-            :value="value"
-            @click="value = !value"
+            checkedColor="#000000"
+            uncheckedColor="#000000"
+            :value="isDayOne"
+            @click="isDayOne = !isDayOne"
             />
     </div>
 </div>
@@ -270,7 +264,6 @@ export default {
         VueToggles
     },
     props: {
-     value: { type: Boolean, default: false },
      isAdminPage: { type: Boolean, default: false }
     },
     computed: {
@@ -278,6 +271,14 @@ export default {
         let b = this.$store.state.businesses.all;
         return b
         },
+        filteredDayBusinesses() {
+        if (this.isDayOne) {
+            return this.businesses.filter(business => business.days === "Dag 1" || business.days === "Begge dager").slice().sort((a, b) => a.standnumber - b.standnumber);
+        }
+        else {
+            return this.businesses.filter(business => business.days === "Dag 2" || business.days === "Begge dager").slice().sort((a, b) => a.standnumber - b.standnumber);
+        }
+    }
     },
     data() {
         return {
@@ -333,7 +334,7 @@ template{
 }
 .standkart_holder{
     width: 100%;
-    height: 100%;
+    height: 100%; 
     position: relative;
 }
 .standkart {
@@ -368,8 +369,22 @@ template{
 /*button*/
 .toggle_holder{
     position: relative;
-    left: 70vw;
-    top: 5vh;
+    top: 15%;
+    left: 2%;
+}
+
+@media (max-width: 768px) {
+    /* Adjust the position for smaller screens */
+    .toggle_holder {
+        width: 50%;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Further adjustments for even smaller screens */
+    .toggle_holder {
+        width: 50%;
+    }
 }
 .switch {
      position: relative;
