@@ -22,7 +22,7 @@ const actions = {
 const getters = {
   levels: state => {
     let levels = [
-      {level: 'Hovedsamarbeidspartner', levelHeader: 'Møt vår nye hovedsamarbeidspartner ', businesses: []},
+      {level: 'Hovedsamarbeidspartner', levelHeader: 'Møt vår nye hovedsponsor', businesses: []},
       {level: 'Samarbeidspartner', levelHeader: 'Samarbeids&shy;partnere', businesses: []},
       {level: 'Gull', levelHeader: 'Bedrifter du kan møte på stand', businesses: []},
       {level: 'Sølv', levelHeader: '', businesses: []},
