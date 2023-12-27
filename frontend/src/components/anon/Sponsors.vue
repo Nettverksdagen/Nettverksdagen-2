@@ -46,15 +46,16 @@
               </b-row>
             </a>
           </div> -->
-
-        <b-row>
+        <div >
             <h2 class="text-center font-weight-bold">Hovedsponsor</h2>
-            <Sponsor  v-for="(sponsor, index) in sponsors"
-                :key="index"
-                :logo_src="sponsor.logo_uri"
-                :href="sponsor.website_url">
-            </Sponsor>
-        </b-row>
+            <b-row class="justify-content-center">
+                <Sponsor  v-for="(sponsor, index) in sponsors"
+                    :key="index"
+                    :logo_src="sponsor.logo_uri"
+                    :href="sponsor.website_url">
+                </Sponsor>
+            </b-row>
+        </div>
       </Content>
     </div>
 </template>
