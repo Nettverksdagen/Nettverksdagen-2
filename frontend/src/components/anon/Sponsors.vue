@@ -18,42 +18,38 @@
           </a>
         </div>
         -->
-        <!-- <h2 class="text-center font-weight-bold">Sponsorer</h2>
-          <div class="sponsor-banner extra-banner">
-            <a href="https://coop.no/extra/" target="_blank" rel="noopener noreferrer">
-              <b-row>
-                <b-col cols="12" md="6" class="sponsor-banner-text align-middle">
-                  <h3 class="font-weight-bold">{{$t('thankscoop')}}</h3>
-                  <span>{{$t('thankscooptext')}}</span>
-                </b-col>
-                <b-col cols="12" md="6" class="text-center">
-                  <img class="logo-extra float-md-right" src="@/assets/extra.png">
-                </b-col>
-              </b-row>
-            </a>
-          </div> -->
-
-          <!--<div class="sponsor-banner bunnpris-banner">
+        
+        <!--<div class="sponsor-banner bunnpris-banner">
             <a href="https://bunnpris.no/" target="_blank" rel="noopener noreferrer">
-              <b-row>
-                <b-col cols="12" md="6" class="sponsor-banner-text align-middle">
-                  <h3 class="font-weight-bold">{{$t('thanksbunn')}}</h3>
-                  <span>{{$t('thanksbunntext')}}</span>
-                </b-col>
-                <b-col cols="12" md="6" class="text-center">
-                  <img class="logo-bunnpris float-md-right" src="@/assets/bunnpris.png">
-                </b-col>
-              </b-row>
+                <b-row>
+                    <b-col cols="12" md="6" class="sponsor-banner-text align-middle">
+                        <h3 class="font-weight-bold">{{$t('thanksbunn')}}</h3>
+                        <span>{{$t('thanksbunntext')}}</span>
+                    </b-col>
+                    <b-col cols="12" md="6" class="text-center">
+                        <img class="logo-bunnpris float-md-right" src="@/assets/bunnpris.png">
+                    </b-col>
+                </b-row>
             </a>
-          </div> -->
-
+        </div> -->
+        
         <b-row>
-          <Sponsor  v-for="(sponsor, index) in sponsors"
-                   :key="index"
-                   :logo_src="sponsor.logo_uri"
-                   :href="sponsor.website_url">
-          </Sponsor>
+            <Sponsor  v-for="(sponsor, index) in sponsors"
+            :key="index"
+            :logo_src="sponsor.logo_uri"
+            :href="sponsor.website_url">
+        </Sponsor>
         </b-row>
+        <h2 class="text-center font-weight-bold">Kaffesponsor</h2>
+        <div class="sponsor-banner extra-banner">
+            <a href="https://teogkaffehuset.no/" target="_blank" rel="noopener noreferrer">
+                <b-row>
+                <b-col cols="12" md="6" class="text-center">
+                    <img class="logo-extra float-md-right" src="@/assets/teogkaffehuset.png">
+                </b-col>
+                </b-row>
+            </a>
+        </div>
       </Content>
     </div>
 </template>
