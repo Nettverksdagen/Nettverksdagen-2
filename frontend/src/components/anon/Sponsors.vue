@@ -18,43 +18,31 @@
           </a>
         </div>
         -->
-        <!-- <h2 class="text-center font-weight-bold">Sponsorer</h2>
-          <div class="sponsor-banner extra-banner">
-            <a href="https://coop.no/extra/" target="_blank" rel="noopener noreferrer">
-              <b-row>
-                <b-col cols="12" md="6" class="sponsor-banner-text align-middle">
-                  <h3 class="font-weight-bold">{{$t('thankscoop')}}</h3>
-                  <span>{{$t('thankscooptext')}}</span>
-                </b-col>
-                <b-col cols="12" md="6" class="text-center">
-                  <img class="logo-extra float-md-right" src="@/assets/extra.png">
-                </b-col>
-              </b-row>
-            </a>
-          </div> -->
-
-          <!--<div class="sponsor-banner bunnpris-banner">
+        <!--<div class="sponsor-banner bunnpris-banner">
             <a href="https://bunnpris.no/" target="_blank" rel="noopener noreferrer">
-              <b-row>
-                <b-col cols="12" md="6" class="sponsor-banner-text align-middle">
-                  <h3 class="font-weight-bold">{{$t('thanksbunn')}}</h3>
-                  <span>{{$t('thanksbunntext')}}</span>
-                </b-col>
-                <b-col cols="12" md="6" class="text-center">
-                  <img class="logo-bunnpris float-md-right" src="@/assets/bunnpris.png">
-                </b-col>
-              </b-row>
+                <b-row>
+                    <b-col cols="12" md="6" class="sponsor-banner-text align-middle">
+                        <h3 class="font-weight-bold">{{$t('thanksbunn')}}</h3>
+                        <span>{{$t('thanksbunntext')}}</span>
+                    </b-col>
+                    <b-col cols="12" md="6" class="text-center">
+                        <img class="logo-bunnpris float-md-right" src="@/assets/bunnpris.png">
+                    </b-col>
+                </b-row>
             </a>
-          </div> -->
-        <div >
-            <h2 class="text-center font-weight-bold">Hovedsponsor</h2>
-            <b-row class="justify-content-center">
-                <Sponsor  v-for="(sponsor, index) in sponsors"
-                    :key="index"
-                    :logo_src="sponsor.logo_uri"
-                    :href="sponsor.website_url">
-                </Sponsor>
-            </b-row>
+        </div> -->
+        <b-row>
+          <Sponsor  v-for="(sponsor, index) in sponsors"
+          :key="index"
+          :logo_src="sponsor.logo_uri"
+          :href="sponsor.website_url">
+          </Sponsor>
+        </b-row>
+        <h2 class="text-center font-weight-bold">{{ $t('coffeesponsor') }}</h2>
+        <div class="sponsor col-5">
+          <a href="https://teogkaffehuset.no/" target="_blank" rel="noopener noreferrer">
+            <b-img fluid src="@/assets/teogkaffehuset.png"></b-img>
+          </a>
         </div>
       </Content>
     </div>
@@ -89,6 +77,24 @@ export default {
     }
     @media(min-width: 768px) {
       font-size: 2.5rem;
+    }
+  }
+  .sponsor {
+    position: relative;
+    margin: auto;
+    transition: transform 300ms, filter 500ms;
+    padding: 1rem 1rem;
+      @media(min-width: 576px) {
+        padding: 0rem 3rem;
+      }
+      @media(min-width: 1200px) {
+        padding: 0.5rem 5.25rem;
+      }
+  }
+  .sponsor:hover {
+    transition: filter 0.5s, transform 0.3s;
+    @media(min-width: 1200px) {
+      filter: none;
     }
   }
   .sponsor-banner {
@@ -133,54 +139,5 @@ export default {
   .no-padding-top {
     padding-top:0;
   }
-  .kjeldsberg-banner {
-    background-color: #ffd600;
-  }
-  .extra-banner {
-    background-color: #e4002b;
-  }
 
-  .bunnpris-banner {
-    background-color: #f2e200;
-  }
-  /*
-  .poption-banner {
-    background-color: #fa6352;
-    margin-bottom: 5rem;
-  } */
-  .logo-kjeldsberg {
-    height: 11rem;
-    padding: 0.5rem 3rem 1rem 3rem;
-    @media(max-width: 576px) {
-      height: 7.5rem;
-      padding: 0 1rem 1rem 1rem;
-    }
-  }
-  .logo-extra {
-    height: 11rem;
-    padding: 0.5rem 2.5rem 1rem 3rem;
-    @media(max-width: 576px) {
-      height: 7.5rem;
-      padding: 0 1rem 1rem 1rem;
-    }
-  }
-  .logo-bunnpris {
-    height: 9rem;
-    padding: 1.5rem 2.5rem 0rem 2rem;
-    @media(max-width: 576px) {
-      height: 7.5rem;
-      padding: 0 1rem 1rem 1rem;
-    }
-  }
-  /*
-  // Removed the poption sponsor. Uncomment to add.
-  .logo-poption {
-    height: 5rem;
-    padding: 0.5rem 3rem 1rem 3rem;
-
-    @media(max-width: 620px) {
-      height: 3rem;
-      padding: 0.5rem 1rem 1rem 1rem;
-    }
-  } */
 </style>
