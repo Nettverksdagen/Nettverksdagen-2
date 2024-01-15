@@ -31,6 +31,7 @@
                 </b-row>
             </a>
         </div> -->
+        <h2 class="text-center font-weight-bold">Hovedsponsor</h2>
         <b-row>
           <Sponsor  v-for="(sponsor, index) in sponsors"
           :key="index"
