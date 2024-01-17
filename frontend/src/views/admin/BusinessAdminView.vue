@@ -54,6 +54,7 @@
             <b-button v-on:click="abortEdit()" size="md" variant="secondary" v-if="editing">{{$t('abort')}}</b-button>
           </b-form>
         </b-card>
+        
       </div>
       <div class="d-none d-md-block col-4">
         <StandMap :isAdminPage=true></StandMap>
