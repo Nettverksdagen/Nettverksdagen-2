@@ -151,40 +151,40 @@
 
     </svg>
     <svg class="standkart" viewBox="0 0 2116 2123">
-        <text 
-            x="100" 
-            y="200" 
-            dominant-baseline="middle" 
-            text-anchor="left" 
-            font-size="80px" 
+        <text
+            x="100"
+            y="200"
+            dominant-baseline="middle"
+            text-anchor="left"
+            font-size="80px"
             fill="#D9D9D9"
         >Standkart</text>
-        <line v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap" 
-            :x1="StandPosition.x" 
-            :y1="StandPosition.y" 
-            :x2="StandPosition.x" 
-            :y2="StandPosition.y" 
-            stroke="#898989" 
+        <line v-bind:key="index" v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap"
+            :x1="StandPosition.x"
+            :y1="StandPosition.y"
+            :x2="StandPosition.x"
+            :y2="StandPosition.y"
+            stroke="#898989"
             class="_circle"
             :id="'circle-' + index"
             @mouseover="handleTextMouseOver(business.standnumber)"
             @mouseout="handleTextMouseOut(business.standnumber)"
         ></line>
-        <line v-for="business in filteredDayBusinesses" 
-            :x1="StandPositionMap[business.standnumber].x" 
-            :y1="StandPositionMap[business.standnumber].y" 
-            :x2="StandPositionMap[business.standnumber].x" 
-            :y2="StandPositionMap[business.standnumber].y" 
-            stroke="#D9D9D9" 
+        <line v-bind:key="'t0' + business.id" v-for="business in filteredDayBusinesses"
+            :x1="StandPositionMap[business.standnumber].x"
+            :y1="StandPositionMap[business.standnumber].y"
+            :x2="StandPositionMap[business.standnumber].x"
+            :y2="StandPositionMap[business.standnumber].y"
+            stroke="#D9D9D9"
             class="_circle"
             :id="'circle-' + business.standnumber"
             @mouseover="handleTextMouseOver(business.standnumber)"
             @mouseout="handleTextMouseOut(business.standnumber)"
         ></line>
-        <!-- <text v-if="isAdminPage" v-for="StandPosition in StandPositionMap"
+        <!-- <text v-bind:key="index" v-if="isAdminPage" v-for="StandPosition in StandPositionMap"
             dominant-baseline="middle"
             :x="StandPosition.x + ((StandPosition.text_rotation > 90 && StandPosition.text_rotation < 270) ? -30*StandPosition.text_offset_x : 30*StandPosition.text_offset_x)"
-            :y="StandPosition.y + 0*StandPosition.text_offset_y " 
+            :y="StandPosition.y + 0*StandPosition.text_offset_y "
             :text-anchor="(StandPosition.text_rotation > 90 && StandPosition.text_rotation < 270) ? 'end' : 'start'"
             :transform="'rotate(' + ((StandPosition.text_rotation > 90 && StandPosition.text_rotation < 270) ? StandPosition.text_rotation - 180 : StandPosition.text_rotation )+ ',' + StandPosition.x + ',' + StandPosition.y + ')'"
             stroke = "#e3e3e1"
@@ -193,7 +193,7 @@
             class="_business"
             :id="'business-' + business.standnumber"
         >Bedriftsnavn</text> -->
-        <text v-if="!isAdminPage" v-for="business in filteredDayBusinesses"
+        <text v-bind:key="'t1' + business.id" v-if="!isAdminPage" v-for="business in filteredDayBusinesses"
             dominant-baseline="middle"
             :x="StandPositionMap[business.standnumber].x + (StandPositionMap[business.standnumber].text_rotation > 90 && StandPositionMap[business.standnumber].text_rotation < 270 ? -30 * StandPositionMap[business.standnumber].text_offset_x : 30 * StandPositionMap[business.standnumber].text_offset_x)"
             :y="StandPositionMap[business.standnumber].y + 0 * StandPositionMap[business.standnumber].text_offset_y"
@@ -207,28 +207,28 @@
             @mouseover="handleTextMouseOver(business.standnumber)"
             @mouseout="handleTextMouseOut(business.standnumber)"
         >{{ business.name }}</text>
-        <text v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap" 
-            :x="StandPosition.x" 
-            :y="StandPosition.y" 
-            dominant-baseline="middle" 
-            text-anchor="middle" 
-            font-size="20px" 
+        <text v-bind:key="'t2' + index" v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap"
+            :x="StandPosition.x"
+            :y="StandPosition.y"
+            dominant-baseline="middle"
+            text-anchor="middle"
+            font-size="20px"
             fill="#000000"
         >{{index}}</text>
-        <text v-if="!isAdminPage" v-for="(business, index) in filteredDayBusinesses"  
-            :x="StandPositionMap[business.standnumber].x" 
-            :y="StandPositionMap[business.standnumber].y" 
-            dominant-baseline="middle" 
-            text-anchor="middle" 
-            font-size="20px" 
+        <text v-bind:key="'t3' + business.id" v-if="!isAdminPage" v-for="(business, index) in filteredDayBusinesses"
+            :x="StandPositionMap[business.standnumber].x"
+            :y="StandPositionMap[business.standnumber].y"
+            dominant-baseline="middle"
+            text-anchor="middle"
+            font-size="20px"
             fill="#000000"
         >{{index + 1}}</text>
-        <text v-for="(business, index) in filteredDayBusinesses" 
-            :x="1000" 
-            :y="200 + index * 50" 
-            dominant-baseline="middle" 
-            text-anchor="left" 
-            font-size="40px" 
+        <text v-bind:key="'t4' + business.id" v-for="(business, index) in filteredDayBusinesses"
+            :x="1000"
+            :y="200 + index * 50"
+            dominant-baseline="middle"
+            text-anchor="left"
+            font-size="40px"
             fill="#D9D9D9"
             @mouseover="handleTextMouseOver(business.standnumber)"
             @mouseout="handleTextMouseOut(business.standnumber)"
@@ -297,15 +297,6 @@ export default {
     },
     created() {
     this.StandPositionMap = StandPositionData;
-    // this.circles = data.map(item => {
-    //   return { x: item.position.x, y: item.position.y };
-    // });
-    // this.names = data.map((item, index) => {
-    //   const newX = 1200 + Math.floor(index / 15) * 400; // Starting from 445 and adding 160 every 15 elements
-    //   const newY = 200 + 40*(index%15);
-    //   //const newText = index + item.name;
-    //   return { ...item, text_pos: { ...item.text_pos, x: newX, y: newY } };
-    // });
     },
     methods: {
     handleTextMouseOver(standnumber) {
@@ -370,8 +361,6 @@ template{
 ._business._business.hovered{
     font-size: 4em;
 }
-
-
 
 /*button*/
 .toggle_holder{
