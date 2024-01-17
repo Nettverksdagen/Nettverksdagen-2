@@ -181,18 +181,18 @@
             @mouseover="handleTextMouseOver(business.standnumber)"
             @mouseout="handleTextMouseOut(business.standnumber)"
         ></line>
-        <text v-if="isAdminPage" v-for="StandPosition in StandPositionMap"
+        <!-- <text v-if="isAdminPage" v-for="StandPosition in StandPositionMap"
             dominant-baseline="middle"
             :x="StandPosition.x + ((StandPosition.text_rotation > 90 && StandPosition.text_rotation < 270) ? -30*StandPosition.text_offset_x : 30*StandPosition.text_offset_x)"
             :y="StandPosition.y + 0*StandPosition.text_offset_y " 
-            :text-anchor = "(StandPosition.text_rotation > 90 && StandPosition.text_rotation < 270) ? 'end' : 'start'"
+            :text-anchor="(StandPosition.text_rotation > 90 && StandPosition.text_rotation < 270) ? 'end' : 'start'"
             :transform="'rotate(' + ((StandPosition.text_rotation > 90 && StandPosition.text_rotation < 270) ? StandPosition.text_rotation - 180 : StandPosition.text_rotation )+ ',' + StandPosition.x + ',' + StandPosition.y + ')'"
             stroke = "#e3e3e1"
             fill="#e3e3e1"
             font-size="1.5em"
             class="_business"
             :id="'business-' + business.standnumber"
-        >Bedriftsnavn</text>
+        >Bedriftsnavn</text> -->
         <text v-if="!isAdminPage" v-for="business in filteredDayBusinesses"
             dominant-baseline="middle"
             :x="StandPositionMap[business.standnumber].x + (StandPositionMap[business.standnumber].text_rotation > 90 && StandPositionMap[business.standnumber].text_rotation < 270 ? -30 * StandPositionMap[business.standnumber].text_offset_x : 30 * StandPositionMap[business.standnumber].text_offset_x)"

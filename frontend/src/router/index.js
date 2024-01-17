@@ -53,6 +53,7 @@ export default new Router({
           component: ProgramView,
           meta: {title: 'Program'}
         },
+        
         {
           path: 'stillinger',
           name: 'Listings',

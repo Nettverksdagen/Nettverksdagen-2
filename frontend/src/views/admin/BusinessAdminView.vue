@@ -56,7 +56,7 @@
         </b-card>
       </div>
       <div class="d-none d-md-block col-4">
-        <stand-map :isAdminPage=true style="width: 100%;"></stand-map>
+        <StandMap :isAdminPage=true></StandMap>
         <!-- <b-jumbotron bg-variant="success" text-variant="white" :header="numBusinesses + ' bedrifter'" lead="lagt ut så langt." class="h-100">
         </b-jumbotron> -->
       </div>
