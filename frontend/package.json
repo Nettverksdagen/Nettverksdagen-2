@@ -39,7 +39,8 @@
     "vue-router": "^3.5.3",
     "vuejs-datepicker": "^1.6.2",
     "vuex": "^3.6.2",
-    "vuex-persistedstate": "^2.7.1"
+    "vuex-persistedstate": "^2.7.1",
+    "vue-toggles": "^1.1.4"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
