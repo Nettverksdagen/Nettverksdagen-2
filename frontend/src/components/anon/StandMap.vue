@@ -151,37 +151,17 @@
 
     </svg>
     <svg class="standkart" viewBox="0 0 2116 2123">
-        <text
-            x="100"
-            y="200"
-            dominant-baseline="middle"
-            text-anchor="left"
-            font-size="80px"
-            fill="#D9D9D9"
-        >Standkart</text>
-        <line v-bind:key="index" v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap"
-            :x1="StandPosition.x"
-            :y1="StandPosition.y"
-            :x2="StandPosition.x"
-            :y2="StandPosition.y"
-            stroke="#898989"
-            class="_circle"
-            :id="'circle-' + index"
-            @mouseover="handleTextMouseOver(business.standnumber)"
-            @mouseout="handleTextMouseOut(business.standnumber)"
-        ></line>
-        <line v-bind:key="'t0' + business.id" v-for="business in filteredDayBusinesses"
-            :x1="StandPositionMap[business.standnumber].x"
-            :y1="StandPositionMap[business.standnumber].y"
-            :x2="StandPositionMap[business.standnumber].x"
-            :y2="StandPositionMap[business.standnumber].y"
-            stroke="#D9D9D9"
-            class="_circle"
-            :id="'circle-' + business.standnumber"
-            @mouseover="handleTextMouseOver(business.standnumber)"
-            @mouseout="handleTextMouseOut(business.standnumber)"
-        ></line>
-        <!-- <text v-bind:key="index" v-if="isAdminPage" v-for="StandPosition in StandPositionMap"
+      <text x="100" y="200" dominant-baseline="middle" text-anchor="left" font-size="80px" fill="#D9D9D9">Standkart</text>
+      <line v-bind:key="index" v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap" :x1="StandPosition.x"
+        :y1="StandPosition.y" :x2="StandPosition.x" :y2="StandPosition.y" stroke="#898989" class="_circle"
+        :id="'circle-' + index" @mouseover="handleTextMouseOver(business.standnumber)"
+        @mouseout="handleTextMouseOut(business.standnumber)"></line>
+      <line v-bind:key="'t0' + business.id" v-for="business in filteredDayBusinesses"
+        :x1="StandPositionMap[business.standnumber].x" :y1="StandPositionMap[business.standnumber].y"
+        :x2="StandPositionMap[business.standnumber].x" :y2="StandPositionMap[business.standnumber].y" stroke="#D9D9D9"
+        class="_circle" :id="'circle-' + business.standnumber" @mouseover="handleTextMouseOver(business.standnumber)"
+        @mouseout="handleTextMouseOut(business.standnumber)"></line>
+      <!-- <text v-bind:key="index" v-if="isAdminPage" v-for="StandPosition in StandPositionMap"
             dominant-baseline="middle"
             :x="StandPosition.x + ((StandPosition.text_rotation > 90 && StandPosition.text_rotation < 270) ? -30*StandPosition.text_offset_x : 30*StandPosition.text_offset_x)"
             :y="StandPosition.y + 0*StandPosition.text_offset_y "
@@ -193,46 +173,25 @@
             class="_business"
             :id="'business-' + business.standnumber"
         >Bedriftsnavn</text> -->
-        <text v-bind:key="'t1' + business.id" v-if="!isAdminPage" v-for="business in filteredDayBusinesses"
-            dominant-baseline="middle"
-            :x="StandPositionMap[business.standnumber].x + (StandPositionMap[business.standnumber].text_rotation > 90 && StandPositionMap[business.standnumber].text_rotation < 270 ? -30 * StandPositionMap[business.standnumber].text_offset_x : 30 * StandPositionMap[business.standnumber].text_offset_x)"
-            :y="StandPositionMap[business.standnumber].y + 0 * StandPositionMap[business.standnumber].text_offset_y"
-            :text-anchor="(StandPositionMap[business.standnumber].text_rotation > 90 && StandPositionMap[business.standnumber].text_rotation < 270 ? 'end' : 'start')"
-            :transform="'rotate(' + (StandPositionMap[business.standnumber].text_rotation > 90 && StandPositionMap[business.standnumber].text_rotation < 270 ? StandPositionMap[business.standnumber].text_rotation - 180 : StandPositionMap[business.standnumber].text_rotation) + ',' + StandPositionMap[business.standnumber].x + ',' + StandPositionMap[business.standnumber].y + ')'"
-            stroke = "#e3e3e1"
-            fill="#e3e3e1"
-            font-size="1.5em"
-            class="_business"
-            :id="'business-' + business.standnumber"
-            @mouseover="handleTextMouseOver(business.standnumber)"
-            @mouseout="handleTextMouseOut(business.standnumber)"
-        >{{ business.name }}</text>
-        <text v-bind:key="'t2' + index" v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap"
-            :x="StandPosition.x"
-            :y="StandPosition.y"
-            dominant-baseline="middle"
-            text-anchor="middle"
-            font-size="20px"
-            fill="#000000"
-        >{{index}}</text>
-        <text v-bind:key="'t3' + business.id" v-if="!isAdminPage" v-for="(business, index) in filteredDayBusinesses"
-            :x="StandPositionMap[business.standnumber].x"
-            :y="StandPositionMap[business.standnumber].y"
-            dominant-baseline="middle"
-            text-anchor="middle"
-            font-size="20px"
-            fill="#000000"
-        >{{index + 1}}</text>
-        <text v-bind:key="'t4' + business.id" v-for="(business, index) in filteredDayBusinesses"
-            :x="1000"
-            :y="200 + index * 50"
-            dominant-baseline="middle"
-            text-anchor="left"
-            font-size="40px"
-            fill="#D9D9D9"
-            @mouseover="handleTextMouseOver(business.standnumber)"
-            @mouseout="handleTextMouseOut(business.standnumber)"
-        >{{index + 1}}.{{ business.name }}</text>
+      <text v-bind:key="'t1' + business.id" v-if="!isAdminPage" v-for="business in filteredDayBusinesses"
+        dominant-baseline="middle"
+        :x="StandPositionMap[business.standnumber].x + (StandPositionMap[business.standnumber].text_rotation > 90 && StandPositionMap[business.standnumber].text_rotation < 270 ? -30 * StandPositionMap[business.standnumber].text_offset_x : 30 * StandPositionMap[business.standnumber].text_offset_x)"
+        :y="StandPositionMap[business.standnumber].y + 0 * StandPositionMap[business.standnumber].text_offset_y"
+        :text-anchor="(StandPositionMap[business.standnumber].text_rotation > 90 && StandPositionMap[business.standnumber].text_rotation < 270 ? 'end' : 'start')"
+        :transform="'rotate(' + (StandPositionMap[business.standnumber].text_rotation > 90 && StandPositionMap[business.standnumber].text_rotation < 270 ? StandPositionMap[business.standnumber].text_rotation - 180 : StandPositionMap[business.standnumber].text_rotation) + ',' + StandPositionMap[business.standnumber].x + ',' + StandPositionMap[business.standnumber].y + ')'"
+        stroke="#e3e3e1" fill="#e3e3e1" font-size="1.5em" class="_business" :id="'business-' + business.standnumber"
+        @mouseover="handleTextMouseOver(business.standnumber)" @mouseout="handleTextMouseOut(business.standnumber)">{{
+          business.name }}</text>
+      <text v-bind:key="'t2' + index" v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap"
+        :x="StandPosition.x" :y="StandPosition.y" dominant-baseline="middle" text-anchor="middle" font-size="20px"
+        fill="#000000">{{ index }}</text>
+      <text v-bind:key="'t3' + business.id" v-if="!isAdminPage" v-for="(business, index) in filteredDayBusinesses"
+        :x="StandPositionMap[business.standnumber].x" :y="StandPositionMap[business.standnumber].y"
+        dominant-baseline="middle" text-anchor="middle" font-size="20px" fill="#000000">{{ index + 1 }}</text>
+      <text v-bind:key="'t4' + business.id" v-for="(business, index) in filteredDayBusinesses" :x="1000"
+        :y="200 + index * 50" dominant-baseline="middle" text-anchor="left" font-size="40px" fill="#D9D9D9"
+        @mouseover="handleTextMouseOver(business.standnumber)"
+        @mouseout="handleTextMouseOut(business.standnumber)">{{ index + 1 }}.{{ business.name }}</text>
 
     </svg>
     <div class="toggle_holder">
@@ -266,36 +225,35 @@ export default {
         return this.businesses.filter(business => business.days === 'Dag 2' || business.days === 'Begge dager').slice().sort((a, b) => a.standnumber - b.standnumber)
       }
     }
-    },
-    data() {
-        return {
-            circles: [],
-            names: [],
-            StandPositionMap: [],
-            isDayOne: true
-        }
-    },
-    watch: {
-     checked(val) {
-       this.$emit('input', this.checked)
-     }
-    },
-    created() {
-    this.StandPositionMap = StandPositionData;
-    },
-    handleTextMouseOut (standnumber) {
-      const circle = document.getElementById(`circle-${standnumber}`)
-      const business = document.getElementById(`business-${standnumber}`)
-
-      circle.classList.remove('hovered')
-      business.classList.remove('hovered')
-    },
-    changeInput () {
-      this.checked = !this.checked
-      this.$emit('input', !this.value)
+  },
+  data () {
+    return {
+      circles: [],
+      names: [],
+      StandPositionMap: [],
+      isDayOne: true
     }
-  }
+  },
+  watch: {
+    checked (val) {
+      this.$emit('input', this.checked)
+    }
+  },
+  created () {
+    this.StandPositionMap = StandPositionData
+  },
+  handleTextMouseOut (standnumber) {
+    const circle = document.getElementById(`circle-${standnumber}`)
+    const business = document.getElementById(`business-${standnumber}`)
 
+    circle.classList.remove('hovered')
+    business.classList.remove('hovered')
+  },
+  changeInput () {
+    this.checked = !this.checked
+    this.$emit('input', !this.value)
+  }
+}
 
 </script>
 
@@ -403,9 +361,11 @@ template {
 input:checked+.slider {
   background-color: transparent;
 }
+
 input:focus+.slider {
   box-shadow: 0 0 1px #2567A2;
 }
+
 input:checked+.slider:before {
   -webkit-transform: translateX(31px);
   -ms-transform: translateX(31px);
@@ -415,10 +375,12 @@ input:checked+.slider:before {
   transition: .7s;
   border: solid 2px #fff;
 }
+
 .slider.round {
   border-radius: 24px;
   border-color: #ffffff;
 }
+
 .slider.round:before {
   border-radius: 50%;
   border-color: #ffffff;
