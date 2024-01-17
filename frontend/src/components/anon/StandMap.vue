@@ -219,7 +219,6 @@ export default {
       return b
     },
     filteredDayBusinesses () {
-      console.log(this.businesses)
       if (this.isDayOne) {
         return this.businesses.filter(business => business.days === 'Dag 1' || business.days === 'Begge dager').slice().sort((a, b) => a.standnumber - b.standnumber)
       } else {

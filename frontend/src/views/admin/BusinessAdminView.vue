@@ -88,7 +88,7 @@ import { mapMutations } from 'vuex'
 import { fileUploader } from '@/services'
 import EditButton from '@/components/admin/EditButton.vue'
 import DeleteButton from '@/components/admin/DeleteButton.vue'
-import StandMap from '../../components/anon/StandMap.vue'
+import StandMap from '@/components/anon/StandMap.vue'
 export default {
   name: 'BusinessAdminView',
   components: {
