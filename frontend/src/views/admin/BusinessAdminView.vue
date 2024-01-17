@@ -26,6 +26,9 @@
                 <b-form-group label="Dager på stand" label-for="business-days-input">
                   <b-form-select v-model="business.days" :options="businessDays" id="business-days-input" required></b-form-select>
                 </b-form-group>
+                <b-form-group label="Standnummer" label-for="standnummer">
+                  <b-form-input v-model="business.standnumber" id="standnummer" type="number" required></b-form-input>
+                </b-form-group>
               </div>
               <div class="col-12 col-md-6">
                 <b-form-group label="Pakke" label-for="business-level-input">
@@ -53,8 +56,9 @@
         </b-card>
       </div>
       <div class="d-none d-md-block col-4">
-        <b-jumbotron bg-variant="success" text-variant="white" :header="numBusinesses + ' bedrifter'" lead="lagt ut så langt." class="h-100">
-        </b-jumbotron>
+        <StandMap :isAdminPage=true></StandMap>
+        <!-- <b-jumbotron bg-variant="success" text-variant="white" :header="numBusinesses + ' bedrifter'" lead="lagt ut så langt." class="h-100">
+        </b-jumbotron> -->
       </div>
     </b-row>
     <b-row>
@@ -84,12 +88,14 @@ import { mapMutations } from 'vuex'
 import { fileUploader } from '@/services'
 import EditButton from '@/components/admin/EditButton.vue'
 import DeleteButton from '@/components/admin/DeleteButton.vue'
+import StandMap from '../../components/anon/StandMap.vue'
 export default {
   name: 'BusinessAdminView',
   components: {
     ImagePreview,
     EditButton,
-    DeleteButton
+    DeleteButton,
+    StandMap
   },
   data: function () {
     return {
@@ -98,6 +104,7 @@ export default {
         { key: 'website_url', label: 'Website Url' }, { key: 'level', label: 'Level' },
         { key: 'days', label: 'Days' },
         { key: 'textShort', label: 'Text' },
+        { key: 'standnumber', label: 'Standnummer' },
         { key: 'edit', label: '' }
       ],
       business: {

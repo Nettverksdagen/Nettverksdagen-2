@@ -82,6 +82,7 @@ class Business(BusinessWithLogo):
     level = models.CharField(max_length=250, choices=LEVELTYPECHOICE, default=GOLD)
     text = models.TextField()
     days = models.CharField(max_length=250, choices=DAYSCHOICE, default=DAYS_NONE)
+    standnumber = models.IntegerField(default=10)
 
 
 class Sponsor(BusinessWithLogo):
