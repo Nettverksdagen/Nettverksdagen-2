@@ -96,7 +96,7 @@ export default {
     EditButton,
     DeleteButton,
     StandMap
-},
+  },
   data: function () {
     return {
       fields: [
