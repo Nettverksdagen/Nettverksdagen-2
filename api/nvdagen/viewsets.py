@@ -1,13 +1,15 @@
 from rest_framework import viewsets, status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from .models import Listing, Business, Sponsor, TeamMember, Form, Participant, Program
-from .serializers import ListingSerializer, BusinessSerializer, SponsorSerializer, TeamMemberSerializer, FormSerializer, ParticipantSerializer, ProgramSerializer
+from .models import Listing, Business, Sponsor, TeamMember, Form, Participant, Program, SpinTheWheel
+from .serializers import ListingSerializer, BusinessSerializer, SponsorSerializer, TeamMemberSerializer, FormSerializer, ParticipantSerializer, ProgramSerializer, SpinTheWheelSerializer
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from datetime import datetime, time
 from babel.dates import format_datetime, format_time
+
+from .permissions import AllowPostOnlyPermission
 
 
 class ListingViewSet(viewsets.ModelViewSet):
@@ -150,3 +152,21 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                         return Response(response, status = status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         return response
+
+class SpinTheWheelViewSet(viewsets.ModelViewSet):
+    serializer_class = SpinTheWheelSerializer
+    queryset = SpinTheWheel.objects.all()
+    permission_classes = (AllowPostOnlyPermission,)
+
+    def create(self, request):
+        data = request.data
+        if not SpinTheWheel.objects.filter(business=data['business'], email=data['email']).exists():
+            return super().create(request)
+        else:
+            response = {'message': 'Already registered'}
+            return Response(response, status = status.HTTP_400_BAD_REQUEST)
+
+
+
+
+        
