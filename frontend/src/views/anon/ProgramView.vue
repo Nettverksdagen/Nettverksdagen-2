@@ -1,49 +1,33 @@
 <template>
-    <Content>
-      <div class="program">
-        <h1 class="text-center">Program</h1>
-        <!-- <p class="text-center description mt-3 mb-2">{{$t('program22')}}</p> -->
-        <!-- <h4 class="text-center font-weight-bold"><a href="#stand-map-header">Se standkart her!</a></h4> -->
-        <div :key="'programDay' + index" v-for="(day, index) in program">
-          <h3 class="font-weight-bold">{{formatDate(day[0].timeStart)}}</h3>
-          <div class="timeline">
-            <div :key="'dayItem' + item.id" v-for="(item) in day">
-              <ProgramItem
-              :timeStart="item.timeStart"
-              :timeEnd="item.timeEnd"
-              :place="item.place"
-              :header="item.header"
-              :paragraph="item.paragraph"
-              :registration="item.registration"
-              :maxRegistered="item.maxRegistered"
-              :registered="item.registered"
-              :cancelEmail="item.cancelEmail"
-              :registrationStart="item.registrationStart"
-              :registrationEnd="item.registrationEnd"
-              :name="item.id"
-              >
-              </ProgramItem>
+  <Content>
+    <div class="program">
+      <h1 class="text-center">Program</h1>
+      <Carousel :perPage="itemsPerPage">
+        <Slide class="program-day" :key="'programDay' + index" v-for="(day, index) in program">
+          <div class="timeline-child">
+            <h3 class="font-weight-bold">{{ formatDate(day[0].timeStart) }}</h3>
+            <div class="timeline">
+              <div :key="'dayItem' + item.id" v-for="(item) in day">
+                <ProgramItem  :timeStart="item.timeStart"
+                              :header="item.header"
+                              :name="item.id"
+                              :timeEnd="item.timeEnd"
+                              :place="item.place">
+                </ProgramItem>
+              </div>
             </div>
           </div>
-        </div>
-        <div id="bankett">
-        </div>
-      </div>
+        </Slide>
+      </Carousel>
+    </div>
 
-      <!-- Uncomment this to get the stand maps from 2020 at the bottom. Disabled for 2021 since it was held digitally.
-      <h2 id="stand-map-header" class="text-center mb-3">Standkart</h2>
-      <h3 class="text-center mb-3">29. januar</h3>
-      <img class="stand-map mb-5" src="@/assets/standkart-dag1.png">
-      <h3 class="text-center mb-3">30. januar</h3>
-      <img class="stand-map mb-5" src="@/assets/standkart-dag2.png">
-      -->
-
-    </Content>
+  </Content>
 </template>
 
 <script>
 import Content from '@/components/common/Content.vue'
 import ProgramItem from '@/components/anon/ProgramItem.vue'
+import {Carousel, Slide} from 'vue-carousel'
 
 function isSameDay (lhs, rhs) {
   return (
@@ -57,17 +41,38 @@ export default {
   name: 'ProgramView',
   components: {
     Content,
-    ProgramItem
+    ProgramItem,
+    Carousel,
+    Slide
   },
+
+  data () {
+    return {
+      itemsPerPage: 3 // Deafault number of days shown
+    }
+  },
+
   methods: {
     formatDate (dateObj) {
       let months = ['januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'desember']
       let date = dateObj.getDate()
       let month = dateObj.getMonth()
       return String(date) + '. ' + months[month]
+    },
+
+    updateItemsPerPage () {
+      if (window.innerWidth < 768) {
+        this.itemsPerPage = 1
+      } else if (window.innerWidth < 1430) {
+        this.itemsPerPage = 2
+      } else {
+        this.itemsPerPage = 3
+      }
     }
+
   },
   computed: {
+
     program: function () {
       let prog = this.$store.getters['program/anonProgram']
 
@@ -92,88 +97,112 @@ export default {
 
       return days
     }
+  },
+
+  mounted () {
+    this.updateItemsPerPage()
+    window.addEventListener('resize', this.updateItemsPerPage)
+  },
+
+  beforeDestroy () {
+  // Remove the window resize event listener when the component is destroyed
+    window.removeEventListener('resize', this.updateItemsPerPage)
   }
+
 }
 </script>
 
 <style scoped lang="scss">
-  .description {
-    font-size:1.1em;
-  }
-  .stand-map {
-    height: calc(100% - 2em);
-    background: #dee2e2;
-    border-radius: 8px;
-    padding: 3em 1em;
-    width: 100%;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.15);
+.description {
+  font-size: 1.1em;
+}
 
-    @media(min-width: 576px) {
-      padding: 3em 1em;
-    }
+.timeline {
+  position: relative;
+  margin: 0em 0 3em 6em;
+  padding: 1rem 1rem;
+  vertical-align: center;
+  height: 88%;
+}
 
-    @media(min-width: 768px) {
-      padding: 3em 4em;
-    }
+.timeline-child {
+  border: 1px solid rgb(160, 160, 160);
+  border-radius: 20px;
+  background-color: #f4f4f4;
+  padding: 1rem 1rem;
+  margin: 0 8%;
+  height: 100%;
+}
 
-    @media(min-width: 966px) {
-      padding: 4em 14em;
-    }
+.timeline::after {
+  content: '';
+  position: absolute;
+  left: 16px;
+  width: 6px;
+  background-color: #1d4844;
+  top: 0;
+  bottom: 0;
+  margin-left: -20px;
+}
+
+.btn-primary {
+  background-color: #1d4844;
+  color: white !important;
+  border-radius: 25px;
+  border: none;
+  padding: 10px 20px;
+}
+
+.img-company {
+  height: 2rem;
+  max-width: 100%;
+  margin-right: 1rem;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: 60;
+  text-align: center;
+  color: black;
+  margin-bottom: 30px;
+  margin-top: 40px;
+
+  @media(min-width: 768px) {
+    text-align: left;
   }
-  .timeline {
-    position: relative;
-    margin: 1em 0 3em 6em;
-  }
+}
+
+// @media(max-width: 966px) {
+//   h3 {
+//     font-size: 1em;
+//   }
+
+//   h4 {
+//     font-size: 0.8em;
+
+//   }
+// }
+
+@media(max-width: 768px) {
   .timeline::after {
-    content: '';
-    position: absolute;
-    width: 6px;
-    background-color: #1d4844;
-    top: 0;
-    bottom: 0;
-    margin-left: -3px;
+    margin-left: -37px;
   }
 
-  .btn-primary {
-    background-color: #1d4844;
-    color: white !important;
-    border-radius: 25px;
-    border: none;
-    padding: 10px 20px;
+  .timeline-parent::-webkit-scrollbar {
+    display: none;
   }
 
-  .img-company {
-    height: 2rem;
-    max-width: 100%;
-    margin-right: 1rem;
+  .program-day {
+    width: 100vw;
+    min-width: 100vw;
+    //scroll-snap-align: start;
   }
 
-  h1 {
-    font-size: 36px;
-    font-weight: 600;
-    text-align: center;
-    color: black;
-    margin-bottom: 30px;
-    margin-top: 40px;
-    @media(min-width: 768px) {
-      text-align: left;
-    }
+  .timeline-child {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 350px;
   }
-
-  @media(max-width: 966px) {
-    h3 {
-      font-size: 1.3em;
-    }
-    h4 {
-      font-size: 1.2em;
-
-    }
-  }
-
-  @media(max-width: 768px) {
-    .timeline::after {
-      margin-left: -20px;
-    }
-  }
-
+}
 </style>

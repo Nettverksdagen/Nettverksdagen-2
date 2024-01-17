@@ -8,7 +8,12 @@
       <div class="card-body">
         <div class="header">
           <div v-if="header">
-            <h3 class="font-weight-bold">{{header}}</h3>
+            <router-link :to="{ name: 'ProgramDetails', params: { programReferer: nameUrlEncoded } }">
+              <h3 class='font-header'>{{ header }}</h3>
+              <!-- <div class="businessContainer">
+                  <p class='description'>{{ header }}</p>
+                </div> -->
+              </router-link>
           </div>
           <div v-if="registration && maxRegistered">
             <h5 v-if="registered<=maxRegistered">
@@ -31,11 +36,11 @@
         <div class="footer">
           <div class="inline">
             <div v-if="place" class="d-block d-md-inline">
-              <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>
-              <div v-html="place" class="d-inline"/>
+              <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="map"/>
+              <div v-html="place" class="d-inline map-text"/><br>
             </div>
             <div v-if="timeEnd" class="d-inline">
-              <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-md-1 ml-md-2"/>
+              <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="clock"/>
               {{formatTime(timeStart)}} - {{formatTime(timeEnd)}}
             </div>
           </div>
@@ -44,97 +49,59 @@
           </div>
           <div v-if="registration">
               <div v-if="submitted">
-                <div>{{$t('submitted')}}</div>
+                <div>{{ $t('submitted') }}</div>
               </div>
-              <div v-else-if="enableRegistration && registered<maxRegistered">
-                <div>{{$t('påmeldingstart')}}</div>
+              <div v-else-if="enableRegistration && registered < maxRegistered">
+                <div>{{ $t('påmeldingstart') }}</div>
               </div>
-              <div v-else-if="enableRegistration && registered>=maxRegistered">
-                <div>{{$t('vilbliventeliste')}}</div>
+              <div v-else-if="enableRegistration && registered >= maxRegistered">
+                <div>{{ $t('vilbliventeliste') }}</div>
               </div>
               <div v-else-if="afterRegistration">
-                <div>{{$t('regfinish')}}</div>
+                <div>{{ $t('regfinish') }}</div>
               </div>
               <div v-else>
-              <div>{{$t('regtobegin') + ' ' + formatDate(registrationStart)}}</div>
+                <div>{{ $t('regtobegin') + ' ' + formatDate(registrationStart) }}</div>
               </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div>
-    <b-modal :id="'dialogForm'+name" :title="'Meld deg på: '+header" v-model="show" centered>
-      <b-form>
-        <b-form-group
-        :id="'input-group-name'+name"
-        :label-for="'input-name' + name"
-        description='Skriv inn navnet ditt slik at vi vet hvem som melder seg på'
-      >
-        <b-form-input
-          :id="'input-name' + name"
-          v-model="form.name"
-          required
-          placeholder='Navn'
-        ></b-form-input>
-      </b-form-group>
-       <b-form-group
-        :id="'input-group-email'+name"
-        :label-for="'input-email' + name"
-        description='Skriv inn emailen din slik at vi kan sende deg en email for påmelding.'
-      >
-        <b-form-input
-          :id="'input-email' + name"
-          type="email"
-          v-model="form.email"
-          required
-          placeholder='E-post'
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group
-       :id="'input-group-study'+name"
-       :label-for="'input-study' + name"
-       description='Skriv inn det du studerer.'
-     >
-       <b-form-input
-         :id="'input-study' + name"
-         v-model="form.study"
-         required
-         placeholder='Study'
-       ></b-form-input>
-     </b-form-group>
-     <b-form-group
-      :id="'input-group-year'+name"
-      :label-for="'input-year' + name"
-      description='Skriv inn hvilket år du er på.'
-    >
-      <b-form-input
-        :id="'input-year' + name"
-        v-model="form.year"
-        required
-        placeholder='Year'
-      ></b-form-input>
-    </b-form-group>
-     </b-form>
-      <template v-slot:modal-footer>
+    <div>
+      <b-modal :id="'dialogForm' + name" :title="'Meld deg på: ' + header" v-model="show" centered>
+        <b-form>
+          <b-form-group :id="'input-group-name' + name" :label-for="'input-name' + name"
+            description='Skriv inn navnet ditt slik at vi vet hvem som melder seg på'>
+            <b-form-input :id="'input-name' + name" v-model="form.name" required placeholder='Navn'></b-form-input>
+          </b-form-group>
+          <b-form-group :id="'input-group-email' + name" :label-for="'input-email' + name"
+            description='Skriv inn emailen din slik at vi kan sende deg en email for påmelding.'>
+            <b-form-input :id="'input-email' + name" type="email" v-model="form.email" required
+              placeholder='E-post'></b-form-input>
+          </b-form-group>
+          <b-form-group :id="'input-group-study' + name" :label-for="'input-study' + name"
+            description='Skriv inn det du studerer.'>
+            <b-form-input :id="'input-study' + name" v-model="form.study" required placeholder='Study'></b-form-input>
+          </b-form-group>
+          <b-form-group :id="'input-group-year' + name" :label-for="'input-year' + name"
+            description='Skriv inn hvilket år du er på.'>
+            <b-form-input :id="'input-year' + name" v-model="form.year" required placeholder='Year'></b-form-input>
+          </b-form-group>
+        </b-form>
+        <template v-slot:modal-footer>
           <div>
-            <b-button
-            variant='outline-secondary'
-            @click="onCancel"
-          >
-            Avbryt
-          </b-button>
-          <b-button
-            variant='primary'
-            @click="onSubmit"
-          >
-            Meld på
-          </b-button>
+            <b-button variant='outline-secondary' @click="onCancel">
+              Avbryt
+            </b-button>
+            <b-button variant='primary' @click="onSubmit">
+              Meld på
+            </b-button>
           </div>
-      </template>
-    </b-modal>
+        </template>
+      </b-modal>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -185,6 +152,9 @@ export default {
         return false
       }
       return true
+    },
+    nameUrlEncoded: function () {
+      return this.header.replace(/\s+/g, '-').toLowerCase()
     }
   },
   methods: {
@@ -204,7 +174,7 @@ export default {
       return this.formatTime(dateObj) + ' ' + day + '.' + month + '.' + year
     },
     openDialog () {
-      this.$data.form = {email: '', name: '', study: '', year: ''}
+      this.$data.form = { email: '', name: '', study: '', year: '' }
       this.$data.show = true
     },
     onSubmit (e) {
@@ -216,14 +186,14 @@ export default {
         this.submitForm()
         // Clear data
         this.$data.show = false
-        this.$data.form = {email: '', name: '', study: '', year: ''}
+        this.$data.form = { email: '', name: '', study: '', year: '' }
         this.$data.submitted = true
       }
     },
     submitForm () {
-      console.log({event: this.$props.name, ...this.$data.form})
+      console.log({ event: this.$props.name, ...this.$data.form })
       axios.post(process.env.VUE_APP_API_HOST +
-        '/api/participant/', {event: this.$props.name, ...this.$data.form})
+        '/api/participant/', { event: this.$props.name, ...this.$data.form })
         .then((response) => console.log(response))
         .catch((e) => {
           console.log('Error in submitForm')
@@ -232,7 +202,7 @@ export default {
     },
     onCancel (e) {
       e.preventDefault()
-      this.$data.form = {email: '', name: '', study: '', year: ''}
+      this.$data.form = { email: '', name: '', study: '', year: '' }
       this.$data.show = false
     },
     checkValidForm (check) {
@@ -266,7 +236,7 @@ export default {
             if (inputedCode === code) {
               if (confirm('Er du sikker på at du vil melde av ' + participant.name + '?')) {
                 axios.delete(process.env.VUE_APP_API_HOST + '/api/participant/' +
-                  participant.id + '/').then(_ => {
+                    participant.id + '/').then(_ => {
                   alert(participant.name + ' er nå avmeldt.')
                 }).catch(_ => {
                   alert('Det oppsto en feil under avmeldingen. Vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
@@ -294,46 +264,56 @@ export default {
     border-radius: 20px;
     border-width: 2px;
     border-color: var(--line-border-color);
-    background-color: white;
+    background-color: #f4f4f4;
   }
   .numberofpeople {
     display: inline;
   }
 
   .timeline-item {
-    padding: 15px 0 15px 40px;
+    padding: 15px 0 0px 0px;
     position: relative;
     background-color: inherit;
     width: 100%;
   }
 
-  /* Add arrows to the right container (pointing left) */
-  .timeline-item::before {
-    content: " ";
-    height: 0;
-    position: absolute;
-    top: 22px;
-    width: 0;
-    z-index: 1;
-    left: 30px;
-    border-width: 10px 10px 10px 0;
-    border-color: transparent white transparent transparent;
+  .card-body {
+    padding-right: 0;
+    padding-top: 0;
+    @media(max-width: 768px) {
+      margin-right: 15px;
+      flex-direction: row-reverse;
+      padding-top: 13px;
+    }
   }
 
-  /* The circles on the timeline */
-  .timeline-item::after {
-    content: '';
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    right: -17px;
-    background-color: white;
-    border: 4px solid var(--primary-color);
-    top: 18px;
-    border-radius: 50%;
-    z-index: 1;
-    left: -13px;
-  }
+/* Add arrows to the right container (pointing left) */
+.timeline-item::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  left: 30px;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent white transparent transparent;
+}
+
+/* The circles on the timeline */
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  right: -17px;
+  background-color: white;
+  border: 4px solid var(--primary-color);
+  top: 18px;
+  border-radius: 50%;
+  z-index: 1;
+  left:  -30px;
+}
 
   .header {
     display: flex;
@@ -346,74 +326,104 @@ export default {
       margin-bottom: 0;
     }
   }
-
-  .footer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-bottom: 0px;
-    @media(min-width: 992px) {
-      flex-direction: row;
-      margin-bottom: 0;
+  .font-header {
+    font-size: 25px;
+    color: #252525;
+    text-align: left;
+    font-weight: bold;
+    margin-right: -10px;
+    @media(max-width: 768px) {
+      margin-right: -42px;
     }
   }
 
-  .button {
-    display: flex;
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 0px;
+
+  @media(min-width: 992px) {
     flex-direction: row;
-    margin-bottom: 10px;
-    @media(min-width: 768px) {
-      margin-right: 15px;
-      flex-direction: row-reverse;
-    }
+    margin-bottom: 0;
   }
+}
 
+.map {
+  margin-left: 2px;
+}
+.map-text {
+  margin-left: 4px;
+}
+
+.clock {
+  margin-right: 2px;
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+
+  @media(min-width: 768px) {
+    margin-right: 15px;
+    flex-direction: row-reverse;
+  }
+}
+
+.timestamp {
+  position: absolute;
+  left: -105px;
+  top: 16px;
+}
+
+.description {
+  font-size: 1.1em;
+}
+
+/deep/ .modal-content {
+  border: none;
+  border-radius: 20px;
+  background-color: var(--line-border-color);
+  color: black;
+}
+
+/deep/ .modal-header {
+  border-bottom: none;
+}
+
+/deep/ .modal-footer {
+  border: none;
+}
+
+/deep/ .modal-title {
+  text-align: center;
+  width: 100%;
+}
+
+@media(max-width: 768px) {
   .timestamp {
-    position: absolute;
-    left: -82px;
-    top: 16px;
-  }
+    top: 28px;
+    left: -102px;
+    margin-left: 0px
 
-  .description {
-    font-size:1.1em;
-  }
-
-  /deep/ .modal-content {
-    border: none;
-    border-radius: 20px;
-    background-color: var(--line-border-color);
-    color: black;
-  }
-  /deep/ .modal-header {
-    border-bottom: none;
-  }
-  /deep/ .modal-footer {
-    border: none;
-  }
-  /deep/ .modal-title {
-    text-align: center;
-    width: 100%;
-  }
-  @media(max-width: 768px) {
-    .timestamp {
-      top: 30px;
-      h4 {
-        font-size: 1.2em;
-      }
-    }
-
-    .timeline-item::after {
-      top: 30px;
-      left: -30px;
-    }
-
-    .timeline-item {
-      padding-left: 16px;
-    }
-
-    .timeline-item::before {
-      left: 8px;
-      top: 32px;
+    h4 {
+      font-size: 1.2em;
     }
   }
+
+  .timeline-item::after {
+    top: 30px;
+    left: -32px;
+  }
+
+  .timeline-item {
+    margin-left: -15px;
+  }
+
+  .timeline-item::before {
+    left: 0px;
+    top: 32px;
+  }
+}
 </style>
