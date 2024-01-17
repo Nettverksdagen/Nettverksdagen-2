@@ -377,7 +377,7 @@ template{
 .toggle_holder{
     position: relative;
     top: 15%;
-    left: 2%;
+    left: 5%;
 }
 
 @media (max-width: 768px) {

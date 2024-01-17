@@ -53,7 +53,12 @@ export default new Router({
           component: ProgramView,
           meta: {title: 'Program'}
         },
-        
+        // {
+        //   path: 'stand-map',
+        //   name: 'StandMap',
+        //   component: StandMapView,
+        //   meta: {title: 'StandMap'}
+        // },
         {
           path: 'stillinger',
           name: 'Listings',

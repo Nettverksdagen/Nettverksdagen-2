@@ -8,10 +8,10 @@
       <!--<Hero/> -->
       <HomeScreen/>
     </div>
-    <businesses></businesses>
     <div style="width: 100vw; display: flex; justify-content: center; align-items: center;">
       <StandMap style="width: 100vmin; height: 100vmin; "></StandMap>
     </div>
+    <businesses></businesses>
     <sponsors></sponsors>
   </div>
 </template>
