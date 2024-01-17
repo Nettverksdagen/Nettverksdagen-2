@@ -220,9 +220,9 @@ export default {
     },
     filteredDayBusinesses () {
       if (this.isDayOne) {
-        return this.businesses.filter(business => business.days === 'Dag 1' || business.days === 'Begge dager').slice().sort((a, b) => a.standnumber - b.standnumber)
+        return this.businesses.filter(business => business.days === 'Dag 1' || business.days === 'Begge dager').slice().filter(b => !!b.standnumber).sort((a, b) => a.standnumber - b.standnumber)
       } else {
-        return this.businesses.filter(business => business.days === 'Dag 2' || business.days === 'Begge dager').slice().sort((a, b) => a.standnumber - b.standnumber)
+        return this.businesses.filter(business => business.days === 'Dag 2' || business.days === 'Begge dager').slice().filter(b => !!b.standnumber).sort((a, b) => a.standnumber - b.standnumber)
       }
     }
   },
