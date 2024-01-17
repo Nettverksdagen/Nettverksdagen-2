@@ -1,0 +1,63 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres
+    restart: "always"
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: '1234'
+
+  api:
+    build: ./api
+    command: "./django-prod-entrypoint.sh"
+    depends_on:
+      - postgres
+    restart: "always"
+    ports:
+      - "7001:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=nvdnew.settings.prod
+
+  frontend:
+    build:
+      context: ./frontend
+      target: builder
+    volumes:
+      - frontend-files:/frontend/dist
+    command: ["echo", "Successfully created static frontend files"] # No operation
+
+  fileserver:
+    build: ./fileserver
+    command: ["./main"]
+    restart: "always"
+    ports:
+      - "7002:9000"
+    volumes:
+      - ./fileserver/uploads:/root/uploads
+
+  nginx:
+    image: linuxserver/swag
+    restart: "always"
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - PUID=1002
+      - GUID=1003
+      - EMAIL=it@nettverksdagene.no
+      - URL=nettverksdagene.no
+      - SUBDOMAINS=www,blogg
+      - TZ=Europe/Oslo
+      - VALIDATION=http
+      #- STAGING=true # Uncomment this when testing
+    depends_on:
+      - api
+      - fileserver
+    volumes:
+      - ./nginx/config:/config # Todo: Can this volume include the below?
+      - frontend-files:/frontend
+
+volumes:
+  frontend-files:
