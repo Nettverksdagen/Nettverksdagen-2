@@ -151,6 +151,16 @@
 
     </svg>
     <svg class="standkart" viewBox="0 0 2116 2123">
+      <defs>
+        <filter id="customColorOutlineEffect" color-interpolation-filters="sRGB">
+          <feMorphology in="SourceAlpha" result="MORPH" operator="dilate" radius="10" />
+          <feColorMatrix in="MORPH" result="COLORED" type="matrix" values="0 0 0 0 0.13, 0 0 0 0 0.248, 0 0 0 0 0.235, 0 0 0 1 0"/>
+          <feMerge>
+            <feMergeNode in="COLORED"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
       <text x="100" y="200" dominant-baseline="middle" text-anchor="left" font-size="80px" font-weight="500" fill="#D9D9D9">Standkart</text>
       <line v-bind:key="index" v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap" :x1="StandPosition.x"
         :y1="StandPosition.y" :x2="StandPosition.x" :y2="StandPosition.y" stroke="#898989" class="_circle"
@@ -176,23 +186,27 @@
       <text v-bind:key="'t1' + business.id" v-if="!isAdminPage" v-for="business in filteredDayBusinesses"
         dominant-baseline="middle"
         :x="StandPositionMap[business.standnumber].x + (StandPositionMap[business.standnumber].text_rotation > 90 && StandPositionMap[business.standnumber].text_rotation < 270 ? -30 * StandPositionMap[business.standnumber].text_offset_x : 30 * StandPositionMap[business.standnumber].text_offset_x)"
-        :y="StandPositionMap[business.standnumber].y + 0 * StandPositionMap[business.standnumber].text_offset_y"
+        :y="StandPositionMap[business.standnumber].y"
         :text-anchor="(StandPositionMap[business.standnumber].text_rotation > 90 && StandPositionMap[business.standnumber].text_rotation < 270 ? 'end' : 'start')"
         :transform="'rotate(' + (StandPositionMap[business.standnumber].text_rotation > 90 && StandPositionMap[business.standnumber].text_rotation < 270 ? StandPositionMap[business.standnumber].text_rotation - 180 : StandPositionMap[business.standnumber].text_rotation) + ',' + StandPositionMap[business.standnumber].x + ',' + StandPositionMap[business.standnumber].y + ')'"
-        stroke="#e3e3e1" fill="#e3e3e1" font-size="1.5em" class="_business" :id="'business-' + business.standnumber"
+        stroke="#e3e3e1" fill="#e3e3e1" filter="url(#customColorOutlineEffect)" font-size="1.5em" class="_business" :id="'business-' + business.standnumber"
         @mouseover="handleTextMouseOver(business.standnumber)" @mouseout="handleTextMouseOut(business.standnumber)">{{
           business.name }}</text>
-      <text v-bind:key="'t2' + index" v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap"
+        <!-- dots on admin page -->
+      <text v-bind:key="'t3' + index" v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap"
         :x="StandPosition.x" :y="StandPosition.y" dominant-baseline="middle" text-anchor="middle" font-size="20px"
         fill="#000000">{{ index }}</text>
-      <text v-bind:key="'t3' + business.id" v-if="!isAdminPage" v-for="(business, index) in filteredDayBusinesses"
-        :x="StandPositionMap[business.standnumber].x" :y="StandPositionMap[business.standnumber].y"
+        <!-- dots -->
+      <text v-bind:key="'t4' + business.id" v-if="!isAdminPage" v-for="(business, index) in filteredDayBusinesses"
+        :x="StandPositionMap[business.standnumber].x" :y="StandPositionMap[business.standnumber].y + 2"
         dominant-baseline="middle" text-anchor="middle" font-size="20px" fill="#000000">{{ index + 1 }}</text>
-      <text v-bind:key="'t4' + business.id" v-for="(business, index) in filteredDayBusinesses.slice(0, 15)" :x="1000"
+        <!-- businesses text 1-15 -->
+      <text v-bind:key="'t5' + business.id" v-for="(business, index) in filteredDayBusinesses.slice(0, 15)" :x="1000"
         :y="200 + index * 50" dominant-baseline="middle" text-anchor="left" font-size="40px" fill="#D9D9D9"
         @mouseover="handleTextMouseOver(business.standnumber)"
         @mouseout="handleTextMouseOut(business.standnumber)">{{ index + 1 }}.{{ business.name }}</text>
-      <text v-bind:key="'t5' + business.id" v-for="(business, index) in filteredDayBusinesses.slice(15, filteredDayBusinesses.length)" :x="1600"
+        <!-- businesses text 1-15 -->
+      <text v-bind:key="'t6' + business.id" v-for="(business, index) in filteredDayBusinesses.slice(15, filteredDayBusinesses.length)" :x="1600"
         :y="200 + index * 50" dominant-baseline="middle" text-anchor="left" font-size="40px" fill="#D9D9D9"
         @mouseover="handleTextMouseOver(business.standnumber)"
         @mouseout="handleTextMouseOut(business.standnumber)">{{ index + 16 }}. {{ business.name }}</text>
