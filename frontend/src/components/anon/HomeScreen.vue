@@ -18,9 +18,9 @@
     <div class="wrapper">
       <div class="hero-content">
         <div class="boxes">
-          <b-link :to="'/program'">
+          <router-link :to="{name: 'Home', hash: '#stand-map'}" @click.native="scrollToId('stand-map')">
             <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" :box-text="$t('glassgårdentext')" class="box"/>
-          </b-link>
+          </router-link>
           <router-link :to="{name: 'Program', hash: '#bankett'}" @click.native="scrollToId('bankett')">
             <HomeScreenBox :box-title="$t('bankett')" box-icon="glass-cheers-solid.svg" :box-text="$t('banquetend')" class="box"/>
           </router-link>
