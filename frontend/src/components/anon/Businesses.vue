@@ -16,8 +16,8 @@
         </b-row>
         <hr>
       </div>
+      <h2 class="text-center font-weight-bold">Bedrifter du kan møte på stand</h2>
       <div v-for="(day, dindex) in days" :key="'day' + dindex">
-        <h2 class="text-center font-weight-bold" v-html="days[dindex].dayHeader"></h2>
         <b-row class="justify-content-center">
           <template v-for="(level, lindex) in days[dindex].levels">
             <Business v-for="business in days[dindex].levels[lindex].businesses"
@@ -31,8 +31,8 @@
             </Business>
           </template>
         </b-row>
-        <hr>
       </div>
+      <hr>
     </Content>
     <router-view />
   </div>
