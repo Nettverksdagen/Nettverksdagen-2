@@ -8,9 +8,9 @@
       <!--<Hero/> -->
       <HomeScreen/>
     </div>
-    <!-- <div style="display: flex; justify-content: center; align-items: center;">
+    <div style="display: flex; justify-content: center; align-items: center;">
       <StandMap style="width: 100vmin; height: 100vmin; "></StandMap>
-    </div> -->
+    </div>
     <businesses></businesses>
     <sponsors></sponsors>
   </div>

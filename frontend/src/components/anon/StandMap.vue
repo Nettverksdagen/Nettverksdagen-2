@@ -188,7 +188,11 @@
       <text v-bind:key="'t3' + business.id" v-if="!isAdminPage" v-for="(business, index) in filteredDayBusinesses"
         :x="StandPositionMap[business.standnumber].x" :y="StandPositionMap[business.standnumber].y"
         dominant-baseline="middle" text-anchor="middle" font-size="20px" fill="#000000">{{ index + 1 }}</text>
-      <text v-bind:key="'t4' + business.id" v-for="(business, index) in filteredDayBusinesses" :x="1000"
+      <text v-bind:key="'t4' + business.id" v-for="(business, index) in filteredDayBusinesses.slice(0, 15)" :x="1000"
+        :y="200 + index * 50" dominant-baseline="middle" text-anchor="left" font-size="40px" fill="#D9D9D9"
+        @mouseover="handleTextMouseOver(business.standnumber)"
+        @mouseout="handleTextMouseOut(business.standnumber)">{{ index + 1 }}.{{ business.name }}</text>
+      <text v-bind:key="'t5' + business.id" v-for="(business, index) in filteredDayBusinesses.slice(15, filteredDayBusinesses.length)" :x="1500"
         :y="200 + index * 50" dominant-baseline="middle" text-anchor="left" font-size="40px" fill="#D9D9D9"
         @mouseover="handleTextMouseOver(business.standnumber)"
         @mouseout="handleTextMouseOut(business.standnumber)">{{ index + 1 }}.{{ business.name }}</text>
