@@ -151,7 +151,7 @@
 
     </svg>
     <svg class="standkart" viewBox="0 0 2116 2123">
-      <text x="100" y="200" dominant-baseline="middle" text-anchor="left" font-size="80px" fill="#D9D9D9">Standkart</text>
+      <text x="100" y="200" dominant-baseline="middle" text-anchor="left" font-size="80px" font-weight="500" fill="#D9D9D9">Standkart</text>
       <line v-bind:key="index" v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap" :x1="StandPosition.x"
         :y1="StandPosition.y" :x2="StandPosition.x" :y2="StandPosition.y" stroke="#898989" class="_circle"
         :id="'circle-' + index" @mouseover="handleTextMouseOver(business.standnumber)"
@@ -192,14 +192,14 @@
         :y="200 + index * 50" dominant-baseline="middle" text-anchor="left" font-size="40px" fill="#D9D9D9"
         @mouseover="handleTextMouseOver(business.standnumber)"
         @mouseout="handleTextMouseOut(business.standnumber)">{{ index + 1 }}.{{ business.name }}</text>
-      <text v-bind:key="'t5' + business.id" v-for="(business, index) in filteredDayBusinesses.slice(15, filteredDayBusinesses.length)" :x="1500"
+      <text v-bind:key="'t5' + business.id" v-for="(business, index) in filteredDayBusinesses.slice(15, filteredDayBusinesses.length)" :x="1600"
         :y="200 + index * 50" dominant-baseline="middle" text-anchor="left" font-size="40px" fill="#D9D9D9"
         @mouseover="handleTextMouseOver(business.standnumber)"
-        @mouseout="handleTextMouseOut(business.standnumber)">{{ index + 1 }}.{{ business.name }}</text>
+        @mouseout="handleTextMouseOut(business.standnumber)">{{ index + 16 }}. {{ business.name }}</text>
 
     </svg>
     <div class="toggle_holder">
-      <VueToggles height="30" width="90" checkedText="Dag 1" uncheckedText="Dag 2" checkedBg="#ffffff"
+      <VueToggles height="30" width="90" checkedText="Dag 1" uncheckedText="Dag 2" checkedBg="#e3e3e1"
         uncheckedBg="#e3e3e1" checkedColor="#000000" uncheckedColor="#000000" :value="isDayOne"
         @click="isDayOne = !isDayOne" />
     </div>
