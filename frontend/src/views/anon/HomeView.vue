@@ -8,7 +8,7 @@
       <!--<Hero/> -->
       <HomeScreen/>
     </div>
-    <div style="display: flex; justify-content: center; align-items: center;">
+    <div style="display: flex; justify-content: center; align-items: center;" id="stand-map">
       <StandMap style="width: 100vmin; height: 100vmin; "></StandMap>
     </div>
     <businesses></businesses>
