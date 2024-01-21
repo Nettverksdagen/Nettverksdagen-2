@@ -4,7 +4,7 @@
     <div class="container">
       <div class="two-thirds">
         <h1 class="text-center">{{ spi.header }}</h1>
-        <p v-for="paragraph in spi.paragraph">
+        <p :key="index" v-for="paragraph, index in spi.paragraph">
           {{ paragraph }}
         </p>
       </div>
