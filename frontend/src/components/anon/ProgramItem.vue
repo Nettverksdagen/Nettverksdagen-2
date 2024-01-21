@@ -29,10 +29,6 @@
             <p class='description'>{{line}}</p>
           </div>
         </div>
-        <div v-if="registration" class='button'>
-          <b-button v-if="enableRegistration && !submitted" variant='primary' @click="openDialog">{{$t('påmelding')}}</b-button>
-          <b-button v-else disabled variant="dark">{{$t('påmelding')}}</b-button>
-        </div>
         <div class="footer">
           <div class="inline">
             <div v-if="place" class="d-block d-md-inline">
@@ -44,62 +40,9 @@
               {{formatTime(timeStart)}} - {{formatTime(timeEnd)}}
             </div>
           </div>
-          <div v-if="registration && cancelEmail">
-              <b-link @click.native="destroy_participant(name)">{{$t('destroypart')}}</b-link>
-          </div>
-          <div v-if="registration">
-              <div v-if="submitted">
-                <div>{{ $t('submitted') }}</div>
-              </div>
-              <div v-else-if="enableRegistration && registered < maxRegistered">
-                <div>{{ $t('påmeldingstart') }}</div>
-              </div>
-              <div v-else-if="enableRegistration && registered >= maxRegistered">
-                <div>{{ $t('vilbliventeliste') }}</div>
-              </div>
-              <div v-else-if="afterRegistration">
-                <div>{{ $t('regfinish') }}</div>
-              </div>
-              <div v-else>
-                <div>{{ $t('regtobegin') + ' ' + formatDate(registrationStart) }}</div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div>
-      <b-modal :id="'dialogForm' + name" :title="'Meld deg på: ' + header" v-model="show" centered>
-        <b-form>
-          <b-form-group :id="'input-group-name' + name" :label-for="'input-name' + name"
-            description='Skriv inn navnet ditt slik at vi vet hvem som melder seg på'>
-            <b-form-input :id="'input-name' + name" v-model="form.name" required placeholder='Navn'></b-form-input>
-          </b-form-group>
-          <b-form-group :id="'input-group-email' + name" :label-for="'input-email' + name"
-            description='Skriv inn emailen din slik at vi kan sende deg en email for påmelding.'>
-            <b-form-input :id="'input-email' + name" type="email" v-model="form.email" required
-              placeholder='E-post'></b-form-input>
-          </b-form-group>
-          <b-form-group :id="'input-group-study' + name" :label-for="'input-study' + name"
-            description='Skriv inn det du studerer.'>
-            <b-form-input :id="'input-study' + name" v-model="form.study" required placeholder='Study'></b-form-input>
-          </b-form-group>
-          <b-form-group :id="'input-group-year' + name" :label-for="'input-year' + name"
-            description='Skriv inn hvilket år du er på.'>
-            <b-form-input :id="'input-year' + name" v-model="form.year" required placeholder='Year'></b-form-input>
-          </b-form-group>
-        </b-form>
-        <template v-slot:modal-footer>
-          <div>
-            <b-button variant='outline-secondary' @click="onCancel">
-              Avbryt
-            </b-button>
-            <b-button variant='primary' @click="onSubmit">
-              Meld på
-            </b-button>
-          </div>
-        </template>
-      </b-modal>
     </div>
   </div>
 </template>
@@ -153,9 +96,19 @@ export default {
       }
       return true
     },
-    nameUrlEncoded: function () {
-      return this.header.replace(/\s+/g, '-').toLowerCase()
+
+    nameUrlEncoded () {
+      if (typeof this.name === 'string') {
+        return this.name.replace(/\s+/g, '-')
+      } else {
+      // Handle the case where this.name is not a string
+        console.error('Unexpected type for this.name:', typeof this.name)
+        return '' // Or provide a default value or handle it accordingly
+      }
     }
+    // nameUrlEncoded: function () {
+    //   // return this.name.replace(/\s+/g, '-').toLowerCase()
+    // }
   },
   methods: {
     formatTime (dateObj) {
