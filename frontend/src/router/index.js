@@ -52,7 +52,7 @@ export default new Router({
           path: 'program',
           name: 'Program',
           component: ProgramView,
-          meta: {title: 'Program'},
+          meta: {title: 'Program'}
           // children: [
           //   {
           //     path: ':programReferer',
