@@ -10,10 +10,10 @@
           <div v-if="header">
             <router-link :to="{ name: 'ProgramDetails', params: { programReferer: nameUrlEncoded } }">
               <h3 class='font-header'>{{ header }}</h3>
-              <!-- <div class="businessContainer">
+                <!-- <div class="businessContainer">
                   <p class='description'>{{ header }}</p>
                 </div> -->
-              </router-link>
+            </router-link>
           </div>
           <div v-if="registration && maxRegistered">
             <h5 v-if="registered<=maxRegistered">
@@ -33,7 +33,7 @@
           <div class="inline">
             <div v-if="place" class="d-block d-md-inline">
               <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="map"/>
-              <div v-html="place" class="d-inline map-text"/><br>
+              <div v-html="place" class="d-inline map-text"></div><br>
             </div>
             <div v-if="timeEnd" class="d-inline">
               <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="clock"/>
@@ -96,19 +96,9 @@ export default {
       }
       return true
     },
-
-    nameUrlEncoded () {
-      if (typeof this.name === 'string') {
-        return this.name.replace(/\s+/g, '-')
-      } else {
-      // Handle the case where this.name is not a string
-        console.error('Unexpected type for this.name:', typeof this.name)
-        return '' // Or provide a default value or handle it accordingly
-      }
+    nameUrlEncoded: function () {
+        return encodeURIComponent(this.$props.header)
     }
-    // nameUrlEncoded: function () {
-    //   // return this.name.replace(/\s+/g, '-').toLowerCase()
-    // }
   },
   methods: {
     formatTime (dateObj) {
