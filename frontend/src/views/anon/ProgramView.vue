@@ -130,11 +130,11 @@ export default {
 }
 
 .timeline-child {
-  border: 1px solid rgb(160, 160, 160);
+  border: 1px solid #f5f5f6;
   border-radius: 20px;
-  background-color: #f4f4f4;
+  background-color: #f5f5f6;
   padding: 1rem 0rem;
-  padding-left: 0px;
+  padding-left: 10px;
   padding-right: 6px;
   margin: 0 8%;
   height: 100%;
@@ -181,7 +181,6 @@ h1 {
   .timeline::after {
     left: -7px;
   }
-  
   .timeline {
     padding: 1rem 0rem;
     padding-left: 1rem;

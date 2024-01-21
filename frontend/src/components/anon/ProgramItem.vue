@@ -217,7 +217,7 @@ export default {
     border-radius: 20px;
     border-width: 2px;
     border-color: var(--line-border-color);
-    background-color: #f4f4f4;
+    background-color: #f5f5f6; //Card color
   }
   .numberofpeople {
     display: inline;
