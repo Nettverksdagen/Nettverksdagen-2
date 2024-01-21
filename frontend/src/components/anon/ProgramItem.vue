@@ -51,9 +51,9 @@
 import axios from 'axios'
 // import { mapMutations } from 'vuex'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons'
+import { faMapMarkerAlt, faClock , faCalendar} from '@fortawesome/free-solid-svg-icons'
 
-library.add(faMapMarkerAlt, faClock)
+library.add(faMapMarkerAlt, faClock, faCalendar)
 export default {
   name: 'ProgramItem',
   props: ['timeStart', 'timeEnd', 'place', 'header', 'paragraph', 'registration', 'maxRegistered', 'cancelEmail', 'registrationStart', 'registrationEnd', 'name'],
@@ -97,7 +97,7 @@ export default {
       return true
     },
     nameUrlEncoded: function () {
-      return encodeURIComponent(this.$props.header)
+      return encodeURIComponent(`${this.$props.name}-${this.$props.header}`)
     }
   },
   methods: {

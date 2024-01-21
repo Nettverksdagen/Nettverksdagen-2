@@ -9,17 +9,11 @@
         </p>
       </div>
       <div class="one-third">
-        <div class="sub-box">
+        <div class="sub-box" v-if="spi.registration">
           <h3>Påmelding</h3>
-          <p>{{ formatDate(new Date(spi.registrationStart)) }} - {{ formatDate(new
-            Date(spi.registrationEnd)) }}</p>
-          <p>{{ spi.registered }}/{{ spi.maxRegistered }}</p>
-          <p>{{ spi.registration }}</p>
-          <p>Enable registration: {{ enableRegistration }}</p>
-          <div v-if="spi.registration && spi.cancelEmail">
-            <b-link @click.native="destroy_participant(name)">{{ $t('destroypart') }}</b-link>
-          </div>
-          <div v-if="spi.registration">
+         
+          <div >
+            <p>{{ spi.registered }}/{{ spi.maxRegistered + ' ' + $t('påmeldte')}}</p>
             <div v-if="submitted">
               <div>{{ $t('submitted') }}</div>
             </div>
@@ -40,10 +34,29 @@
             <b-button v-if="enableRegistration && !submitted" variant='primary'
               @click="openDialog">{{ $t('påmelding') }}</b-button>
             <b-button v-else disabled variant="dark">{{ $t('påmelding') }}</b-button>
+          </div><br>
+          <div v-if="spi.registration && spi.cancelEmail">
+            <b-link @click.native="destroy_participant(name)">{{ $t('destroypart') }}</b-link>
           </div>
         </div>
         <div class="sub-box">
-          <p>Content for the second 1/3 sub-box</p>
+          <h3>Informasjon</h3>
+          <div>
+            <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'calendar' }" class="calendat"/>
+            {{ formatDay(new Date(spi.timeStart)) }}
+          </div><br>
+          <div v-if="spi.timeEnd" class="d-inline">
+            <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="clock"/>
+            {{ formatTime(new Date(spi.timeStart)) }} - {{ formatTime(new
+            Date(spi.timeEnd)) }}
+          </div><br><br>
+          <div v-if="spi.place" class="d-block d-md-inline">
+            <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="map"/>
+            <div v-html="spi.place" class="d-inline map-text"></div><br>
+          </div>
+
+          
+          
         </div>
       </div>
     </div>
@@ -88,9 +101,6 @@
               :registered="spi.registered" :cancelEmail="spi.cancelEmail" :registrationStart="spi.registrationStart"
               :registrationEnd="spi.registrationEnd" :name="spi.id">
             </ProgramItem> -->
-
-
-
 <script>
 import axios from 'axios'
 import ProgramItem from '@/components/anon/ProgramItem.vue'
@@ -98,10 +108,10 @@ import ProgramItem from '@/components/anon/ProgramItem.vue'
 
 export default {
   components: {
-    ProgramItem,
+    ProgramItem
     // other components if needed
   },
-  data() {
+  data () {
     return {
       form: {
         email: '',
@@ -114,20 +124,21 @@ export default {
     }
   },
   methods: {
-    // formatDate(dateObj) {
-    //   let months = ['januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'desember']
-    //   let date = dateObj.getDate()
-    //   let month = dateObj.getMonth()
-    //   return String(date) + '. ' + months[month]
-    // },
-    formatTime(dateObj) {
+    formatDay(dateObj) {
+      let months = ['januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'desember']
+      let date = dateObj.getDate()
+      let month = dateObj.getMonth()
+      let year = dateObj.getFullYear()
+      return String(date) + '. ' + months[month] + ' ' + year
+    },
+    formatTime (dateObj) {
       let hours = dateObj.getHours()
       let minutes = dateObj.getMinutes()
       hours = (hours > 9) ? String(hours) : ('0' + String(hours))
       minutes = (minutes > 9) ? String(minutes) : ('0' + String(minutes))
       return hours + ':' + minutes
     },
-    formatDate(dateObj) {
+    formatDate (dateObj) {
       let day = dateObj.getDate()
       let month = dateObj.getMonth() + 1
       let year = dateObj.getFullYear()
@@ -135,11 +146,11 @@ export default {
       month = (month > 9) ? String(month) : ('0' + String(month))
       return this.formatTime(dateObj) + ' ' + day + '.' + month + '.' + year
     },
-    openDialog() {
+    openDialog () {
       this.$data.form = { email: '', name: '', study: '', year: '' }
       this.$data.show = true
     },
-    onSubmit(e) {
+    onSubmit (e) {
       e.preventDefault()
       let data = this.$data.form
       // Generate and include 6-character random deregistering code
@@ -180,8 +191,8 @@ export default {
       }
       return true
     },
-    nameUrlEncoded: function (header) {
-      return encodeURIComponent(header)
+    nameUrlEncoded: function (name, header) {
+      return encodeURIComponent(`${name}-${header}`)
     },
     destroy_participant: function (event) {
       let email = prompt('Vennligst skriv inn emailen din:')
@@ -224,7 +235,7 @@ export default {
     spi: function () {
       let programReferer = this.$route.params.programReferer
       let prog = this.$store.getters['program/anonProgram']
-      return prog.find(item => this.nameUrlEncoded(item.header) === programReferer)
+      return prog.find(item => this.nameUrlEncoded(item.id, item.header) === programReferer)
     },
     registered: function () {
       return this.$store.state.participant.all.filter(par => par.event === this.spi.name).length
