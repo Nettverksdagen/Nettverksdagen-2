@@ -113,6 +113,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+.font-weight-bold {
+  padding: 1rem;
+}
 .description {
   font-size: 1.1em;
 }
@@ -129,7 +133,9 @@ export default {
   border: 1px solid rgb(160, 160, 160);
   border-radius: 20px;
   background-color: #f4f4f4;
-  padding: 1rem 1rem;
+  padding: 1rem 0rem;
+  padding-left: 0px;
+  padding-right: 6px;
   margin: 0 8%;
   height: 100%;
 }
@@ -137,12 +143,11 @@ export default {
 .timeline::after {
   content: '';
   position: absolute;
-  left: 16px;
+  left: -4px;
   width: 6px;
   background-color: #1d4844;
   top: 0;
   bottom: 0;
-  margin-left: -20px;
 }
 
 .btn-primary {
@@ -172,20 +177,14 @@ h1 {
   }
 }
 
-// @media(max-width: 966px) {
-//   h3 {
-//     font-size: 1em;
-//   }
-
-//   h4 {
-//     font-size: 0.8em;
-
-//   }
-// }
-
 @media(max-width: 768px) {
   .timeline::after {
-    margin-left: -37px;
+    left: -7px;
+  }
+  
+  .timeline {
+    padding: 1rem 0rem;
+    padding-left: 1rem;
   }
 
   .timeline-parent::-webkit-scrollbar {
@@ -195,7 +194,6 @@ h1 {
   .program-day {
     width: 100vw;
     min-width: 100vw;
-    //scroll-snap-align: start;
   }
 
   .timeline-child {
@@ -203,6 +201,7 @@ h1 {
     margin-left: auto;
     margin-right: auto;
     max-width: 350px;
+    padding-right: 0px;
   }
 }
 </style>

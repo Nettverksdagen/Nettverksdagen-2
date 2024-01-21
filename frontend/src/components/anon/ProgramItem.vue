@@ -331,9 +331,9 @@ export default {
     color: #252525;
     text-align: left;
     font-weight: bold;
-    margin-right: -10px;
+    margin-right: 0px;
     @media(max-width: 768px) {
-      margin-right: -42px;
+      margin-right: 0px;
     }
   }
 
@@ -373,7 +373,7 @@ export default {
 
 .timestamp {
   position: absolute;
-  left: -105px;
+  left: -101px;
   top: 16px;
 }
 
@@ -418,7 +418,7 @@ export default {
   }
 
   .timeline-item {
-    margin-left: -15px;
+    margin-left: 0px;//fix -15px
   }
 
   .timeline-item::before {
