@@ -184,8 +184,7 @@ export default {
       return true
     },
     nameUrlEncoded: function (header) {
-      console.log(header)
-      return header.replace(/\s+/g, '-').toLowerCase()
+      return encodeURIComponent(header)
     },
     destroy_participant: function (event) {
       let email = prompt('Vennligst skriv inn emailen din:')
