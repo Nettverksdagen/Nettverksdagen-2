@@ -32,7 +32,7 @@ export default {
   }
   .anon-base {
     min-height: 100vh;
-    width: 100%;
+    width: 95%;
     min-width: 320px;
     margin: 0 auto;
     margin-top: 100px;

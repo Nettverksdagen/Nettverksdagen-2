@@ -97,7 +97,7 @@ export default {
       return true
     },
     nameUrlEncoded: function () {
-        return encodeURIComponent(this.$props.header)
+      return encodeURIComponent(this.$props.header)
     }
   },
   methods: {
