@@ -45,9 +45,6 @@
         <div class="sub-box">
           <p>Content for the second 1/3 sub-box</p>
         </div>
-        <div class="sub-box">
-          <p>Content for the third 1/3 sub-box</p>
-        </div>
       </div>
     </div>
     <div>
@@ -270,18 +267,12 @@ export default {
     width: 100%;
 }
 
-.card {
-    position: relative;
-    border-radius: 20px;
-    border-width: 2px;
-    border-color: var(--line-border-color);
-    background-color: white;
-}
-
 .two-thirds {
   flex: 2;
   background-color: white;
-  padding: 10px;
+  padding: 15px;
+  border-radius: 20px;
+  margin-bottom: 15px;
   /* Reduce padding for better space management */
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -289,24 +280,26 @@ export default {
 .one-third {
   flex: 1;
   display: flex;
+  justify-content: flex-start;
   flex-direction: column;
   background-color: white;
-  padding: 10px;
+  // padding: 10px;
   /* Reduce padding for better space management */
-  overflow-y: auto;
-  /* Enable vertical scrolling if content exceeds box height */
+  // overflow-y: auto;
+  // /* Enable vertical scrolling if content exceeds box height */
   max-height: 100%;
   /* Set a maximum height for the box */
 }
 
 .sub-box {
-  flex: 1;
   background-color: white;
+  border-radius: 20px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 10px;
+  padding: 15px;
+  margin: 0px 15px;
   /* Reduce padding for better space management */
-  margin-bottom: 10px;
-  overflow-y: auto;
-  /* Enable vertical scrolling if content exceeds box height */
+  margin-bottom: 15px;
+  // overflow-y: auto;
+  // /* Enable vertical scrolling if content exceeds box height */
 }
 </style>
