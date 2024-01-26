@@ -28,7 +28,7 @@
             <HomeScreenBox :box-title="$t('bedpresword')" box-icon="utensils-solid.svg" :box-text="$t('bedpres2')" class="box"/>
           </b-link>
           <b-link :to="'/program'">
-            <HomeScreenBox :box-title="$t('ballongslipp')" box-icon="gift-solid.svg" :box-text="$t('ball')" class="box"/>
+            <HomeScreenBox :box-title="$t('interviews')" box-icon="interview-icon.svg" :box-text="$t('interviews2')" class="box"/>
           </b-link>
           <!-- <b-link :to="'/program'" class="temp-link">
             <HomeScreenBoxTemp box-title="Fjorårets program" box-icon="nettverksdagenesvg.svg" :box-text="$t('
