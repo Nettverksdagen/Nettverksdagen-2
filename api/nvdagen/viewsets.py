@@ -1,6 +1,7 @@
 from rest_framework import viewsets, status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from rest_framework.decorators import action
 from .models import Listing, Business, Sponsor, TeamMember, Form, Participant, Program
 from .serializers import ListingSerializer, BusinessSerializer, SponsorSerializer, TeamMemberSerializer, FormSerializer, ParticipantSerializer, ProgramSerializer
 from django.core.mail import send_mail
@@ -76,12 +77,13 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                     data['header'] = program.header
                     html_message = render_to_string('registered_email.html', context=data)
                     plain_message = strip_tags(html_message)
-                    send_mail('Nettverksdagene - Påmelding bekreftet for ' + data['name'],
-                        plain_message,
-                        'do-not-reply@nettverksdagene.no',
-                        [data['email']],
-                        fail_silently=False,
-                        html_message=html_message)
+                    #Only for development to prevent email errors
+                    #send_mail('Nettverksdagene - Påmelding bekreftet for ' + data['name'],
+                    #    plain_message,
+                    #    'do-not-reply@nettverksdagene.no',
+                    #    [data['email']],
+                    #    fail_silently=False,
+                    #    html_message=html_message)
             except:
                 print("ERROR: Could not send email. Is mail_settings.py correct?")
                 response = {'message': 'Could not send email'}
@@ -150,3 +152,14 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                         return Response(response, status = status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         return response
+    
+    @action(detail=False, methods=['get'])
+    def count(self, request):
+        participant_count = Participant.objects.all().count()
+        print(participant_count)
+        return Response({'participant_count': participant_count})
+    #Not tested and not implemented properly in /api
+    def get_participant(self, request, email):
+        participant = Participant.objects.get(email=email)
+        return Response({'participant:', participant})
+
