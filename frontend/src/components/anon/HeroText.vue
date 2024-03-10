@@ -1,8 +1,8 @@
 <template>
   <div class="hero-text">
-    <h1 class="mt-3 hero-header">Påmelding for bedrifter til Nettverksdagene 2024 har nå åpnet!</h1>
+    <h1 class="mt-3 hero-header">Påmelding for bedrifter til Nettverksdagene 2025 har nå åpnet!</h1>
     <hr class="hr-hero">
-    <h2 class="font-weight-light">30.01-01.02 2024</h2>
+    <h2 class="font-weight-light">04.02-06.02 2025</h2>
   </div>
 </template>
 
