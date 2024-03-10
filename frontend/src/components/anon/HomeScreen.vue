@@ -5,7 +5,7 @@
             <div class="hometext">
                 <h3>{{$t('homescreen.fremtidig')}}</h3>
                 <h1>{{$t('nettverksdagene')}}</h1>
-                <h2>30.01-01.02 2024</h2>
+                <h2>31.01-02.02 2024</h2>
             </div>
         </div>
         <div class="col-12 col-lg-6 homevideo">
