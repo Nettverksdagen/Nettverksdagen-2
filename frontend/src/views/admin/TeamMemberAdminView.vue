@@ -40,7 +40,7 @@
                     <b-form-file v-model="photoFile" placeholder="Velg et bilde" id="member-photo" ref="photoFileInput" @input="uploadPhoto"></b-form-file>
                     <p class="text-black-50 mt-2">
                       <span class="font-weight-bold">NB!</span>:
-                      {{$('squarephoto')}}
+                      {{$t('squarephoto')}}
                     </p>
                   </b-form-group>
                   <image-preview :imgPreviewSrc="imgSrc" :showImgPreview="showImgPreview"></image-preview>

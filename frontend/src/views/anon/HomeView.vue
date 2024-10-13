@@ -8,6 +8,9 @@
       <!--<Hero/> -->
       <HomeScreen/>
     </div>
+    <div style="display: flex; justify-content: center; align-items: center;" id="stand-map">
+      <StandMap style="width: 100vmin; height: 100vmin; "></StandMap>
+    </div>
     <businesses></businesses>
     <sponsors></sponsors>
   </div>
@@ -18,12 +21,14 @@ import Hero from '@/components/anon/Hero.vue'
 import Businesses from '@/components/anon/Businesses.vue'
 import Sponsors from '@/components/anon/Sponsors.vue'
 import HomeScreen from '@/components/anon/HomeScreen.vue'
+import StandMap from '@/components/anon/StandMap.vue'
 export default {
   components: {
     Hero,
     Businesses,
     Sponsors,
-    HomeScreen
+    HomeScreen,
+    StandMap
   },
   name: 'Home',
   data () {

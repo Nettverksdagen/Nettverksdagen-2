@@ -19,3 +19,4 @@ config.production.json
 ghost/data/*
 !ghost/data/.gitkeep
 api/nvdnew/settings/mail_settings.py
+.DS_Store

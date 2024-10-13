@@ -5,7 +5,7 @@
             <div class="hometext">
                 <h3>{{$t('homescreen.fremtidig')}}</h3>
                 <h1>{{$t('nettverksdagene')}}</h1>
-                <h2>31.01-02.02 2024</h2>
+                <h2>21.01-23.01 2025</h2>
             </div>
         </div>
         <div class="col-12 col-lg-6 homevideo">
@@ -18,9 +18,9 @@
     <div class="wrapper">
       <div class="hero-content">
         <div class="boxes">
-          <b-link :to="'/program'">
+          <router-link :to="{name: 'Home', hash: '#stand-map'}" @click.native="scrollToId('stand-map')">
             <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" :box-text="$t('glassgårdentext')" class="box"/>
-          </b-link>
+          </router-link>
           <router-link :to="{name: 'Program', hash: '#bankett'}" @click.native="scrollToId('bankett')">
             <HomeScreenBox :box-title="$t('bankett')" box-icon="glass-cheers-solid.svg" :box-text="$t('banquetend')" class="box"/>
           </router-link>
@@ -28,7 +28,7 @@
             <HomeScreenBox :box-title="$t('bedpresword')" box-icon="utensils-solid.svg" :box-text="$t('bedpres2')" class="box"/>
           </b-link>
           <b-link :to="'/program'">
-            <HomeScreenBox :box-title="$t('ballongslipp')" box-icon="gift-solid.svg" :box-text="$t('ball')" class="box"/>
+            <HomeScreenBox :box-title="$t('interviews')" box-icon="interview-icon.svg" :box-text="$t('interviews2')" class="box"/>
           </b-link>
           <!-- <b-link :to="'/program'" class="temp-link">
             <HomeScreenBoxTemp box-title="Fjorårets program" box-icon="nettverksdagenesvg.svg" :box-text="$t('

@@ -5,7 +5,7 @@
             <div class="hometext">
                 <h3>Møt din fremtidige arbeidsgiver på</h3>
                 <h1>Nettverksdagene</h1>
-                <h2>31.01-02.02 2024</h2>
+                <h2>04.02-06.02 2025</h2>
             </div>
         </div>
         <div class="col-12 col-lg-6 homevideo">
