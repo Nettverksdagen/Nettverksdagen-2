@@ -19,6 +19,7 @@ import BusinessDetails from '@/components/anon/BusinessDetails.vue'
 import ListingDetails from '@/components/anon/ListingDetails.vue'
 import ProgramAdminView from '@/views/admin/ProgramAdminView.vue'
 import ParticipantAdminView from '@/views/admin/ParticipantAdminView.vue'
+import QRRegistrationView from '@/views/anon/QRRegistrationView.vue'
 // import HomeViewTemp from '@/views/anon/HomeViewTemp.vue'
 import NotFoundView from '@/views/anon/NotFoundView.vue'
 
@@ -87,8 +88,14 @@ export default new Router({
         },
         {
           path: 'lykkehjul',
-          redirect: 'static/lykkehjul/lykkehjul.html',
+          redirect: 'static/lykkehjul/',
           name: 'Lykkehjul'
+        },
+        {
+          path: 'qr/:id',
+          name: 'Form',
+          component: QRRegistrationView,
+          meta: {title: 'QR'}
         }
       ]
     },
