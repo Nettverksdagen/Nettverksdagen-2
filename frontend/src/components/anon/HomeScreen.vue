@@ -30,10 +30,9 @@
           <b-link :to="'/program'">
             <HomeScreenBox :box-title="$t('ballongslipp')" box-icon="gift-solid.svg" :box-text="$t('ball')" class="box"/>
           </b-link>
-          <!-- <b-link :to="'/program'" class="temp-link">
-            <HomeScreenBoxTemp box-title="Fjorårets program" box-icon="nettverksdagenesvg.svg" :box-text="$t('
-            ')"/>
-          </b-link>-->
+          <b-link :to="'/program'" class="temp-link">
+            <HomeScreenBoxTemp box-title="Fjorårets program" box-icon="nettverksdagenesvg.svg" :box-text="$t('lastyearprogram')" class="box"/>
+          </b-link>
         </div>
       </div>
     </div>
@@ -112,7 +111,7 @@ export default {
     }
   }
   .homevideo {
-      display: none;
+      display: block;
       margin-top: 90px;
       @media(min-width: 1430px) {
           display: block;

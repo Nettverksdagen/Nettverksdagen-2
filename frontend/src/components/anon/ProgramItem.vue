@@ -10,9 +10,9 @@
           <div v-if="header">
             <router-link :to="{ name: 'ProgramDetails', params: { programReferer: nameUrlEncoded } }">
               <h3 class='font-header'>{{ header }}</h3>
-                <!-- <div class="businessContainer">
+                <div class="businessContainer">
                   <p class='description'>{{ header }}</p>
-                </div> -->
+                </div>
             </router-link>
           </div>
           <div v-if="registration && maxRegistered">
