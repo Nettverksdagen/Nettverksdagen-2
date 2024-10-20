@@ -2,7 +2,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 
 EMAIL_HOST_USER = 'do-not-reply@nettverksdagene.no'  
 
-EMAIL_HOST_PASSWORD = 'nDCxC7%Wm*'
+EMAIL_HOST_PASSWORD = ''
 
 EMAIL_PORT = '587' 
 
