@@ -1,4 +1,4 @@
-FROM node:10.23.0 as base
+FROM node:22 as base
 RUN mkdir /frontend
 RUN chown node:node /frontend
 WORKDIR /frontend
