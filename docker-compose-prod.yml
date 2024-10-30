@@ -19,6 +19,10 @@ services:
       - "7001:8000"
     environment:
       - DJANGO_SETTINGS_MODULE=nvdnew.settings.prod
+      - EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+      - EMAIL_PORT=587
+      - EMAIL_HOST_USER='do-not-reply@nettverksdagene.no'
+      - EMAIL_HOST_PASSWORD='Password123!'
 
   frontend:
     build:
