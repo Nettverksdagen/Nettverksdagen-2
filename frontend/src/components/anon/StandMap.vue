@@ -251,7 +251,7 @@ export default {
     this.StandPositionMap = StandPositionData
   },
   handleTextMouseOut (standnumber) {
-    // TODO: FIX this garbage
+    // TODO: Refactor to not use getElementById
     // const circle = document.getElementById(`circle-${standnumber}`)
     // const business = document.getElementById(`business-${standnumber}`)
 
