@@ -251,11 +251,12 @@ export default {
     this.StandPositionMap = StandPositionData
   },
   handleTextMouseOut (standnumber) {
-    const circle = document.getElementById(`circle-${standnumber}`)
-    const business = document.getElementById(`business-${standnumber}`)
+    // TODO: Refactor to not use getElementById
+    // const circle = document.getElementById(`circle-${standnumber}`)
+    // const business = document.getElementById(`business-${standnumber}`)
 
-    circle.classList.remove('hovered')
-    business.classList.remove('hovered')
+    // circle.classList.remove('hovered')
+    // business.classList.remove('hovered')
   },
   changeInput () {
     this.checked = !this.checked
