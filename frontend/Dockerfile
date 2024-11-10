@@ -1,9 +1,9 @@
-FROM node:10.23.0 AS base
+FROM node:18 AS base
 RUN mkdir /frontend
 RUN chown node:node /frontend
 WORKDIR /frontend
 COPY package.json /frontend/
-COPY package-lock.json /frontend/
+# COPY package-lock.json /frontend/
 RUN ["npm", "install"]
 COPY . /frontend/
 
