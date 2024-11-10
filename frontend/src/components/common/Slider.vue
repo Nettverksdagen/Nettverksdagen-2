@@ -42,6 +42,7 @@ export default {
         {routeName: 'Listings', linkText: 'Stillingsannonser'},
         {routeName: 'About', linkText: 'Om oss'},
         {routeName: 'Contact', linkText: 'Kontakt'},
+        {routeName: 'Valgomat', linkText: 'Valgomat'},
         {routeName: 'Language', linkText: 'English'}
       ]
     }
