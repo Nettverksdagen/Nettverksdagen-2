@@ -1,24 +1,23 @@
 <template>
-    <div class="about-view">
-      <Content>
-        <h1>{{$t('about') + ' ' + $t('nettverksdagene')}}</h1>
-        <b-row>
-          <b-col cols="12" lg="6">
-            <div>
-              <!-- Render the quiz questions and results here -->
-              <QuestionCard
-                v-for="question in questions"
-                :key="question.id"
-                :question="question"
-                @answerSelected="handleAnswer"
-              />
-              <Result v-if="showResults" :topCompanies="topCompanies" />
-              <ProgressBar :progress="progress" />
+    <Content>
+      <b-row>
+        <b-col cols="12" lg="6">
+          <div>
+            <!-- Render the quiz questions and results here -->
+            <QuestionCard
+              v-if="questions.length"
+              :question="questions[currentQuestionIndex]"
+              @answerSelected="handleAnswer"
+            />
+            <Result v-if="showResults" :topCompanies="topCompanies" />
+            <ProgressBar :progress="progress" />
+            <div class="navigation-buttons">
+            <b-button @click="prevQuestion" :disabled="currentQuestionIndex === 0">Previous</b-button>
             </div>
-          </b-col>
-        </b-row>
-      </Content>
-    </div>
+          </div>
+        </b-col>
+      </b-row>
+    </Content>
   </template>
   
   <script>
@@ -38,9 +37,8 @@
       return {
         showResults: false,
         progress: 0,
+        currentQuestionIndex: 0,
         topCompanies: [], // Stores top 3 companies based on the user's answers
-
-        // Questions and answers for the quiz
         questions: [
           {
             id: 1,
@@ -75,6 +73,19 @@
         this.selectedAnswers[questionId] = option;
         this.calculateProgress();
         this.updateProgress();
+        this.nextQuestion();
+      },
+      nextQuestion() {
+        if (this.currentQuestionIndex < this.questions.length - 1) {
+          this.currentQuestionIndex++;
+        } else {
+          this.showResults = true;
+        }
+      },
+      prevQuestion() {
+        if (this.currentQuestionIndex > 0) {
+          this.currentQuestionIndex--;
+        }
       },
       calculateScores() {
         const companyScores = {};
@@ -88,6 +99,10 @@
           .sort(([, scoreA], [, scoreB]) => scoreB - scoreA)
           .slice(0, 3)
           .map(([company]) => company);
+      },
+      calculateProgress() {
+        this.progress = (Object.keys(this.selectedAnswers).length / this.questions.length) * 100;
+        if (this.progress === 100) this.showResults = true;
       },
       updateProgress() {
         this.progress = (Object.keys(this.selectedAnswers).length / this.questions.length) * 100;
@@ -113,23 +128,11 @@
       color: black;
       margin-bottom: 30px;
       margin-top: 40px;
-      @media(min-width: 768px) {
-        text-align: left;
-      }
     }
-    .image {
-      border-style: solid;
-      border: none;
-      border-radius: 20px;
-      overflow: hidden;
+    .navigation-buttons {
+      display: flex;
+      justify-content: space-between;
       margin-top: 20px;
-      margin-bottom: 20px;
-      @media(min-width: 768px) {
-        margin-top: 0px;
-      }
-    }
-    .about-view {
-        min-height: 80vh;
     }
   </style>
   
