@@ -1,22 +1,18 @@
 <template>
     <Content>
-      <b-row>
-        <b-col cols="12" lg="6">
-          <div>
-            <!-- Render the quiz questions and results here -->
-            <QuestionCard
-              v-if="questions.length"
-              :question="questions[currentQuestionIndex]"
-              @answerSelected="handleAnswer"
-            />
-            <Result v-if="showResults" :topCompanies="topCompanies" />
-            <ProgressBar :progress="progress" />
-            <div class="navigation-buttons">
-            <b-button @click="prevQuestion" :disabled="currentQuestionIndex === 0">Previous</b-button>
-            </div>
-          </div>
-        </b-col>
-      </b-row>
+      <div>
+        <!-- Render the quiz questions and results here -->
+        <QuestionCard
+          v-if="questions.length"
+          :question="questions[currentQuestionIndex]"
+          @answerSelected="handleAnswer"
+        />
+        <Result v-if="showResults" :topCompanies="topCompanies" />
+        <ProgressBar :progress="progress" />
+        <div class="navigation-buttons">
+        <b-button @click="prevQuestion" :disabled="currentQuestionIndex === 0">Previous</b-button>
+        </div>
+      </div>
     </Content>
   </template>
   

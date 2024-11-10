@@ -34,8 +34,12 @@
   <style scoped>
   .question-card {
     border: 1px solid #ddd;
-    padding: 20px;
+    padding: 40px;
     margin: 10px 0;
+    border-radius: 4px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .option {
     cursor: pointer;
