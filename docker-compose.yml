@@ -30,6 +30,9 @@ services:
       - ./frontend/src:/frontend/src
       - ./frontend/static:/frontend/static
       - ./frontend/test:/frontend/test
+      - ./frontend/package.json:/frontend/package.json
+      - ./frontend/package-lock.json:/frontend/package-lock.json
+      - ./frontend/node_modules:/frontend/node_modules
   fileserver:
     build: ./fileserver
     ports:
