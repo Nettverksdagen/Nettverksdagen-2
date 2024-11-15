@@ -272,8 +272,9 @@ template {
 }
 
 .standkart_holder {
-  width: 100%;
-  height: 100%;
+  width: 100%;  /* Takes up 80% of parent width */
+  height: 80vh;  /* Takes up 80% of viewport height */
+  margin: 0 auto;  /* Centers the map */
   position: relative;
 }
 
