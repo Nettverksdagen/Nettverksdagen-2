@@ -23,6 +23,7 @@
 <script>
 import QuestionCard from '@/components/valgomat/QuestionCard.vue'
 import ProgressBar from '@/components/valgomat/ProgressBar.vue'
+import questions from '@/components/valgomat/questions.json';
 
 export default {
   components: {
@@ -35,85 +36,7 @@ export default {
       progress: 0,
       currentQuestionIndex: 0,
       topCompanies: [], // Stores top 3 companies based on the user's answers
-      questions: [
-        {
-          id: 1,
-          text: "Hvilket fagområde interesserer deg mest?",
-          options: [
-            { id: 1, text: "Teknologi og innovasjon", companyWeights: { Thelma_Biotel: 1, Cisco: 1, Brunvoll: 1, Element_Logic: 1, NFEA: 0, Sopra_Steria: 1, Fugro: 0, Applica_Consulting: 1, Eltorque: 1, Nemko: 1, ABB: 1 } },
-              { id: 2, text: "Miljø og bærekraft", companyWeights: { Thelma_Biotel: 0, Cisco: 0, Brunvoll: 1, Element_Logic: 1, NFEA: 0, Sopra_Steria: 1, Fugro: 1, Applica_Consulting: 0, Eltorque: 1, Nemko: 1, ABB: 1 } },
-              { id: 3, text: "Helse og biomedision", companyWeights: { Thelma_Biotel: 1, Cisco: 0, Brunvoll: 0, Element_Logic: 0, NFEA: 0, Sopra_Steria: 0, Fugro: 0, Applica_Consulting: 0, Eltorque: 0, Nemko: 0, ABB: 0 } },
-            { id: 4, text: "Energi og fornybare ressurser", companyWeights: { Thelma_Biotel: 0, Cisco: 0, Brunvoll: 0, Element_Logic: 0, NFEA: 0, Sopra_Steria: 0, Fugro: 1, Applica_Consulting: 0, Eltorque: 0, Nemko: 0, ABB: 1 } },
-              { id: 5, text: "Annet", companyWeights: { Thelma_Biotel: 0, Cisco: 0, Brunvoll: 0, Element_Logic: 0, NFEA: 1, Sopra_Steria: 0, Fugro: 0, Applica_Consulting: 0, Eltorque: 0, Nemko: 0, ABB: 0 } },
-          ],
-        },
-        {
-          id: 2,
-          text: "Hvor ønsker du å jobbe?",
-          options: [
-            { id: 1, text: "Kan jobbe hvor som helst", companyWeights: { Thelma_Biotel: 1, Cisco: 1, Brunvoll: 1, Element_Logic: 1, NFEA: 1, Sopra_Steria: 1, Fugro: 1, Applica_Consulting: 1, Eltorque: 1, Nemko: 1, ABB: 1 } },
-              { id: 2, text: "Oslo", companyWeights: { Thelma_Biotel: 0, Cisco: 1, Brunvoll: 0, Element_Logic: 0, NFEA: 0, Sopra_Steria: 1, Fugro: 1, Applica_Consulting: 0, Eltorque: 0, Nemko: 1, ABB: 1 } },
-              { id: 3, text: "Trondheim", companyWeights: { Thelma_Biotel: 1, Cisco: 0, Brunvoll: 0, Element_Logic: 0, NFEA: 0, Sopra_Steria: 1, Fugro: 1, Applica_Consulting: 0, Eltorque: 1, Nemko: 0, ABB: 1 } },
-              { id: 4, text: "Stavanger", companyWeights: { Thelma_Biotel: 0, Cisco: 0, Brunvoll: 0, Element_Logic: 0, NFEA: 0, Sopra_Steria: 1, Fugro: 0, Applica_Consulting: 0, Eltorque: 0, Nemko: 0, ABB: 1 } },
-              { id: 5, text: "Bergen", companyWeights: { Thelma_Biotel: 0, Cisco: 0, Brunvoll: 0, Element_Logic: 0, NFEA: 0, Sopra_Steria: 1, Fugro: 1, Applica_Consulting: 0, Eltorque: 0, Nemko: 0, ABB: 1 } },
-              { id: 6, text: "Nord-Norge", companyWeights: { Thelma_Biotel: 0, Cisco: 0, Brunvoll: 0, Element_Logic: 0, NFEA: 0, Sopra_Steria: 1, Fugro: 0, Applica_Consulting: 0, Eltorque: 0, Nemko: 1, ABB: 1 } },
-            { id: 7, text: "Midt-Norge", companyWeights: { Thelma_Biotel: 1, Cisco: 0, Brunvoll: 0, Element_Logic: 0, NFEA: 0, Sopra_Steria: 1, Fugro: 1, Applica_Consulting: 0, Eltorque: 1, Nemko: 0, ABB: 0 } },
-              { id: 8, text: "Sørlandet", companyWeights: { Thelma_Biotel: 0, Cisco: 0, Brunvoll: 0, Element_Logic: 0, NFEA: 1, Sopra_Steria: 1, Fugro: 0, Applica_Consulting: 1, Eltorque: 0, Nemko: 1, ABB: 0 } },
-              { id: 9, text: "Østlandet", companyWeights: { Thelma_Biotel: 0, Cisco: 1, Brunvoll: 1, Element_Logic: 1, NFEA: 0, Sopra_Steria: 1, Fugro: 1, Applica_Consulting: 0, Eltorque: 0, Nemko: 1, ABB: 1 } },
-              { id: 10, text: "Vestlandet", companyWeights: { Thelma_Biotel: 0, Cisco: 0, Brunvoll: 1, Element_Logic: 0, NFEA: 0, Sopra_Steria: 1, Fugro: 1, Applica_Consulting: 0, Eltorque: 0, Nemko: 1, ABB: 1 } },
-              { id: 11, text: "Utenlands", companyWeights: { Thelma_Biotel: 0, Cisco: 1, Brunvoll: 1, Element_Logic: 1, NFEA: 0, Sopra_Steria: 1, Fugro: 1, Applica_Consulting: 0, Eltorque: 1, Nemko: 1, ABB: 1 } },
-          ],
-        },
-        {
-          id: 3,
-          text: "Hva er viktigst for deg på en arbeidsplass?",
-            options: [
-              { id: 1, text: "Godt arbeidsmiljø og sosiale tiltak", companyWeights: { Thelma_Biotel: 0, Cisco: 1, Brunvoll: 0, Element_Logic: 1, NFEA: 0, Sopra_Steria: 1, Fugro: 0, Applica_Consulting: 0, Eltorque: 0, Nemko: 0, ABB: 0 } },
-              { id: 2, text: "Høy lønn", companyWeights: { Thelma_Biotel: 0, Cisco: 0, Brunvoll: 1, Element_Logic: 0, NFEA: 0, Sopra_Steria: 0, Fugro: 0, Applica_Consulting: 0, Eltorque: 0, Nemko: 1, ABB: 1 } },
-              { id: 3, text: "Fleksible arbeidstider", companyWeights: { Thelma_Biotel: 1, Cisco: 0, Brunvoll: 0, Element_Logic: 0, NFEA: 0, Sopra_Steria: 0, Fugro: 0, Applica_Consulting: 1, Eltorque: 1, Nemko: 0, ABB: 0 } },
-              { id: 4, text: "Muligheter for faglig utvikling", companyWeights: { Thelma_Biotel: 0, Cisco: 0, Brunvoll: 0, Element_Logic: 0, NFEA: 1, Sopra_Steria: 1, Fugro: 1, Applica_Consulting: 0, Eltorque: 0, Nemko: 0, ABB: 0 } },
-              { id: 5, text: "Bærekraftige og miljønevennlige løsninger", companyWeights: { Thelma_Biotel: 0, Cisco: 0, Brunvoll: 0, Element_Logic: 0, NFEA: 0, Sopra_Steria: 0, Fugro: 1, Applica_Consulting: 0, Eltorque: 1, Nemko: 0, ABB: 1 } },
-            ],
-          },
-          {
-            id: 4,
-            text: "Hvordan fortrekker du å jobbe?",
-            options: [
-              { id: 1, text: "I åpent kontorlandskap", companyWeights: { Thelma_Biotel: 0, Cisco: 1, Brunvoll: 0, Element_Logic: 1, NFEA: 0, Sopra_Steria: 1, Fugro: 0, Applica_Consulting: 0, Eltorque: 0, Nemko: 1, ABB: 1 } },
-              { id: 2, text: "Selvstendig på eget kontor", companyWeights: { Thelma_Biotel: 1, Cisco: 0, Brunvoll: 1, Element_Logic: 0, NFEA: 1, Sopra_Steria: 0, Fugro: 0, Applica_Consulting: 1, Eltorque: 1, Nemko: 0, ABB: 0 } },
-              { id: 3, text: "Hjemmekontor", companyWeights: { Thelma_Biotel: 0, Cisco: 0, Brunvoll: 0, Element_Logic: 0, NFEA: 0, Sopra_Steria: 0, Fugro: 1, Applica_Consulting: 0, Eltorque: 0, Nemko: 0, ABB: 0 } },
-            ],
-          },
-          {
-            id: 5,
-            text: "Hva slags bedrift ønsker du å jobbe i?",
-            options: [
-              { id: 1, text: "Startup", companyWeights: { Thelma_Biotel: 1, Cisco: 0, Brunvoll: 0, Element_Logic: 0, NFEA: 0, Sopra_Steria: 0, Fugro: 0, Applica_Consulting: 0, Eltorque: 1, Nemko: 0, ABB: 0 } },
-              { id: 2, text: "Stor og etablert bedrift", companyWeights: { Thelma_Biotel: 0, Cisco: 1, Brunvoll: 1, Element_Logic: 1, NFEA: 1, Sopra_Steria: 1, Fugro: 0, Applica_Consulting: 0, Eltorque: 0, Nemko: 1, ABB: 1 } },
-              { id: 3, text: "Nøytral", companyWeights: { Thelma_Biotel: 0, Cisco: 0, Brunvoll: 0, Element_Logic: 0, NFEA: 0, Sopra_Steria: 0, Fugro: 1, Applica_Consulting: 1, Eltorque: 0, Nemko: 0, ABB: 0 } },
-            ],
-          },
-          {
-            id: 6,
-            text: "Hvilken rolle ser du for deg i fremtiden?",
-            options: [
-              { id: 1, text: "Konsulent", companyWeights: { Thelma_Biotel: 0, Cisco: 0, Brunvoll: 0, Element_Logic: 0, NFEA: 0, Sopra_Steria: 1, Fugro: 0, Applica_Consulting: 1, Eltorque: 0, Nemko: 0, ABB: 0 } },
-              { id: 2, text: "Leder", companyWeights: { Thelma_Biotel: 1, Cisco: 1, Brunvoll: 1, Element_Logic: 1, NFEA: 1, Sopra_Steria: 1, Fugro: 1, Applica_Consulting: 1, Eltorque: 1, Nemko: 1, ABB: 1 } },
-              { id: 3, text: "Ingeniør i fast konsern", companyWeights: { Thelma_Biotel: 1, Cisco: 1, Brunvoll: 1, Element_Logic: 1, NFEA: 1, Sopra_Steria: 0, Fugro: 1, Applica_Consulting: 0, Eltorque: 1, Nemko: 1, ABB: 1 } },
-              { id: 4, text: "Nøytral", companyWeights: { Thelma_Biotel: 1, Cisco: 1, Brunvoll: 1, Element_Logic: 1, NFEA: 1, Sopra_Steria: 1, Fugro: 1, Applica_Consulting: 1, Eltorque: 1, Nemko: 1, ABB: 1 } },
-            ],
-          },
-          {
-            id: 7,
-            text: "Hvor viktig er følgende for deg?",
-          options: [
-            { id: 1, text: "Sosiale tiltak som ping-pong og kaffemaskin", companyWeights: { Thelma_Biotel: 0, Cisco: 1, Brunvoll: 0, Element_Logic: 1, NFEA: 0, Sopra_Steria: 1, Fugro: 0, Applica_Consulting: 0, Eltorque: 0, Nemko: 0, ABB: 0 } },
-              { id: 2, text: "Lønn", companyWeights: { Thelma_Biotel: 0, Cisco: 0, Brunvoll: 1, Element_Logic: 0, NFEA: 0, Sopra_Steria: 0, Fugro: 0, Applica_Consulting: 0, Eltorque: 0, Nemko: 1, ABB: 1 } },
-            { id: 3, text: "Fleksible arbeidstider", companyWeights: { Thelma_Biotel: 1, Cisco: 0, Brunvoll: 0, Element_Logic: 0, NFEA: 0, Sopra_Steria: 0, Fugro: 0, Applica_Consulting: 1, Eltorque: 1, Nemko: 0, ABB: 0 } },
-              { id: 4, text: "Jobbe med bærekraft", companyWeights: { Thelma_Biotel: 0, Cisco: 0, Brunvoll: 0, Element_Logic: 0, NFEA: 1, Sopra_Steria: 1, Fugro: 1, Applica_Consulting: 0, Eltorque: 0, Nemko: 0, ABB: 0 } },
-          ],
-        },
-      ],
+      questions,
       selectedAnswers: {}, // Stores the user's selected answers by question ID
     };
   },
