@@ -40,6 +40,11 @@ export default {
   margin-right: 20px; /* Space between FAQ and image */
 }
 
+/* Padding below header */
+.faq-container h1 {
+  margin-bottom: 30px; /* Adjust this value for more or less spacing */
+}
+
 .side-image {
   flex: 1;
   max-width: 600px;
