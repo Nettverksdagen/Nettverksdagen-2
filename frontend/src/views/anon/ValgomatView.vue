@@ -71,12 +71,9 @@ export default {
       this.nextQuestion();
     },
     nextQuestion() {
-      
-      if (this.currentQuestionIndex < this.questions.length - 1) {
-        this.currentQuestionIndex++;
-        this.calculateProgress();
-      } else {
-        this.currentQuestionIndex++;
+      this.currentQuestionIndex++;
+      this.calculateProgress();
+      if (this.currentQuestionIndex === this.questions.length) {
         this.calculateScores();
         this.showResults = true;
       }
