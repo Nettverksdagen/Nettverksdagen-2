@@ -78,5 +78,34 @@
     "bedpresword": "Presentations",
     "coffeesponsor": "Coffee Sponsor",
     "interviews": "Interviews",
-    "interviews2": "Participate in Speed Interviews with some of the Companies of the Year"
+    "interviews2": "Participate in Speed Interviews with some of the Companies of the Year",
+    "faq": {
+        "header": "Frequently asked questions",
+        "questions": [
+        {
+            "question": "Where are the Networking days arranged?",
+            "answer": "The Networking days are arranged in Glassgården at Gamle Elektro."
+        },
+        {
+            "question": "When are companies at their stands?",
+            "answer": "The stand area is open from 10:00 AM to 3:00 PM on Wednesday and Thursday (January 22nd and 23rd)."
+        },
+        {
+            "question": "Who can participate in the NVD events?",
+            "answer": "Everyone can join the balloon drop and visit the stands. However, company presentations, the banquet, and other events requiring registration are reserved for Cybernetics and Robotics students."
+        },
+        {
+            "question": "Is there coffee at the stands?",
+            "answer": "There's only one way to find out. ;)"
+        },
+        {
+            "question": "What can you win at the balloon drop?",
+            "answer": "Gift cards and more (details to come)."
+        },
+        {
+            "question": "What can you do during NVD?",
+            "answer": "Stands, company presentations, and the banquet, among other activities."
+        }
+    ]
+    }
 }
