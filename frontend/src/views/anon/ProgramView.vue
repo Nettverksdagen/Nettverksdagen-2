@@ -26,7 +26,7 @@
             </div>
           </div>
         </div>
-        <div id="bankett">
+        <div id="avslutningsmiddag">
         </div>
       </div>
 
