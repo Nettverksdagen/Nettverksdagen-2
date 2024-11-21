@@ -41,6 +41,7 @@ export default {
         {routeName: 'Program', linkText: 'Program'},
         {routeName: 'Listings', linkText: 'Stillingsannonser'},
         {routeName: 'About', linkText: 'Om oss'},
+        {routeName: 'FAQ_List', linkText: 'FAQ'},
         {routeName: 'Contact', linkText: 'Kontakt'},
         {routeName: 'Language', linkText: 'English'}
       ]
