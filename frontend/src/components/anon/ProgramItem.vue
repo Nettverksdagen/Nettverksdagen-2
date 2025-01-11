@@ -1,62 +1,60 @@
 <template>
 <div>
-  <div class="timeline-item">
-    <div class="timestamp">
-      <h4><span class="font-weight-bold">{{formatTime(timeStart)}}</span></h4>
-    </div>
+  <div class="timeline-item" @click="$emit('click')">
     <div class="card">
+      <div class="timestamp">
+        <h4><span>{{formatTime(timeStart)}} - {{formatTime(timeEnd)}}</span></h4>
+      </div>
+      <div class="separator"></div>
       <div class="card-body">
         <div class="header">
           <div v-if="header">
             <h3 class="font-weight-bold">{{header}}</h3>
           </div>
           <div v-if="registration && maxRegistered">
-            <h5 v-if="registered<=maxRegistered">
-              {{registered + '/' + maxRegistered + ' ' + $t('påmeldte')}}
-            </h5>
-            <h5 v-else>
-              {{maxRegistered + ' ' + $t('påmeldte') + ', '  + (registered-maxRegistered) + ' ' + $t('onthe') + ' ' +$t('venteliste')}}
-            </h5>
+            <h5 class="registration-tag">&check; {{ $t('registrationAvailable') }}</h5>
           </div>
         </div>
-        <div v-if="paragraph">
+
+        <!-- <div v-if="paragraph">
           <div :key="name + line" v-for="line in paragraph" >
             <p class='description'>{{line}}</p>
           </div>
-        </div>
-        <div v-if="registration" class='button'>
-          <b-button v-if="enableRegistration && !submitted" variant='primary' @click="openDialog">{{$t('påmelding')}}</b-button>
-          <b-button v-else disabled variant="dark">{{$t('påmelding')}}</b-button>
-        </div>
+        </div> -->
+
+        <!-- <div v-if="registration" class='button'>
+          <b-button v-if="enableRegistration && !submitted" variant='primary' @click="openDialog">{{$t('registrationAvailable')}}</b-button>
+          <b-button v-else disabled variant="dark">{{$t('registrationAvailable')}}</b-button>
+        </div> -->
         <div class="footer">
           <div class="inline">
             <div v-if="place" class="d-block d-md-inline">
               <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="mr-1"/>
               <div v-html="place" class="d-inline"/>
             </div>
-            <div v-if="timeEnd" class="d-inline">
+            <!-- <div v-if="timeEnd" class="d-inline">
               <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-md-1 ml-md-2"/>
               {{formatTime(timeStart)}} - {{formatTime(timeEnd)}}
-            </div>
+            </div> -->
           </div>
-          <div v-if="registration && cancelEmail">
+          <!-- <div v-if="registration && cancelEmail">
               <b-link @click.native="destroy_participant(name)">{{$t('destroypart')}}</b-link>
-          </div>
+          </div> -->
           <div v-if="registration">
               <div v-if="submitted">
                 <div>{{$t('submitted')}}</div>
               </div>
               <div v-else-if="enableRegistration && registered<maxRegistered">
-                <div>{{$t('påmeldingstart')}}</div>
+                <div>{{$t('registrationHasOpened')}}</div>
               </div>
               <div v-else-if="enableRegistration && registered>=maxRegistered">
                 <div>{{$t('vilbliventeliste')}}</div>
               </div>
               <div v-else-if="afterRegistration">
-                <div>{{$t('regfinish')}}</div>
+                <div>{{$t('registrationClosed')}}</div>
               </div>
               <div v-else>
-              <div>{{$t('regtobegin') + ' ' + formatDate(registrationStart)}}</div>
+              <div>{{$t('registrationOpensAt') + ' ' + formatDate(registrationStart)}}</div>
               </div>
           </div>
         </div>
@@ -289,62 +287,97 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .card {
+  .timeline-item {
+    // padding: 15px 0 15px 40px;
     position: relative;
+    background-color: inherit;
+    // width: fit-content;
+  }
+  .card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    column-gap: 20px;
+    align-items: center;
+    // width: fit-content;
+    border: none;
+  }
+  .separator {
+    position: relative;
+    width: 6px;
+    align-self: stretch;
+    background-color: #1d4844;
+
+    /* The circles on the timeline */
+    &::after {
+      content: '';
+      position: absolute;
+
+      // Move the circle to the center, accounting for its own size
+      top: 50%;
+      left: 50%;
+      width: 25px;
+      height: 25px;
+      transform: translate(-50%, -50%);
+
+      background-color: white;
+      border: 4px solid var(--primary-color);
+      border-radius: 50%;
+      z-index: 1;
+    }
+  }
+  .card-body {
+    --line-border-color: rgba(0, 0, 0, 0.125);
+    border: 1px solid var(--line-border-color);
     border-radius: 20px;
     border-width: 2px;
     border-color: var(--line-border-color);
     background-color: white;
-  }
-  .numberofpeople {
-    display: inline;
-  }
 
-  .timeline-item {
-    padding: 15px 0 15px 40px;
-    position: relative;
-    background-color: inherit;
-    width: 100%;
-  }
+    // width: 400px;
+    margin: .5rem 0;
 
-  /* Add arrows to the right container (pointing left) */
-  .timeline-item::before {
-    content: " ";
-    height: 0;
-    position: absolute;
-    top: 22px;
-    width: 0;
-    z-index: 1;
-    left: 30px;
-    border-width: 10px 10px 10px 0;
-    border-color: transparent white transparent transparent;
-  }
+    transition-property: border-color, background-color;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.1s;
+    --primary-color-opacity: #14403c31;
+    &:hover {
+      border-color: var(--primary-color);
+      cursor: pointer;
+    }
+    .selected-event & {
+      border-color: var(--primary-color);
+      background-color: var(--primary-color-opacity);
+      cursor: default;
+    }
 
-  /* The circles on the timeline */
-  .timeline-item::after {
-    content: '';
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    right: -17px;
-    background-color: white;
-    border: 4px solid var(--primary-color);
-    top: 18px;
-    border-radius: 50%;
-    z-index: 1;
-    left: -13px;
+    * {
+      margin: 0;
+    }
   }
+  // .numberofpeople {
+  //   display: inline;
+  // }
 
   .header {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 20px;
+    gap: 1em;
+    align-items: center;
+    // margin-bottom: 20px;
     overflow-wrap: break-word;
-    @media(min-width: 992px) {
-      flex-direction: row;
-      margin-bottom: 0;
+
+    * {
+      margin: 0;
     }
+    .registration-tag {
+      white-space: nowrap;
+    }
+    // @media(min-width: 992px) {
+    //   flex-direction: row;
+    //   margin-bottom: 0;
+    // }
   }
 
   .footer {
@@ -352,26 +385,38 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     margin-bottom: 0px;
-    @media(min-width: 992px) {
-      flex-direction: row;
-      margin-bottom: 0;
-    }
+
+    // @media(min-width: 992px) {
+    //   flex-direction: row;
+    //   margin-bottom: 0;
+    // }
   }
 
   .button {
     display: flex;
     flex-direction: row;
-    margin-bottom: 10px;
-    @media(min-width: 768px) {
-      margin-right: 15px;
-      flex-direction: row-reverse;
-    }
+    // margin-bottom: 10px;
+
+    // @media(min-width: 768px) {
+    //   margin-right: 15px;
+    //   flex-direction: row-reverse;
+    // }
   }
 
   .timestamp {
-    position: absolute;
-    left: -82px;
-    top: 16px;
+    // outline: 1px solid red;
+    // position: absolute;
+    // top: calc(50%);
+    // left: -20px; // Move left of the timeline
+    height: auto;
+    white-space: nowrap;
+    // transform: translate(-100%, -50%);
+
+    h4 {
+        font-size: 1rem;
+        opacity: 0.7;
+        margin: 0;
+    }
   }
 
   .description {
@@ -409,6 +454,7 @@ export default {
 
     .timeline-item {
       padding-left: 16px;
+      flex-grow: 1;
     }
 
     .timeline-item::before {
