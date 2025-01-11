@@ -107,6 +107,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .contact-view {
+    flex: 1;
+  }
   h1 {
     font-size: 36px;
     font-weight: 600;

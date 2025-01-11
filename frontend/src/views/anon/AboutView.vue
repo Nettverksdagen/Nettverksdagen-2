@@ -30,6 +30,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .about-view {
+    flex: 1;
+  }
   .introduction {
     font-size:18px;
     text-align: center;
@@ -43,8 +46,8 @@ export default {
     font-weight: 600;
     text-align: center;
     color: black;
-    margin-bottom: 30px;
-    margin-top: 40px;
+    // margin-bottom: 30px;
+    // margin-top: 40px;
     @media(min-width: 768px) {
       text-align: left;
     }

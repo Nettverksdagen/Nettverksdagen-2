@@ -220,6 +220,7 @@ export default {
     // min-height: 80vh;
     // margin-top: 40px;
     color: black;
+    flex: 1;
   }
   h1 {
     font-size: 36px;
