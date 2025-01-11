@@ -21,11 +21,11 @@
     </div>
   </div>
 </template>
-  
+
 <script>
 import QuestionCard from '@/components/valgomat/QuestionCard.vue'
 import ProgressBar from '@/components/valgomat/ProgressBar.vue'
-import questions from '@/components/valgomat/questions.json';
+import questions from '@/components/valgomat/questions.json'
 import companyDescription from '@/components/valgomat/companyDescription.json'
 
 export default {
@@ -33,7 +33,7 @@ export default {
     QuestionCard,
     ProgressBar
   },
-  data() {
+  data () {
     return {
       showResults: false,
       progress: 0,
@@ -41,30 +41,30 @@ export default {
       topCompanies: [], // Stores top 3 companies based on the user's answers
       companyDescription: companyDescription,
       questions,
-      selectedAnswers: {}, // Stores the user's selected answers by question ID
-    };
+      selectedAnswers: {} // Stores the user's selected answers by question ID
+    }
   },
   methods: {
-    handleAnswer(questionId, option) {
-      this.selectedAnswers[questionId] = option;
-      this.calculateProgress();
-      this.nextQuestion();
+    handleAnswer (questionId, option) {
+      this.selectedAnswers[questionId] = option
+      this.calculateProgress()
+      this.nextQuestion()
     },
-    nextQuestion() {
-      this.currentQuestionIndex++;
-      this.calculateProgress();
+    nextQuestion () {
+      this.currentQuestionIndex++
+      this.calculateProgress()
       if (this.currentQuestionIndex === this.questions.length) {
-        this.calculateScores();
-        this.showResults = true;
+        this.calculateScores()
+        this.showResults = true
       }
     },
-    prevQuestion() {
+    prevQuestion () {
       if (this.currentQuestionIndex > 0) {
-        this.currentQuestionIndex--;
-        this.calculateProgress();
+        this.currentQuestionIndex--
+        this.calculateProgress()
       }
     },
-    calculateScores() {
+    calculateScores () {
       const companyScores = {}
       for (const question of this.questions) {
         const answer = this.selectedAnswers[question.id]
@@ -79,7 +79,7 @@ export default {
         .slice(0, Math.min(3, Object.keys(companyScores).length))
         .map(([company]) => company)
     },
-    calculateProgress() {
+    calculateProgress () {
       this.progress = this.currentQuestionIndex / this.questions.length * 100
     }
   }
