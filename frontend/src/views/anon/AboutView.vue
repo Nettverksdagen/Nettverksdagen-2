@@ -60,7 +60,7 @@ export default {
       margin-top: 0px;
     }
   }
-  .about-view {
-      min-height: 80vh;
-  }
+  // .about-view {
+  //     min-height: 80vh;
+  // }
 </style>

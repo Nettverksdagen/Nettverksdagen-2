@@ -10,9 +10,9 @@
 </script>
 
 <style lang="scss" scoped>
-  .content {
-    margin: auto auto;
-  }
+  // .content {
+  //   margin: auto auto;
+  // }
   a {
     color: #187c79;
   }

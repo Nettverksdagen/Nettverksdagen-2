@@ -217,8 +217,8 @@ export default {
   }
 
   .listings {
-    min-height: 80vh;
-    margin-top: 40px;
+    // min-height: 80vh;
+    // margin-top: 40px;
     color: black;
   }
   h1 {
