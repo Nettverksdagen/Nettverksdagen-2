@@ -40,3 +40,8 @@ class ParticipantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Participant
         fields = '__all__'
+
+class ParticipantListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Participant
+        exclude = ('code',)

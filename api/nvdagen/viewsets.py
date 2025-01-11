@@ -3,7 +3,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from .models import Listing, Business, Sponsor, TeamMember, Form, Participant, Program
-from .serializers import ListingSerializer, BusinessSerializer, SponsorSerializer, TeamMemberSerializer, FormSerializer, ParticipantSerializer, ProgramSerializer
+from .serializers import ListingSerializer, BusinessSerializer, SponsorSerializer, TeamMemberSerializer, FormSerializer, ParticipantSerializer, ProgramSerializer, ParticipantListSerializer
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
@@ -45,6 +45,9 @@ class ParticipantViewSet(viewsets.ModelViewSet):
     serializer_class = ParticipantSerializer
     permission_classes = (AllowAny,)
 
+    def list(self, request, *args, **kwargs):
+        self.serializer_class = ParticipantListSerializer
+        return super().list(request, *args, **kwargs)
 
     def create(self, request):
         data = request.data
