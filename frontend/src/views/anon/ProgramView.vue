@@ -35,10 +35,27 @@
               :name="item.id"
             >
             </ProgramItem>
+            <div v-if="isMobile && selectedProgramItem && selectedProgramItem.id === item.id">
+              <ProgramDescription
+                :timeStart="selectedProgramItem.timeStart"
+                :timeEnd="selectedProgramItem.timeEnd"
+                :place="selectedProgramItem.place"
+                :header="selectedProgramItem.header"
+                :paragraph="selectedProgramItem.paragraph"
+                :registration="selectedProgramItem.registration"
+                :maxRegistered="selectedProgramItem.maxRegistered"
+                :registered="selectedProgramItem.registered"
+                :cancelEmail="selectedProgramItem.cancelEmail"
+                :registrationStart="selectedProgramItem.registrationStart"
+                :registrationEnd="selectedProgramItem.registrationEnd"
+                :name="selectedProgramItem.id"
+              >
+              </ProgramDescription>
+            </div>
           </div>
         </div>
         <ProgramDescription
-          v-if="selectedProgramItem"
+          v-if="!isMobile && selectedProgramItem"
           :timeStart="selectedProgramItem.timeStart"
           :timeEnd="selectedProgramItem.timeEnd"
           :place="selectedProgramItem.place"
@@ -82,8 +99,15 @@ export default {
   data () {
     return {
       selectedProgramItem: null,
-      selectedDayIndex: 0
+      selectedDayIndex: 0,
+      isMobile: window.innerWidth <= 768
     }
+  },
+  mounted() {
+    window.addEventListener('resize', this.handleResize);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.handleResize);
   },
   methods: {
     formatDate (dateObj) {
@@ -98,6 +122,9 @@ export default {
     selectDay (index) {
       this.selectedDayIndex = index
       this.selectedProgramItem = this.program[index][0]
+    },
+    handleResize() {
+      this.isMobile = window.innerWidth <= 768;
     }
   },
   computed: {

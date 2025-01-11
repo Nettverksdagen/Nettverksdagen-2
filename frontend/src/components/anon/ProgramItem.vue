@@ -3,7 +3,8 @@
   <div class="timeline-item" @click="$emit('click')">
     <div class="card">
       <div class="timestamp">
-        <h4><span>{{formatTime(timeStart)}} - {{formatTime(timeEnd)}}</span></h4>
+        <!-- <h4><span>{{formatTime(timeStart)}} - {{formatTime(timeEnd)}}</span></h4> -->
+        <h4><span>{{formatTime(timeStart)}}</span></h4>
       </div>
       <div class="separator"></div>
       <div class="card-body">
