@@ -232,18 +232,6 @@ export default {
     margin-right: 1rem;
   }
 
-  h1 {
-    font-size: 36px;
-    font-weight: 600;
-    text-align: center;
-    color: black;
-    // margin-bottom: 30px;
-    // margin-top: 40px;
-    @media(min-width: 768px) {
-      text-align: left;
-    }
-  }
-
   @media(max-width: 966px) {
     h3 {
       font-size: 1.3em;

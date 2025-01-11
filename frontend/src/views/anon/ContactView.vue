@@ -2,7 +2,7 @@
   <div class="contact-view">
     <Content>
     <!-- <h1>{{$t('kontakt')}}</h1> -->
-    <h2>{{$t('kontakt') + ' for ' + $t('nettverksdagene')  + ' 2025'}}</h2>
+    <h1>{{$t('kontakt') + ' for ' + $t('nettverksdagene')  + ' 2025'}}</h1>
     <b-row class="firstrow">
        <!-- <b-col cols="12" md="5">
           <p class="description">
@@ -109,17 +109,6 @@ export default {
 <style lang="scss" scoped>
   .contact-view {
     flex: 1;
-  }
-  h1 {
-    font-size: 36px;
-    font-weight: 600;
-    text-align: center;
-    color: black;
-    margin-bottom: 30px;
-    margin-top: 40px;
-    @media(min-width: 768px) {
-      text-align: left;
-    }
   }
   .firstrow {
     margin-bottom: -40px;

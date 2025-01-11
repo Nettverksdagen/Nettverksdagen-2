@@ -42,6 +42,16 @@ export default {
     flex-direction: column;
     gap: 2em;
 
+    h1 {
+      font-size: 36px;
+      font-weight: 600;
+      text-align: center;
+      color: black;
+      @media(min-width: 768px) {
+        text-align: left;
+      }
+    }
+
     @media(max-width: 768px) {
       overflow-x: hidden;
     }

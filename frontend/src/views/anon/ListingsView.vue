@@ -222,16 +222,6 @@ export default {
     color: black;
     flex: 1;
   }
-  h1 {
-    font-size: 36px;
-    font-weight: 600;
-    text-align: center;
-    color: black;
-    margin-bottom: 30px;
-    @media(min-width: 768px) {
-      text-align: left;
-    }
-  }
   .checkbox {
     background-color: white;
     border: none;

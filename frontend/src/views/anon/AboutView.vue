@@ -41,17 +41,6 @@ export default {
       margin-right: 30px;
     }
   }
-  h1 {
-    font-size: 36px;
-    font-weight: 600;
-    text-align: center;
-    color: black;
-    // margin-bottom: 30px;
-    // margin-top: 40px;
-    @media(min-width: 768px) {
-      text-align: left;
-    }
-  }
   .image {
     border-style: solid;
     border: none;
