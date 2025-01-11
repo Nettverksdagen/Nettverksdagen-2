@@ -136,6 +136,20 @@
 </div>
 </template>
 
+    <b-modal
+      id="confirm-modal"
+      ref="confirm-modal"
+      centered
+      title="P melding"
+      ok-only
+      ok-title="OK"
+      ok-variant="secondary"
+      @ok="onConfirmed"
+    >
+      <p v-if="registered">Du er n  p meldt p {{header}}.</p>
+      <p v-else>Det er dessverre ikke noen ledige plasser igjen p {{header}}.</p>
+    </b-modal>
+
 <script>
 import axios from 'axios'
 // import { mapMutations } from 'vuex'
