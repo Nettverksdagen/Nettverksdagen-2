@@ -1,16 +1,18 @@
 <template>
   <div>
-    <!-- Render the quiz questions and results here -->
     <QuestionCard
       v-if="questions.length && !showResults"
       :question="questions[currentQuestionIndex]"
       @answerSelected="handleAnswer"
     />
     <div v-if="showResults">
-      <h1>Results</h1>
-      <p>Based on your answers, here are the top companies that match your preferences:</p>
+      <h1>{{$t('valgomatresulttitle')}}</h1>
+      <p>{{$t('valgomatresulttext')}}</p>
       <ul>
-        <li v-for="company in topCompanies" :key="company">{{ company }}</li>
+        <li v-for="company in topCompanies" :key="company">
+          <h2>{{ companyDescription[company][0] }}</h2>
+          <p>{{ companyDescription[company][1] }}</p>
+        </li>
       </ul>
     </div>
     <ProgressBar :progress="progress" />
@@ -24,6 +26,7 @@
 import QuestionCard from '@/components/valgomat/QuestionCard.vue'
 import ProgressBar from '@/components/valgomat/ProgressBar.vue'
 import questions from '@/components/valgomat/questions.json';
+import companyDescription from '@/components/valgomat/companyDescription.json'
 
 export default {
   components: {
@@ -36,6 +39,7 @@ export default {
       progress: 0,
       currentQuestionIndex: 0,
       topCompanies: [], // Stores top 3 companies based on the user's answers
+      companyDescription: companyDescription,
       questions,
       selectedAnswers: {}, // Stores the user's selected answers by question ID
     };
@@ -61,48 +65,47 @@ export default {
       }
     },
     calculateScores() {
-      const companyScores = {};
+      const companyScores = {}
       for (const question of this.questions) {
-        const answer = this.selectedAnswers[question.id];
+        const answer = this.selectedAnswers[question.id]
         if (answer) {
           for (const [company, score] of Object.entries(answer.companyWeights)) {
-            companyScores[company] = (companyScores[company] || 0) + score;
+            companyScores[company] = (companyScores[company] || 0) + score
           }
         }
       }
       this.topCompanies = Object.entries(companyScores)
-      .sort(([, scoreA], [, scoreB]) => scoreB - scoreA)
-      .slice(0, Math.min(3, Object.keys(companyScores).length))
-      .map(([company]) => company);
+        .sort(([, scoreA], [, scoreB]) => scoreB - scoreA)
+        .slice(0, Math.min(3, Object.keys(companyScores).length))
+        .map(([company]) => company)
     },
     calculateProgress() {
-      this.progress = this.currentQuestionIndex / this.questions.length * 100;
-      //this.progress = (Object.keys(this.selectedAnswers).length / this.questions.length) * 100;
+      this.progress = this.currentQuestionIndex / this.questions.length * 100
     }
-  },
-};
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-  .introduction {
-    font-size:18px;
-    text-align: center;
-    @media(min-width: 768px) {
-      text-align: left;
-      margin-right: 30px;
-    }
+.introduction {
+  font-size:18px;
+  text-align: center;
+  @media(min-width: 768px) {
+    text-align: left;
+    margin-right: 30px;
   }
-  h1 {
-    font-size: 36px;
-    font-weight: 600;
-    text-align: center;
-    color: black;
-    margin-bottom: 30px;
-    margin-top: 40px;
-  }
-  .navigation-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
+}
+h1 {
+  font-size: 36px;
+  font-weight: 600;
+  text-align: center;
+  color: black;
+  margin-bottom: 30px;
+  margin-top: 40px;
+}
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
 </style>

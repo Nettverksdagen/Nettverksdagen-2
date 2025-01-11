@@ -14,18 +14,18 @@
       </div>
     </div>
 </template>
-  
+
 <script>
-  export default {
-    props: {
-      progress: {
-        type: Number,
-        required: true,
-      },
-    },
-  };
+export default {
+  props: {
+    progress: {
+      type: Number,
+      required: true
+    }
+  }
+}
 </script>
-  
+
 <style scoped>
 .progress-container {
     margin: 20px 0;
@@ -37,7 +37,7 @@
     border-radius: 5px;
     overflow: hidden;
 }
-  
+
 .progress-bar {
     background-color: #14403C;
     text-align: center;
