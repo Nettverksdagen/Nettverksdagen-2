@@ -26,7 +26,7 @@
 "registrationOpensAt": "Påmelding åpner",
 "registrationNotYetAvailable": "Påmelding er ikke tilgjengelig ennå",
 "registrationHasOpened": "Påmelding har startet",
-"registrationClosed": "Påmelding har steng",
+"registrationClosed": "Påmelding har stengt",
 "waitlistAvailable": "Venteliste tilgjengelig",
 "cancel": "Avbryt",
 "submit": "Send inn",
@@ -77,10 +77,10 @@
     "hide": "Skjul",
     "stillingstype": "Stillingstype",
     "sted": "Sted",
-    "bankett": "Bankett",
+    "closing_dinner": "Avslutningsmiddag",
     "ballongslipp": "Ballongslipp",
     "standtext": "Glassgården fylles med stands! Kom i kontakt med mange spennende bedrifter.",
-    "programtext": "Nettverksdagene avsluttes med en bankett på Thon Hotel Prinsen. Trykk for info.",
+    "programtext": "Nettverksdagene avsluttes med en avslutningsmiddag på Thon Hotel Prinsen. Trykk for info.",
     "bedprestext": "Det blir holdt flere bedrifts- presentasjoner for de som vil bli bedre kjent med bedriftene.",
     "ballongslipptext": "Vinn flotte premier når Nettverksdagene åpner med ballongslipp.",
     "Styret": "Styret",
@@ -90,12 +90,45 @@
     "thankscoop": "Takk til Coop Extra!",
     "thankscooptext": "Vi takker Coop Extra for forsyning av kaffe under Nettverksdagene 2023!",
     "glassgårdentext": "Glassgården fylles med stands! Kom i kontakt med mange spennende bedrifter.",
-    "banquetend": "Nettverksdagene avsluttes med en bankett. ",
+    "avslutningsmiddag": "Avslutningsmiddag",
     "bedpres2": "Det blir holdt flere bedrifts- presentasjoner for de som vil bli bedre kjent med bedriftene.",
     "ball": "Vinn flotte premier når Nettverksdagene åpner med ballongslipp.",
     "programfor": "Trykk her for å se hvilke arrangementer som foregikk under Nettverksdagene 2022!",
     "bedpresword": "Bedpres",
     "coffeesponsor": "Kaffesponsor",
     "interviews": "Intervjuer",
-    "interviews2": "Bli med på speedintervju med årets bedrifter"
+    "interviews2": "Bli med på speedintervju med årets bedrifter",
+    "faq": {
+        "header": "Ofte stile spørsmål",
+        "questions": [
+            {
+                "question": "Hvor arrangeres Nettverksdagene?",
+                "answer": "Nettverksdagene arangeres i Glassgården i Gamle Elekro."
+            },
+            {
+                "question": "Når står bedrifter på stand?",
+                "answer": "Standområdet er åpent fra 10:00 - 15:00 onsdag og torsdag (22.01 og 23.01)."
+            },
+            {
+                "question": "Hvem kan delta på NVD arrangementene?",
+                "answer": "Alle kan delta på ballongsslipp og stands. For bedpress, banket og andre arrangement med påmelding er disse forbeholdt Kybernetikk og Robotikk studenter."
+            },
+            {
+                "question": "Er det kaffe på stands?",
+                "answer": "Det er bare en måte å finne ut det på ;)"
+            },
+            {
+                "question": "Hva kan man vinne på ballongslipp?",
+                "answer": "Gavekort ++ (mer info kommer)"
+            },
+            {
+                "question": "Hva kan man gjøre under Nettverksdagene?",
+                "answer": "Stands, bedpress og bankett++"
+            },
+            {
+                "question": "Hva er banketten og hvem kan delta?",
+                "answer": "En buisness causal middag hvor man kan møtte bedriftsrepresentanter fra noen av våre sammarbeidspartnere. Det blir servert mat drikke og det vil være underholdning underveis."
+            }
+        ]
+    }
 }

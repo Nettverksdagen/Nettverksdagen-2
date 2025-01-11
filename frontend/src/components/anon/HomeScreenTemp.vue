@@ -21,8 +21,8 @@
           <!--  <b-link :to="'/program'"> -->
             <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" box-text="Glassgården fylles med stands! Kom i kontakt med mange spennende bedrifter." class="box"/>
           <!-- </b-link> -->
-          <!-- <router-link :to="{name: 'Program', hash: '#bankett'}" @click.native="scrollToId('bankett')"> -->
-            <HomeScreenBox box-title="Bankett" box-icon="glass-cheers-solid.svg" box-text="Nettverksdagene avsluttes med en bankett. " class="box"/>
+          <!-- <router-link :to="{name: 'Program', hash: '#avslutningsmiddag'}" @click.native="scrollToId('avslutningsmiddag')"> -->
+            <HomeScreenBox box-title="avslutningsmiddag" box-icon="glass-cheers-solid.svg" box-text="Nettverksdagene avsluttes med en avslutningsmiddag. " class="box"/>
           <!-- </router-link> -->
           <!--  <b-link :to="'/program'"> -->
             <HomeScreenBox box-title="Bedpres" box-icon="utensils-solid.svg" box-text="Det blir holdt flere bedrifts- presentasjoner for de som vil bli bedre kjent med bedriftene." class="box"/>

@@ -37,12 +37,12 @@
             <b-img fluid src="@/assets/nfea.png"></b-img>
           </a>
         </div>
-        <h2 class="text-center font-weight-bold">{{ $t('coffeesponsor') }}</h2>
+        <!-- <h2 class="text-center font-weight-bold">{{ $t('coffeesponsor') }}</h2>
         <div class="sponsor col-5">
             <a href="https://teogkaffehuset.no/" target="_blank" rel="noopener noreferrer">
                 <b-img fluid src="@/assets/teogkaffehuset.png"></b-img>
             </a>
-        </div>
+        </div> -->
         <h2 class="text-center font-weight-bold" style="margin-top: 4rem;">Øvrige sponsorer</h2>
         <b-row>
           <Sponsor  v-for="(sponsor, index) in sponsors"
