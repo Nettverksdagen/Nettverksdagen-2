@@ -78,7 +78,7 @@
           placeholder='Navn'
         ></b-form-input>
       </b-form-group>
-       <b-form-group
+      <b-form-group
         :id="'input-group-email'+name"
         :label-for="'input-email' + name"
         description='Skriv inn emailen din slik at vi kan sende deg en email for påmelding.'
@@ -135,20 +135,6 @@
   </div>
 </div>
 </template>
-
-    <b-modal
-      id="confirm-modal"
-      ref="confirm-modal"
-      centered
-      title="P melding"
-      ok-only
-      ok-title="OK"
-      ok-variant="secondary"
-      @ok="onConfirmed"
-    >
-      <p v-if="registered">Du er n  p meldt p {{header}}.</p>
-      <p v-else>Det er dessverre ikke noen ledige plasser igjen p {{header}}.</p>
-    </b-modal>
 
 <script>
 import axios from 'axios'
