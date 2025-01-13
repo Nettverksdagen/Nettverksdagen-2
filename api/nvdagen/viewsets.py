@@ -80,15 +80,14 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                     data['header'] = program.header
                     html_message = render_to_string('registered_email.html', context=data)
                     plain_message = strip_tags(html_message)
-                    #Only for development to prevent email errors
-                    #send_mail('Nettverksdagene - Påmelding bekreftet for ' + data['name'],
-                    #    plain_message,
-                    #    'do-not-reply@nettverksdagene.no',
-                    #    [data['email']],
-                    #    fail_silently=False,
-                    #    html_message=html_message)
-            except:
-                print("ERROR: Could not send email. Is mail_settings.py correct?")
+                    send_mail('Nettverksdagene - Påmelding bekreftet for ' + data['name'],
+                       plain_message,
+                       'do-not-reply@nettverksdagene.no',
+                       [data['email']],
+                       fail_silently=False,
+                       html_message=html_message)
+            except Exception as e:
+                print("ERROR: Could not send email. Is mail_settings.py correct?", e)
                 response = {'message': 'Could not send email'}
                 return Response(response, status = status.HTTP_500_INTERNAL_SERVER_ERROR)                
 
@@ -115,8 +114,8 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                 [participant.email],
                 fail_silently=False,
                 html_message=html_message)
-        except:
-            print("ERROR: Could not send email. Is mail_settings.py correct?")
+        except Exception as e:
+            print("ERROR: Could not send email. Is mail_settings.py correct?", e)
             response = {'message': 'Could not send email'}
             return Response(response, status = status.HTTP_500_INTERNAL_SERVER_ERROR)
 
@@ -124,7 +123,9 @@ class ParticipantViewSet(viewsets.ModelViewSet):
         return Response(response, status = status.HTTP_200_OK)
 
     def destroy(self, request, pk):
-        
+        # THIS METHOD IS UNSECURED AND SHOULD BE UPDATED
+        # CURRENTLY ANYONE CAN DELETE ANY PARTICIPANT AS LONG AS THEY KNOW THE ID
+
         participant = Participant.objects.get(id=pk)
 
         response = super().destroy(request)
@@ -149,8 +150,8 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                             [lastParticipant.email],
                             fail_silently=False,
                             html_message=html_message)
-                    except:
-                        print("ERROR: Could not send email. Is mail_settings.py correct?")
+                    except Exception as e:
+                        print("ERROR: Could not send email. Is mail_settings.py correct?", e)
                         response = {'message': 'Could not send email'}
                         return Response(response, status = status.HTTP_500_INTERNAL_SERVER_ERROR)
 
