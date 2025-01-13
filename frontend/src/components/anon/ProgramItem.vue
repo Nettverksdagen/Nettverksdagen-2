@@ -40,7 +40,8 @@
             </div>
           </div>
           <div v-if="registration && cancelEmail">
-              <b-link @click.native="destroy_participant(name)">{{$t('destroypart')}}</b-link>
+              <div>{{$t('destroypart')}} <a href="mailto:it@nettverksdagene.no">it@nettverksdagene.no</a>.</div>
+              <!-- Removed temporaraly until unregistration works securely. <b-link @click.native="destroy_participant(name)">{{$t('destroypart')}}</b-link> -->
           </div>
           <div v-if="registration">
               <div v-if="submitted">
@@ -248,7 +249,7 @@ export default {
       }
       return true
     },
-    destroy_participant: function (event) {
+    /* Removed temporaraly until unregistration works SECURLY! THIS IS NOT SAFE! destroy_participant: function (event) {
       let email = prompt('Vennligst skriv inn emailen din:')
       let participants = this.$store.state.participant.all
       let participant = participants.filter(par => par.email === email && par.event === event)[0]
@@ -262,6 +263,7 @@ export default {
           let retry = true
           while (retry) {
             let inputedCode = prompt('Vennligst skriv inn koden som ble sendt til ' + participant.email + '. Hvis du ikke mottar mailen, vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
+            // CLIENT SIDE CHECK????????? NOT SAFE! NOT SAFE! NOT SAFE!
             if (inputedCode === code) {
               if (confirm('Er du sikker på at du vil melde av ' + participant.name + '?')) {
                 axios.delete(process.env.VUE_APP_API_HOST + '/api/participant/' +
@@ -282,7 +284,7 @@ export default {
       } else if (email !== null) {
         alert('Fant ingen deltakere med denne epost-adressen på dette arrangementet.')
       }
-    }
+    }*/
   }
 }
 </script>
