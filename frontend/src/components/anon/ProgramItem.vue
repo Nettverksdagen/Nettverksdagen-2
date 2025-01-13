@@ -78,7 +78,7 @@
           placeholder='Navn'
         ></b-form-input>
       </b-form-group>
-       <b-form-group
+      <b-form-group
         :id="'input-group-email'+name"
         :label-for="'input-email' + name"
         description='Skriv inn emailen din slik at vi kan sende deg en email for påmelding.'
@@ -92,18 +92,17 @@
         ></b-form-input>
       </b-form-group>
       <b-form-group
-       :id="'input-group-study'+name"
-       :label-for="'input-study' + name"
-       description='Skriv inn det du studerer.'
-     >
-       <b-form-input
-         :id="'input-study' + name"
-         v-model="form.study"
-         required
-         placeholder='Study'
-       ></b-form-input>
-     </b-form-group>
-     <b-form-group
+      :id="'input-group-study'+name"
+      :label-for="'input-study' + name"
+      description='Skriv inn det du studerer.'>
+      <b-form-input
+        :id="'input-study' + name"
+        v-model="form.study"
+        required
+        placeholder='Study'
+      ></b-form-input>
+    </b-form-group>
+    <b-form-group
       :id="'input-group-year'+name"
       :label-for="'input-year' + name"
       description='Skriv inn hvilket år du er på.'
@@ -115,7 +114,7 @@
         placeholder='Year'
       ></b-form-input>
     </b-form-group>
-     </b-form>
+    </b-form>
       <template v-slot:modal-footer>
           <div>
             <b-button
