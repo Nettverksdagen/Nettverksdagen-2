@@ -38,7 +38,7 @@
           </a>
         </div>
         <h2 class="text-center font-weight-bold">{{ $t('coffeesponsor') }}</h2>
-        <div class="sponsor col-5">
+        <div class="sponsor col-5 text-center">
             <a href="https://www.kaffeknappen.no/" target="_blank" rel="noopener noreferrer">
                 <b-img fluid src="@/assets/kaffeknappen.svg"></b-img>
             </a>
