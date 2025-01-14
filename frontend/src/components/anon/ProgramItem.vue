@@ -262,15 +262,15 @@ export default {
           // Prompt user for code, and delete participant if input matches
           let retry = true
           while (retry) {
-            let inputedCode = prompt('Vennligst skriv inn koden som ble sendt til ' + participant.email + '. Hvis du ikke mottar mailen, vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
-            // CLIENT SIDE CHECK????????? NOT SAFE! NOT SAFE! NOT SAFE!
+            let inputedCode = prompt('Vennligst skriv inn koden som ble sendt til ' + participant.email + '. Hvis du ikke mottar mailen, vennligst kontakt IT-gruppen på admin@nettverksdagene.no.')
+             // CLIENT SIDE CHECK????????? NOT SAFE! NOT SAFE! NOT SAFE!
             if (inputedCode === code) {
               if (confirm('Er du sikker på at du vil melde av ' + participant.name + '?')) {
                 axios.delete(process.env.VUE_APP_API_HOST + '/api/participant/' +
                   participant.id + '/').then(_ => {
                   alert(participant.name + ' er nå avmeldt.')
                 }).catch(_ => {
-                  alert('Det oppsto en feil under avmeldingen. Vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
+                  alert('Det oppsto en feil under avmeldingen. Vennligst kontakt IT-gruppen på admin@nettverksdagene.no.')
                 })
               }
               break
@@ -279,7 +279,7 @@ export default {
             }
           }
         }).catch(_ => {
-          alert('Det oppsto en feil under sendingen av avmeldingskoden. Vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
+          alert('Det oppsto en feil under sendingen av avmeldingskoden. Vennligst kontakt IT-gruppen på admin@nettverksdagene.no.')
         })
       } else if (email !== null) {
         alert('Fant ingen deltakere med denne epost-adressen på dette arrangementet.')
