@@ -24,7 +24,7 @@
     "regfinish": "Registration is finished",
     "påmeldte": "registered",
     "onthe": "on the",
-    "destroypart": "Do you wish to sign off, click here.",
+    "destroypart": "Do you wish to unregister? Send us an email at",
     "regtobegin": "Registration is starting",
     "avmelding": "Are you sure that you want to sign off?",
     "sponsors": "Sponsors in 2025",
@@ -58,10 +58,10 @@
     "hide": "Hide",
     "stillingstype": "Type of position",
     "sted": "Place",
-    "bankett": "Banquet",
+    "avslutningsmiddag": "Formal Dinner",
     "ballongslipp": "Balloon drop",
     "standtext": "The hall will be filled with stands! Get in touch with many exciting companies.",
-    "programtext": "Nettverksdagene will end with a banquet at Thon Hotel Prinsen. Click for info.",
+    "programtext": "Nettverksdagene will end with a formal dinner at Thon Hotel Prinsen. Click for info.",
     "bedprestext": "There will be held multiple presentations for those who would like to learn more about the companies.",
     "ballongslipptext": "Win great prizes at the balloon drop when Nettverksdagene opens.",
     "Styret": "Board",
@@ -71,7 +71,7 @@
     "thankscoop": "A big thanks to Coop Extra!",
     "thankscooptext": "We would like to thank Coop Extra for supplying coffee during Nettverksdagene 2023!",
     "glassgårdentext": "Meet many exciting companies at their stands in Glassgården",
-    "banquetend": "Nettverksdagene will end with a banquet at Thon Hotel Prinsen",
+    "closing_dinner": "Nettverksdagene will end with a formal dinner at Thon Hotel Prinsen",
     "bedpres2": "There will be held presentations for those who want to get to know more about the companies.",
     "ball": "There will be balloon drop where you can win great prizes!",
     "programfor": "Click here to see the program for Nettverksdagene 2022!",
@@ -105,6 +105,10 @@
         {
             "question": "What can you do during NVD?",
             "answer": "Stands, company presentations, and the banquet, among other activities."
+        },
+        {
+            "question": "What is the banquet and who can participate?",
+            "answer": "It's a buisness casual dinner where you'll be able to talk to some of out collaborators. There will be dinner, drinks and entertainment."
         }
     ]
     }

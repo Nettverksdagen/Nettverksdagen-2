@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="appFAQ">
     <div class="content-wrapper">
       <div class="faq-container">
         <h1>{{$t('faq.header')}}</h1>
@@ -21,8 +21,8 @@ export default {
 };
 </script>
 
-<style>
-#app {
+<style scoped>
+#appFAQ {
   font-family: Arial, sans-serif;
   padding: 0; /* Remove default padding */
 }
