@@ -54,22 +54,23 @@
             </div>
           </div>
         </div>
-        <ProgramDescription
-          v-if="!isMobile && selectedProgramItem"
-          :timeStart="selectedProgramItem.timeStart"
-          :timeEnd="selectedProgramItem.timeEnd"
-          :place="selectedProgramItem.place"
-          :header="selectedProgramItem.header"
-          :paragraph="selectedProgramItem.paragraph"
-          :registration="selectedProgramItem.registration"
-          :maxRegistered="selectedProgramItem.maxRegistered"
-          :registered="selectedProgramItem.registered"
-          :cancelEmail="selectedProgramItem.cancelEmail"
-          :registrationStart="selectedProgramItem.registrationStart"
-          :registrationEnd="selectedProgramItem.registrationEnd"
-          :name="selectedProgramItem.id"
-        >
-        </ProgramDescription>
+        <!-- <div> -->
+          <ProgramDescription  v-if="!isMobile && selectedProgramItem"
+            :timeStart="selectedProgramItem.timeStart"
+            :timeEnd="selectedProgramItem.timeEnd"
+            :place="selectedProgramItem.place"
+            :header="selectedProgramItem.header"
+            :paragraph="selectedProgramItem.paragraph"
+            :registration="selectedProgramItem.registration"
+            :maxRegistered="selectedProgramItem.maxRegistered"
+            :registered="selectedProgramItem.registered"
+            :cancelEmail="selectedProgramItem.cancelEmail"
+            :registrationStart="selectedProgramItem.registrationStart"
+            :registrationEnd="selectedProgramItem.registrationEnd"
+            :name="selectedProgramItem.id"
+          >
+          </ProgramDescription>
+        <!-- </div> -->
       </div>
       <div id="bankett"></div>
     </div>
@@ -103,11 +104,21 @@ export default {
       isMobile: window.innerWidth <= 768
     }
   },
-  mounted() {
-    window.addEventListener('resize', this.handleResize);
+  mounted () {
+    window.addEventListener('resize', this.handleResize)
+    if (this.program.length > 0 && this.program[0].length > 0) {
+      this.selectedProgramItem = this.program[0][0]
+    }
   },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.handleResize);
+  beforeDestroy () {
+    window.removeEventListener('resize', this.handleResize)
+  },
+  watch: {
+    program (newProgram) {
+      if (newProgram.length > 0 && newProgram[0].length > 0) {
+        this.selectedProgramItem = newProgram[0][0]
+      }
+    }
   },
   methods: {
     formatDate (dateObj) {
@@ -123,8 +134,8 @@ export default {
       this.selectedDayIndex = index
       this.selectedProgramItem = this.program[index][0]
     },
-    handleResize() {
-      this.isMobile = window.innerWidth <= 768;
+    handleResize () {
+      this.isMobile = window.innerWidth <= 768
     }
   },
   computed: {
@@ -153,12 +164,6 @@ export default {
           days.push([item])
         }
       })
-
-      // Set the first item as the selected program item by default
-      if (days.length > 0 && days[0].length > 0) {
-        // this.selectDay(0)
-        this.selectedProgramItem = days[0][0]
-      }
 
       return days
     },
@@ -198,6 +203,7 @@ export default {
     flex-direction: column;
     align-items: stretch;
     gap: 1em;
+    padding: 0.5em;
 
     h1 {
       margin-bottom: 0;
@@ -215,7 +221,15 @@ export default {
     // }
   }
   .timeline {
-    position: relative;
+    flex: 1;
+
+    @media (min-width: 768px) {
+      position: sticky;
+      top: 4em;
+      overflow: scroll;
+      scroll-behavior: contain;
+      max-height: 100vh;
+    }
   }
 
   .btn-primary {

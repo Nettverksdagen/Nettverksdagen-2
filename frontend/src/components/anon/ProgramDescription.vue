@@ -137,22 +137,22 @@ export default {
   display: flex;
   align-items: stretch;
   flex: 1;
-  
+
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border: 1px solid #ddd;
   padding: 16px;
-  
-  max-height: 400px;
+
+  /* max-height: 400px; */
 
   * {
     margin: 0;
   }
 }
 .event-card {
-  overflow: scroll;
-  overscroll-behavior: contain;
+  /* overflow: scroll;
+  overscroll-behavior: contain; */
 
   display: flex;
   flex-direction: column;
@@ -160,13 +160,14 @@ export default {
   gap: 20px;
 }
 .event-header {
-  position: sticky;
-  top: 0;
+  /* position: sticky;
+  top: 0; */
   background: white;
 }
 .event-title {
   font-size: 2rem;
   font-weight: bold;
+  text-align: left;
 }
 .event-timing, .event-place {
   font-size: 16px;
