@@ -99,7 +99,7 @@ export default {
     },
     registeredText () {
       let registered = `${Math.min(this.registered, this.maxRegistered)} / ${this.maxRegistered} ${this.$t('registered')}`.toLowerCase()
-      let waiting_list = `${this.registered - this.maxRegistered} ${this.$t('onWaitingList')}`.toLowerCase()
+      let waiting_list = `${Math.max(this.registered - this.maxRegistered, 0)} ${this.$t('onWaitingList')}`.toLowerCase()
       return `${registered}, ${waiting_list}`
     },
     waitingListText () {
