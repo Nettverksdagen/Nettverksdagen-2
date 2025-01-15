@@ -223,13 +223,13 @@ export default {
   .timeline {
     flex: 1;
 
-    @media (min-width: 768px) {
-      position: sticky;
-      top: 4em;
-      overflow: scroll;
-      scroll-behavior: contain;
-      max-height: 100vh;
-    }
+    // @media (min-width: 768px) {
+    //   position: sticky;
+    //   top: 4em;
+    //   overflow: scroll;
+    //   scroll-behavior: contain;
+    //   max-height: 100vh;
+    // }
   }
 
   .btn-primary {

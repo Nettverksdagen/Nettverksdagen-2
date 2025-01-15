@@ -12,21 +12,8 @@
           <div v-if="header">
             <h3 class="font-weight-bold">{{header}}</h3>
           </div>
-          <div v-if="registration && maxRegistered">
-            <h5 class="registration-tag">&check; {{ $t('registrationAvailable') }}</h5>
-          </div>
         </div>
 
-        <!-- <div v-if="paragraph">
-          <div :key="name + line" v-for="line in paragraph" >
-            <p class='description'>{{line}}</p>
-          </div>
-        </div> -->
-
-        <!-- <div v-if="registration" class='button'>
-          <b-button v-if="enableRegistration && !submitted" variant='primary' @click="openDialog">{{$t('registrationAvailable')}}</b-button>
-          <b-button v-else disabled variant="dark">{{$t('registrationAvailable')}}</b-button>
-        </div> -->
         <div class="footer">
           <div class="inline">
             <div v-if="place" class="d-block d-md-inline">
@@ -37,10 +24,6 @@
               <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-md-1 ml-md-2"/>
               {{formatTime(timeStart)}} - {{formatTime(timeEnd)}}
             </div> -->
-          </div>
-          <div v-if="registration && cancelEmail">
-              <div>{{$t('destroypart')}} <a href="mailto:it@nettverksdagene.no">it@nettverksdagene.no</a>.</div>
-              <!-- Removed temporaraly until unregistration works securely. <b-link @click.native="destroy_participant(name)">{{$t('destroypart')}}</b-link> -->
           </div>
           <div v-if="registration">
               <div v-if="submitted">
@@ -58,6 +41,16 @@
               <div v-else>
               <div>{{$t('registrationOpensAt') + ' ' + formatDate(registrationStart)}}</div>
               </div>
+          </div>
+
+          <!-- Shows button for signing up (removed since is is already present in ProgramDescription) -->
+          <!-- <div v-if="registration" class='button'>
+            <b-button v-if="enableRegistration && !submitted" variant='primary' @click="openDialog">{{$t('register')}}</b-button>
+            <b-button v-else disabled variant="dark">{{$t('registrationNotYetAvailable')}}</b-button>
+          </div> -->
+
+          <div v-if="isRegistrationOpen">
+            <p>{{ registeredText }}</p>
           </div>
         </div>
       </div>
@@ -159,6 +152,13 @@ export default {
     }
   },
   computed: {
+    isRegistrationOpen () {
+      const now = new Date()
+      return now >= new Date(this.registrationStart) && now <= new Date(this.registrationEnd)
+    },
+    registeredText () {
+      return `${this.registered} / ${this.maxRegistered} ${this.$t('registered')}`
+    },
     registered: function () {
       return this.$store.state.participant.all.filter(par => par.event === this.$props.name).length
     },
@@ -247,7 +247,7 @@ export default {
         }
       }
       return true
-    },
+    }
     /* Removed temporaraly until unregistration works SECURLY! THIS IS NOT SAFE! destroy_participant: function (event) {
       let email = prompt('Vennligst skriv inn emailen din:')
       let participants = this.$store.state.participant.all
@@ -283,7 +283,7 @@ export default {
       } else if (email !== null) {
         alert('Fant ingen deltakere med denne epost-adressen på dette arrangementet.')
       }
-    }*/
+    } */
   }
 }
 </script>
@@ -373,8 +373,8 @@ export default {
     * {
       margin: 0;
     }
-    .registration-tag {
-      white-space: nowrap;
+    h3 {
+      font-size: 1.5em;
     }
     // @media(min-width: 992px) {
     //   flex-direction: row;

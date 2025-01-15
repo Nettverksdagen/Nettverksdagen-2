@@ -21,12 +21,14 @@
           {{ paragraph }}
         </p>
       </div>
+      
+      <div v-if="registration && cancelEmail">
+        <div>{{$t('destroypart')}} <a href="mailto:it@nettverksdagene.no">it@nettverksdagene.no</a>.</div>
+        <!-- Removed temporaraly until unregistration works securely. <b-link @click.native="destroy_participant(name)">{{$t('destroypart')}}</b-link> -->
+      </div>
 
       <div v-if="registration" class="event-registration">
-        <!-- <div v-if="isRegistrationOpen">
-          <p>{{ registeredText }}</p>
-        </div>
-        <div v-else>
+        <!-- <div v-else>
           <p>{{ registrationStatusText }}</p>
         </div> -->
         <b-button v-if="enableRegistration" variant="primary" @click="openRegistration">
@@ -96,9 +98,6 @@ export default {
     },
     enableRegistration () {
       return this.isRegistrationOpen && this.registered < this.maxRegistered
-    },
-    registeredText () {
-      return `${this.registered} / ${this.maxRegistered} ${this.$t('registered')}`
     },
     registrationStatusText () {
       const now = new Date()
