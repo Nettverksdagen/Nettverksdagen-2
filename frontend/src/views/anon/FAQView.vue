@@ -31,7 +31,7 @@ export default {
   display: flex;
   align-items: flex-start;
   width: 100%; /* Full screen width */
-  padding: 20px;
+  /* padding: 20px; */
   flex-direction: row; /* Default: items side by side */
 }
 

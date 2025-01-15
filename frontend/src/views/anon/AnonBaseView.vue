@@ -36,6 +36,7 @@ export default {
     height: 100%;
     min-width: 320px;
     margin: 0 auto;
+    padding: 0 20px;
     // margin-top: 100px;
 
     display: flex;
