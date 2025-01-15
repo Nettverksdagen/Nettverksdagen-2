@@ -43,24 +43,23 @@ export default {
     flex-direction: column;
     gap: 2em;
 
+    // Enforce same font for all page headers
     h1 {
       font-size: 36px;
       font-weight: 600;
       text-align: center;
       color: black;
-      @media(min-width: 768px) {
-        text-align: left;
-      }
+      text-align: left;
     }
 
     @media(max-width: 768px) {
       overflow-x: hidden;
     }
     @media(min-width: 480px) {
-      // width: 95%;
+      width: 95%;
     }
     @media(min-width: 768px) {
-      // width: 95%;
+      width: 95%;
     }
     @media(min-width: 992px) {
       width: 980px;
@@ -68,8 +67,8 @@ export default {
     @media(min-width: 1200px) {
       width: 1100px;
     }
-    // @media(min-width: 1430px) {
-    //   width: 1400px;
-    // }
+    @media(min-width: 1430px) {
+      width: 1400px;
+    }
   }
 </style>

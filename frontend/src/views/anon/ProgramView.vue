@@ -214,6 +214,9 @@ export default {
     flex-direction: row;
     // justify-content: space-between;
     gap: 2em;
+    align-self: center;
+    width: 100%;
+    max-width: 1024px; // Completely arbitrary, but looks good
     // align-items: stretch;
     // margin-bottom: 2em;
     // @media(max-width: 768px) {
