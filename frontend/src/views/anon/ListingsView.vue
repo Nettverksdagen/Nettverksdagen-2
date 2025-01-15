@@ -1,7 +1,7 @@
 <template>
   <div class="listings">
     <Content class="content">
-      <h1>{{$t('stillingsannonser')}}</h1>
+      <h1 class="page-header">{{$t('stillingsannonser')}}</h1>
       <b-row>
         <div class="col-12 col-md-4 col-lg-3 background">
           <b-card no-body class="mb-3 box">

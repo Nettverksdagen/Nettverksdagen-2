@@ -1,7 +1,7 @@
 <template>
   <div class="about-view">
     <Content>
-      <h1>{{$t('about') + ' ' + $t('nettverksdagene')}}</h1>
+      <h1 class="page-header">{{$t('about') + ' ' + $t('nettverksdagene')}}</h1>
       <b-row>
         <b-col cols="12" lg="6">
           <p class="introduction">

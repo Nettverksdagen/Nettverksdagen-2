@@ -2,7 +2,7 @@
   <div class="contact-view">
     <Content>
     <!-- <h1>{{$t('kontakt')}}</h1> -->
-    <h1>{{$t('kontakt') + ' for ' + $t('nettverksdagene')  + ' 2025'}}</h1>
+    <h1 class="page-header">{{$t('kontakt') + ' for ' + $t('nettverksdagene')  + ' 2025'}}</h1>
     <b-row class="firstrow">
        <!-- <b-col cols="12" md="5">
           <p class="description">

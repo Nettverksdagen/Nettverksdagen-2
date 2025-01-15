@@ -44,7 +44,7 @@ export default {
     gap: 2em;
 
     // Enforce same font for all page headers
-    h1 {
+    h1.page-header {
       font-size: 36px;
       font-weight: 600;
       text-align: center;

@@ -2,7 +2,7 @@
   <div id="appFAQ">
     <div class="content-wrapper">
       <div class="faq-container">
-        <h1>{{$t('faq.header')}}</h1>
+        <h1 class="page-header">{{$t('faq.header')}}</h1>
         <FaqList :faqs="$t('faq.questions')" />
       </div>
       <img src="@/assets/NVDBilde2.jpg" alt="Related image" class="side-image" />
