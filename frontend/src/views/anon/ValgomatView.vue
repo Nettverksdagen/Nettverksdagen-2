@@ -9,7 +9,7 @@
       <h1>{{$t('valgomatresulttitle')}}</h1>
       <h4 class="valgomatresultstext">{{$t('valgomatresulttext')}}</h4>
       <br>
-      <ul>
+      <ul class="company-list">
         <li v-for="company in topCompanies" :key="company">
           <h2>{{ companyDescription[company][0] }}</h2>
           <p>{{ companyDescription[company][1] }}</p>
@@ -112,5 +112,9 @@ h1 {
 
 .valgomatresultstext {
   text-align: center;
+}
+
+.company-list {
+  list-style-type: none;
 }
 </style>
