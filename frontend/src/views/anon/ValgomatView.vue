@@ -7,7 +7,8 @@
     />
     <div v-if="showResults">
       <h1>{{$t('valgomatresulttitle')}}</h1>
-      <p>{{$t('valgomatresulttext')}}</p>
+      <h4 class="valgomatresultstext">{{$t('valgomatresulttext')}}</h4>
+      <br>
       <ul>
         <li v-for="company in topCompanies" :key="company">
           <h2>{{ companyDescription[company][0] }}</h2>
@@ -107,5 +108,9 @@ h1 {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+}
+
+.valgomatresultstext {
+  text-align: center;
 }
 </style>
