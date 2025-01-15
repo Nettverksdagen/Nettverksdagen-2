@@ -15,6 +15,8 @@
           <p>{{ companyDescription[company][1] }}</p>
         </li>
       </ul>
+      <br>
+      <h5 class="valgomatresultstext">Finn bedriftene <a href="/#stand-map"><u>her</u>!</a></h5>
     </div>
     <ProgressBar :progress="progress" />
     <div v-if="!showResults" class="navigation-buttons">
@@ -116,5 +118,9 @@ h1 {
 
 .company-list {
   list-style-type: none;
+}
+
+a {
+  color: #000000;
 }
 </style>
