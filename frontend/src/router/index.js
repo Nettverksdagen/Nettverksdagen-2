@@ -96,7 +96,7 @@ export default new Router({
           name: 'FAQ',
           component: FAQView,
           meta: {title: 'FAQ'}
-        },
+        }
       ]
     },
     {

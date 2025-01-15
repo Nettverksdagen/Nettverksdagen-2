@@ -26,4 +26,3 @@
 //       answer: "Stands, bedpress og bankett++"
 //     },
 //   ];
-  

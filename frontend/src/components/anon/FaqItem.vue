@@ -11,22 +11,22 @@
 
 <script>
 export default {
-  name: "FaqItem",
+  name: 'FaqItem',
   props: {
     question: String,
     answer: String
   },
-  data() {
+  data () {
     return {
       showAnswer: false
-    };
+    }
   },
   methods: {
-    toggleAnswer() {
-      this.showAnswer = !this.showAnswer;
+    toggleAnswer () {
+      this.showAnswer = !this.showAnswer
     }
   }
-};
+}
 </script>
 
 <style scoped>

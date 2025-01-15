@@ -11,14 +11,14 @@
 </template>
 
 <script>
-import FaqList from "@/components/anon/FaqList.vue";
+import FaqList from '@/components/anon/FaqList.vue'
 
 export default {
-  name: "FAQView",
+  name: 'FAQView',
   components: {
     FaqList
   }
-};
+}
 </script>
 
 <style scoped>
