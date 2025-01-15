@@ -43,6 +43,12 @@
 "placeholderFieldOfStudy": "Skriv inn studieretning",
 "placeholderStudyYear": "Skriv inn årstrinn",
 
+"is_required": "kreves",
+"already_registered": "Denne e-posten er allerede registrert",
+"registration_success": "Du er registrert! Sjekk mailen din for å se om du fikk plass eller er på venteliste.",
+"waiting_list": "Venteliste",
+"onWaitingList": "På venteliste",
+
     "onthe": "på",
     "destroypart": "Ønsker du å melde deg av? Send en epost til",
     "regtobegin": "Påmelding starter",

@@ -44,6 +44,12 @@
 "placeholderFieldOfStudy": "Enter field of study",
 "placeholderStudyYear": "Enter year of study",
 
+"is_required": "is required",
+"already_registered": "This email is already registered",
+"registration_success": "You are registered! Check your email to see if you got a spot or are on the waiting list.",
+"waiting_list": "Waiting list",
+"onWaitingList": "On waiting list",
+
     "påmeldte": "registered",
     "onthe": "on the",
     "destroypart": "Do you wish to unregister? Send us an email at",
