@@ -30,10 +30,6 @@
           <b-link :to="'/program'">
             <HomeScreenBox :box-title="$t('interviews')" box-icon="interview-icon.svg" :box-text="$t('interviews2')" class="box"/>
           </b-link>
-          <!-- <b-link :to="'/program'" class="temp-link">
-            <HomeScreenBoxTemp box-title="Fjorårets program" box-icon="nettverksdagenesvg.svg" :box-text="$t('
-            ')"/>
-          </b-link>-->
         </div>
       </div>
     </div>
@@ -43,14 +39,10 @@
 <script>
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import HeroText from '@/components/anon/HeroText.vue'
 import HomeScreenBox from '@/components/anon/HomeScreenBox.vue'
-import HomeScreenBoxTemp from './HomeScreenBoxTemp.vue'
 export default {
   components: {
-    HeroText,
     HomeScreenBox,
-    HomeScreenBoxTemp
   },
   methods: {
     scrollToId (id) {
