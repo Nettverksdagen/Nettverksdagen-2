@@ -1,7 +1,7 @@
 <template>
   <Content>
     <div class="program">
-      <h1 class="text-center">Program</h1>
+      <h1 class="text-center page-header">Program</h1>
       <div class="days-list">
         <button
           v-for="(day, index) in program"

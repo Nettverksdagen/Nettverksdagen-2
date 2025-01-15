@@ -46,7 +46,7 @@ export default{
     display: flex;
   }
   .fancy-text {
-    margin: 1em;
+    margin: 0.5em;
     display: flex;
     flex-direction: column;
     width: 100%;
