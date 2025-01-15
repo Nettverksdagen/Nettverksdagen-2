@@ -38,9 +38,10 @@
               {{formatTime(timeStart)}} - {{formatTime(timeEnd)}}
             </div> -->
           </div>
-          <!-- <div v-if="registration && cancelEmail">
-              <b-link @click.native="destroy_participant(name)">{{$t('destroypart')}}</b-link>
-          </div> -->
+          <div v-if="registration && cancelEmail">
+              <div>{{$t('destroypart')}} <a href="mailto:it@nettverksdagene.no">it@nettverksdagene.no</a>.</div>
+              <!-- Removed temporaraly until unregistration works securely. <b-link @click.native="destroy_participant(name)">{{$t('destroypart')}}</b-link> -->
+          </div>
           <div v-if="registration">
               <div v-if="submitted">
                 <div>{{$t('submitted')}}</div>
@@ -77,7 +78,7 @@
           placeholder='Navn'
         ></b-form-input>
       </b-form-group>
-       <b-form-group
+      <b-form-group
         :id="'input-group-email'+name"
         :label-for="'input-email' + name"
         description='Skriv inn emailen din slik at vi kan sende deg en email for påmelding.'
@@ -91,18 +92,17 @@
         ></b-form-input>
       </b-form-group>
       <b-form-group
-       :id="'input-group-study'+name"
-       :label-for="'input-study' + name"
-       description='Skriv inn det du studerer.'
-     >
-       <b-form-input
-         :id="'input-study' + name"
-         v-model="form.study"
-         required
-         placeholder='Study'
-       ></b-form-input>
-     </b-form-group>
-     <b-form-group
+      :id="'input-group-study'+name"
+      :label-for="'input-study' + name"
+      description='Skriv inn det du studerer.'>
+      <b-form-input
+        :id="'input-study' + name"
+        v-model="form.study"
+        required
+        placeholder='Study'
+      ></b-form-input>
+    </b-form-group>
+    <b-form-group
       :id="'input-group-year'+name"
       :label-for="'input-year' + name"
       description='Skriv inn hvilket år du er på.'
@@ -114,7 +114,7 @@
         placeholder='Year'
       ></b-form-input>
     </b-form-group>
-     </b-form>
+    </b-form>
       <template v-slot:modal-footer>
           <div>
             <b-button
@@ -248,7 +248,7 @@ export default {
       }
       return true
     },
-    destroy_participant: function (event) {
+    /* Removed temporaraly until unregistration works SECURLY! THIS IS NOT SAFE! destroy_participant: function (event) {
       let email = prompt('Vennligst skriv inn emailen din:')
       let participants = this.$store.state.participant.all
       let participant = participants.filter(par => par.email === email && par.event === event)[0]
@@ -261,14 +261,15 @@ export default {
           // Prompt user for code, and delete participant if input matches
           let retry = true
           while (retry) {
-            let inputedCode = prompt('Vennligst skriv inn koden som ble sendt til ' + participant.email + '. Hvis du ikke mottar mailen, vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
+            let inputedCode = prompt('Vennligst skriv inn koden som ble sendt til ' + participant.email + '. Hvis du ikke mottar mailen, vennligst kontakt IT-gruppen på admin@nettverksdagene.no.')
+             // CLIENT SIDE CHECK????????? NOT SAFE! NOT SAFE! NOT SAFE!
             if (inputedCode === code) {
               if (confirm('Er du sikker på at du vil melde av ' + participant.name + '?')) {
                 axios.delete(process.env.VUE_APP_API_HOST + '/api/participant/' +
                   participant.id + '/').then(_ => {
                   alert(participant.name + ' er nå avmeldt.')
                 }).catch(_ => {
-                  alert('Det oppsto en feil under avmeldingen. Vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
+                  alert('Det oppsto en feil under avmeldingen. Vennligst kontakt IT-gruppen på admin@nettverksdagene.no.')
                 })
               }
               break
@@ -277,12 +278,12 @@ export default {
             }
           }
         }).catch(_ => {
-          alert('Det oppsto en feil under sendingen av avmeldingskoden. Vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
+          alert('Det oppsto en feil under sendingen av avmeldingskoden. Vennligst kontakt IT-gruppen på admin@nettverksdagene.no.')
         })
       } else if (email !== null) {
         alert('Fant ingen deltakere med denne epost-adressen på dette arrangementet.')
       }
-    }
+    }*/
   }
 }
 </script>

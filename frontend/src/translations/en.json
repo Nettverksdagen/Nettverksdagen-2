@@ -46,7 +46,8 @@
 
     "påmeldte": "registered",
     "onthe": "on the",
-    "destroypart": "Do you wish to sign off, click here.",
+    "destroypart": "Do you wish to unregister? Send us an email at",
+    "regtobegin": "Registration is starting",
     "avmelding": "Are you sure that you want to sign off?",
     "sponsors": "Sponsors in 2025",
     "login": "Login",
