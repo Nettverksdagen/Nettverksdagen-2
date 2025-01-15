@@ -12,21 +12,8 @@
           <div v-if="header">
             <h3 class="font-weight-bold">{{header}}</h3>
           </div>
-          <div v-if="registration && maxRegistered">
-            <h5 class="registration-tag">&check; {{ $t('registrationAvailable') }}</h5>
-          </div>
         </div>
 
-        <!-- <div v-if="paragraph">
-          <div :key="name + line" v-for="line in paragraph" >
-            <p class='description'>{{line}}</p>
-          </div>
-        </div> -->
-
-        <!-- <div v-if="registration" class='button'>
-          <b-button v-if="enableRegistration && !submitted" variant='primary' @click="openDialog">{{$t('registrationAvailable')}}</b-button>
-          <b-button v-else disabled variant="dark">{{$t('registrationAvailable')}}</b-button>
-        </div> -->
         <div class="footer">
           <div class="inline">
             <div v-if="place" class="d-block d-md-inline">
@@ -37,10 +24,6 @@
               <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="mr-md-1 ml-md-2"/>
               {{formatTime(timeStart)}} - {{formatTime(timeEnd)}}
             </div> -->
-          </div>
-          <div v-if="registration && cancelEmail">
-              <div>{{$t('destroypart')}} <a href="mailto:it@nettverksdagene.no">it@nettverksdagene.no</a>.</div>
-              <!-- Removed temporaraly until unregistration works securely. <b-link @click.native="destroy_participant(name)">{{$t('destroypart')}}</b-link> -->
           </div>
           <div v-if="registration">
               <div v-if="submitted">
@@ -59,85 +42,24 @@
               <div>{{$t('registrationOpensAt') + ' ' + formatDate(registrationStart)}}</div>
               </div>
           </div>
+
+          <!-- Shows button for signing up (removed since is is already present in ProgramDescription) -->
+          <!-- <div v-if="registration" class='button'>
+            <b-button v-if="enableRegistration && !submitted" variant='primary' @click="openDialog">{{$t('register')}}</b-button>
+            <b-button v-else disabled variant="dark">{{$t('registrationNotYetAvailable')}}</b-button>
+          </div> -->
+
+          <div v-if="isRegistrationOpen">
+            <p>{{ registeredText }}</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div>
-    <b-modal :id="'dialogForm'+name" :title="'Meld deg på: '+header" v-model="show" centered>
-      <b-form>
-        <b-form-group
-        :id="'input-group-name'+name"
-        :label-for="'input-name' + name"
-        description='Skriv inn navnet ditt slik at vi vet hvem som melder seg på'
-      >
-        <b-form-input
-          :id="'input-name' + name"
-          v-model="form.name"
-          required
-          placeholder='Navn'
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group
-        :id="'input-group-email'+name"
-        :label-for="'input-email' + name"
-        description='Skriv inn emailen din slik at vi kan sende deg en email for påmelding.'
-      >
-        <b-form-input
-          :id="'input-email' + name"
-          type="email"
-          v-model="form.email"
-          required
-          placeholder='E-post'
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group
-      :id="'input-group-study'+name"
-      :label-for="'input-study' + name"
-      description='Skriv inn det du studerer.'>
-      <b-form-input
-        :id="'input-study' + name"
-        v-model="form.study"
-        required
-        placeholder='Study'
-      ></b-form-input>
-    </b-form-group>
-    <b-form-group
-      :id="'input-group-year'+name"
-      :label-for="'input-year' + name"
-      description='Skriv inn hvilket år du er på.'
-    >
-      <b-form-input
-        :id="'input-year' + name"
-        v-model="form.year"
-        required
-        placeholder='Year'
-      ></b-form-input>
-    </b-form-group>
-    </b-form>
-      <template v-slot:modal-footer>
-          <div>
-            <b-button
-            variant='outline-secondary'
-            @click="onCancel"
-          >
-            Avbryt
-          </b-button>
-          <b-button
-            variant='primary'
-            @click="onSubmit"
-          >
-            Meld på
-          </b-button>
-          </div>
-      </template>
-    </b-modal>
   </div>
 </div>
 </template>
 
 <script>
-import axios from 'axios'
 // import { mapMutations } from 'vuex'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons'
@@ -145,7 +67,19 @@ import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons'
 library.add(faMapMarkerAlt, faClock)
 export default {
   name: 'ProgramItem',
-  props: ['timeStart', 'timeEnd', 'place', 'header', 'paragraph', 'registration', 'maxRegistered', 'cancelEmail', 'registrationStart', 'registrationEnd', 'name'],
+  props: [
+    'timeStart',
+    'timeEnd',
+    'place',
+    'header',
+    'paragraph',
+    'registration',
+    'maxRegistered',
+    'cancelEmail',
+    'registrationStart',
+    'registrationEnd',
+    'name'
+  ],
   data () {
     return {
       form: {
@@ -159,6 +93,18 @@ export default {
     }
   },
   computed: {
+    isRegistrationOpen () {
+      const now = new Date()
+      return now >= new Date(this.registrationStart) && now <= new Date(this.registrationEnd)
+    },
+    registeredText () {
+      let registered = `${Math.min(this.registered, this.maxRegistered)} / ${this.maxRegistered} ${this.$t('registered')}`.toLowerCase()
+      let waiting_list = `${this.registered - this.maxRegistered} ${this.$t('onWaitingList')}`.toLowerCase()
+      return `${registered}, ${waiting_list}`
+    },
+    waitingListText () {
+      return `${this.registered - this.maxRegistered} ${this.$t('onWaitingList')}`
+    },
     registered: function () {
       return this.$store.state.participant.all.filter(par => par.event === this.$props.name).length
     },
@@ -201,53 +147,7 @@ export default {
       day = (day > 9) ? String(day) : ('0' + String(day))
       month = (month > 9) ? String(month) : ('0' + String(month))
       return this.formatTime(dateObj) + ' ' + day + '.' + month + '.' + year
-    },
-    openDialog () {
-      this.$data.form = {email: '', name: '', study: '', year: ''}
-      this.$data.show = true
-    },
-    onSubmit (e) {
-      e.preventDefault()
-      let data = this.$data.form
-      // Generate and include 6-character random deregistering code
-      data.code = Array(6).fill(0).map(x => Math.random().toString(36).charAt(2)).join('').toUpperCase()
-      if (this.checkValidForm(data)) {
-        this.submitForm()
-        // Clear data
-        this.$data.show = false
-        this.$data.form = {email: '', name: '', study: '', year: ''}
-        this.$data.submitted = true
-      }
-    },
-    submitForm () {
-      console.log({event: this.$props.name, ...this.$data.form})
-      axios.post(process.env.VUE_APP_API_HOST +
-        '/api/participant/', {event: this.$props.name, ...this.$data.form})
-        .then((response) => console.log(response))
-        .catch((e) => {
-          console.log('Error in submitForm')
-          console.log(e)
-        })
-    },
-    onCancel (e) {
-      e.preventDefault()
-      this.$data.form = {email: '', name: '', study: '', year: ''}
-      this.$data.show = false
-    },
-    checkValidForm (check) {
-      for (let key in check) {
-        if (check[key] === '') {
-          return false
-        } else if (key === 'email') {
-          let at = check[key].split('@')
-          let dot = at[at.length - 1].split('.')
-          if (at.length < 2 || dot.length < 2 || dot[dot.length - 1].length === 0) {
-            return false
-          }
-        }
-      }
-      return true
-    },
+    }
     /* Removed temporaraly until unregistration works SECURLY! THIS IS NOT SAFE! destroy_participant: function (event) {
       let email = prompt('Vennligst skriv inn emailen din:')
       let participants = this.$store.state.participant.all
@@ -283,7 +183,7 @@ export default {
       } else if (email !== null) {
         alert('Fant ingen deltakere med denne epost-adressen på dette arrangementet.')
       }
-    }*/
+    } */
   }
 }
 </script>
@@ -373,8 +273,8 @@ export default {
     * {
       margin: 0;
     }
-    .registration-tag {
-      white-space: nowrap;
+    h3 {
+      font-size: 1.5em;
     }
     // @media(min-width: 992px) {
     //   flex-direction: row;

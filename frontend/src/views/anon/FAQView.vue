@@ -11,14 +11,14 @@
 </template>
 
 <script>
-import FaqList from "@/components/anon/FaqList.vue";
+import FaqList from '@/components/anon/FaqList.vue'
 
 export default {
-  name: "FAQView",
+  name: 'FAQView',
   components: {
     FaqList
   }
-};
+}
 </script>
 
 <style scoped>
@@ -31,7 +31,7 @@ export default {
   display: flex;
   align-items: flex-start;
   width: 100%; /* Full screen width */
-  padding: 20px;
+  /* padding: 20px; */
   flex-direction: row; /* Default: items side by side */
 }
 

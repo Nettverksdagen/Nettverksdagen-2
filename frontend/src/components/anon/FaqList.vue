@@ -11,13 +11,13 @@
 
 <script>
 // import { faqs } from "@/assets/FAQ_data";
-import FaqItem from "@/components/anon/FaqItem.vue";
+import FaqItem from '@/components/anon/FaqItem.vue'
 
 export default {
-  name: "FaqList",
+  name: 'FaqList',
   props: ['faqs'],
   components: {
     FaqItem
-  },
-};
+  }
+}
 </script>
