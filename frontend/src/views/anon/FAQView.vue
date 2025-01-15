@@ -56,7 +56,7 @@ export default {
 }
 
 /* Media query for smaller screens */
-@media (max-width: 768px) { /* Adjust the width as needed for phones */
+@media (max-width: 80%) { /* Adjust the width as needed for phones */
   .content-wrapper {
     flex-direction: column; /* Stack items vertically */
     align-items: center; /* Center content horizontally */
