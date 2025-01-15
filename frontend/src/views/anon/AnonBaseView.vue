@@ -31,7 +31,7 @@ export default {
     }
   }
   .anon-base {
-    // min-height: 100vh;
+    min-height: 100vh; /* Necessary to stretch to fill parent */
     // width: 95%;
     height: 100%;
     min-width: 320px;
