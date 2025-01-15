@@ -24,15 +24,15 @@ export default {
 <style scoped>
 #appFAQ {
   font-family: Arial, sans-serif;
-  padding: 0; /* Remove default padding */
+  padding: 0;
 }
 
 .content-wrapper {
   display: flex;
   align-items: flex-start;
-  width: 100%; /* Full screen width */
-  /* padding: 20px; */
-  flex-direction: row; /* Default: items side by side */
+  width: 100%;
+  padding: 20px;
+  flex-direction: row; /* Default layout: side by side */
 }
 
 .faq-container {
@@ -40,9 +40,8 @@ export default {
   margin-right: 20px; /* Space between FAQ and image */
 }
 
-/* Padding below header */
 .faq-container h1 {
-  margin-bottom: 30px; /* Adjust this value for more or less spacing */
+  margin-bottom: 30px;
 }
 
 .side-image {
@@ -51,24 +50,24 @@ export default {
   height: auto;
   border-radius: 10px;
   object-fit: cover;
-  margin-right: 20px;
-  margin-top: 80px;
+  margin-top: 80px; /* Default spacing above image */
 }
 
 /* Media query for smaller screens */
-@media (max-width: 80%) { /* Adjust the width as needed for phones */
+@media (max-width: 1000px) { /* Adjust the breakpoint as needed */
   .content-wrapper {
     flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center content horizontally */
+    align-items: center; /* Center align content */
   }
 
   .faq-container {
-    margin-right: 0; /* Remove right margin for vertical stacking */
+    margin-right: 0; /* Remove side margin for vertical layout */
   }
 
   .side-image {
-    margin-top: 20px; /* Add spacing between content and image */
-    margin-right: 0; /* Remove right margin for alignment */
+    margin-top: 20px; /* Space between the last FAQ item and image */
+    margin-right: 0;
   }
 }
 </style>
+
