@@ -30,7 +30,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .form-view {
-      min-height: 80vh;
-  }
+  // .form-view {
+  //     min-height: 80vh;
+  // }
 </style>

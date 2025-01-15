@@ -30,23 +30,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .about-view {
+    flex: 1;
+  }
   .introduction {
     font-size:18px;
     text-align: center;
     @media(min-width: 768px) {
       text-align: left;
       margin-right: 30px;
-    }
-  }
-  h1 {
-    font-size: 36px;
-    font-weight: 600;
-    text-align: center;
-    color: black;
-    margin-bottom: 30px;
-    margin-top: 40px;
-    @media(min-width: 768px) {
-      text-align: left;
     }
   }
   .image {
@@ -60,7 +52,7 @@ export default {
       margin-top: 0px;
     }
   }
-  .about-view {
-      min-height: 80vh;
-  }
+  // .about-view {
+  //     min-height: 80vh;
+  // }
 </style>

@@ -35,7 +35,6 @@ export default {
     width: 95%;
     min-width: 320px;
     margin: 0 auto;
-    margin-top: 100px;
     @media(max-width: 768px) {
       overflow-x: hidden;
     }

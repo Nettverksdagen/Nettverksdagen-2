@@ -124,21 +124,21 @@ export default {
   a {
     text-decoration:none;
   }
-  /deep/ .list-group-item {
+  ::v-deep .list-group-item {
     border-radius: 20px;
     border-width: 2px;
     margin-bottom: 0px;
     border-color: var(--line-border-color);
     text-decoration:none;
   }
-  /deep/ .info-container {
+  ::v-deep .info-container {
     text-decoration: none;
   }
-  /deep/ .list-group-item:first-child {
+  ::v-deep .list-group-item:first-child {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
   }
-  /deep/ .list-group-item:last-child {
+  ::v-deep .list-group-item:last-child {
     margin-bottom: 12px;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;

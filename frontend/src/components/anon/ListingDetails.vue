@@ -61,21 +61,21 @@ export default {
     border-radius: 15px;
     border: none;
   }
-  /deep/ .modal-content {
+  ::v-deep .modal-content {
     border: none;
     border-radius: 20px;
     background-color: var(--line-border-color);
     color: black;
     text-align: center;
   }
-  /deep/ .modal-header {
+  ::v-deep .modal-header {
     border-bottom: none;
   }
-  /deep/ .modal-title {
+  ::v-deep .modal-title {
     text-align: center;
     width: 100%;
   }
-  /deep/ .btn-primary {
+  ::v-deep .btn-primary {
     color: #fff;
     background-color: var(--primary-color);
     border-color: var(--primary-color);
@@ -86,7 +86,7 @@ export default {
     text-align: center;
     margin-bottom: 15px;
   }
-  /deep/ h5 {
+  ::v-deep h5 {
     margin-left: 20px;
     margin-top: 10px;
     margin-bottom: -10px;
