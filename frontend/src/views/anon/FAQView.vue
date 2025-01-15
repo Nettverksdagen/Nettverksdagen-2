@@ -53,19 +53,18 @@ export default {
   margin-top: 80px; /* Default spacing above image */
 }
 
-/* Media query for smaller screens */
-@media (max-width: 1000px) { /* Adjust the breakpoint as needed */
+@media (max-width: 1000px) {
   .content-wrapper {
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center align content */
+    flex-direction: column;
+    align-items: center;
   }
 
   .faq-container {
-    margin-right: 0; /* Remove side margin for vertical layout */
+    margin-right: 0;
   }
 
   .side-image {
-    margin-top: 20px; /* Space between the last FAQ item and image */
+    margin-top: 20px;
     margin-right: 0;
   }
 }
