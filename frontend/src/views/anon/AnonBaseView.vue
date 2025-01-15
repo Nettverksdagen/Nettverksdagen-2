@@ -31,19 +31,35 @@ export default {
     }
   }
   .anon-base {
-    min-height: 100vh;
-    width: 95%;
+    // min-height: 100vh;
+    // width: 95%;
+    height: 100%;
     min-width: 320px;
     margin: 0 auto;
-    margin-top: 100px;
+    // margin-top: 100px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+
+    h1 {
+      font-size: 36px;
+      font-weight: 600;
+      text-align: center;
+      color: black;
+      @media(min-width: 768px) {
+        text-align: left;
+      }
+    }
+
     @media(max-width: 768px) {
       overflow-x: hidden;
     }
     @media(min-width: 480px) {
-      width: 95%;
+      // width: 95%;
     }
     @media(min-width: 768px) {
-      width: 95%;
+      // width: 95%;
     }
     @media(min-width: 992px) {
       width: 980px;
@@ -51,8 +67,8 @@ export default {
     @media(min-width: 1200px) {
       width: 1100px;
     }
-    @media(min-width: 1430px) {
-      width: 1400px;
-    }
+    // @media(min-width: 1430px) {
+    //   width: 1400px;
+    // }
   }
 </style>

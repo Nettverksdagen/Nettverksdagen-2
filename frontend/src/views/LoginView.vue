@@ -58,12 +58,12 @@ export default {
   $form-color: #28a771;
   .login-view {
     min-width:100vh;
-    min-height:100vh;
+    // min-height:100vh;
     background: url('../assets/login_bg.jpg') no-repeat center;
     background-size: cover;
-    .main-container {
-      min-height:100vh;
-    }
+    // .main-container {
+    //   min-height:100vh;
+    // }
     .login-container {
       box-shadow:0 2px 10px rgba(0, 0, 0, 0.15);
       overflow: hidden;

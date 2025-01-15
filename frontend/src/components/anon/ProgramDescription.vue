@@ -1,0 +1,201 @@
+<template>
+  <div class="event-container">
+    <div class="event-card">
+      <div class="event-header">
+        <h1 class="event-title">{{ header }}</h1>
+        <div class="event-timing">
+          <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'clock' }" class="icon"/>
+          <span>{{ formatTime(timeStart) }} - {{ formatTime(timeEnd) }}</span>
+        </div>
+        <div v-if="place" class="event-place">
+          <font-awesome-icon :icon="{ prefix: 'fas', iconName: 'map-marker-alt' }" class="icon"/>
+          <span>{{ place }}</span>
+        </div>
+      </div>
+
+      <div class="event-body">
+        <p v-if="Array.isArray(paragraph)" v-for="(paragraph, index) in paragraph" :key="index" class="event-description">
+          {{ paragraph }}
+        </p>
+        <p v-else-if="paragraph" class="event-description">
+          {{ paragraph }}
+        </p>
+      </div>
+
+      <div v-if="registration" class="event-registration">
+        <!-- <div v-if="isRegistrationOpen">
+          <p>{{ registeredText }}</p>
+        </div>
+        <div v-else>
+          <p>{{ registrationStatusText }}</p>
+        </div> -->
+        <b-button v-if="enableRegistration" variant="primary" @click="openRegistration">
+          {{ $t('register') }}
+        </b-button>
+        <b-button v-else disabled variant="secondary">
+          {{ $t('registrationNotYetAvailable') }}
+        </b-button>
+      </div>
+    </div>
+
+    <b-modal :id="'dialogForm' + name" :title="header" v-model="showModal" centered>
+      <b-form @submit.prevent="submitForm">
+        <b-form-group :label="$t('inputfieldName')" label-for="name-input">
+          <b-form-input id="name-input" v-model="form.name" required :placeholder="$t('placeholderName')"></b-form-input>
+        </b-form-group>
+        <b-form-group :label="$t('inputFieldEmail')" label-for="email-input">
+          <b-form-input id="email-input" type="email" v-model="form.email" required :placeholder="$t('placeholderEmail')"></b-form-input>
+        </b-form-group>
+        <b-form-group :label="$t('inputFieldFieldOfStudy')" label-for="study-input">
+          <b-form-input id="study-input" v-model="form.study" required :placeholder="$t('placeholderFieldOfStudy')"></b-form-input>
+        </b-form-group>
+        <b-form-group :label="$t('inputFieldStudyYear')" label-for="year-input">
+          <b-form-input id="year-input" v-model="form.year" required :placeholder="$t('placeholderStudyYear')"></b-form-input>
+        </b-form-group>
+        <template #modal-footer>
+          <b-button variant="outline-secondary" @click="cancelForm">{{ $t('cancel') }}</b-button>
+          <b-button variant="primary" type="submit">{{ $t('submit') }}</b-button>
+        </template>
+      </b-form>
+    </b-modal>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'ProgramDescription',
+  props: [
+    'timeStart',
+    'timeEnd',
+    'place',
+    'header',
+    'paragraph',
+    'registration',
+    'maxRegistered',
+    'cancelEmail',
+    'registrationStart',
+    'registrationEnd',
+    'name'
+  ],
+  data () {
+    return {
+      showModal: false,
+      form: {
+        name: '',
+        email: '',
+        study: '',
+        year: ''
+      },
+      registered: 0 // Add a variable for registered count if needed
+    }
+  },
+  computed: {
+    isRegistrationOpen () {
+      const now = new Date()
+      return now >= new Date(this.registrationStart) && now <= new Date(this.registrationEnd)
+    },
+    enableRegistration () {
+      return this.isRegistrationOpen && this.registered < this.maxRegistered
+    },
+    registeredText () {
+      return `${this.registered} / ${this.maxRegistered} ${this.$t('registered')}`
+    },
+    registrationStatusText () {
+      const now = new Date()
+      if (now < new Date(this.registrationStart)) {
+        return `${this.$t('registrationOpensAt')} ${this.formatDate(this.registrationStart)}`
+      }
+      if (now > new Date(this.registrationEnd)) {
+        return this.$t('registrationClosed')
+      }
+      return this.$t('waitlistAvailable')
+    }
+  },
+  methods: {
+    formatTime (time) {
+      return new Date(time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    },
+    formatDate (date) {
+      return new Date(date).toLocaleDateString()
+    },
+    openRegistration () {
+      this.showModal = true
+    },
+    cancelForm () {
+      this.showModal = false
+    },
+    submitForm () {
+      // Handle form submission logic here
+      this.showModal = false
+    }
+  }
+}
+</script>
+
+<style scoped>
+.event-container {
+  display: flex;
+  align-items: stretch;
+  flex: 1;
+  
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  padding: 16px;
+  
+  max-height: 400px;
+
+  * {
+    margin: 0;
+  }
+}
+.event-card {
+  overflow: scroll;
+  overscroll-behavior: contain;
+
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  gap: 20px;
+}
+.event-header {
+  position: sticky;
+  top: 0;
+  background: white;
+}
+.event-title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+.event-timing, .event-place {
+  font-size: 16px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .icon {
+    margin: 0 !important;
+    width: 16px;
+    height: 16px;
+  }
+}
+.event-body {
+  flex: 1;
+  width: 100%;
+
+  margin: 0;
+}
+.event-place {
+  display: flex;
+  align-items: center;
+}
+.event-place .icon {
+  margin-right: 8px;
+}
+.event-registration {
+  /* align-self: flex-end; */
+  /* margin-top: auto;   */
+}
+</style>

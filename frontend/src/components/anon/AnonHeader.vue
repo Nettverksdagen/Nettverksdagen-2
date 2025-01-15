@@ -101,22 +101,14 @@ export default {
     background:var(--background-color-primary);
     margin:0 auto;
     transition: background 0.5s;
-    width: 95%;
-    -webkit-position: fixed;
-    position: fixed;
+    // width: 95%;
+    // -webkit-position: fixed;
+    position: sticky;
     top: 0px;
     z-index: 10;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    @media(min-width: 992px) {
-      width: 980px;
-    }
-    @media(min-width: 1200px) {
-      width: 1100px;
-    }
-    @media(min-width: 1430px) {
-      width: 1400px;
-    }
+    width: 100%;
   }
   *{
     box-sizing:border-box;

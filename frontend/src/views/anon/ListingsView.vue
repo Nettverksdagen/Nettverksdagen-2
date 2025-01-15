@@ -217,19 +217,10 @@ export default {
   }
 
   .listings {
-    min-height: 80vh;
-    margin-top: 40px;
+    // min-height: 80vh;
+    // margin-top: 40px;
     color: black;
-  }
-  h1 {
-    font-size: 36px;
-    font-weight: 600;
-    text-align: center;
-    color: black;
-    margin-bottom: 30px;
-    @media(min-width: 768px) {
-      text-align: left;
-    }
+    flex: 1;
   }
   .checkbox {
     background-color: white;
