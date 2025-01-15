@@ -123,10 +123,19 @@ class ParticipantViewSet(viewsets.ModelViewSet):
         return Response(response, status = status.HTTP_200_OK)
 
     def destroy(self, request, pk):
-        # THIS METHOD IS UNSECURED AND SHOULD BE UPDATED
-        # CURRENTLY ANYONE CAN DELETE ANY PARTICIPANT AS LONG AS THEY KNOW THE ID
+        code = request.data['code']
 
-        participant = Participant.objects.get(id=pk)
+        try:
+            participant = Participant.objects.get(id=pk)
+        except:
+            response = {'message': 'Participant not found'}
+            return Response(response, status = status.HTTP_404_NOT_FOUND)
+        
+        print(code, participant.code)
+        
+        if participant.code != code:
+            response = {'message': 'Invalid code'}
+            return Response(response, status = status.HTTP_400_BAD_REQUEST)
 
         response = super().destroy(request)
 
