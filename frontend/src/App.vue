@@ -23,6 +23,7 @@ export default {
   background:var(--background-color-primary);
   transition: background 0.5s;
   transition: color 0.5s;
+  min-height: 100vh; /* Necessary to prevent gray background from showing */
 }
 :root {
   --background-color-primary: #ffffff;
