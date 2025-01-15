@@ -271,25 +271,25 @@ export default {
     left: 0;
     font-weight: 400;
   }
-  /deep/ .custom-control-input:checked ~ .custom-control-label::before {
+  .custom-control-input:checked ~ .custom-control-label::before {
     color: #fff;
     border-color: var(--primary-color);
     background-color: var(--primary-color);
   }
-  /deep/ .list-group-item {
+  .list-group-item {
     border-radius: 20px;
     border-width: 2px;
     margin-bottom: 0px;
     border-color: var(--line-border-color);
   }
-  /deep/ .info-container {
+  .info-container {
     text-decoration: none;
   }
-  /deep/ .list-group-item:first-child {
+  .list-group-item:first-child {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
   }
-  /deep/ .list-group-item:last-child {
+  .list-group-item:last-child {
     margin-bottom: 12px;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;

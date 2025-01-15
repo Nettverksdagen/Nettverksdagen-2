@@ -378,19 +378,19 @@ export default {
     font-size:1.1em;
   }
 
-  /deep/ .modal-content {
+  .modal-content {
     border: none;
     border-radius: 20px;
     background-color: var(--line-border-color);
     color: black;
   }
-  /deep/ .modal-header {
+  .modal-header {
     border-bottom: none;
   }
-  /deep/ .modal-footer {
+  .modal-footer {
     border: none;
   }
-  /deep/ .modal-title {
+  .modal-title {
     text-align: center;
     width: 100%;
   }
