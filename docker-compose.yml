@@ -19,6 +19,7 @@ services:
       - DJANGO_SETTINGS_MODULE=nvdnew.settings.dev
     depends_on:
       - postgres
+
   frontend:
     build:
       context: ./frontend
@@ -30,6 +31,7 @@ services:
       - ./frontend/src:/frontend/src
       - ./frontend/static:/frontend/static
       - ./frontend/test:/frontend/test
+
   fileserver:
     build: ./fileserver
     ports:
@@ -37,3 +39,14 @@ services:
     command: ["./main"]
     volumes:
       - ./fileserver/uploads:/root/uploads
+
+  postfix:
+    build:
+      context: ./postfix
+    ports:
+      - "587:587"
+    env_file:
+      - path: ./postfix/.env.default
+        required: true
+      - path: ./postfix/.env
+        required: false

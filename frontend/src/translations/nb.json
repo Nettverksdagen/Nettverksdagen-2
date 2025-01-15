@@ -84,10 +84,10 @@
     "hide": "Skjul",
     "stillingstype": "Stillingstype",
     "sted": "Sted",
-    "closing_dinner": "Avslutningsmiddag",
+    "avslutningsmiddagtitle": "Avslutningsmiddag",
     "ballongslipp": "Ballongslipp",
     "standtext": "Glassgården fylles med stands! Kom i kontakt med mange spennende bedrifter.",
-    "programtext": "Nettverksdagene avsluttes med en avslutningsmiddag på Thon Hotel Prinsen. Trykk for info.",
+    "programtext": "Nettverksdagene avsluttes med en avslutningsmiddag på Thon Hotel Prinsen.",
     "bedprestext": "Det blir holdt flere bedrifts- presentasjoner for de som vil bli bedre kjent med bedriftene.",
     "ballongslipptext": "Vinn flotte premier når Nettverksdagene åpner med ballongslipp.",
     "Styret": "Styret",
@@ -97,7 +97,6 @@
     "thankscoop": "Takk til Coop Extra!",
     "thankscooptext": "Vi takker Coop Extra for forsyning av kaffe under Nettverksdagene 2023!",
     "glassgårdentext": "Glassgården fylles med stands! Kom i kontakt med mange spennende bedrifter.",
-    "avslutningsmiddag": "Avslutningsmiddag",
     "bedpres2": "Det blir holdt flere bedrifts- presentasjoner for de som vil bli bedre kjent med bedriftene.",
     "ball": "Vinn flotte premier når Nettverksdagene åpner med ballongslipp.",
     "programfor": "Trykk her for å se hvilke arrangementer som foregikk under Nettverksdagene 2022!",
@@ -126,14 +125,14 @@
             },
             {
                 "question": "Hva kan man vinne på ballongslipp?",
-                "answer": "Gavekort ++ (mer info kommer)"
+                "answer": "Her er det mye spennende man kan vinne, lunsjboner hos Egon/Røft, Drop-in klatring på Grip, gavekort og mye annet."
             },
             {
                 "question": "Hva kan man gjøre under Nettverksdagene?",
                 "answer": "Stands, bedpress og bankett++"
             },
             {
-                "question": "Hva er banketten og hvem kan delta?",
+                "question": "Hva er avsluttningsmiddagen og hvem kan delta?",
                 "answer": "En buisness causal middag hvor man kan møtte bedriftsrepresentanter fra noen av våre sammarbeidspartnere. Det blir servert mat drikke og det vil være underholdning underveis."
             }
         ]

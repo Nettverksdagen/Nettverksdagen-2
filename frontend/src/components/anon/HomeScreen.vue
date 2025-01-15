@@ -21,9 +21,9 @@
           <router-link :to="{name: 'Home', hash: '#stand-map'}" @click.native="scrollToId('stand-map')">
             <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" :box-text="$t('glassgårdentext')" class="box"/>
           </router-link>
-          <router-link :to="{name: 'Program', hash: '#avslutningsmiddag'}" @click.native="scrollToId('avslutningsmiddag')">
-            <HomeScreenBox :box-title="$t('avslutningsmiddag')" box-icon="glass-cheers-solid.svg" :box-text="$t('avslutningsmiddag')" class="box"/>
-          </router-link>
+          <b-link :to="'/program'">
+            <HomeScreenBox :box-title="$t('avslutningsmiddagtitle')" box-icon="glass-cheers-solid.svg" :box-text="$t('programtext')" class="box"/>
+          </b-link>
           <b-link :to="'/program'">
             <HomeScreenBox :box-title="$t('bedpresword')" box-icon="utensils-solid.svg" :box-text="$t('bedpres2')" class="box"/>
           </b-link>
