@@ -1,7 +1,7 @@
 <template>
   <div class="businesses mt-5">
     <Content>
-      <!-- <div v-for="(level, index) in levels.slice(0,2)" :key="index" class="samarbeidspartnere">
+      <div v-for="(level, index) in levels.slice(0,2)" :key="index" class="samarbeidspartnere">
         <h2 class="text-center font-weight-bold" v-html="levels[index].levelHeader"></h2>
         <b-row class="justify-content-center">
           <Business v-for="(business, index) in level.businesses"
@@ -15,7 +15,7 @@
           </Business>
         </b-row>
         <hr>
-      </div> -->
+      </div>
       <h2 class="text-center font-weight-bold">Bedrifter du kan møte på stand</h2>
       <div v-for="(day, dindex) in days" :key="'day' + dindex">
         <b-row class="justify-content-center">
