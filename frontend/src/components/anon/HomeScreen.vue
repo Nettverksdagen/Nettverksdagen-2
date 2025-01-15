@@ -22,8 +22,16 @@
             <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" :box-text="$t('glassgårdentext')" class="box"/>
           </router-link>
           <router-link :to="{name: 'Program', hash: '#avslutningsmiddag'}" @click.native="scrollToId('avslutningsmiddag')">
-            <HomeScreenBox :box-title="$t('avslutningsmiddag')" box-icon="glass-cheers-solid.svg" :box-text="$t('avslutningsmiddag')" class="box"/>
+            <HomeScreenBox :box-title="$t('avslutningsmiddag_title')" box-icon="glass-cheers-solid.svg" :box-text="$t('avslutningsmiddagtext')" class="box"/>
           </router-link>
+          <!-- <router-link :to="{name: 'Program', hash: '#avslutningsmiddag'}" @click.native="scrollToId('avslutningsmiddag')">
+            <HomeScreenBox 
+              :box-title="$t('avslutningsmiddag')" 
+              box-icon="glass-cheers-solid.svg" 
+              :box-text="$t('avslutningsmiddagtext')" 
+              class="box break-words"
+            />
+          </router-link> -->
           <b-link :to="'/program'">
             <HomeScreenBox :box-title="$t('bedpresword')" box-icon="utensils-solid.svg" :box-text="$t('bedpres2')" class="box"/>
           </b-link>

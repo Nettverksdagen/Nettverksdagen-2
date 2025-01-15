@@ -19,7 +19,7 @@
         </li>
       </ul>
     </div>
-    <div class="overlay" v-bind:class="{ visible: menuIsOpen }" v-if="menuIsOpen" v-on:click="menuIsOpen = false"></div>
+    <!-- <div class="overlay" v-bind:class="{ visible: menuIsOpen }" v-if="menuIsOpen" v-on:click="menuIsOpen = false"></div> -->
   </div>
 </template>
 
