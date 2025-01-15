@@ -21,8 +21,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: var(--text-primary-color);
   background:var(--background-color-primary);
-  /* min-height: 100vh; */
-  height: 100vh;
   transition: background 0.5s;
   transition: color 0.5s;
 }
