@@ -1,37 +1,33 @@
 <template>
   <div class="loading-page">
     <b-row class="firstrow">
-        <div class="col-12 col-xl-6 firsthalf" :style="{'background-image': 'url(' + require('@/assets/iphonebakgrunn.svg') + ')'}">
+        <div class="col-12 splash-text" :style="{'background-image': 'url(' + require('@/assets/iphonebakgrunn.svg') + ')'}">
             <div class="hometext">
                 <h3>{{$t('homescreen.fremtidig')}}</h3>
                 <h1>{{$t('nettverksdagene')}}</h1>
                 <h2>21.01-23.01 2025</h2>
             </div>
         </div>
-        <div class="col-12 col-lg-6 homevideo">
-            <video class ="video" muted loop autoplay>
+        <div class="col-12 homevideo">
+            <video class="video" muted loop autoplay>
                 <source src="@/assets/timelapse.mp4" type="video/mp4">
             </video>
             <img class="overlay" src="@/assets/background_overlay.png">
         </div>
     </b-row>
-    <div class="wrapper">
-      <div class="hero-content">
-        <div class="boxes">
-          <router-link :to="{name: 'Home', hash: '#stand-map'}" @click.native="scrollToId('stand-map')">
-            <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" :box-text="$t('glassgårdentext')" class="box"/>
-          </router-link>
-          <b-link :to="'/program'">
-            <HomeScreenBox :box-title="$t('avslutningsmiddagtitle')" box-icon="glass-cheers-solid.svg" :box-text="$t('programtext')" class="box"/>
-          </b-link>
-          <b-link :to="'/program'">
-            <HomeScreenBox :box-title="$t('bedpresword')" box-icon="utensils-solid.svg" :box-text="$t('bedpres2')" class="box"/>
-          </b-link>
-          <b-link :to="'/program'">
-            <HomeScreenBox :box-title="$t('interviews')" box-icon="interview-icon.svg" :box-text="$t('interviews2')" class="box"/>
-          </b-link>
-        </div>
-      </div>
+    <div class="boxes">
+      <router-link :to="{name: 'Home', hash: '#stand-map'}" @click.native="scrollToId('stand-map')">
+        <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" :box-text="$t('glassgårdentext')"/>
+      </router-link>
+      <b-link :to="'/program'">
+        <HomeScreenBox :box-title="$t('avslutningsmiddagtitle')" box-icon="glass-cheers-solid.svg" :box-text="$t('programtext')"/>
+      </b-link>
+      <b-link :to="'/program'">
+        <HomeScreenBox :box-title="$t('bedpresword')" box-icon="utensils-solid.svg" :box-text="$t('bedpres2')"/>
+      </b-link>
+      <b-link :to="'/program'">
+        <HomeScreenBox :box-title="$t('interviews')" box-icon="interview-icon.svg" :box-text="$t('interviews2')"/>
+      </b-link>
     </div>
   </div>
 </template>
@@ -46,82 +42,111 @@ export default {
   },
   methods: {
     scrollToId (id) {
-      document.getElementById(id).scrollIntoView()
+      var element = document.getElementById(id);
+      var headerOffset = 80; // Pure guess. TODO: should be replaced with a more accurate value for the header height
+      var elementPosition = element.getBoundingClientRect().top;
+      var offsetPosition = elementPosition + window.scrollY - headerOffset;
+    
+      window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+      });
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+  $tiny-width: 300px;
+  $small-width: 500px;
+  $medium-width: 768px;
+  $large-width: 992px;
+  $largest-width: 1400px;
+
   .loading-page {
     width: 100%;
-    overflow: hidden;
+    // overflow: hidden;
     margin-top: 0px;
   }
-  .firstrow {
-    height: 350px;
-    @media(min-width: 500px) {
-        height: 400px;
-    }
-    @media(min-width: 600px) {
-        height: 500px;
-    }
-    @media(min-width: 768px) {
-        height: 630px;
-    }
-    @media(min-width: 992px) {
-        height: 670px;
-    }
-    @media(min-width: 1200px) {
-        height: 440px;
-    }
-    @media(min-width: 1430px) {
-        height: 520px;
-    }
-  }
-  .firsthalf {
+  .splash-text {
     background: no-repeat top;
-    background-size: 95% auto;
-    @media(min-width: 1430px) {
-      background-size: 95% auto;
+    padding: 0;
+    // background-size: 95% auto;
+
+    // TODO: Replace all hard-coded values with variables, also make them dependent on rem units rather than pixels
+    --padding-bottom: 100px;
+    --background-size: 361px;
+    @media (min-width: $medium-width) {
+      --background-size: 642px;
+      --padding-bottom: 140px;
+    }
+    @media (min-width: $large-width) {
+      --background-size: 905px;
+      --padding-bottom: 220px;
+    }
+    @media(min-width: $largest-width) {
+      --background-size: 700px;
+      --padding-bottom: 200px;
       top: 10px;
     }
+    background-size: var(--background-size) auto;
+    padding-bottom: var(--padding-bottom);
+
+    // This was part of the column styling before (col-xl-6 from bootstrap framework), but was removed because it was using incorrect breakpoints
+    @media (min-width: $largest-width) {
+      flex: 0 0 50%;
+    }
+  }
+  .firstrow {
+    margin: 0; // Removes the default margin from the b-row element
   }
   .hometext {
-    margin-top: 85px;
-    z-index: 10;
-    @media(min-width: 768px) {
-        margin-top: 140px;
+    // z-index: 10; // To make sure the text is on top of the background
+    --home-text-margin-top: 85px;
+    @media(min-width: $medium-width) {
+      --home-text-margin-top: 140px;
     }
-    @media(min-width: 992px) {
-        margin-top: 220px;
+    @media(min-width: $large-width) {
+      --home-text-margin-top: 220px;
     }
-    @media(min-width: 1200px) {
-        margin-top: 110px;
+    @media(min-width: $largest-width) {
+      --home-text-margin-top: 140px;
     }
-    @media(min-width: 1430px) {
-        margin-top: 140px;
-    }
+    margin-top: var(--home-text-margin-top);
   }
   .homevideo {
-      display: none;
-      margin-top: 90px;
-      @media(min-width: 1430px) {
-          display: block;
-      }
+    display: none;
+    padding: 0 !important;
+    overflow: hidden;
+    // TODO: Replace video overlay with a clipping mask
+
+    // By adding a tiny clipping region, we avoid artefacts from the video showing to the left and right of the overlay
+    --clip-size: 2px;
+    clip-path: polygon(var(--clip-size) var(--clip-size), calc(100% - var(--clip-size)) var(--clip-size), calc(100% - var(--clip-size)) calc(100% - var(--clip-size)), var(--clip-size) calc(100% - var(--clip-size)));
+
+    // This was part of the column styling before (col-xl-6 from bootstrap framework), but was removed because it was using incorrect breakpoints
+    @media (min-width: $largest-width) {
+      flex: 0 0 50%;
+    }
+
+    // Only show the video on larger screens
+    @media(min-width: $largest-width) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
   }
   .video {
-    transform: scale(1.1);
-    margin-left: 30px;
-    overflow: hidden;
+    width: 100%;
+    transform: scale(1.4); // Arbitrary scaling to make the video fill the overlay
+    transform-origin: 0 50%; // So that the scaling happens from the left edge
+    
+    border-radius: 30px;
   }
   .overlay {
     position: absolute;
-    top: -125px;
-    left: 10px;
-    width: 98%;
-    height: 120%;
-    align-content: center;
+    width: 100%;
+    height: 100%;
   }
   .main-text {
     margin-top: 100px;
@@ -134,31 +159,25 @@ export default {
     font-size: 42px;
     color: var(--primary-color);
     z-index: 10;
-    @media(min-width: 768px) {
-        font-size: 90px;
+    @media(min-width: $medium-width) {
+      font-size: 88px;
     }
-    @media(min-width: 1200px) {
-        text-align: left;
-        font-size: 70px;
-        margin-left: -4px;
-        margin-top: -15px;
-    }
-    @media(min-width: 1430px) {
-        text-align: left;
-        font-size: 90px;
-        margin-left: -4px;
+    @media(min-width: $largest-width) {
+      text-align: left;
+      font-size: 88px;
+      margin-left: -4px;
     }
   }
   h3 {
     display: none;
     color: var(--primary-color);
     text-align: center;
-    @media(min-width: 768px) {
+    @media(min-width: $medium-width) {
         display: block;
         text-align: center;
         font-size: 36px;
     }
-    @media(min-width: 1200px) {
+    @media(min-width: $largest-width) {
         text-align: left;
         font-size: 28px;
     }
@@ -168,27 +187,13 @@ export default {
     color: var(--primary-color);
     font-size: 28px;
     font-weight: 600;
-    @media(min-width: 768px) {
+    @media(min-width: $medium-width) {
         text-align: center;
         font-size: 32px;
     }
-    @media(min-width: 1200px) {
+    @media(min-width: $largest-width) {
         text-align: right;
         margin-top: -5px;
-    }
-  }
-  .videoplayer {
-    height: 464px;
-  }
-  .video {
-    width: 100%;
-    height: inherit;
-    position: relative;
-    border-radius: 30px;
-    overflow: hidden;
-    background-color: white;
-    &:hover {
-      filter: brightness(70%);
     }
   }
   .background {
@@ -228,80 +233,54 @@ export default {
     position: absolute;
     top: -67px;
   }
-  .wrapper {
-    width:100%;
-    position:relative;
-    height: 320px;
-    @media(min-width: 300px) {
-      height: 520px;
-    }
-    @media(min-width: 768px) {
-      height: 500px;
-    }
-    @media(min-width: 1200px) {
-      height: 300px;
-    }
-    @media(min-width: 1430px) {
-      height: 400px;
-    }
-  }
-  .hero-content {
-    position:absolute;
-    height:300px;
-    width:100%;
-    left:0%;
-  }
   .home-page-txt {
     position: relative;
     width: 100%;
     overflow: hidden;
     margin-top: -180px;
     z-index: 2;
-    @media(min-width: 1430px) {
-      margin-top: -270px;
-    }
   }
   .boxes {
-    width: 100%;
-    margin-left: 0%;
-    display: inline-grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
-    height: inherit;
-    grid-gap: 30px;
-    @media(min-width: 300) {
-      width: 25%;
-      margin-left: 20%;
+    // align-self: center;
+    margin: 0 auto; // Hack to center the boxes
+    width: fit-content; // To prevent the box-container from stretching to the full width
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: clamp(300px, 90%, 1024px); // Numbers chosen a little at random
+
+    --gap-size: 5px;
+    --font-size: 0.6rem;
+    --icon-size: 30px;
+    @media(min-width: $small-width) {
+      --gap-size: 10px;
+      --font-size: 0.8rem;
+      --icon-size: 40px;
     }
-    @media(min-width: 500) {
-      width: 40%;
-      margin-left: 20%;
+    @media(min-width: $medium-width) {
+      --gap-size: 20px;
+      --font-size: 1.4rem;
+      --icon-size: 50px;
     }
-    @media(min-width: 768px) {
-      width: 60%;
-      margin-left: 20%;
+    @media(min-width: $large-width) {
+      --gap-size: 30px;
+      --font-size: 1.6rem;
+      --icon-size: 60px;
     }
-    @media(min-width: 992px) {
-      width: 70%;
-      margin-left: 15%;
-    }
-    @media(min-width: 1200px) {
-      grid-template-rows: 1fr 1fr;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      display:inline-grid;
-      width: 100%;
-      margin-left: 0%;
-    }
+    gap: var(--gap-size);
+    font-size: var(--font-size);
+
+    // Could be useful for larger screens
+    // @media(min-width: --largest-width) {
+    //   grid-template-columns: repeat(4, 1fr);
+    // }
     a {
-       text-decoration: none;
-     }
+      text-decoration: none;
     }
-  .box {
-    display: block;
   }
   .temp-link {
     grid-column: span 2;
-    @media(min-width: 1200px) {
+    @media(min-width: $largest-width) {
       grid-column: span 4;
     }
   }

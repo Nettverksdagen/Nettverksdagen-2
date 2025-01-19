@@ -64,11 +64,11 @@ export default {
 <style scoped lang="scss">
   .anon-footer {
     width: 100%;
-    margin-top: 30px;
+    // margin-top: 30px;
     // padding-bottom: 40px;
-    @media(min-width: 1200px) {
-      margin-top: 60px;
-    }
+    // @media(min-width: 1200px) {
+    //   margin-top: 60px;
+    // }
     position: relative;
     background: var(--background-primary-color);
     color: var(--primary-color);
