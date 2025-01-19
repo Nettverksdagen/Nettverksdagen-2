@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="valgomat-view">
     <QuestionCard
       v-if="questions.length && !showResults"
       :question="questions[currentQuestionIndex]"
@@ -90,37 +90,40 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.introduction {
-  font-size:18px;
-  text-align: center;
-  @media(min-width: 768px) {
-    text-align: left;
-    margin-right: 30px;
+  .valgomat-view {
+    flex: 1;
   }
-}
-h1 {
-  font-size: 36px;
-  font-weight: 600;
-  text-align: center;
-  color: black;
-  margin-bottom: 30px;
-  margin-top: 40px;
-}
-.navigation-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
+  .introduction {
+    font-size:18px;
+    text-align: center;
+    @media(min-width: 768px) {
+      text-align: left;
+      margin-right: 30px;
+    }
+  }
+  h1 {
+    font-size: 36px;
+    font-weight: 600;
+    text-align: center;
+    color: black;
+    margin-bottom: 30px;
+    margin-top: 40px;
+  }
+  .navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
 
-.valgomatresultstext {
-  text-align: center;
-}
+  .valgomatresultstext {
+    text-align: center;
+  }
 
-.company-list {
-  list-style-type: none;
-}
+  .company-list {
+    list-style-type: none;
+  }
 
-a {
-  color: #000000;
-}
+  a {
+    color: #000000;
+  }
 </style>
