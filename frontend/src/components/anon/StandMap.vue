@@ -290,7 +290,7 @@ export default {
   }
   .toggle_holder {
     position: absolute;
-    top: 15%;
+    top: 12%;
     left: 5%;
     z-index: 10;
     // TODO: Her burde størrelsen på knappen også oppdateres med skjermstørrelse
