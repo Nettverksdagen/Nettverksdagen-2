@@ -19,6 +19,13 @@ export default {
 </script>
 
 <style lang="scss">
+  // Define breakpoints for responsive design
+  $tiny-width: 300px;
+  $small-width: 500px;
+  $medium-width: 768px;
+  $large-width: 992px;
+  $largest-width: 1400px;
+
   .bm-burger-button {
     top:16px;
     left:16px;
@@ -52,23 +59,23 @@ export default {
       text-align: left;
     }
 
-    @media(max-width: 768px) {
-      // overflow-x: hidden; // What the fuck was this meant to do?
-    }
-    @media(min-width: 480px) {
+    // @media(max-width: 768px) {
+    //   overflow-x: hidden; // What the fuck was this meant to do?
+    // }
+    @media(min-width: $small-width) {
       width: 95%;
     }
-    @media(min-width: 768px) {
-      width: 95%;
+    // @media(min-width: $medium-width) {
+    //   width: 95%;
+    // }
+    @media(min-width: $large-width) {
+      width: $large-width;
     }
-    @media(min-width: 992px) {
-      width: 980px;
-    }
-    @media(min-width: 1200px) {
-      width: 1100px;
-    }
-    @media(min-width: 1430px) {
-      width: 1400px;
+    // @media(min-width: 1200px) {
+    //   width: 1100px;
+    // }
+    @media(min-width: $largest-width) {
+      width: $largest-width;
     }
   }
 </style>
