@@ -4,12 +4,8 @@
       <h3>{{$t('doyour')}}</h3>
       <h3><a href="mailto:bedrift@nettverksdagene.no">{{$t('sendmailto') + ' bedrift@nettverksdagene.no' }}</a></h3>
     </div> -->
-    <div class="dude">
-      <HomeScreen/>
-    </div>
-    <div style="display: flex; justify-content: center; align-items: center;" id="stand-map">
-      <StandMap style="width: 100vmin; height: 100vmin; "></StandMap>
-    </div>
+    <HomeScreen/>
+    <StandMap/>
     <businesses></businesses>
     <sponsors></sponsors>
   </div>
@@ -37,8 +33,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .dude {
-    width:100%;
+  .home {
+    display: flex;
+    flex-direction: column;
+    gap: 2em; // Very simple way to add spacing between elements (like splash screen and map)
   }
   .card {
     width: fit-content;

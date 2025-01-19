@@ -150,7 +150,7 @@
       <line x1="472" y1="1259.5" x2="508" y2="1259.5" stroke="#778E8A" stroke-width="3" />
 
     </svg>
-    <svg class="standkart" viewBox="0 0 2116 2123">
+    <svg class="standkart-text" viewBox="0 0 2116 2123">
       <text x="100" y="200" dominant-baseline="middle" text-anchor="left" font-size="80px" font-weight="500" fill="#D9D9D9">Standkart</text>
       <line v-bind:key="index" v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap" :x1="StandPosition.x"
         :y1="StandPosition.y" :x2="StandPosition.x" :y2="StandPosition.y" stroke="#898989" class="_circle"
@@ -266,132 +266,138 @@ export default {
 
 </script>
 
-<style scoped>
-template {
-  margin: 0;
-}
+<style scoped lang="scss">
+  // template {
+  //   margin: 0;
+  // }
 
-.standkart_holder {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.standkart {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-}
-
-.standkart:hover {
-  cursor: pointer;
-}
-
-._circle {
-  stroke-width: 37;
-  stroke-linecap: round;
-  transition-duration: 100ms;
-}
-
-._circle:hover {
-  stroke-width: 60;
-}
-
-._circle.hovered {
-  stroke-width: 60;
-}
-
-._business._business.hovered {
-  font-size: 4em;
-}
-
-/*button*/
-.toggle_holder {
-  position: relative;
-  top: 15%;
-  left: 5%;
-}
-
-@media (max-width: 768px) {
-
-  /* Adjust the position for smaller screens */
-  .toggle_holder {
-    width: 50%;
+  .standkart_holder {
+    width: 100%;
+    height: 100%;
+    position: relative;
   }
-}
 
-@media (max-width: 480px) {
-
-  /* Further adjustments for even smaller screens */
-  .toggle_holder {
-    width: 50%;
+  .standkart {
+    width: 100%;
+    height: 100%;
+    // position: absolute;
   }
-}
+  .standkart-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+  }
+  .toggle_holder {
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    z-index: 10;
+    // TODO: Her burde størrelsen på knappen også oppdateres med skjermstørrelse
 
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 35px;
-  height: 22px;
-}
+    &:hover {
+      cursor: pointer;
+    }
+  }
 
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+  ._circle {
+    stroke-width: 37;
+    stroke-linecap: round;
+    transition-duration: 100ms;
+  }
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #D9D9D9;
-  -webkit-transition: .7s;
-  transition: .7s;
-  border: 1px solid #ffffff;
-}
+  ._circle:hover {
+    stroke-width: 60;
+  }
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 22px;
-  width: 22px;
-  left: -3px;
-  bottom: -2px;
-  background-color: #2567A2;
-  -webkit-transition: .4s;
-  transition: .4s;
-  border: solid 1.5px #fff;
-}
+  ._circle.hovered {
+    stroke-width: 60;
+  }
 
-input:checked+.slider {
-  background-color: transparent;
-}
+  ._business._business.hovered {
+    font-size: 4em;
+  }
 
-input:focus+.slider {
-  box-shadow: 0 0 1px #2567A2;
-}
+  @media (max-width: 768px) {
 
-input:checked+.slider:before {
-  -webkit-transform: translateX(31px);
-  -ms-transform: translateX(31px);
-  transform: translateX(15px);
-  background: #2567A2;
-  -webkit-transition: .7s;
-  transition: .7s;
-  border: solid 2px #fff;
-}
+    /* Adjust the position for smaller screens */
+    .toggle_holder {
+      width: 50%;
+    }
+  }
 
-.slider.round {
-  border-radius: 24px;
-  border-color: #ffffff;
-}
+  @media (max-width: 480px) {
 
-.slider.round:before {
-  border-radius: 50%;
-  border-color: #ffffff;
-}
+    /* Further adjustments for even smaller screens */
+    .toggle_holder {
+      width: 50%;
+    }
+  }
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 35px;
+    height: 22px;
+  }
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #D9D9D9;
+    -webkit-transition: .7s;
+    transition: .7s;
+    border: 1px solid #ffffff;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: -3px;
+    bottom: -2px;
+    background-color: #2567A2;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border: solid 1.5px #fff;
+  }
+
+  input:checked+.slider {
+    background-color: transparent;
+  }
+
+  input:focus+.slider {
+    box-shadow: 0 0 1px #2567A2;
+  }
+
+  input:checked+.slider:before {
+    -webkit-transform: translateX(31px);
+    -ms-transform: translateX(31px);
+    transform: translateX(15px);
+    background: #2567A2;
+    -webkit-transition: .7s;
+    transition: .7s;
+    border: solid 2px #fff;
+  }
+
+  .slider.round {
+    border-radius: 24px;
+    border-color: #ffffff;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+    border-color: #ffffff;
+  }
 </style>
