@@ -267,12 +267,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  // template {
-  //   margin: 0;
-  // }
-
   .standkart_holder {
-    width: 100%;
+    margin: 0 auto; // Hack for centering
+    width: 80%; // TODO: Dynamic sizing based on screen height (so that the map is always visible)
     height: 100%;
     position: relative;
   }
