@@ -318,22 +318,6 @@ export default {
     font-size: 4em;
   }
 
-  @media (max-width: 768px) {
-
-    /* Adjust the position for smaller screens */
-    .toggle_holder {
-      width: 50%;
-    }
-  }
-
-  @media (max-width: 480px) {
-
-    /* Further adjustments for even smaller screens */
-    .toggle_holder {
-      width: 50%;
-    }
-  }
-
   .switch {
     position: relative;
     display: inline-block;
