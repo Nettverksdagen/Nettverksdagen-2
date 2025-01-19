@@ -5,7 +5,7 @@
       <h3><a href="mailto:bedrift@nettverksdagene.no">{{$t('sendmailto') + ' bedrift@nettverksdagene.no' }}</a></h3>
     </div> -->
     <HomeScreen/>
-    <StandMap/>
+    <StandMap id="stand-map"/>
     <businesses></businesses>
     <sponsors></sponsors>
   </div>
