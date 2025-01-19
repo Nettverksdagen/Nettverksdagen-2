@@ -53,7 +53,7 @@ export default {
     }
 
     @media(max-width: 768px) {
-      overflow-x: hidden;
+      // overflow-x: hidden; // What the fuck was this meant to do?
     }
     @media(min-width: 480px) {
       width: 95%;
