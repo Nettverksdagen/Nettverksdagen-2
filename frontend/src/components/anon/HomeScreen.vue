@@ -1,15 +1,15 @@
 <template>
   <div class="loading-page">
     <b-row class="firstrow">
-        <div class="col-12 col-xl-6 firsthalf" :style="{'background-image': 'url(' + require('@/assets/iphonebakgrunn.svg') + ')'}">
+        <div class="col-12 splash-text" :style="{'background-image': 'url(' + require('@/assets/iphonebakgrunn.svg') + ')'}">
             <div class="hometext">
                 <h3>{{$t('homescreen.fremtidig')}}</h3>
                 <h1>{{$t('nettverksdagene')}}</h1>
                 <h2>21.01-23.01 2025</h2>
             </div>
         </div>
-        <div class="col-12 col-lg-6 homevideo">
-            <video class ="video" muted loop autoplay>
+        <div class="col-12 homevideo">
+            <video class="video" muted loop autoplay>
                 <source src="@/assets/timelapse.mp4" type="video/mp4">
             </video>
             <img class="overlay" src="@/assets/background_overlay.png">
@@ -49,62 +49,74 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  $tiny-width: 300px;
+  $small-width: 500px;
+  $medium-width: 768px;
+  $large-width: 992px;
+  $largest-width: 1400px;
+
   .loading-page {
     width: 100%;
     overflow: hidden;
     margin-top: 0px;
   }
-  .firstrow {
-    height: 350px;
-    @media(min-width: 500px) {
-        height: 400px;
-    }
-    @media(min-width: 600px) {
-        height: 500px;
-    }
-    @media(min-width: 768px) {
-        height: 630px;
-    }
-    @media(min-width: 992px) {
-        height: 670px;
-    }
-    @media(min-width: 1200px) {
-        height: 440px;
-    }
-    @media(min-width: 1430px) {
-        height: 520px;
-    }
-  }
-  .firsthalf {
+  .splash-text {
     background: no-repeat top;
-    background-size: 95% auto;
-    @media(min-width: 1430px) {
-      background-size: 95% auto;
+    // background-size: 95% auto;
+
+    // TODO: Replace all hard-coded values with variables, also make them dependent on rem units rather than pixels
+    --padding-bottom: 100px;
+    --background-size: 361px;
+    @media (min-width: $medium-width) {
+      --background-size: 642px;
+      --padding-bottom: 140px;
+    }
+    @media (min-width: $large-width) {
+      --background-size: 905px;
+      --padding-bottom: 220px;
+    }
+    @media(min-width: $largest-width) {
+      --background-size: 700px;
+      --padding-bottom: 200px;
       top: 10px;
+    }
+    background-size: var(--background-size) auto;
+    padding-bottom: var(--padding-bottom);
+
+    // This was part of the column styling before (col-xl-6 from bootstrap framework), but was removed because it was using incorrect breakpoints
+    @media (min-width: $largest-width) {
+      flex: 0 0 50%;
+      max-width: 50%;
     }
   }
   .hometext {
-    margin-top: 85px;
-    z-index: 10;
-    @media(min-width: 768px) {
-        margin-top: 140px;
+    // z-index: 10; // To make sure the text is on top of the background
+    --home-text-margin-top: 85px;
+    @media(min-width: $medium-width) {
+      --home-text-margin-top: 140px;
     }
-    @media(min-width: 992px) {
-        margin-top: 220px;
+    @media(min-width: $large-width) {
+      --home-text-margin-top: 220px;
     }
-    @media(min-width: 1200px) {
-        margin-top: 110px;
+    @media(min-width: $largest-width) {
+      --home-text-margin-top: 140px;
     }
-    @media(min-width: 1430px) {
-        margin-top: 140px;
-    }
+    margin-top: var(--home-text-margin-top);
   }
   .homevideo {
-      display: none;
-      margin-top: 90px;
-      @media(min-width: 1430px) {
-          display: block;
-      }
+    display: none;
+    margin-top: 90px;
+
+    // This was part of the column styling before (col-xl-6 from bootstrap framework), but was removed because it was using incorrect breakpoints
+    @media (min-width: $largest-width) {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+
+    // Only show the video on larger screens
+    @media(min-width: $largest-width) {
+        display: block;
+    }
   }
   .video {
     transform: scale(1.1);
@@ -130,16 +142,10 @@ export default {
     font-size: 42px;
     color: var(--primary-color);
     z-index: 10;
-    @media(min-width: 768px) {
+    @media(min-width: $medium-width) {
         font-size: 90px;
     }
-    @media(min-width: 1200px) {
-        text-align: left;
-        font-size: 70px;
-        margin-left: -4px;
-        margin-top: -15px;
-    }
-    @media(min-width: 1430px) {
+    @media(min-width: $largest-width) {
         text-align: left;
         font-size: 90px;
         margin-left: -4px;
@@ -149,12 +155,12 @@ export default {
     display: none;
     color: var(--primary-color);
     text-align: center;
-    @media(min-width: 768px) {
+    @media(min-width: $medium-width) {
         display: block;
         text-align: center;
         font-size: 36px;
     }
-    @media(min-width: 1200px) {
+    @media(min-width: $largest-width) {
         text-align: left;
         font-size: 28px;
     }
@@ -164,11 +170,11 @@ export default {
     color: var(--primary-color);
     font-size: 28px;
     font-weight: 600;
-    @media(min-width: 768px) {
+    @media(min-width: $medium-width) {
         text-align: center;
         font-size: 32px;
     }
-    @media(min-width: 1200px) {
+    @media(min-width: $largest-width) {
         text-align: right;
         margin-top: -5px;
     }
@@ -230,9 +236,6 @@ export default {
     overflow: hidden;
     margin-top: -180px;
     z-index: 2;
-    @media(min-width: 1430px) {
-      margin-top: -270px;
-    }
   }
   .boxes {
     // align-self: center;
@@ -242,12 +245,6 @@ export default {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     width: clamp(300px, 90%, 1024px); // Numbers chosen a little at random
-
-    $tiny-width: 300px;
-    $small-width: 500px;
-    $medium-width: 768px;
-    $large-width: 992px;
-    $largest-width: 1200px;
 
     --gap-size: 5px;
     --font-size: 0.6rem;
@@ -280,7 +277,7 @@ export default {
   }
   .temp-link {
     grid-column: span 2;
-    @media(min-width: 1200px) {
+    @media(min-width: $largest-width) {
       grid-column: span 4;
     }
   }
