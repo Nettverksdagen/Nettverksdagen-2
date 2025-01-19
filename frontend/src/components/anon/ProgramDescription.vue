@@ -280,6 +280,7 @@ export default {
   flex-direction: column;
   align-items: stretch;
   flex: 1;
+  height: fit-content;
 
   background: #fff;
   border-radius: 8px;
