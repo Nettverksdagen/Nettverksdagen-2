@@ -36,7 +36,7 @@ export default {
   .home {
     display: flex;
     flex-direction: column;
-    gap: 2em; // Very simple way to add spacing between elements (like splash screen and map)
+    gap: 5em; // Very simple way to add spacing between elements (like splash screen and map)
   }
   .card {
     width: fit-content;
