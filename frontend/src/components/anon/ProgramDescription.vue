@@ -34,7 +34,7 @@
       </div>
 
       <div v-if="registration && cancelEmail">
-        <div>{{$t('destroypart')}} <a href="mailto:it@nettverksdagene.no">it@nettverksdagene.no</a>.</div>
+        <div>{{$t('destroypart')}} <a href="mailto:admin@nettverksdagene.no">admin@nettverksdagene.no</a>.</div>
         <!-- Removed temporaraly until unregistration works securely. <b-link @click.native="destroy_participant(name)">{{$t('destroypart')}}</b-link> -->
       </div>
 
