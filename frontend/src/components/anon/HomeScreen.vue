@@ -15,23 +15,19 @@
             <img class="overlay" src="@/assets/background_overlay.png">
         </div>
     </b-row>
-    <div class="wrapper">
-      <div class="hero-content">
-        <div class="boxes">
-          <router-link :to="{name: 'Home', hash: '#stand-map'}" @click.native="scrollToId('stand-map')">
-            <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" :box-text="$t('glassgårdentext')" class="box"/>
-          </router-link>
-          <b-link :to="'/program'">
-            <HomeScreenBox :box-title="$t('avslutningsmiddagtitle')" box-icon="glass-cheers-solid.svg" :box-text="$t('programtext')" class="box"/>
-          </b-link>
-          <b-link :to="'/program'">
-            <HomeScreenBox :box-title="$t('bedpresword')" box-icon="utensils-solid.svg" :box-text="$t('bedpres2')" class="box"/>
-          </b-link>
-          <b-link :to="'/program'">
-            <HomeScreenBox :box-title="$t('interviews')" box-icon="interview-icon.svg" :box-text="$t('interviews2')" class="box"/>
-          </b-link>
-        </div>
-      </div>
+    <div class="boxes">
+      <router-link :to="{name: 'Home', hash: '#stand-map'}" @click.native="scrollToId('stand-map')">
+        <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" :box-text="$t('glassgårdentext')"/>
+      </router-link>
+      <b-link :to="'/program'">
+        <HomeScreenBox :box-title="$t('avslutningsmiddagtitle')" box-icon="glass-cheers-solid.svg" :box-text="$t('programtext')"/>
+      </b-link>
+      <b-link :to="'/program'">
+        <HomeScreenBox :box-title="$t('bedpresword')" box-icon="utensils-solid.svg" :box-text="$t('bedpres2')"/>
+      </b-link>
+      <b-link :to="'/program'">
+        <HomeScreenBox :box-title="$t('interviews')" box-icon="interview-icon.svg" :box-text="$t('interviews2')"/>
+      </b-link>
     </div>
   </div>
 </template>
@@ -228,29 +224,6 @@ export default {
     position: absolute;
     top: -67px;
   }
-  .wrapper {
-    width:100%;
-    position:relative;
-    height: 320px;
-    @media(min-width: 300px) {
-      height: 520px;
-    }
-    @media(min-width: 768px) {
-      height: 500px;
-    }
-    @media(min-width: 1200px) {
-      height: 300px;
-    }
-    @media(min-width: 1430px) {
-      height: 400px;
-    }
-  }
-  .hero-content {
-    position:absolute;
-    height:300px;
-    width:100%;
-    left:0%;
-  }
   .home-page-txt {
     position: relative;
     width: 100%;
@@ -262,42 +235,48 @@ export default {
     }
   }
   .boxes {
-    width: 100%;
-    margin-left: 0%;
-    display: inline-grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
-    height: inherit;
-    grid-gap: 30px;
-    @media(min-width: 300) {
-      width: 25%;
-      margin-left: 20%;
+    // align-self: center;
+    margin: 0 auto; // Hack to center the boxes
+    width: fit-content; // To prevent the box-container from stretching to the full width
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: clamp(300px, 90%, 1024px); // Numbers chosen a little at random
+
+    $tiny-width: 300px;
+    $small-width: 500px;
+    $medium-width: 768px;
+    $large-width: 992px;
+    $largest-width: 1200px;
+
+    --gap-size: 5px;
+    --font-size: 0.6rem;
+    --icon-size: 30px;
+    @media(min-width: $small-width) {
+      --gap-size: 10px;
+      --font-size: 0.8rem;
+      --icon-size: 40px;
     }
-    @media(min-width: 500) {
-      width: 40%;
-      margin-left: 20%;
+    @media(min-width: $medium-width) {
+      --gap-size: 20px;
+      --font-size: 1.4rem;
+      --icon-size: 50px;
     }
-    @media(min-width: 768px) {
-      width: 60%;
-      margin-left: 20%;
+    @media(min-width: $large-width) {
+      --gap-size: 30px;
+      --font-size: 1.6rem;
+      --icon-size: 60px;
     }
-    @media(min-width: 992px) {
-      width: 70%;
-      margin-left: 15%;
-    }
-    @media(min-width: 1200px) {
-      grid-template-rows: 1fr 1fr;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      display:inline-grid;
-      width: 100%;
-      margin-left: 0%;
-    }
+    gap: var(--gap-size);
+    font-size: var(--font-size);
+
+    // Could be useful for larger screens
+    // @media(min-width: --largest-width) {
+    //   grid-template-columns: repeat(4, 1fr);
+    // }
     a {
-       text-decoration: none;
-     }
+      text-decoration: none;
     }
-  .box {
-    display: block;
   }
   .temp-link {
     grid-column: span 2;
