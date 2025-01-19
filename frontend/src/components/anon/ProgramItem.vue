@@ -201,6 +201,7 @@ export default {
     justify-content: space-between;
     column-gap: 20px;
     align-items: center;
+    margin-bottom: 0 !important; // Remove bottom margin from card, since this mysteriously appears on the server
     // width: fit-content;
     border: none;
   }
