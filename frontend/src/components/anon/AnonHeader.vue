@@ -17,6 +17,7 @@
           <b-nav-item :to="{name: 'About'}"><p>{{$t('omoss')}}</p></b-nav-item>
           <b-nav-item :to="{name: 'Contact'}"><p>{{$t('kontakt')}}</p></b-nav-item>
           <b-nav-item :to="{name: 'Valgomat'}"><p>{{$t('Valgomat')}}</p></b-nav-item>
+          <b-nav-item :to="{name: 'FAQ'}"><p>{{$t('FAQ')}}</p></b-nav-item>
           <b-nav-item v-on:click="toggleLanguage"><p>{{$t('lang')}}</p></b-nav-item>
           <!-- UNCOMMENT TO SHOW "TOGGLE THEME BUTTON"-->
           <!-- <b-nav-item class="round-button" title="Endre tema" v-on:click="toggleTheme">
@@ -101,22 +102,14 @@ export default {
     background:var(--background-color-primary);
     margin:0 auto;
     transition: background 0.5s;
-    width: 95%;
-    -webkit-position: fixed;
-    position: fixed;
+    // width: 95%;
+    // -webkit-position: fixed;
+    position: sticky;
     top: 0px;
     z-index: 10;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    @media(min-width: 992px) {
-      width: 980px;
-    }
-    @media(min-width: 1200px) {
-      width: 1100px;
-    }
-    @media(min-width: 1430px) {
-      width: 1400px;
-    }
+    width: 100%;
   }
   *{
     box-sizing:border-box;

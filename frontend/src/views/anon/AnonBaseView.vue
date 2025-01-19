@@ -31,11 +31,27 @@ export default {
     }
   }
   .anon-base {
-    min-height: 100vh;
-    width: 95%;
+    // min-height: 100vh;
+    // width: 95%;
+    height: 100%;
     min-width: 320px;
     margin: 0 auto;
-    margin-top: 100px;
+    padding: 0 20px;
+    // margin-top: 100px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+
+    // Enforce same font for all page headers
+    h1 {
+      font-size: 36px;
+      font-weight: 600;
+      text-align: center;
+      color: black;
+      text-align: left;
+    }
+
     @media(max-width: 768px) {
       overflow-x: hidden;
     }

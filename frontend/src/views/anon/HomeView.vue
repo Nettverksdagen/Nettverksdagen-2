@@ -5,7 +5,6 @@
       <h3><a href="mailto:bedrift@nettverksdagene.no">{{$t('sendmailto') + ' bedrift@nettverksdagene.no' }}</a></h3>
     </div> -->
     <div class="dude">
-      <!--<Hero/> -->
       <HomeScreen/>
     </div>
     <div style="display: flex; justify-content: center; align-items: center;" id="stand-map">
@@ -17,14 +16,12 @@
 </template>
 
 <script>
-import Hero from '@/components/anon/Hero.vue'
 import Businesses from '@/components/anon/Businesses.vue'
 import Sponsors from '@/components/anon/Sponsors.vue'
 import HomeScreen from '@/components/anon/HomeScreen.vue'
 import StandMap from '@/components/anon/StandMap.vue'
 export default {
   components: {
-    Hero,
     Businesses,
     Sponsors,
     HomeScreen,

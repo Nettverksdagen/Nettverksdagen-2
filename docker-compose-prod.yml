@@ -57,5 +57,17 @@ services:
       - ./nginx/config:/config # Todo: Can this volume include the below?
       - frontend-files:/frontend
 
+  postfix:
+    build:
+      context: ./postfix
+    ports:
+      - "587:587"
+    env_file:
+      - path: ./postfix/.env
+        required: true
+    volumes:
+      - postfix-spool:/var/spool/postfix # Volume for storing unset postfix emails
+
 volumes:
   frontend-files:
+  postfix-spool:

@@ -1,14 +1,26 @@
 <template>
-    <Content>
-      <div class="program">
-        <h1 class="text-center">Program</h1>
-        <!-- <p class="text-center description mt-3 mb-2">{{$t('program22')}}</p> -->
-        <!-- <h4 class="text-center font-weight-bold"><a href="#stand-map-header">Se standkart her!</a></h4> -->
-        <div :key="'programDay' + index" v-for="(day, index) in program">
-          <h3 class="font-weight-bold">{{formatDate(day[0].timeStart)}}</h3>
-          <div class="timeline">
-            <div :key="'dayItem' + item.id" v-for="(item) in day">
-              <ProgramItem
+  <Content>
+    <div class="program">
+      <h1 class="text-center">Program</h1>
+      <div class="days-list">
+        <button
+          v-for="(day, index) in program"
+          :key="'dayButton' + index"
+          @click="selectDay(index)"
+          :class="{ 'selected-day': selectedDayIndex === index }"
+        >
+          {{ formatDate(day[0].timeStart) }}
+        </button>
+      </div>
+      <div v-if="selectedDay" class="program-wrapper">
+        <div class="timeline">
+          <div
+            :key="'dayItem' + item.id"
+            v-for="(item) in selectedDay"
+            @click="selectProgramItem(item)"
+            :class="{ 'selected-event': selectedProgramItem && selectedProgramItem.id === item.id }"
+          >
+            <ProgramItem
               :timeStart="item.timeStart"
               :timeEnd="item.timeEnd"
               :place="item.place"
@@ -21,29 +33,54 @@
               :registrationStart="item.registrationStart"
               :registrationEnd="item.registrationEnd"
               :name="item.id"
+            >
+            </ProgramItem>
+            <div v-if="isMobile && selectedProgramItem && selectedProgramItem.id === item.id">
+              <ProgramDescription
+                :timeStart="selectedProgramItem.timeStart"
+                :timeEnd="selectedProgramItem.timeEnd"
+                :place="selectedProgramItem.place"
+                :header="selectedProgramItem.header"
+                :paragraph="selectedProgramItem.paragraph"
+                :registration="selectedProgramItem.registration"
+                :maxRegistered="selectedProgramItem.maxRegistered"
+                :registered="selectedProgramItem.registered"
+                :cancelEmail="selectedProgramItem.cancelEmail"
+                :registrationStart="selectedProgramItem.registrationStart"
+                :registrationEnd="selectedProgramItem.registrationEnd"
+                :name="selectedProgramItem.id"
               >
-              </ProgramItem>
+              </ProgramDescription>
             </div>
           </div>
         </div>
-        <div id="bankett">
-        </div>
+        <!-- <div> -->
+          <ProgramDescription  v-if="!isMobile && selectedProgramItem"
+            :timeStart="selectedProgramItem.timeStart"
+            :timeEnd="selectedProgramItem.timeEnd"
+            :place="selectedProgramItem.place"
+            :header="selectedProgramItem.header"
+            :paragraph="selectedProgramItem.paragraph"
+            :registration="selectedProgramItem.registration"
+            :maxRegistered="selectedProgramItem.maxRegistered"
+            :registered="selectedProgramItem.registered"
+            :cancelEmail="selectedProgramItem.cancelEmail"
+            :registrationStart="selectedProgramItem.registrationStart"
+            :registrationEnd="selectedProgramItem.registrationEnd"
+            :name="selectedProgramItem.id"
+          >
+          </ProgramDescription>
+        <!-- </div> -->
       </div>
-
-      <!-- Uncomment this to get the stand maps from 2020 at the bottom. Disabled for 2021 since it was held digitally.
-      <h2 id="stand-map-header" class="text-center mb-3">Standkart</h2>
-      <h3 class="text-center mb-3">29. januar</h3>
-      <img class="stand-map mb-5" src="@/assets/standkart-dag1.png">
-      <h3 class="text-center mb-3">30. januar</h3>
-      <img class="stand-map mb-5" src="@/assets/standkart-dag2.png">
-      -->
-
-    </Content>
+      <div id="bankett"></div>
+    </div>
+  </Content>
 </template>
 
 <script>
 import Content from '@/components/common/Content.vue'
 import ProgramItem from '@/components/anon/ProgramItem.vue'
+import ProgramDescription from '@/components/anon/ProgramDescription.vue'
 
 function isSameDay (lhs, rhs) {
   return (
@@ -57,7 +94,31 @@ export default {
   name: 'ProgramView',
   components: {
     Content,
-    ProgramItem
+    ProgramItem,
+    ProgramDescription
+  },
+  data () {
+    return {
+      selectedProgramItem: null,
+      selectedDayIndex: 0,
+      isMobile: window.innerWidth <= 768
+    }
+  },
+  mounted () {
+    window.addEventListener('resize', this.handleResize)
+    if (this.program.length > 0 && this.program[0].length > 0) {
+      this.selectedProgramItem = this.program[0][0]
+    }
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.handleResize)
+  },
+  watch: {
+    program (newProgram) {
+      if (newProgram.length > 0 && newProgram[0].length > 0) {
+        this.selectedProgramItem = newProgram[0][0]
+      }
+    }
   },
   methods: {
     formatDate (dateObj) {
@@ -65,14 +126,28 @@ export default {
       let date = dateObj.getDate()
       let month = dateObj.getMonth()
       return String(date) + '. ' + months[month]
+    },
+    selectProgramItem (item) {
+      this.selectedProgramItem = item
+    },
+    selectDay (index) {
+      this.selectedDayIndex = index
+      this.selectedProgramItem = this.program[index][0]
+    },
+    handleResize () {
+      this.isMobile = window.innerWidth <= 768
     }
   },
   computed: {
     program: function () {
       let prog = this.$store.getters['program/anonProgram']
 
-      // Sort the program by start time
+      // Sort the program by start time and end time
       let sortedProg = [...prog].sort((lhs, rhs) => {
+        // Sort by end times
+        return lhs.timeEnd - rhs.timeEnd
+      }).sort((lhs, rhs) => {
+        // Sort by start times, since stable sort the end times will be preserved
         return lhs.timeStart - rhs.timeStart
       })
 
@@ -91,6 +166,9 @@ export default {
       })
 
       return days
+    },
+    selectedDay () {
+      return this.program[this.selectedDayIndex]
     }
   }
 }
@@ -100,38 +178,61 @@ export default {
   .description {
     font-size:1.1em;
   }
-  .stand-map {
-    height: calc(100% - 2em);
-    background: #dee2e2;
-    border-radius: 8px;
-    padding: 3em 1em;
+  // .stand-map {
+  //   height: calc(100% - 2em);
+  //   background: #dee2e2;
+  //   border-radius: 8px;
+  //   padding: 3em 1em;
+  //   width: 100%;
+  //   box-shadow: 0 1px 2px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.15);
+
+  //   @media(min-width: 576px) {
+  //     padding: 3em 1em;
+  //   }
+
+  //   @media(min-width: 768px) {
+  //     padding: 3em 4em;
+  //   }
+
+  //   @media(min-width: 966px) {
+  //     padding: 4em 14em;
+  //   }
+  // }
+  .program {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1em;
+    padding: 0.5em;
+
+    h1 {
+      margin-bottom: 0;
+    }
+  }
+  .program-wrapper {
+    display: flex;
+    flex-direction: row;
+    // justify-content: space-between;
+    gap: 2em;
+    align-self: center;
     width: 100%;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.15);
-
-    @media(min-width: 576px) {
-      padding: 3em 1em;
-    }
-
-    @media(min-width: 768px) {
-      padding: 3em 4em;
-    }
-
-    @media(min-width: 966px) {
-      padding: 4em 14em;
-    }
+    max-width: 1024px; // Completely arbitrary, but looks good
+    // align-items: stretch;
+    // margin-bottom: 2em;
+    // @media(max-width: 768px) {
+    //   flex-direction: column;
+    // }
   }
   .timeline {
-    position: relative;
-    margin: 1em 0 3em 6em;
-  }
-  .timeline::after {
-    content: '';
-    position: absolute;
-    width: 6px;
-    background-color: #1d4844;
-    top: 0;
-    bottom: 0;
-    margin-left: -3px;
+    flex: 1;
+
+    // @media (min-width: 768px) {
+    //   position: sticky;
+    //   top: 4em;
+    //   overflow: scroll;
+    //   scroll-behavior: contain;
+    //   max-height: 100vh;
+    // }
   }
 
   .btn-primary {
@@ -148,25 +249,12 @@ export default {
     margin-right: 1rem;
   }
 
-  h1 {
-    font-size: 36px;
-    font-weight: 600;
-    text-align: center;
-    color: black;
-    margin-bottom: 30px;
-    margin-top: 40px;
-    @media(min-width: 768px) {
-      text-align: left;
-    }
-  }
-
   @media(max-width: 966px) {
     h3 {
       font-size: 1.3em;
     }
     h4 {
       font-size: 1.2em;
-
     }
   }
 
@@ -176,4 +264,24 @@ export default {
     }
   }
 
+  // .selected-event {
+  //   background-color: #e0f7fa;
+  // }
+
+  .days-list {
+    display: flex;
+    justify-content: center;
+    // margin-bottom: 20px;
+    button {
+      margin: 0 10px;
+      padding: 10px 20px;
+      border: none;
+      background-color: #f0f0f0;
+      cursor: pointer;
+      &.selected-day {
+        background-color: #1d4844;
+        color: white;
+      }
+    }
+  }
 </style>

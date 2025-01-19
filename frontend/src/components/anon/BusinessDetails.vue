@@ -42,7 +42,7 @@ export default {
   .businessText {
     white-space: pre-line;
   }
-    .modal-content {
+  .modal-content {
     border: none;
     border-radius: 20px;
     background-color: var(--line-border-color);

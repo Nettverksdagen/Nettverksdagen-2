@@ -60,7 +60,7 @@ export default {
       display: block;
     }
   }
-  .about-view {
-      min-height: 80vh;
-  }
+  // .about-view {
+  //     min-height: 80vh;
+  // }
 </style>
