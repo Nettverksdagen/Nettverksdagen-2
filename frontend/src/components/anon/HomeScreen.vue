@@ -42,7 +42,15 @@ export default {
   },
   methods: {
     scrollToId (id) {
-      document.getElementById(id).scrollIntoView()
+      var element = document.getElementById(id);
+      var headerOffset = 80; // Pure guess. TODO: should be replaced with a more accurate value for the header height
+      var elementPosition = element.getBoundingClientRect().top;
+      var offsetPosition = elementPosition + window.scrollY - headerOffset;
+    
+      window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+      });
     }
   }
 }
@@ -57,11 +65,12 @@ export default {
 
   .loading-page {
     width: 100%;
-    overflow: hidden;
+    // overflow: hidden;
     margin-top: 0px;
   }
   .splash-text {
     background: no-repeat top;
+    padding: 0;
     // background-size: 95% auto;
 
     // TODO: Replace all hard-coded values with variables, also make them dependent on rem units rather than pixels
@@ -86,8 +95,10 @@ export default {
     // This was part of the column styling before (col-xl-6 from bootstrap framework), but was removed because it was using incorrect breakpoints
     @media (min-width: $largest-width) {
       flex: 0 0 50%;
-      max-width: 50%;
     }
+  }
+  .firstrow {
+    margin: 0; // Removes the default margin from the b-row element
   }
   .hometext {
     // z-index: 10; // To make sure the text is on top of the background
@@ -105,31 +116,37 @@ export default {
   }
   .homevideo {
     display: none;
-    margin-top: 90px;
+    padding: 0 !important;
+    overflow: hidden;
+    // TODO: Replace video overlay with a clipping mask
+
+    // By adding a tiny clipping region, we avoid artefacts from the video showing to the left and right of the overlay
+    --clip-size: 2px;
+    clip-path: polygon(var(--clip-size) var(--clip-size), calc(100% - var(--clip-size)) var(--clip-size), calc(100% - var(--clip-size)) calc(100% - var(--clip-size)), var(--clip-size) calc(100% - var(--clip-size)));
 
     // This was part of the column styling before (col-xl-6 from bootstrap framework), but was removed because it was using incorrect breakpoints
     @media (min-width: $largest-width) {
       flex: 0 0 50%;
-      max-width: 50%;
     }
 
     // Only show the video on larger screens
     @media(min-width: $largest-width) {
-        display: block;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
   }
   .video {
-    transform: scale(1.1);
-    margin-left: 30px;
-    overflow: hidden;
+    width: 100%;
+    transform: scale(1.4); // Arbitrary scaling to make the video fill the overlay
+    transform-origin: 0 50%; // So that the scaling happens from the left edge
+    
+    border-radius: 30px;
   }
   .overlay {
     position: absolute;
-    top: -125px;
-    left: 10px;
-    width: 98%;
-    height: 120%;
-    align-content: center;
+    width: 100%;
+    height: 100%;
   }
   .main-text {
     margin-top: 100px;
@@ -143,12 +160,12 @@ export default {
     color: var(--primary-color);
     z-index: 10;
     @media(min-width: $medium-width) {
-        font-size: 90px;
+      font-size: 88px;
     }
     @media(min-width: $largest-width) {
-        text-align: left;
-        font-size: 90px;
-        margin-left: -4px;
+      text-align: left;
+      font-size: 88px;
+      margin-left: -4px;
     }
   }
   h3 {
@@ -177,20 +194,6 @@ export default {
     @media(min-width: $largest-width) {
         text-align: right;
         margin-top: -5px;
-    }
-  }
-  .videoplayer {
-    height: 464px;
-  }
-  .video {
-    width: 100%;
-    height: inherit;
-    position: relative;
-    border-radius: 30px;
-    overflow: hidden;
-    background-color: white;
-    &:hover {
-      filter: brightness(70%);
     }
   }
   .background {
