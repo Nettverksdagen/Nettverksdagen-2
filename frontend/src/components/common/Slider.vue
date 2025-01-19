@@ -43,6 +43,7 @@ export default {
         {routeName: 'About', linkText: 'Om oss'},
         {routeName: 'FAQ', linkText: 'FAQ'},
         {routeName: 'Contact', linkText: 'Kontakt'},
+        {routeName: 'Valgomat', linkText: 'Valgomat'},
         {routeName: 'Language', linkText: 'English'}
       ]
     }

@@ -326,19 +326,19 @@ export default {
     font-size:1.1em;
   }
 
-  ::v-deep .modal-content {
+  .modal-content {
     border: none;
     border-radius: 20px;
     background-color: var(--line-border-color);
     color: black;
   }
-  ::v-deep .modal-header {
+  .modal-header {
     border-bottom: none;
   }
-  ::v-deep .modal-footer {
+  .modal-footer {
     border: none;
   }
-  ::v-deep .modal-title {
+  .modal-title {
     text-align: center;
     width: 100%;
   }

@@ -21,6 +21,7 @@ import ProgramAdminView from '@/views/admin/ProgramAdminView.vue'
 import ParticipantAdminView from '@/views/admin/ParticipantAdminView.vue'
 // import HomeViewTemp from '@/views/anon/HomeViewTemp.vue'
 import NotFoundView from '@/views/anon/NotFoundView.vue'
+import ValgomatView from '@/views/anon/ValgomatView.vue'
 import FAQView from '@/views/anon/FAQView.vue'
 
 Vue.use(Router)
@@ -90,6 +91,12 @@ export default new Router({
           path: 'lykkehjul',
           redirect: 'static/lykkehjul/lykkehjul.html',
           name: 'Lykkehjul'
+        },
+        {
+          path: 'valgomat',
+          name: 'Valgomat',
+          component: ValgomatView,
+          meta: {title: 'Valgomat'}
         },
         {
           path: 'faq',
