@@ -145,6 +145,10 @@ export default {
   .links {
     margin-top: 20px;
     font-weight: 500;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
     @media (min-width: 992px) {
       display:flex;
       font-size:18px;
@@ -156,6 +160,7 @@ export default {
     a {
       //color:var(--primary-color);
       color: black;
+      padding: 0;
     }
   }
   p {
