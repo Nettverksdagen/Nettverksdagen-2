@@ -289,7 +289,7 @@ export default {
     position: absolute;
     top: 12%;
     left: 5%;
-    z-index: 10;
+    z-index: 9;
     // TODO: Her burde størrelsen på knappen også oppdateres med skjermstørrelse
 
     &:hover {

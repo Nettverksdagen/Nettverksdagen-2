@@ -124,6 +124,7 @@ export default {
     top: 5px;
   }
   .sidemenu {
+    // isolation: isolate;
     color: var(--background-color-primary);
     border:none;
     outline: 0px;
@@ -135,6 +136,7 @@ export default {
       transition: all 300ms;
     }
     .slider {
+      z-index: 10;
       visibility: hidden;
       position: fixed;
       transition: all 300ms;
@@ -144,7 +146,6 @@ export default {
       left: 0;
       width: 100%;
       background: var(--background-color-primary);
-      z-index:-1;
       box-shadow: 0px 80px 60px -60px rgba(0,0,0,0.10);
       &.visible {
         visibility: visible;
@@ -186,19 +187,18 @@ export default {
     }
   }
   .overlay {
-    background-color: var(--background-color-primary);
+    z-index: 1;
+    // background-color: var(--background-color-primary);
     width:100%;
     height:100%;
-    top:379px;
+    top: 100px;
     left:0;
     position:fixed;
-    opacity: 1;
+    // opacity: 1;
     transition: all 0.5s;
   }
   .overlay.visible {
-    opacity: 1;
-    transition: all 0.5s;
-    -webkit-transition: all 0.5s;
-    background-color: rgba(0, 0, 0, 0.02);
+    // opacity: 1;
+    background-color: rgba(0, 0, 0, 0.2);
   }
 </style>
