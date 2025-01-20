@@ -247,7 +247,7 @@ export default {
 
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    width: clamp(300px, 90%, 1024px); // Numbers chosen a little at random
+    width: clamp(300px, 90%, 100%); // Numbers chosen a little at random
 
     --gap-size: 5px;
     --font-size: 0.6rem;
@@ -271,9 +271,13 @@ export default {
     font-size: var(--font-size);
 
     // Could be useful for larger screens
-    // @media(min-width: --largest-width) {
-    //   grid-template-columns: repeat(4, 1fr);
-    // }
+    @media(min-width: $largest-width) {
+      --font-size: 1.2rem;
+      --icon-size: 50px;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    // Prevent text in boxes from showing underline
     a {
       text-decoration: none;
     }
