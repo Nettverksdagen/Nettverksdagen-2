@@ -13,7 +13,13 @@
       <ul>
         <li v-for="route in routes" :key="route.routeName">
           <span v-on:click="menuIsOpen = false">
-            <router-link :to="{ name: route.routeName }">{{ route.linkText }}</router-link>
+            <router-link :to="{ name: route.routeName }">{{ $t(route.linkText) }}</router-link>
+          </span>
+          <hr>
+        </li>
+        <li>
+          <span v-on:click="changeLanguage">
+            <a href="#">{{ $t('lang') }}</a>
           </span>
           <hr>
         </li>
@@ -27,6 +33,7 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faBars, faAdjust, faInfoCircle, faHome } from '@fortawesome/free-solid-svg-icons'
+import {i18n} from '@/translations/translations.js'
 library.add(faBars, faAdjust, faInfoCircle, faHome)
 export default {
   name: 'Slider',
@@ -37,18 +44,25 @@ export default {
     return {
       menuIsOpen: false,
       routes: [
-        {routeName: 'Home', linkText: 'Hjem'},
-        {routeName: 'Program', linkText: 'Program'},
-        {routeName: 'Listings', linkText: 'Stillingsannonser'},
-        {routeName: 'About', linkText: 'Om oss'},
-        {routeName: 'FAQ', linkText: 'FAQ'},
-        {routeName: 'Contact', linkText: 'Kontakt'},
-        {routeName: 'Valgomat', linkText: 'Valgomat'},
-        {routeName: 'Language', linkText: 'English'}
+        {routeName: 'Home', linkText: 'hjem'},
+        {routeName: 'Program', linkText: 'program'},
+        {routeName: 'Listings', linkText: 'stillingsannonser'},
+        {routeName: 'About', linkText: 'omoss'},
+        {routeName: 'FAQ', linkText: 'kontakt'},
+        {routeName: 'Contact', linkText: 'valgomat'},
+        {routeName: 'Valgomat', linkText: 'faq_nav'},
+        // {routeName: 'language', linkText: 'English'}
       ]
     }
   },
   methods: {
+    changeLanguage () {
+      if (i18n.locale === 'en') {
+        i18n.locale = 'nb'
+      } else {
+        i18n.locale = 'en'
+      }
+    },
     menuToggle () {
       this.menuIsOpen = !this.menuIsOpen
     }
@@ -124,6 +138,7 @@ export default {
     top: 5px;
   }
   .sidemenu {
+    // isolation: isolate;
     color: var(--background-color-primary);
     border:none;
     outline: 0px;
@@ -135,6 +150,7 @@ export default {
       transition: all 300ms;
     }
     .slider {
+      z-index: 10;
       visibility: hidden;
       position: fixed;
       transition: all 300ms;
@@ -144,7 +160,6 @@ export default {
       left: 0;
       width: 100%;
       background: var(--background-color-primary);
-      z-index:-1;
       box-shadow: 0px 80px 60px -60px rgba(0,0,0,0.10);
       &.visible {
         visibility: visible;
@@ -186,19 +201,18 @@ export default {
     }
   }
   .overlay {
-    background-color: var(--background-color-primary);
+    z-index: 1;
+    // background-color: var(--background-color-primary);
     width:100%;
     height:100%;
-    top:379px;
+    top: 100px;
     left:0;
     position:fixed;
-    opacity: 1;
+    // opacity: 1;
     transition: all 0.5s;
   }
   .overlay.visible {
-    opacity: 1;
-    transition: all 0.5s;
-    -webkit-transition: all 0.5s;
-    background-color: rgba(0, 0, 0, 0.02);
+    // opacity: 1;
+    background-color: rgba(0, 0, 0, 0.2);
   }
 </style>

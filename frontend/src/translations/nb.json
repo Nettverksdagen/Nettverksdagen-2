@@ -1,8 +1,5 @@
 {
     "lang": "English",
-    "stillingsannonser": "Stillingsannonser",
-    "kontakt": "Kontakt",
-    "omoss": "Om oss",
     "homescreen": {
         "fremtidig": "Møt din fremtidige arbeidsgiver på"
     },
@@ -48,6 +45,14 @@
 "registration_success": "Du er registrert! Sjekk mailen din for å se om du fikk plass eller er på venteliste.",
 "waiting_list": "Venteliste",
 "onWaitingList": "På venteliste",
+
+"hjem": "Hjem",
+"program": "Program",
+"stillingsannonser": "Stillingsannonser",
+"omoss": "Om oss",
+"kontakt": "Kontakt",
+"valgomat": "Valgomat",
+"faq_nav": "FAQ",
 
     "onthe": "på",
     "destroypart": "Ønsker du å melde deg av? Send en epost til",

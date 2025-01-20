@@ -9,9 +9,11 @@
             </div>
         </div>
         <div class="col-12 homevideo">
-            <video class="video" muted loop autoplay>
-                <source src="@/assets/timelapse.mp4" type="video/mp4">
-            </video>
+            <div class="video-container">
+              <video class="video" muted playsinline loop autoplay>
+                  <source src="@/assets/timelapse.mp4" type="video/mp4">
+              </video>
+            </div>
             <img class="overlay" src="@/assets/background_overlay.png">
         </div>
     </b-row>
@@ -116,13 +118,12 @@ export default {
   }
   .homevideo {
     display: none;
-    padding: 0 !important;
-    overflow: hidden;
+    // padding: 0 !important;
+    position: relative;
+    // overflow: hidden;
     // TODO: Replace video overlay with a clipping mask
 
-    // By adding a tiny clipping region, we avoid artefacts from the video showing to the left and right of the overlay
-    --clip-size: 2px;
-    clip-path: polygon(var(--clip-size) var(--clip-size), calc(100% - var(--clip-size)) var(--clip-size), calc(100% - var(--clip-size)) calc(100% - var(--clip-size)), var(--clip-size) calc(100% - var(--clip-size)));
+    padding: 0 0.5rem; // Very hacky way to make the video not show any artefacts outside the container
 
     // This was part of the column styling before (col-xl-6 from bootstrap framework), but was removed because it was using incorrect breakpoints
     @media (min-width: $largest-width) {
@@ -135,6 +136,13 @@ export default {
       flex-direction: column;
       justify-content: center;
     }
+  }
+  .video-container {
+    overflow: hidden; // Very hacky way to make the video not show any artefacts outside the container
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   .video {
     width: 100%;
@@ -247,7 +255,7 @@ export default {
 
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    width: clamp(300px, 90%, 1024px); // Numbers chosen a little at random
+    width: clamp(300px, 90%, 100%); // Numbers chosen a little at random
 
     --gap-size: 5px;
     --font-size: 0.6rem;
@@ -255,25 +263,29 @@ export default {
     @media(min-width: $small-width) {
       --gap-size: 10px;
       --font-size: 0.8rem;
-      --icon-size: 40px;
+      --icon-size: 35px;
     }
     @media(min-width: $medium-width) {
       --gap-size: 20px;
-      --font-size: 1.4rem;
-      --icon-size: 50px;
+      --font-size: 1.1rem;
+      --icon-size: 40px;
     }
     @media(min-width: $large-width) {
       --gap-size: 30px;
-      --font-size: 1.6rem;
-      --icon-size: 60px;
+      --font-size: 1.2rem;
+      --icon-size: 45px;
     }
     gap: var(--gap-size);
     font-size: var(--font-size);
 
     // Could be useful for larger screens
-    // @media(min-width: --largest-width) {
-    //   grid-template-columns: repeat(4, 1fr);
-    // }
+    @media(min-width: $largest-width) {
+      --font-size: 1.2rem;
+      --icon-size: 50px;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    // Prevent text in boxes from showing underline
     a {
       text-decoration: none;
     }

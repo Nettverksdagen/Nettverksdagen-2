@@ -1,8 +1,5 @@
 {
     "lang": "Norsk",
-    "stillingsannonser": "Job advertisements",
-    "kontakt": "Contact us",
-    "omoss": "About us",
     "homescreen": {
         "fremtidig": "Meet your future employer at"
     },
@@ -49,6 +46,14 @@
 "registration_success": "You are registered! Check your email to see if you got a spot or are on the waiting list.",
 "waiting_list": "Waiting list",
 "onWaitingList": "On waiting list",
+
+"hjem": "Home",
+"program": "Program",
+"stillingsannonser": "Job advertisements",
+"kontakt": "Contact us",
+"omoss": "About us",
+"valgomat": "Firm finder",
+"faq_nav": "FAQ",
 
     "påmeldte": "registered",
     "onthe": "on the",

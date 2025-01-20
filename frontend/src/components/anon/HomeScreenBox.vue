@@ -17,6 +17,7 @@ export default{
 
 <style lang="scss" scoped>
   .home-box {
+    overflow: hidden; // Prevents hover from outside the box
     height: 100%; // To stretch to fill parent
     background-color: rgb(245, 245, 246);
     border-radius: 1rem;
