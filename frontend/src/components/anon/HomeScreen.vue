@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="col-12 homevideo">
-            <video class="video" muted loop autoplay>
+            <video class="video" muted playsinline loop autoplay>
                 <source src="@/assets/timelapse.mp4" type="video/mp4">
             </video>
             <img class="overlay" src="@/assets/background_overlay.png">
