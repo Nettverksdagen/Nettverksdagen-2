@@ -1,8 +1,5 @@
 {
     "lang": "English",
-    "stillingsannonser": "Stillingsannonser",
-    "kontakt": "Kontakt",
-    "omoss": "Om oss",
     "homescreen": {
         "fremtidig": "Møt din fremtidige arbeidsgiver på"
     },
@@ -55,6 +52,14 @@
     "unregistration_success": "Du er nå meldt av arrangementet.",
     "waiting_list": "Venteliste",
     "onWaitingList": "På venteliste",
+
+"hjem": "Hjem",
+"program": "Program",
+"stillingsannonser": "Stillingsannonser",
+"omoss": "Om oss",
+"kontakt": "Kontakt",
+"valgomat": "Valgomat",
+"faq_nav": "FAQ",
 
     "onthe": "på",
     "destroypart": "Meld meg av",

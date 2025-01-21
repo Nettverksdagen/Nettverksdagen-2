@@ -12,12 +12,12 @@
       </b-link>
       <div class="side">
         <b-nav class="links">
-          <b-nav-item :to="{name: 'Program'}"><p>Program 2025</p></b-nav-item>
+          <b-nav-item :to="{name: 'Program'}"><p>{{$t('program')}}</p></b-nav-item>
           <b-nav-item :to="{name: 'Listings'}"><p>{{$t('stillingsannonser')}}</p></b-nav-item>
           <b-nav-item :to="{name: 'About'}"><p>{{$t('omoss')}}</p></b-nav-item>
           <b-nav-item :to="{name: 'Contact'}"><p>{{$t('kontakt')}}</p></b-nav-item>
-          <b-nav-item :to="{name: 'Valgomat'}"><p>{{$t('Valgomat')}}</p></b-nav-item>
-          <b-nav-item :to="{name: 'FAQ'}"><p>{{$t('FAQ')}}</p></b-nav-item>
+          <b-nav-item :to="{name: 'Valgomat'}"><p>{{$t('valgomat')}}</p></b-nav-item>
+          <b-nav-item :to="{name: 'FAQ'}"><p>{{$t('faq_nav')}}</p></b-nav-item>
           <b-nav-item v-on:click="toggleLanguage"><p>{{$t('lang')}}</p></b-nav-item>
           <!-- UNCOMMENT TO SHOW "TOGGLE THEME BUTTON"-->
           <!-- <b-nav-item class="round-button" title="Endre tema" v-on:click="toggleTheme">
@@ -145,6 +145,10 @@ export default {
   .links {
     margin-top: 20px;
     font-weight: 500;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
     @media (min-width: 992px) {
       display:flex;
       font-size:18px;
@@ -156,6 +160,7 @@ export default {
     a {
       //color:var(--primary-color);
       color: black;
+      padding: 0;
     }
   }
   p {
