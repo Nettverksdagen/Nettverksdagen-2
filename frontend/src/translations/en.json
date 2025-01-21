@@ -51,6 +51,7 @@
     "already_registered": "This email is already registered",
     "registration_success": "You are registered! Check your email to see if you got a spot or are on the waiting list.",
     "unregistration_success": "You are now unregistered from the event.",
+    "unregistration_code_sent": "Unregistration code sent.",
     "waiting_list": "Waiting list",
     "onWaitingList": "On waiting list",
 

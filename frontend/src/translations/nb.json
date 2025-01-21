@@ -50,6 +50,7 @@
     "already_registered": "Denne e-posten er allerede registrert",
     "registration_success": "Du er registrert! Sjekk mailen din for å se om du fikk plass eller er på venteliste.",
     "unregistration_success": "Du er nå meldt av arrangementet.",
+    "unregistration_code_sent": "Avmeldingskode sendt.",
     "waiting_list": "Venteliste",
     "onWaitingList": "På venteliste",
 

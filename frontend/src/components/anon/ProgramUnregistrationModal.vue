@@ -10,7 +10,12 @@
     :ok-title="$t('destroypart')"
     centered
   >
-    <b-alert>
+    <b-alert
+      :show="unregistrationCodeSentAlertCountDown"
+      dismissible
+      variant="success"
+      @dismissed="unregistrationCodeSentAlertCountDown=0"
+    >
       {{ $t('unregistration_code_sent') }}
     </b-alert>
     <b-form
@@ -70,6 +75,7 @@ export default {
       emailInvalidFeedbackString: this.emailInvalidFeedbackDefault,
       codeInvalidFeedbackDefault: this.$t('inputFieldCode') + ' ' + this.$t('is_required'),
       codeInvalidFeedbackString: this.codeInvalidFeedbackDefault,
+      unregistrationCodeSentAlertCountDown: 0,
     }
   },
   computed: {
@@ -175,7 +181,14 @@ export default {
       }
 
       const participant = this.getParticipant()
+      
       axios.get(process.env.VUE_APP_API_HOST + '/api/participant/' +  participant.id + '/')
+        .then(() => {
+          this.showUnregistrationCodeSentAlert()
+        })
+    },
+    showUnregistrationCodeSentAlert () {
+      this.unregistrationCodeSentAlertCountDown = 15
     },
   }
 }
