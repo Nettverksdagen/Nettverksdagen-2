@@ -98,6 +98,11 @@ export default {
       return this.codeInvalidFeedbackString
     },
   },
+  mounted () {
+    if (this.$route.query.unregister !== undefined) {
+      this.$bvModal.show(this.modalId)
+    }    
+  },
   methods: {
     checkFormValidity () {
       const valid = this.$refs.form.checkValidity()
@@ -130,8 +135,8 @@ export default {
       this.codeInvalidFeedbackString = this.codeInvalidFeedbackDefault
     },
     resetModal () {
-      this.form.email = ''
-      this.form.code = ''
+      this.form.email = this.$route.query.email || ''
+      this.form.code = this.$route.query.code || ''
 
       this.emailState = null
       this.codeState = null
@@ -162,7 +167,7 @@ export default {
       axios.delete(process.env.VUE_APP_API_HOST + '/api/participant/' + participant.id + '/', { data: { code, } })
         .then(_ => {
           this.$bvModal.hide(this.modalId)
-
+          
           this.$emit('unregistration-success')
         })
         .catch((error) => {
