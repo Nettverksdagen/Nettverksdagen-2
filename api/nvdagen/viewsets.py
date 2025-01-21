@@ -78,7 +78,6 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                     #Ny formatering av dato
                     data['timeStart'] = format_datetime(datetime.fromtimestamp(program.timeStart+3600), "EEEE dd. MMMM, 'klokken' H:MM ", locale='nb_NO')
                     data['header'] = program.header
-                    print(data)
                     html_message = render_to_string('registered_email.html', context=data)
                     plain_message = strip_tags(html_message)
                     send_mail('Nettverksdagene - Påmelding bekreftet for ' + data['name'],
