@@ -151,43 +151,7 @@ export default {
       day = (day > 9) ? String(day) : ('0' + String(day))
       month = (month > 9) ? String(month) : ('0' + String(month))
       return this.formatTime(dateObj) + ' ' + day + '.' + month + '.' + year
-    }
-    /* Removed temporaraly until unregistration works SECURLY! THIS IS NOT SAFE! destroy_participant: function (event) {
-      let email = prompt('Vennligst skriv inn emailen din:')
-      let participants = this.$store.state.participant.all
-      let participant = participants.filter(par => par.email === email && par.event === event)[0]
-
-      if (participant !== undefined) {
-        // Send deregistering code
-        let code = participant.code
-        axios.get(process.env.VUE_APP_API_HOST + '/api/participant/' +
-          participant.id + '/').then(_ => {
-          // Prompt user for code, and delete participant if input matches
-          let retry = true
-          while (retry) {
-            let inputedCode = prompt('Vennligst skriv inn koden som ble sendt til ' + participant.email + '. Hvis du ikke mottar mailen, vennligst kontakt IT-gruppen på admin@nettverksdagene.no.')
-             // CLIENT SIDE CHECK????????? NOT SAFE! NOT SAFE! NOT SAFE!
-            if (inputedCode === code) {
-              if (confirm('Er du sikker på at du vil melde av ' + participant.name + '?')) {
-                axios.delete(process.env.VUE_APP_API_HOST + '/api/participant/' +
-                  participant.id + '/').then(_ => {
-                  alert(participant.name + ' er nå avmeldt.')
-                }).catch(_ => {
-                  alert('Det oppsto en feil under avmeldingen. Vennligst kontakt IT-gruppen på admin@nettverksdagene.no.')
-                })
-              }
-              break
-            } else {
-              retry = confirm('Feil kode. Vil du prøve igjen?')
-            }
-          }
-        }).catch(_ => {
-          alert('Det oppsto en feil under sendingen av avmeldingskoden. Vennligst kontakt IT-gruppen på admin@nettverksdagene.no.')
-        })
-      } else if (email !== null) {
-        alert('Fant ingen deltakere med denne epost-adressen på dette arrangementet.')
-      }
-    } */
+    },
   }
 }
 </script>

@@ -2,12 +2,22 @@
   <div class="event-container">
     <!-- Alert for registration success -->
     <b-alert
-      :show="registrationCountDown"
+      :show="registrationSuccessAlertCountDown"
       dismissible
       variant="success"
-      @dismissed="registrationCountDown=0"
+      @dismissed="registrationSuccessAlertCountDown=0"
     >
       {{ $t('registration_success') }}
+    </b-alert>
+
+    <!-- Alert for unregistration success -->
+    <b-alert
+      :show="unregistrationSuccessAlertCountDown"
+      dismissible
+      variant="success"
+      @dismissed="unregistrationSuccessAlertCountDown=0"
+    >
+      {{ $t('unregistration_success') }}
     </b-alert>
 
     <!-- Description -->
@@ -33,93 +43,42 @@
         </p>
       </div>
 
-      <div v-if="registration && cancelEmail">
-        <div>{{$t('destroypart')}} <a href="mailto:admin@nettverksdagene.no">admin@nettverksdagene.no</a>.</div>
-        <!-- Removed temporaraly until unregistration works securely. <b-link @click.native="destroy_participant(name)">{{$t('destroypart')}}</b-link> -->
-      </div>
-
-      <div v-if="registration" class="event-registration">
+      <div v-if="registration">
         <!-- <div v-else>
           <p>{{ registrationStatusText }}</p>
         </div> -->
-        <b-button v-if="enableRegistration" variant="primary" v-b-modal="'dialogForm' + name">
+        <b-button v-if="enableRegistration" variant="primary" v-b-modal="'registrationModal' + name">
           {{ $t('register') }}
         </b-button>
         <b-button v-else disabled variant="secondary">
           {{ $t('registrationNotYetAvailable') }}
         </b-button>
+
+        <b-button v-if="cancelEmail" variant="outline-primary" v-b-modal="'unregistrationModal' + name">{{$t('destroypart')}}</b-button>
       </div>
     </div>
 
-    <b-modal
-      :id="'dialogForm' + name"
-      ref="modal"
-      :title="header"
-      @show="resetModal"
-      @hidden="resetModal"
-      @ok="handleOk"
-      centered
-    >
-      <b-form
-        ref="form"
-        @submit.stop.prevent="handleSubmit"
-      >
-        <b-form-group :label="$t('inputfieldName')" label-for="name-input" :invalid-feedback="$t('inputfieldName') + ' ' + $t('is_required')">
-          <b-form-input
-            id="name-input"
-            v-model="form.name"
-            required
-            ref="nameInput"
-            :placeholder="$t('placeholderName')"
-            :state="nameState"
-          >
-          </b-form-input>
-        </b-form-group>
-        <b-form-group :label="$t('inputFieldEmail')" label-for="email-input" :invalid-feedback="emailInvalidFeedback">
-          <b-form-input
-            id="email-input"
-            type="email"
-            v-model="form.email"
-            required
-            ref="emailInput"
-            :placeholder="$t('placeholderEmail')"
-            :state="emailState"
-          >
-          </b-form-input>
-        </b-form-group>
-        <b-form-group :label="$t('inputFieldFieldOfStudy')" label-for="study-input" :invalid-feedback="$t('inputFieldFieldOfStudy') + ' ' + $t('is_required')">
-          <b-form-input
-            id="study-input"
-            v-model="form.study"
-            required
-            ref="studyInput"
-            :placeholder="$t('placeholderFieldOfStudy')"
-            :state="studyState"
-          >
-          </b-form-input>
-        </b-form-group>
-        <b-form-group :label="$t('inputFieldStudyYear')" label-for="year-input" :invalid-feedback="$t('inputFieldStudyYear') + ' ' + $t('is_required')">
-          <b-form-input
-            id="year-input"
-            v-model="form.year"
-            required
-            ref="yearInput"
-            :placeholder="$t('placeholderStudyYear')"
-            :state="yearState"
-          >
-          </b-form-input>
-        </b-form-group>
-        <!-- <b-button variant="outline-secondary" @click="cancelForm">{{ $t('cancel') }}</b-button>
-        <b-button variant="primary" type="submit">{{ $t('submit') }}</b-button> -->
-        <!-- <template #modal-footer>
-        </template> -->
-      </b-form>
-    </b-modal>
+    <ProgramRegistrationModal
+      :modalId="'registrationModal' + name"
+      :header="header"
+      :name="name"
+      @registration-success="showRegistrationSuccessAlert"
+    />
+
+    <ProgramUnregistrationModal
+      :modalId="'unregistrationModal' + name"
+      :header="header"
+      :name="name"
+      @unregistration-success="showUnregistrationSuccessAlert"
+    />
+
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+
+import ProgramRegistrationModal from '@/components/anon/ProgramRegistrationModal.vue';
+import ProgramUnregistrationModal from './ProgramUnregistrationModal.vue';
 
 export default {
   name: 'ProgramDescription',
@@ -136,21 +95,14 @@ export default {
     'registrationEnd',
     'name'
   ],
+  components: {
+    ProgramRegistrationModal,
+    ProgramUnregistrationModal,
+  },
   data () {
     return {
-      form: {
-        name: '',
-        email: '',
-        study: '',
-        year: ''
-      },
-      nameState: null,
-      emailState: null,
-      studyState: null,
-      yearState: null,
-      emailInvalidFeedbackDefault: this.$t('inputFieldEmail') + ' ' + this.$t('is_required'),
-      emailInvalidFeedbackString: this.emailInvalidFeedbackDefault,
-      registrationCountDown: 0
+      registrationSuccessAlertCountDown: 0,
+      unregistrationSuccessAlertCountDown: 0,
     }
   },
   computed: {
@@ -189,87 +141,12 @@ export default {
     formatDate (date) {
       return new Date(date).toLocaleDateString()
     },
-
-    checkFormValidity () {
-      const valid = this.$refs.form.checkValidity()
-
-      const nameValid = this.$refs.nameInput.checkValidity()
-      const emailValid = this.$refs.emailInput.checkValidity()
-      const studyValid = this.$refs.studyInput.checkValidity()
-      const yearValid = this.$refs.yearInput.checkValidity()
-
-      this.nameState = nameValid
-      this.emailState = emailValid
-      this.studyState = studyValid
-      this.yearState = yearValid
-
-      return valid
+    showRegistrationSuccessAlert () {
+      this.registrationSuccessAlertCountDown = 15
     },
-    resetModal () {
-      this.form.name = ''
-      this.form.email = ''
-      this.form.study = ''
-      this.form.year = ''
-
-      this.nameState = null
-      this.emailState = null
-      this.studyState = null
-      this.yearState = null
+    showUnregistrationSuccessAlert () {
+      this.unregistrationSuccessAlertCountDown = 15
     },
-    handleOk (bvModalEvent) {
-      // Prevent modal from closing
-      bvModalEvent.preventDefault()
-      // Trigger submit handler
-      this.handleSubmit()
-    },
-    async handleSubmit () {
-      // Exit when the form isn't valid
-      this.emailInvalidFeedbackString = this.emailInvalidFeedbackDefault
-      if (!this.checkFormValidity()) {
-        return
-      }
-
-      // Create random unregister code
-      this.form.code = Array(6).fill(0).map(x => Math.random().toString(36).charAt(2)).join('').toUpperCase()
-
-      // Submit
-      console.log({event: this.$props.name, ...this.$data.form})
-      axios.post(process.env.VUE_APP_API_HOST +
-        '/api/participant/', {event: this.$props.name, ...this.$data.form})
-        .then((response) => {
-          // console.log(response)
-          this.$bvModal.hide('dialogForm' + this.$props.name)
-
-          // Update registered count
-          // this.registered += 1 // Doesn't work, since the count is not updated in the backend
-          // alert(this.$t('registrationSuccess'))
-          this.showSuccessAlert()
-        })
-        .catch((e) => {
-          // console.log('Error in submitForm')
-          // console.log(e)
-          // console.log(e.response.data.message)
-
-          // Set email state invalid, with message already registered
-          if (e.response.data.message.includes('already registered')) {
-            this.emailState = false
-            this.emailInvalidFeedbackString = this.$t('already_registered')
-          }
-        })
-    },
-
-    showSuccessAlert () {
-      this.registrationCountDown = 15
-    },
-    emailInvalidFeedback () {
-      // Check for empty field
-      if (this.form.email === '') {
-        return this.emailInvalidFeedbackDefault
-      }
-
-      // Invalid email
-      return this.emailInvalidFeedbackString
-    }
   }
 }
 </script>

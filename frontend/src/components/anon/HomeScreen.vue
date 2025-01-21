@@ -18,18 +18,21 @@
         </div>
     </b-row>
     <div class="boxes">
-      <router-link :to="{name: 'Home', hash: '#stand-map'}" @click.native="scrollToId('stand-map')">
+      <b-link :to="{name: 'Home', hash: '#stand-map'}" @click.native="scrollToId('stand-map')">
         <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" :box-text="$t('glassgårdentext')"/>
-      </router-link>
+      </b-link>
       <b-link :to="'/program'">
         <HomeScreenBox :box-title="$t('avslutningsmiddagtitle')" box-icon="glass-cheers-solid.svg" :box-text="$t('programtext')"/>
       </b-link>
       <b-link :to="'/program'">
         <HomeScreenBox :box-title="$t('bedpresword')" box-icon="utensils-solid.svg" :box-text="$t('bedpres2')"/>
       </b-link>
-      <b-link :to="'/program'">
-        <HomeScreenBox :box-title="$t('interviews')" box-icon="interview-icon.svg" :box-text="$t('interviews2')"/>
+      <b-link :to="'/stillinger' /* Denne filstien er definert i router/index.js */ ">
+        <HomeScreenBox :box-title="$t('stillingsannonser_card_title')" box-icon="interview-icon.svg" :box-text="$t('stillingsannonser_card_text')"/>
       </b-link>
+      <!-- <b-link :to="'/program'">
+        <HomeScreenBox :box-title="$t('interviews')" box-icon="interview-icon.svg" :box-text="$t('interviews2')"/>
+      </b-link> -->
     </div>
   </div>
 </template>

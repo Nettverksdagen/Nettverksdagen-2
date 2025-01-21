@@ -1,5 +1,5 @@
 <template>
-  <div class="home-box">
+  <div :class="['home-box', { is_mobile: isMobile }]">
     <!-- <img src="@/assets/homebox.svg"> -->
     <img class="icon" :src="require(`@/assets/${boxIcon}`)" :alt="boxIconAlt">
     <div class="fancy-text">
@@ -10,7 +10,29 @@
 </template>
 
 <script>
-export default{
+export default {
+  data() {
+    return {
+      windowWidth: window.innerWidth
+    };
+  },
+  computed: {
+    isMobile() {
+      return false;
+      return this.windowWidth <= 768; // Completely arbitrary, should not be hard-coded. Same as breakpoints in CSS in HomeScreen.vue
+    }
+  },
+  mounted() {
+    window.addEventListener('resize', this.handleResize);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.handleResize);
+  },
+  methods: {
+    handleResize() {
+      this.windowWidth = window.innerWidth;
+    }
+  },
   props: ['boxIcon', 'boxIconAlt', 'boxTitle', 'boxText']
 }
 </script>
@@ -47,7 +69,7 @@ export default{
   }
 
 
-  .home-box:hover {
+  .home-box:hover, .home-box.is_mobile {
     h3, .showme, .fancy-text {
       transition: opacity 300ms 200ms, transform 400ms; // Changing the transition times "reverses" the transition
       transform: translateY(0); // Transform trickery in order to animate the text appearing and disappearing

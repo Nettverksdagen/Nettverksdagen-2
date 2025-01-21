@@ -123,10 +123,19 @@ class ParticipantViewSet(viewsets.ModelViewSet):
         return Response(response, status = status.HTTP_200_OK)
 
     def destroy(self, request, pk):
-        # THIS METHOD IS UNSECURED AND SHOULD BE UPDATED
-        # CURRENTLY ANYONE CAN DELETE ANY PARTICIPANT AS LONG AS THEY KNOW THE ID
+        try:
+            participant = Participant.objects.get(id=pk)
+        except:
+            response = {'message': 'Participant not found'}
+            return Response(response, status = status.HTTP_404_NOT_FOUND)
 
-        participant = Participant.objects.get(id=pk)
+        code = request.data.get('code', None)
+
+        # The request is authorized if either a matching code is provided or
+        # the user making the request is logged as the admin and no code is provided.
+        if not (participant.code == code or code == None and request.user.is_staff):
+            response = {'message': 'Invalid code'}
+            return Response(response, status = status.HTTP_400_BAD_REQUEST)
 
         response = super().destroy(request)
 
@@ -140,6 +149,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                     try:
                         data = {}
                         data['name'] = lastParticipant.name
+                        data['code'] = lastParticipant.code
                         data['header'] = program.header
                         data['place'] = program.place
                         html_message = render_to_string('off_waiting_list.html', context=data)
