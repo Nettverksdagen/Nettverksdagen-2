@@ -102,9 +102,6 @@ export default {
       let waiting_list = `${Math.max(this.registered - this.maxRegistered, 0)} ${this.$t('onWaitingList')}`.toLowerCase()
       return `${registered}, ${waiting_list}`
     },
-    waitingListText () {
-      return `${this.registered - this.maxRegistered} ${this.$t('onWaitingList')}`
-    },
     registered: function () {
       return this.$store.state.participant.all.filter(par => par.event === this.$props.name).length
     },
@@ -147,37 +144,6 @@ export default {
       day = (day > 9) ? String(day) : ('0' + String(day))
       month = (month > 9) ? String(month) : ('0' + String(month))
       return this.formatTime(dateObj) + ' ' + day + '.' + month + '.' + year
-    },
-    destroy_participant: function (event) {
-      let email = prompt('Vennligst skriv inn emailen din:')
-      let participants = this.$store.state.participant.all
-      let participant = participants.filter(par => par.email === email && par.event === event)[0]
-      if (participant === undefined && email !== null) {
-        alert('Fant ingen deltakere med denne epost-adressen på dette arrangementet.')
-        return
-      }
-      axios.get(process.env.VUE_APP_API_HOST + '/api/participant/' +
-        participant.id + '/').then(_ => {
-        // Prompt user for code, and delete participant if input matches
-        let retry = true
-        while (retry) {
-          let inputedCode = prompt('Vennligst skriv inn koden som ble sendt til ' + participant.email + '. Hvis du ikke mottar mailen, vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
-          if (confirm('Er du sikker på at du vil melde av ' + participant.name + '?')) {
-            axios.delete(process.env.VUE_APP_API_HOST + '/api/participant/' + participant.id + '/', {
-              data: {
-                code: inputedCode
-              }
-            }).then(_ => {
-              alert(participant.name + ' er nå avmeldt.')
-            }).catch(_ => {
-              alert('Det oppsto en feil under avmeldingen. Er koden feil tro?')
-            })
-          }
-          break
-        }
-      }).catch(_ => {
-        alert('Det oppsto en feil under sendingen av avmeldingskoden. Vennligst kontakt IT-gruppen på it@nettverksdagene.no.')
-      })
     },
   }
 }

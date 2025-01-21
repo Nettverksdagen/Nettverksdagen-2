@@ -123,17 +123,17 @@ class ParticipantViewSet(viewsets.ModelViewSet):
         return Response(response, status = status.HTTP_200_OK)
 
     def destroy(self, request, pk):
-        code = request.data['code']
-
         try:
             participant = Participant.objects.get(id=pk)
         except:
             response = {'message': 'Participant not found'}
             return Response(response, status = status.HTTP_404_NOT_FOUND)
-        
-        print(code, participant.code)
-        
-        if participant.code != code:
+
+        code = request.data.get('code', None)
+
+        # The request is authorized if either a matching code is provided or
+        # the user making the request is logged as the admin and no code is provided.
+        if not (participant.code == code or code == None and request.user.is_staff):
             response = {'message': 'Invalid code'}
             return Response(response, status = status.HTTP_400_BAD_REQUEST)
 
