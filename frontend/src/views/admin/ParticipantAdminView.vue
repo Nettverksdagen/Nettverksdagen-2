@@ -21,7 +21,8 @@
     </b-row>
     <b-row>
       <div class="col-12">
-        <b-card header="Deltagere">
+        <b-card header="Deltakere">
+          <b-link download="Deltakere.csv" :href="participantsDownloadHref"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'download' }"/> Last ned CSV</b-link>
           <b-table class="d-none d-md-table" hover :fields="fields" :items="participantList">
             <template v-slot:cell(delete)="participantList">
               <delete-button class="mx-3" @click.native="destroy(participantList.item)"></delete-button>
@@ -38,6 +39,7 @@
     <b-row>
       <div class="col-12">
         <b-card header="Venteliste">
+          <b-link download="Deltakere.csv" :href="waitinglistDownloadHref"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'download' }"/> Last ned CSV</b-link>
           <b-table class="d-none d-md-table" hover :fields="fields" :items="waitingList">
             <template v-slot:cell(delete)="waitingList">
               <delete-button class="mx-3" @click.native="destroy(waitingList.item)"></delete-button>
@@ -58,6 +60,20 @@
 import axios from 'axios'
 import { mapMutations } from 'vuex'
 import DeleteButton from '@/components/admin/DeleteButton.vue'
+
+function generateDownloadableCsv(headerRow, rows) {
+  let csvContent = "data:text/csv;charset=utf-8,";
+
+  csvContent += headerRow.join(",") + "\r\n";
+
+  rows.forEach(rowArray => {
+      let row = rowArray.join(",");
+      csvContent += row + "\r\n";
+  });
+
+  return encodeURI(csvContent);
+}
+
 export default {
   name: 'ParticipantAdminView',
   components: {
@@ -117,7 +133,16 @@ export default {
         emailString += participant.email + ';'
       })
       return emailString
-    }
+    },
+    participantsDownloadHref: function () {
+      const rows = this.participantList.map(participant => [participant.name, participant.email, participant.study, participant.year])
+      return generateDownloadableCsv(['Navn', 'E-post', 'Studie', 'Årskull'], rows)
+
+    },
+    waitinglistDownloadHref: function () {
+      const rows = this.waitingList.map(participant => [participant.name, participant.email, participant.study, participant.year])
+      return generateDownloadableCsv(['Navn', 'E-post', 'Studie', 'Årskull'], rows)
+    },
   },
   methods: {
     destroy: function (participant) {

@@ -21,9 +21,9 @@
 import { Header } from '@coreui/vue/src/components/Header'
 import { Sidebar, SidebarNav, SidebarNavTitle, SidebarNavItem, SidebarNavLink, SidebarToggler } from '@coreui/vue/src/components/Sidebar'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faBars, faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faPencilAlt, faTrashAlt, faDownload } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
-library.add(faBars, faPencilAlt, faTrashAlt)
+library.add(faBars, faPencilAlt, faTrashAlt, faDownload)
 export default {
   name: 'AdminBaseView',
   components: {
