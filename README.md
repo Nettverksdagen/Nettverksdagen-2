@@ -114,6 +114,14 @@ The dev environment has a default admin user with the following credentials:
 | -------- | -------- |
 | admin    | 1234     |
 
+## Restoring from backups
+Backups of the site and it's data should be regularly created. If something goes wrong, one can restore from a backup by calling
+```bash
+./nettverksdagen restore <backup-name>
+```
+
+The backups must be stored in the `/opt/backups` folder for this to work.
+
 ## Other random things
 ### Curl examples with authentication
 #### Login
