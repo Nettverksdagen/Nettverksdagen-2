@@ -3,14 +3,13 @@
 
 ## Prerequisites
 * [Docker](https://www.docker.com/)
-* [Docker compose](https://docs.docker.com/compose/)
 
 ## Project Installation
-With docker-compose installed, the project requires minimal setup for the development environment:
+The project requires minimal setup for the development environment:
 ```bash
 git clone https://github.com/Nettverksdagen/Nettverksdagen-2.git
 cd Nettverksdagen-2
-docker-compose up
+docker compose up
 ```
 The webpage should now appear on `localhost:8080` and the django REST api browser on `localhost:8000`. 
 
@@ -25,12 +24,12 @@ If you want to be able to actually send emails:
 
 ## Quick tour of docker and the container setup
 ### What is docker and how does it help us?
-Docker is a containerization and virtualization platform that packs individual components of the complete system into small containers that can be easily deployed on different platforms. Each part of the system is run in its own little linux virtual machine with very minimal overhead. With `docker-compose`, setting up a large system with many docker containers can be made relatively painless.
+Docker is a containerization and virtualization platform that packs individual components of the complete system into small containers that can be easily deployed on different platforms. Each part of the system is run in its own little linux virtual machine with very minimal overhead. With `docker compose`, setting up a large system with many docker containers can be made relatively painless.
 
-In our case, we have both a single-page vue frontend, a django REST api and a PostgreSQL database. The setup of this 3-part system can through the use of docker be reduced to a single `docker-compose up` command. Deployments can also be simplified tremendously, especially as the system grows, and the development environment can be made to match the production environment much more closely.
+In our case, we have both a single-page vue frontend, a django REST api and a PostgreSQL database. The setup of this 3-part system can through the use of docker be reduced to a single `docker compose up` command. Deployments can also be simplified tremendously, especially as the system grows, and the development environment can be made to match the production environment much more closely.
 
 ### The setup
-Starting the webpage with `docker-compose up` spins up four docker containers.
+Starting the webpage with `docker compose up` spins up four docker containers.
 A [Vue js](https://vuejs.org/) single page web application, a [Django REST](https://www.django-rest-framework.org/) API that interfaces a [PostgreSQL](https://www.postgresql.org/) database and a simple file uploading/hosting server for handling image uploads.
 The flow of communication between these four components are shown in the figure below.
 ![Docker container setup](https://i.imgur.com/A8LzwaW.png)
@@ -50,7 +49,7 @@ docker exec -ti nettverksdagen-2_fileserver_1_c27e85b4cd47 ls
 ```
 
 ### Volumes
-Any folders defined under `volumes` in `docker-compose.yml` will be mirrored into the container. Thus, folders containing the project files, namely
+Any folders defined under `volumes` in `docker compose.yml` will be mirrored into the container. Thus, folders containing the project files, namely
 * `api/nvdagen`
 * `api/nvdnew`
 * `frontend/src`
@@ -98,12 +97,12 @@ You will then be guided through the process of creating the user.
 When installing a new npm package, the frontend container needs to be rebuilt.
 This can be done with the following command:
 ```bash
-docker-compose build --no-cache
+docker compose build --no-cache
 ```
 
 ### Restart the file server
 ```bash
-docker-compose stop fileserver && docker-compose up --no-deps -d --build fileserver
+docker compose stop fileserver && docker compose up --no-deps -d --build fileserver
 ```
 
 ## Admin user
