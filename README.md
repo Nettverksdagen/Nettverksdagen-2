@@ -6,14 +6,22 @@
 * [Docker compose](https://docs.docker.com/compose/)
 
 ## Project Installation
-With docker-compose installed, the project requires minimal setup
+With docker-compose installed, the project requires minimal setup for the development environment:
 ```bash
 git clone https://github.com/Nettverksdagen/Nettverksdagen-2.git
 cd Nettverksdagen-2
-cp api/nvdnew/settings/mail_settings_default.py api/nvdnew/settings/mail_settings.py
 docker-compose up
 ```
 The webpage should now appear on `localhost:8080` and the django REST api browser on `localhost:8000`. 
+
+## Mail Setup
+### Mail setup in development environment
+https://ethereal.email can create fake credentials, and the service can show all emails that were attempted sent (without actually sending them). This is also mentioned in `postfix/.env.default`.
+
+### Mail setup in production environment
+If you want to be able to actually send emails:
+- Copy `postfix/.env.default` to `postfix/.env`
+- Replace values with credentials from our mail provider (currently Uniweb)
 
 ## Quick tour of docker and the container setup
 ### What is docker and how does it help us?
