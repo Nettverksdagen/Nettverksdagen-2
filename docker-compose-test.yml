@@ -46,7 +46,7 @@ services:
       - GUID=1003
       - EMAIL=it@nettverksdagene.no
       - URL=nettverksdagene.no
-      - SUBDOMAINS=www,blogg
+      - SUBDOMAINS=www
       - TZ=Europe/Oslo
       - VALIDATION=http
       #- STAGING=true # Uncomment this when testing
