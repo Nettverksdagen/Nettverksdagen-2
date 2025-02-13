@@ -7,7 +7,6 @@ backup() {
 	local backup_time="$(date --rfc-3339='seconds' | sed 's/\ /_/g')"
 	local backup_dir="$backup_root_dir/$backup_time"
 	rsync -a fileserver/uploads "$backup_dir" &> /dev/null
-	rsync -a ghost/data "$backup_dir" &> /dev/null
 	docker exec postgres pg_dumpall -c -U postgres > "$backup_dir/api_db.sql"
 	echo "$backup_time"
 }
@@ -16,7 +15,6 @@ restore() {
 	local backup_time="$1"
 	local backup_dir="$backup_root_dir/$backup_time"
 	rsync -a "$backup_dir/uploads" fileserver &> /dev/null
-	rsync -a "$backup_dir/data" ghost &> /dev/null
 	docker exec -i postgres psql -q -U postgres < "$backup_dir/api_db.sql" &> /dev/null
 	echo "$backup_time"
 }
