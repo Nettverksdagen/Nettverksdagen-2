@@ -88,11 +88,6 @@ export default new Router({
           meta: {title: 'Skjema'}
         },
         {
-          path: 'lykkehjul',
-          redirect: 'static/lykkehjul/lykkehjul.html',
-          name: 'Lykkehjul'
-        },
-        {
           path: 'valgomat',
           name: 'Valgomat',
           component: ValgomatView,
