@@ -5,7 +5,7 @@
             <div class="hometext">
                 <h3>{{$t('homescreen.fremtidig')}}</h3>
                 <h1>{{$t('nettverksdagene')}}</h1>
-                <h2>21.01-23.01 2025</h2>
+                <h2>27.01-29.01 2026</h2>
             </div>
         </div>
         <div class="col-12 homevideo">
@@ -20,7 +20,7 @@
     <div class="boxes">
       <b-link :to="{name: 'Home', hash: '#stand-map'}" @click.native="scrollToId('stand-map')">
         <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" :box-text="$t('glassgårdentext')"/>
-      </b-link>
+      </b-link> 
       <b-link :to="'/program'">
         <HomeScreenBox :box-title="$t('avslutningsmiddagtitle')" box-icon="glass-cheers-solid.svg" :box-text="$t('programtext')"/>
       </b-link>
