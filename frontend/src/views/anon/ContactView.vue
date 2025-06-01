@@ -54,7 +54,7 @@
 
       <b-row class="mt-5">
         <b-col cols="12">
-          <h2>{{$t('contactpeople')}}</h2>
+          <h1 class="page-header">{{$t('Kontaktpersoner') + ' for ' + $t('nettverksdagene')  + ' 2025'}}</h1>
         </b-col>
       </b-row>
         <b-row v-bind:key="team.key" v-for="team in teams">
