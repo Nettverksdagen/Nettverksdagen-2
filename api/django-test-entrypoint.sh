@@ -1,4 +1,7 @@
 #!/bin/bash
+# Exit upon any failure
+set -e
+
 sh django-base-entrypoint.sh
 
 echo "Loading data from fixtures"
