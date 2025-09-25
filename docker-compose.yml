@@ -13,6 +13,7 @@ services:
     volumes:
       - ./api/nvdagen:/api/nvdagen
       - ./api/nvdnew:/api/nvdnew
+      - ./api/test:/api/test
     ports:
       - "8000:8000"
     environment:
