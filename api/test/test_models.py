@@ -12,7 +12,7 @@ class ModelTestCase(TestCase):
         )
 
     def test_basic(self):
-        self.assertEqual(self.team_member_1.name, "NotFoo")
+        self.assertEqual(self.team_member_1.name, "Foo")
 
     def test_participant_program(self):
         program = Program.objects.create(
