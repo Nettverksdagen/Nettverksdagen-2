@@ -5,7 +5,11 @@ from unittest.mock import patch
 
 from nvdagen.models import Participant, Program
 
+CONFIRMATION_WORD = "bekreftet"
+WAITLIST_WORD     = "venteliste"
+
 class ViewSetTestCase(APITestCase):
+
     def setUp(self):
         # See routers.py
         self.participant_url       = reverse("participant-list")
@@ -60,7 +64,7 @@ class ViewSetTestCase(APITestCase):
 
         mock_send_mail.assert_called_once()
         send_mail_args, _ = mock_send_mail.call_args
-        self.assertIn("bekreftet", send_mail_args[0].lower())
+        self.assertIn(CONFIRMATION_WORD, send_mail_args[0].lower())
 
         # Test registration fails if someone registers twice
         response = self.client.post(self.participant_url, format="json", data=alice_data)
@@ -82,8 +86,8 @@ class ViewSetTestCase(APITestCase):
 
         send_mail_args, _ = mock_send_mail.call_args
     
-        self.assertNotIn("bekreftet", send_mail_args[0].lower())
-        self.assertIn("venteliste", send_mail_args[0].lower())
+        self.assertNotIn(CONFIRMATION_WORD, send_mail_args[0].lower())
+        self.assertIn(WAITLIST_WORD, send_mail_args[0].lower())
 
         # Check that if alice unregisters, Bob will get confirmed
         alice = Participant.objects.filter(email=alice_data["email"]).get()
@@ -96,6 +100,6 @@ class ViewSetTestCase(APITestCase):
 
         # Now bob should get the mail
         self.assertEqual(mock_send_mail.call_count, 3)
-        self.assertIn("bekreftet", send_mail_args[0])
+        self.assertIn(CONFIRMATION_WORD, send_mail_args[0])
         self.assertIn(bob_data["name"], send_mail_args[0])
         self.assertEquals(send_mail_args[-1][0], bob_data["email"])
