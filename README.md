@@ -83,7 +83,7 @@ python manage.py flush
 ```
 (warning: this will destroy all data)
 
-New fixtures are loaded with
+New fixtures are loaded with:
 ```bash
 python manage.py loaddata fixtures.json
 ```
