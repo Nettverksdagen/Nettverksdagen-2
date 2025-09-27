@@ -38,12 +38,14 @@
     "inputFieldEmail": "E-post",
     "inputFieldFieldOfStudy": "Studieretning",
     "inputFieldStudyYear": "Årstrinn",
+    "inputFieldAllergies": "Allergier og matrestriksjoner",
     "inputFieldCode": "Avmeldingskode",
 
     "placeholderName": "Skriv inn navn",
     "placeholderEmail": "Skriv inn e-post",
     "placeholderFieldOfStudy": "Skriv inn studieretning",
     "placeholderStudyYear": "Skriv inn årstrinn",
+    "placeholderAllergies": "Skriv inn eventuelle allergier eller matrestriksjoner",
     "placeholderCode": "Skriv inn avmeldingskoden",
 
     "is_required": "kreves",
