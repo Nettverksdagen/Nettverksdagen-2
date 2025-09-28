@@ -103,3 +103,38 @@ class ViewSetTestCase(APITestCase):
         self.assertIn(CONFIRMATION_WORD, send_mail_args[0])
         self.assertIn(bob_data["name"], send_mail_args[0])
         self.assertEquals(send_mail_args[-1][0], bob_data["email"])
+
+    @patch("nvdagen.viewsets.send_mail")
+    def test_participant_allergies(self, mock_send_mail):
+        allergic_participant = {
+            "email": "gluten@free.com",
+            "event": self.program.id,
+            "name" : "Allergisk deltaker",
+            "year" : "2",
+            "study": "Matvitenskap",
+            "code" : "0xallergy",
+            "allergies" : "gluten, laktose, vann uten smak"
+        }
+
+        non_allergic_participant = {
+            "email": "healthy@individual.com",
+            "event": self.program.id,
+            "name" : "Sunn norsk ungdom",
+            "year" : "5",
+            "study": "Medisin",
+            "code" : "0xnoallergy"
+        }
+
+        # Check that allergies are registered
+        response = self.client.post(self.participant_url, format="json", data=allergic_participant)
+
+        self.assertLess(response.status_code, 300)
+        allergic = Participant.objects.get(email="gluten@free.com")
+        self.assertEqual(allergic.allergies, "gluten, laktose, vann uten smak")
+
+        # Check without allergies
+        response = self.client.post(self.participant_url, format="json", data=non_allergic_participant)
+
+        self.assertLess(response.status_code, 300)
+        non_allergic = Participant.objects.get(email="healthy@individual.com")
+        self.assertEqual(non_allergic.allergies, "")

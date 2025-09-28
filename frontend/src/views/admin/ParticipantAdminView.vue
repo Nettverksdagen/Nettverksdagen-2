@@ -82,7 +82,13 @@ export default {
   data: function () {
     return {
       fields: [
-        'id', {key: 'name', label: 'Navn'}, {key: 'study', label: 'Studie'}, {key: 'year', label: 'Årskull'}, {key: 'email', label: 'Email'}, {key: 'delete', label: ''}
+        'id',
+        {key: 'name', label: 'Navn'},
+        {key: 'study', label: 'Studie'},
+        {key: 'year', label: 'Årskull'},
+        {key: 'email', label: 'Email'},
+        {key: 'allergies', label: 'Allergier'},
+        {key: 'delete', label: ''}
       ],
       alert: {
         dismissSecs: 5,
@@ -135,13 +141,25 @@ export default {
       return emailString
     },
     participantsDownloadHref: function () {
-      const rows = this.participantList.map(participant => [participant.name, participant.email, participant.study, participant.year])
-      return generateDownloadableCsv(['Navn', 'E-post', 'Studie', 'Årskull'], rows)
+      const rows = this.participantList.map(participant => [
+        participant.name,
+        participant.email,
+        participant.study,
+        participant.year,
+        participant.allergies
+      ])
+      return generateDownloadableCsv(['Navn', 'E-post', 'Studie', 'Årskull', 'Allergier'], rows)
 
     },
     waitinglistDownloadHref: function () {
-      const rows = this.waitingList.map(participant => [participant.name, participant.email, participant.study, participant.year])
-      return generateDownloadableCsv(['Navn', 'E-post', 'Studie', 'Årskull'], rows)
+      const rows = this.waitingList.map(participant => [
+        participant.name,
+        participant.email,
+        participant.study,
+        participant.year,
+        participant.allergies
+      ])
+      return generateDownloadableCsv(['Navn', 'E-post', 'Studie', 'Årskull', 'Allergier'], rows)
     },
   },
   methods: {

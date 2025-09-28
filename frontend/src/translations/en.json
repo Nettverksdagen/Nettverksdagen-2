@@ -39,12 +39,14 @@
     "inputFieldEmail": "Email",
     "inputFieldFieldOfStudy": "Field of Study",
     "inputFieldStudyYear": "Year of Study",
+    "inputFieldAllergies": "Allergies and dietary restrictions",
     "inputFieldCode": "Unregistration Code",
 
     "placeholderName": "Enter name",
     "placeholderEmail": "Enter email",
     "placeholderFieldOfStudy": "Enter field of study",
     "placeholderStudyYear": "Enter year of study",
+    "placeholderAllergies": "Enter any allergies or dietary restrictions",
     "placeholderCode": "Enter unregistration code",
 
     "is_required": "is required",

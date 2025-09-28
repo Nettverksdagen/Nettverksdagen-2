@@ -59,6 +59,16 @@
         >
         </b-form-input>
       </b-form-group>
+      <b-form-group :label="$t('inputFieldAllergies')" label-for="allergies-input">
+        <b-form-input
+          id="allergies-input"
+          v-model="form.allergies"
+          ref="allergiesInput"
+          :placeholder="$t('placeholderAllergies')"
+          :state="allergiesState"
+        >
+        </b-form-input>
+      </b-form-group>
     </b-form>
   </b-modal>
 </template>
@@ -79,12 +89,14 @@ export default {
         name: '',
         email: '',
         study: '',
-        year: ''
+        year: '',
+        allergies: ''
       },
       nameState: null,
       emailState: null,
       studyState: null,
       yearState: null,
+      allergiesState: null,
       emailInvalidFeedbackDefault: this.$t('inputFieldEmail') + ' ' + this.$t('is_required'),
       emailInvalidFeedbackString: this.emailInvalidFeedbackDefault,
     }
@@ -108,11 +120,13 @@ export default {
       const emailValid = this.$refs.emailInput.checkValidity()
       const studyValid = this.$refs.studyInput.checkValidity()
       const yearValid = this.$refs.yearInput.checkValidity()
+      const allergiesValid = this.$refs.allergiesInput.checkValidity()
 
       this.nameState = nameValid
       this.emailState = emailValid
       this.studyState = studyValid
       this.yearState = yearValid
+      this.allergiesState = allergiesValid
 
       return valid
     },
@@ -121,11 +135,13 @@ export default {
       this.form.email = ''
       this.form.study = ''
       this.form.year = ''
+      this.form.allergies = ''
 
       this.nameState = null
       this.emailState = null
       this.studyState = null
       this.yearState = null
+      this.allergiesState = null
     },
     handleOk (bvModalEvent) {
       // Prevent modal from closing
