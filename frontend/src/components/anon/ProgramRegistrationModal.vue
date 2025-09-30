@@ -98,7 +98,7 @@ export default {
       yearState: null,
       allergiesState: null,
       emailInvalidFeedbackDefault: this.$t('inputFieldEmail') + ' ' + this.$t('is_required'),
-      emailInvalidFeedbackString: this.emailInvalidFeedbackDefault,
+      emailInvalidFeedbackString: this.emailInvalidFeedbackDefault
     }
   },
   computed: {
@@ -110,7 +110,7 @@ export default {
 
       // Invalid email
       return this.emailInvalidFeedbackString
-    },
+    }
   },
   methods: {
     checkFormValidity () {
@@ -175,7 +175,7 @@ export default {
             this.emailInvalidFeedbackString = this.$t('already_registered')
           }
         })
-    },
+    }
   }
 }
 </script>
