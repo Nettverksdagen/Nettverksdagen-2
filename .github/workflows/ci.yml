@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [ "master" ]
 jobs:
-  django-tests:
+  tests:
     runs-on: ubuntu-latest
     steps:
      - uses: actions/checkout@v3
@@ -13,8 +13,11 @@ jobs:
      - name: Set up Docker Compose
        uses: docker/setup-buildx-action@v2
 
-     - name: Build and run tests
-       run: docker compose -f ./docker-compose-ci.yml up --abort-on-container-exit
+     - name: Build and run API tests
+       run: docker compose -f ./docker-compose-ci.yml up api --abort-on-container-exit
+
+     - name: Build and run frontend tests
+       run: docker compose -f ./docker-compose-ci.yml up frontend --abort-on-container-exit
 
      - name: Tear down
        run: docker compose -f ./docker-compose-ci.yml down
