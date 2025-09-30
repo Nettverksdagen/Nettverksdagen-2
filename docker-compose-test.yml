@@ -57,19 +57,5 @@ services:
       - ./nginx/config:/config # Todo: Can this volume include the below?
       - frontend-files:/frontend
 
-  # Is postfix nessesary for tests? Do we actually use the tests? Do the tests even work?
-  # These are all good questions that I don't have the answer to and I'm too annoyed of this project to find out.
-  # I have included it here because why not.
-  postfix:
-    build:
-      context: ./postfix
-    ports:
-      - "587:587"
-    env_file:
-      - path: ./postfix/.env.default
-        required: true
-      - path: ./postfix/.env
-        required: false
-
 volumes:
   frontend-files:

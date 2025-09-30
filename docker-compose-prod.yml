@@ -20,6 +20,8 @@ services:
     build:
       context: ./frontend
       target: builder
+      args:
+        - DOMAIN=${DOMAIN}
     volumes:
       - frontend-files:/frontend/dist
     command: ["echo", "Successfully created static frontend files"] # No operation

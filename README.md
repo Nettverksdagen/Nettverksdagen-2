@@ -13,17 +13,6 @@ docker compose up
 ```
 The webpage should now appear on `localhost:8080` and the django REST api browser on `localhost:8000`. 
 
-## Mail Setup
-### Mail setup in development environment
-https://ethereal.email can create fake credentials, and the service can show all emails that were attempted sent (without actually sending them). This is also mentioned in `postfix/.env.default`. To use the service:
-- Copy `postfix/.env.default` to `postfix/.env`
-- Replace values with credentials from our https://ethereal.email
-
-### Mail setup in production environment
-If you want to be able to actually send emails:
-- Copy `postfix/.env.default` to `postfix/.env`
-- Replace values with credentials from our mail provider (currently Uniweb)
-
 ## Quick tour of docker and the container setup
 ### What is docker and how does it help us?
 Docker is a containerization and virtualization platform that packs individual components of the complete system into small containers that can be easily deployed on different platforms. Each part of the system is run in its own little linux virtual machine with very minimal overhead. With `docker compose`, setting up a large system with many docker containers can be made relatively painless.
