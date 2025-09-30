@@ -1,7 +1,8 @@
 const defaultState = {
-  username: '',
-  token: '',
-  loggedIn: false
+  username: localStorage.getItem('auth_username') || '',
+  token: localStorage.getItem('auth_token') || '',
+  loggedIn: !!localStorage.getItem('auth_token'),
+  loggingIn: false
 }
 
 const state = {...defaultState}
@@ -53,6 +54,9 @@ const mutations = {
     state.token = payload.token
     state.loggingIn = false
     state.loggedIn = true
+
+    localStorage.setItem('auth_token', payload.token)
+    localStorage.setItem('auth_username', payload.username)
   },
   loginFailure () {
     console.log('Wrong login credentials')
@@ -67,6 +71,11 @@ const mutations = {
     state.username = ''
     state.token = ''
     state.loggedIn = false
+
+    localStorage.removeItem('auth_token')
+    localStorage.removeItem('auth_username')
+    sessionStorage.removeItem('auth_token') 
+    document.cookie = "auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;" 
   }
 }
 
