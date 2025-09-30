@@ -18,8 +18,7 @@ export default {
   },
   computed: {
     isMobile () {
-      return false
-      // return this.windowWidth <= 768 // Completely arbitrary, should not be hard-coded. Same as breakpoints in CSS in HomeScreen.vue
+      return this.windowWidth <= 768 // Same as breakpoints in CSS in HomeScreen.vue
     }
   },
   mounted () {
