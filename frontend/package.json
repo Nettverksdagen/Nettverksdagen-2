@@ -8,7 +8,8 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "lint": "eslint --c .js,.vue src test",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "test": "vitest --config test/vitest.config.js"
   },
   "dependencies": {
     "@coreui/coreui": "^2.1.16",
