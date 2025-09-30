@@ -36,6 +36,9 @@ const actions = {
         }
       })
       .catch(error => commit('fetchFailure', error))
+  },
+  logout ({commit}) {
+    commit('logout')
   }
 }
 
@@ -59,6 +62,11 @@ const mutations = {
   fetchFailure (error) {
     console.log('Could not log in because of an error: ', error)
     state.loggingIn = false
+  },
+  logout (state) {
+    state.username = ''
+    state.token = ''
+    state.loggedIn = false
   }
 }
 
