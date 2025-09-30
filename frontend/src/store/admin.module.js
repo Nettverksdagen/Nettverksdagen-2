@@ -58,12 +58,12 @@ const mutations = {
     localStorage.setItem('auth_token', payload.token)
     localStorage.setItem('auth_username', payload.username)
   },
-  loginFailure () {
+  loginFailure (state) {
     console.log('Wrong login credentials')
     state.loggingIn = false
     state.loggedIn = false
   },
-  fetchFailure (error) {
+  fetchFailure (state, error) {
     console.log('Could not log in because of an error: ', error)
     state.loggingIn = false
   },
