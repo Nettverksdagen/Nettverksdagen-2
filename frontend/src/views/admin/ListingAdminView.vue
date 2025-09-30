@@ -71,7 +71,7 @@
         </b-card>
       </div>
       <div class="d-none d-md-block col-4">
-        <b-jumbotron bg-variant="info" text-variant="white" :header="numListings + ''" lead="åpne stillingsannonser" class="h-100">
+        <b-jumbotron bg-variant="info" text-variant="white" :header="numActiveListings + ''" :lead="`åpne stillingsannonser. ${numListings} totalt.`" class="h-100">
           <hr class="my-4">
           <p>
             {{$t('herestilling')}}
@@ -166,6 +166,18 @@ export default {
     numListings: function () {
       return this.listings.length
     },
+    numActiveListings: function () {
+      const today = new Date()
+      today.setHours(0, 0, 0, 0) // Start of today
+
+      return this.listings.filter((listing) => {
+        if (!listing.deadline || listing.deadline == 0) return true // No deadline => active
+        const deadline = new Date(listing.deadline)
+        deadline.setHours(23, 59, 59, 999) // End of day
+
+        return today <= deadline
+      }).length
+    },
     listingsLink: function () {
       return this.$router.resolve({name: 'Listings'})
     },
@@ -254,7 +266,9 @@ export default {
       this.$data.listing = listing
       this.$data.showImgPreview = true
       this.$data.editing = true
-      this.$data.deadlineDateTime = new Date(this.$data.listing.deadline)
+      this.$data.deadlineDateTime = listing.deadline ?  new Date(listing.deadline) : null
+      // Scroll to top when editing
+      window.scrollTo({top: 0, behavior: 'smooth'})
     },
     abortEdit: function () {
       this.resetForm()
