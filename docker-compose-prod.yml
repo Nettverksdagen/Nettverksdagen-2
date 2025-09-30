@@ -13,8 +13,6 @@ services:
     depends_on:
       - postgres
     restart: "always"
-    ports:
-      - "7001:8000"
     environment:
       - DJANGO_SETTINGS_MODULE=nvdnew.settings.prod
 
@@ -30,8 +28,6 @@ services:
     build: ./fileserver
     command: ["./main"]
     restart: "always"
-    ports:
-      - "7002:9000"
     volumes:
       - ./fileserver/uploads:/root/uploads
 
@@ -44,8 +40,8 @@ services:
     environment:
       - PUID=1002
       - GUID=1003
-      - EMAIL=it@nettverksdagene.no
-      - URL=nettverksdagene.no
+      - EMAIL=it@${DOMAIN}
+      - URL=${DOMAIN}
       - SUBDOMAINS=www
       - TZ=Europe/Oslo
       - VALIDATION=http
@@ -57,17 +53,5 @@ services:
       - ./nginx/config:/config # Todo: Can this volume include the below?
       - frontend-files:/frontend
 
-  postfix:
-    build:
-      context: ./postfix
-    ports:
-      - "587:587"
-    env_file:
-      - path: ./postfix/.env
-        required: true
-    volumes:
-      - postfix-spool:/var/spool/postfix # Volume for storing unset postfix emails
-
 volumes:
   frontend-files:
-  postfix-spool:
