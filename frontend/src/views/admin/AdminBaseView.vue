@@ -10,7 +10,7 @@
             </div>
           </main>
           <Sidebar>
-            <SidebarNav :navItems="navItems">
+            <SidebarNav :navItems="navItems" @click.native="handleNavClick">
             </SidebarNav>
           </Sidebar>
         </div>
@@ -90,6 +90,16 @@ export default {
           name: 'Participants',
           url: this.$router.resolve({name: 'ParticipantAdmin'}).href,
           icon: 'cui-dollar'
+        },
+        {
+          divider: true,
+          class: 'sidebar-nav-divider'
+        },
+        {
+          name: 'Logg ut',
+          url: '#',
+          icon: 'cui-account-logout',
+          class: 'logout-link'
         }
       ]
     }
@@ -107,6 +117,14 @@ export default {
   methods: {
     handleResize () {
       this.isMobile = window.innerWidth <= 1000
+    },
+    handleNavClick (event) {
+      const target = event.target.closest('.logout-link')
+      if (target) {
+        event.preventDefault()
+        this.$store.dispatch('admin/logout')
+        this.$router.push({name: 'Home'})
+      }
     }
   },
   beforeCreate () {
