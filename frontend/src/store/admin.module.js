@@ -1,7 +1,8 @@
 const defaultState = {
   username: '',
   token: '',
-  loggedIn: false
+  loggedIn: false,
+  loggingIn: false
 }
 
 const state = {...defaultState}
@@ -51,12 +52,12 @@ const mutations = {
     state.loggingIn = false
     state.loggedIn = true
   },
-  loginFailure () {
+  loginFailure (state) {
     console.log('Wrong login credentials')
     state.loggingIn = false
     state.loggedIn = false
   },
-  fetchFailure (error) {
+  fetchFailure (state, error) {
     console.log('Could not log in because of an error: ', error)
     state.loggingIn = false
   }
