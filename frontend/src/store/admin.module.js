@@ -1,7 +1,7 @@
 const defaultState = {
-  username: '',
-  token: '',
-  loggedIn: false,
+  username: localStorage.getItem('auth_username') || '',
+  token: localStorage.getItem('auth_token') || '',
+  loggedIn: !!localStorage.getItem('auth_token'),
   loggingIn: false
 }
 
@@ -37,6 +37,9 @@ const actions = {
         }
       })
       .catch(error => commit('fetchFailure', error))
+  },
+  logout ({commit}) {
+    commit('logout')
   }
 }
 
@@ -51,6 +54,9 @@ const mutations = {
     state.token = payload.token
     state.loggingIn = false
     state.loggedIn = true
+
+    localStorage.setItem('auth_token', payload.token)
+    localStorage.setItem('auth_username', payload.username)
   },
   loginFailure (state) {
     console.log('Wrong login credentials')
@@ -60,6 +66,14 @@ const mutations = {
   fetchFailure (state, error) {
     console.log('Could not log in because of an error: ', error)
     state.loggingIn = false
+  },
+  logout (state) {
+    state.username = ''
+    state.token = ''
+    state.loggedIn = false
+
+    localStorage.removeItem('auth_token')
+    localStorage.removeItem('auth_username')
   }
 }
 
