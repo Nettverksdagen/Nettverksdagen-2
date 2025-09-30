@@ -254,7 +254,9 @@ export default {
       this.$data.listing = listing
       this.$data.showImgPreview = true
       this.$data.editing = true
-      this.$data.deadlineDateTime = new Date(this.$data.listing.deadline)
+      this.$data.deadlineDateTime = listing.deadline ?  new Date(listing.deadline) : null
+      // Scroll to top when editing
+      window.scrollTo({top: 0, behavior: 'smooth'})
     },
     abortEdit: function () {
       this.resetForm()

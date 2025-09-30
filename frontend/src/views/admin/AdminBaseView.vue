@@ -87,7 +87,7 @@ export default {
           icon: 'cui-dollar'
         },
         {
-          name: 'Participants',
+          name: 'Deltakere',
           url: this.$router.resolve({name: 'ParticipantAdmin'}).href,
           icon: 'cui-dollar'
         }
