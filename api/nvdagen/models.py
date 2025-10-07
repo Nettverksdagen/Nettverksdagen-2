@@ -2,6 +2,7 @@ from django.db import models
 from django.core.mail import send_mail
 from rest_framework.response import Response
 from rest_framework import status
+import uuid
 
 SUMMER_INTERNSHIP = 'Sommerjobb'
 FULL_TIME_POSITION = 'Fast stilling'
@@ -118,3 +119,6 @@ class Participant(models.Model):
     study = models.CharField(max_length=250)
     code = models.CharField(max_length=250)
     allergies = models.CharField(max_length=250, blank=True, default="")
+    attendance_token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    attended = models.BooleanField(default=False)
+    check_in_time = models.DateTimeField(null=True, blank=True)
