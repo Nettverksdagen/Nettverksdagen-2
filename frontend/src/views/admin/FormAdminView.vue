@@ -28,7 +28,7 @@
                 </b-form-group>
               </div>
             </b-row>
-            <b-button type="submit" size="md" variant="success" v-if="!editing">{{$t('create')}</b-button>
+            <b-button type="submit" size="md" variant="success" v-if="!editing">{{$t('create')}}</b-button>
             <b-button type="submit" size="md" variant="primary" v-if="editing">{{$t('edit')}}</b-button>
             <b-button v-on:click="abortEdit()" size="md" variant="secondary" v-if="editing">{{$t('abort')}}</b-button>
           </b-form>
