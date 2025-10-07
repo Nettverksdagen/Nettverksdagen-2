@@ -92,6 +92,11 @@ export default {
           icon: 'cui-dollar'
         },
         {
+          name: 'Attendance',
+          url: this.$router.resolve({name: 'AttendanceAdmin'}).href,
+          icon: 'cui-check'
+        },
+        {
           divider: true,
           class: 'sidebar-nav-divider'
         },

@@ -19,6 +19,7 @@ import BusinessDetails from '@/components/anon/BusinessDetails.vue'
 import ListingDetails from '@/components/anon/ListingDetails.vue'
 import ProgramAdminView from '@/views/admin/ProgramAdminView.vue'
 import ParticipantAdminView from '@/views/admin/ParticipantAdminView.vue'
+import AttendanceAdminView from '@/views/admin/AttendanceAdminView.vue'
 // import HomeViewTemp from '@/views/anon/HomeViewTemp.vue'
 import NotFoundView from '@/views/anon/NotFoundView.vue'
 import ValgomatView from '@/views/anon/ValgomatView.vue'
@@ -159,6 +160,12 @@ export default new Router({
           name: 'ParticipantAdmin',
           component: ParticipantAdminView,
           meta: {title: 'Rediger deltagere'}
+        },
+        {
+          path: 'attendance',
+          name: 'AttendanceAdmin',
+          component: AttendanceAdminView,
+          meta: {title: 'Attendance Management'}
         }
       ]
     },
