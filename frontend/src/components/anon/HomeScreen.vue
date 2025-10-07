@@ -18,7 +18,7 @@
         </div>
     </b-row>
     <div class="InfoBox">
-      <InfoBox :box-title="title" :items="items" />
+      <InfoBox :title="infoboxTitle" :paragraph="infoboxParagraph" />
     </div>
     <div class="boxes">
       <b-link :to="{name: 'Home', hash: '#stand-map'}" @click.native="scrollToId('stand-map')">
@@ -53,8 +53,8 @@ export default {
   },
   data() {
     return {
-      title: localStorage.getItem("infobox_title") || "Viktig informasjon",
-      items: JSON.parse(localStorage.getItem("infobox_items") || "[]")
+      title: "Viktig informasjon",
+      paragraph: "Ingen informasjon lagt til ennå…"
     };
   },
   methods: {
@@ -68,6 +68,14 @@ export default {
         top: offsetPosition,
         behavior: "smooth"
       });
+    }
+  },
+  computed: {
+    infoboxTitle: function() {
+      return this.$store.state.infobox.title || "Viktig informasjon";
+    },
+    infoboxParagraph: function() {
+      return this.$store.state.infobox.paragraph || "";
     }
   }
 }

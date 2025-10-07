@@ -1,57 +1,127 @@
 <template>
-  <div class="p-6 max-w-4xl mx-auto">
-    <h1 class="text-2xl font-bold mb-4">Rediger Viktig informasjon</h1>
+  <div class="infobox-admin-view">
+    <b-alert
+      :show="alert.dismissCountDown"
+      dismissible
+      fade
+      :variant="alert.variant"
+      @dismissed="alert.dismissCountDown = 0"
+      @dismiss-count-down="countDownChanged"
+      class="mt-4"
+    >
+      <h4 class="alert-heading font-weight-bold">{{ alert.heading }}</h4>
+      <hr />
+      {{ alert.message }}
+    </b-alert>
 
-    <label class="block mb-2">Tittel</label>
-    <input v-model="title" class="border p-2 w-full mb-4"/>
+    <b-row class="my-4">
+      <div class="col-12 col-md-8">
+        <b-card header="Rediger Viktig informasjon" class="h-100">
+          <b-form @submit.prevent="handleSubmit">
+            <b-form-group label="Tittel" label-for="infobox-title-input">
+              <b-form-input
+                v-model="infobox.title"
+                id="infobox-title-input"
+                required
+                placeholder="Skriv inn tittel"
+              />
+            </b-form-group>
 
-    <label class="block mb-2">Informasjonspunkter</label>
-    <div v-for="(item, index) in items" :key="index" class="flex gap-2 mb-2">
-      <input v-model="items[index]" class="border p-2 w-full"/>
-      <button @click="removeItem(index)" class="bg-red-500 text-white px-2 rounded">X</button>
-    </div>
+            <b-form-group label="Tekst" label-for="infobox-paragraph-input">
+              <b-form-textarea
+                v-model="infobox.paragraph"
+                id="infobox-paragraph-input"
+                rows="5"
+                required
+                placeholder="Skriv inn informasjonstekst"
+              />
+            </b-form-group>
 
-    <button @click="addItem" class="bg-blue-500 text-white px-3 py-1 rounded">Legg til punkt</button>
+            <b-button type="submit" size="md" variant="success">
+              Lagre endringer
+            </b-button>
+          </b-form>
+        </b-card>
+      </div>
+    </b-row>
 
-    <hr class="my-6"/>
-
-    <button @click="saveChanges" class="bg-green-600 text-white px-4 py-2 rounded">
-      Lagre endringer
-    </button>
-
-    <h2 class="text-xl font-semibold mt-6 mb-2">Forhåndsvisning</h2>
-    <InfoBox :title="title" :items="items" />
+    <b-row>
+      <div class="col-12">
+        <b-card header="Forhåndsvisning">
+          <InfoBox :title="infobox.title" :paragraph="infobox.paragraph" />
+        </b-card>
+      </div>
+    </b-row>
   </div>
 </template>
 
 <script>
-import { reactive } from "vue";
-import InfoBox from "@/components/anon/InfoBox.vue";
+import axios from 'axios'
+import InfoBox from '@/components/anon/InfoBox.vue'
 
 export default {
-  name: "InfoboxAdminView",
+  name: 'InfoBoxAdminView',
   components: { InfoBox },
-  setup() {
-    const state = reactive({
-      title: localStorage.getItem("infobox_title") || "Viktig informasjon",
-      items: JSON.parse(localStorage.getItem("infobox_items") || "[]")
-    });
-
-    function addItem() {
-      state.items.push("");
+  data () {
+    return {
+      infobox: {
+        title: '',
+        paragraph: ''
+      },
+      alert: {
+        dismissSecs: 5,
+        dismissCountDown: 0,
+        variant: 'info',
+        heading: '',
+        message: ''
+      }
     }
-
-    function removeItem(index) {
-      state.items.splice(index, 1);
+  },
+  computed: {
+    title () {
+      return this.$store.state.infobox.title || 'Viktig informasjon'
+    },
+    paragraph () {
+      return this.$store.state.infobox.paragraph || ''
     }
-
-    function saveChanges() {
-      localStorage.setItem("infobox_title", state.title);
-      localStorage.setItem("infobox_items", JSON.stringify(state.items));
-      alert("Lagret!");
+  },
+  created () {
+    // Hent eksisterende infoboks fra store/API ved lasting
+    this.$store.dispatch('infobox/fetchInfobox').then(() => {
+      this.infobox.title = this.$store.state.infobox.title
+      this.infobox.paragraph = this.$store.state.infobox.paragraph
+    })
+  },
+  methods: {
+    handleSubmit () {
+      axios
+        .post(process.env.VUE_APP_API_HOST + '/api/infobox/', this.infobox)
+        .then(() => {
+          this.showAlert('success', 'Suksess!', 'Infoboksen er oppdatert.')
+          this.$store.commit('infobox/fetchSuccessful', this.infobox)
+        })
+        .catch((e) => {
+          const status = e.response ? e.response.status : ''
+          const text = e.response ? e.response.statusText : ''
+          this.showAlert(
+            'danger',
+            `Error ${status} ${text}`,
+            'Kunne ikke lagre infoboksen.'
+          )
+        })
+    },
+    showAlert (variant, heading, message) {
+      this.alert.variant = variant
+      this.alert.heading = heading
+      this.alert.message = message
+      this.alert.dismissCountDown = this.alert.dismissSecs
+    },
+    countDownChanged (dismissCountDown) {
+      this.alert.dismissCountDown = dismissCountDown
     }
-
-    return { ...state, addItem, removeItem, saveChanges };
   }
-};
+}
 </script>
+
+<style scoped lang="scss">
+</style>
