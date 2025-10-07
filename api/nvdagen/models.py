@@ -117,3 +117,8 @@ class Participant(models.Model):
     year = models.CharField(max_length=250)
     study = models.CharField(max_length=250)
     code = models.CharField(max_length=250)
+
+class Infobox(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=250)
+    paragraph = models.CharField(max_length=10000,blank=True, null=True)

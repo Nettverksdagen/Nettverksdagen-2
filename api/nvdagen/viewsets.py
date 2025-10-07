@@ -2,8 +2,8 @@ from rest_framework import viewsets, status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from .models import Listing, Business, Sponsor, TeamMember, Form, Participant, Program
-from .serializers import ListingSerializer, BusinessSerializer, SponsorSerializer, TeamMemberSerializer, FormSerializer, ParticipantSerializer, ProgramSerializer, ParticipantListSerializer
+from .models import Listing, Business, Sponsor, TeamMember, Form, Participant, Program, Infobox
+from .serializers import ListingSerializer, BusinessSerializer, SponsorSerializer, TeamMemberSerializer, FormSerializer, ParticipantSerializer, ProgramSerializer, ParticipantListSerializer, InfoboxSerializer
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
@@ -177,3 +177,6 @@ class ParticipantViewSet(viewsets.ModelViewSet):
         participant = Participant.objects.get(email=email)
         return Response({'participant:', participant})
 
+class InfoboxViewSet(viewsets.ModelViewSet):
+    serializer_class = InfoboxSerializer
+    queryset = Infobox.objects.all()

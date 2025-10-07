@@ -90,6 +90,11 @@ export default {
           name: 'Participants',
           url: this.$router.resolve({name: 'ParticipantAdmin'}).href,
           icon: 'cui-dollar'
+        },
+        {
+          name: 'Infoboks',
+          url: this.$router.resolve({name: 'InfoboxAdmin'}).href,
+          icon: 'cui-info'
         }
       ]
     }

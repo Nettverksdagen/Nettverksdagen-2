@@ -17,6 +17,9 @@
             <img class="overlay" src="@/assets/background_overlay.png">
         </div>
     </b-row>
+    <div class="InfoBox">
+      <InfoBox :box-title="title" :items="items" />
+    </div>
     <div class="boxes">
       <b-link :to="{name: 'Home', hash: '#stand-map'}" @click.native="scrollToId('stand-map')">
         <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" :box-text="$t('glassgårdentext')"/>
@@ -41,20 +44,29 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import HomeScreenBox from '@/components/anon/HomeScreenBox.vue'
+import InfoBox from '@/components/anon/InfoBox.vue'
 export default {
+  name: "HomeScreen",
   components: {
     HomeScreenBox,
+    InfoBox
+  },
+  data() {
+    return {
+      title: localStorage.getItem("infobox_title") || "Viktig informasjon",
+      items: JSON.parse(localStorage.getItem("infobox_items") || "[]")
+    };
   },
   methods: {
-    scrollToId (id) {
+    scrollToId(id) {
       var element = document.getElementById(id);
       var headerOffset = 80; // Pure guess. TODO: should be replaced with a more accurate value for the header height
       var elementPosition = element.getBoundingClientRect().top;
       var offsetPosition = elementPosition + window.scrollY - headerOffset;
-    
+
       window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth"
+        top: offsetPosition,
+        behavior: "smooth"
       });
     }
   }

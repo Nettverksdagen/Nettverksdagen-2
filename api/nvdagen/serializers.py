@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Listing, Business, Sponsor, TeamMember, Form, Program, Participant
+from .models import Listing, Business, Sponsor, TeamMember, Form, Program, Participant, Infobox
 
 
 class ListingSerializer(serializers.ModelSerializer):
@@ -45,3 +45,8 @@ class ParticipantListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Participant
         exclude = ('code',)
+
+class InfoboxSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Infobox
+        fields = '__all__'
