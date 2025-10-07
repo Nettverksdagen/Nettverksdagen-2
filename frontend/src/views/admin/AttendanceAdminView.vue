@@ -46,7 +46,36 @@
             <div v-if="activeTab === 'scanner'" class="tab-pane active">
               <div class="qr-scanner-container">
                 <h3>QR Code Scanner</h3>
-                <p class="text-muted">Camera-based QR scanning will be available soon.</p>
+
+                <!-- Camera Scanner -->
+                <div class="camera-scanner mb-4">
+                  <div v-if="!cameraEnabled">
+                    <button @click="startCamera" class="btn btn-lg btn-primary">
+                      <i class="fa fa-camera"></i> Start Camera Scanner
+                    </button>
+                    <p class="text-muted mt-2">
+                      <small>Note: Camera access requires HTTPS in production</small>
+                    </p>
+                  </div>
+
+                  <div v-else class="camera-view">
+                    <stream-barcode-reader
+                      @decode="onDecode"
+                      @loaded="onLoaded"
+                      class="qr-stream"
+                    ></stream-barcode-reader>
+
+                    <div class="camera-controls mt-3">
+                      <button @click="stopCamera" class="btn btn-danger">
+                        <i class="fa fa-times"></i> Stop Camera
+                      </button>
+                    </div>
+
+                    <div v-if="cameraError" class="alert alert-danger mt-3">
+                      {{ cameraError }}
+                    </div>
+                  </div>
+                </div>
 
                 <div class="manual-input mt-4">
                   <h5>Manual Token Input</h5>
@@ -314,13 +343,13 @@
 </template>
 
 <script>
-import QRScanner from '@/components/admin/QRScanner.vue'
+import { StreamBarcodeReader } from 'vue-barcode-reader'
 import axios from 'axios'
 
 export default {
   name: 'AttendanceAdminView',
   components: {
-    QRScanner
+    StreamBarcodeReader
   },
   data () {
     return {
@@ -337,7 +366,9 @@ export default {
       scannedParticipant: null,
       scanError: null,
       scanSuccess: null,
-      verifying: false
+      verifying: false,
+      cameraEnabled: false,
+      cameraError: null
     }
   },
   computed: {
@@ -594,6 +625,30 @@ export default {
           this.$refs.tokenInput.focus()
         }
       })
+    },
+
+    startCamera () {
+      this.cameraEnabled = true
+      this.cameraError = null
+    },
+
+    stopCamera () {
+      this.cameraEnabled = false
+      this.cameraError = null
+    },
+
+    async onDecode (result) {
+      // Stop camera and process QR code
+      this.stopCamera()
+
+      // Set the token and verify
+      this.manualToken = result
+      await this.verifyAndShowParticipant()
+    },
+
+    onLoaded () {
+      this.cameraError = null
+      console.log('Camera loaded successfully')
     }
   }
 }
@@ -666,6 +721,49 @@ export default {
 
 .participant-card .card-footer {
   background-color: #f8f9fa;
+}
+
+.camera-scanner {
+  text-align: center;
+}
+
+.camera-view {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.qr-stream {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  border: 3px solid #007bff;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.scanner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.scanner-frame {
+  width: 250px;
+  height: 250px;
+  border: 3px solid #00ff00;
+  border-radius: 12px;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+}
+
+.camera-controls {
+  text-align: center;
 }
 
 @media (max-width: 768px) {
