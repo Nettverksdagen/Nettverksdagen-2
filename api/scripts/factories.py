@@ -25,10 +25,10 @@ from nvdagen.models import (
     # DAYS_NONE,
 )
 
-LOCALE = 'nb_NO' # For Norwegian data
+LOCALE = 'no_NO' # For Norwegian data
 EXAMPLE_URL = 'http://example.com'
 
-fake = Faker('nb_NO') # For Norwegian data
+fake = Faker(LOCALE) # For Norwegian data
 factory.Faker.override_default_locale(LOCALE)
 
 class BusinessFactory(DjangoModelFactory):
@@ -87,14 +87,14 @@ class ProgramFactory(DjangoModelFactory):
         model = Program
     
     header = factory.Faker('sentence', nb_words=4)
-    time = factory.Faker('time')  # Random time
     place = factory.Faker('city')
-    capacity = factory.Faker('random_int', min=10, max=100)
-    registration_start = factory.Faker('past_datetime', start_date='-30d')
-    registration_end = factory.Faker('future_datetime', end_date='+30d')
-    event_start = factory.Faker('future_datetime', end_date='+60d')
-    event_end = factory.LazyAttribute(lambda obj: obj.event_start)  # Same as start or later
-
+    timeStart = factory.Faker('future_datetime', end_date='+60d')
+    timeEnd = factory.LazyAttribute(lambda obj: obj.timeStart)  # Same as start or later
+    paragraph = factory.Faker('paragraph')
+    registration = factory.Faker('random_element', elements = [True, False])
+    maxRegistered = factory.Faker('random_int', min=10, max=100)
+    registrationStart = factory.Faker('past_datetime', start_date='-30d')
+    registrationEnd = factory.Faker('future_datetime', end_date='+30d')
 
 class ParticipantFactory(DjangoModelFactory):
     class Meta:
