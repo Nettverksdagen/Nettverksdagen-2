@@ -1,18 +1,18 @@
 services:
   postgres:
     image: postgres
-    restart: "always"
+    estart: unless-stopped
     container_name: postgres
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: '1234'
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
   api:
     build: ./api
     command: "./django-prod-entrypoint.sh"
     depends_on:
       - postgres
-    restart: "always"
+    restart: unless-stopped
     environment:
       - DJANGO_SETTINGS_MODULE=nvdnew.settings.prod
 
@@ -29,13 +29,13 @@ services:
   fileserver:
     build: ./fileserver
     command: ["./main"]
-    restart: "always"
+    restart: unless-stopped
     volumes:
       - ./fileserver/uploads:/root/uploads
 
   nginx:
     image: linuxserver/swag
-    restart: "always"
+    restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
@@ -44,7 +44,7 @@ services:
       - GUID=1003
       - EMAIL=it@${DOMAIN}
       - URL=${DOMAIN}
-      - SUBDOMAINS=www
+      - SUBDOMAINS=${SUBDOMAINS}
       - TZ=Europe/Oslo
       - VALIDATION=http
       #- STAGING=true # Uncomment this when testing
