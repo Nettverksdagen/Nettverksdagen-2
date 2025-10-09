@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres
-    estart: unless-stopped
+    restart: unless-stopped
     container_name: postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
