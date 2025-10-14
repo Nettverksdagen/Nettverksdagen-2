@@ -4,7 +4,7 @@
     <div v-if="paragraph" class="list-disc pl-5 text-gray-700 space-y-1">
       {{paragraph}}
     </div>
-    <p v-else class="text-gray-500 italic">Ingen informasjon la ennå…</p>
+    <p v-else class="text-gray-500 italic"></p>
   </div>
 </template>
 
@@ -14,11 +14,11 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Viktig informasjon"
+      default: "" // Default to empty string if no title is provided
     },
     paragraph: {
       type: String,
-      default: "" //"Ingen informasjon la ennå…"
+      default: "" // Default to empty string if no paragraph is provided
     }
   },
 };

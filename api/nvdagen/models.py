@@ -120,5 +120,5 @@ class Participant(models.Model):
 
 class Infobox(models.Model):
     id = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=250)
-    paragraph = models.CharField(max_length=10000,blank=True, null=True)
+    title = models.CharField(max_length=250,blank=True, null=True)
+    paragraph = models.CharField(max_length=10000,blank=True, null=True)    

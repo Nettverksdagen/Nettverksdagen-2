@@ -72,7 +72,7 @@ export default {
   },
   computed: {
     infoboxTitle: function() {
-      return this.$store.state.infobox.title || "Viktig informasjon";
+      return this.$store.state.infobox.title || "";
     },
     infoboxParagraph: function() {
       return this.$store.state.infobox.paragraph || "";

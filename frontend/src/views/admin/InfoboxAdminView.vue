@@ -22,7 +22,6 @@
               <b-form-input
                 v-model="infobox.title"
                 id="infobox-title-input"
-                required
                 placeholder="Skriv inn tittel"
               />
             </b-form-group>
@@ -32,7 +31,6 @@
                 v-model="infobox.paragraph"
                 id="infobox-paragraph-input"
                 rows="5"
-                required
                 placeholder="Skriv inn informasjonstekst"
               />
             </b-form-group>
@@ -79,7 +77,7 @@ export default {
   },
   computed: {
     title () {
-      return this.$store.state.infobox.title || 'Viktig informasjon'
+      return this.$store.state.infobox.title || ''
     },
     paragraph () {
       return this.$store.state.infobox.paragraph || ''
