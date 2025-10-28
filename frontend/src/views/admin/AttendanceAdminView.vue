@@ -78,6 +78,7 @@
                 </div>
 
                 <div class="manual-input mt-4">
+                  <!-- Manual Token Input - Commented out for production
                   <h5>Manual Token Input</h5>
                   <p class="text-muted">Enter attendance token manually for check-in</p>
                   <div class="input-group mb-3">
@@ -94,6 +95,7 @@
                       </button>
                     </div>
                   </div>
+                  -->
 
                   <!-- Error message -->
                   <div v-if="scanError" class="alert alert-danger">
@@ -188,22 +190,18 @@
                   <thead>
                     <tr>
                       <th>Name</th>
+                      <th>Status</th>
+                      <th>Actions</th>
                       <th>Email</th>
                       <th>Study</th>
                       <th>Year</th>
                       <th>Event</th>
-                      <th>Status</th>
                       <th>Check-in Time</th>
-                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr v-for="participant in filteredParticipants" :key="participant.id">
                       <td>{{ participant.name }}</td>
-                      <td>{{ participant.email }}</td>
-                      <td>{{ participant.study }}</td>
-                      <td>{{ participant.year }}</td>
-                      <td>{{ getEventName(participant.event) }}</td>
                       <td>
                         <span
                           class="badge"
@@ -211,9 +209,6 @@
                         >
                           {{ participant.attended ? 'Attended' : 'Not Attended' }}
                         </span>
-                      </td>
-                      <td>
-                        {{ participant.check_in_time ? formatDateTime(participant.check_in_time) : '-' }}
                       </td>
                       <td>
                         <button
@@ -232,6 +227,13 @@
                         >
                           Undo Check-in
                         </button>
+                      </td>
+                      <td>{{ participant.email }}</td>
+                      <td>{{ participant.study }}</td>
+                      <td>{{ participant.year }}</td>
+                      <td>{{ getEventName(participant.event) }}</td>
+                      <td>
+                        {{ participant.check_in_time ? formatDateTime(participant.check_in_time) : '-' }}
                       </td>
                     </tr>
                   </tbody>
@@ -767,13 +769,141 @@ export default {
 }
 
 @media (max-width: 768px) {
+  /* Use negative margins to break out of parent padding */
+  .attendance-admin {
+    padding: 0 !important;
+    margin-left: -15px !important;
+    margin-right: -15px !important;
+  }
+
+  .container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .col-12, .col-md-6 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .tab-pane {
+    padding: 10px !important;
+  }
+
   .table-responsive {
-    font-size: 0.9em;
+    font-size: 0.95em;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 8px !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    overflow-x: auto;
+  }
+
+  .table {
+    margin: 0 !important;
+    min-width: 100%;
+  }
+
+  .table th,
+  .table td {
+    padding: 12px 8px !important;
+    white-space: nowrap;
+  }
+
+  /* Make columns wider */
+  .table th:nth-child(1),
+  .table td:nth-child(1) {
+    min-width: 100px;
+  }
+
+  .table th:nth-child(2),
+  .table td:nth-child(2) {
+    min-width: 120px;
+  }
+
+  .table th:nth-child(3),
+  .table td:nth-child(3) {
+    min-width: 100px;
+  }
+
+  .table th:nth-child(4),
+  .table td:nth-child(4) {
+    min-width: 180px;
+  }
+
+  .card {
+    border-radius: 8px !important;
+    margin: 10px !important;
+    padding: 15px !important;
+  }
+
+  .form-group, .mb-3 {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  h2 {
+    padding: 15px 15px 10px 15px !important;
+    margin-bottom: 5px !important;
+  }
+
+  h4 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-bottom: 10px !important;
+  }
+
+  .badge {
+    padding: 6px 10px;
+    font-size: 0.85em;
   }
 
   .btn-sm {
-    font-size: 0.8em;
-    padding: 0.25rem 0.5rem;
+    font-size: 0.85em;
+    padding: 6px 12px;
+    white-space: normal;
+    min-width: 80px;
+  }
+
+  /* Stack tabs vertically on mobile */
+  .nav-tabs {
+    display: flex;
+    flex-direction: column;
+    border-bottom: none;
+  }
+
+  .nav-tabs .nav-item {
+    width: 100%;
+  }
+
+  .nav-tabs .nav-link {
+    border: 1px solid #dee2e6;
+    border-radius: 0;
+    text-align: center;
+    padding: 15px;
+    font-size: 1rem;
+  }
+
+  .nav-tabs .nav-link.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+
+  .nav-tabs .nav-link:not(.active) {
+    background-color: #f8f9fa;
   }
 }
+
+
 </style>
