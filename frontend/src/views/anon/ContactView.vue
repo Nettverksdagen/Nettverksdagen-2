@@ -2,7 +2,7 @@
   <div class="contact-view">
     <Content>
     <!-- <h1>{{$t('kontakt')}}</h1> -->
-    <h1 class="page-header">{{$t('kontakt') + ' for ' + $t('nettverksdagene')  + ' 2025'}}</h1>
+    <h1 class="page-header">{{$t('kontakt') + ' for ' + $t('nettverksdagene')  + ' 2026'}}</h1>
     <b-row class="firstrow">
        <!-- <b-col cols="12" md="5">
           <p class="description">
@@ -54,7 +54,7 @@
 
       <b-row class="mt-5">
         <b-col cols="12">
-          <h1 class="page-header">{{$t('Kontaktpersoner') + ' for ' + $t('nettverksdagene')  + ' 2025'}}</h1>
+          <h1 class="page-header">{{$t('Kontaktpersoner') + ' for ' + $t('nettverksdagene')  + ' 2026'}}</h1>
         </b-col>
       </b-row>
         <b-row v-bind:key="team.key" v-for="team in teams">
