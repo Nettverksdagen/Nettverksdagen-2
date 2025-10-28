@@ -50,7 +50,7 @@ export default {
         {routeName: 'About', linkText: 'omoss'},
         {routeName: 'FAQ', linkText: 'faq_nav'},
         {routeName: 'Contact', linkText: 'kontakt'},
-        {routeName: 'Valgomat', linkText: 'valgomat'},
+        {routeName: 'Valgomat', linkText: 'valgomat'}
         // {routeName: 'language', linkText: 'English'}
       ]
     }

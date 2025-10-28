@@ -61,17 +61,17 @@ import axios from 'axios'
 import { mapMutations } from 'vuex'
 import DeleteButton from '@/components/admin/DeleteButton.vue'
 
-function generateDownloadableCsv(headerRow, rows) {
-  let csvContent = "data:text/csv;charset=utf-8,";
+function generateDownloadableCsv (headerRow, rows) {
+  let csvContent = 'data:text/csv;charset=utf-8,'
 
-  csvContent += headerRow.join(",") + "\r\n";
+  csvContent += headerRow.join(',') + '\r\n'
 
   rows.forEach(rowArray => {
-      let row = rowArray.join(",");
-      csvContent += row + "\r\n";
-  });
+    let row = rowArray.join(',')
+    csvContent += row + '\r\n'
+  })
 
-  return encodeURI(csvContent);
+  return encodeURI(csvContent)
 }
 
 export default {
@@ -149,7 +149,6 @@ export default {
         participant.allergies
       ])
       return generateDownloadableCsv([this.$t('name'), this.$t('email'), this.$t('study'), this.$t('yearOfStudy'), this.$t('allergies')], rows)
-
     },
     waitinglistDownloadHref: function () {
       const rows = this.waitingList.map(participant => [
@@ -160,7 +159,7 @@ export default {
         participant.allergies
       ])
       return generateDownloadableCsv([this.$t('name'), this.$t('email'), this.$t('study'), this.$t('yearOfStudy'), this.$t('allergies')], rows)
-    },
+    }
   },
   methods: {
     destroy: function (participant) {

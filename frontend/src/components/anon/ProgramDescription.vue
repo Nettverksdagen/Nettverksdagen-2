@@ -77,8 +77,8 @@
 
 <script>
 
-import ProgramRegistrationModal from '@/components/anon/ProgramRegistrationModal.vue';
-import ProgramUnregistrationModal from './ProgramUnregistrationModal.vue';
+import ProgramRegistrationModal from '@/components/anon/ProgramRegistrationModal.vue'
+import ProgramUnregistrationModal from './ProgramUnregistrationModal.vue'
 
 export default {
   name: 'ProgramDescription',
@@ -97,12 +97,12 @@ export default {
   ],
   components: {
     ProgramRegistrationModal,
-    ProgramUnregistrationModal,
+    ProgramUnregistrationModal
   },
   data () {
     return {
       registrationSuccessAlertCountDown: 0,
-      unregistrationSuccessAlertCountDown: 0,
+      unregistrationSuccessAlertCountDown: 0
     }
   },
   computed: {
@@ -146,7 +146,7 @@ export default {
     },
     showUnregistrationSuccessAlert () {
       this.unregistrationSuccessAlertCountDown = 15
-    },
+    }
   }
 }
 </script>

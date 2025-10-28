@@ -252,7 +252,8 @@
             "contentPlaceholder": "Optional content in the job listing",
             "createListing": "Create listing",
             "updateListing": "Update listing",
-            "openListings": "open job listings"
+            "openListings": "open job listings",
+            "total": "total"
         },
 
         "participant": {

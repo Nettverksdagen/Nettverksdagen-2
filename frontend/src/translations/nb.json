@@ -237,7 +237,8 @@
             "contentPlaceholder": "Eventuelt innhold i stillingsannonsen",
             "createListing": "Opprett annonse",
             "updateListing": "Endre annonse",
-            "openListings": "åpne stillingsannonser"
+            "openListings": "åpne stillingsannonser",
+            "total": "totalt"
         },
         "participant": {
             "deleteConfirm": "Er du sikker på at du vil slette",
