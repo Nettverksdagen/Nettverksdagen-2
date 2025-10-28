@@ -196,8 +196,15 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                         data = {}
                         data['name'] = lastParticipant.name
                         data['code'] = lastParticipant.code
+                        data['email'] = lastParticipant.email
                         data['header'] = program.header
                         data['place'] = program.place
+                        data['timeStart'] = format_datetime(datetime.fromtimestamp(program.timeStart+3600), "EEEE dd. MMMM, 'klokken' H:MM ", locale='nb_NO')
+
+                        # Generate QR code for attendance
+                        qr_data = str(lastParticipant.attendance_token)
+                        data['qr_code'] = generate_qr_code(qr_data)
+
                         html_message = render_to_string('off_waiting_list.html', context=data)
                         plain_message = strip_tags(html_message)
                         send_mail('Nettverksdagene - Påmelding bekreftet for ' + lastParticipant.name,
