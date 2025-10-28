@@ -13,38 +13,37 @@
     </b-alert>
     <b-row class="my-4">
       <div class="col-12 col-md-8">
-        <b-card header="Legg ut en ny stillingsannonse" class="h-100">
+        <b-card :header="$t('admin.listing.header')" class="h-100">
           <b-form @submit.prevent="handleSubmit">
             <b-row>
               <div class="col-12 col-md-6">
-                <b-form-group label="Stillingstittel" label-for="listing-name-input">
-                  <b-form-input v-model="listing.name" id="listing-name-input" required placeholder="Velg en tittel" maxlength="100"></b-form-input>
+                <b-form-group :label="$t('admin.listing.jobTitle')" label-for="listing-name-input">
+                  <b-form-input v-model="listing.name" id="listing-name-input" required :placeholder="$t('admin.listing.jobTitlePlaceholder')" maxlength="100"></b-form-input>
                 </b-form-group>
-                <b-form-group label="Firmanavn" label-for="listing-company-input">
-                  <b-form-input v-model="listing.company_name" id="listing-company-input" required placeholder="Skriv inn firmanavn" ></b-form-input>
+                <b-form-group :label="$t('admin.listing.companyName')" label-for="listing-company-input">
+                  <b-form-input v-model="listing.company_name" id="listing-company-input" required :placeholder="$t('admin.listing.companyNamePlaceholder')" ></b-form-input>
                 </b-form-group>
-                <b-form-group label="Stillingstype" label-for="listing-company-type">
+                <b-form-group :label="$t('admin.listing.jobType')" label-for="listing-company-type">
                   <b-form-select v-model="listing.type" :options="listingTypes" id="listing-company-type" required></b-form-select>
                 </b-form-group>
-                <b-form-group label="Sted" label-for="listing-city-input">
-                  <b-form-input v-model="listing.city" id="listing-city-input" required placeholder="Skriv hvor jobben finner sted" maxlength="100"></b-form-input>
+                <b-form-group :label="$t('admin.listing.location')" label-for="listing-city-input">
+                  <b-form-input v-model="listing.city" id="listing-city-input" required :placeholder="$t('admin.listing.locationPlaceholder')" maxlength="100"></b-form-input>
                   <p class="text-black-50 mt-2">
-                    <span class="font-weight-bold">Merk</span>:
-                    For å opprette stillingsannonser for flere enn én jobblokasjon, skriv en liste med kommaseparerte steder.
-                    F.eks: "Oslo, Bergen, Trondheim".
+                    <span class="font-weight-bold">{{$t('merk')}}</span>:
+                    {{$t('admin.listing.locationNote')}}
                   </p>
                 </b-form-group>
               </div>
               <div class="col-12 col-md-6">
-                <b-form-group label="Søknadsfrist (la stå blank for løpende frist)" label-for="listing-deadline">
-                  <datepicker v-model="deadlineDateTime" :typeable="true" :required="false" format="yyyy-MM-dd" placeholder="Trykk for å velge dato" :bootstrap-styling="true" :monday-first="true" id="listing-deadline"></datepicker>
+                <b-form-group :label="$t('admin.listing.deadline')" label-for="listing-deadline">
+                  <datepicker v-model="deadlineDateTime" :typeable="true" :required="false" format="yyyy-MM-dd" :placeholder="$t('admin.listing.deadlinePlaceholder')" :bootstrap-styling="true" :monday-first="true" id="listing-deadline"></datepicker>
                 </b-form-group>
-                <b-form-group label="Link til annonse (må starte med https://)" label-for="listing-url-input">
-                  <b-form-input type="url" v-model="listing.listing_url" id="listing-url-input" required placeholder="Skriv inn link" @input="validateLink"></b-form-input>
+                <b-form-group :label="$t('admin.listing.listingUrl')" label-for="listing-url-input">
+                  <b-form-input type="url" v-model="listing.listing_url" id="listing-url-input" required :placeholder="$t('admin.listing.listingUrlPlaceholder')" @input="validateLink"></b-form-input>
                 </b-form-group>
                 <div class="d-flex">
-                  <b-form-group class="flex-grow-1" label="Logo" label-for="listing-logo">
-                    <b-form-file v-model="logoFile" :required="!editing" placeholder="Velg et bilde" ref="logoFileInput" @input="uploadLogo"></b-form-file>
+                  <b-form-group class="flex-grow-1" :label="$t('admin.listing.logo')" label-for="listing-logo">
+                    <b-form-file v-model="logoFile" :required="!editing" :placeholder="$t('admin.listing.selectImage')" ref="logoFileInput" @input="uploadLogo"></b-form-file>
                   </b-form-group>
                   <image-preview :imgPreviewSrc="imgSrc" :showImgPreview="showImgPreview"></image-preview>
                 </div>
@@ -52,26 +51,26 @@
             </b-row>
             <b-row>
               <div class="col-12">
-                <b-form-group label="Intern link til annonse" label-for="internal-url-input">
-                  <b-form-input v-model="listing.internal_url" id="internal-url-input" placeholder="Skriv inn intern link"></b-form-input>
+                <b-form-group :label="$t('admin.listing.internalUrl')" label-for="internal-url-input">
+                  <b-form-input v-model="listing.internal_url" id="internal-url-input" :placeholder="$t('admin.listing.internalUrlPlaceholder')"></b-form-input>
                   <p class="text-black-50 mt-2">
                     <span class="font-weight-bold">{{$t('merk')}}</span>:
                     {{$t('lastpart')}}
                   </p>
                 </b-form-group>
-                <b-form-group label="Innhold i intern stillingsannonse (kan inneholde html)" label-for="content-input">
-                  <b-form-textarea v-model="listing.content" id="content-textarea" placeholder="Eventuelt innhold i stillingsannonsen" ></b-form-textarea>
+                <b-form-group :label="$t('admin.listing.content')" label-for="content-input">
+                  <b-form-textarea v-model="listing.content" id="content-textarea" :placeholder="$t('admin.listing.contentPlaceholder')" ></b-form-textarea>
                 </b-form-group>
               </div>
             </b-row>
-            <b-button type="submit" size="md" variant="success" v-if="!editing">Opprett annonse</b-button>
-            <b-button type="submit" size="md" variant="primary" v-if="editing">Endre annonse</b-button>
-            <b-button v-on:click="abortEdit()" size="md" variant="secondary" v-if="editing">Avbryt</b-button>
+            <b-button type="submit" size="md" variant="success" v-if="!editing">{{$t('admin.listing.createListing')}}</b-button>
+            <b-button type="submit" size="md" variant="primary" v-if="editing">{{$t('admin.listing.updateListing')}}</b-button>
+            <b-button v-on:click="abortEdit()" size="md" variant="secondary" v-if="editing">{{$t('abort')}}</b-button>
           </b-form>
         </b-card>
       </div>
       <div class="d-none d-md-block col-4">
-        <b-jumbotron bg-variant="info" text-variant="white" :header="numListings + ''" lead="åpne stillingsannonser" class="h-100">
+        <b-jumbotron bg-variant="info" text-variant="white" :header="numListings + ''" :lead="$t('admin.listing.openListings')" class="h-100">
           <hr class="my-4">
           <p>
             {{$t('herestilling')}}
@@ -82,7 +81,7 @@
     </b-row>
     <b-row>
       <div class="col-12">
-        <b-card header="Stillingsannonser">
+        <b-card :header="$t('admin.listing.listHeader')">
           <b-table class="d-none d-md-table" hover :fields="fields" :items="listings">
             <template v-slot:cell(edit)="listings">
               <edit-button class="mx-3" @click.native="edit(listings.item)"></edit-button>
@@ -148,7 +147,7 @@ export default {
         heading: '',
         message: ''
       },
-      listingTypes: [{value: null, text: 'Velg en stillingstype'}]
+      listingTypes: [{value: null, text: this.$t('admin.listing.selectJobType')}]
     }
   },
   computed: {
@@ -182,27 +181,27 @@ export default {
       }
       axios[this.$data.editing ? 'put' : 'post'](process.env.VUE_APP_API_HOST + '/api/listing/' +
         (this.$data.editing ? this.$data.listing.id + '/' : ''), this.$data.listing).then((response) => {
-        this.showAlert('success', 'Suksess!', 'Stillingsannonsen ble ' + (this.$data.editing ? 'endret.' : 'opprettet.'))
+        this.showAlert('success', this.$t('admin.success'), this.$t('admin.listing.listHeader') + ' ' + (this.$data.editing ? this.$t('admin.updated') : this.$t('admin.created')))
         this['listings/' + (this.$data.editing ? 'updateListing' : 'addListing')](response.data)
         this.resetForm()
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
-          'Stillingsannonsen ble ikke opprettet.')
+          this.$t('admin.listing.listHeader') + ' ' + this.$t('admin.couldNotPublish'))
       })
     },
     destroy: function (listing) {
-      if (!confirm('Er du sikker på at du vil slette ' + listing.name + '?')) {
+      if (!confirm(this.$t('admin.confirmDelete') + ' ' + listing.name + '?')) {
         return
       }
       axios.delete(process.env.VUE_APP_API_HOST + '/api/listing/' +
         listing.id + '/').then((response) => {
-        this.showAlert('success', 'Suksess!', 'Annonsen ble slettet')
+        this.showAlert('success', this.$t('admin.success'), this.$t('admin.listing.listHeader') + ' ' + this.$t('admin.deleted'))
         this['listings/deleteListing'](listing)
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
-          'Stillingsannonsen kunne ikke slettes.')
+          this.$t('admin.listing.listHeader') + ' ' + this.$t('admin.couldNotDelete'))
       })
       this.resetForm()
     },
@@ -241,7 +240,7 @@ export default {
           }
           this.showAlert('danger',
             errorTitle,
-            'Bildeopplastning feilet, prøv igjen. Kontakt IT om problemet vedvarer.')
+            this.$t('admin.imageUploadFailed'))
           this.$data.showImgPreview = false
         })
     },
@@ -270,7 +269,7 @@ export default {
     }).catch((e) => {
       this.showAlert('error',
         'Error ' + e.response.status + ' ' + e.response.statusText,
-        'Kunne ikke lese skjema fra tjeneren. Prøv å laste siden på nytt.')
+        this.$t('admin.couldNotLoadForm'))
     })
   }
 }

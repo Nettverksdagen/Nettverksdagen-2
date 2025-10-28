@@ -151,7 +151,7 @@
 
     </svg>
     <svg class="standkart-text" viewBox="0 0 2116 2123">
-      <text x="100" y="200" dominant-baseline="middle" text-anchor="left" font-size="80px" font-weight="500" fill="#D9D9D9">Standkart</text>
+      <text x="100" y="200" dominant-baseline="middle" text-anchor="left" font-size="80px" font-weight="500" fill="#D9D9D9">{{ $t('standmap.title') }}</text>
       <line v-bind:key="index" v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap" :x1="StandPosition.x"
         :y1="StandPosition.y" :x2="StandPosition.x" :y2="StandPosition.y" stroke="#898989" class="_circle"
         :id="'circle-' + index" @mouseover="handleTextMouseOver(business.standnumber)"
@@ -180,8 +180,7 @@
         :text-anchor="(StandPositionMap[business.standnumber].text_rotation > 90 && StandPositionMap[business.standnumber].text_rotation < 270 ? 'end' : 'start')"
         :transform="'rotate(' + (StandPositionMap[business.standnumber].text_rotation > 90 && StandPositionMap[business.standnumber].text_rotation < 270 ? StandPositionMap[business.standnumber].text_rotation - 180 : StandPositionMap[business.standnumber].text_rotation) + ',' + StandPositionMap[business.standnumber].x + ',' + StandPositionMap[business.standnumber].y + ')'"
         stroke="#e3e3e1" fill="#e3e3e1" font-size="1.5em" class="_business" :id="'business-' + business.standnumber"
-        @mouseover="handleTextMouseOver(business.standnumber)" @mouseout="handleTextMouseOut(business.standnumber)">{{
-          business.name }}</text>
+        @mouseover="handleTextMouseOver(business.standnumber)" @mouseout="handleTextMouseOut(business.standnumber)">{{ displayName(business) }}</text>
         <!-- dots on admin page -->
       <text v-bind:key="'t3' + index" v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap"
         :x="StandPosition.x" :y="StandPosition.y" dominant-baseline="middle" text-anchor="middle" font-size="20px"
@@ -203,8 +202,16 @@
 
     </svg>
     <div class="toggle_holder">
-      <VueToggles height="30" width="90" checkedText="Dag 1" uncheckedText="Dag 2" checkedBg="#e3e3e1"
-        uncheckedBg="#e3e3e1" checkedColor="#000000" uncheckedColor="#000000" :value="isDayOne"
+      <VueToggles
+        height="30"
+        width="90"
+        :checkedText="$t('businesses.days.day1')"
+        :uncheckedText="$t('businesses.days.day2')"
+        checkedBg="#e3e3e1"
+        uncheckedBg="#e3e3e1"
+        checkedColor="#000000"
+        uncheckedColor="#000000"
+        :value="isDayOne"
         @click="isDayOne = !isDayOne" />
     </div>
   </div>
@@ -250,18 +257,29 @@ export default {
   created () {
     this.StandPositionMap = StandPositionData
   },
-  handleTextMouseOut (standnumber) {
-    // TODO: Refactor to not use getElementById
-    // const circle = document.getElementById(`circle-${standnumber}`)
-    // const business = document.getElementById(`business-${standnumber}`)
+  methods: {
+    // Display localized business name if available. The UI will pick name_<locale> (e.g. name_en)
+    // and fall back to name or other fields.
+    displayName (business) {
+      if (!business) return ''
+      const locale = (this.$i18n && this.$i18n.locale) ? this.$i18n.locale : 'nb'
+      const key = 'name_' + locale
+      return business[key] || business.name || business.name_en || ''
+    },
+    handleTextMouseOut (standnumber) {
+      // TODO: Refactor to not use getElementById
+      // const circle = document.getElementById(`circle-${standnumber}`)
+      // const business = document.getElementById(`business-${standnumber}`)
 
-    // circle.classList.remove('hovered')
-    // business.classList.remove('hovered')
-  },
-  changeInput () {
-    this.checked = !this.checked
-    this.$emit('input', !this.value)
+      // circle.classList.remove('hovered')
+      // business.classList.remove('hovered')
+    },
+    changeInput () {
+      this.checked = !this.checked
+      this.$emit('input', !this.value)
+    }
   }
+
 }
 
 </script>

@@ -1,3 +1,4 @@
+import { i18n } from '../translations/translations'
 
 const defaultState = {
   all: []
@@ -21,36 +22,39 @@ const actions = {
 
 const getters = {
   levels: state => {
-    let levels = [
-      {level: 'Hovedsamarbeidspartner', levelHeader: 'Møt vår nye hovedsamarbeidspartner', businesses: []},
-      {level: 'Samarbeidspartner', levelHeader: 'Samarbeids&shy;partnere', businesses: []},
-      {level: 'Gull', levelHeader: 'Bedrifter du kan møte på stand', businesses: []},
-      {level: 'Sølv', levelHeader: '', businesses: []},
-      {level: 'Bronse', levelHeader: '', businesses: []}
+    // map backend level values (used for matching) to translated labels/headers
+    const levelMap = [
+      { value: 'Hovedsamarbeidspartner', label: i18n.t('businesses.levels.main'), header: i18n.t('businesses.mainPartnerHeader'), businesses: [] },
+      { value: 'Samarbeidspartner', label: i18n.t('businesses.levels.partner'), header: i18n.t('businesses.partnersHeader'), businesses: [] },
+      { value: 'Gull', label: i18n.t('businesses.levels.gold'), header: i18n.t('businesses.standHeader'), businesses: [] },
+      { value: 'Sølv', label: i18n.t('businesses.levels.silver'), header: '', businesses: [] },
+      { value: 'Bronse', label: i18n.t('businesses.levels.bronze'), header: '', businesses: [] }
     ]
+
     for (let i = 0; i < state.all.length; i++) {
-      for (let j = 0; j < levels.length; j++) {
-        if (state.all[i].level === levels[j].level) {
-          levels[j].businesses.push(state.all[i])
+      for (let j = 0; j < levelMap.length; j++) {
+        if (state.all[i].level === levelMap[j].value) {
+          levelMap[j].businesses.push(state.all[i])
           break
         }
       }
     }
-    return levels
+    return levelMap
   },
   days: state => {
+    // days.day is used for matching against backend values; dayLabel/dayHeader are translated for UI
     let days = [
-      {day: 'Dag 1', dayHeader: 'Bedrifter du kan møte på stand'},
-      {day: 'Dag 2', dayHeader: 'Bedrifter du kan møte på stand'}
+      { day: 'Dag 1', dayLabel: i18n.t('businesses.days.day1'), dayHeader: i18n.t('businesses.days.dayHeader') },
+      { day: 'Dag 2', dayLabel: i18n.t('businesses.days.day2'), dayHeader: i18n.t('businesses.days.dayHeader') }
     ]
 
     for (let i = 0; i < days.length; i++) {
       days[i]['levels'] = [
-        {level: 'Hovedsamarbeidspartner', businesses: []},
-        {level: 'Samarbeidspartner', businesses: []},
-        {level: 'Gull', businesses: []},
-        {level: 'Sølv', businesses: []},
-        {level: 'Bronse', businesses: []}
+        {level: 'Hovedsamarbeidspartner', label: i18n.t('businesses.levels.main'), businesses: []},
+        {level: 'Samarbeidspartner', label: i18n.t('businesses.levels.partner'), businesses: []},
+        {level: 'Gull', label: i18n.t('businesses.levels.gold'), businesses: []},
+        {level: 'Sølv', label: i18n.t('businesses.levels.silver'), businesses: []},
+        {level: 'Bronse', label: i18n.t('businesses.levels.bronze'), businesses: []}
       ]
     }
     for (let i = 0; i < state.all.length; i++) {

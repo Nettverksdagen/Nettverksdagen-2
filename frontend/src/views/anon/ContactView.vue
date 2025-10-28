@@ -1,20 +1,14 @@
 <template>
   <div class="contact-view">
     <Content>
-    <!-- <h1>{{$t('kontakt')}}</h1> -->
     <h1 class="page-header">{{$t('kontakt') + ' for ' + $t('nettverksdagene')  + ' 2025'}}</h1>
     <b-row class="firstrow">
-       <!-- <b-col cols="12" md="5">
-          <p class="description">
-            {{$t('contactinfo')}}
-          </p>
-        </b-col>-->
         <b-col cols="12" md="7">
           <b-card class="overview">
           <table class="main-contact">
             <tr>
               <td class="align-top">
-                <h3>{{$t('bedrift')}}</h3>
+                <h3>{{$t('company')}}</h3>
                 <b-link href="mailto:bedrift@nettverksdagene.no">bedrift@nettverksdagene.no</b-link>
               </td>
               <td>
@@ -26,7 +20,7 @@
 
             <tr>
               <td class="align-top">
-                <h3>{{$t('Styret')}}</h3>
+                <h3>{{$t('board')}}</h3>
                 <b-link href="mailto:leder@nettverksdagene.no">leder@nettverksdagene.no</b-link>
               </td>
               <td>
@@ -37,7 +31,7 @@
             </tr>
             <tr>
               <td class="align-top">
-                <h3>Sponsor</h3>
+                <h3>{{$t('sponsor')}}</h3>
                 <b-link href="mailto:spons@nettverksdagene.no">spons@nettverksdagene.no</b-link>
               </td>
               <td>
@@ -54,7 +48,7 @@
 
       <b-row class="mt-5">
         <b-col cols="12">
-          <h1 class="page-header">{{$t('Kontaktpersoner') + ' for ' + $t('nettverksdagene')  + ' 2025'}}</h1>
+          <h1 class="page-header">{{$t('contactPersons') + ' for ' + $t('nettverksdagene')  + ' 2025'}}</h1>
         </b-col>
       </b-row>
         <b-row v-bind:key="team.key" v-for="team in teams">
@@ -75,7 +69,7 @@
                 <div class="ml-3 d-flex justify-content-center flex-column">
                   <h4 class="member-name m-0">{{ member.name }}</h4>
                   <b-link class="member-email" :href="'mailto:' + member.email">{{ member.email }}</b-link>
-                  <span class="font-weight-bold text-black-50">{{ member.position }}</span>
+                  <span class="font-weight-bold text-black-50">{{ displayPosition(member.position) }}</span>
                 </div>
               </b-card-body>
             </b-card>
@@ -100,6 +94,15 @@ export default {
   computed: {
     teams: function () {
       return this.$store.getters['teamMembers/teams']
+    }
+  },
+  methods: {
+    displayPosition (pos) {
+      if (!pos) return ''
+      const key = `teamMember.positions.${pos}`
+      const translated = this.$t(key)
+      // when missing, vue-i18n returns the key itself (or the fallback), so detect and fallback to raw pos
+      return (translated && translated !== key) ? translated : pos
     }
   },
   fileServerHost: process.env.VUE_APP_FILESERVER_HOST

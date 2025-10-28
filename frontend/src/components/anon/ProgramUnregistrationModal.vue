@@ -46,7 +46,7 @@
         </b-form-input>
       </b-form-group>
     </b-form>
-    <p>Finner du ikke koden? <b-link @click="sendUnregistrationCode">Trykk her for å få sende den på nytt.</b-link></p>
+    <p>{{$t('cannotFindCode')}} <b-link @click="sendUnregistrationCode">{{$t('clickHereToResend')}}</b-link></p>
   </b-modal>
 </template>
 
