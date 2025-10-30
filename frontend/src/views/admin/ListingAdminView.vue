@@ -170,7 +170,7 @@ export default {
       today.setHours(0, 0, 0, 0) // Start of today
 
       return this.listings.filter((listing) => {
-        if (!listing.deadline || listing.deadline == 0) return true // No deadline => active
+        if (!listing.deadline || listing.deadline === 0) return true // No deadline => active
         const deadline = new Date(listing.deadline)
         deadline.setHours(23, 59, 59, 999) // End of day
 
@@ -265,7 +265,7 @@ export default {
       this.$data.listing = listing
       this.$data.showImgPreview = true
       this.$data.editing = true
-      this.$data.deadlineDateTime = listing.deadline ?  new Date(listing.deadline) : null
+      this.$data.deadlineDateTime = listing.deadline ? new Date(listing.deadline) : null
       // Scroll to top when editing
       window.scrollTo({top: 0, behavior: 'smooth'})
     },

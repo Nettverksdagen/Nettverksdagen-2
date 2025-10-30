@@ -29,8 +29,8 @@
 import QuestionCard from '@/components/valgomat/QuestionCard.vue'
 import ProgressBar from '@/components/valgomat/ProgressBar.vue'
 import questions from '@/components/valgomat/questions.json'
-import companyDescription_nb from '@/components/valgomat/companyDescription_nb.json'
-import companyDescription_en from '@/components/valgomat/companyDescription_en.json'
+import companyDescriptionNb from '@/components/valgomat/companyDescription_nb.json'
+import companyDescriptionEn from '@/components/valgomat/companyDescription_en.json'
 
 export default {
   components: {
@@ -50,7 +50,7 @@ export default {
   computed: {
     companyDescription () {
       // Return the appropriate company description file based on current locale
-      return this.$i18n.locale === 'en' ? companyDescription_en : companyDescription_nb
+      return this.$i18n.locale === 'en' ? companyDescriptionEn : companyDescriptionNb
     }
   },
   methods: {
