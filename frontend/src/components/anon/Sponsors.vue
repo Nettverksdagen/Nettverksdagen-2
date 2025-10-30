@@ -1,7 +1,7 @@
 <template>
     <div class="sponsors mt-5">
       <Content>
-        <h2 class="text-center font-weight-bold">{{ $t('sponsors.mainSponsor') }}</h2>  
+        <h2 class="text-center font-weight-bold">{{ $t('sponsors.mainSponsor') }}</h2>
         <div class="sponsor col-5">
           <a href="https://nfea.no/" target="_blank" rel="noopener noreferrer">
             <b-img fluid src="@/assets/nfea.png"></b-img>
