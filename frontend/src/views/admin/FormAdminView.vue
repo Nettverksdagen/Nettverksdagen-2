@@ -13,18 +13,18 @@
     </b-alert>
     <b-row class="my-4">
       <div class="col-12 col-md-8">
-        <b-card header="Legg til nytt Google-skjema" class="h-100">
+        <b-card :header="$t('admin.form.header')" class="h-100">
           <b-form @submit.prevent="handleSubmit">
             <b-row>
               <div class="col-12 col-md-6">
-                <b-form-group label="Google Forms-url" label-for="form-external-url-input">
-                  <b-form-input v-model="form.external_url" id="form-external-url-input" required placeholder="https://docs.google.com/forms..." ></b-form-input>
+                <b-form-group :label="$t('admin.form.externalUrl')" label-for="form-external-url-input">
+                  <b-form-input v-model="form.external_url" id="form-external-url-input" required :placeholder="$t('admin.form.externalUrlPlaceholder')" ></b-form-input>
                 </b-form-group>
-                <b-form-group label="Intern Nettverksdagene.no-url (kun den delen som kommer etter nettverksdagene.no/skjema/)" label-for="form-internal-url-input">
-                  <b-form-input v-model="form.internal_url" id="form-internal-url-input" required placeholder="Intern skjema-url" ></b-form-input>
+                <b-form-group :label="$t('admin.form.internalUrl')" label-for="form-internal-url-input">
+                  <b-form-input v-model="form.internal_url" id="form-internal-url-input" required :placeholder="$t('admin.form.internalUrlPlaceholder')" ></b-form-input>
                 </b-form-group>
-                <b-form-group label="iFrame-høyde (kun tall)" label-for="form-iframe-height-input">
-                  <b-form-input v-model="form.iframe_height" id="form-iframe-height-input" required placeholder="iFrame-høyde" ></b-form-input>
+                <b-form-group :label="$t('admin.form.iframeHeight')" label-for="form-iframe-height-input">
+                  <b-form-input v-model="form.iframe_height" id="form-iframe-height-input" required :placeholder="$t('admin.form.iframeHeightPlaceholder')" ></b-form-input>
                 </b-form-group>
               </div>
             </b-row>
@@ -37,7 +37,7 @@
     </b-row>
     <b-row>
       <div class="col-12">
-        <b-card header="Skjemaer">
+        <b-card :header="$t('admin.form.listHeader')">
           <b-table class="d-none d-md-table" hover :fields="fields" :items="forms">
             <template v-slot:cell(edit)="forms">
               <edit-button class="mx-3" @click.native="edit(forms.item)"></edit-button>
@@ -72,8 +72,8 @@ export default {
   data: function () {
     return {
       fields: [
-        'id', { key: 'external_url', label: 'Ekstern url' }, { key: 'internal_url', label: 'Intern url' },
-        { key: 'iframe_height', label: 'iFrame-høyde' },
+        'id', { key: 'external_url', label: this.$t('admin.form.externalUrlLabel') }, { key: 'internal_url', label: this.$t('admin.form.internalUrlLabel') },
+        { key: 'iframe_height', label: this.$t('admin.form.iframeHeightLabel') },
         { key: 'edit', label: '' }
       ],
       form: {
@@ -103,28 +103,28 @@ export default {
     handleSubmit: function () {
       axios[(this.$data.editing ? 'put' : 'post')](process.env.VUE_APP_API_HOST + '/api/form/' +
             (this.$data.editing ? this.$data.form.id + '/' : ''), this.$data.form).then((response) => {
-        this.showAlert('success', 'Suksess!', 'Skjemaet er blitt ' +
-           (this.$data.editing ? 'endret.' : 'lagt til.'))
+        this.showAlert('success', this.$t('admin.success'), this.$t('admin.form.listHeader') + ' ' +
+           (this.$data.editing ? this.$t('admin.updated') : this.$t('admin.created')))
         this['forms/' + (this.$data.editing ? 'updateForm' : 'addForm')](response.data)
         this.resetForm()
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
-          'Skjemaet kunne ikke legges ut.')
+          this.$t('admin.form.listHeader') + ' ' + this.$t('admin.couldNotPublish'))
       })
     },
     destroy: function (form) {
-      if (!confirm('Er du sikker på at du vil slette ' + form.internal_url + '?')) {
+      if (!confirm(this.$t('admin.confirmDelete') + ' ' + form.internal_url + '?')) {
         return
       }
       axios.delete(process.env.VUE_APP_API_HOST + '/api/form/' +
         form.id + '/').then((response) => {
-        this.showAlert('success', 'Suksess!', 'Skjemaet er blitt slettet')
+        this.showAlert('success', this.$t('admin.success'), this.$t('admin.form.listHeader') + ' ' + this.$t('admin.deleted'))
         this['forms/deleteForm'](form)
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
-          'Skjemaet kunne ikke slettes.')
+          this.$t('admin.form.listHeader') + ' ' + this.$t('admin.couldNotDelete'))
       })
       this.resetForm()
     },

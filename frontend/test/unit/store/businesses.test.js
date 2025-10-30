@@ -73,9 +73,9 @@ describe('businesses store', () => {
         ]
       }
       const result = businesses.getters.levels(testState)
-      expect(result.find(l => l.level === 'Hovedsamarbeidspartner').businesses).toEqual([{ id: 1, level: 'Hovedsamarbeidspartner' }])
-      expect(result.find(l => l.level === 'Gull').businesses).toEqual([{ id: 2, level: 'Gull' }])
-      expect(result.find(l => l.level === 'Sølv').businesses).toEqual([{ id: 3, level: 'Sølv' }])
+      expect(result.find(l => l.value === 'Hovedsamarbeidspartner').businesses).toEqual([{ id: 1, level: 'Hovedsamarbeidspartner' }])
+      expect(result.find(l => l.value === 'Gull').businesses).toEqual([{ id: 2, level: 'Gull' }])
+      expect(result.find(l => l.value === 'Sølv').businesses).toEqual([{ id: 3, level: 'Sølv' }])
     })
 
     it('days organizes businesses by level and day', () => {

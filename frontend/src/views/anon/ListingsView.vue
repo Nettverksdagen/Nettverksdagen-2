@@ -20,7 +20,7 @@
                       <b-form-checkbox-group
                         id="position-type-checkboxes"
                         v-model="selectedPositionTypes"
-                        :options="$options.allPositionTypes"
+                        :options="translatedPositionTypes"
                         stacked
                         size="lg">
                       </b-form-checkbox-group>
@@ -85,6 +85,12 @@ export default {
     }
   },
   computed: {
+    translatedPositionTypes: function () {
+      return this.$options.allPositionTypes.map(type => ({
+        value: type,
+        text: this.$t(`positionTypes.${type}`) || type
+      }))
+    },
     availableListings: function () {
       let listings = this.$store.state.listings.all
       // Sort by id
