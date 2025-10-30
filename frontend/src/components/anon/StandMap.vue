@@ -262,7 +262,7 @@ export default {
     // and fall back to name or other fields.
     displayName (business) {
       if (!business) return ''
-      const locale = (this.$i18n && this.$i18n.locale) ? this.$i18n.locale : 'nb'
+      const locale = this.$i18n?.locale ? this.$i18n.locale : 'nb'
       const key = 'name_' + locale
       return business[key] || business.name || business.name_en || ''
     },
