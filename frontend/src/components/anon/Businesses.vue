@@ -1,7 +1,7 @@
 <template>
   <div class="businesses mt-5">
     <Content>
-      <div v-for="(level, index) in levels.slice(0,2)" :key="index" class="samarbeidspartnere">
+      <div v-for="(level, index) in levels.slice(0,2)" :key="index" class="samarbeidspartnere" v-if="level.businesses.length > 0">
         <h2 class="text-center font-weight-bold" v-html="levels[index].header"></h2>
         <b-row class="justify-content-center">
           <Business v-for="(business, index) in level.businesses"
