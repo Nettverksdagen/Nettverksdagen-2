@@ -49,8 +49,7 @@ export default {
         {routeName: 'Listings', linkText: 'stillingsannonser'},
         {routeName: 'About', linkText: 'omoss'},
         {routeName: 'FAQ', linkText: 'faq_nav'},
-        {routeName: 'Contact', linkText: 'kontakt'},
-        {routeName: 'Valgomat', linkText: 'valgomat'}
+        {routeName: 'Contact', linkText: 'kontakt'}
         // {routeName: 'language', linkText: 'English'}
       ]
     }
