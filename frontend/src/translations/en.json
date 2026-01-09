@@ -106,6 +106,7 @@
     "positionTypes": {
         "Sommerjobb": "Summer job",
         "Fast stilling": "Permanent position",
+        "Internship": "Internship",
         "Trainee": "Trainee",
         "Deltidsstilling": "Part-time position"
     },
