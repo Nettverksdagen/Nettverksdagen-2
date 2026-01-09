@@ -82,13 +82,37 @@
     <b-row>
       <div class="col-12">
         <b-card :header="$t('admin.listing.listHeader')">
+          <template #header>
+            <div class="d-flex justify-content-between align-items-center">
+              <span>{{ $t('admin.listing.listHeader') }}</span>
+              <div class="d-flex align-items-center">
+                <b-form-checkbox v-model="selectAll" @change="toggleSelectAll" class="mr-3">
+                  {{ $t('admin.selectAll') }}
+                </b-form-checkbox>
+                <b-button
+                  v-if="selectedListings.length > 0"
+                  variant="danger"
+                  size="sm"
+                  @click="bulkDestroy"
+                >
+                  {{ $t('admin.deleteSelected') }} ({{ selectedListings.length }})
+                </b-button>
+              </div>
+            </div>
+          </template>
           <b-table class="d-none d-md-table" hover :fields="fields" :items="listings">
+            <template v-slot:cell(select)="row">
+              <b-form-checkbox v-model="selectedListings" :value="row.item.id"></b-form-checkbox>
+            </template>
             <template v-slot:cell(edit)="listings">
               <edit-button class="mx-3" @click.native="edit(listings.item)"></edit-button>
               <delete-button class="mx-3" @click.native="destroy(listings.item)"></delete-button>
             </template>
           </b-table>
           <b-table class="d-block d-md-none" stacked :fields="fields" :items="listings">
+            <template v-slot:cell(select)="row">
+              <b-form-checkbox v-model="selectedListings" :value="row.item.id"></b-form-checkbox>
+            </template>
             <template v-slot:cell(edit)="listings">
               <edit-button class="mx-3" @click.native="edit(listings.item)"></edit-button>
               <delete-button class="mx-3" @click.native="destroy(listings.item)"></delete-button>
@@ -119,12 +143,15 @@ export default {
   data: function () {
     return {
       fields: [
+        { key: 'select', label: '' },
         'id', { key: 'name', label: 'Name' }, { key: 'company_name', label: 'Company Name' },
         { key: 'deadline', label: 'deadline' }, { key: 'logo_uri', label: 'Logo Uri' },
         { key: 'type', label: 'Type' }, { key: 'listing_url', label: 'Listing Url' },
         { key: 'city', label: 'City' }, { key: 'internal_url', label: 'Internal Url' },
         { key: 'contentShort', label: 'Content' }, { key: 'edit', label: '' }
       ],
+      selectedListings: [],
+      selectAll: false,
       listing: {
         company_name: '',
         name: '',
@@ -217,6 +244,40 @@ export default {
       })
       this.resetForm()
     },
+    bulkDestroy: function () {
+      if (this.selectedListings.length === 0) {
+        return
+      }
+      const count = this.selectedListings.length
+      if (!confirm(this.$t('admin.confirmBulkDelete') + ' ' + count + ' ' + this.$t('admin.listing.listings') + '?')) {
+        return
+      }
+      axios.post(process.env.VUE_APP_API_HOST + '/api/listing/bulk_delete/', {
+        ids: this.selectedListings
+      }).then((response) => {
+        this.showAlert('success', this.$t('admin.success'), response.data.deleted_count + ' ' + this.$t('admin.listing.listings') + ' ' + this.$t('admin.deleted'))
+        // Remove deleted listings from store
+        this.selectedListings.forEach(id => {
+          const listing = this.listings.find(l => l.id === id)
+          if (listing) {
+            this['listings/deleteListing'](listing)
+          }
+        })
+        this.selectedListings = []
+        this.selectAll = false
+      }).catch((e) => {
+        this.showAlert('danger',
+          'Error ' + e.response.status + ' ' + e.response.statusText,
+          this.$t('admin.listing.listHeader') + ' ' + this.$t('admin.couldNotDelete'))
+      })
+    },
+    toggleSelectAll: function () {
+      if (this.selectAll) {
+        this.selectedListings = this.listings.map(l => l.id)
+      } else {
+        this.selectedListings = []
+      }
+    },
     countDownChanged: function (dismissCountDown) {
       this.alert.dismissCountDown = dismissCountDown
     },
@@ -274,6 +335,16 @@ export default {
       this.$data.editing = false
     },
     ...mapMutations(['listings/addListing', 'listings/deleteListing', 'listings/updateListing'])
+  },
+  watch: {
+    selectedListings: function (newVal) {
+      // Sync selectAll checkbox with individual selections
+      if (newVal.length === 0) {
+        this.selectAll = false
+      } else if (newVal.length === this.listings.length) {
+        this.selectAll = true
+      }
+    }
   },
   beforeCreate: function () {
     axios.options(process.env.VUE_APP_API_HOST + '/api/listing/').then((response) => {

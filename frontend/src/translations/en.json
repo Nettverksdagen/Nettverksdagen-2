@@ -186,6 +186,9 @@
     "admin": {
         "success": "Success!",
         "confirmDelete": "Are you sure you want to delete",
+        "confirmBulkDelete": "Are you sure you want to delete",
+        "selectAll": "Select all",
+        "deleteSelected": "Delete selected",
         "deleted": "has been deleted",
         "couldNotDelete": "could not be deleted.",
         "couldNotPublish": "could not be published.",
@@ -231,6 +234,7 @@
         "listing": {
             "header": "Publish a new job listing",
             "listHeader": "Job listings",
+            "listings": "job listings",
             "jobTitle": "Job title",
             "jobTitlePlaceholder": "Choose a title",
             "companyName": "Company name",
