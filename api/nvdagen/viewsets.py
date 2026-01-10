@@ -109,7 +109,6 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                 else:
                     # Create participant first to get attendance_token
                     participant = super().create(request)
-                    created_participant = Participant.objects.get(id=participant.data['id'])
 
                     data['place'] = program.place
                     #data['timeStart'] = strftime('%d. %b klokken %H:%M', gmtime(program.timeStart+3600))
@@ -118,7 +117,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                     data['header'] = program.header
 
                     # Generate QR code for attendance
-                    qr_data = str(created_participant.attendance_token)
+                    qr_data = str(participant.data['attendance_token'])
                     data['qr_code'] = generate_qr_code(qr_data)
 
                     html_message = render_to_string('registered_email.html', context=data)
@@ -306,7 +305,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
 
         if program_id:
             # Statistics for specific program
-            participants = Participant.objects.filter(event_id=program_id)
+            participants = Participant.objects.filter(event=program_id)
             total = participants.count()
             attended = participants.filter(attended=True).count()
             not_attended = total - attended
