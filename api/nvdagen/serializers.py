@@ -49,4 +49,4 @@ class ParticipantListSerializer(serializers.ModelSerializer):
 class ParticipantAttendanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Participant
-        fields = ('id', 'name', 'email', 'study', 'year', 'attendance_token', 'attended', 'check_in_time', 'event')
+        fields = ('id', 'name', 'email', 'study', 'year', 'attendance_token', 'attended', 'check_in_time', 'event', 'allergies')

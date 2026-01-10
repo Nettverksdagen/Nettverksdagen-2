@@ -92,9 +92,19 @@ export default {
           icon: 'cui-dollar'
         },
         {
-          name: 'Attendance',
-          url: this.$router.resolve({name: 'AttendanceAdmin'}).href,
-          icon: 'cui-check'
+          name: 'QR Scanner',
+          url: this.$router.resolve({name: 'AttendanceScanner'}).href,
+          icon: 'cui-camera'
+        },
+        {
+          name: 'Attendance Overview',
+          url: this.$router.resolve({name: 'AttendanceOverview'}).href,
+          icon: 'cui-list'
+        },
+        {
+          name: 'Attendance Stats',
+          url: this.$router.resolve({name: 'AttendanceStats'}).href,
+          icon: 'cui-chart'
         },
         {
           divider: true,

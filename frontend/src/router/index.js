@@ -19,7 +19,9 @@ import BusinessDetails from '@/components/anon/BusinessDetails.vue'
 import ListingDetails from '@/components/anon/ListingDetails.vue'
 import ProgramAdminView from '@/views/admin/ProgramAdminView.vue'
 import ParticipantAdminView from '@/views/admin/ParticipantAdminView.vue'
-import AttendanceAdminView from '@/views/admin/AttendanceAdminView.vue'
+import AttendanceScannerView from '@/views/admin/AttendanceScannerView.vue'
+import AttendanceOverviewView from '@/views/admin/AttendanceOverviewView.vue'
+import AttendanceStatsView from '@/views/admin/AttendanceStatsView.vue'
 // import HomeViewTemp from '@/views/anon/HomeViewTemp.vue'
 import NotFoundView from '@/views/anon/NotFoundView.vue'
 import ValgomatView from '@/views/anon/ValgomatView.vue'
@@ -162,10 +164,22 @@ export default new Router({
           meta: {title: 'Rediger deltagere'}
         },
         {
-          path: 'attendance',
-          name: 'AttendanceAdmin',
-          component: AttendanceAdminView,
-          meta: {title: 'Attendance Management'}
+          path: 'attendance-scanner',
+          name: 'AttendanceScanner',
+          component: AttendanceScannerView,
+          meta: {title: 'QR Scanner'}
+        },
+        {
+          path: 'attendance-overview',
+          name: 'AttendanceOverview',
+          component: AttendanceOverviewView,
+          meta: {title: 'Attendance Overview'}
+        },
+        {
+          path: 'attendance-stats',
+          name: 'AttendanceStats',
+          component: AttendanceStatsView,
+          meta: {title: 'Attendance Statistics'}
         }
       ]
     },
