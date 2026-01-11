@@ -6,42 +6,29 @@
           <h2>Attendance Statistics</h2>
 
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
               <div class="card">
-                <div class="card-header">
-                  <h5>Overall Statistics</h5>
-                </div>
-                <div class="card-body">
-                  <div v-if="stats.overall">
-                    <p><strong>Total Registered:</strong> {{ stats.overall.total_registered }}</p>
-                    <p><strong>Attended:</strong> {{ stats.overall.attended }}</p>
-                    <p><strong>Not Attended:</strong> {{ stats.overall.not_attended }}</p>
-                    <p><strong>Attendance Rate:</strong> {{ stats.overall.attendance_rate.toFixed(1) }}%</p>
-
-                    <!-- Progress bar -->
-                    <div class="progress mt-3">
-                      <div
-                        class="progress-bar bg-success"
-                        :style="{ width: stats.overall.attendance_rate + '%' }"
-                      ></div>
-                    </div>
-                  </div>
-                  <div v-else>
-                    <p class="text-muted">No statistics available</p>
-                  </div>
+                <div class="card-body text-center">
+                  <h6 class="text-muted mb-2">Total Events</h6>
+                  <h2 class="mb-0">{{ stats.by_program ? stats.by_program.length : 0 }}</h2>
                 </div>
               </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
               <div class="card">
-                <div class="card-header">
-                  <h5>Quick Actions</h5>
+                <div class="card-body text-center">
+                  <h6 class="text-muted mb-2">Total Participants</h6>
+                  <h2 class="mb-0">{{ totalParticipants }}</h2>
                 </div>
-                <div class="card-body">
-                  <button @click="refreshStats" class="btn btn-primary btn-block">
-                    <i class="fa fa-refresh"></i> Refresh Statistics
-                  </button>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card">
+                <div class="card-body text-center">
+                  <h6 class="text-muted mb-2">Average Attendance</h6>
+                  <h2 class="mb-0">{{ averageAttendance }}%</h2>
                 </div>
               </div>
             </div>
@@ -59,15 +46,30 @@
                     <table class="table">
                       <thead>
                         <tr>
-                          <th>Event</th>
-                          <th>Total Registered</th>
-                          <th>Attended</th>
-                          <th>Not Attended</th>
-                          <th>Attendance Rate</th>
+                          <th @click="sortBy('program_name')" class="sortable">
+                            Event
+                            <i v-if="sortKey === 'program_name'" :class="sortDirection === 'asc' ? 'fa fa-sort-up' : 'fa fa-sort-down'"></i>
+                          </th>
+                          <th @click="sortBy('total_registered')" class="sortable">
+                            Total Registered
+                            <i v-if="sortKey === 'total_registered'" :class="sortDirection === 'asc' ? 'fa fa-sort-up' : 'fa fa-sort-down'"></i>
+                          </th>
+                          <th @click="sortBy('attended')" class="sortable">
+                            Attended
+                            <i v-if="sortKey === 'attended'" :class="sortDirection === 'asc' ? 'fa fa-sort-up' : 'fa fa-sort-down'"></i>
+                          </th>
+                          <th @click="sortBy('not_attended')" class="sortable">
+                            Not Attended
+                            <i v-if="sortKey === 'not_attended'" :class="sortDirection === 'asc' ? 'fa fa-sort-up' : 'fa fa-sort-down'"></i>
+                          </th>
+                          <th @click="sortBy('attendance_rate')" class="sortable">
+                            Attendance Rate
+                            <i v-if="sortKey === 'attendance_rate'" :class="sortDirection === 'asc' ? 'fa fa-sort-up' : 'fa fa-sort-down'"></i>
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr v-for="eventStat in stats.by_program" :key="eventStat.program_id">
+                        <tr v-for="eventStat in sortedEvents" :key="eventStat.program_id">
                           <td>{{ eventStat.program_name }}</td>
                           <td>{{ eventStat.total_registered }}</td>
                           <td>{{ eventStat.attended }}</td>
@@ -113,7 +115,37 @@ export default {
       stats: {
         overall: null,
         by_program: []
-      }
+      },
+      sortKey: 'attendance_rate',
+      sortDirection: 'desc'
+    }
+  },
+  computed: {
+    totalParticipants () {
+      if (!this.stats.by_program) return 0
+      return this.stats.by_program.reduce((sum, event) => sum + event.total_registered, 0)
+    },
+
+    averageAttendance () {
+      if (!this.stats.by_program || this.stats.by_program.length === 0) return 0
+      const total = this.stats.by_program.reduce((sum, event) => sum + event.attendance_rate, 0)
+      return (total / this.stats.by_program.length).toFixed(1)
+    },
+
+    sortedEvents () {
+      if (!this.stats.by_program) return []
+      const events = [...this.stats.by_program]
+      events.sort((a, b) => {
+        let aVal = a[this.sortKey]
+        let bVal = b[this.sortKey]
+
+        if (this.sortDirection === 'asc') {
+          return aVal > bVal ? 1 : -1
+        } else {
+          return aVal < bVal ? 1 : -1
+        }
+      })
+      return events
     }
   },
   async mounted () {
@@ -129,8 +161,15 @@ export default {
       }
     },
 
-    async refreshStats () {
-      await this.fetchStats()
+    sortBy (key) {
+      if (this.sortKey === key) {
+        // Toggle direction if same column
+        this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc'
+      } else {
+        // New column, default to descending for numbers, ascending for text
+        this.sortKey = key
+        this.sortDirection = key === 'program_name' ? 'asc' : 'desc'
+      }
     },
 
     getProgressBarClass (rate) {
@@ -163,6 +202,20 @@ export default {
   border-top: none;
 }
 
+.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sortable:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.sortable i {
+  margin-left: 5px;
+  font-size: 0.8em;
+}
+
 @media (max-width: 768px) {
   .attendance-stats {
     padding: 0 !important;
@@ -182,7 +235,7 @@ export default {
     margin-right: 0 !important;
   }
 
-  .col-12, .col-md-6 {
+  .col-12, .col-md-4, .col-md-6 {
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
