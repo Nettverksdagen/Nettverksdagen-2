@@ -222,7 +222,6 @@ class ParticipantViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['get'])
     def count(self, request):
         participant_count = Participant.objects.all().count()
-        print(participant_count)
         return Response({'participant_count': participant_count})
 
     @action(detail=False, methods=['post'], permission_classes=[IsAuthenticated])
@@ -349,9 +348,3 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                 },
                 'by_program': program_stats
             })
-
-    #Not tested and not implemented properly in /api
-    def get_participant(self, request, email):
-        participant = Participant.objects.get(email=email)
-        return Response({'participant:', participant})
-

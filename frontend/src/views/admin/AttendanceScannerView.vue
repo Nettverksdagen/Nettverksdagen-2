@@ -21,6 +21,7 @@
                 <stream-barcode-reader
                   @decode="onDecode"
                   @loaded="onLoaded"
+                  @error="onError"
                   class="qr-stream"
                 ></stream-barcode-reader>
 
@@ -30,32 +31,17 @@
                   </button>
                 </div>
 
-                <div v-if="cameraError" class="alert alert-danger mt-3">
-                  {{ cameraError }}
+                <div v-if="cameraError" class="alert alert-danger mt-3" role="alert">
+                  <h6><i class="fa fa-exclamation-circle"></i> Camera Error</h6>
+                  <p class="mb-2">{{ cameraError }}</p>
+                  <button @click="startCamera" class="btn btn-sm btn-primary mt-2">
+                    <i class="fa fa-refresh"></i> Retry
+                  </button>
                 </div>
               </div>
             </div>
 
             <div class="manual-input mt-4">
-              <!-- Manual Token Input - Commented out for production
-              <h5>Manual Token Input</h5>
-              <p class="text-muted">Enter attendance token manually for check-in</p>
-              <div class="input-group mb-3">
-                <input
-                  v-model="manualToken"
-                  @keyup.enter="verifyAndShowParticipant"
-                  placeholder="Paste attendance token here"
-                  class="form-control"
-                  ref="tokenInput"
-                />
-                <div class="input-group-append">
-                  <button @click="verifyAndShowParticipant" class="btn btn-primary" :disabled="verifying">
-                    {{ verifying ? 'Verifying...' : 'Verify' }}
-                  </button>
-                </div>
-              </div>
-              -->
-
               <!-- Error message -->
               <div v-if="scanError" class="alert alert-danger">
                 {{ scanError }}
@@ -275,6 +261,12 @@ export default {
     },
 
     startCamera () {
+      // Check if getUserMedia is supported
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        this.cameraError = 'Your browser does not support camera access. Please use a modern browser (Chrome, Firefox, Edge, Safari).'
+        return
+      }
+
       this.cameraEnabled = true
       this.cameraError = null
     },
@@ -295,7 +287,30 @@ export default {
 
     onLoaded () {
       this.cameraError = null
-      console.log('Camera loaded successfully')
+    },
+
+    onError (error) {
+      console.error('Camera error:', error)
+      this.handleCameraError(error)
+    },
+
+    handleCameraError (error) {
+      this.stopCamera()
+
+      // Detect specific error types and provide user-friendly messages
+      if (error.name === 'NotAllowedError') {
+        this.cameraError = 'Camera permission denied. Please allow camera access in your browser settings and click "Start Camera Scanner" again.'
+      } else if (error.name === 'NotFoundError') {
+        this.cameraError = 'No camera device found. Please ensure your device has a camera connected.'
+      } else if (error.name === 'NotReadableError') {
+        this.cameraError = 'Camera is already in use by another application. Please close it and try again.'
+      } else if (error.name === 'SecurityError') {
+        this.cameraError = 'Camera access denied for security reasons. Note: Camera access requires HTTPS in production.'
+      } else if (error.name === 'TypeError') {
+        this.cameraError = 'Camera not supported. HTTPS connection may be required for camera access.'
+      } else {
+        this.cameraError = `Camera error: ${error.message || 'Unknown error occurred'}`
+      }
     },
 
     getEventName (eventId) {
@@ -398,6 +413,19 @@ export default {
 
 .camera-controls {
   text-align: center;
+}
+
+.alert h6 {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.alert p {
+  margin-bottom: 0;
+}
+
+.alert .btn {
+  margin-top: 0.5rem;
 }
 
 @media (max-width: 768px) {
