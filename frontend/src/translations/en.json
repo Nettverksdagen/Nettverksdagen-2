@@ -114,7 +114,7 @@
     "avslutningsmiddagtitle": "Formal Dinner",
     "ballongslipp": "Balloon drop",
     "standtext": "The hall will be filled with stands! Get in touch with many exciting companies.",
-    "programtext": "Nettverksdagene will end with a formal dinner at Thon Hotel Prinsen.",
+    "programtext": "Nettverksdagene will end with a formal dinner at E. C Dahls.",
     "bedprestext": "There will be multiple presentations for those who would like to learn more about the companies.",
     "ballongslipptext": "Win great prizes at the balloon drop when Nettverksdagene opens.",
     "Styret": "The Board",
@@ -124,7 +124,7 @@
     "thankscoop": "A big thanks to Coop Extra!",
     "thankscooptext": "We would like to thank Coop Extra for supplying coffee during Nettverksdagene 2023!",
     "glassgårdentext": "Meet many exciting companies at their stands in Glassgården",
-    "closing_dinner": "Nettverksdagene will end with a formal dinner at Thon Hotel Prinsen",
+    "closing_dinner": "Nettverksdagene will end with a formal dinner at E. C Dahls",
     "bedpres2": "There will be presentations for those who want to learn more about the companies.",
     "ball": "There will be a balloon drop where you can win great prizes!",
     "programfor": "Click here to see the program for Nettverksdagene 2022!",
@@ -159,7 +159,7 @@
             },
             {
                 "question": "When are companies at their stands?",
-                "answer": "The stand area is open from 10:00 AM to 3:00 PM on Wednesday and Thursday (January 22nd and 23rd)."
+                "answer": "The stand area is open from 10:00 AM to 3:00 PM on Wednesday and Thursday (January 28th and 29th)."
             },
             {
                 "question": "Who can participate in the NVD events?",
@@ -329,12 +329,21 @@
         "mainPartnerHeader": "Meet our new main partner",
         "partnersHeader": "Partners",
         "standHeader": "Companies you can meet at their stands",
+        "visitWebsite": "Visit website",
+        "standNumber": "Stand number",
+        "package": "Package",
+        "daysAtStand": "Days at stand",
         "levels": {
           "main": "Main partner",
           "partner": "Partner",
           "gold": "Gold",
           "silver": "Silver",
-          "bronze": "Bronze"
+          "bronze": "Bronze",
+          "hovedsamarbeidspartner": "Main partner",
+          "samarbeidspartner": "Partner",
+          "gull": "Gold",
+          "sølv": "Silver",
+          "bronse": "Bronze"
         },
         "days": {
           "day1": "Day 1",
@@ -348,7 +357,9 @@
     },
     "contactPersons": "Contact persons",
     "standmap": {
-      "title": "Stand map"
+      "title": "Stand map",
+      "clickToViewDetails": "Click to view details",
+      "tapToViewDetails": "Tap to view details"
     },
     "teamMember": {
         "fullName": "Full name",
