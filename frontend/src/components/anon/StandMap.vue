@@ -1,6 +1,6 @@
 <template>
-  <div class="standkart_holder">
-    <svg class="standkart" width="2116" height="1173" viewBox="0 950 2116 1173" fill="none"
+  <div class="standkart_holder" :class="{ 'admin-mode': isAdminPage }">
+    <svg class="standkart" width="2116" height="1173" viewBox="0 950 2116 1173" preserveAspectRatio="xMidYMid meet" fill="none"
       xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -156,8 +156,8 @@
       <line x1="472" y1="1259.5" x2="508" y2="1259.5" stroke="#2D6963" stroke-width="3" />
 
     </svg>
-    <svg class="standkart-text" viewBox="0 950 2116 1173">
-      <text x="100" y="1050" dominant-baseline="middle" text-anchor="left" font-size="80px" font-weight="700" fill="#FFFFFF">{{ $t('standmap.title') }}</text>
+    <svg class="standkart-text" viewBox="0 950 2116 1173" preserveAspectRatio="xMidYMid meet">
+      <text x="100" y="1050" dominant-baseline="middle" text-anchor="left" font-size="80px" font-weight="700" fill="#FFFFFF" class="standmap-title">{{ $t('standmap.title') }}</text>
       <line v-bind:key="index" v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap" :x1="StandPosition.x"
         :y1="StandPosition.y" :x2="StandPosition.x" :y2="StandPosition.y" stroke="#898989" class="_circle"
         :id="'circle-' + index" @mouseover="handleTextMouseOver(business.standnumber)"
@@ -477,24 +477,49 @@ export default {
     height: auto;
     position: relative;
     max-width: 1800px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 
-    // Responsive sizing
+    // Responsive sizing - use aspect ratio instead of min-height
     @media (max-width: 767px) {
-      min-height: 400px;
+      aspect-ratio: 2116 / 1173;
+      min-height: unset;
+      // Scale up slightly on mobile for better visibility
+      width: 115%;
+      margin-left: -7.5%;
+      margin-right: -7.5%;
+      overflow: visible;
     }
 
-    @media (min-width: 768px) {
-      min-height: 500px;
+    @media (min-width: 768px) and (max-width: 1199px) {
+      aspect-ratio: 2116 / 1173;
+      min-height: unset;
     }
 
     @media (min-width: 1200px) {
       min-height: 600px;
+    }
+
+    // Admin page specific styling - ensure it fits properly in narrow column
+    &.admin-mode {
+      max-width: 100%;
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+      overflow: hidden;
+
+      @media (min-width: 768px) {
+        aspect-ratio: 2116 / 1173;
+        min-height: unset;
+      }
     }
   }
 
   .standkart {
     width: 100%;
     height: 100%;
+    display: block;
 
     // Improved text rendering
     text {
@@ -516,22 +541,44 @@ export default {
     text, line {
       pointer-events: auto;
     }
+
+    // Smaller title in admin mode
+    .admin-mode & .standmap-title {
+      font-size: 60px !important;
+    }
   }
 
   .toggle_holder {
     position: absolute;
-    top: 14%;
-    left: 5%;
-    z-index: 9;
+    top: 13%;
+    left: 7%;
+    z-index: 10;
 
     // Responsive scaling
     @media (max-width: 575px) {
-      transform: scale(0.8);
+      top: 13%;
+      left: 5%;
+      transform: scale(0.75);
+      transform-origin: top left;
+    }
+
+    @media (min-width: 576px) and (max-width: 767px) {
+      top: 15%;
+      left: 6%;
+      transform: scale(0.85);
       transform-origin: top left;
     }
 
     @media (min-width: 1400px) {
       transform: scale(1.2);
+      transform-origin: top left;
+    }
+
+    // Smaller toggle in admin mode
+    .admin-mode & {
+      top: 13%;
+      left: 5%;
+      transform: scale(0.7);
       transform-origin: top left;
     }
 
@@ -544,29 +591,72 @@ export default {
     stroke-width: 37;
     stroke-linecap: round;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    @media (max-width: 767px) {
+      stroke-width: 30;
+    }
+
+    // Smaller circles in admin mode
+    .admin-mode & {
+      stroke-width: 30;
+    }
   }
 
   ._circle:hover, ._circle.hovered {
     stroke-width: 55;
     stroke: var(--standmap-circle-hover, #4ECDC4);
     filter: drop-shadow(0 0 8px var(--standmap-shadow-hover, rgba(78, 205, 196, 0.4)));
+
+    @media (max-width: 767px) {
+      stroke-width: 45;
+    }
+
+    .admin-mode & {
+      stroke-width: 45;
+    }
   }
 
   ._circle.active {
     stroke: var(--standmap-circle-active, #FFD166);
     stroke-width: 60;
     animation: pulse-circle 2s ease-in-out infinite;
+
+    @media (max-width: 767px) {
+      stroke-width: 48;
+    }
+
+    .admin-mode & {
+      stroke-width: 48;
+    }
   }
 
   ._business {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
 
+    @media (max-width: 767px) {
+      font-size: 1.2em !important;
+    }
+
+    // Smaller text in admin mode
+    .admin-mode & {
+      font-size: 1.2em !important;
+    }
+
     &:hover, &.hovered {
       font-size: 2.2em !important;
       font-weight: 600;
       fill: var(--standmap-accent-primary, #4ECDC4);
       filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+
+      @media (max-width: 767px) {
+        font-size: 1.5em !important;
+      }
+
+      // Smaller hover effect in admin mode
+      .admin-mode & {
+        font-size: 1.5em !important;
+      }
     }
   }
 

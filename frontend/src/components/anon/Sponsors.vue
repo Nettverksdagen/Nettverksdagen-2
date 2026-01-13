@@ -59,7 +59,7 @@ export default {
   .sponsor {
     position: relative;
     margin: auto;
-    transition: transform 300ms, filter 500ms;
+    transition: transform 0.2s;
     padding: 1rem 1rem;
       @media(min-width: 576px) {
         padding: 0rem 3rem;
@@ -69,9 +69,8 @@ export default {
       }
   }
   .sponsor:hover {
-    transition: filter 0.5s, transform 0.3s;
-    @media(min-width: 1200px) {
-      filter: none;
+    @media(min-width: 768px) {
+      transform: scale(1.15);
     }
   }
   .sponsor-banner {
