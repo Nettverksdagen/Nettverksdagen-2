@@ -104,7 +104,7 @@
     "avslutningsmiddagtitle": "Avslutningsmiddag",
     "ballongslipp": "Ballongslipp",
     "standtext": "Glassgården fylles med stands! Kom i kontakt med mange spennende bedrifter.",
-    "programtext": "Nettverksdagene avsluttes med en avslutningsmiddag på Thon Hotel Prinsen.",
+    "programtext": "Nettverksdagene avsluttes med en avslutningsmiddag på E. C Dahls.",
     "bedprestext": "Det blir holdt flere bedrifts- presentasjoner for de som vil bli bedre kjent med bedriftene.",
     "ballongslipptext": "Vinn flotte premier når Nettverksdagene åpner med ballongslipp.",
     "Styret": "Styret",
@@ -148,7 +148,7 @@
             },
             {
                 "question": "Når står bedrifter på stand?",
-                "answer": "Standområdet er åpent fra 10:00 - 15:00 onsdag og torsdag (22.01 og 23.01)."
+                "answer": "Standområdet er åpent fra 10:00 - 15:00 onsdag og torsdag (28.01 og 29.01)."
             },
             {
                 "question": "Hvem kan delta på NVD arrangementene?",
@@ -306,18 +306,29 @@
         }
     },
     "standmap": {
-        "title": "Standkart"
+        "title": "Standkart",
+        "clickToViewDetails": "Klikk for å se detaljer",
+        "tapToViewDetails": "Trykk for å se detaljer"
     },
     "businesses": {
         "mainPartnerHeader": "Møt vår nye hovedsamarbeidspartner",
         "partnersHeader": "Samarbeids\u00ADpartnere",
         "standHeader": "Bedrifter du kan møte på stand",
+        "visitWebsite": "Besøk nettside",
+        "standNumber": "Standnummer",
+        "package": "Pakke",
+        "daysAtStand": "Dager på stand",
         "levels": {
             "main": "Hovedsamarbeidspartner",
             "partner": "Samarbeidspartner",
             "gold": "Gull",
             "silver": "S\u00F8lv",
-            "bronze": "Bronse"
+            "bronze": "Bronse",
+            "hovedsamarbeidspartner": "Hovedsamarbeidspartner",
+            "samarbeidspartner": "Samarbeidspartner",
+            "gull": "Gull",
+            "sølv": "Sølv",
+            "bronse": "Bronse"
         },
         "days": {
             "day1": "Dag 1",
