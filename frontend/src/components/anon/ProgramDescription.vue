@@ -43,18 +43,41 @@
         </p>
       </div>
 
-      <div v-if="registration">
-        <!-- <div v-else>
+      <div v-if="registration" class="registration-section">
+        <!-- Registration Status -->
+        <div v-if="isRegistrationOpen" class="registration-stats">
+          <div class="stats-row">
+            <div class="stat-item">
+              <span class="stat-label">{{ $t('registered') }}</span>
+              <span class="stat-value">{{ actual_participants() }} / {{ maxRegistered }}</span>
+            </div>
+            <div v-if="waiting_list_participants() > 0" class="stat-item waiting-list">
+              <span class="stat-label">{{ $t('waiting_list') }}</span>
+              <span class="stat-value">{{ waiting_list_participants() }}</span>
+            </div>
+            <div v-else class="stat-item available">
+              <span class="stat-label">{{ $t('spotsAvailable') }}</span>
+              <span class="stat-value">{{ maxRegistered - actual_participants() }}</span>
+            </div>
+          </div>
+        </div>
+        <div v-else class="registration-status-text">
           <p>{{ registrationStatusText }}</p>
-        </div> -->
-        <b-button v-if="enableRegistration" variant="primary" v-b-modal="'registrationModal' + name">
-          {{ $t('register') }}
-        </b-button>
-        <b-button v-else disabled variant="secondary">
-          {{ $t('registrationNotYetAvailable') }}
-        </b-button>
+        </div>
 
-        <b-button v-if="cancelEmail" variant="outline-primary" v-b-modal="'unregistrationModal' + name">{{$t('destroypart')}}</b-button>
+        <!-- Action Buttons -->
+        <div class="button-group">
+          <button v-if="enableRegistration" class="btn-register" v-b-modal="'registrationModal' + name">
+            {{ $t('register') }}
+          </button>
+          <button v-else disabled class="btn-register btn-disabled">
+            {{ $t('registrationNotYetAvailable') }}
+          </button>
+
+          <button v-if="cancelEmail && enableRegistration" class="btn-unregister" v-b-modal="'unregistrationModal' + name">
+            {{ $t('destroypart') }}
+          </button>
+        </div>
       </div>
     </div>
 
@@ -215,6 +238,157 @@ export default {
 }
 .event-place .icon {
   margin-right: 8px;
+}
+
+/* Registration Section */
+.registration-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.registration-stats {
+  background: linear-gradient(135deg, #14403c 0%, #1d4844 100%);
+  border-radius: 12px;
+  padding: 20px;
+  color: white;
+}
+
+.stats-row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 120px;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.stat-item.waiting-list {
+  border-left: 2px solid rgba(255, 255, 255, 0.3);
+  padding-left: 24px;
+}
+
+.stat-item.available {
+  border-left: 2px solid rgba(255, 255, 255, 0.3);
+  padding-left: 24px;
+}
+
+.registration-status-text {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 12px 16px;
+  text-align: center;
+  color: #666;
+  font-weight: 500;
+}
+
+/* Button Group */
+.button-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-register, .btn-unregister {
+  flex: 0 1 auto;
+  min-width: 100px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.btn-register {
+  background: linear-gradient(135deg, #2c5f7c 0%, #3a7a9a 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(44, 95, 124, 0.2);
+}
+
+.btn-register:hover:not(.btn-disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(44, 95, 124, 0.3);
+  background: linear-gradient(135deg, #376d8c 0%, #4589ab 100%);
+}
+
+.btn-register:active:not(.btn-disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(44, 95, 124, 0.2);
+}
+
+.btn-disabled {
+  background: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-unregister {
+  background: white;
+  color: #2c5f7c;
+  border: 1.5px solid #2c5f7c;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.btn-unregister:hover {
+  background: #2c5f7c;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(44, 95, 124, 0.25);
+}
+
+.btn-unregister:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(44, 95, 124, 0.2);
+}
+
+@media (max-width: 576px) {
+  .stats-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .stat-item.waiting-list,
+  .stat-item.available {
+    border-left: none;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    padding-left: 0;
+    padding-top: 16px;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .btn-register, .btn-unregister {
+    width: 100%;
+  }
 }
 
 </style>
