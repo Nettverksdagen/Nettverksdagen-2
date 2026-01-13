@@ -24,13 +24,15 @@ PARTNER = 'Samarbeidspartner'
 GOLD = 'Gull'
 SILVER = 'Sølv'
 BRONZE = 'Bronse'
+STARTUP = 'Startup'
 
 LEVELTYPECHOICE = (
     (MAIN_PARTNER, MAIN_PARTNER),
     (PARTNER, PARTNER),
     (GOLD, GOLD),
     (SILVER, SILVER),
-    (BRONZE, BRONZE)
+    (BRONZE, BRONZE),
+    (STARTUP, STARTUP)
 )
 
 DAYS_NONE = 'Ingen dager'
