@@ -15,6 +15,15 @@ class ListingViewSet(viewsets.ModelViewSet):
     queryset = Listing.objects.all()
     serializer_class = ListingSerializer
 
+    @action(detail=False, methods=['post'])
+    def bulk_delete(self, request):
+        ids = request.data.get('ids', [])
+        if not ids:
+            return Response({'message': 'No IDs provided'}, status=status.HTTP_400_BAD_REQUEST)
+
+        deleted_count, _ = Listing.objects.filter(id__in=ids).delete()
+        return Response({'message': f'{deleted_count} listings deleted successfully', 'deleted_count': deleted_count}, status=status.HTTP_200_OK)
+
 
 class TeamMemberViewSet(viewsets.ModelViewSet):
     queryset = TeamMember.objects.all()

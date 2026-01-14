@@ -7,7 +7,7 @@
 //     },
 //     {
 //       question: "Når står bedrifter på stand?",
-//       answer: "Standområdet er åpent fra 10:00 - 15:00 onsdag og torsdag (22.01 og 23.01)."
+//       answer: "Standområdet er åpent fra 10:00 - 15:00 onsdag og torsdag (28.01 og 29.01)."
 //     },
 //     {
 //       question: "Hvem kan delta på NVD arrangementene?",

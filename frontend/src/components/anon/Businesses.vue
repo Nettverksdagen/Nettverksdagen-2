@@ -1,8 +1,8 @@
 <template>
   <div class="businesses mt-5">
     <Content>
-      <div v-for="(level, index) in levels.slice(0,2)" :key="index" class="samarbeidspartnere">
-        <h2 class="text-center font-weight-bold" v-html="levels[index].levelHeader"></h2>
+      <div v-for="(level, index) in levels.slice(0,2)" :key="index" class="samarbeidspartnere" v-if="level.businesses.length > 0">
+        <h2 class="text-center font-weight-bold" v-html="levels[index].header"></h2>
         <b-row class="justify-content-center">
           <Business v-for="(business, index) in level.businesses"
                     :key="index"
@@ -16,22 +16,20 @@
         </b-row>
         <hr>
       </div>
-      <h2 class="text-center font-weight-bold">Bedrifter du kan møte på stand</h2>
-      <div v-for="(day, dindex) in days" :key="'day' + dindex">
-        <b-row class="justify-content-center">
-          <template v-for="(level, lindex) in days[dindex].levels">
-            <Business v-for="business in days[dindex].levels[lindex].businesses"
-                      :key="business.id"
-                      :logo_src="business.logo_uri"
-                      :href="business.website_url"
-                      :text="business.text"
-                      :id="business.id"
-                      :name="business.name"
-                      :colSize="$options.sizesDays[business.level]">
-            </Business>
-          </template>
-        </b-row>
-      </div>
+      <h2 class="text-center font-weight-bold">{{ $t('businesses.standHeader') }}</h2>
+      <b-row class="justify-content-center">
+        <template v-for="(level, lindex) in levels.slice(2)">
+          <Business v-for="business in level.businesses"
+                    :key="business.id"
+                    :logo_src="business.logo_uri"
+                    :href="business.website_url"
+                    :text="business.text"
+                    :id="business.id"
+                    :name="business.name"
+                    :colSize="$options.sizesDays[business.level]">
+          </Business>
+        </template>
+      </b-row>
       <hr>
     </Content>
     <router-view />

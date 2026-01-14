@@ -5,7 +5,7 @@
             <div class="hometext">
                 <h3>{{$t('homescreen.fremtidig')}}</h3>
                 <h1>{{$t('nettverksdagene')}}</h1>
-                <h2>27.01-29.01 2026</h2>
+                <h2>28.01-29.01 2026</h2>
             </div>
         </div>
         <div class="col-12 homevideo">
@@ -20,7 +20,7 @@
     <div class="boxes">
       <b-link :to="{name: 'Home', hash: '#stand-map'}" @click.native="scrollToId('stand-map')">
         <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" :box-text="$t('glassgårdentext')"/>
-      </b-link> 
+      </b-link>
       <b-link :to="'/program'">
         <HomeScreenBox :box-title="$t('avslutningsmiddagtitle')" box-icon="glass-cheers-solid.svg" :box-text="$t('programtext')"/>
       </b-link>
@@ -43,19 +43,19 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import HomeScreenBox from '@/components/anon/HomeScreenBox.vue'
 export default {
   components: {
-    HomeScreenBox,
+    HomeScreenBox
   },
   methods: {
     scrollToId (id) {
-      var element = document.getElementById(id);
-      var headerOffset = 80; // Pure guess. TODO: should be replaced with a more accurate value for the header height
-      var elementPosition = element.getBoundingClientRect().top;
-      var offsetPosition = elementPosition + window.scrollY - headerOffset;
-    
+      var element = document.getElementById(id)
+      var headerOffset = 80 // Pure guess. TODO: should be replaced with a more accurate value for the header height
+      var elementPosition = element.getBoundingClientRect().top
+      var offsetPosition = elementPosition + window.scrollY - headerOffset
+
       window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth"
-      });
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
     }
   }
 }
@@ -151,7 +151,7 @@ export default {
     width: 100%;
     transform: scale(1.4); // Arbitrary scaling to make the video fill the overlay
     transform-origin: 0 50%; // So that the scaling happens from the left edge
-    
+
     border-radius: 30px;
   }
   .overlay {
