@@ -13,7 +13,7 @@
     </b-alert>
     <b-row class="my-4">
       <div class="col-12">
-        <b-card :header="$t('admin.teamMember.cardHeader')" class="h-100">
+        <b-card :header="$t('admin.teamMember.header')" class="h-100">
           <b-form @submit.prevent="handleSubmit">
             <b-row>
               <div class="col-12 col-md-6">
