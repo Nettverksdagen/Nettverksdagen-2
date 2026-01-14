@@ -4,6 +4,7 @@
       xmlns="http://www.w3.org/2000/svg">
       <rect width="2116" height="2123" fill="#14403C" />
       <!--<rect y="440" width="2116" height="1683" fill="#14403C"/>-->
+      <g class="lines-group" transform="translate(0,-600)">
       <line x1="394" y1="1287.5" x2="366" y2="1287.5" stroke="#778E8A" stroke-width="3" />
       <line x1="481" y1="1287.5" x2="453" y2="1287.5" stroke="#778E8A" stroke-width="3" />
       <line x1="367.5" y1="1286" x2="367.5" y2="1660" stroke="#778E8A" stroke-width="3" />
@@ -148,10 +149,11 @@
       <line y1="-1.5" x2="8" y2="-1.5" transform="matrix(0 1 1 0 440 1218)" stroke="#778E8A" stroke-width="3" />
       <line x1="471.5" y1="1223" x2="471.5" y2="1261" stroke="#778E8A" stroke-width="3" />
       <line x1="472" y1="1259.5" x2="508" y2="1259.5" stroke="#778E8A" stroke-width="3" />
-
+      </g>
     </svg>
     <svg class="standkart-text" viewBox="0 0 2116 2123">
       <text x="100" y="200" dominant-baseline="middle" text-anchor="left" font-size="80px" font-weight="500" fill="#D9D9D9">Standkart</text>
+      <g transform="translate(0,-600)">
       <line v-bind:key="index" v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap" :x1="StandPosition.x"
         :y1="StandPosition.y" :x2="StandPosition.x" :y2="StandPosition.y" stroke="#898989" class="_circle"
         :id="'circle-' + index" @mouseover="handleTextMouseOver(business.standnumber)"
@@ -182,6 +184,7 @@
         stroke="#e3e3e1" fill="#e3e3e1" font-size="1.5em" class="_business" :id="'business-' + business.standnumber"
         @mouseover="handleTextMouseOver(business.standnumber)" @mouseout="handleTextMouseOut(business.standnumber)">{{
           business.name }}</text>
+      
         <!-- dots on admin page -->
       <text v-bind:key="'t3' + index" v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap"
         :x="StandPosition.x" :y="StandPosition.y" dominant-baseline="middle" text-anchor="middle" font-size="20px"
@@ -190,17 +193,37 @@
       <text v-bind:key="'t4' + business.id" v-if="!isAdminPage" v-for="(business, index) in filteredDayBusinesses"
         :x="StandPositionMap[business.standnumber].x" :y="StandPositionMap[business.standnumber].y + 2"
         dominant-baseline="middle" text-anchor="middle" font-size="20px" fill="#000000">{{ index + 1 }}</text>
+      </g>
         <!-- businesses text 1-15 -->
-      <text v-bind:key="'t5' + business.id" v-for="(business, index) in filteredDayBusinesses.slice(0, 15)" :x="1000"
+      <!-- <text v-bind:key="'t5' + business.id" v-for="(business, index) in filteredDayBusinesses.slice(0, 15)" :x="1000"
         :y="200 + index * 50" dominant-baseline="middle" text-anchor="left" font-size="40px" fill="#D9D9D9"
         @mouseover="handleTextMouseOver(business.standnumber)"
-        @mouseout="handleTextMouseOut(business.standnumber)">{{ index + 1 }}.{{ business.name }}</text>
+        @mouseout="handleTextMouseOut(business.standnumber)">{{ index + 1 }}.{{ business.name }}</text> -->
         <!-- businesses text 1-15 -->
-      <text v-bind:key="'t6' + business.id" v-for="(business, index) in filteredDayBusinesses.slice(15, filteredDayBusinesses.length)" :x="1600"
+      <!-- <text v-bind:key="'t6' + business.id" v-for="(business, index) in filteredDayBusinesses.slice(15, filteredDayBusinesses.length)" :x="1600"
         :y="200 + index * 50" dominant-baseline="middle" text-anchor="left" font-size="40px" fill="#D9D9D9"
         @mouseover="handleTextMouseOver(business.standnumber)"
-        @mouseout="handleTextMouseOut(business.standnumber)">{{ index + 16 }}. {{ business.name }}</text>
-
+        @mouseout="handleTextMouseOut(business.standnumber)">{{ index + 16 }}. {{ business.name }}</text> -->
+      <text v-bind:key="'t5' + business.id" 
+      v-for="(business, index) in filteredDayBusinesses.slice(0,Math.ceil(filteredDayBusinesses.length/3))" 
+      :x="100" :y="1500 + index *50" dominant-baseline="middle" text-anchor="left" font-size="40px" fill="#D9D9D9"
+      @mouseover="handleTextMouseOver(business.standnumber)"
+      @mouseout="handleTextMouseOut(business.standnumber)">{{ index + 1 }}.{{ business.name }}
+      </text>
+      <text v-bind:key="'t5' + business.id" 
+      v-for="(business, index) in filteredDayBusinesses.slice(Math.ceil(filteredDayBusinesses.length/3),Math.ceil(2*filteredDayBusinesses.length/3))" 
+      :x="850" :y="1500 + index *50" dominant-baseline="middle" text-anchor="left" font-size="40px" fill="#D9D9D9"
+      @mouseover="handleTextMouseOver(business.standnumber)"
+      @mouseout="handleTextMouseOut(business.standnumber)">
+      {{ index + Math.ceil(filteredDayBusinesses.length/3) + 1 }}.{{ business.name }}
+      </text>
+      <text v-bind:key="'t5' + business.id" 
+      v-for="(business, index) in filteredDayBusinesses.slice(Math.ceil(2*filteredDayBusinesses.length/3), filteredDayBusinesses.length)" 
+      :x="1600" :y="1500 + index *50" dominant-baseline="middle" text-anchor="left" font-size="40px" fill="#D9D9D9"
+      @mouseover="handleTextMouseOver(business.standnumber)"
+      @mouseout="handleTextMouseOut(business.standnumber)">
+      {{ index + Math.ceil(2*filteredDayBusinesses.length/3) + 1 }}.{{ business.name }}
+      </text>
     </svg>
     <div class="toggle_holder">
       <VueToggles height="30" width="90" checkedText="Dag 1" uncheckedText="Dag 2" checkedBg="#e3e3e1"
