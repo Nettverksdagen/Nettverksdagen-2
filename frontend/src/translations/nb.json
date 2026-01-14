@@ -371,7 +371,13 @@
             "Sponsoransvarlig": "Sponsoransvarlig",
             "IT-ansvarlig": "IT-ansvarlig",
             "Bedriftansvarlig": "Bedriftansvarlig",
-            "Medlem": "Medlem"
+            "Medlem": "Medlem",
+            "IT-leder": "IT-leder",
+            "Bedriftsleder": "Bedriftsleder",
+            "Markedsføringsleder": "Markedsføringsleder",
+            "Sponsorleder": "Sponsorleder",
+            "Logistikkleder": "Logistikkleder",
+            "Dugnadsansvarlig": "Dugnadsansvarlig"
         },
         "successCreated": "Teammedlemmet er blitt lagt ut på forsiden.",
         "successUpdated": "Teammedlemmet er blitt endret.",
