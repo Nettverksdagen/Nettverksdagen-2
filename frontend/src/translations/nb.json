@@ -284,6 +284,7 @@
             "sponsorNamePlaceholder": "Skriv inn sponsornavn",
             "websiteUrl": "Link til nettside (må starte med https://)",
             "websiteUrlPlaceholder": "Skriv inn link",
+            "sponsorType": "Sponsortype",
             "logo": "Logo",
             "selectImage": "Velg et bilde",
             "sponsors": "sponsorer",
@@ -340,7 +341,8 @@
     },
     "sponsors": {
         "mainSponsor": "Hovedsponsor",
-        "otherSponsors": "Øvrige sponsorer"
+        "otherSponsors": "Øvrige sponsorer",
+        "coffeeSponsor": "Kaffesponsor"
     },
     "contactPersons": "Kontaktpersoner",
     "teamMember": {

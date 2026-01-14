@@ -302,6 +302,7 @@
             "sponsorNamePlaceholder": "Enter sponsor name",
             "websiteUrl": "Link to website (must start with https://)",
             "websiteUrlPlaceholder": "Enter link",
+            "sponsorType": "Sponsor type",
             "logo": "Logo",
             "selectImage": "Select an image",
             "sponsors": "sponsors",
@@ -355,7 +356,8 @@
     },
     "sponsors": {
       "mainSponsor": "Main sponsor",
-      "otherSponsors": "Other sponsors"
+      "otherSponsors": "Other sponsors",
+      "coffeeSponsor": "Coffee Sponsor"
     },
     "contactPersons": "Contact persons",
     "standmap": {

@@ -23,6 +23,9 @@
                 <b-form-group :label="$t('admin.sponsor.websiteUrl')" label-for="website-url-input">
                   <b-form-input type="url" v-model="sponsor.website_url" id="website-url-input" required :placeholder="$t('admin.sponsor.websiteUrlPlaceholder')" @input="validateWebsiteUrl"></b-form-input>
                 </b-form-group>
+                <b-form-group :label="$t('admin.sponsor.sponsorType')" label-for="sponsor-type-input">
+                  <b-form-select v-model="sponsor.type" id="sponsor-type-input" :options="sponsorTypes" required></b-form-select>
+                </b-form-group>
               </div>
               <div class="col-12 col-md-6">
                 <div class="d-flex">
@@ -81,13 +84,19 @@ export default {
   data: function () {
     return {
       fields: [
-        'id', { key: 'name', label: 'Name' }, { key: 'logo_uri', label: 'Logo Uri' },
+        'id', { key: 'name', label: 'Name' }, { key: 'type', label: 'Type' }, { key: 'logo_uri', label: 'Logo Uri' },
         { key: 'website_url', label: 'Website Url' }, { key: 'edit', label: '' }
+      ],
+      sponsorTypes: [
+        { value: 'Hovedsponsor', text: 'Hovedsponsor' },
+        { value: 'Kaffesponsor', text: 'Kaffesponsor' },
+        { value: 'Annen sponsor', text: 'Annen sponsor' }
       ],
       sponsor: {
         name: '',
         logo_uri: '',
-        website_url: ''
+        website_url: '',
+        type: 'Annen sponsor'
       },
       logoFile: null,
       showImgPreview: false,
@@ -152,7 +161,7 @@ export default {
       }
     },
     resetForm: function () {
-      this.$data.sponsor = {name: '', logo_uri: '', website_url: ''}
+      this.$data.sponsor = {name: '', logo_uri: '', website_url: '', type: 'Annen sponsor'}
       this.$refs.logoFileInput.reset()
       this.$data.editing = false
       this.$data.showImgPreview = false
