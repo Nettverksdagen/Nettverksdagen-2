@@ -386,12 +386,18 @@
         "positions": {
             "Markedsføringsansvarlig": "Marketing Manager",
             "Sekretær": "Secretary",
-            "Leder": "Leader",
+            "Leder": "Head of Board",
             "Nestleder": "Deputy Leader",
             "Sponsoransvarlig": "Sponsorship Manager",
             "IT-ansvarlig": "IT Manager",
             "Bedriftansvarlig": "Company Manager",
-            "Medlem": "Member"
+            "Medlem": "Member",
+            "IT-leder": "Head of IT",
+            "Bedriftsleder": "Key Account Manager",
+            "Markedsføringsleder": "Head of Marketing",
+            "Sponsorleder": "Head of Sponsorship",
+            "Logistikkleder": "Head of Logistics",
+            "Dugnadsansvarlig": "Voluntary Work Coordinator"
         },
         "successCreated": "Team member has been published to the contact page.",
         "successUpdated": "Team member has been updated.",
