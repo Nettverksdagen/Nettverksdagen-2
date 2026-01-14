@@ -79,6 +79,14 @@
         width: fit-content;
         margin: auto;
       }
+      .qr-code {
+        text-align: center;
+        margin: 20px 0;
+      }
+      .qr-code img {
+        max-width: 200px;
+        height: auto;
+      }
     </style>
     
 </head>
@@ -106,7 +114,16 @@
             <p>Tid: {{timeStart}}</p>
             <p>Sted: {{place}}</p>
           </td>
-        </tr> 
+        </tr>
+        <tr>
+          <td class="qr-code">
+            <p><strong>Din inngangsbilett:</strong></p>
+            <img src="{{qr_code}}" alt="QR-kode for inngang" />
+            <p style="font-size: 14px; color: #666;">
+              Vis denne QR-koden ved inngang for å registrere oppmøte
+            </p>
+          </td>
+        </tr>
         <tr>
           <td>
             <p>
