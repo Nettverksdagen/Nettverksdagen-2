@@ -161,13 +161,11 @@ export default {
   },
   methods: {
     checkFormValidity () {
-      const valid = this.$refs.form.checkValidity()
-
       const nameValid = this.$refs.nameInput.checkValidity()
       const emailValid = this.$refs.emailInput.checkValidity()
-      const studyValid = this.$refs.studySelect.checkValidity()
-      const yearValid = this.$refs.yearInput.checkValidity()
-      const allergiesValid = this.$refs.allergiesInput.checkValidity()
+      const studyValid = this.form.studySelection !== null
+      const yearValid = this.form.year !== null
+      const allergiesValid = true
 
       let studyOtherValid = true
       if (this.form.studySelection === 'Annet') {
@@ -181,7 +179,7 @@ export default {
       this.yearState = yearValid
       this.allergiesState = allergiesValid
 
-      return valid && studyOtherValid
+      return nameValid && emailValid && studyValid && yearValid && studyOtherValid
     },
     onStudyChange () {
       if (this.form.studySelection === 'Annet') {
