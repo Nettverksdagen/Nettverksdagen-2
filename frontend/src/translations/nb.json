@@ -284,6 +284,7 @@
             "sponsorNamePlaceholder": "Skriv inn sponsornavn",
             "websiteUrl": "Link til nettside (må starte med https://)",
             "websiteUrlPlaceholder": "Skriv inn link",
+            "sponsorType": "Sponsortype",
             "logo": "Logo",
             "selectImage": "Velg et bilde",
             "sponsors": "sponsorer",

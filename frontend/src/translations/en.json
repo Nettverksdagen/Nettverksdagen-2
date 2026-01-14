@@ -302,6 +302,7 @@
             "sponsorNamePlaceholder": "Enter sponsor name",
             "websiteUrl": "Link to website (must start with https://)",
             "websiteUrlPlaceholder": "Enter link",
+            "sponsorType": "Sponsor type",
             "logo": "Logo",
             "selectImage": "Select an image",
             "sponsors": "sponsors",

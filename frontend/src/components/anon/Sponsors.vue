@@ -1,26 +1,36 @@
 <template>
     <div class="sponsors mt-5">
       <Content>
-        <h2 class="text-center font-weight-bold">{{ $t('sponsors.mainSponsor') }}</h2>
-        <div class="sponsor col-5">
-          <a href="https://nfea.no/" target="_blank" rel="noopener noreferrer">
-            <b-img fluid src="@/assets/nfea.png"></b-img>
-          </a>
-        </div>
-        <h2 class="text-center font-weight-bold">{{ $t('coffeesponsor') }}</h2>
-        <div class="sponsor col-5 text-center">
-            <a href="https://www.kaffeknappen.no/" target="_blank" rel="noopener noreferrer">
-                <b-img fluid src="@/assets/kaffeknappen.svg"></b-img>
-            </a>
-        </div>
-        <h2 class="text-center font-weight-bold" style="margin-top: 4rem;">{{ $t('sponsors.otherSponsors') }}</h2>
-        <b-row>
-          <Sponsor  v-for="(sponsor, index) in sponsors"
-          :key="index"
-          :logo_src="sponsor.logo_uri"
-          :href="sponsor.website_url">
-          </Sponsor>
-        </b-row>
+        <template v-if="mainSponsors.length > 0">
+          <h2 class="text-center font-weight-bold">{{ $t('sponsors.mainSponsor') }}</h2>
+          <b-row>
+            <Sponsor v-for="(sponsor, index) in mainSponsors"
+              :key="'main-' + index"
+              :logo_src="sponsor.logo_uri"
+              :href="sponsor.website_url">
+            </Sponsor>
+          </b-row>
+        </template>
+        <template v-if="coffeeSponsors.length > 0">
+          <h2 class="text-center font-weight-bold">{{ $t('coffeesponsor') }}</h2>
+          <b-row>
+            <Sponsor v-for="(sponsor, index) in coffeeSponsors"
+              :key="'coffee-' + index"
+              :logo_src="sponsor.logo_uri"
+              :href="sponsor.website_url">
+            </Sponsor>
+          </b-row>
+        </template>
+        <template v-if="otherSponsors.length > 0">
+          <h2 class="text-center font-weight-bold" style="margin-top: 4rem;">{{ $t('sponsors.otherSponsors') }}</h2>
+          <b-row>
+            <Sponsor v-for="(sponsor, index) in otherSponsors"
+              :key="'other-' + index"
+              :logo_src="sponsor.logo_uri"
+              :href="sponsor.website_url">
+            </Sponsor>
+          </b-row>
+        </template>
       </Content>
     </div>
 </template>
@@ -34,6 +44,15 @@ export default {
   computed: {
     sponsors: function () {
       return this.$store.state.sponsors.all
+    },
+    mainSponsors: function () {
+      return this.sponsors.filter(s => s.type === 'Hovedsponsor')
+    },
+    coffeeSponsors: function () {
+      return this.sponsors.filter(s => s.type === 'Kaffesponsor')
+    },
+    otherSponsors: function () {
+      return this.sponsors.filter(s => s.type === 'Annen sponsor' || !s.type)
     }
   }
 }
