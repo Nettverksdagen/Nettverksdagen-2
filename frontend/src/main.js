@@ -12,7 +12,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'babel-polyfill'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { i18n } from './translations/translations'
-import ga4 from './plugins/ga4'
+import ga4 from './services/ga4'
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
