@@ -2,6 +2,6 @@ Django>=2.1.1,<3.0
 djangorestframework
 django-cors-headers
 django-rest-auth
-psycopg2==2.8.6
+psycopg2==2.9.11
 gunicorn
 Babel
