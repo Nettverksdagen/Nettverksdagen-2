@@ -341,7 +341,8 @@
     },
     "sponsors": {
         "mainSponsor": "Hovedsponsor",
-        "otherSponsors": "Øvrige sponsorer"
+        "otherSponsors": "Øvrige sponsorer",
+        "coffeeSponsor": "Kaffesponsor"
     },
     "contactPersons": "Kontaktpersoner",
     "teamMember": {

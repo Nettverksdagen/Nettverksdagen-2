@@ -356,7 +356,8 @@
     },
     "sponsors": {
       "mainSponsor": "Main sponsor",
-      "otherSponsors": "Other sponsors"
+      "otherSponsors": "Other sponsors",
+      "coffeeSponsor": "Coffee Sponsor"
     },
     "contactPersons": "Contact persons",
     "standmap": {
