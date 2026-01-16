@@ -2,6 +2,9 @@
   <div class="loading-page">
     <b-row class="firstrow">
         <div class="col-12 splash-text" :style="{'background-image': 'url(' + require('@/assets/iphonebakgrunn.svg') + ')'}">
+          <div class="infoBox">
+            <InfoBox :title="infoboxTitle" :paragraph="infoboxParagraph" />
+          </div>
             <div class="hometext">
                 <h3>{{$t('homescreen.fremtidig')}}</h3>
                 <h1>{{$t('nettverksdagene')}}</h1>
@@ -17,9 +20,7 @@
             <img class="overlay" src="@/assets/background_overlay.png">
         </div>
     </b-row>
-    <div class="InfoBox">
-      <InfoBox :title="infoboxTitle" :paragraph="infoboxParagraph" />
-    </div>
+    
     <div class="boxes">
       <b-link :to="{name: 'Home', hash: '#stand-map'}" @click.native="scrollToId('stand-map')">
         <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" :box-text="$t('glassgårdentext')"/>
@@ -124,6 +125,33 @@ export default {
   }
   .firstrow {
     margin: 0; // Removes the default margin from the b-row element
+  }
+  .infoBox {
+    //position: absolute;
+    position:absolute;
+    --left-margin: 30%;
+    --width: 70%;
+    @media(min-width: $small-width) {
+      --left-margin: 36%;
+      --width: 64%;
+    }
+    @media(min-width: $medium-width) {
+      --left-margin: 30%;
+      --width: 70%
+    }
+    // @media(min-width: $large-width) {
+    //   position: absolute;
+    // }
+
+    @media(min-width: $largest-width) {
+      --width: 100%;
+      right: -100%;
+    }
+
+    left: var(--left-margin);
+
+    max-width: var(--width);
+    z-index: 1;
   }
   .hometext {
     // z-index: 10; // To make sure the text is on top of the background

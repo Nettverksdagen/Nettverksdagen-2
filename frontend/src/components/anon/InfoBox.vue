@@ -1,7 +1,7 @@
 <template>
-  <div class="p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-md shadow-md w-full max-w-4xl mx-auto my-6">
-    <h2 class="text-xl font-bold mb-2">{{ title }}</h2>
-    <div v-if="paragraph" class="list-disc pl-5 text-gray-700 space-y-1">
+  <div class="info-box" v-if="hasText">
+    <h2 class="infoBoxHeading">{{ title }}</h2>
+    <div v-if="paragraph" class="infoBoxText">
       {{paragraph}}
     </div>
     <p v-else class="text-gray-500 italic"></p>
@@ -21,5 +21,37 @@ export default {
       default: "" // Default to empty string if no paragraph is provided
     }
   },
+  computed: {
+    hasText() {
+      return this.title.trim() || this.paragraph.trim()
+    }
+  }
 };
 </script>
+
+
+<style scoped lang="scss">
+
+.info-box {
+  height: 100%;
+  min-width: 100%;
+  border-radius: 1rem;
+  border-width: 2px;
+  border-style: solid;
+  border-color: var(--primary-color);
+  background-color: var(--line-border-color);
+  padding: 5px;
+}
+
+.infoBoxHeading {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.infoBoxText {
+  color: var(--primary-color);
+  //overflow-wrap: break-word;
+}
+
+</style>
