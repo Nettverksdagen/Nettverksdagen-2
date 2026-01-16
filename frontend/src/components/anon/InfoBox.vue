@@ -31,25 +31,27 @@ export default {
 
 
 <style scoped lang="scss">
-
+$medium-width: 768px;
 .info-box {
   height: 100%;
   min-width: 100%;
   border-radius: 1rem;
-  border-width: 2px;
+  border-width: 3px;
   border-style: solid;
   border-color: var(--primary-color);
   background-color: var(--line-border-color);
-  padding: 5px;
+  padding: 15px;
+  margin-bottom: 5px;
 }
 
 .infoBoxHeading {
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bold;
   color: var(--primary-color);
 }
 
 .infoBoxText {
+  font-size: 14px;
   color: var(--primary-color);
   //overflow-wrap: break-word;
 }
