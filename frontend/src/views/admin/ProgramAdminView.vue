@@ -13,39 +13,39 @@
     </b-alert>
     <b-row class="my-4">
       <div class="col-12">
-        <b-card header="Legg til 'ProgramItem' i programmet på siden" class="h-100">
+        <b-card :header="$t('admin.program.header')" class="h-100">
           <b-form @submit.prevent="handleSubmit">
             <b-row>
               <div class="col-12 col-md-6">
-                <b-form-group label="Tittel" label-for="item-header-input">
-                  <b-form-input v-model="programItem.header" id="item-header-input" required placeholder="Tittel på 'ProgramItem'" ></b-form-input>
+                <b-form-group :label="$t('admin.program.title')" label-for="item-header-input">
+                  <b-form-input v-model="programItem.header" id="item-header-input" required :placeholder="$t('admin.program.titlePlaceholder')" ></b-form-input>
                 </b-form-group>
-                <b-form-group label="Sted" label-for="item-place-input">
-                  <b-form-input v-model="programItem.place" id="item-place-input" placeholder="Stedet det skal foregå" ></b-form-input>
+                <b-form-group :label="$t('admin.program.location')" label-for="item-place-input">
+                  <b-form-input v-model="programItem.place" id="item-place-input" :placeholder="$t('admin.program.locationPlaceholder')" ></b-form-input>
                 </b-form-group>
               </div>
               <div class="col-12 col-md-6">
-                <b-form-group label="Dato" label-for="item-date-input">
-                  <b-form-input type="date" v-model="programItem.date" id="item-date-input" required placeholder="Velg dato for 'ProgramItem'"></b-form-input>
+                <b-form-group :label="$t('admin.program.date')" label-for="item-date-input">
+                  <b-form-input type="date" v-model="programItem.date" id="item-date-input" required :placeholder="$t('admin.program.datePlaceholder')"></b-form-input>
                 </b-form-group>
-                <b-form-group label="Starttid" label-for="item-timeStart-input">
-                  <b-form-input type="time" v-model="programItem.timeStart" id="item-timeStart-input" required placeholder="Velg starttid for 'ProgramItem'"></b-form-input>
+                <b-form-group :label="$t('admin.program.startTime')" label-for="item-timeStart-input">
+                  <b-form-input type="time" v-model="programItem.timeStart" id="item-timeStart-input" required :placeholder="$t('admin.program.startTimePlaceholder')"></b-form-input>
                 </b-form-group>
-                <b-form-group label="Sluttid" label-for="item-timeEnd-input">
-                  <b-form-input type="time" v-model="programItem.timeEnd" id="item-timeEnd-input" required placeholder="Velg slutttid for 'ProgramItem'"></b-form-input>
+                <b-form-group :label="$t('admin.program.endTime')" label-for="item-timeEnd-input">
+                  <b-form-input type="time" v-model="programItem.timeEnd" id="item-timeEnd-input" required :placeholder="$t('admin.program.endTimePlaceholder')"></b-form-input>
                 </b-form-group>
               </div>
               <div class="col-12 col-md-6 mb-2">
-                <b-form-group label="Tekst" label-for="item-paragraph-input-0">
+                <b-form-group :label="$t('admin.program.text')" label-for="item-paragraph-input-0">
                   <div :key="index" v-for="(line, index) in programItem.paragraph" class="row mb-1 pl-2">
-                      <b-form-input class="col-10 mr-1" v-model="programItem.paragraph[index]" :id="'item-paragraph-input-'+index" placeholder="Linje med brødtekst"></b-form-input>
+                      <b-form-input class="col-10 mr-1" v-model="programItem.paragraph[index]" :id="'item-paragraph-input-'+index" :placeholder="$t('admin.program.textLine')"></b-form-input>
                       <b-button class="" @click="handleDeleteParagraphLine(index)" variant="danger">
-                          Slett
+                          {{$t('admin.program.deleteLine')}}
                       </b-button>
                   </div>
                 </b-form-group>
                 <b-button @click="handleAddLine">
-                    Legg til tekstlinje
+                    {{$t('admin.program.addTextLine')}}
                 </b-button>
               </div>
               <div class="col-12 mt-2 mb-3">
@@ -53,33 +53,33 @@
                     id="checkbox-registration"
                     v-model="programItem.registration"
                     name="checkbox-registration">
-                  Påmelding
+                  {{$t('admin.program.registration')}}
                 </b-form-checkbox>
               </div>
                 <div class="col-12 col-md-6" v-if="programItem.registration">
-                    <b-form-group label="Dato for påmeldingsstart" label-for="item-date-registration-start-input">
+                    <b-form-group :label="$t('admin.program.registrationStartDate')" label-for="item-date-registration-start-input">
                       <b-form-input type="date" v-model="programItem.registrationStartDate" id="item-date-registration-start-input" :required="programItem.registration"></b-form-input>
                     </b-form-group>
-                    <b-form-group label="Tid for påmeldingsstart" label-for="item-time-registration-start-input">
+                    <b-form-group :label="$t('admin.program.registrationStartTime')" label-for="item-time-registration-start-input">
                       <b-form-input type="time" v-model="programItem.registrationStartTime" id="item-time-registration-start-input" :required="programItem.registration"></b-form-input>
                     </b-form-group>
                 </div>
                 <div class="col-12 col-md-6" v-if="programItem.registration">
-                  <b-form-group label="Dato for påmeldingsslutt" label-for="item-date-registration-end-input">
+                  <b-form-group :label="$t('admin.program.registrationEndDate')" label-for="item-date-registration-end-input">
                     <b-form-input type="date" v-model="programItem.registrationEndDate" id="item-date-registration-end-input"></b-form-input>
                   </b-form-group>
-                  <b-form-group label="Tid for påmeldingsslutt" label-for="item-time-registration-end-input">
+                  <b-form-group :label="$t('admin.program.registrationEndTime')" label-for="item-time-registration-end-input">
                     <b-form-input type="time"  v-model="programItem.registrationEndTime" id="item-time-registration-end-input"></b-form-input>
                   </b-form-group>
                 </div>
                 <div class="col-12 col-md-6 mt-3" v-if="programItem.registration">
-                  <b-form-group label="Max antall påmeldte" label-for="item-max-registred-input">
+                  <b-form-group :label="$t('admin.program.maxRegistered')" label-for="item-max-registred-input">
                     <b-form-input type="number" v-model="programItem.maxRegistered" id="item-max-registered-input"></b-form-input>
                   </b-form-group>
                 </div>
                 <div class="col-12 col-md-6 mt-3" v-if="programItem.registration">
-                  <b-form-group label="Email som avmeldingsmail blir sendt til" label-for="item-email-input">
-                    <b-form-input type="email" v-model="programItem.cancelEmail" id="item-email-input" :required="programItem.registration" placeholder="Email til ansvarlig" ></b-form-input>
+                  <b-form-group :label="$t('admin.program.cancelEmail')" label-for="item-email-input">
+                    <b-form-input type="email" v-model="programItem.cancelEmail" id="item-email-input" :required="programItem.registration" :placeholder="$t('admin.program.emailPlaceholder')" ></b-form-input>
                 </b-form-group>
                 </div>
             </b-row>
@@ -92,7 +92,7 @@
     </b-row>
     <b-row>
       <div class="col-12">
-        <b-card header="Program">
+        <b-card :header="$t('admin.program.listHeader')">
           <b-table class="d-none d-md-table" hover :fields="fields" :items="programData">
             <template v-slot:cell(edit)="program">
               <edit-button class="mx-3" @click.native="edit(program.item)"></edit-button>
@@ -245,8 +245,8 @@ export default {
       axios[(this.$data.editing ? 'put' : 'post')](process.env.VUE_APP_API_HOST +
         '/api/program/' + (this.$data.editing ? programItem.id + '/' : ''),
       programItem).then((response) => {
-        this.showAlert('success', 'Suksess!', 'ProgramItem har blitt' +
-          (this.$data.editing ? 'endret.' : 'lagt ut på forsiden.'))
+        this.showAlert('success', this.$t('admin.success'), 'ProgramItem ' +
+          (this.$data.editing ? this.$t('admin.updated') : this.$t('admin.published')))
         this['program/' + (this.$data.editing ? 'updateProgramItem' : 'addProgramItem')](response.data)
         this.resetForm()
         setTimeout(() => {
@@ -255,21 +255,21 @@ export default {
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
-          'ProgramItem kunne ikke legges ut.')
+          'ProgramItem ' + this.$t('admin.couldNotPublish'))
       })
     },
     destroy: function (programItem) {
-      if (!confirm('Er du sikker på at du vil slette ' + programItem.header + '?')) {
+      if (!confirm(this.$t('admin.confirmDelete') + ' ' + programItem.header + '?')) {
         return
       }
       axios.delete(process.env.VUE_APP_API_HOST + '/api/program/' +
         programItem.id + '/').then((response) => {
-        this.showAlert('success', 'Suksess!', 'ProgramItem er blitt slettet')
+        this.showAlert('success', this.$t('admin.success'), 'ProgramItem ' + this.$t('admin.deleted'))
         this['program/deleteProgramItem'](programItem)
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
-          'ProgramItem kunne ikke slettes.')
+          'ProgramItem ' + this.$t('admin.couldNotDelete'))
       })
       this.resetForm()
       setTimeout(() => {

@@ -7,11 +7,9 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
-    "unit": "jest --config test/unit/jest.conf.js --coverage",
-    "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e",
-    "lint": "eslint --c .js,.vue src test/unit test/e2e/specs",
-    "build": "node build/build.js"
+    "lint": "eslint --c .js,.vue src test",
+    "build": "node build/build.js",
+    "test": "vitest --config test/vitest.config.js"
   },
   "dependencies": {
     "@coreui/coreui": "^2.1.16",
@@ -23,7 +21,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/vue-fontawesome": "^0.1.10",
-    "axios": "^0.25.0",
+    "axios": "^0.30.2",
     "babel-polyfill": "^6.26.0",
     "bootstrap-vue": "^2.21.2",
     "es6-promise": "^4.2.8",
@@ -35,6 +33,7 @@
     "simple-line-icons": "^2.5.5",
     "style-loader": "^0.23.1",
     "vue": "^2.6.14",
+    "vue-gtag": "^1.16.1",
     "vue-i18n": "^8.27.2",
     "vue-router": "^3.5.3",
     "vue-toggles": "^1.1.4",
@@ -61,7 +60,7 @@
     "chromedriver": "^2.46.0",
     "copy-webpack-plugin": "^4.6.0",
     "cross-spawn": "^5.0.1",
-    "css-loader": "^0.28.0",
+    "css-loader": "^0.28.11",
     "eslint": "^4.15.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-friendly-formatter": "^3.0.0",
@@ -91,6 +90,7 @@
     "shelljs": "^0.8.5",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
+    "vitest": "^3.2.4",
     "vue-jest": "^1.0.2",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",

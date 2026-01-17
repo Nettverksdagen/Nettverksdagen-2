@@ -16,7 +16,7 @@
         </li>
       </ul>
       <br>
-      <h5 class="valgomatresultstext">Finn bedriftene <a href="/#stand-map"><u>her</u>!</a></h5>
+      <h5 class="valgomatresultstext">{{ $t('valgomatFindCompanies') }} <a href="/#stand-map"><u>{{ $t('here') }}</u>!</a></h5>
     </div>
     <ProgressBar :progress="progress" />
     <div v-if="!showResults" class="navigation-buttons">
@@ -29,7 +29,8 @@
 import QuestionCard from '@/components/valgomat/QuestionCard.vue'
 import ProgressBar from '@/components/valgomat/ProgressBar.vue'
 import questions from '@/components/valgomat/questions.json'
-import companyDescription from '@/components/valgomat/companyDescription.json'
+import companyDescriptionNb from '@/components/valgomat/companyDescription_nb.json'
+import companyDescriptionEn from '@/components/valgomat/companyDescription_en.json'
 
 export default {
   components: {
@@ -42,9 +43,14 @@ export default {
       progress: 0,
       currentQuestionIndex: 0,
       topCompanies: [], // Stores top 3 companies based on the user's answers
-      companyDescription: companyDescription,
       questions,
       selectedAnswers: {} // Stores the user's selected answers by question ID
+    }
+  },
+  computed: {
+    companyDescription () {
+      // Return the appropriate company description file based on current locale
+      return this.$i18n.locale === 'en' ? companyDescriptionEn : companyDescriptionNb
     }
   },
   methods: {
@@ -127,5 +133,3 @@ export default {
     color: #000000;
   }
 </style>
-
-

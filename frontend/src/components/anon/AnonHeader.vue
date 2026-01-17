@@ -16,7 +16,6 @@
           <b-nav-item :to="{name: 'Listings'}"><p>{{$t('stillingsannonser')}}</p></b-nav-item>
           <b-nav-item :to="{name: 'About'}"><p>{{$t('omoss')}}</p></b-nav-item>
           <b-nav-item :to="{name: 'Contact'}"><p>{{$t('kontakt')}}</p></b-nav-item>
-          <b-nav-item :to="{name: 'Valgomat'}"><p>{{$t('valgomat')}}</p></b-nav-item>
           <b-nav-item :to="{name: 'FAQ'}"><p>{{$t('faq_nav')}}</p></b-nav-item>
           <b-nav-item v-on:click="toggleLanguage"><p>{{$t('lang')}}</p></b-nav-item>
           <!-- UNCOMMENT TO SHOW "TOGGLE THEME BUTTON"-->

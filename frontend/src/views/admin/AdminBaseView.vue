@@ -52,11 +52,6 @@ export default {
           class: 'sidebar-nav-divider'
         },
         {
-          name: 'Oversikt',
-          url: this.$router.resolve({name: 'AdminOverview'}).href,
-          icon: 'cui-home'
-        },
-        {
           name: 'Stillingsannonser',
           url: this.$router.resolve({name: 'ListingAdmin'}).href,
           icon: 'cui-list'
@@ -87,7 +82,7 @@ export default {
           icon: 'cui-dollar'
         },
         {
-          name: 'Participants',
+          name: 'Deltakere',
           url: this.$router.resolve({name: 'ParticipantAdmin'}).href,
           icon: 'cui-dollar'
         },

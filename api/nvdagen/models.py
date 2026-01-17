@@ -24,13 +24,25 @@ PARTNER = 'Samarbeidspartner'
 GOLD = 'Gull'
 SILVER = 'Sølv'
 BRONZE = 'Bronse'
+STARTUP = 'Startup'
 
 LEVELTYPECHOICE = (
     (MAIN_PARTNER, MAIN_PARTNER),
     (PARTNER, PARTNER),
     (GOLD, GOLD),
     (SILVER, SILVER),
-    (BRONZE, BRONZE)
+    (BRONZE, BRONZE),
+    (STARTUP, STARTUP)
+)
+
+SPONSOR_MAIN = 'Hovedsponsor'
+SPONSOR_COFFEE = 'Kaffesponsor'
+SPONSOR_OTHER = 'Annen sponsor'
+
+SPONSORTYPECHOICE = (
+    (SPONSOR_MAIN, SPONSOR_MAIN),
+    (SPONSOR_COFFEE, SPONSOR_COFFEE),
+    (SPONSOR_OTHER, SPONSOR_OTHER)
 )
 
 DAYS_NONE = 'Ingen dager'
@@ -87,6 +99,7 @@ class Business(BusinessWithLogo):
 
 class Sponsor(BusinessWithLogo):
     id = models.AutoField(primary_key=True)
+    type = models.CharField(max_length=250, choices=SPONSORTYPECHOICE, default=SPONSOR_OTHER)
 
 class Form(models.Model):
     id = models.AutoField(primary_key=True)

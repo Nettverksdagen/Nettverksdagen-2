@@ -20,7 +20,7 @@
                       <b-form-checkbox-group
                         id="position-type-checkboxes"
                         v-model="selectedPositionTypes"
-                        :options="$options.allPositionTypes"
+                        :options="translatedPositionTypes"
                         stacked
                         size="lg">
                       </b-form-checkbox-group>
@@ -74,7 +74,6 @@ export default {
     Content,
     Listing
   },
-  allPositionTypes: [],
   data () {
     return {
       fileserverHost: process.env.VUE_APP_FILESERVER_HOST,
@@ -85,6 +84,17 @@ export default {
     }
   },
   computed: {
+    allPositionTypes: function () {
+      return this.sortByFrequencyAndRemoveDuplicates(
+        this.$store.state.listings.all.map(listing => listing.type)
+      )
+    },
+    translatedPositionTypes: function () {
+      return this.allPositionTypes.map(type => ({
+        value: type,
+        text: this.$t(`positionTypes.${type}`) || type
+      }))
+    },
     availableListings: function () {
       let listings = this.$store.state.listings.all
       // Sort by id
@@ -92,10 +102,12 @@ export default {
         return a.id - b.id
       })
 
-      // Convert cities string to array of cities
-      listings = listings.filter(listing => {
-        listing.cities = listing.city.split(',').map(city => city.trim())
-        return listing
+      // Convert cities string to array of cities (without mutating original)
+      listings = listings.map(listing => {
+        return {
+          ...listing,
+          cities: listing.city.split(',').map(city => city.trim())
+        }
       })
 
       // Separate listings with and without deadline
@@ -118,12 +130,13 @@ export default {
     },
     filteredListings: function () {
       let listings = this.availableListings
+
       // Filter out unchecked position types
-      listings = listings.filter(listing => this.$data.selectedPositionTypes.indexOf(listing.type) !== -1)
+      listings = listings.filter(listing => this.selectedPositionTypes.indexOf(listing.type) !== -1)
 
       // Filter out unchecked job locations
       listings = listings.filter(listing => {
-        let cityMatches = listing.cities.filter(city => this.$data.selectedJobLocations.indexOf(city) !== -1)
+        let cityMatches = listing.cities.filter(city => this.selectedJobLocations.indexOf(city) !== -1)
         return cityMatches !== undefined && cityMatches.length > 0
       })
       return listings
@@ -135,12 +148,7 @@ export default {
     }
   },
   mounted () {
-    this.$options.allPositionTypes = this.sortByFrequencyAndRemoveDuplicates(
-      this.$store.state.listings.all.map(listing => listing.type)
-    )
-    this.selectedPositionTypes = this.$options.allPositionTypes
-
-    this.selectedJobLocations = this.allJobLocations
+    // Watchers with immediate: true handle initialization
   },
   created () {
     window.addEventListener('resize', this.handleResize)
@@ -203,8 +211,31 @@ export default {
     }
   },
   watch: {
-    allJobLocations: function (allJobLocations) {
-      this.$data.selectedJobLocations = allJobLocations
+    allPositionTypes: {
+      handler: function (newTypes) {
+        // Add any new types that aren't selected yet
+        this.$nextTick(() => {
+          newTypes.forEach(type => {
+            if (this.selectedPositionTypes.indexOf(type) === -1) {
+              this.selectedPositionTypes.push(type)
+            }
+          })
+        })
+      },
+      immediate: true
+    },
+    allJobLocations: {
+      handler: function (newLocations) {
+        // Add any new locations that aren't selected yet
+        this.$nextTick(() => {
+          newLocations.forEach(location => {
+            if (this.selectedJobLocations.indexOf(location) === -1) {
+              this.selectedJobLocations.push(location)
+            }
+          })
+        })
+      },
+      immediate: true
     }
   }
 }
