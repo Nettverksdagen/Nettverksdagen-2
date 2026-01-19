@@ -5,9 +5,9 @@ from datetime import datetime, timedelta
 
 def update_day(timestamp: int, days_from_today: int) -> int:
     """Takes in a timestamp and returns a new one with the day updated relative to today."""
-    today = datetime.now()
+    new_date = datetime.now() + timedelta(days=days_from_today)
     return int(datetime.fromtimestamp(timestamp)
-               .replace(year=today.year, month=today.month, day=today.day + days_from_today)
+               .replace(year=new_date.year, month=new_date.month, day=new_date.day)
                .timestamp())
 
 def main():
