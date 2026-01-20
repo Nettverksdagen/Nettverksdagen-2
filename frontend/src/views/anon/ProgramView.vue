@@ -48,6 +48,7 @@
                 :cancelEmail="selectedProgramItem.cancelEmail"
                 :registrationStart="selectedProgramItem.registrationStart"
                 :registrationEnd="selectedProgramItem.registrationEnd"
+                :allowDeregistration="selectedProgramItem.allowDeregistration"
                 :name="selectedProgramItem.id"
               >
               </ProgramDescription>
@@ -67,6 +68,7 @@
             :cancelEmail="selectedProgramItem.cancelEmail"
             :registrationStart="selectedProgramItem.registrationStart"
             :registrationEnd="selectedProgramItem.registrationEnd"
+            :allowDeregistration="selectedProgramItem.allowDeregistration"
             :name="selectedProgramItem.id"
           >
           </ProgramDescription>
