@@ -44,7 +44,8 @@ class ViewSetTestCase(APITestCase):
             "name" : "Alice",
             "year" : "1918",
             "study": "Kjønnsstudier",
-            "code" :  "0xcafebabe"
+            "code" :  "0xcafebabe",
+            "phone": "12345678"
         }
         bob_data = {
             "email": "bob@hotmail.com",
@@ -52,7 +53,8 @@ class ViewSetTestCase(APITestCase):
             "name" : "Bob",
             "year" : "2021",
             "study": "Prompting",
-            "code" : "0xdeadbeef"
+            "code" : "0xdeadbeef",
+            "phone": "87654321"
         }
 
         # Test registration
@@ -113,7 +115,8 @@ class ViewSetTestCase(APITestCase):
             "year" : "2",
             "study": "Matvitenskap",
             "code" : "0xallergy",
-            "allergies" : "gluten, laktose, vann uten smak"
+            "allergies" : "gluten, laktose, vann uten smak",
+            "phone": "11111111"
         }
 
         non_allergic_participant = {
@@ -122,7 +125,8 @@ class ViewSetTestCase(APITestCase):
             "name" : "Sunn norsk ungdom",
             "year" : "5",
             "study": "Medisin",
-            "code" : "0xnoallergy"
+            "code" : "0xnoallergy",
+            "phone": "22222222"
         }
 
         # Check that allergies are registered

@@ -37,6 +37,7 @@
 
     "inputfieldName": "Name",
     "inputFieldEmail": "Email",
+    "inputFieldPhone": "Phone number",
     "inputFieldFieldOfStudy": "Field of Study",
     "inputFieldStudyYear": "Year of Study",
     "inputFieldAllergies": "Allergies and dietary restrictions",
@@ -44,6 +45,7 @@
 
     "placeholderName": "Enter name",
     "placeholderEmail": "Enter email",
+    "placeholderPhone": "Enter phone number",
     "placeholderFieldOfStudy": "Enter field of study",
     "placeholderStudyYear": "Enter year of study",
     "placeholderAllergies": "Enter any allergies or dietary restrictions",
@@ -143,6 +145,7 @@
     "waitingList": "Waiting List",
     "name": "Name",
     "email": "Email",
+    "phone": "Phone",
     "study": "Study",
     "yearOfStudy": "Year",
     "allergies": "Allergies",
