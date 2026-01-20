@@ -498,7 +498,9 @@ export default {
     }
 
     @media (min-width: 1200px) {
-      min-height: 600px;
+      aspect-ratio: 2116 / 1173;
+      min-height: unset;
+      max-height: 80vh;
     }
 
     // Admin page specific styling - ensure it fits properly in narrow column
