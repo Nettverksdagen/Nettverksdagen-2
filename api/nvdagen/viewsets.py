@@ -14,7 +14,6 @@ from babel.dates import format_datetime, format_time
 class ListingViewSet(viewsets.ModelViewSet):
     queryset = Listing.objects.all()
     serializer_class = ListingSerializer
-    permission_classes = [IsAuthenticated]
 
     @action(detail=False, methods=['post'])
     def bulk_delete(self, request):
@@ -29,30 +28,25 @@ class ListingViewSet(viewsets.ModelViewSet):
 class TeamMemberViewSet(viewsets.ModelViewSet):
     queryset = TeamMember.objects.all()
     serializer_class = TeamMemberSerializer
-    permission_classes = [IsAuthenticated]
 
 
 class BusinessViewSet(viewsets.ModelViewSet):
     queryset = Business.objects.all()
     serializer_class = BusinessSerializer
-    permission_classes = [IsAuthenticated]
 
 
 class SponsorViewSet(viewsets.ModelViewSet):
     queryset = Sponsor.objects.all()
     serializer_class = SponsorSerializer
-    permission_classes = [IsAuthenticated]
 
 
 class FormViewSet(viewsets.ModelViewSet):
     serializer_class = FormSerializer
     queryset = Form.objects.all()
-    permission_classes = [IsAuthenticated]
 
 class ProgramViewSet(viewsets.ModelViewSet):
     serializer_class = ProgramSerializer
     queryset = Program.objects.all()
-    permission_classes = [IsAuthenticated]
 
 
 class ParticipantViewSet(viewsets.ModelViewSet):
