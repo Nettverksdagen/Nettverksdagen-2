@@ -2,6 +2,9 @@
 
 sh django-base-entrypoint.sh
 
+echo "Updating sample data in fixtures"
+python scripts/update_dev_data.py
+
 echo "Loading data from fixtures"
 python manage.py loaddata fixtures.json
 
