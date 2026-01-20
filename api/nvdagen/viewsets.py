@@ -70,8 +70,9 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                 if (currentlyRegistered >= program.maxRegistered):
                     waitingListIndex = currentlyRegistered - program.maxRegistered + 1
                     data['waitingListIndex'] = waitingListIndex
-                    data['place'] = program.place                    
+                    data['place'] = program.place
                     data['header'] = program.header
+                    data['allowDeregistration'] = program.allowDeregistration
                     html_message = render_to_string('on_waiting_list.html', context=data)
                     plain_message = strip_tags(html_message)
                     send_mail('Nettverksdagene - Du står på venteliste',
@@ -87,6 +88,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                     #Ny formatering av dato
                     data['timeStart'] = format_datetime(datetime.fromtimestamp(program.timeStart+3600), "EEEE dd. MMMM, 'klokken' H:MM ", locale='nb_NO')
                     data['header'] = program.header
+                    data['allowDeregistration'] = program.allowDeregistration
                     html_message = render_to_string('registered_email.html', context=data)
                     plain_message = strip_tags(html_message)
                     send_mail('Nettverksdagene - Påmelding bekreftet for ' + data['name'],
@@ -109,6 +111,10 @@ class ParticipantViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, pk):
         participant = Participant.objects.get(id=pk)
         program = participant.event
+
+        if not program.allowDeregistration:
+            response = {'message': 'Avmelding er ikke tillatt for dette arrangementet'}
+            return Response(response, status = status.HTTP_400_BAD_REQUEST)
 
         try:
             data = {}
@@ -161,6 +167,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                         data['code'] = lastParticipant.code
                         data['header'] = program.header
                         data['place'] = program.place
+                        data['allowDeregistration'] = program.allowDeregistration
                         html_message = render_to_string('off_waiting_list.html', context=data)
                         plain_message = strip_tags(html_message)
                         send_mail('Nettverksdagene - Påmelding bekreftet for ' + lastParticipant.name,
