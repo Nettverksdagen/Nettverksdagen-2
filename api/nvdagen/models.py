@@ -120,6 +120,7 @@ class Program(models.Model):
     cancelEmail = models.CharField(max_length=250, blank=True, null=True)
     registrationStart = models.IntegerField(blank=True, null=True)
     registrationEnd = models.IntegerField(blank=True, null=True)
+    allowDeregistration = models.BooleanField(default=True)
 
 
 class Participant(models.Model):
