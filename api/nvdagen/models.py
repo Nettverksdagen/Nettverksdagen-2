@@ -127,6 +127,7 @@ class Participant(models.Model):
     event = models.ForeignKey(Program, on_delete=models.CASCADE)
     email = models.CharField(max_length=250)
     name = models.CharField(max_length=250)
+    phone = models.CharField(max_length=50)
     year = models.CharField(max_length=250)
     study = models.CharField(max_length=250)
     code = models.CharField(max_length=250)

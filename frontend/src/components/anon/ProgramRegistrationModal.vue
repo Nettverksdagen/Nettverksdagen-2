@@ -37,6 +37,18 @@
         >
         </b-form-input>
       </b-form-group>
+      <b-form-group :label="$t('inputFieldPhone')" label-for="phone-input" :invalid-feedback="$t('inputFieldPhone') + ' ' + $t('is_required')">
+        <b-form-input
+          id="phone-input"
+          type="tel"
+          v-model="form.phone"
+          required
+          ref="phoneInput"
+          :placeholder="$t('placeholderPhone')"
+          :state="phoneState"
+        >
+        </b-form-input>
+      </b-form-group>
       <b-form-group :label="$t('inputFieldFieldOfStudy')" label-for="study-select" :invalid-feedback="$t('inputFieldFieldOfStudy') + ' ' + $t('is_required')">
         <b-form-select
           id="study-select"
@@ -106,6 +118,7 @@ export default {
       form: {
         name: '',
         email: '',
+        phone: '',
         study: '',
         studySelection: null,
         studyOther: '',
@@ -140,6 +153,7 @@ export default {
       ],
       nameState: null,
       emailState: null,
+      phoneState: null,
       studyState: null,
       studyOtherState: null,
       yearState: null,
@@ -163,6 +177,7 @@ export default {
     checkFormValidity () {
       const nameValid = this.$refs.nameInput.checkValidity()
       const emailValid = this.$refs.emailInput.checkValidity()
+      const phoneValid = this.$refs.phoneInput.checkValidity()
       const studyValid = this.form.studySelection !== null
       const yearValid = this.form.year !== null
       const allergiesValid = true
@@ -175,11 +190,12 @@ export default {
 
       this.nameState = nameValid
       this.emailState = emailValid
+      this.phoneState = phoneValid
       this.studyState = studyValid
       this.yearState = yearValid
       this.allergiesState = allergiesValid
 
-      return nameValid && emailValid && studyValid && yearValid && studyOtherValid
+      return nameValid && emailValid && phoneValid && studyValid && yearValid && studyOtherValid
     },
     onStudyChange () {
       if (this.form.studySelection === 'Annet') {
@@ -192,6 +208,7 @@ export default {
     resetModal () {
       this.form.name = ''
       this.form.email = ''
+      this.form.phone = ''
       this.form.study = ''
       this.form.studySelection = null
       this.form.studyOther = ''
@@ -200,6 +217,7 @@ export default {
 
       this.nameState = null
       this.emailState = null
+      this.phoneState = null
       this.studyState = null
       this.studyOtherState = null
       this.yearState = null

@@ -40,7 +40,7 @@
         "fields": {
             "name": "Sommerjobb i Kongsberg",
             "company_name": "Kongsberggruppen",
-            "deadline": "2026-01-21",
+            "deadline": "2026-01-27",
             "logo_uri": "static/kbg.png",
             "type": "Sommerjobb",
             "listing_url": "http://example.com",
@@ -55,7 +55,7 @@
         "fields": {
             "name": "Verdens beste sommerjobb",
             "company_name": "Sparebank1",
-            "deadline": "2026-01-21",
+            "deadline": "2026-01-27",
             "logo_uri": "static/sb1.png",
             "type": "Sommerjobb",
             "listing_url": "http://example.com",
@@ -70,7 +70,7 @@
         "fields": {
             "name": "Sommerjobb hos Norges beste arbeidsplass",
             "company_name": "Sopra Steria",
-            "deadline": "2026-01-21",
+            "deadline": "2026-01-27",
             "logo_uri": "static/sopra.png",
             "type": "Sommerjobb",
             "listing_url": "http://example.com",
@@ -85,7 +85,7 @@
         "fields": {
             "name": "Bli med og skap fremtidens l\u00f8sninger",
             "company_name": "Evry",
-            "deadline": "2026-01-21",
+            "deadline": "2026-01-27",
             "logo_uri": "static/evry.png",
             "type": "Fast stilling",
             "listing_url": "http://example.com",
@@ -100,7 +100,7 @@
         "fields": {
             "name": "Bli med p\u00e5 en spennende reise",
             "company_name": "Disruptive Technologies",
-            "deadline": "2026-01-21",
+            "deadline": "2026-01-27",
             "logo_uri": "static/disruptive.png",
             "type": "Trainee",
             "listing_url": "http://example.com",
@@ -115,7 +115,7 @@
         "fields": {
             "name": "Jobb i en spennende ny startup",
             "company_name": "Ardoq",
-            "deadline": "2026-01-21",
+            "deadline": "2026-01-27",
             "logo_uri": "static/ardoq.png",
             "type": "Deltidsstilling",
             "listing_url": "http://example.com",
@@ -130,7 +130,7 @@
         "fields": {
             "name": "Fulltidsjobb i BaneNor",
             "company_name": "BaneNor",
-            "deadline": "2026-01-21",
+            "deadline": "2026-01-27",
             "logo_uri": "24b70bb2-b6eb-42dd-99a5-a6ed35055619.png",
             "type": "Fast stilling",
             "listing_url": "https://banenor.no",
@@ -369,14 +369,14 @@
         "fields": {
             "header": "Bedpres med Kongsberggruppen",
             "place": "Graffi Grill",
-            "timeStart": 1768496400,
-            "timeEnd": 1768510800,
+            "timeStart": 1769014800,
+            "timeEnd": 1769029200,
             "paragraph": "Kongsberggruppen holder bedriftspresentasjon med bespisning p\u00e5 Graffi Grill",
             "registration": true,
             "maxRegistered": 5,
             "cancelEmail": "your.fake@email.here",
-            "registrationStart": 1768302000,
-            "registrationEnd": 1768492800
+            "registrationStart": 1768820400,
+            "registrationEnd": 1769011200
         }
     },
     {
@@ -385,14 +385,14 @@
         "fields": {
             "header": "Lunsj med Sopra Steria",
             "place": "EL5",
-            "timeStart": 1768474800,
-            "timeEnd": 1768478400,
+            "timeStart": 1768993200,
+            "timeEnd": 1768996800,
             "paragraph": "Spis deg stapmett p\u00e5 konsulenthusets regning!",
             "registration": true,
             "maxRegistered": 2,
             "cancelEmail": "your.fake@email.here",
-            "registrationStart": 1768302000,
-            "registrationEnd": 1768517940
+            "registrationStart": 1768820400,
+            "registrationEnd": 1769036340
         }
     },
     {
@@ -402,6 +402,7 @@
             "event": 2,
             "email": "bobsemail@stud.ntnu.no",
             "name": "Bob",
+            "phone": "98765432",
             "year": "3",
             "study": "MTTK",
             "code": "CI1USO",
@@ -415,6 +416,7 @@
             "event": 2,
             "email": "alicesemail@stud.ntnu.no",
             "name": "Alice",
+            "phone": "41234567",
             "year": "5",
             "study": "MTTK",
             "code": "A3XYJ4",
