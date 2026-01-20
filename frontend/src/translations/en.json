@@ -295,8 +295,7 @@
             "registrationEndTime": "Time for registration end",
             "maxRegistered": "Max number of registered",
             "cancelEmail": "Email where unregistration email will be sent",
-            "emailPlaceholder": "Email to responsible person",
-            "allowDeregistration": "Allow unregistration"
+            "emailPlaceholder": "Email to responsible person"
         },
 
         "sponsor": {

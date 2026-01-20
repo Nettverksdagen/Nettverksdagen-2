@@ -82,14 +82,6 @@
                     <b-form-input type="email" v-model="programItem.cancelEmail" id="item-email-input" :required="programItem.registration" :placeholder="$t('admin.program.emailPlaceholder')" ></b-form-input>
                 </b-form-group>
                 </div>
-                <div class="col-12 mt-2" v-if="programItem.registration">
-                  <b-form-checkbox
-                      id="checkbox-allow-deregistration"
-                      v-model="programItem.allowDeregistration"
-                      name="checkbox-allow-deregistration">
-                    {{$t('admin.program.allowDeregistration')}}
-                  </b-form-checkbox>
-                </div>
             </b-row>
             <b-button type="submit" size="md" variant="success" v-if="!editing">{{$t('leggut')}}</b-button>
             <b-button type="submit" size="md" variant="primary" v-if="editing">{{$t('edit')}}</b-button>
@@ -152,8 +144,7 @@ export default {
         registrationStartTime: '',
         registrationEndDate: '',
         registrationEndTime: '',
-        cancelEmail: '',
-        allowDeregistration: true
+        cancelEmail: ''
       },
       editing: false,
       alert: {
@@ -207,7 +198,6 @@ export default {
         newItem.cancelEmail = programItem.cancelEmail
         newItem.registered = (programItem.registered === undefined || programItem.registered === null) ? 0 : programItem.registered
         newItem.maxRegistered = Number(programItem.maxRegistered)
-        newItem.allowDeregistration = programItem.allowDeregistration
 
         let registrationStartDate = programItem.registrationStartDate.split('-')
         let registrationStartTime = programItem.registrationStartTime.split(':')
@@ -223,7 +213,7 @@ export default {
           newItem.registrationEnd = undefined
         }
       } else {
-        let registrationFields = ['maxRegistered', 'registered', 'cancelEmail', 'registrationStart', 'registrationEnd', 'allowDeregistration']
+        let registrationFields = ['maxRegistered', 'registered', 'cancelEmail', 'registrationStart', 'registrationEnd']
         registrationFields.forEach((field) => {
           newItem[field] = undefined
         })
@@ -302,8 +292,7 @@ export default {
         registrationStartTime: '',
         registreationEndDate: '',
         registreationEndTime: '',
-        cancelEmail: '',
-        allowDeregistration: true
+        cancelEmail: ''
       }
       this.$data.editing = false
     },
