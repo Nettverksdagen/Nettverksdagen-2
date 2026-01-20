@@ -278,7 +278,8 @@
             "registrationEndTime": "Tid for påmeldingsslutt",
             "maxRegistered": "Max antall påmeldte",
             "cancelEmail": "Email som avmeldingsmail blir sendt til",
-            "emailPlaceholder": "Email til ansvarlig"
+            "emailPlaceholder": "Email til ansvarlig",
+            "allowDeregistration": "Tillat avmelding"
         },
         "sponsor": {
             "header": "Legg til en ny sponsor på forsiden",
