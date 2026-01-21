@@ -77,7 +77,15 @@
                     <b-form-input type="number" v-model="programItem.maxRegistered" id="item-max-registered-input"></b-form-input>
                   </b-form-group>
                 </div>
-                <div class="col-12 col-md-6 mt-3" v-if="programItem.registration">
+                <div class="col-12 mt-2 mb-3" v-if="programItem.registration">
+                  <b-form-checkbox
+                      id="checkbox-allow-deregistration"
+                      v-model="programItem.allowDeregistration"
+                      name="checkbox-allow-deregistration">
+                    {{$t('admin.program.allowDeregistration')}}
+                  </b-form-checkbox>
+                </div>
+                <div class="col-12 mt-2 mt-3" v-if="programItem.registration && programItem.allowDeregistration">
                   <b-form-group :label="$t('admin.program.cancelEmail')" label-for="item-email-input">
                     <b-form-input type="email" v-model="programItem.cancelEmail" id="item-email-input" :required="programItem.registration" :placeholder="$t('admin.program.emailPlaceholder')" ></b-form-input>
                 </b-form-group>
@@ -144,6 +152,7 @@ export default {
         registrationStartTime: '',
         registrationEndDate: '',
         registrationEndTime: '',
+        allowDeregistration: true,
         cancelEmail: ''
       },
       editing: false,
@@ -198,6 +207,7 @@ export default {
         newItem.cancelEmail = programItem.cancelEmail
         newItem.registered = (programItem.registered === undefined || programItem.registered === null) ? 0 : programItem.registered
         newItem.maxRegistered = Number(programItem.maxRegistered)
+        newItem.allowDeregistration = programItem.allowDeregistration;
 
         let registrationStartDate = programItem.registrationStartDate.split('-')
         let registrationStartTime = programItem.registrationStartTime.split(':')
@@ -290,8 +300,9 @@ export default {
         maxRegistered: 0,
         registrationStartDate: '',
         registrationStartTime: '',
-        registreationEndDate: '',
-        registreationEndTime: '',
+        registrationEndDate: '',
+        registrationEndTime: '',
+        allowDeregistration: true,
         cancelEmail: ''
       }
       this.$data.editing = false

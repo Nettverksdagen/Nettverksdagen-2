@@ -276,6 +276,7 @@
             "registrationStartTime": "Tid for påmeldingsstart",
             "registrationEndDate": "Dato for påmeldingsslutt",
             "registrationEndTime": "Tid for påmeldingsslutt",
+            "allowDeregistration": "Avmelding",
             "maxRegistered": "Max antall påmeldte",
             "cancelEmail": "Email som avmeldingsmail blir sendt til",
             "emailPlaceholder": "Email til ansvarlig"

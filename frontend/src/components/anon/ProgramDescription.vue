@@ -74,7 +74,7 @@
             {{ $t('registrationNotYetAvailable') }}
           </button>
 
-          <button v-if="cancelEmail && enableRegistration" class="btn-unregister" v-b-modal="'unregistrationModal' + name">
+          <button v-if="allowDeregistration && enableRegistration" class="btn-unregister" v-b-modal="'unregistrationModal' + name">
             {{ $t('destroypart') }}
           </button>
         </div>
@@ -113,7 +113,7 @@ export default {
     'paragraph',
     'registration',
     'maxRegistered',
-    'cancelEmail',
+    'allowDeregistration',
     'registrationStart',
     'registrationEnd',
     'name'
