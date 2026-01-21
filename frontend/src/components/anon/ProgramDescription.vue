@@ -67,12 +67,14 @@
 
         <!-- Action Buttons -->
         <div class="button-group">
-          <button v-if="enableRegistration" class="btn-register" v-b-modal="'registrationModal' + name">
-            {{ $t('register') }}
-          </button>
-          <button v-else disabled class="btn-register btn-disabled">
-            {{ $t('registrationNotYetAvailable') }}
-          </button>
+          <template v-if="actual_participants() < maxRegistered">
+            <button v-if="enableRegistration" class="btn-register" v-b-modal="'registrationModal' + name">
+              {{ $t('register') }}
+            </button>
+            <button v-else disabled class="btn-register btn-disabled">
+              {{ $t('registrationNotYetAvailable') }}
+            </button>
+          </template>
 
           <button v-if="cancelEmail && enableRegistration" class="btn-unregister" v-b-modal="'unregistrationModal' + name">
             {{ $t('destroypart') }}
@@ -162,7 +164,11 @@ export default {
       return new Date(time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     },
     formatDate (date) {
-      return new Date(date).toLocaleDateString()
+      const d = new Date(date)
+      const day = d.getDate()
+      const month = d.toLocaleDateString('nb-NO', { month: 'long' })
+      const time = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      return `${day}. ${month} kl. ${time}`
     },
     showRegistrationSuccessAlert () {
       this.registrationSuccessAlertCountDown = 15
@@ -309,6 +315,7 @@ export default {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .btn-register, .btn-unregister {
