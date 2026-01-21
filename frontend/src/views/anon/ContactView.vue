@@ -8,6 +8,17 @@
           <table class="main-contact">
             <tr>
               <td class="align-top">
+                <h3>{{$t('board')}}</h3>
+                <b-link href="mailto:leder@nettverksdagene.no">leder@nettverksdagene.no</b-link>
+              </td>
+              <td>
+                <p class="info">
+                  {{$t('genquest')}}
+                </p>
+              </td>
+            </tr>
+             <tr>
+              <td class="align-top">
                 <h3>{{$t('company')}}</h3>
                 <b-link href="mailto:bedrift@nettverksdagene.no">bedrift@nettverksdagene.no</b-link>
               </td>
@@ -18,18 +29,7 @@
               </td>
             </tr>
 
-            <tr>
-              <td class="align-top">
-                <h3>{{$t('board')}}</h3>
-                <b-link href="mailto:leder@nettverksdagene.no">leder@nettverksdagene.no</b-link>
-              </td>
-              <td>
-                <p class="info">
-                  {{$t('genquest')}}
-                </p>
-              </td>
-            </tr>
-            <tr>
+           <tr>
               <td class="align-top">
                 <h3>{{$t('sponsor')}}</h3>
                 <b-link href="mailto:spons@nettverksdagene.no">spons@nettverksdagene.no</b-link>
