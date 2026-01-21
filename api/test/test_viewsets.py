@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from unittest.mock import patch
 
-from nvdagen.models import Participant, Program
+from nvdagen.models import Participant, Program, FAQ
 
 CONFIRMATION_WORD = "bekreftet"
 WAITLIST_WORD     = "venteliste"
@@ -14,6 +14,7 @@ class ViewSetTestCase(APITestCase):
         # See routers.py
         self.participant_url       = reverse("participant-list")
         self.participant_count_url = reverse("participant-count")
+        self.faq_url = reverse("faq-list")
 
         self.program = Program.objects.create(
             header        = "Interesting event",
@@ -27,6 +28,22 @@ class ViewSetTestCase(APITestCase):
         self.participant = Participant.objects.create(
             event = self.program,
             email = "participant@gmail.com",
+        )
+        
+        self.faq1 = FAQ.objects.create(
+            question_nb="Hva er NVD?",
+            question_en="What is NVD?",
+            answer_nb="Nettverksdagen",
+            answer_en="Networking Day",
+            order=1
+        )
+        
+        self.faq2 = FAQ.objects.create(
+            question_nb="Når er NVD?",
+            question_en="When is NVD?",
+            answer_nb="Hvert år",
+            answer_en="Every year",
+            order=2
         )
 
     def test_participant_count(self):
@@ -142,3 +159,23 @@ class ViewSetTestCase(APITestCase):
         self.assertLess(response.status_code, 300)
         non_allergic = Participant.objects.get(email="healthy@individual.com")
         self.assertEqual(non_allergic.allergies, "")
+
+    def test_list_faqs(self):
+        response = self.client.get(self.faq_url)
+        
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)
+        
+    def test_faqs_ordered(self):
+        response = self.client.get(self.faq_url)
+        
+        self.assertEqual(response.data[0]["order"], 1)
+        self.assertEqual(response.data[1]["order"], 2)
+        
+    def test_retrieve_faq(self):
+        detail_url = reverse("faq-detail", args=[self.faq1.id])
+        response = self.client.get(detail_url)
+        
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["question_nb"], "Hva er NVD?")
+        self.assertEqual(response.data["answer_en"], "Networking Day")
