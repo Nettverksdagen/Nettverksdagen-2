@@ -145,12 +145,10 @@ export default {
       return hours + ':' + minutes
     },
     formatDate (dateObj) {
-      let day = dateObj.getDate()
-      let month = dateObj.getMonth() + 1
-      let year = dateObj.getFullYear()
-      day = (day > 9) ? String(day) : ('0' + String(day))
-      month = (month > 9) ? String(month) : ('0' + String(month))
-      return this.formatTime(dateObj) + ' ' + day + '.' + month + '.' + year
+      const day = dateObj.getDate()
+      const month = dateObj.toLocaleDateString('nb-NO', { month: 'long' })
+      const time = this.formatTime(dateObj)
+      return `${day}. ${month} kl. ${time}`
     }
   }
 }
