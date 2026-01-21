@@ -76,7 +76,7 @@
             </button>
           </template>
 
-          <button v-if="cancelEmail && enableRegistration" class="btn-unregister" v-b-modal="'unregistrationModal' + name">
+          <button v-if="allowDeregistration && enableRegistration" class="btn-unregister" v-b-modal="'unregistrationModal' + name">
             {{ $t('destroypart') }}
           </button>
         </div>
@@ -87,6 +87,7 @@
       :modalId="'registrationModal' + name"
       :header="header"
       :name="name"
+      :allowDeregistration="allowDeregistration"
       @registration-success="showRegistrationSuccessAlert"
     />
 
@@ -115,7 +116,7 @@ export default {
     'paragraph',
     'registration',
     'maxRegistered',
-    'cancelEmail',
+    'allowDeregistration',
     'registrationStart',
     'registrationEnd',
     'name'

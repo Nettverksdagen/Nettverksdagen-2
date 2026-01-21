@@ -50,6 +50,8 @@
     "registration_success": "Du er registrert! Sjekk mailen din for å se om du fikk plass eller er på venteliste.",
     "unregistration_success": "Du er nå meldt av arrangementet.",
     "unregistration_code_sent": "Avmeldingskode sendt.",
+    "confirm_registration_title": "Er du sikker?",
+    "confirm_registration_no_deregister": "Dette arrangementet tillater ikke avmelding. Ved å melde deg på bekrefter du at du kan delta på arrangementet. Er du sikker på at du ønsker å melde deg på?",
     "waiting_list": "Venteliste",
     "onWaitingList": "På venteliste",
     "spotsAvailable": "Ledige plasser",
@@ -276,6 +278,7 @@
             "registrationStartTime": "Tid for påmeldingsstart",
             "registrationEndDate": "Dato for påmeldingsslutt",
             "registrationEndTime": "Tid for påmeldingsslutt",
+            "allowDeregistration": "Avmelding",
             "maxRegistered": "Max antall påmeldte",
             "cancelEmail": "Email som avmeldingsmail blir sendt til",
             "emailPlaceholder": "Email til ansvarlig"

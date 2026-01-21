@@ -30,7 +30,7 @@
     "submit": "Submit",
     "when": "When",
     "where": "Where",
-    
+
     "participant_not_found": "Registration with given e-mail not found",
     "unregistration_failure_code_invalid": "Invalid unregistration code",
     "unregistration_failure_unknown": "Something went wrong, please contact it@nettverksdagene.no",
@@ -56,6 +56,8 @@
     "registration_success": "You are registered! Check your email to see if you got a spot or are on the waiting list.",
     "unregistration_success": "You are now unregistered from the event.",
     "unregistration_code_sent": "Unregistration code sent.",
+    "confirm_registration_title": "Are you sure?",
+    "confirm_registration_no_deregister": "This event does not allow deregistration. By registering you confirm that you are going to participate. Are you sure you want to register?",
     "waiting_list": "Waiting list",
     "onWaitingList": "On waiting list",
     "spotsAvailable": "Spots available",
@@ -70,7 +72,7 @@
 
     "stillingsannonser_card_title": "Job advertisements",
     "stillingsannonser_card_text": "Jumpstart your career by applying for a job through Nettverksdagene!",
-    
+
     "påmeldte": "registered",
     "onthe": "on the",
     "destroypart": "Unregister",
@@ -293,6 +295,7 @@
             "registrationStartTime": "Time for registration start",
             "registrationEndDate": "Date for registration end",
             "registrationEndTime": "Time for registration end",
+            "allowDeregistration": "Deregistration",
             "maxRegistered": "Max number of registered",
             "cancelEmail": "Email where unregistration email will be sent",
             "emailPlaceholder": "Email to responsible person"
