@@ -40,6 +40,7 @@ new Vue({
     this.fetchTeamMembers()
     this.fetchProgram()
     this.fetchParticipant()
+    this.fetchInfobox()
   },
   methods: {
     ...Vuex.mapActions('listings', ['fetchListings']),
@@ -47,7 +48,8 @@ new Vue({
     ...Vuex.mapActions('sponsors', ['fetchSponsors']),
     ...Vuex.mapActions('teamMembers', ['fetchTeamMembers']),
     ...Vuex.mapActions('program', ['fetchProgram']),
-    ...Vuex.mapActions('participant', ['fetchParticipant'])
+    ...Vuex.mapActions('participant', ['fetchParticipant']),
+    ...Vuex.mapActions('infobox', ['fetchInfobox'])
   },
   components: { App },
   template: '<App/>'

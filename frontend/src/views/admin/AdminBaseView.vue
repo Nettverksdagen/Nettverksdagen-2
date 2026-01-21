@@ -87,6 +87,11 @@ export default {
           icon: 'cui-dollar'
         },
         {
+          name: 'Infoboks',
+          url: this.$router.resolve({name: 'InfoboxAdmin'}).href,
+          icon: 'cui-info'
+        },
+        {
           divider: true,
           class: 'sidebar-nav-divider'
         },

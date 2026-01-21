@@ -1,5 +1,8 @@
 <template>
   <div class="loading-page">
+    <div class="infoBox">
+            <InfoBox :title="infoboxTitle" :paragraph="infoboxParagraph" />
+          </div>
     <b-row class="firstrow">
         <div class="col-12 splash-text" :style="{'background-image': 'url(' + require('@/assets/iphonebakgrunn.svg') + ')'}">
             <div class="hometext">
@@ -17,6 +20,7 @@
             <img class="overlay" src="@/assets/background_overlay.png">
         </div>
     </b-row>
+    
     <div class="boxes">
       <b-link :to="{name: 'Home', hash: '#stand-map'}" @click.native="scrollToId('stand-map')">
         <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" :box-text="$t('glassgårdentext')"/>
@@ -41,9 +45,12 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import HomeScreenBox from '@/components/anon/HomeScreenBox.vue'
+import InfoBox from '@/components/anon/InfoBox.vue'
 export default {
+  name: "HomeScreen",
   components: {
-    HomeScreenBox
+    HomeScreenBox,
+    InfoBox
   },
   methods: {
     scrollToId (id) {
@@ -56,6 +63,14 @@ export default {
         top: offsetPosition,
         behavior: 'smooth'
       })
+    }
+  },
+  computed: {
+    infoboxTitle: function() {
+      return this.$store.state.infobox.title || "";
+    },
+    infoboxParagraph: function() {
+      return this.$store.state.infobox.paragraph || "";
     }
   }
 }
@@ -105,6 +120,7 @@ export default {
   .firstrow {
     margin: 0; // Removes the default margin from the b-row element
   }
+
   .hometext {
     // z-index: 10; // To make sure the text is on top of the background
     --home-text-margin-top: 85px;
