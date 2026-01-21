@@ -19,6 +19,7 @@ const actions = {
 }
 
 const getters = {
+  // Get an object of teams with their members
   teams: state => {
     let teams = {}
     for (let i = 0; i < state.all.length; i++) {
@@ -31,10 +32,6 @@ const getters = {
         teams[state.all[i].team]['members'].push(state.all[i])
       }
     }
-
-    Object.keys(teams).forEach(teamKey => {
-      teams[teamKey].members.sort((a, b) => a.id - b.id)
-    })
     return teams
   }
 }
