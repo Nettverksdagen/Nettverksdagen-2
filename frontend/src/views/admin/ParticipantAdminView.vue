@@ -13,7 +13,7 @@
     </b-alert>
     <b-row class="my-4">
       <div class="col-12">
-        <b-card header="Velg event og se deltagere" class="h-100">
+        <b-card :header="$t('selectEventAndViewParticipants')" class="h-100">
             <b-form-select v-model="selectedEvent" :options="events"></b-form-select>
             <b-link :href="'mailto:' +concatEmails">{{$t('sendtoall')}}</b-link>
         </b-card>
@@ -21,8 +21,8 @@
     </b-row>
     <b-row>
       <div class="col-12">
-        <b-card header="Deltakere">
-          <b-link download="Deltakere.csv" :href="participantsDownloadHref"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'download' }"/> Last ned CSV</b-link>
+        <b-card :header="$t('participants')">
+          <b-link :download="$t('participants') + '.csv'" :href="participantsDownloadHref"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'download' }"/> {{$t('downloadCsv')}}</b-link>
           <b-table class="d-none d-md-table" hover :fields="fields" :items="participantList">
             <template v-slot:cell(delete)="participantList">
               <delete-button class="mx-3" @click.native="destroy(participantList.item)"></delete-button>
@@ -38,8 +38,8 @@
     </b-row>
     <b-row>
       <div class="col-12">
-        <b-card header="Venteliste">
-          <b-link download="Deltakere.csv" :href="waitinglistDownloadHref"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'download' }"/> Last ned CSV</b-link>
+        <b-card :header="$t('waitingList')">
+          <b-link :download="$t('waitingList') + '.csv'" :href="waitinglistDownloadHref"><font-awesome-icon :icon="{ prefix: 'fas', iconName: 'download' }"/> {{$t('downloadCsv')}}</b-link>
           <b-table class="d-none d-md-table" hover :fields="fields" :items="waitingList">
             <template v-slot:cell(delete)="waitingList">
               <delete-button class="mx-3" @click.native="destroy(waitingList.item)"></delete-button>
@@ -61,17 +61,17 @@ import axios from 'axios'
 import { mapMutations } from 'vuex'
 import DeleteButton from '@/components/admin/DeleteButton.vue'
 
-function generateDownloadableCsv(headerRow, rows) {
-  let csvContent = "data:text/csv;charset=utf-8,";
+function generateDownloadableCsv (headerRow, rows) {
+  let csvContent = 'data:text/csv;charset=utf-8,'
 
-  csvContent += headerRow.join(",") + "\r\n";
+  csvContent += headerRow.join(',') + '\r\n'
 
   rows.forEach(rowArray => {
-      let row = rowArray.join(",");
-      csvContent += row + "\r\n";
-  });
+    let row = rowArray.join(',')
+    csvContent += row + '\r\n'
+  })
 
-  return encodeURI(csvContent);
+  return encodeURI(csvContent)
 }
 
 export default {
@@ -82,7 +82,14 @@ export default {
   data: function () {
     return {
       fields: [
-        'id', {key: 'name', label: 'Navn'}, {key: 'study', label: 'Studie'}, {key: 'year', label: 'Årskull'}, {key: 'email', label: 'Email'}, {key: 'delete', label: ''}
+        'id',
+        {key: 'name', label: this.$t('name')},
+        {key: 'study', label: this.$t('study')},
+        {key: 'year', label: this.$t('yearOfStudy')},
+        {key: 'email', label: this.$t('email')},
+        {key: 'phone', label: this.$t('phone')},
+        {key: 'allergies', label: this.$t('allergies')},
+        {key: 'delete', label: ''}
       ],
       alert: {
         dismissSecs: 5,
@@ -122,10 +129,18 @@ export default {
       return sortedParticipants
     },
     participantList: function () {
-      return this.participants.slice(0, this.$data.selectedEvent.maxRegistered)
+      const max = this.$data.selectedEvent.maxRegistered
+      if (!max || max <= 0) {
+        return this.participants
+      }
+      return this.participants.slice(0, max)
     },
     waitingList: function () {
-      return this.participants.slice(this.$data.selectedEvent.maxRegistered)
+      const max = this.$data.selectedEvent.maxRegistered
+      if (!max || max <= 0) {
+        return []
+      }
+      return this.participants.slice(max)
     },
     concatEmails: function () {
       let emailString = ''
@@ -135,28 +150,41 @@ export default {
       return emailString
     },
     participantsDownloadHref: function () {
-      const rows = this.participantList.map(participant => [participant.name, participant.email, participant.study, participant.year])
-      return generateDownloadableCsv(['Navn', 'E-post', 'Studie', 'Årskull'], rows)
-
+      const rows = this.participantList.map(participant => [
+        participant.name,
+        participant.email,
+        participant.phone,
+        participant.study,
+        participant.year,
+        participant.allergies
+      ])
+      return generateDownloadableCsv([this.$t('name'), this.$t('email'), this.$t('phone'), this.$t('study'), this.$t('yearOfStudy'), this.$t('allergies')], rows)
     },
     waitinglistDownloadHref: function () {
-      const rows = this.waitingList.map(participant => [participant.name, participant.email, participant.study, participant.year])
-      return generateDownloadableCsv(['Navn', 'E-post', 'Studie', 'Årskull'], rows)
-    },
+      const rows = this.waitingList.map(participant => [
+        participant.name,
+        participant.email,
+        participant.phone,
+        participant.study,
+        participant.year,
+        participant.allergies
+      ])
+      return generateDownloadableCsv([this.$t('name'), this.$t('email'), this.$t('phone'), this.$t('study'), this.$t('yearOfStudy'), this.$t('allergies')], rows)
+    }
   },
   methods: {
     destroy: function (participant) {
-      if (!confirm('Er du sikker på at du vil slette ' + participant.name + '?')) {
+      if (!confirm(this.$t('admin.confirmDelete') + ' ' + participant.name + '?')) {
         return
       }
       axios.delete(process.env.VUE_APP_API_HOST + '/api/participant/' +
         participant.id + '/').then((response) => {
-        this.showAlert('success', 'Suksess!', 'Participant er blitt slettet')
+        this.showAlert('success', this.$t('admin.success'), this.$t('admin.participant.deleteSuccess'))
         this['participant/deleteParticipant'](participant)
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
-          'Participant kunne ikke slettes.')
+          this.$t('admin.participant.deleteFailed'))
       })
     },
     showAlert: function (variant, heading, message) {

@@ -116,8 +116,7 @@ export default new Router({
         {
           path: '',
           name: 'AdminOverview',
-          component: null,
-          meta: {title: 'Nvdagen admin'}
+          redirect: {name: 'ListingAdmin'}
         },
         {
           path: 'stillinger',

@@ -99,15 +99,15 @@ export default {
       return now >= new Date(this.registrationStart) && now <= new Date(this.registrationEnd)
     },
     registeredText () {
-      let filled_spaces = Math.min(this.registered, this.maxRegistered)
-      let waiting_list_spaces = Math.max(this.registered - this.maxRegistered, 0)
+      let filledSpaces = Math.min(this.registered, this.maxRegistered)
+      let waitingListSpaces = Math.max(this.registered - this.maxRegistered, 0)
 
-      let registered_string = `${filled_spaces}/${this.maxRegistered} ${this.$t('registered')}`.toLowerCase()
+      let registeredString = `${filledSpaces}/${this.maxRegistered} ${this.$t('registered')}`.toLowerCase()
       if (this.registered >= this.maxRegistered) {
-        let waiting_list_string = `${waiting_list_spaces} ${this.$t('onWaitingList')}`.toLowerCase()
-        return `${registered_string}, ${waiting_list_string}`
+        let waitingListString = `${waitingListSpaces} ${this.$t('onWaitingList')}`.toLowerCase()
+        return `${registeredString}, ${waitingListString}`
       }
-      return registered_string
+      return registeredString
     },
     registered: function () {
       return this.$store.state.participant.all.filter(par => par.event === this.$props.name).length
@@ -142,7 +142,7 @@ export default {
       let minutes = dateObj.getMinutes()
       hours = (hours > 9) ? String(hours) : ('0' + String(hours))
       minutes = (minutes > 9) ? String(minutes) : ('0' + String(minutes))
-      return hours + ':' + minutes  
+      return hours + ':' + minutes
     },
     formatDate (dateObj) {
       let day = dateObj.getDate()
@@ -151,7 +151,7 @@ export default {
       day = (day > 9) ? String(day) : ('0' + String(day))
       month = (month > 9) ? String(month) : ('0' + String(month))
       return this.formatTime(dateObj) + ' ' + day + '.' + month + '.' + year
-    },
+    }
   }
 }
 </script>

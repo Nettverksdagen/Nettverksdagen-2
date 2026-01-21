@@ -40,11 +40,13 @@
         "fields": {
             "name": "Sommerjobb i Kongsberg",
             "company_name": "Kongsberggruppen",
-            "deadline": "2019-01-29",
+            "deadline": "2026-01-27",
             "logo_uri": "static/kbg.png",
             "type": "Sommerjobb",
             "listing_url": "http://example.com",
-            "city": "Kongsberg"
+            "city": "Kongsberg",
+            "internal_url": null,
+            "content": ""
         }
     },
     {
@@ -53,11 +55,13 @@
         "fields": {
             "name": "Verdens beste sommerjobb",
             "company_name": "Sparebank1",
-            "deadline": "2019-04-01",
+            "deadline": "2026-01-27",
             "logo_uri": "static/sb1.png",
             "type": "Sommerjobb",
             "listing_url": "http://example.com",
-            "city": "Oslo"
+            "city": "Oslo",
+            "internal_url": null,
+            "content": ""
         }
     },
     {
@@ -66,11 +70,13 @@
         "fields": {
             "name": "Sommerjobb hos Norges beste arbeidsplass",
             "company_name": "Sopra Steria",
-            "deadline": "2019-03-18",
+            "deadline": "2026-01-27",
             "logo_uri": "static/sopra.png",
             "type": "Sommerjobb",
             "listing_url": "http://example.com",
-            "city": "Oslo"
+            "city": "Oslo",
+            "internal_url": null,
+            "content": ""
         }
     },
     {
@@ -79,11 +85,13 @@
         "fields": {
             "name": "Bli med og skap fremtidens l\u00f8sninger",
             "company_name": "Evry",
-            "deadline": "2019-05-03",
+            "deadline": "2026-01-27",
             "logo_uri": "static/evry.png",
             "type": "Fast stilling",
             "listing_url": "http://example.com",
-            "city": "Bergen"
+            "city": "Bergen",
+            "internal_url": null,
+            "content": ""
         }
     },
     {
@@ -92,11 +100,13 @@
         "fields": {
             "name": "Bli med p\u00e5 en spennende reise",
             "company_name": "Disruptive Technologies",
-            "deadline": "2019-02-13",
+            "deadline": "2026-01-27",
             "logo_uri": "static/disruptive.png",
             "type": "Trainee",
             "listing_url": "http://example.com",
-            "city": "Trondheim"
+            "city": "Trondheim",
+            "internal_url": null,
+            "content": ""
         }
     },
     {
@@ -105,11 +115,13 @@
         "fields": {
             "name": "Jobb i en spennende ny startup",
             "company_name": "Ardoq",
-            "deadline": "2019-03-07",
+            "deadline": "2026-01-27",
             "logo_uri": "static/ardoq.png",
             "type": "Deltidsstilling",
             "listing_url": "http://example.com",
-            "city": "Oslo, Bergen, Tromsø"
+            "city": "Oslo, Bergen, Troms\u00f8",
+            "internal_url": null,
+            "content": ""
         }
     },
     {
@@ -118,11 +130,13 @@
         "fields": {
             "name": "Fulltidsjobb i BaneNor",
             "company_name": "BaneNor",
-            "deadline": "2019-04-19",
+            "deadline": "2026-01-27",
             "logo_uri": "24b70bb2-b6eb-42dd-99a5-a6ed35055619.png",
             "type": "Fast stilling",
             "listing_url": "https://banenor.no",
-            "city": "Oslo"
+            "city": "Oslo",
+            "internal_url": null,
+            "content": ""
         }
     },
     {
@@ -242,7 +256,10 @@
             "name": "Kongsberggruppen",
             "logo_uri": "static/kbg.png",
             "website_url": "http://example.com",
-            "level": "Gull"
+            "level": "Gull",
+            "text": "",
+            "days": "Begge dager",
+            "standnumber": 1
         }
     },
     {
@@ -252,7 +269,10 @@
             "name": "Sparebank1",
             "logo_uri": "static/sb1.png",
             "website_url": "http://example.com",
-            "level": "Sølv"
+            "level": "S\u00f8lv",
+            "text": "",
+            "days": "Dag 1",
+            "standnumber": 2
         }
     },
     {
@@ -262,7 +282,10 @@
             "name": "Sopra Steria",
             "logo_uri": "static/sopra.png",
             "website_url": "http://example.com",
-            "level": "Gull"
+            "level": "Gull",
+            "text": "",
+            "days": "Dag 2",
+            "standnumber": 2
         }
     },
     {
@@ -272,7 +295,10 @@
             "name": "Evry",
             "logo_uri": "static/evry.png",
             "website_url": "http://example.com",
-            "level": "Sølv"
+            "level": "S\u00f8lv",
+            "text": "",
+            "days": "Dag 1",
+            "standnumber": 3
         }
     },
     {
@@ -282,7 +308,10 @@
             "name": "Disruptive Technologies",
             "logo_uri": "static/disruptive.png",
             "website_url": "http://example.com",
-            "level": "Gull"
+            "level": "Gull",
+            "text": "",
+            "days": "Dag 2",
+            "standnumber": 3
         }
     },
     {
@@ -292,7 +321,10 @@
             "name": "Ardoq",
             "logo_uri": "static/ardoq.png",
             "website_url": "http://example.com",
-            "level": "Bronse"
+            "level": "Bronse",
+            "text": "",
+            "days": "Begge dager",
+            "standnumber": 4
         }
     },
     {
@@ -330,6 +362,65 @@
             "logo_uri": "static/egon.png",
             "website_url": "http://example.com"
         }
+    },
+    {
+        "model": "nvdagen.program",
+        "pk": 1,
+        "fields": {
+            "header": "Bedpres med Kongsberggruppen",
+            "place": "Graffi Grill",
+            "timeStart": 1769014800,
+            "timeEnd": 1769029200,
+            "paragraph": "Kongsberggruppen holder bedriftspresentasjon med bespisning p\u00e5 Graffi Grill",
+            "registration": true,
+            "maxRegistered": 5,
+            "cancelEmail": "your.fake@email.here",
+            "registrationStart": 1768820400,
+            "registrationEnd": 1769011200
+        }
+    },
+    {
+        "model": "nvdagen.program",
+        "pk": 2,
+        "fields": {
+            "header": "Lunsj med Sopra Steria",
+            "place": "EL5",
+            "timeStart": 1768993200,
+            "timeEnd": 1768996800,
+            "paragraph": "Spis deg stapmett p\u00e5 konsulenthusets regning!",
+            "registration": true,
+            "maxRegistered": 2,
+            "cancelEmail": "your.fake@email.here",
+            "registrationStart": 1768820400,
+            "registrationEnd": 1769036340
+        }
+    },
+    {
+        "model": "nvdagen.participant",
+        "pk": 1,
+        "fields": {
+            "event": 2,
+            "email": "bobsemail@stud.ntnu.no",
+            "name": "Bob",
+            "phone": "98765432",
+            "year": "3",
+            "study": "MTTK",
+            "code": "CI1USO",
+            "allergies": "Gluten"
+        }
+    },
+    {
+        "model": "nvdagen.participant",
+        "pk": 2,
+        "fields": {
+            "event": 2,
+            "email": "alicesemail@stud.ntnu.no",
+            "name": "Alice",
+            "phone": "41234567",
+            "year": "5",
+            "study": "MTTK",
+            "code": "A3XYJ4",
+            "allergies": "Kald kaffe"
+        }
     }
 ]
-

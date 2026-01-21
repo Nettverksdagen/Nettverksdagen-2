@@ -37,25 +37,65 @@
         >
         </b-form-input>
       </b-form-group>
-      <b-form-group :label="$t('inputFieldFieldOfStudy')" label-for="study-input" :invalid-feedback="$t('inputFieldFieldOfStudy') + ' ' + $t('is_required')">
+      <b-form-group :label="$t('inputFieldPhone')" label-for="phone-input" :invalid-feedback="$t('inputFieldPhone') + ' ' + $t('is_required')">
         <b-form-input
-          id="study-input"
-          v-model="form.study"
+          id="phone-input"
+          type="tel"
+          v-model="form.phone"
           required
-          ref="studyInput"
-          :placeholder="$t('placeholderFieldOfStudy')"
+          ref="phoneInput"
+          :placeholder="$t('placeholderPhone')"
+          :state="phoneState"
+        >
+        </b-form-input>
+      </b-form-group>
+      <b-form-group :label="$t('inputFieldFieldOfStudy')" label-for="study-select" :invalid-feedback="$t('inputFieldFieldOfStudy') + ' ' + $t('is_required')">
+        <b-form-select
+          id="study-select"
+          v-model="form.studySelection"
+          required
+          ref="studySelect"
           :state="studyState"
+          :options="studyOptions"
+          @change="onStudyChange"
+        >
+          <template #first>
+            <b-form-select-option :value="null" disabled>{{ $t('placeholderFieldOfStudy') }}</b-form-select-option>
+          </template>
+        </b-form-select>
+      </b-form-group>
+      <b-form-group v-if="form.studySelection === 'Annet'" :label="$t('placeholderFieldOfStudy')" label-for="study-other-input" :invalid-feedback="$t('inputFieldFieldOfStudy') + ' ' + $t('is_required')">
+        <b-form-input
+          id="study-other-input"
+          v-model="form.studyOther"
+          required
+          ref="studyOtherInput"
+          :placeholder="$t('placeholderFieldOfStudy')"
+          :state="studyOtherState"
         >
         </b-form-input>
       </b-form-group>
       <b-form-group :label="$t('inputFieldStudyYear')" label-for="year-input" :invalid-feedback="$t('inputFieldStudyYear') + ' ' + $t('is_required')">
-        <b-form-input
+        <b-form-select
           id="year-input"
           v-model="form.year"
           required
           ref="yearInput"
-          :placeholder="$t('placeholderStudyYear')"
           :state="yearState"
+          :options="yearOptions"
+        >
+          <template #first>
+            <b-form-select-option :value="null" disabled>{{ $t('placeholderStudyYear') }}</b-form-select-option>
+          </template>
+        </b-form-select>
+      </b-form-group>
+      <b-form-group :label="$t('inputFieldAllergies')" label-for="allergies-input">
+        <b-form-input
+          id="allergies-input"
+          v-model="form.allergies"
+          ref="allergiesInput"
+          :placeholder="$t('placeholderAllergies')"
+          :state="allergiesState"
         >
         </b-form-input>
       </b-form-group>
@@ -78,15 +118,48 @@ export default {
       form: {
         name: '',
         email: '',
+        phone: '',
         study: '',
-        year: ''
+        studySelection: null,
+        studyOther: '',
+        year: null,
+        allergies: ''
       },
+      studyOptions: [
+        { value: 'Bioteknologi', text: 'Bioteknologi' },
+        { value: 'Bygg- og miljøteknikk', text: 'Bygg- og miljøteknikk' },
+        { value: 'Datateknologi', text: 'Datateknologi' },
+        { value: 'Elektronisk systemdesign og innovasjon', text: 'Elektronisk systemdesign og innovasjon' },
+        { value: 'Energi og miljø', text: 'Energi og miljø' },
+        { value: 'Geomatikk', text: 'Geomatikk' },
+        { value: 'Industriell økonomi og teknologiledelse', text: 'Industriell økonomi og teknologiledelse' },
+        { value: 'Kjemi og bioteknologi', text: 'Kjemi og bioteknologi' },
+        { value: 'Kommunikasjonsteknologi', text: 'Kommunikasjonsteknologi' },
+        { value: 'Kybernetikk og robotikk', text: 'Kybernetikk og robotikk' },
+        { value: 'Marin teknikk', text: 'Marin teknikk' },
+        { value: 'Maskinteknikk', text: 'Maskinteknikk' },
+        { value: 'Materialteknologi', text: 'Materialteknologi' },
+        { value: 'Nanoteknologi', text: 'Nanoteknologi' },
+        { value: 'Produktutvikling og produksjon', text: 'Produktutvikling og produksjon' },
+        { value: 'Teknisk fysikk', text: 'Teknisk fysikk' },
+        { value: 'Annet', text: 'Annet' }
+      ],
+      yearOptions: [
+        { value: '1', text: '1' },
+        { value: '2', text: '2' },
+        { value: '3', text: '3' },
+        { value: '4', text: '4' },
+        { value: '5', text: '5' }
+      ],
       nameState: null,
       emailState: null,
+      phoneState: null,
       studyState: null,
+      studyOtherState: null,
       yearState: null,
+      allergiesState: null,
       emailInvalidFeedbackDefault: this.$t('inputFieldEmail') + ' ' + this.$t('is_required'),
-      emailInvalidFeedbackString: this.emailInvalidFeedbackDefault,
+      emailInvalidFeedbackString: this.emailInvalidFeedbackDefault
     }
   },
   computed: {
@@ -98,34 +171,57 @@ export default {
 
       // Invalid email
       return this.emailInvalidFeedbackString
-    },
+    }
   },
   methods: {
     checkFormValidity () {
-      const valid = this.$refs.form.checkValidity()
-
       const nameValid = this.$refs.nameInput.checkValidity()
       const emailValid = this.$refs.emailInput.checkValidity()
-      const studyValid = this.$refs.studyInput.checkValidity()
-      const yearValid = this.$refs.yearInput.checkValidity()
+      const phoneValid = this.$refs.phoneInput.checkValidity()
+      const studyValid = this.form.studySelection !== null
+      const yearValid = this.form.year !== null
+      const allergiesValid = true
+
+      let studyOtherValid = true
+      if (this.form.studySelection === 'Annet') {
+        studyOtherValid = this.$refs.studyOtherInput && this.$refs.studyOtherInput.checkValidity()
+        this.studyOtherState = studyOtherValid
+      }
 
       this.nameState = nameValid
       this.emailState = emailValid
+      this.phoneState = phoneValid
       this.studyState = studyValid
       this.yearState = yearValid
+      this.allergiesState = allergiesValid
 
-      return valid
+      return nameValid && emailValid && phoneValid && studyValid && yearValid && studyOtherValid
+    },
+    onStudyChange () {
+      if (this.form.studySelection === 'Annet') {
+        this.form.study = this.form.studyOther
+      } else {
+        this.form.study = this.form.studySelection
+        this.form.studyOther = ''
+      }
     },
     resetModal () {
       this.form.name = ''
       this.form.email = ''
+      this.form.phone = ''
       this.form.study = ''
-      this.form.year = ''
+      this.form.studySelection = null
+      this.form.studyOther = ''
+      this.form.year = null
+      this.form.allergies = ''
 
       this.nameState = null
       this.emailState = null
+      this.phoneState = null
       this.studyState = null
+      this.studyOtherState = null
       this.yearState = null
+      this.allergiesState = null
     },
     handleOk (bvModalEvent) {
       // Prevent modal from closing
@@ -138,6 +234,13 @@ export default {
       this.emailInvalidFeedbackString = this.emailInvalidFeedbackDefault
       if (!this.checkFormValidity()) {
         return
+      }
+
+      // Set study field based on selection
+      if (this.form.studySelection === 'Annet') {
+        this.form.study = this.form.studyOther
+      } else {
+        this.form.study = this.form.studySelection
       }
 
       // Create random unregister code
@@ -159,7 +262,7 @@ export default {
             this.emailInvalidFeedbackString = this.$t('already_registered')
           }
         })
-    },
+    }
   }
 }
 </script>

@@ -1,0 +1,29 @@
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: '1234'
+
+  api:
+    build: 
+      context: ./api
+    command: "./django-test-entrypoint.sh"
+    environment:
+      - DJANGO_SETTINGS_MODULE=nvdnew.settings.dev
+    depends_on:
+      - postgres
+    volumes:
+      - ./api:/api
+
+  frontend:
+    build:
+      context: ./frontend
+      target: base
+    ports:
+      - "8080:8080"
+    command: ["npm", "run", "test"]
+    volumes:
+      - ./frontend/src:/frontend/src
+      - ./frontend/static:/frontend/static
+      - ./frontend/test:/frontend/test

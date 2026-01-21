@@ -1,5 +1,5 @@
 from rest_framework import viewsets, status
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from .models import Listing, Business, Sponsor, TeamMember, Form, Participant, Program, Infobox
@@ -14,6 +14,15 @@ from babel.dates import format_datetime, format_time
 class ListingViewSet(viewsets.ModelViewSet):
     queryset = Listing.objects.all()
     serializer_class = ListingSerializer
+
+    @action(detail=False, methods=['post'])
+    def bulk_delete(self, request):
+        ids = request.data.get('ids', [])
+        if not ids:
+            return Response({'message': 'No IDs provided'}, status=status.HTTP_400_BAD_REQUEST)
+
+        deleted_count, _ = Listing.objects.filter(id__in=ids).delete()
+        return Response({'message': f'{deleted_count} listings deleted successfully', 'deleted_count': deleted_count}, status=status.HTTP_200_OK)
 
 
 class TeamMemberViewSet(viewsets.ModelViewSet):
@@ -61,7 +70,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                 if (currentlyRegistered >= program.maxRegistered):
                     waitingListIndex = currentlyRegistered - program.maxRegistered + 1
                     data['waitingListIndex'] = waitingListIndex
-                    data['place'] = program.place                    
+                    data['place'] = program.place
                     data['header'] = program.header
                     html_message = render_to_string('on_waiting_list.html', context=data)
                     plain_message = strip_tags(html_message)

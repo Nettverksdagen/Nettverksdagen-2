@@ -10,7 +10,7 @@
             </div>
           </main>
           <Sidebar>
-            <SidebarNav :navItems="navItems">
+            <SidebarNav :navItems="navItems" @click.native="handleNavClick">
             </SidebarNav>
           </Sidebar>
         </div>
@@ -52,11 +52,6 @@ export default {
           class: 'sidebar-nav-divider'
         },
         {
-          name: 'Oversikt',
-          url: this.$router.resolve({name: 'AdminOverview'}).href,
-          icon: 'cui-home'
-        },
-        {
           name: 'Stillingsannonser',
           url: this.$router.resolve({name: 'ListingAdmin'}).href,
           icon: 'cui-list'
@@ -87,7 +82,7 @@ export default {
           icon: 'cui-dollar'
         },
         {
-          name: 'Participants',
+          name: 'Deltakere',
           url: this.$router.resolve({name: 'ParticipantAdmin'}).href,
           icon: 'cui-dollar'
         },
@@ -95,6 +90,16 @@ export default {
           name: 'Infoboks',
           url: this.$router.resolve({name: 'InfoboxAdmin'}).href,
           icon: 'cui-info'
+        },
+        {
+          divider: true,
+          class: 'sidebar-nav-divider'
+        },
+        {
+          name: 'Logg ut',
+          url: '#',
+          icon: 'cui-account-logout',
+          class: 'logout-link'
         }
       ]
     }
@@ -112,6 +117,14 @@ export default {
   methods: {
     handleResize () {
       this.isMobile = window.innerWidth <= 1000
+    },
+    handleNavClick (event) {
+      const target = event.target.closest('.logout-link')
+      if (target) {
+        event.preventDefault()
+        this.$store.dispatch('admin/logout')
+        this.$router.push({name: 'Home'})
+      }
     }
   },
   beforeCreate () {

@@ -12,12 +12,15 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'babel-polyfill'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { i18n } from './translations/translations'
+import ga4 from './services/ga4'
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
 Vue.use(Vuex)
 Vue.use(BootstrapVue)
+
+ga4({ router })
 
 /* eslint-disable no-new */
 new Vue({
