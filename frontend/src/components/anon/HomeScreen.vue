@@ -50,7 +50,7 @@ export default {
   name: "HomeScreen",
   components: {
     HomeScreenBox,
-    Infobox
+    InfoBox
   },
   methods: {
     scrollToId (id) {
