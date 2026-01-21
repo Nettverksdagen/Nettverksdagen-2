@@ -1,6 +1,6 @@
 <template>
   <div class="standkart_holder" :class="{ 'admin-mode': isAdminPage }">
-    <svg class="standkart" width="2116" height="1173" viewBox="0 950 2116 1173" preserveAspectRatio="xMidYMid meet" fill="none"
+    <svg class="standkart" width="2116" height="1723" viewBox="0 850 2116 1723" preserveAspectRatio="xMidYMid meet" fill="none"
       xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -8,7 +8,7 @@
           <stop offset="100%" style="stop-color:#1A524D;stop-opacity:1" />
         </linearGradient>
       </defs>
-      <rect x="0" y="950" width="2116" height="1173" fill="url(#bgGradient)" />
+      <rect x="0" y="850" width="2116" height="1723" fill="url(#bgGradient)" />
       <!--<rect y="440" width="2116" height="1683" fill="#14403C"/>-->
       <line x1="394" y1="1287.5" x2="366" y2="1287.5" stroke="#2D6963" stroke-width="3" />
       <line x1="481" y1="1287.5" x2="453" y2="1287.5" stroke="#2D6963" stroke-width="3" />
@@ -155,9 +155,7 @@
       <line x1="471.5" y1="1223" x2="471.5" y2="1261" stroke="#2D6963" stroke-width="3" />
       <line x1="472" y1="1259.5" x2="508" y2="1259.5" stroke="#2D6963" stroke-width="3" />
 
-    </svg>
-    <svg class="standkart-text" viewBox="0 950 2116 1173" preserveAspectRatio="xMidYMid meet">
-      <text x="100" y="1050" dominant-baseline="middle" text-anchor="left" font-size="80px" font-weight="700" fill="#FFFFFF" class="standmap-title">{{ $t('standmap.title') }}</text>
+      <text x="100" y="950" dominant-baseline="middle" text-anchor="left" font-size="80px" font-weight="700" fill="#FFFFFF" class="standmap-title">{{ $t('standmap.title') }}</text>
       <line v-bind:key="index" v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap" :x1="StandPosition.x"
         :y1="StandPosition.y" :x2="StandPosition.x" :y2="StandPosition.y" stroke="#898989" class="_circle"
         :id="'circle-' + index" @mouseover="handleTextMouseOver(business.standnumber)"
@@ -202,12 +200,35 @@
       <text v-bind:key="'t4' + business.id" v-if="!isAdminPage" v-for="(business, index) in filteredDayBusinesses"
         :x="StandPositionMap[business.standnumber].x" :y="StandPositionMap[business.standnumber].y + 2"
         dominant-baseline="middle" text-anchor="middle" font-size="20px" fill="#000000">{{ index + 1 }}</text>
-
+      
+      <!--Businesses first column-->
+      <text v-bind:key="'t5' + business.id" 
+      v-for="(business, index) in filteredDayBusinesses.slice(0,Math.ceil(filteredDayBusinesses.length/3))" 
+      :x="100" :y="2050 + index *50" dominant-baseline="middle" text-anchor="left" font-size="40px" fill="#FFFFFF"
+      @mouseenter="handleHover(business.standnumber, true, $event)"
+      @mouseleave="handleHover(business.standnumber, false, $event)">{{ index + 1 }}.{{ business.name }}
+      </text>
+      <!--Businesses second column-->
+      <text v-bind:key="'t5' + business.id" 
+      v-for="(business, index) in filteredDayBusinesses.slice(Math.ceil(filteredDayBusinesses.length/3),Math.ceil(2*filteredDayBusinesses.length/3))" 
+      :x="850" :y="2050 + index *50" dominant-baseline="middle" text-anchor="left" font-size="40px" fill="#FFFFFF"
+      @mouseenter="handleHover(business.standnumber, true, $event)"
+      @mouseleave="handleHover(business.standnumber, false, $event)">
+      {{ index + Math.ceil(filteredDayBusinesses.length/3) + 1 }}.{{ business.name }}
+      </text>
+      <!--Businesses third column-->
+      <text v-bind:key="'t5' + business.id" 
+      v-for="(business, index) in filteredDayBusinesses.slice(Math.ceil(2*filteredDayBusinesses.length/3), filteredDayBusinesses.length)" 
+      :x="1600" :y="2050 + index *50" dominant-baseline="middle" text-anchor="left" font-size="40px" fill="#FFFFFF"
+      @mouseenter="handleHover(business.standnumber, true, $event)"
+      @mouseleave="handleHover(business.standnumber, false, $event)">
+      {{ index + Math.ceil(2*filteredDayBusinesses.length/3) + 1 }}.{{ business.name }}
+      </text>
     </svg>
     <div class="toggle_holder">
       <VueToggles
-        height="35"
-        width="110"
+        height="30"
+        width="80"
         :checkedText="$t('businesses.days.day1')"
         :uncheckedText="$t('businesses.days.day2')"
         checkedBg="linear-gradient(135deg, #2D7D75 0%, #1A5F58 100%)"
@@ -328,11 +349,19 @@ export default {
     }
   },
   data () {
+    // checks current date and set date, and sets the dayswitch (on load) accordingly
+    const currentDate = Date.now()
+    const switchDate = Date.parse('2026-01-29T00:00:00Z') // TODO: Change next year
+    let setIsDayOne = true
+    if (currentDate > switchDate) {
+      setIsDayOne = false
+    }
+
     return {
       circles: [],
       names: [],
       StandPositionMap: [],
-      isDayOne: true,
+      isDayOne: setIsDayOne,
       hoveredStand: null,
       selectedStand: null,
       tooltipData: null,
@@ -483,7 +512,7 @@ export default {
 
     // Responsive sizing - use aspect ratio instead of min-height
     @media (max-width: 767px) {
-      aspect-ratio: 2116 / 1173;
+      aspect-ratio: 2116 / 1723;
       min-height: unset;
       // Scale up slightly on mobile for better visibility
       width: 115%;
@@ -493,14 +522,13 @@ export default {
     }
 
     @media (min-width: 768px) and (max-width: 1199px) {
-      aspect-ratio: 2116 / 1173;
+      aspect-ratio: 2116 / 1723;
       min-height: unset;
     }
 
     @media (min-width: 1200px) {
-      aspect-ratio: 2116 / 1173;
+      aspect-ratio: 2116 / 1723;
       min-height: unset;
-      max-height: 80vh;
     }
 
     // Admin page specific styling - ensure it fits properly in narrow column
@@ -512,7 +540,7 @@ export default {
       overflow: hidden;
 
       @media (min-width: 768px) {
-        aspect-ratio: 2116 / 1173;
+        aspect-ratio: 2116 / 1723;
         min-height: unset;
       }
     }
@@ -552,21 +580,21 @@ export default {
 
   .toggle_holder {
     position: absolute;
-    top: 13%;
-    left: 7%;
+    top: 10%;
+    left: 5%;
     z-index: 10;
 
     // Responsive scaling
     @media (max-width: 575px) {
-      top: 13%;
+      top: 10%;
       left: 5%;
       transform: scale(0.75);
       transform-origin: top left;
     }
 
     @media (min-width: 576px) and (max-width: 767px) {
-      top: 15%;
-      left: 6%;
+      top: 10%;
+      left: 5%;
       transform: scale(0.85);
       transform-origin: top left;
     }
@@ -578,7 +606,7 @@ export default {
 
     // Smaller toggle in admin mode
     .admin-mode & {
-      top: 13%;
+      top: 10%;
       left: 5%;
       transform: scale(0.7);
       transform-origin: top left;
