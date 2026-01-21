@@ -86,8 +86,10 @@ export default {
   created () {
     // Hent eksisterende infoboks fra store/API ved lasting
     this.$store.dispatch('infobox/fetchInfobox').then(() => {
-      this.infobox.title = this.$store.state.infobox.title
-      this.infobox.paragraph = this.$store.state.infobox.paragraph
+      this.infobox = {
+          title: this.$store.state.infobox.title || '',
+          paragraph: this.$store.state.infobox.paragraph || ''
+      }
     })
   },
   methods: {
