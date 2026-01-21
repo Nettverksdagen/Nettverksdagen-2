@@ -53,7 +53,7 @@ $medium-width: 768px;
 .infoBoxText {
   font-size: 14px;
   color: var(--primary-color);
-  //overflow-wrap: break-word;
+  white-space: pre-line;
 }
 
 </style>
