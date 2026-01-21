@@ -87,6 +87,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                     #Ny formatering av dato
                     data['timeStart'] = format_datetime(datetime.fromtimestamp(program.timeStart+3600), "EEEE dd. MMMM, 'klokken' H:MM ", locale='nb_NO')
                     data['header'] = program.header
+                    data['allowDeregistration'] = program.allowDeregistration
                     html_message = render_to_string('registered_email.html', context=data)
                     plain_message = strip_tags(html_message)
                     send_mail('Nettverksdagene - Påmelding bekreftet for ' + data['name'],
@@ -109,6 +110,9 @@ class ParticipantViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, pk):
         participant = Participant.objects.get(id=pk)
         program = participant.event
+
+        if not program.allowDeregistration:
+            return Response({'message': 'This program does not allow deregistration'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
             data = {}
@@ -139,12 +143,16 @@ class ParticipantViewSet(viewsets.ModelViewSet):
             return Response(response, status = status.HTTP_404_NOT_FOUND)
 
         code = request.data.get('code', None)
+        program = participant.event
 
-        # The request is authorized if either a matching code is provided or
-        # the user making the request is logged as the admin and no code is provided.
-        if not (participant.code == code or code == None and request.user.is_staff):
-            response = {'message': 'Invalid code'}
-            return Response(response, status = status.HTTP_400_BAD_REQUEST)
+        # We only override validity as staff if the code is not provided
+        valid_as_staff = request.user.is_staff and code is None
+        valid_as_anon  = program.allowDeregistration and participant.code == code
+        request_valid = valid_as_staff or valid_as_anon
+
+        if not request_valid:
+            msg = 'Program does not allow deregistration' if not program.allowDeregistration else 'Invalid code'
+            return Response({'message': msg}, status = status.HTTP_400_BAD_REQUEST)
 
         response = super().destroy(request)
 
