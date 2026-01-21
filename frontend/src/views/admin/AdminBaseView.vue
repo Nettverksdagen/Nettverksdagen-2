@@ -87,20 +87,16 @@ export default {
           icon: 'cui-dollar'
         },
         {
-<<<<<<< HEAD
           name: 'Infoboks',
           url: this.$router.resolve({name: 'InfoboxAdmin'}).href,
           icon: 'cui-info'
         },
         {
-||||||| parent of 624049c (feat: fix frontend for FAQ admin view and refactor FAQ to read from db)
-=======
           name: 'FAQ',
           url: this.$router.resolve({name: 'FAQAdmin'}).href,
           icon: 'cui-info'
         },
         {
->>>>>>> 624049c (feat: fix frontend for FAQ admin view and refactor FAQ to read from db)
           divider: true,
           class: 'sidebar-nav-divider'
         },

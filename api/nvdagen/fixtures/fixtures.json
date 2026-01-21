@@ -1,474 +1,503 @@
 [
-{
-    "model": "nvdagen.listing",
-    "pk": 1,
-    "fields": {
-        "name": "Sommerjobb i Kongsberg",
-        "company_name": "Kongsberggruppen",
-        "deadline": "2026-01-28",
-        "logo_uri": "static/kbg.png",
-        "type": "Sommerjobb",
-        "listing_url": "http://example.com",
-        "city": "Kongsberg",
-        "internal_url": null,
-        "content": ""
+    {
+        "model": "auth.user",
+        "fields": {
+            "password": "pbkdf2_sha256$120000$3fVEudg4GV26$A6wvfWt/Z6FYB7te5eYixHKfHPKAL2bFjItHxb2jztU=",
+            "last_login": "2019-01-12T08:46:54.922Z",
+            "is_superuser": true,
+            "username": "admin",
+            "first_name": "",
+            "last_name": "",
+            "email": "",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2018-11-25T14:36:46.384Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "ic9jtuur2fuaoz00e9s41ew5ay1069xq",
+        "fields": {
+            "session_data": "MDkwMGI5NTVhZDM0NDhjY2FmMDMwNjdjNzFkNmIxNDUzNTNjODQ2ODp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhMmQ2MjIzM2QxMmI5ZjMxYWJmMDIwZGI1Mzg3NTU2Mzg0NWQxODQxIn0=",
+            "expire_date": "2019-01-26T08:46:54.948Z"
+        }
+    },
+    {
+        "model": "authtoken.token",
+        "pk": "516bca62d93e6726885a68b7fe359b1f389b4678",
+        "fields": {
+            "user": [
+                "admin"
+            ],
+            "created": "2019-01-12T08:46:54.912Z"
+        }
+    },
+    {
+        "model": "nvdagen.listing",
+        "pk": 1,
+        "fields": {
+            "name": "Sommerjobb i Kongsberg",
+            "company_name": "Kongsberggruppen",
+            "deadline": "2026-01-28",
+            "logo_uri": "static/kbg.png",
+            "type": "Sommerjobb",
+            "listing_url": "http://example.com",
+            "city": "Kongsberg",
+            "internal_url": null,
+            "content": ""
+        }
+    },
+    {
+        "model": "nvdagen.listing",
+        "pk": 2,
+        "fields": {
+            "name": "Verdens beste sommerjobb",
+            "company_name": "Sparebank1",
+            "deadline": "2026-01-28",
+            "logo_uri": "static/sb1.png",
+            "type": "Sommerjobb",
+            "listing_url": "http://example.com",
+            "city": "Oslo",
+            "internal_url": null,
+            "content": ""
+        }
+    },
+    {
+        "model": "nvdagen.listing",
+        "pk": 3,
+        "fields": {
+            "name": "Sommerjobb hos Norges beste arbeidsplass",
+            "company_name": "Sopra Steria",
+            "deadline": "2026-01-28",
+            "logo_uri": "static/sopra.png",
+            "type": "Sommerjobb",
+            "listing_url": "http://example.com",
+            "city": "Oslo",
+            "internal_url": null,
+            "content": ""
+        }
+    },
+    {
+        "model": "nvdagen.listing",
+        "pk": 4,
+        "fields": {
+            "name": "Bli med og skap fremtidens l\u00f8sninger",
+            "company_name": "Evry",
+            "deadline": "2026-01-28",
+            "logo_uri": "static/evry.png",
+            "type": "Fast stilling",
+            "listing_url": "http://example.com",
+            "city": "Bergen",
+            "internal_url": null,
+            "content": ""
+        }
+    },
+    {
+        "model": "nvdagen.listing",
+        "pk": 5,
+        "fields": {
+            "name": "Bli med p\u00e5 en spennende reise",
+            "company_name": "Disruptive Technologies",
+            "deadline": "2026-01-28",
+            "logo_uri": "static/disruptive.png",
+            "type": "Trainee",
+            "listing_url": "http://example.com",
+            "city": "Trondheim",
+            "internal_url": null,
+            "content": ""
+        }
+    },
+    {
+        "model": "nvdagen.listing",
+        "pk": 6,
+        "fields": {
+            "name": "Jobb i en spennende ny startup",
+            "company_name": "Ardoq",
+            "deadline": "2026-01-28",
+            "logo_uri": "static/ardoq.png",
+            "type": "Deltidsstilling",
+            "listing_url": "http://example.com",
+            "city": "Oslo, Bergen, Troms\u00f8",
+            "internal_url": null,
+            "content": ""
+        }
+    },
+    {
+        "model": "nvdagen.listing",
+        "pk": 7,
+        "fields": {
+            "name": "Fulltidsjobb i BaneNor",
+            "company_name": "BaneNor",
+            "deadline": "2026-01-28",
+            "logo_uri": "24b70bb2-b6eb-42dd-99a5-a6ed35055619.png",
+            "type": "Fast stilling",
+            "listing_url": "https://banenor.no",
+            "city": "Oslo",
+            "internal_url": null,
+            "content": ""
+        }
+    },
+    {
+        "model": "nvdagen.teammember",
+        "pk": 1,
+        "fields": {
+            "name": "Magnus Carlsen",
+            "email": "carlsen@nettverksdagene.no",
+            "photo_uri": "static/carlsen.jpg",
+            "team": "Styret",
+            "position": "Leder"
+        }
+    },
+    {
+        "model": "nvdagen.teammember",
+        "pk": 2,
+        "fields": {
+            "name": "Barack Obama",
+            "email": "obama@nettverksdagene.no",
+            "photo_uri": "static/obama.jpg",
+            "team": "Styret",
+            "position": "Nestleder"
+        }
+    },
+    {
+        "model": "nvdagen.teammember",
+        "pk": 3,
+        "fields": {
+            "name": "Steve Jobs",
+            "email": "jobs@nettverksdagene.no",
+            "photo_uri": "static/jobs.jpg",
+            "team": "Styret",
+            "position": "Sponsoransvarlig"
+        }
+    },
+    {
+        "model": "nvdagen.teammember",
+        "pk": 4,
+        "fields": {
+            "name": "Gunnar Bovim",
+            "email": "bovim@nettverksdagene.no",
+            "photo_uri": "static/bovim.jpg",
+            "team": "Styret",
+            "position": "IT-ansvarlig"
+        }
+    },
+    {
+        "model": "nvdagen.teammember",
+        "pk": 5,
+        "fields": {
+            "name": "Jan Tommy Gravdahl",
+            "email": "jantommy@nettverksdagene.no",
+            "photo_uri": "static/jantommy.jpg",
+            "team": "Styret",
+            "position": "Bedriftansvarlig"
+        }
+    },
+    {
+        "model": "nvdagen.teammember",
+        "pk": 6,
+        "fields": {
+            "name": "Jan Tommy Gravdahl",
+            "email": "jantommy@nettverksdagene.no",
+            "photo_uri": "static/jantommy.jpg",
+            "team": "Bedrift",
+            "position": "Leder"
+        }
+    },
+    {
+        "model": "nvdagen.teammember",
+        "pk": 7,
+        "fields": {
+            "name": "Elon Musk",
+            "email": "musk@nettverksdagene.no",
+            "photo_uri": "static/musk.jpg",
+            "team": "Styret",
+            "position": "Markedsf\u00f8ringsansvarlig"
+        }
+    },
+    {
+        "model": "nvdagen.teammember",
+        "pk": 8,
+        "fields": {
+            "name": "Albert Einstein",
+            "email": "einstein@nettverksdagene.no",
+            "photo_uri": "static/einstein.jpg",
+            "team": "Bedrift",
+            "position": "Medlem"
+        }
+    },
+    {
+        "model": "nvdagen.teammember",
+        "pk": 9,
+        "fields": {
+            "name": "Marit Bj\u00f8rgen",
+            "email": "marit@nettverksdagene.no",
+            "photo_uri": "static/marit.jpg",
+            "team": "Bedrift",
+            "position": "Medlem"
+        }
+    },
+    {
+        "model": "nvdagen.teammember",
+        "pk": 10,
+        "fields": {
+            "name": "Jo Nesb\u00f8",
+            "email": "nesbo@nettverksdagene.no",
+            "photo_uri": "static/nesbo.jpg",
+            "team": "Styret",
+            "position": "Sekret\u00e6r"
+        }
+    },
+    {
+        "model": "nvdagen.business",
+        "pk": 1,
+        "fields": {
+            "name": "Kongsberggruppen",
+            "logo_uri": "static/kbg.png",
+            "website_url": "http://example.com",
+            "level": "Gull",
+            "text": "",
+            "days": "Begge dager",
+            "standnumber": 1
+        }
+    },
+    {
+        "model": "nvdagen.business",
+        "pk": 2,
+        "fields": {
+            "name": "Sparebank1",
+            "logo_uri": "static/sb1.png",
+            "website_url": "http://example.com",
+            "level": "S\u00f8lv",
+            "text": "",
+            "days": "Dag 1",
+            "standnumber": 2
+        }
+    },
+    {
+        "model": "nvdagen.business",
+        "pk": 3,
+        "fields": {
+            "name": "Sopra Steria",
+            "logo_uri": "static/sopra.png",
+            "website_url": "http://example.com",
+            "level": "Gull",
+            "text": "",
+            "days": "Dag 2",
+            "standnumber": 2
+        }
+    },
+    {
+        "model": "nvdagen.business",
+        "pk": 4,
+        "fields": {
+            "name": "Evry",
+            "logo_uri": "static/evry.png",
+            "website_url": "http://example.com",
+            "level": "S\u00f8lv",
+            "text": "",
+            "days": "Dag 1",
+            "standnumber": 3
+        }
+    },
+    {
+        "model": "nvdagen.business",
+        "pk": 5,
+        "fields": {
+            "name": "Disruptive Technologies",
+            "logo_uri": "static/disruptive.png",
+            "website_url": "http://example.com",
+            "level": "Gull",
+            "text": "",
+            "days": "Dag 2",
+            "standnumber": 3
+        }
+    },
+    {
+        "model": "nvdagen.business",
+        "pk": 6,
+        "fields": {
+            "name": "Ardoq",
+            "logo_uri": "static/ardoq.png",
+            "website_url": "http://example.com",
+            "level": "Bronse",
+            "text": "",
+            "days": "Begge dager",
+            "standnumber": 4
+        }
+    },
+    {
+        "model": "nvdagen.sponsor",
+        "pk": 1,
+        "fields": {
+            "name": "Kjeldsberg kaffe",
+            "logo_uri": "static/kjeldsberg.png",
+            "website_url": "http://example.com"
+        }
+    },
+    {
+        "model": "nvdagen.sponsor",
+        "pk": 2,
+        "fields": {
+            "name": "NTNU",
+            "logo_uri": "static/ntnu.png",
+            "website_url": "http://example.com"
+        }
+    },
+    {
+        "model": "nvdagen.sponsor",
+        "pk": 3,
+        "fields": {
+            "name": "Studentsamskipnaden i Trondheim",
+            "logo_uri": "static/sit.png",
+            "website_url": "http://example.com"
+        }
+    },
+    {
+        "model": "nvdagen.sponsor",
+        "pk": 4,
+        "fields": {
+            "name": "Egon",
+            "logo_uri": "static/egon.png",
+            "website_url": "http://example.com"
+        }
+    },
+    {
+        "model": "nvdagen.program",
+        "pk": 1,
+        "fields": {
+            "header": "Bedpres med Kongsberggruppen",
+            "place": "Graffi Grill",
+            "timeStart": 1769101200,
+            "timeEnd": 1769115600,
+            "paragraph": "Kongsberggruppen holder bedriftspresentasjon med bespisning p\u00e5 Graffi Grill",
+            "registration": true,
+            "maxRegistered": 5,
+            "cancelEmail": "your.fake@email.here",
+            "registrationStart": 1768906800,
+            "registrationEnd": 1769097600
+        }
+    },
+    {
+        "model": "nvdagen.program",
+        "pk": 2,
+        "fields": {
+            "header": "Lunsj med Sopra Steria",
+            "place": "EL5",
+            "timeStart": 1769079600,
+            "timeEnd": 1769083200,
+            "paragraph": "Spis deg stapmett p\u00e5 konsulenthusets regning!",
+            "registration": true,
+            "maxRegistered": 2,
+            "cancelEmail": "your.fake@email.here",
+            "registrationStart": 1768906800,
+            "registrationEnd": 1769122740
+        }
+    },
+    {
+        "model": "nvdagen.participant",
+        "pk": 1,
+        "fields": {
+            "event": 2,
+            "email": "bobsemail@stud.ntnu.no",
+            "name": "Bob",
+            "phone": "98765432",
+            "year": "3",
+            "study": "MTTK",
+            "code": "CI1USO",
+            "allergies": "Gluten"
+        }
+    },
+    {
+        "model": "nvdagen.participant",
+        "pk": 2,
+        "fields": {
+            "event": 2,
+            "email": "alicesemail@stud.ntnu.no",
+            "name": "Alice",
+            "phone": "41234567",
+            "year": "5",
+            "study": "MTTK",
+            "code": "A3XYJ4",
+            "allergies": "Kald kaffe"
+        }
+    },
+    {
+        "model": "nvdagen.faq",
+        "pk": 1,
+        "fields": {
+            "question_nb": "Hvor arrangeres Nettverksdagene?",
+            "question_en": "When are the Networking days arranged?",
+            "answer_nb": "Nettverksdagene arrangeres i Glassg\u00e5rden i Gamle Elektro.",
+            "answer_en": "The Networking days are arranged in Glassg\u00e5rden at Gamle Elektro.",
+            "order": 0
+        }
+    },
+    {
+        "model": "nvdagen.faq",
+        "pk": 2,
+        "fields": {
+            "question_nb": "N\u00e5r st\u00e5r bedrifter p\u00e5 stand?",
+            "question_en": "When are companies at their stands?",
+            "answer_nb": "Standomr\u00e5det er \u00e5pent fra 10:00 - 15:00 onsdag og torsdag (28.01 og 29.01).",
+            "answer_en": "The stand area is open from 10:00 AM to 3:00 PM on Wednesday and Thursday (January 28th and 29th).",
+            "order": 1
+        }
+    },
+    {
+        "model": "nvdagen.faq",
+        "pk": 3,
+        "fields": {
+            "question_nb": "Hvem kan delta p\u00e5 NVD arrangementene?",
+            "question_en": "Who can participate in the NVD events?",
+            "answer_nb": "Alle kan delta p\u00e5 ballongslipp og stands. For bedpress, bankett og andre arrangement med p\u00e5melding er disse forbeholdt Kybernetikk og Robotikk studenter.",
+            "answer_en": "Everyone can join the balloon drop and visit the stands. However, company presentations, the banquet, and other events requiring registration are reserved for Cybernetics and Robotics students.",
+            "order": 2
+        }
+    },
+    {
+        "model": "nvdagen.faq",
+        "pk": 4,
+        "fields": {
+            "question_nb": "Er det kaffe p\u00e5 stands?",
+            "question_en": "Is there coffee at the stands?",
+            "answer_nb": "Det er bare en m\u00e5te \u00e5 finne ut det p\u00e5 ;)",
+            "answer_en": "There's only one way to find out. ;)",
+            "order": 3
+        }
+    },
+    {
+        "model": "nvdagen.faq",
+        "pk": 5,
+        "fields": {
+            "question_nb": "Hva kan man vinne p\u00e5 ballongslipp?",
+            "question_en": "What can you win at the balloon drop?",
+            "answer_nb": "Her er det mye spennende man kan vinne, lunsjbonger hos Egon/R\u00f8ft, Drop-in klatring p\u00e5 Grip, gavekort og mye annet.",
+            "answer_en": "Among other prizes there are gift cards, free lunches and drop-in climbing at Grip to name a few.",
+            "order": 4
+        }
+    },
+    {
+        "model": "nvdagen.faq",
+        "pk": 6,
+        "fields": {
+            "question_nb": "Hva kan man gj\u00f8re under Nettverksdagene?",
+            "question_en": "What can you do during NVD?",
+            "answer_nb": "Stands, bedpress og bankett++",
+            "answer_en": "Stands, company presentations, and the formal dinner, among other activities.",
+            "order": 5
+        }
+    },
+    {
+        "model": "nvdagen.faq",
+        "pk": 7,
+        "fields": {
+            "question_nb": "Hva er avslutningsmiddagen og hvem kan delta?",
+            "question_en": "What is the formal dinner and who can participate?",
+            "answer_nb": "En business causal middag hvor man kan m\u00f8tte bedriftsrepresentanter fra noen av v\u00e5re samarbeidspartnere. Det blir servert mat drikke og det vil v\u00e6re underholdning underveis.",
+            "answer_en": "It's a business casual dinner where you'll be able to talk to some of our collaborators. There will be dinner, drinks and entertainment.",
+            "order": 6
+        }
     }
-},
-{
-    "model": "nvdagen.listing",
-    "pk": 2,
-    "fields": {
-        "name": "Verdens beste sommerjobb",
-        "company_name": "Sparebank1",
-        "deadline": "2026-01-28",
-        "logo_uri": "static/sb1.png",
-        "type": "Sommerjobb",
-        "listing_url": "http://example.com",
-        "city": "Oslo",
-        "internal_url": null,
-        "content": ""
-    }
-},
-{
-    "model": "nvdagen.listing",
-    "pk": 3,
-    "fields": {
-        "name": "Sommerjobb hos Norges beste arbeidsplass",
-        "company_name": "Sopra Steria",
-        "deadline": "2026-01-28",
-        "logo_uri": "static/sopra.png",
-        "type": "Sommerjobb",
-        "listing_url": "http://example.com",
-        "city": "Oslo",
-        "internal_url": null,
-        "content": ""
-    }
-},
-{
-    "model": "nvdagen.listing",
-    "pk": 4,
-    "fields": {
-        "name": "Bli med og skap fremtidens l\u00f8sninger",
-        "company_name": "Evry",
-        "deadline": "2026-01-28",
-        "logo_uri": "static/evry.png",
-        "type": "Fast stilling",
-        "listing_url": "http://example.com",
-        "city": "Bergen",
-        "internal_url": null,
-        "content": ""
-    }
-},
-{
-    "model": "nvdagen.listing",
-    "pk": 5,
-    "fields": {
-        "name": "Bli med p\u00e5 en spennende reise",
-        "company_name": "Disruptive Technologies",
-        "deadline": "2026-01-28",
-        "logo_uri": "static/disruptive.png",
-        "type": "Trainee",
-        "listing_url": "http://example.com",
-        "city": "Trondheim",
-        "internal_url": null,
-        "content": ""
-    }
-},
-{
-    "model": "nvdagen.listing",
-    "pk": 6,
-    "fields": {
-        "name": "Jobb i en spennende ny startup",
-        "company_name": "Ardoq",
-        "deadline": "2026-01-28",
-        "logo_uri": "static/ardoq.png",
-        "type": "Deltidsstilling",
-        "listing_url": "http://example.com",
-        "city": "Oslo, Bergen, Troms\u00f8",
-        "internal_url": null,
-        "content": ""
-    }
-},
-{
-    "model": "nvdagen.listing",
-    "pk": 7,
-    "fields": {
-        "name": "Fulltidsjobb i BaneNor",
-        "company_name": "BaneNor",
-        "deadline": "2026-01-28",
-        "logo_uri": "24b70bb2-b6eb-42dd-99a5-a6ed35055619.png",
-        "type": "Fast stilling",
-        "listing_url": "https://banenor.no",
-        "city": "Oslo",
-        "internal_url": null,
-        "content": ""
-    }
-},
-{
-    "model": "nvdagen.teammember",
-    "pk": 1,
-    "fields": {
-        "name": "Magnus Carlsen",
-        "email": "carlsen@nettverksdagene.no",
-        "photo_uri": "static/carlsen.jpg",
-        "team": "Styret",
-        "position": "Leder"
-    }
-},
-{
-    "model": "nvdagen.teammember",
-    "pk": 2,
-    "fields": {
-        "name": "Barack Obama",
-        "email": "obama@nettverksdagene.no",
-        "photo_uri": "static/obama.jpg",
-        "team": "Styret",
-        "position": "Nestleder"
-    }
-},
-{
-    "model": "nvdagen.teammember",
-    "pk": 3,
-    "fields": {
-        "name": "Steve Jobs",
-        "email": "jobs@nettverksdagene.no",
-        "photo_uri": "static/jobs.jpg",
-        "team": "Styret",
-        "position": "Sponsoransvarlig"
-    }
-},
-{
-    "model": "nvdagen.teammember",
-    "pk": 4,
-    "fields": {
-        "name": "Gunnar Bovim",
-        "email": "bovim@nettverksdagene.no",
-        "photo_uri": "static/bovim.jpg",
-        "team": "Styret",
-        "position": "IT-ansvarlig"
-    }
-},
-{
-    "model": "nvdagen.teammember",
-    "pk": 5,
-    "fields": {
-        "name": "Jan Tommy Gravdahl",
-        "email": "jantommy@nettverksdagene.no",
-        "photo_uri": "static/jantommy.jpg",
-        "team": "Styret",
-        "position": "Bedriftansvarlig"
-    }
-},
-{
-    "model": "nvdagen.teammember",
-    "pk": 6,
-    "fields": {
-        "name": "Jan Tommy Gravdahl",
-        "email": "jantommy@nettverksdagene.no",
-        "photo_uri": "static/jantommy.jpg",
-        "team": "Bedrift",
-        "position": "Leder"
-    }
-},
-{
-    "model": "nvdagen.teammember",
-    "pk": 7,
-    "fields": {
-        "name": "Elon Musk",
-        "email": "musk@nettverksdagene.no",
-        "photo_uri": "static/musk.jpg",
-        "team": "Styret",
-        "position": "Markedsf\u00f8ringsansvarlig"
-    }
-},
-{
-    "model": "nvdagen.teammember",
-    "pk": 8,
-    "fields": {
-        "name": "Albert Einstein",
-        "email": "einstein@nettverksdagene.no",
-        "photo_uri": "static/einstein.jpg",
-        "team": "Bedrift",
-        "position": "Medlem"
-    }
-},
-{
-    "model": "nvdagen.teammember",
-    "pk": 9,
-    "fields": {
-        "name": "Marit Bj\u00f8rgen",
-        "email": "marit@nettverksdagene.no",
-        "photo_uri": "static/marit.jpg",
-        "team": "Bedrift",
-        "position": "Medlem"
-    }
-},
-{
-    "model": "nvdagen.teammember",
-    "pk": 10,
-    "fields": {
-        "name": "Jo Nesb\u00f8",
-        "email": "nesbo@nettverksdagene.no",
-        "photo_uri": "static/nesbo.jpg",
-        "team": "Styret",
-        "position": "Sekret\u00e6r"
-    }
-},
-{
-    "model": "nvdagen.business",
-    "pk": 1,
-    "fields": {
-        "name": "Kongsberggruppen",
-        "logo_uri": "static/kbg.png",
-        "website_url": "http://example.com",
-        "level": "Gull",
-        "text": "",
-        "days": "Begge dager",
-        "standnumber": 1
-    }
-},
-{
-    "model": "nvdagen.business",
-    "pk": 2,
-    "fields": {
-        "name": "Sparebank1",
-        "logo_uri": "static/sb1.png",
-        "website_url": "http://example.com",
-        "level": "S\u00f8lv",
-        "text": "",
-        "days": "Dag 1",
-        "standnumber": 2
-    }
-},
-{
-    "model": "nvdagen.business",
-    "pk": 3,
-    "fields": {
-        "name": "Sopra Steria",
-        "logo_uri": "static/sopra.png",
-        "website_url": "http://example.com",
-        "level": "Gull",
-        "text": "",
-        "days": "Dag 2",
-        "standnumber": 2
-    }
-},
-{
-    "model": "nvdagen.business",
-    "pk": 4,
-    "fields": {
-        "name": "Evry",
-        "logo_uri": "static/evry.png",
-        "website_url": "http://example.com",
-        "level": "S\u00f8lv",
-        "text": "",
-        "days": "Dag 1",
-        "standnumber": 3
-    }
-},
-{
-    "model": "nvdagen.business",
-    "pk": 5,
-    "fields": {
-        "name": "Disruptive Technologies",
-        "logo_uri": "static/disruptive.png",
-        "website_url": "http://example.com",
-        "level": "Gull",
-        "text": "",
-        "days": "Dag 2",
-        "standnumber": 3
-    }
-},
-{
-    "model": "nvdagen.business",
-    "pk": 6,
-    "fields": {
-        "name": "Ardoq",
-        "logo_uri": "static/ardoq.png",
-        "website_url": "http://example.com",
-        "level": "Bronse",
-        "text": "",
-        "days": "Begge dager",
-        "standnumber": 4
-    }
-},
-{
-    "model": "nvdagen.sponsor",
-    "pk": 1,
-    "fields": {
-        "name": "Kjeldsberg kaffe",
-        "logo_uri": "static/kjeldsberg.png",
-        "website_url": "http://example.com",
-        "type": "Annen sponsor"
-    }
-},
-{
-    "model": "nvdagen.sponsor",
-    "pk": 2,
-    "fields": {
-        "name": "NTNU",
-        "logo_uri": "static/ntnu.png",
-        "website_url": "http://example.com",
-        "type": "Annen sponsor"
-    }
-},
-{
-    "model": "nvdagen.sponsor",
-    "pk": 3,
-    "fields": {
-        "name": "Studentsamskipnaden i Trondheim",
-        "logo_uri": "static/sit.png",
-        "website_url": "http://example.com",
-        "type": "Annen sponsor"
-    }
-},
-{
-    "model": "nvdagen.sponsor",
-    "pk": 4,
-    "fields": {
-        "name": "Egon",
-        "logo_uri": "static/egon.png",
-        "website_url": "http://example.com",
-        "type": "Annen sponsor"
-    }
-},
-{
-    "model": "nvdagen.program",
-    "pk": 1,
-    "fields": {
-        "header": "Bedpres med Kongsberggruppen",
-        "place": "Graffi Grill",
-        "timeStart": 1769101200,
-        "timeEnd": 1769115600,
-        "paragraph": "Kongsberggruppen holder bedriftspresentasjon med bespisning p\u00e5 Graffi Grill",
-        "registration": true,
-        "maxRegistered": 5,
-        "cancelEmail": "your.fake@email.here",
-        "registrationStart": 1768906800,
-        "registrationEnd": 1769097600,
-        "allowDeregistration": true
-    }
-},
-{
-    "model": "nvdagen.program",
-    "pk": 2,
-    "fields": {
-        "header": "Lunsj med Sopra Steria",
-        "place": "EL5",
-        "timeStart": 1769079600,
-        "timeEnd": 1769083200,
-        "paragraph": "Spis deg stapmett p\u00e5 konsulenthusets regning!",
-        "registration": true,
-        "maxRegistered": 2,
-        "cancelEmail": "your.fake@email.here",
-        "registrationStart": 1768906800,
-        "registrationEnd": 1769122740,
-        "allowDeregistration": true
-    }
-},
-{
-    "model": "nvdagen.participant",
-    "pk": 1,
-    "fields": {
-        "event": 2,
-        "email": "bobsemail@stud.ntnu.no",
-        "name": "Bob",
-        "phone": "98765432",
-        "year": "3",
-        "study": "MTTK",
-        "code": "CI1USO",
-        "allergies": "Gluten"
-    }
-},
-{
-    "model": "nvdagen.participant",
-    "pk": 2,
-    "fields": {
-        "event": 2,
-        "email": "alicesemail@stud.ntnu.no",
-        "name": "Alice",
-        "phone": "41234567",
-        "year": "5",
-        "study": "MTTK",
-        "code": "A3XYJ4",
-        "allergies": "Kald kaffe"
-    }
-},
-{
-    "model": "nvdagen.faq",
-    "pk": 1,
-    "fields": {
-        "question_nb": "Hvor arrangeres Nettverksdagene?",
-        "question_en": "Where are the Networking days arranged?",
-        "answer_nb": "Nettverksdagene arrangeres i Glassg\u00e5rden i Gamle Elektro.",
-        "answer_en": "The Networking days are arranged in Glassg\u00e5rden at Gamle Elektro.",
-        "order": 0
-    }
-},
-{
-    "model": "nvdagen.faq",
-    "pk": 2,
-    "fields": {
-        "question_nb": "N\u00e5r st\u00e5r bedrifter p\u00e5 stand?",
-        "question_en": "When are companies at their stands?",
-        "answer_nb": "Standomr\u00e5det er \u00e5pent fra 10:00 - 15:00 onsdag og torsdag (28.01 og 29.01).",
-        "answer_en": "The stand area is open from 10:00 AM to 3:00 PM on Wednesday and Thursday (January 28th and 29th).",
-        "order": 1
-    }
-},
-{
-    "model": "nvdagen.faq",
-    "pk": 3,
-    "fields": {
-        "question_nb": "Hvem kan delta p\u00e5 NVD arrangementene?",
-        "question_en": "Who can participate in the NVD events?",
-        "answer_nb": "Alle kan delta p\u00e5 ballongslipp og stands. For bedpress, bankett og andre arrangement med p\u00e5melding er disse forbeholdt Kybernetikk og Robotikk studenter.",
-        "answer_en": "Everyone can join the balloon drop and visit the stands. However, company presentations, the banquet, and other events requiring registration are reserved for Cybernetics and Robotics students.",
-        "order": 2
-    }
-},
-{
-    "model": "nvdagen.faq",
-    "pk": 4,
-    "fields": {
-        "question_nb": "Er det kaffe p\u00e5 stands?",
-        "question_en": "Is there coffee at the stands?",
-        "answer_nb": "Det er bare en m\u00e5te \u00e5 finne ut det p\u00e5 ;)",
-        "answer_en": "There's only one way to find out. ;)",
-        "order": 3
-    }
-},
-{
-    "model": "nvdagen.faq",
-    "pk": 5,
-    "fields": {
-        "question_nb": "Hva kan man vinne p\u00e5 ballongslipp?",
-        "question_en": "What can you win at the balloon drop?",
-        "answer_nb": "Her er det mye spennende man kan vinne, lunsjbonger hos Egon/R\u00f8ft, Drop-in klatring p\u00e5 Grip, gavekort og mye annet.",
-        "answer_en": "Among other prizes there are gift cards, free lunches and drop-in climbing at Grip to name a few.",
-        "order": 4
-    }
-},
-{
-    "model": "nvdagen.faq",
-    "pk": 6,
-    "fields": {
-        "question_nb": "Hva kan man gj\u00f8re under Nettverksdagene?",
-        "question_en": "What can you do during NVD?",
-        "answer_nb": "Stands, bedpress og bankett++",
-        "answer_en": "Stands, company presentations, and the formal dinner, among other activities.",
-        "order": 5
-    }
-},
-{
-    "model": "nvdagen.faq",
-    "pk": 7,
-    "fields": {
-        "question_nb": "Hva er avslutningsmiddagen og hvem kan delta?",
-        "question_en": "What is the formal dinner and who can participate?",
-        "answer_nb": "En business causal middag hvor man kan m\u00f8tte bedriftsrepresentanter fra noen av v\u00e5re samarbeidspartnere. Det blir servert mat drikke og det vil v\u00e6re underholdning underveis.",
-        "answer_en": "It's a business casual dinner where you'll be able to talk to some of our collaborators. There will be dinner, drinks and entertainment.",
-        "order": 6
-    }
-}
 ]

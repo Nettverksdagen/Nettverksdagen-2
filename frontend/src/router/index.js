@@ -23,14 +23,8 @@ import InfoboxAdminView from '@/views/admin/InfoboxAdminView.vue'
 // import HomeViewTemp from '@/views/anon/HomeViewTemp.vue'
 import NotFoundView from '@/views/anon/NotFoundView.vue'
 import ValgomatView from '@/views/anon/ValgomatView.vue'
-<<<<<<< HEAD
 import FAQView from '@/views/anon/FAQView.vue'  
-||||||| parent of 624049c (feat: fix frontend for FAQ admin view and refactor FAQ to read from db)
-import FAQView from '@/views/anon/FAQView.vue'
-=======
-import FAQView from '@/views/anon/FAQView.vue'
-import FAQAdminView from '../views/admin/FAQAdminView.vue'
->>>>>>> 624049c (feat: fix frontend for FAQ admin view and refactor FAQ to read from db)
+import FAQAdminView from '@/views/admin/FAQAdminView.vue'
 
 Vue.use(Router)
 
@@ -166,22 +160,18 @@ export default new Router({
           name: 'ParticipantAdmin',
           component: ParticipantAdminView,
           meta: {title: 'Rediger deltagere'}
-<<<<<<< HEAD
         },
         {
           path: 'infoboks',
           name: 'InfoboxAdmin',
           component: InfoboxAdminView,
           meta: {title: 'Rediger infoboks'}
-||||||| parent of 624049c (feat: fix frontend for FAQ admin view and refactor FAQ to read from db)
-=======
         },
         {
           path: 'faq',
           name: 'FAQAdmin',
           component: FAQAdminView,
           meta: {title: 'Rediger FAQ'}
->>>>>>> 624049c (feat: fix frontend for FAQ admin view and refactor FAQ to read from db)
         }
       ]
     },
