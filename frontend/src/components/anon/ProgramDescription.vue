@@ -85,6 +85,7 @@
       :modalId="'registrationModal' + name"
       :header="header"
       :name="name"
+      :allowDeregistration="allowDeregistration"
       @registration-success="showRegistrationSuccessAlert"
     />
 

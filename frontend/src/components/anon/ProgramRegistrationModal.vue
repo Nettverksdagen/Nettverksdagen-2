@@ -111,7 +111,8 @@ export default {
   props: [
     'modalId',
     'header',
-    'name'
+    'name',
+    'allowDeregistration'
   ],
   data () {
     return {
@@ -234,6 +235,26 @@ export default {
       this.emailInvalidFeedbackString = this.emailInvalidFeedbackDefault
       if (!this.checkFormValidity()) {
         return
+      }
+
+      // Double check that they want to register if it isn't possible do deregister
+      if (!this.allowDeregistration) {
+        const confirmed = await this.$bvModal.msgBoxConfirm(
+          this.$t('confirm_registration_no_deregister'),
+          {
+            title: this.$t('confirm_registration_title'),
+            size: "sm",
+            buttonSize: "sm",
+            okVariant: "primary",
+            okTitle: this.$t("submit"),
+            cancelTitle: this.$t("cancel"),
+            footerClass: 'p-2',
+            hideHeaderClose: false,
+            centered: true
+          }
+        )
+
+        if (!confirmed) return;
       }
 
       // Set study field based on selection

@@ -56,6 +56,8 @@
     "registration_success": "You are registered! Check your email to see if you got a spot or are on the waiting list.",
     "unregistration_success": "You are now unregistered from the event.",
     "unregistration_code_sent": "Unregistration code sent.",
+    "confirm_registration_title": "Are you sure?",
+    "confirm_registration_no_deregister": "This event does not allow deregistration. By registering you confirm that you are going to participate. Are you sure you want to register?",
     "waiting_list": "Waiting list",
     "onWaitingList": "On waiting list",
     "spotsAvailable": "Spots available",
