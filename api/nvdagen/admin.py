@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Listing, Business, Sponsor, TeamMember, Form, Program, Participant, Infobox
+from .models import Listing, Business, Sponsor, TeamMember, Form, Program, Participant, Infobox, FAQ
 
 
 # Register your models here.
@@ -11,3 +11,4 @@ admin.site.register(Form)
 admin.site.register(Program)
 admin.site.register(Participant)
 admin.site.register(Infobox)
+admin.site.register(FAQ )

@@ -24,6 +24,7 @@ import InfoboxAdminView from '@/views/admin/InfoboxAdminView.vue'
 import NotFoundView from '@/views/anon/NotFoundView.vue'
 import ValgomatView from '@/views/anon/ValgomatView.vue'
 import FAQView from '@/views/anon/FAQView.vue'  
+import FAQAdminView from '@/views/admin/FAQAdminView.vue'
 
 Vue.use(Router)
 
@@ -165,6 +166,12 @@ export default new Router({
           name: 'InfoboxAdmin',
           component: InfoboxAdminView,
           meta: {title: 'Rediger infoboks'}
+        },
+        {
+          path: 'faq',
+          name: 'FAQAdmin',
+          component: FAQAdminView,
+          meta: {title: 'Rediger FAQ'}
         }
       ]
     },

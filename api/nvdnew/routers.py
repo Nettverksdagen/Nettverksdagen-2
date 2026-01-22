@@ -1,5 +1,5 @@
 from rest_framework import routers
-from nvdagen.viewsets import ListingViewSet, BusinessViewSet, SponsorViewSet, TeamMemberViewSet, FormViewSet, ProgramViewSet, ParticipantViewSet, InfoboxViewSet
+from nvdagen.viewsets import ListingViewSet, BusinessViewSet, SponsorViewSet, TeamMemberViewSet, FormViewSet, ProgramViewSet, ParticipantViewSet, InfoboxViewSet, FAQViewSet
 
 router = routers.DefaultRouter()
 
@@ -12,3 +12,4 @@ router.register(r'program', ProgramViewSet)
 router.register(r'participant', ParticipantViewSet)
 router.register(r'participant-count', ParticipantViewSet)
 router.register(r'infobox', InfoboxViewSet)
+router.register(r'faq', FAQViewSet)

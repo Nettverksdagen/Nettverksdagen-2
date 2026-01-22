@@ -92,6 +92,11 @@ export default {
           icon: 'cui-info'
         },
         {
+          name: 'FAQ',
+          url: this.$router.resolve({name: 'FAQAdmin'}).href,
+          icon: 'cui-info'
+        },
+        {
           divider: true,
           class: 'sidebar-nav-divider'
         },

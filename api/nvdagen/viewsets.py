@@ -2,8 +2,8 @@ from rest_framework import viewsets, status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from .models import Listing, Business, Sponsor, TeamMember, Form, Participant, Program, Infobox
-from .serializers import ListingSerializer, BusinessSerializer, SponsorSerializer, TeamMemberSerializer, FormSerializer, ParticipantSerializer, ProgramSerializer, ParticipantListSerializer, InfoboxSerializer
+from .models import Listing, Business, Sponsor, TeamMember, Form, Participant, Program, Infobox, FAQ
+from .serializers import ListingSerializer, BusinessSerializer, SponsorSerializer, TeamMemberSerializer, FormSerializer, ParticipantSerializer, ProgramSerializer, ParticipantListSerializer, InfoboxSerializer, FAQserializer
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
@@ -215,3 +215,8 @@ class InfoboxViewSet(viewsets.ModelViewSet):
 
         # Otherwise, fall back to normal create (first time only)
         return super().create(request, *args, **kwargs)
+    
+
+class FAQViewSet(viewsets.ModelViewSet):
+    queryset = FAQ.objects.all()
+    serializer_class = FAQserializer

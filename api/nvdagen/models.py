@@ -139,3 +139,15 @@ class Infobox(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=250,blank=True, null=True)
     paragraph = models.CharField(max_length=10000,blank=True, null=True)    
+
+
+class FAQ(models.Model):
+    id = models.AutoField(primary_key=True)
+    question_nb = models.CharField(max_length=10000)
+    question_en = models.CharField(max_length=10000)
+    answer_nb = models.CharField(max_length=10000)
+    answer_en = models.CharField(max_length=10000)
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']

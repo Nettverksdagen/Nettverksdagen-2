@@ -157,37 +157,7 @@
     "password": "Password",
     "loginButton": "Log in",
     "faq": {
-        "header": "Frequently asked questions",
-        "questions": [
-            {
-                "question": "Where are the Networking days arranged?",
-                "answer": "The Networking days are arranged in Glassgården at Gamle Elektro."
-            },
-            {
-                "question": "When are companies at their stands?",
-                "answer": "The stand area is open from 10:00 AM to 3:00 PM on Wednesday and Thursday (January 28th and 29th)."
-            },
-            {
-                "question": "Who can participate in the NVD events?",
-                "answer": "Everyone can join the balloon drop and visit the stands. However, company presentations, the banquet, and other events requiring registration are reserved for Cybernetics and Robotics students."
-            },
-            {
-                "question": "Is there coffee at the stands?",
-                "answer": "There's only one way to find out. ;)"
-            },
-            {
-                "question": "What can you win at the balloon drop?",
-                "answer": "Among other prizes there are gift cards, free lunches and drop-in climbing at Grip to name a few."
-            },
-            {
-                "question": "What can you do during NVD?",
-                "answer": "Stands, company presentations, and the formal dinner, among other activities."
-            },
-            {
-                "question": "What is the formal dinner and who can participate?",
-                "answer": "It's a business casual dinner where you'll be able to talk to some of our collaborators. There will be dinner, drinks and entertainment."
-            }
-        ]
+        "header": "Frequently asked questions"
     },
 
     "admin": {
@@ -330,6 +300,19 @@
             "photo": "Photo",
             "selectImage": "Select an image",
             "photoNote": "The picture is automatically centered in a square, without being stretched or cropped. Upload square pictures for the best result."
+        },
+        "faq" : {
+            "header": "Manage FAQ items",
+            "listHeader": "FAQ Items",
+            "questionNorwegian": "Question (Norwegian)",
+            "questionNorwegianPlaceholder": "Enter question in Norwegian",
+            "questionEnglish": "Question (English)",
+            "questionEnglishPlaceholder": "Enter question in English",
+            "answerNorwegian": "Answer (Norwegian)",
+            "answerNorwegianPlaceholder": "Enter answer in Norwegian",
+            "answerEnglish": "Answer (English)",
+            "answerEnglishPlaceholder": "Enter answer in English",
+            "order": "Display Order"
         }
     },
 

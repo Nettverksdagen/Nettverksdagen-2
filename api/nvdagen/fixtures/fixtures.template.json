@@ -40,7 +40,7 @@
         "fields": {
             "name": "Sommerjobb i Kongsberg",
             "company_name": "Kongsberggruppen",
-            "deadline": "2026-01-27",
+            "deadline": "2026-01-28",
             "logo_uri": "static/kbg.png",
             "type": "Sommerjobb",
             "listing_url": "http://example.com",
@@ -55,7 +55,7 @@
         "fields": {
             "name": "Verdens beste sommerjobb",
             "company_name": "Sparebank1",
-            "deadline": "2026-01-27",
+            "deadline": "2026-01-28",
             "logo_uri": "static/sb1.png",
             "type": "Sommerjobb",
             "listing_url": "http://example.com",
@@ -70,7 +70,7 @@
         "fields": {
             "name": "Sommerjobb hos Norges beste arbeidsplass",
             "company_name": "Sopra Steria",
-            "deadline": "2026-01-27",
+            "deadline": "2026-01-28",
             "logo_uri": "static/sopra.png",
             "type": "Sommerjobb",
             "listing_url": "http://example.com",
@@ -85,7 +85,7 @@
         "fields": {
             "name": "Bli med og skap fremtidens l\u00f8sninger",
             "company_name": "Evry",
-            "deadline": "2026-01-27",
+            "deadline": "2026-01-28",
             "logo_uri": "static/evry.png",
             "type": "Fast stilling",
             "listing_url": "http://example.com",
@@ -100,7 +100,7 @@
         "fields": {
             "name": "Bli med p\u00e5 en spennende reise",
             "company_name": "Disruptive Technologies",
-            "deadline": "2026-01-27",
+            "deadline": "2026-01-28",
             "logo_uri": "static/disruptive.png",
             "type": "Trainee",
             "listing_url": "http://example.com",
@@ -115,7 +115,7 @@
         "fields": {
             "name": "Jobb i en spennende ny startup",
             "company_name": "Ardoq",
-            "deadline": "2026-01-27",
+            "deadline": "2026-01-28",
             "logo_uri": "static/ardoq.png",
             "type": "Deltidsstilling",
             "listing_url": "http://example.com",
@@ -130,7 +130,7 @@
         "fields": {
             "name": "Fulltidsjobb i BaneNor",
             "company_name": "BaneNor",
-            "deadline": "2026-01-27",
+            "deadline": "2026-01-28",
             "logo_uri": "24b70bb2-b6eb-42dd-99a5-a6ed35055619.png",
             "type": "Fast stilling",
             "listing_url": "https://banenor.no",
@@ -369,14 +369,14 @@
         "fields": {
             "header": "Bedpres med Kongsberggruppen",
             "place": "Graffi Grill",
-            "timeStart": 1769014800,
-            "timeEnd": 1769029200,
+            "timeStart": 1769101200,
+            "timeEnd": 1769115600,
             "paragraph": "Kongsberggruppen holder bedriftspresentasjon med bespisning p\u00e5 Graffi Grill",
             "registration": true,
             "maxRegistered": 5,
             "cancelEmail": "your.fake@email.here",
-            "registrationStart": 1768820400,
-            "registrationEnd": 1769011200
+            "registrationStart": 1768906800,
+            "registrationEnd": 1769097600
         }
     },
     {
@@ -385,14 +385,14 @@
         "fields": {
             "header": "Lunsj med Sopra Steria",
             "place": "EL5",
-            "timeStart": 1768993200,
-            "timeEnd": 1768996800,
+            "timeStart": 1769079600,
+            "timeEnd": 1769083200,
             "paragraph": "Spis deg stapmett p\u00e5 konsulenthusets regning!",
             "registration": true,
             "maxRegistered": 2,
             "cancelEmail": "your.fake@email.here",
-            "registrationStart": 1768820400,
-            "registrationEnd": 1769036340
+            "registrationStart": 1768906800,
+            "registrationEnd": 1769122740
         }
     },
     {
@@ -421,6 +421,83 @@
             "study": "MTTK",
             "code": "A3XYJ4",
             "allergies": "Kald kaffe"
+        }
+    },
+    {
+        "model": "nvdagen.faq",
+        "pk": 1,
+        "fields": {
+            "question_nb": "Hvor arrangeres Nettverksdagene?",
+            "question_en": "When are the Networking days arranged?",
+            "answer_nb": "Nettverksdagene arrangeres i Glassg\u00e5rden i Gamle Elektro.",
+            "answer_en": "The Networking days are arranged in Glassg\u00e5rden at Gamle Elektro.",
+            "order": 0
+        }
+    },
+    {
+        "model": "nvdagen.faq",
+        "pk": 2,
+        "fields": {
+            "question_nb": "N\u00e5r st\u00e5r bedrifter p\u00e5 stand?",
+            "question_en": "When are companies at their stands?",
+            "answer_nb": "Standomr\u00e5det er \u00e5pent fra 10:00 - 15:00 onsdag og torsdag (28.01 og 29.01).",
+            "answer_en": "The stand area is open from 10:00 AM to 3:00 PM on Wednesday and Thursday (January 28th and 29th).",
+            "order": 1
+        }
+    },
+    {
+        "model": "nvdagen.faq",
+        "pk": 3,
+        "fields": {
+            "question_nb": "Hvem kan delta p\u00e5 NVD arrangementene?",
+            "question_en": "Who can participate in the NVD events?",
+            "answer_nb": "Alle kan delta p\u00e5 ballongslipp og stands. For bedpress, bankett og andre arrangement med p\u00e5melding er disse forbeholdt Kybernetikk og Robotikk studenter.",
+            "answer_en": "Everyone can join the balloon drop and visit the stands. However, company presentations, the banquet, and other events requiring registration are reserved for Cybernetics and Robotics students.",
+            "order": 2
+        }
+    },
+    {
+        "model": "nvdagen.faq",
+        "pk": 4,
+        "fields": {
+            "question_nb": "Er det kaffe p\u00e5 stands?",
+            "question_en": "Is there coffee at the stands?",
+            "answer_nb": "Det er bare en m\u00e5te \u00e5 finne ut det p\u00e5 ;)",
+            "answer_en": "There's only one way to find out. ;)",
+            "order": 3
+        }
+    },
+    {
+        "model": "nvdagen.faq",
+        "pk": 5,
+        "fields": {
+            "question_nb": "Hva kan man vinne p\u00e5 ballongslipp?",
+            "question_en": "What can you win at the balloon drop?",
+            "answer_nb": "Her er det mye spennende man kan vinne, lunsjbonger hos Egon/R\u00f8ft, Drop-in klatring p\u00e5 Grip, gavekort og mye annet.",
+            "answer_en": "Among other prizes there are gift cards, free lunches and drop-in climbing at Grip to name a few.",
+            "order": 4
+        }
+    },
+    {
+        "model": "nvdagen.faq",
+        "pk": 6,
+        "fields": {
+            "question_nb": "Hva kan man gj\u00f8re under Nettverksdagene?",
+            "question_en": "What can you do during NVD?",
+            "answer_nb": "Stands, bedpress og bankett++",
+            "answer_en": "Stands, company presentations, and the formal dinner, among other activities.",
+            "order": 5
+        }
+    },
+    {
+        "model": "nvdagen.faq",
+        "pk": 7,
+        "fields": {
+            "question_nb": "Hva er avslutningsmiddagen og hvem kan delta?",
+            "question_en": "What is the formal dinner and who can participate?",
+            "answer_nb": "En business causal middag hvor man kan m\u00f8tte bedriftsrepresentanter fra noen av v\u00e5re samarbeidspartnere. Det blir servert mat drikke og det vil v\u00e6re underholdning underveis.",
+            "answer_en": "It's a business casual dinner where you'll be able to talk to some of our collaborators. There will be dinner, drinks and entertainment.",
+            "order": 6
         }
     }
 ]

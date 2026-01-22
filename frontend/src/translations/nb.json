@@ -28,7 +28,7 @@
     "submit": "Send inn",
     "when": "Når",
     "where": "Hvor",
-    "participant_not_found": "Det finnes ikke en deltakere med den gitte e-posten",
+    "participant_not_found": "Det finnes ikke en deltaker med den gitte e-posten",
     "unregistration_failure_code_invalid": "Ugyldig avregistreringskode",
     "unregistration_failure_unknown": "Noe galt skjedde, vennligst kontakt it@nettverksdagene.no",
     "inputfieldName": "Navn",
@@ -146,37 +146,7 @@
     "password": "Passord",
     "loginButton": "Logg inn",
     "faq": {
-        "header": "Ofte stile spørsmål",
-        "questions": [
-            {
-                "question": "Hvor arrangeres Nettverksdagene?",
-                "answer": "Nettverksdagene arangeres i Glassgården i Gamle Elekro."
-            },
-            {
-                "question": "Når står bedrifter på stand?",
-                "answer": "Standområdet er åpent fra 10:00 - 15:00 onsdag og torsdag (28.01 og 29.01)."
-            },
-            {
-                "question": "Hvem kan delta på NVD arrangementene?",
-                "answer": "Alle kan delta på ballongsslipp og stands. For bedpress, banket og andre arrangement med påmelding er disse forbeholdt Kybernetikk og Robotikk studenter."
-            },
-            {
-                "question": "Er det kaffe på stands?",
-                "answer": "Det er bare en måte å finne ut det på ;)"
-            },
-            {
-                "question": "Hva kan man vinne på ballongslipp?",
-                "answer": "Her er det mye spennende man kan vinne, lunsjboner hos Egon/Røft, Drop-in klatring på Grip, gavekort og mye annet."
-            },
-            {
-                "question": "Hva kan man gjøre under Nettverksdagene?",
-                "answer": "Stands, bedpress og bankett++"
-            },
-            {
-                "question": "Hva er avsluttningsmiddagen og hvem kan delta?",
-                "answer": "En buisness causal middag hvor man kan møtte bedriftsrepresentanter fra noen av våre sammarbeidspartnere. Det blir servert mat drikke og det vil være underholdning underveis."
-            }
-        ]
+        "header": "Ofte stilte spørsmål"
     },
     "admin": {
         "success": "Suksess!",
@@ -311,6 +281,19 @@
             "photo": "Bilde",
             "selectImage": "Velg et bilde",
             "photoNote": "Bildet blir automatisk plassert i sentrum av et kvadrat, men ikke beskåret eller strukket. Last opp bilder som allerede er kvadratiske for best resultat."
+        },
+        "faq" : {
+            "header": "Administrer FAQ-elementer",
+            "listHeader": "FAQ-elementer",
+            "questionNorwegian": "Spørsmål (Norsk)",
+            "questionNorwegianPlaceholder": "Skriv inn spørsmålet på norsk",
+            "questionEnglish": "Spørsmål (Engelsk)",
+            "questionEnglishPlaceholder": "Skriv inn spørsmålet på engelsk",
+            "answerNorwegian": "Svar (Norsk)",
+            "answerNorwegianPlaceholder": "Skriv inn svaret på norsk",
+            "answerEnglish": "Svar (Engelsk)",
+            "answerEnglishPlaceholder": "Skriv inn svaret på engelsk",
+            "order": "Visningsrekkefølge"
         }
     },
     "standmap": {
