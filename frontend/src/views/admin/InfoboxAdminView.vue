@@ -16,22 +16,43 @@
 
     <b-row class="my-4">
       <div class="col-12 col-md-8">
-        <b-card header="Rediger Viktig informasjon" class="h-100">
+        <b-card header="Rediger infoboksen på forsiden" class="h-100">
           <b-form @submit.prevent="handleSubmit">
-            <b-form-group label="Tittel" label-for="infobox-title-input">
+            <h5 class="mt-3 mb-3">Norsk</h5>
+            <b-form-group label="Tittel" label-for="infobox-title-nb-input">
               <b-form-input
-                v-model="infobox.title"
-                id="infobox-title-input"
+                v-model="infobox.title_nb"
+                id="infobox-title-nb-input"
                 placeholder="Skriv inn tittel"
               />
             </b-form-group>
 
-            <b-form-group label="Tekst" label-for="infobox-paragraph-input">
+            <b-form-group label="Tekst" label-for="infobox-paragraph-nb-input">
               <b-form-textarea
-                v-model="infobox.paragraph"
-                id="infobox-paragraph-input"
+                v-model="infobox.paragraph_nb"
+                id="infobox-paragraph-nb-input"
                 rows="5"
                 placeholder="Skriv inn informasjonstekst"
+              />
+            </b-form-group>
+
+            <hr>
+
+            <h5 class="mt-3 mb-3">English</h5>
+            <b-form-group label="Title" label-for="infobox-title-en-input">
+              <b-form-input
+                v-model="infobox.title_en"
+                id="infobox-title-en-input"
+                placeholder="Write title"
+              />
+            </b-form-group>
+
+            <b-form-group label="Text" label-for="infobox-paragraph-en-input">
+              <b-form-textarea
+                v-model="infobox.paragraph_en"
+                id="infobox-paragraph-en-input"
+                rows="5"
+                placeholder="Write information text"
               />
             </b-form-group>
 
@@ -46,7 +67,11 @@
     <b-row>
       <div class="col-12">
         <b-card header="Forhåndsvisning">
-          <InfoBox :title="infobox.title" :paragraph="infobox.paragraph" />
+          <h5 class="mt-3 mb-3">Norsk</h5>
+          <InfoBox :title="infobox.title_nb" :paragraph="infobox.paragraph_nb" />
+          <hr class="mt-4">
+          <h5 class="mt-3 mb-3">English</h5>
+          <InfoBox :title="infobox.title_en" :paragraph="infobox.paragraph_en" />
         </b-card>
       </div>
     </b-row>
@@ -63,8 +88,10 @@ export default {
   data () {
     return {
       infobox: {
-        title: '',
-        paragraph: ''
+        title_nb: '',
+        title_en: '',
+        paragraph_nb: '',
+        paragraph_en: ''
       },
       alert: {
         dismissSecs: 5,
@@ -76,19 +103,27 @@ export default {
     }
   },
   computed: {
-    title () {
-      return this.$store.state.infobox.title || ''
+    title_nb () {
+      return this.$store.state.infobox.title_nb || ''
     },
-    paragraph () {
-      return this.$store.state.infobox.paragraph || ''
+    title_en () {
+      return this.$store.state.infobox.title_en || ''
+    },
+    paragraph_nb () {
+      return this.$store.state.infobox.paragraph_nb || ''
+    },
+    paragraph_en () {
+      return this.$store.state.infobox.paragraph_en || ''
     }
   },
   created () {
     // Hent eksisterende infoboks fra store/API ved lasting
     this.$store.dispatch('infobox/fetchInfobox').then(() => {
       this.infobox = {
-          title: this.$store.state.infobox.title || '',
-          paragraph: this.$store.state.infobox.paragraph || ''
+          title_nb: this.$store.state.infobox.title_nb || '',
+          title_en: this.$store.state.infobox.title_en || '',
+          paragraph_nb: this.$store.state.infobox.paragraph_nb || '',
+          paragraph_en: this.$store.state.infobox.paragraph_en || ''
       }
     })
   },
