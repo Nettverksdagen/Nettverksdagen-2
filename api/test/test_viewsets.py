@@ -3,6 +3,8 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from unittest.mock import patch
 
+from django.contrib.auth import get_user_model
+
 from nvdagen.models import Participant, Program, FAQ, Infobox
 
 CONFIRMATION_WORD = "bekreftet"
@@ -197,6 +199,14 @@ class ViewSetTestCase(APITestCase):
         self.assertEqual(response.data["paragraph_en"], "Read this carefully")
         
     def test_update_infobox(self):
+        User = get_user_model()
+        superuser = User.objects.create_user(
+            username="admin",
+            password="1234",
+            is_superuser=True
+        )
+
+        self.client.force_authenticate(user=superuser)
         detail_url = reverse("infobox-detail", args=[self.infobox.id])
         updated_data = {
             "title_nb": "Ny tittel",
