@@ -72,7 +72,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                     data['waitingListIndex'] = waitingListIndex
                     data['place'] = program.place
                     data['header'] = program.header
-                    data['year'] = datetime.now().year
+                    data['current_year'] = datetime.now().year
                     html_message = render_to_string('on_waiting_list.html', context=data)
                     plain_message = strip_tags(html_message)
                     send_mail('Nettverksdagene - Du står på venteliste',
@@ -89,7 +89,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                     data['timeStart'] = format_datetime(datetime.fromtimestamp(program.timeStart+3600), "EEEE dd. MMMM, 'klokken' HH:mm", locale='nb_NO')
                     data['header'] = program.header
                     data['allowDeregistration'] = program.allowDeregistration
-                    data['year'] = datetime.now().year
+                    data['current_year'] = datetime.now().year
                     html_message = render_to_string('registered_email.html', context=data)
                     plain_message = strip_tags(html_message)
                     send_mail('Nettverksdagene - Påmelding bekreftet for ' + data['name'],
@@ -121,7 +121,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
             data['name'] = participant.name
             data['header'] = program.header
             data['code'] = participant.code
-            data['year'] = datetime.now().year
+            data['current_year'] = datetime.now().year
             html_message = render_to_string('deregister_code.html', context=data)
             plain_message = strip_tags(html_message)
             send_mail('Nettverksdagene - Avmeldingskode for ' + participant.name,
@@ -173,7 +173,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                         data['header'] = program.header
                         data['place'] = program.place
                         data['timeStart'] = format_datetime(datetime.fromtimestamp(program.timeStart+3600), "EEEE dd. MMMM, 'klokken' HH:mm", locale='nb_NO')
-                        data['year'] = datetime.now().year
+                        data['current_year'] = datetime.now().year
                         html_message = render_to_string('off_waiting_list.html', context=data)
                         plain_message = strip_tags(html_message)
                         send_mail('Nettverksdagene - Påmelding bekreftet for ' + lastParticipant.name,
