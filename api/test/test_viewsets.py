@@ -3,7 +3,9 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from unittest.mock import patch
 
-from nvdagen.models import Participant, Program, FAQ
+from django.contrib.auth import get_user_model
+
+from nvdagen.models import Participant, Program, FAQ, Infobox
 
 CONFIRMATION_WORD = "bekreftet"
 WAITLIST_WORD     = "venteliste"
@@ -15,6 +17,7 @@ class ViewSetTestCase(APITestCase):
         self.participant_url       = reverse("participant-list")
         self.participant_count_url = reverse("participant-count")
         self.faq_url = reverse("faq-list")
+        self.infobox_url = reverse("infobox-list")
 
         self.program = Program.objects.create(
             header        = "Interesting event",
@@ -44,6 +47,13 @@ class ViewSetTestCase(APITestCase):
             answer_nb="Hvert år",
             answer_en="Every year",
             order=2
+        )
+
+        self.infobox = Infobox.objects.create(
+            title_nb="Viktig informasjon",
+            title_en="Important information",
+            paragraph_nb="Les dette nøye",
+            paragraph_en="Read this carefully"
         )
 
     def test_participant_count(self):
@@ -179,3 +189,33 @@ class ViewSetTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["question_nb"], "Hva er NVD?")
         self.assertEqual(response.data["answer_en"], "Networking Day")
+        
+    def test_retrieve_infobox(self):
+        detail_url = reverse("infobox-detail", args=[self.infobox.id])
+        response = self.client.get(detail_url)
+        
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["title_nb"], "Viktig informasjon")
+        self.assertEqual(response.data["paragraph_en"], "Read this carefully")
+        
+    def test_update_infobox(self):
+        User = get_user_model()
+        superuser = User.objects.create_user(
+            username="admin",
+            password="1234",
+            is_superuser=True
+        )
+
+        self.client.force_authenticate(user=superuser)
+        detail_url = reverse("infobox-detail", args=[self.infobox.id])
+        updated_data = {
+            "title_nb": "Ny tittel",
+            "title_en": "New title",
+            "paragraph_nb": "Ny tekst",
+            "paragraph_en": "New text"
+        }
+        response = self.client.put(detail_url, format="json", data=updated_data)
+        
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["title_nb"], "Ny tittel")
+        self.assertEqual(response.data["title_en"], "New title")

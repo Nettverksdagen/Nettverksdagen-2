@@ -1,6 +1,8 @@
 const defaultState = {
-  title: null,
-  paragraph: null,
+  title_nb: null,
+  title_en: null,
+  paragraph_nb: null,
+  paragraph_en: null,
 }
 
 const state = {...defaultState}
@@ -27,8 +29,10 @@ const mutations = {
     state.loading = true
   },
   fetchSuccessful (state, data) {
-    state.title = data.title
-    state.paragraph = data.paragraph
+    state.title_nb = data.title_nb
+    state.title_en = data.title_en
+    state.paragraph_nb = data.paragraph_nb
+    state.paragraph_en = data.paragraph_en
     state.loading = false
     state.loaded = true
   },

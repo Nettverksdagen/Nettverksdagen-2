@@ -67,10 +67,18 @@ export default {
   },
   computed: {
     infoboxTitle: function() {
-      return this.$store.state.infobox.title || "";
+      const lang = this.$i18n.locale
+      if (lang === 'en') {
+        return this.$store.state.infobox.title_en || ""
+      }
+      return this.$store.state.infobox.title_nb || ""
     },
     infoboxParagraph: function() {
-      return this.$store.state.infobox.paragraph || "";
+      const lang = this.$i18n.locale
+      if (lang === 'en') {
+        return this.$store.state.infobox.paragraph_en || ""
+      }
+      return this.$store.state.infobox.paragraph_nb || ""
     }
   }
 }
