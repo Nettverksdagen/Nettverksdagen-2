@@ -11,6 +11,11 @@ from datetime import datetime, time
 from babel.dates import format_datetime, format_time
 
 
+def fix_ntnu_email(email):
+    """Replace @ntnu.no with @stud.ntnu.no so emails are actually delivered."""
+    return email.replace('@ntnu.no', '@stud.ntnu.no')
+
+
 class ListingViewSet(viewsets.ModelViewSet):
     queryset = Listing.objects.all()
     serializer_class = ListingSerializer
@@ -78,7 +83,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                     send_mail('Nettverksdagene - Du står på venteliste',
                         plain_message,
                         'do-not-reply@nettverksdagene.no',
-                        [data['email']],
+                        [fix_ntnu_email(data['email'])],
                         fail_silently=False,
                         html_message=html_message)
                 # If program not full, send confirmation email
@@ -95,7 +100,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                     send_mail('Nettverksdagene - Påmelding bekreftet for ' + data['name'],
                        plain_message,
                        'do-not-reply@nettverksdagene.no',
-                       [data['email']],
+                       [fix_ntnu_email(data['email'])],
                        fail_silently=False,
                        html_message=html_message)
             except Exception as e:
@@ -127,7 +132,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
             send_mail('Nettverksdagene - Avmeldingskode for ' + participant.name,
                 plain_message,
                 'do-not-reply@nettverksdagene.no',
-                [participant.email],
+                [fix_ntnu_email(participant.email)],
                 fail_silently=False,
                 html_message=html_message)
         except Exception as e:
@@ -179,7 +184,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                         send_mail('Nettverksdagene - Påmelding bekreftet for ' + lastParticipant.name,
                             plain_message,
                             'do-not-reply@nettverksdagene.no',
-                            [lastParticipant.email],
+                            [fix_ntnu_email(lastParticipant.email)],
                             fail_silently=False,
                             html_message=html_message)
                     except Exception as e:

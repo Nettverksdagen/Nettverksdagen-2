@@ -265,7 +265,7 @@ export default {
       }
 
       // Create random unregister code
-      this.form.code = Array(6).fill(0).map(x => Math.random().toString(36).charAt(2)).join('').toUpperCase()
+      this.form.code = Math.random().toString(36).substring(2, 8).padEnd(6, '0').toUpperCase()
 
       // Submit
       axios.post(
