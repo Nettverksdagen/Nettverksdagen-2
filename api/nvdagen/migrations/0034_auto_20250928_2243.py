@@ -4,6 +4,13 @@ from django.db import migrations, models
 import uuid
 
 
+def generate_unique_tokens(apps, schema_editor):
+    Participant = apps.get_model('nvdagen', 'Participant')
+    for participant in Participant.objects.all():
+        participant.attendance_token = uuid.uuid4()
+        participant.save(update_fields=['attendance_token'])
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -11,7 +18,16 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        # Step 1: Add field without unique constraint
         migrations.AddField(
+            model_name='participant',
+            name='attendance_token',
+            field=models.UUIDField(default=uuid.uuid4, editable=False, null=True),
+        ),
+        # Step 2: Generate unique tokens for existing rows
+        migrations.RunPython(generate_unique_tokens, migrations.RunPython.noop),
+        # Step 3: Add unique constraint
+        migrations.AlterField(
             model_name='participant',
             name='attendance_token',
             field=models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
