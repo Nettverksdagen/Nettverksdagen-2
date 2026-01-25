@@ -122,3 +122,4 @@ class Participant(models.Model):
     attendance_token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
     attended = models.BooleanField(default=False)
     check_in_time = models.DateTimeField(null=True, blank=True)
+    qr_email_sent = models.BooleanField(default=False)

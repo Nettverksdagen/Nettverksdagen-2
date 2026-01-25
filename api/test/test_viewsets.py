@@ -387,3 +387,89 @@ class ViewSetTestCase(APITestCase):
         self.assertEqual(stats_response.data['total_registered'], 2)
         self.assertEqual(stats_response.data['attended'], 1)
         self.assertEqual(stats_response.data['attendance_rate'], 50.0)
+
+    # Send QR Preview Tests
+    def test_send_qr_preview_returns_correct_counts(self):
+        """Test preview endpoint returns correct counts"""
+        self.client.force_authenticate(user=self.admin_user)
+        response = self.client.get(
+            reverse('participant-send-qr-preview'),
+            {'program_id': self.program.id}
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn('pending_qr_count', response.data)
+        self.assertIn('total_confirmed', response.data)
+        self.assertIn('already_sent_count', response.data)
+        self.assertEqual(response.data['program_name'], self.program.header)
+        # Participant hasn't received QR email yet
+        self.assertEqual(response.data['pending_qr_count'], 1)
+        self.assertEqual(response.data['already_sent_count'], 0)
+
+    def test_send_qr_preview_requires_auth(self):
+        """Test preview endpoint requires authentication"""
+        response = self.client.get(
+            reverse('participant-send-qr-preview'),
+            {'program_id': self.program.id}
+        )
+        self.assertIn(response.status_code, [status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN])
+
+    def test_send_qr_preview_requires_program_id(self):
+        """Test preview endpoint requires program_id parameter"""
+        self.client.force_authenticate(user=self.admin_user)
+        response = self.client.get(reverse('participant-send-qr-preview'))
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    # Send QR Emails Tests
+    @patch("nvdagen.viewsets.send_mail")
+    def test_send_qr_emails_success(self, mock_send_mail):
+        """Test sending QR emails marks participants as sent"""
+        self.client.force_authenticate(user=self.admin_user)
+
+        # Participant has not received QR email
+        self.assertFalse(self.participant.qr_email_sent)
+
+        response = self.client.post(
+            reverse('participant-send-qr-emails'),
+            {'program_id': self.program.id}
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['sent'], 1)
+        self.assertEqual(response.data['failed'], 0)
+
+        # Verify participant is now marked as sent
+        self.participant.refresh_from_db()
+        self.assertTrue(self.participant.qr_email_sent)
+
+    @patch("nvdagen.viewsets.send_mail")
+    def test_send_qr_emails_skips_already_sent(self, mock_send_mail):
+        """Test that participants who already received QR are skipped"""
+        self.client.force_authenticate(user=self.admin_user)
+
+        # Mark participant as already having received QR email
+        self.participant.qr_email_sent = True
+        self.participant.save()
+
+        response = self.client.post(
+            reverse('participant-send-qr-emails'),
+            {'program_id': self.program.id}
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['sent'], 0)
+        self.assertEqual(response.data['failed'], 0)
+
+        # send_mail should not have been called
+        mock_send_mail.assert_not_called()
+
+    def test_send_qr_emails_requires_auth(self):
+        """Test send emails endpoint requires authentication"""
+        response = self.client.post(
+            reverse('participant-send-qr-emails'),
+            {'program_id': self.program.id}
+        )
+        self.assertIn(response.status_code, [status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN])
+
+        # Verify participant was NOT marked as sent
+        self.participant.refresh_from_db()
+        self.assertFalse(self.participant.qr_email_sent)

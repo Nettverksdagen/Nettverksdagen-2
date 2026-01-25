@@ -8,6 +8,14 @@
               <h2>Attendance Overview</h2>
             </div>
             <div class="col-md-6 text-right">
+              <button
+                @click="showSendQrModal"
+                class="btn btn-secondary mb-2 mr-2"
+                :disabled="!selectedEvent"
+                title="Select an event first"
+              >
+                Send QR Codes
+              </button>
               <button @click="exportAttendanceData" class="btn btn-primary mb-2">
                 Export Attendance Data (CSV)
               </button>
@@ -93,6 +101,53 @@
         </div>
       </div>
     </div>
+
+    <!-- Send QR Modal -->
+    <div v-if="showQrModal" class="modal-overlay" @click.self="closeQrModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5>Send QR Codes</h5>
+          <button @click="closeQrModal" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div v-if="loadingQrPreview" class="text-center py-3">
+            <div class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+            <p class="mt-2">Loading preview...</p>
+          </div>
+          <div v-else-if="qrPreview">
+            <p><strong>Event:</strong> {{ qrPreview.program_name }}</p>
+            <p><strong>Confirmed participants:</strong> {{ qrPreview.total_confirmed }}</p>
+            <p><strong>Already received QR:</strong> {{ qrPreview.already_sent_count }}</p>
+            <p><strong>Will receive QR now:</strong> <span class="text-primary font-weight-bold">{{ qrPreview.pending_qr_count }}</span></p>
+
+            <div v-if="qrPreview.pending_qr_count === 0" class="alert alert-info mt-3">
+              All confirmed participants have already received their QR codes.
+            </div>
+            <div v-else class="alert alert-warning mt-3">
+              This will send {{ qrPreview.pending_qr_count }} email(s). Are you sure?
+            </div>
+          </div>
+          <div v-if="sendingQr" class="text-center py-3">
+            <div class="spinner-border" role="status">
+              <span class="sr-only">Sending...</span>
+            </div>
+            <p class="mt-2">Sending emails...</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button @click="closeQrModal" class="btn btn-secondary" :disabled="sendingQr">Cancel</button>
+          <button
+            @click="sendQrEmails"
+            class="btn btn-primary"
+            :disabled="sendingQr || loadingQrPreview || !qrPreview || qrPreview.pending_qr_count === 0"
+          >
+            Send Emails
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -106,7 +161,11 @@ export default {
       participants: [],
       events: [],
       selectedEvent: '',
-      checkingIn: false
+      checkingIn: false,
+      showQrModal: false,
+      loadingQrPreview: false,
+      qrPreview: null,
+      sendingQr: false
     }
   },
   computed: {
@@ -232,6 +291,71 @@ export default {
       a.download = `attendance_data_${new Date().toISOString().split('T')[0]}.csv`
       a.click()
       window.URL.revokeObjectURL(url)
+    },
+
+    async showSendQrModal () {
+      if (!this.selectedEvent) {
+        alert('Please select an event first')
+        return
+      }
+
+      this.showQrModal = true
+      this.loadingQrPreview = true
+      this.qrPreview = null
+
+      try {
+        const response = await axios.get(
+          `${process.env.VUE_APP_API_HOST}/api/participant/send_qr_preview/`,
+          {
+            params: { program_id: this.selectedEvent },
+            headers: { 'Authorization': `Token ${this.$store.state.admin.token}` }
+          }
+        )
+        this.qrPreview = response.data
+      } catch (err) {
+        console.error('Failed to load QR preview:', err)
+        alert('Failed to load preview: ' + (err.response && err.response.data && err.response.data.message ? err.response.data.message : 'Unknown error'))
+        this.showQrModal = false
+      } finally {
+        this.loadingQrPreview = false
+      }
+    },
+
+    closeQrModal () {
+      if (!this.sendingQr) {
+        this.showQrModal = false
+        this.qrPreview = null
+      }
+    },
+
+    async sendQrEmails () {
+      this.sendingQr = true
+
+      try {
+        const response = await axios.post(
+          `${process.env.VUE_APP_API_HOST}/api/participant/send_qr_emails/`,
+          { program_id: this.selectedEvent },
+          { headers: { 'Authorization': `Token ${this.$store.state.admin.token}` } }
+        )
+
+        const { sent, failed, errors } = response.data
+
+        if (failed === 0) {
+          alert(`Success! Sent ${sent} QR code email(s).`)
+        } else {
+          alert(`Sent ${sent} email(s), but ${failed} failed. Check console for details.`)
+          console.error('QR email failures:', errors)
+        }
+
+        this.showQrModal = false
+        // Refresh participants to update qr_email_sent status
+        await this.fetchParticipants()
+      } catch (err) {
+        console.error('Failed to send QR emails:', err)
+        alert('Failed to send emails: ' + (err.response && err.response.data && err.response.data.message ? err.response.data.message : 'Unknown error'))
+      } finally {
+        this.sendingQr = false
+      }
     }
   }
 }
@@ -354,5 +478,61 @@ export default {
     white-space: normal;
     min-width: 80px;
   }
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.modal-header h5 {
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 15px 20px;
+  border-top: 1px solid #dee2e6;
 }
 </style>

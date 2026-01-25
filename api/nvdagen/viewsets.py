@@ -129,6 +129,11 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                        fail_silently=False,
                        html_message=html_message)
 
+                    # Mark QR email as sent
+                    created_participant = Participant.objects.get(id=participant.data['id'])
+                    created_participant.qr_email_sent = True
+                    created_participant.save()
+
                     return participant
             except Exception as e:
                 print("ERROR: Could not send email. Is mail_settings.py correct?", e)
@@ -212,6 +217,10 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                             [lastParticipant.email],
                             fail_silently=False,
                             html_message=html_message)
+
+                        # Mark QR email as sent
+                        lastParticipant.qr_email_sent = True
+                        lastParticipant.save()
                     except Exception as e:
                         print("ERROR: Could not send email. Is mail_settings.py correct?", e)
                         response = {'message': 'Could not send email'}
@@ -348,3 +357,97 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                 },
                 'by_program': program_stats
             })
+
+    @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
+    def send_qr_preview(self, request):
+        """Preview how many QR code emails would be sent for an event"""
+        program_id = request.query_params.get('program_id')
+        if not program_id:
+            return Response({'message': 'program_id is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            program = Program.objects.get(id=program_id)
+        except Program.DoesNotExist:
+            return Response({'message': 'Program not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Get confirmed participants (first maxRegistered by id order)
+        all_participants = list(program.participant_set.all().order_by('id'))
+        confirmed_participants = all_participants[:program.maxRegistered] if program.maxRegistered else all_participants
+
+        # Filter to those who haven't received QR email
+        pending_qr = [p for p in confirmed_participants if not p.qr_email_sent]
+
+        return Response({
+            'program_id': program_id,
+            'program_name': program.header,
+            'total_confirmed': len(confirmed_participants),
+            'pending_qr_count': len(pending_qr),
+            'already_sent_count': len(confirmed_participants) - len(pending_qr)
+        })
+
+    @action(detail=False, methods=['post'], permission_classes=[IsAuthenticated])
+    def send_qr_emails(self, request):
+        """Send QR code emails to confirmed participants who haven't received them"""
+        program_id = request.data.get('program_id')
+        if not program_id:
+            return Response({'message': 'program_id is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            program = Program.objects.get(id=program_id)
+        except Program.DoesNotExist:
+            return Response({'message': 'Program not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Get confirmed participants who need QR emails
+        all_participants = list(program.participant_set.all().order_by('id'))
+        confirmed_participants = all_participants[:program.maxRegistered] if program.maxRegistered else all_participants
+        pending_qr = [p for p in confirmed_participants if not p.qr_email_sent]
+
+        sent_count = 0
+        failed_count = 0
+        errors = []
+
+        for participant in pending_qr:
+            try:
+                data = {
+                    'name': participant.name,
+                    'email': participant.email,
+                    'code': participant.code,
+                    'header': program.header,
+                    'place': program.place,
+                    'timeStart': format_datetime(
+                        datetime.fromtimestamp(program.timeStart + 3600),
+                        "EEEE dd. MMMM, 'klokken' H:MM ",
+                        locale='nb_NO'
+                    ),
+                    'qr_code': generate_qr_code(str(participant.attendance_token))
+                }
+
+                html_message = render_to_string('registered_email.html', context=data)
+                plain_message = strip_tags(html_message)
+
+                send_mail(
+                    'Nettverksdagene - Din QR-kode for ' + program.header,
+                    plain_message,
+                    'do-not-reply@nettverksdagene.no',
+                    [participant.email],
+                    fail_silently=False,
+                    html_message=html_message
+                )
+
+                participant.qr_email_sent = True
+                participant.save()
+                sent_count += 1
+
+            except Exception as e:
+                failed_count += 1
+                errors.append({
+                    'participant_id': participant.id,
+                    'email': participant.email,
+                    'error': str(e)
+                })
+
+        return Response({
+            'sent': sent_count,
+            'failed': failed_count,
+            'errors': errors if errors else None
+        }, status=status.HTTP_200_OK if failed_count == 0 else status.HTTP_207_MULTI_STATUS)
