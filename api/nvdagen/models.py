@@ -2,6 +2,7 @@ from django.db import models
 from django.core.mail import send_mail
 from rest_framework.response import Response
 from rest_framework import status
+import uuid
 
 SUMMER_INTERNSHIP = 'Sommerjobb'
 FULL_TIME_POSITION = 'Fast stilling'
@@ -133,14 +134,18 @@ class Participant(models.Model):
     study = models.CharField(max_length=250)
     code = models.CharField(max_length=250)
     allergies = models.CharField(max_length=250, blank=True, default="")
-    
-    
+    attendance_token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    attended = models.BooleanField(default=False)
+    check_in_time = models.DateTimeField(null=True, blank=True)
+    qr_email_sent = models.BooleanField(default=False)
+
+
 class Infobox(models.Model):
     id = models.AutoField(primary_key=True)
     title_nb = models.CharField(max_length=250,blank=True, null=True)
     title_en = models.CharField(max_length=250,blank=True, null=True)
     paragraph_nb = models.CharField(max_length=10000,blank=True, null=True)
-    paragraph_en = models.CharField(max_length=10000,blank=True, null=True)    
+    paragraph_en = models.CharField(max_length=10000,blank=True, null=True)
 
 
 class FAQ(models.Model):

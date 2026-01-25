@@ -46,8 +46,13 @@ class ParticipantListSerializer(serializers.ModelSerializer):
         model = Participant
         exclude = ('code',)
 
+class ParticipantAttendanceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Participant
+        fields = ('id', 'name', 'email', 'study', 'year', 'attendance_token', 'attended', 'check_in_time', 'event', 'allergies', 'qr_email_sent')
+
 class InfoboxSerializer(serializers.ModelSerializer):
-    class Meta: 
+    class Meta:
         model = Infobox
         fields = '__all__'
 

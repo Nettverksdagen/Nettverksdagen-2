@@ -19,6 +19,9 @@ import BusinessDetails from '@/components/anon/BusinessDetails.vue'
 import ListingDetails from '@/components/anon/ListingDetails.vue'
 import ProgramAdminView from '@/views/admin/ProgramAdminView.vue'
 import ParticipantAdminView from '@/views/admin/ParticipantAdminView.vue'
+import AttendanceScannerView from '@/views/admin/AttendanceScannerView.vue'
+import AttendanceOverviewView from '@/views/admin/AttendanceOverviewView.vue'
+import AttendanceStatsView from '@/views/admin/AttendanceStatsView.vue'
 import InfoboxAdminView from '@/views/admin/InfoboxAdminView.vue'
 // import HomeViewTemp from '@/views/anon/HomeViewTemp.vue'
 import NotFoundView from '@/views/anon/NotFoundView.vue'
@@ -160,6 +163,24 @@ export default new Router({
           name: 'ParticipantAdmin',
           component: ParticipantAdminView,
           meta: {title: 'Rediger deltagere'}
+        },
+        {
+          path: 'attendance-scanner',
+          name: 'AttendanceScanner',
+          component: AttendanceScannerView,
+          meta: {title: 'QR Scanner'}
+        },
+        {
+          path: 'attendance-overview',
+          name: 'AttendanceOverview',
+          component: AttendanceOverviewView,
+          meta: {title: 'Attendance Overview'}
+        },
+        {
+          path: 'attendance-stats',
+          name: 'AttendanceStats',
+          component: AttendanceStatsView,
+          meta: {title: 'Attendance Statistics'}
         },
         {
           path: 'infoboks',

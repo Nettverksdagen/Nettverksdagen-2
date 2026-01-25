@@ -74,17 +74,32 @@ export default {
         {
           name: 'Skjemaer',
           url: this.$router.resolve({name: 'FormAdmin'}).href,
-          icon: 'cui-dollar'
+          icon: 'cui-note'
         },
         {
           name: 'Program',
           url: this.$router.resolve({name: 'ProgramAdmin'}).href,
-          icon: 'cui-dollar'
+          icon: 'cui-calendar'
         },
         {
           name: 'Deltakere',
           url: this.$router.resolve({name: 'ParticipantAdmin'}).href,
-          icon: 'cui-dollar'
+          icon: 'cui-people'
+        },
+        {
+          name: 'QR Scanner',
+          url: this.$router.resolve({name: 'AttendanceScanner'}).href,
+          icon: 'cui-task'
+        },
+        {
+          name: 'Attendance Overview',
+          url: this.$router.resolve({name: 'AttendanceOverview'}).href,
+          icon: 'cui-list'
+        },
+        {
+          name: 'Attendance Stats',
+          url: this.$router.resolve({name: 'AttendanceStats'}).href,
+          icon: 'cui-chart'
         },
         {
           name: 'Infoboks',
