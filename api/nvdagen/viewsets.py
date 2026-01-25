@@ -2,8 +2,8 @@ from rest_framework import viewsets, status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from .models import Listing, Business, Sponsor, TeamMember, Form, Participant, Program
-from .serializers import ListingSerializer, BusinessSerializer, SponsorSerializer, TeamMemberSerializer, FormSerializer, ParticipantSerializer, ProgramSerializer, ParticipantListSerializer, ParticipantAttendanceSerializer
+from .models import Listing, Business, Sponsor, TeamMember, Form, Participant, Program, Infobox, FAQ
+from .serializers import ListingSerializer, BusinessSerializer, SponsorSerializer, TeamMemberSerializer, FormSerializer, ParticipantSerializer, ProgramSerializer, ParticipantListSerializer, ParticipantAttendanceSerializer, InfoboxSerializer, FAQserializer
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
@@ -34,6 +34,11 @@ def generate_qr_code(data):
     # Convert to base64 for embedding in email
     img_base64 = base64.b64encode(buffer.getvalue()).decode()
     return f"data:image/png;base64,{img_base64}"
+
+
+def fix_ntnu_email(email):
+    """Replace @ntnu.no with @stud.ntnu.no so emails are actually delivered."""
+    return email.replace('@ntnu.no', '@stud.ntnu.no')
 
 
 class ListingViewSet(viewsets.ModelViewSet):
@@ -95,14 +100,15 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                 if (currentlyRegistered >= program.maxRegistered):
                     waitingListIndex = currentlyRegistered - program.maxRegistered + 1
                     data['waitingListIndex'] = waitingListIndex
-                    data['place'] = program.place                    
+                    data['place'] = program.place
                     data['header'] = program.header
+                    data['current_year'] = datetime.now().year
                     html_message = render_to_string('on_waiting_list.html', context=data)
                     plain_message = strip_tags(html_message)
                     send_mail('Nettverksdagene - Du står på venteliste',
                         plain_message,
                         'do-not-reply@nettverksdagene.no',
-                        [data['email']],
+                        [fix_ntnu_email(data['email'])],
                         fail_silently=False,
                         html_message=html_message)
                 # If program not full, send confirmation email
@@ -111,10 +117,10 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                     participant = super().create(request)
 
                     data['place'] = program.place
-                    #data['timeStart'] = strftime('%d. %b klokken %H:%M', gmtime(program.timeStart+3600))
-                    #Ny formatering av dato
-                    data['timeStart'] = format_datetime(datetime.fromtimestamp(program.timeStart+3600), "EEEE dd. MMMM, 'klokken' H:MM ", locale='nb_NO')
+                    data['timeStart'] = format_datetime(datetime.fromtimestamp(program.timeStart+3600), "EEEE dd. MMMM, 'klokken' HH:mm", locale='nb_NO')
                     data['header'] = program.header
+                    data['allowDeregistration'] = program.allowDeregistration
+                    data['current_year'] = datetime.now().year
 
                     # Generate QR code for attendance
                     qr_data = str(participant.data['attendance_token'])
@@ -125,7 +131,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                     send_mail('Nettverksdagene - Påmelding bekreftet for ' + data['name'],
                        plain_message,
                        'do-not-reply@nettverksdagene.no',
-                       [data['email']],
+                       [fix_ntnu_email(data['email'])],
                        fail_silently=False,
                        html_message=html_message)
 
@@ -138,7 +144,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
             except Exception as e:
                 print("ERROR: Could not send email. Is mail_settings.py correct?", e)
                 response = {'message': 'Could not send email'}
-                return Response(response, status = status.HTTP_500_INTERNAL_SERVER_ERROR)                
+                return Response(response, status = status.HTTP_500_INTERNAL_SERVER_ERROR)
 
             # Create participant for waiting list too
             return super().create(request)
@@ -151,17 +157,21 @@ class ParticipantViewSet(viewsets.ModelViewSet):
         participant = Participant.objects.get(id=pk)
         program = participant.event
 
+        if not program.allowDeregistration:
+            return Response({'message': 'This program does not allow deregistration'}, status=status.HTTP_400_BAD_REQUEST)
+
         try:
             data = {}
             data['name'] = participant.name
             data['header'] = program.header
             data['code'] = participant.code
+            data['current_year'] = datetime.now().year
             html_message = render_to_string('deregister_code.html', context=data)
             plain_message = strip_tags(html_message)
             send_mail('Nettverksdagene - Avmeldingskode for ' + participant.name,
                 plain_message,
                 'do-not-reply@nettverksdagene.no',
-                [participant.email],
+                [fix_ntnu_email(participant.email)],
                 fail_silently=False,
                 html_message=html_message)
         except Exception as e:
@@ -180,12 +190,16 @@ class ParticipantViewSet(viewsets.ModelViewSet):
             return Response(response, status = status.HTTP_404_NOT_FOUND)
 
         code = request.data.get('code', None)
+        program = participant.event
 
-        # The request is authorized if either a matching code is provided or
-        # the user making the request is logged as the admin and no code is provided.
-        if not (participant.code == code or code == None and request.user.is_staff):
-            response = {'message': 'Invalid code'}
-            return Response(response, status = status.HTTP_400_BAD_REQUEST)
+        # We only override validity as staff if the code is not provided
+        valid_as_staff = request.user.is_staff and code is None
+        valid_as_anon  = program.allowDeregistration and participant.code == code
+        request_valid = valid_as_staff or valid_as_anon
+
+        if not request_valid:
+            msg = 'Program does not allow deregistration' if not program.allowDeregistration else 'Invalid code'
+            return Response({'message': msg}, status = status.HTTP_400_BAD_REQUEST)
 
         response = super().destroy(request)
 
@@ -203,7 +217,8 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                         data['email'] = lastParticipant.email
                         data['header'] = program.header
                         data['place'] = program.place
-                        data['timeStart'] = format_datetime(datetime.fromtimestamp(program.timeStart+3600), "EEEE dd. MMMM, 'klokken' H:MM ", locale='nb_NO')
+                        data['timeStart'] = format_datetime(datetime.fromtimestamp(program.timeStart+3600), "EEEE dd. MMMM, 'klokken' HH:mm", locale='nb_NO')
+                        data['current_year'] = datetime.now().year
 
                         # Generate QR code for attendance
                         qr_data = str(lastParticipant.attendance_token)
@@ -214,7 +229,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                         send_mail('Nettverksdagene - Påmelding bekreftet for ' + lastParticipant.name,
                             plain_message,
                             'do-not-reply@nettverksdagene.no',
-                            [lastParticipant.email],
+                            [fix_ntnu_email(lastParticipant.email)],
                             fail_silently=False,
                             html_message=html_message)
 
@@ -227,7 +242,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                         return Response(response, status = status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         return response
-    
+
     @action(detail=False, methods=['get'])
     def count(self, request):
         participant_count = Participant.objects.all().count()
@@ -416,9 +431,10 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                     'place': program.place,
                     'timeStart': format_datetime(
                         datetime.fromtimestamp(program.timeStart + 3600),
-                        "EEEE dd. MMMM, 'klokken' H:MM ",
+                        "EEEE dd. MMMM, 'klokken' HH:mm",
                         locale='nb_NO'
                     ),
+                    'current_year': datetime.now().year,
                     'qr_code': generate_qr_code(str(participant.attendance_token))
                 }
 
@@ -429,7 +445,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                     'Nettverksdagene - Din QR-kode for ' + program.header,
                     plain_message,
                     'do-not-reply@nettverksdagene.no',
-                    [participant.email],
+                    [fix_ntnu_email(participant.email)],
                     fail_silently=False,
                     html_message=html_message
                 )
@@ -451,3 +467,25 @@ class ParticipantViewSet(viewsets.ModelViewSet):
             'failed': failed_count,
             'errors': errors if errors else None
         }, status=status.HTTP_200_OK if failed_count == 0 else status.HTTP_207_MULTI_STATUS)
+
+
+class InfoboxViewSet(viewsets.ModelViewSet):
+    serializer_class = InfoboxSerializer
+    queryset = Infobox.objects.all()
+
+    def create(self, request, *args, **kwargs):
+        # If there's already one infobox, update it instead of creating a new
+        existing = Infobox.objects.first()
+        if existing:
+            serializer = self.get_serializer(existing, data=request.data, partial=True)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        # Otherwise, fall back to normal create (first time only)
+        return super().create(request, *args, **kwargs)
+
+
+class FAQViewSet(viewsets.ModelViewSet):
+    queryset = FAQ.objects.all()
+    serializer_class = FAQserializer

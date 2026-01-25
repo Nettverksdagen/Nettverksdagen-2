@@ -28,17 +28,19 @@
     "submit": "Send inn",
     "when": "Når",
     "where": "Hvor",
-    "participant_not_found": "Det finnes ikke en deltakere med den gitte e-posten",
+    "participant_not_found": "Det finnes ikke en deltaker med den gitte e-posten",
     "unregistration_failure_code_invalid": "Ugyldig avregistreringskode",
     "unregistration_failure_unknown": "Noe galt skjedde, vennligst kontakt it@nettverksdagene.no",
     "inputfieldName": "Navn",
     "inputFieldEmail": "E-post",
+    "inputFieldPhone": "Telefonnummer",
     "inputFieldFieldOfStudy": "Studieretning",
     "inputFieldStudyYear": "Årstrinn",
     "inputFieldAllergies": "Allergier og matrestriksjoner",
     "inputFieldCode": "Avmeldingskode",
     "placeholderName": "Skriv inn navn",
     "placeholderEmail": "Skriv inn e-post",
+    "placeholderPhone": "Skriv inn telefonnummer",
     "placeholderFieldOfStudy": "Skriv inn studieretning",
     "placeholderStudyYear": "Skriv inn årstrinn",
     "placeholderAllergies": "Skriv inn eventuelle allergier eller matrestriksjoner",
@@ -48,8 +50,11 @@
     "registration_success": "Du er registrert! Sjekk mailen din for å se om du fikk plass eller er på venteliste.",
     "unregistration_success": "Du er nå meldt av arrangementet.",
     "unregistration_code_sent": "Avmeldingskode sendt.",
+    "confirm_registration_title": "Er du sikker?",
+    "confirm_registration_no_deregister": "Dette arrangementet tillater ikke avmelding. Ved å melde deg på bekrefter du at du kan delta på arrangementet. Er du sikker på at du ønsker å melde deg på?",
     "waiting_list": "Venteliste",
     "onWaitingList": "På venteliste",
+    "spotsAvailable": "Ledige plasser",
     "hjem": "Hjem",
     "program": "Program",
     "stillingsannonser": "Stillingsannonser",
@@ -104,7 +109,7 @@
     "avslutningsmiddagtitle": "Avslutningsmiddag",
     "ballongslipp": "Ballongslipp",
     "standtext": "Glassgården fylles med stands! Kom i kontakt med mange spennende bedrifter.",
-    "programtext": "Nettverksdagene avsluttes med en avslutningsmiddag på Thon Hotel Prinsen.",
+    "programtext": "Nettverksdagene avsluttes med en avslutningsmiddag på E. C Dahls.",
     "bedprestext": "Det blir holdt flere bedrifts- presentasjoner for de som vil bli bedre kjent med bedriftene.",
     "ballongslipptext": "Vinn flotte premier når Nettverksdagene åpner med ballongslipp.",
     "Styret": "Styret",
@@ -131,6 +136,7 @@
     "waitingList": "Venteliste",
     "name": "Navn",
     "email": "E-post",
+    "phone": "Telefon",
     "study": "Studie",
     "yearOfStudy": "Årskull",
     "allergies": "Allergier",
@@ -140,37 +146,7 @@
     "password": "Passord",
     "loginButton": "Logg inn",
     "faq": {
-        "header": "Ofte stile spørsmål",
-        "questions": [
-            {
-                "question": "Hvor arrangeres Nettverksdagene?",
-                "answer": "Nettverksdagene arangeres i Glassgården i Gamle Elekro."
-            },
-            {
-                "question": "Når står bedrifter på stand?",
-                "answer": "Standområdet er åpent fra 10:00 - 15:00 onsdag og torsdag (22.01 og 23.01)."
-            },
-            {
-                "question": "Hvem kan delta på NVD arrangementene?",
-                "answer": "Alle kan delta på ballongsslipp og stands. For bedpress, banket og andre arrangement med påmelding er disse forbeholdt Kybernetikk og Robotikk studenter."
-            },
-            {
-                "question": "Er det kaffe på stands?",
-                "answer": "Det er bare en måte å finne ut det på ;)"
-            },
-            {
-                "question": "Hva kan man vinne på ballongslipp?",
-                "answer": "Her er det mye spennende man kan vinne, lunsjboner hos Egon/Røft, Drop-in klatring på Grip, gavekort og mye annet."
-            },
-            {
-                "question": "Hva kan man gjøre under Nettverksdagene?",
-                "answer": "Stands, bedpress og bankett++"
-            },
-            {
-                "question": "Hva er avsluttningsmiddagen og hvem kan delta?",
-                "answer": "En buisness causal middag hvor man kan møtte bedriftsrepresentanter fra noen av våre sammarbeidspartnere. Det blir servert mat drikke og det vil være underholdning underveis."
-            }
-        ]
+        "header": "Ofte stilte spørsmål"
     },
     "admin": {
         "success": "Suksess!",
@@ -272,6 +248,7 @@
             "registrationStartTime": "Tid for påmeldingsstart",
             "registrationEndDate": "Dato for påmeldingsslutt",
             "registrationEndTime": "Tid for påmeldingsslutt",
+            "allowDeregistration": "Avmelding",
             "maxRegistered": "Max antall påmeldte",
             "cancelEmail": "Email som avmeldingsmail blir sendt til",
             "emailPlaceholder": "Email til ansvarlig"
@@ -283,6 +260,7 @@
             "sponsorNamePlaceholder": "Skriv inn sponsornavn",
             "websiteUrl": "Link til nettside (må starte med https://)",
             "websiteUrlPlaceholder": "Skriv inn link",
+            "sponsorType": "Sponsortype",
             "logo": "Logo",
             "selectImage": "Velg et bilde",
             "sponsors": "sponsorer",
@@ -303,21 +281,46 @@
             "photo": "Bilde",
             "selectImage": "Velg et bilde",
             "photoNote": "Bildet blir automatisk plassert i sentrum av et kvadrat, men ikke beskåret eller strukket. Last opp bilder som allerede er kvadratiske for best resultat."
+        },
+        "faq" : {
+            "header": "Administrer FAQ-elementer",
+            "listHeader": "FAQ-elementer",
+            "questionNorwegian": "Spørsmål (Norsk)",
+            "questionNorwegianPlaceholder": "Skriv inn spørsmålet på norsk",
+            "questionEnglish": "Spørsmål (Engelsk)",
+            "questionEnglishPlaceholder": "Skriv inn spørsmålet på engelsk",
+            "answerNorwegian": "Svar (Norsk)",
+            "answerNorwegianPlaceholder": "Skriv inn svaret på norsk",
+            "answerEnglish": "Svar (Engelsk)",
+            "answerEnglishPlaceholder": "Skriv inn svaret på engelsk",
+            "order": "Visningsrekkefølge"
         }
     },
     "standmap": {
-        "title": "Standkart"
+        "title": "Standkart",
+        "clickToViewDetails": "Klikk for å se detaljer",
+        "tapToViewDetails": "Trykk for å se detaljer"
     },
     "businesses": {
         "mainPartnerHeader": "Møt vår nye hovedsamarbeidspartner",
         "partnersHeader": "Samarbeids\u00ADpartnere",
         "standHeader": "Bedrifter du kan møte på stand",
+        "visitWebsite": "Besøk nettside",
+        "standNumber": "Standnummer",
+        "package": "Pakke",
+        "daysAtStand": "Dager på stand",
         "levels": {
             "main": "Hovedsamarbeidspartner",
             "partner": "Samarbeidspartner",
             "gold": "Gull",
             "silver": "S\u00F8lv",
-            "bronze": "Bronse"
+            "bronze": "Bronse",
+            "startup": "Startup",
+            "hovedsamarbeidspartner": "Hovedsamarbeidspartner",
+            "samarbeidspartner": "Samarbeidspartner",
+            "gull": "Gull",
+            "sølv": "Sølv",
+            "bronse": "Bronse"
         },
         "days": {
             "day1": "Dag 1",
@@ -327,7 +330,8 @@
     },
     "sponsors": {
         "mainSponsor": "Hovedsponsor",
-        "otherSponsors": "Øvrige sponsorer"
+        "otherSponsors": "Øvrige sponsorer",
+        "coffeeSponsor": "Kaffesponsor"
     },
     "contactPersons": "Kontaktpersoner",
     "teamMember": {
@@ -358,7 +362,13 @@
             "Sponsoransvarlig": "Sponsoransvarlig",
             "IT-ansvarlig": "IT-ansvarlig",
             "Bedriftansvarlig": "Bedriftansvarlig",
-            "Medlem": "Medlem"
+            "Medlem": "Medlem",
+            "IT-leder": "IT-leder",
+            "Bedriftsleder": "Bedriftsleder",
+            "Markedsføringsleder": "Markedsføringsleder",
+            "Sponsorleder": "Sponsorleder",
+            "Logistikkleder": "Logistikkleder",
+            "Dugnadsansvarlig": "Dugnadsansvarlig"
         },
         "successCreated": "Teammedlemmet er blitt lagt ut på forsiden.",
         "successUpdated": "Teammedlemmet er blitt endret.",

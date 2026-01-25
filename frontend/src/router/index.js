@@ -22,10 +22,12 @@ import ParticipantAdminView from '@/views/admin/ParticipantAdminView.vue'
 import AttendanceScannerView from '@/views/admin/AttendanceScannerView.vue'
 import AttendanceOverviewView from '@/views/admin/AttendanceOverviewView.vue'
 import AttendanceStatsView from '@/views/admin/AttendanceStatsView.vue'
+import InfoboxAdminView from '@/views/admin/InfoboxAdminView.vue'
 // import HomeViewTemp from '@/views/anon/HomeViewTemp.vue'
 import NotFoundView from '@/views/anon/NotFoundView.vue'
 import ValgomatView from '@/views/anon/ValgomatView.vue'
-import FAQView from '@/views/anon/FAQView.vue'
+import FAQView from '@/views/anon/FAQView.vue'  
+import FAQAdminView from '@/views/admin/FAQAdminView.vue'
 
 Vue.use(Router)
 
@@ -118,8 +120,7 @@ export default new Router({
         {
           path: '',
           name: 'AdminOverview',
-          component: null,
-          meta: {title: 'Nvdagen admin'}
+          redirect: {name: 'ListingAdmin'}
         },
         {
           path: 'stillinger',
@@ -180,6 +181,18 @@ export default new Router({
           name: 'AttendanceStats',
           component: AttendanceStatsView,
           meta: {title: 'Attendance Statistics'}
+        },
+        {
+          path: 'infoboks',
+          name: 'InfoboxAdmin',
+          component: InfoboxAdminView,
+          meta: {title: 'Rediger infoboks'}
+        },
+        {
+          path: 'faq',
+          name: 'FAQAdmin',
+          component: FAQAdminView,
+          meta: {title: 'Rediger FAQ'}
         }
       ]
     },

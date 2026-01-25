@@ -8,6 +8,8 @@ import { teamMembers } from './teamMembers.module'
 import { forms } from './forms.module'
 import { program } from './program.module'
 import { participant } from './participant.module'
+import { infobox } from './infobox.module'
+import { faq } from './faq.module'
 import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
@@ -20,7 +22,9 @@ export default new Vuex.Store({
     teamMembers,
     forms,
     program,
-    participant
+    participant,
+    infobox,
+    faq
   },
   plugins: [createPersistedState()]
 })

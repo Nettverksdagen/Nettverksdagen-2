@@ -52,11 +52,6 @@ export default {
           class: 'sidebar-nav-divider'
         },
         {
-          name: 'Oversikt',
-          url: this.$router.resolve({name: 'AdminOverview'}).href,
-          icon: 'cui-home'
-        },
-        {
           name: 'Stillingsannonser',
           url: this.$router.resolve({name: 'ListingAdmin'}).href,
           icon: 'cui-list'
@@ -105,6 +100,16 @@ export default {
           name: 'Attendance Stats',
           url: this.$router.resolve({name: 'AttendanceStats'}).href,
           icon: 'cui-chart'
+        },
+        {
+          name: 'Infoboks',
+          url: this.$router.resolve({name: 'InfoboxAdmin'}).href,
+          icon: 'cui-info'
+        },
+        {
+          name: 'FAQ',
+          url: this.$router.resolve({name: 'FAQAdmin'}).href,
+          icon: 'cui-info'
         },
         {
           divider: true,

@@ -1,11 +1,14 @@
 <template>
   <div class="loading-page">
+    <div class="infoBox">
+            <InfoBox :title="infoboxTitle" :paragraph="infoboxParagraph" />
+          </div>
     <b-row class="firstrow">
         <div class="col-12 splash-text" :style="{'background-image': 'url(' + require('@/assets/iphonebakgrunn.svg') + ')'}">
             <div class="hometext">
                 <h3>{{$t('homescreen.fremtidig')}}</h3>
                 <h1>{{$t('nettverksdagene')}}</h1>
-                <h2>27.01-29.01 2026</h2>
+                <h2>28.01-29.01 2026</h2>
             </div>
         </div>
         <div class="col-12 homevideo">
@@ -17,6 +20,7 @@
             <img class="overlay" src="@/assets/background_overlay.png">
         </div>
     </b-row>
+    
     <div class="boxes">
       <b-link :to="{name: 'Home', hash: '#stand-map'}" @click.native="scrollToId('stand-map')">
         <HomeScreenBox box-title="Stands" box-icon="store-alt-solid.svg" :box-text="$t('glassgårdentext')"/>
@@ -41,9 +45,12 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import HomeScreenBox from '@/components/anon/HomeScreenBox.vue'
+import InfoBox from '@/components/anon/InfoBox.vue'
 export default {
+  name: "HomeScreen",
   components: {
-    HomeScreenBox
+    HomeScreenBox,
+    InfoBox
   },
   methods: {
     scrollToId (id) {
@@ -56,6 +63,22 @@ export default {
         top: offsetPosition,
         behavior: 'smooth'
       })
+    }
+  },
+  computed: {
+    infoboxTitle: function() {
+      const lang = this.$i18n.locale
+      if (lang === 'en') {
+        return this.$store.state.infobox.title_en || ""
+      }
+      return this.$store.state.infobox.title_nb || ""
+    },
+    infoboxParagraph: function() {
+      const lang = this.$i18n.locale
+      if (lang === 'en') {
+        return this.$store.state.infobox.paragraph_en || ""
+      }
+      return this.$store.state.infobox.paragraph_nb || ""
     }
   }
 }
@@ -105,6 +128,7 @@ export default {
   .firstrow {
     margin: 0; // Removes the default margin from the b-row element
   }
+
   .hometext {
     // z-index: 10; // To make sure the text is on top of the background
     --home-text-margin-top: 85px;

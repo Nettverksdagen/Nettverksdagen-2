@@ -87,6 +87,7 @@ export default {
         {key: 'study', label: this.$t('study')},
         {key: 'year', label: this.$t('yearOfStudy')},
         {key: 'email', label: this.$t('email')},
+        {key: 'phone', label: this.$t('phone')},
         {key: 'allergies', label: this.$t('allergies')},
         {key: 'delete', label: ''}
       ],
@@ -128,10 +129,18 @@ export default {
       return sortedParticipants
     },
     participantList: function () {
-      return this.participants.slice(0, this.$data.selectedEvent.maxRegistered)
+      const max = this.$data.selectedEvent.maxRegistered
+      if (!max || max <= 0) {
+        return this.participants
+      }
+      return this.participants.slice(0, max)
     },
     waitingList: function () {
-      return this.participants.slice(this.$data.selectedEvent.maxRegistered)
+      const max = this.$data.selectedEvent.maxRegistered
+      if (!max || max <= 0) {
+        return []
+      }
+      return this.participants.slice(max)
     },
     concatEmails: function () {
       let emailString = ''
@@ -144,21 +153,23 @@ export default {
       const rows = this.participantList.map(participant => [
         participant.name,
         participant.email,
+        participant.phone,
         participant.study,
         participant.year,
         participant.allergies
       ])
-      return generateDownloadableCsv([this.$t('name'), this.$t('email'), this.$t('study'), this.$t('yearOfStudy'), this.$t('allergies')], rows)
+      return generateDownloadableCsv([this.$t('name'), this.$t('email'), this.$t('phone'), this.$t('study'), this.$t('yearOfStudy'), this.$t('allergies')], rows)
     },
     waitinglistDownloadHref: function () {
       const rows = this.waitingList.map(participant => [
         participant.name,
         participant.email,
+        participant.phone,
         participant.study,
         participant.year,
         participant.allergies
       ])
-      return generateDownloadableCsv([this.$t('name'), this.$t('email'), this.$t('study'), this.$t('yearOfStudy'), this.$t('allergies')], rows)
+      return generateDownloadableCsv([this.$t('name'), this.$t('email'), this.$t('phone'), this.$t('study'), this.$t('yearOfStudy'), this.$t('allergies')], rows)
     }
   },
   methods: {

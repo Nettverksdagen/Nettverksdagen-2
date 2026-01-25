@@ -49,6 +49,7 @@
                 :registrationStart="selectedProgramItem.registrationStart"
                 :registrationEnd="selectedProgramItem.registrationEnd"
                 :name="selectedProgramItem.id"
+                :allowDeregistration="selectedProgramItem.allowDeregistration"
               >
               </ProgramDescription>
             </div>
@@ -68,6 +69,7 @@
             :registrationStart="selectedProgramItem.registrationStart"
             :registrationEnd="selectedProgramItem.registrationEnd"
             :name="selectedProgramItem.id"
+            :allowDeregistration="selectedProgramItem.allowDeregistration"
           >
           </ProgramDescription>
         <!-- </div> -->

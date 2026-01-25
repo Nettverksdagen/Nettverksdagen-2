@@ -30,13 +30,14 @@
     "submit": "Submit",
     "when": "When",
     "where": "Where",
-    
+
     "participant_not_found": "Registration with given e-mail not found",
     "unregistration_failure_code_invalid": "Invalid unregistration code",
     "unregistration_failure_unknown": "Something went wrong, please contact it@nettverksdagene.no",
 
     "inputfieldName": "Name",
     "inputFieldEmail": "Email",
+    "inputFieldPhone": "Phone number",
     "inputFieldFieldOfStudy": "Field of Study",
     "inputFieldStudyYear": "Year of Study",
     "inputFieldAllergies": "Allergies and dietary restrictions",
@@ -44,6 +45,7 @@
 
     "placeholderName": "Enter name",
     "placeholderEmail": "Enter email",
+    "placeholderPhone": "Enter phone number",
     "placeholderFieldOfStudy": "Enter field of study",
     "placeholderStudyYear": "Enter year of study",
     "placeholderAllergies": "Enter any allergies or dietary restrictions",
@@ -54,8 +56,11 @@
     "registration_success": "You are registered! Check your email to see if you got a spot or are on the waiting list.",
     "unregistration_success": "You are now unregistered from the event.",
     "unregistration_code_sent": "Unregistration code sent.",
+    "confirm_registration_title": "Are you sure?",
+    "confirm_registration_no_deregister": "This event does not allow deregistration. By registering you confirm that you are going to participate. Are you sure you want to register?",
     "waiting_list": "Waiting list",
     "onWaitingList": "On waiting list",
+    "spotsAvailable": "Spots available",
 
 "hjem": "Home",
 "program": "Program",
@@ -67,7 +72,7 @@
 
     "stillingsannonser_card_title": "Job advertisements",
     "stillingsannonser_card_text": "Jumpstart your career by applying for a job through Nettverksdagene!",
-    
+
     "påmeldte": "registered",
     "onthe": "on the",
     "destroypart": "Unregister",
@@ -114,7 +119,7 @@
     "avslutningsmiddagtitle": "Formal Dinner",
     "ballongslipp": "Balloon drop",
     "standtext": "The hall will be filled with stands! Get in touch with many exciting companies.",
-    "programtext": "Nettverksdagene will end with a formal dinner at Thon Hotel Prinsen.",
+    "programtext": "Nettverksdagene will end with a formal dinner at E. C Dahls.",
     "bedprestext": "There will be multiple presentations for those who would like to learn more about the companies.",
     "ballongslipptext": "Win great prizes at the balloon drop when Nettverksdagene opens.",
     "Styret": "The Board",
@@ -124,7 +129,7 @@
     "thankscoop": "A big thanks to Coop Extra!",
     "thankscooptext": "We would like to thank Coop Extra for supplying coffee during Nettverksdagene 2023!",
     "glassgårdentext": "Meet many exciting companies at their stands in Glassgården",
-    "closing_dinner": "Nettverksdagene will end with a formal dinner at Thon Hotel Prinsen",
+    "closing_dinner": "Nettverksdagene will end with a formal dinner at E. C Dahls",
     "bedpres2": "There will be presentations for those who want to learn more about the companies.",
     "ball": "There will be a balloon drop where you can win great prizes!",
     "programfor": "Click here to see the program for Nettverksdagene 2022!",
@@ -142,6 +147,7 @@
     "waitingList": "Waiting List",
     "name": "Name",
     "email": "Email",
+    "phone": "Phone",
     "study": "Study",
     "yearOfStudy": "Year",
     "allergies": "Allergies",
@@ -151,37 +157,7 @@
     "password": "Password",
     "loginButton": "Log in",
     "faq": {
-        "header": "Frequently asked questions",
-        "questions": [
-            {
-                "question": "Where are the Networking days arranged?",
-                "answer": "The Networking days are arranged in Glassgården at Gamle Elektro."
-            },
-            {
-                "question": "When are companies at their stands?",
-                "answer": "The stand area is open from 10:00 AM to 3:00 PM on Wednesday and Thursday (January 22nd and 23rd)."
-            },
-            {
-                "question": "Who can participate in the NVD events?",
-                "answer": "Everyone can join the balloon drop and visit the stands. However, company presentations, the banquet, and other events requiring registration are reserved for Cybernetics and Robotics students."
-            },
-            {
-                "question": "Is there coffee at the stands?",
-                "answer": "There's only one way to find out. ;)"
-            },
-            {
-                "question": "What can you win at the balloon drop?",
-                "answer": "Among other prizes there are gift cards, free lunches and drop-in climbing at Grip to name a few."
-            },
-            {
-                "question": "What can you do during NVD?",
-                "answer": "Stands, company presentations, and the formal dinner, among other activities."
-            },
-            {
-                "question": "What is the formal dinner and who can participate?",
-                "answer": "It's a business casual dinner where you'll be able to talk to some of our collaborators. There will be dinner, drinks and entertainment."
-            }
-        ]
+        "header": "Frequently asked questions"
     },
 
     "admin": {
@@ -289,6 +265,7 @@
             "registrationStartTime": "Time for registration start",
             "registrationEndDate": "Date for registration end",
             "registrationEndTime": "Time for registration end",
+            "allowDeregistration": "Deregistration",
             "maxRegistered": "Max number of registered",
             "cancelEmail": "Email where unregistration email will be sent",
             "emailPlaceholder": "Email to responsible person"
@@ -301,6 +278,7 @@
             "sponsorNamePlaceholder": "Enter sponsor name",
             "websiteUrl": "Link to website (must start with https://)",
             "websiteUrlPlaceholder": "Enter link",
+            "sponsorType": "Sponsor type",
             "logo": "Logo",
             "selectImage": "Select an image",
             "sponsors": "sponsors",
@@ -322,6 +300,19 @@
             "photo": "Photo",
             "selectImage": "Select an image",
             "photoNote": "The picture is automatically centered in a square, without being stretched or cropped. Upload square pictures for the best result."
+        },
+        "faq" : {
+            "header": "Manage FAQ items",
+            "listHeader": "FAQ Items",
+            "questionNorwegian": "Question (Norwegian)",
+            "questionNorwegianPlaceholder": "Enter question in Norwegian",
+            "questionEnglish": "Question (English)",
+            "questionEnglishPlaceholder": "Enter question in English",
+            "answerNorwegian": "Answer (Norwegian)",
+            "answerNorwegianPlaceholder": "Enter answer in Norwegian",
+            "answerEnglish": "Answer (English)",
+            "answerEnglishPlaceholder": "Enter answer in English",
+            "order": "Display Order"
         }
     },
 
@@ -329,12 +320,22 @@
         "mainPartnerHeader": "Meet our new main partner",
         "partnersHeader": "Partners",
         "standHeader": "Companies you can meet at their stands",
+        "visitWebsite": "Visit website",
+        "standNumber": "Stand number",
+        "package": "Package",
+        "daysAtStand": "Days at stand",
         "levels": {
           "main": "Main partner",
           "partner": "Partner",
           "gold": "Gold",
           "silver": "Silver",
-          "bronze": "Bronze"
+          "bronze": "Bronze",
+          "startup": "Startup",
+          "hovedsamarbeidspartner": "Main partner",
+          "samarbeidspartner": "Partner",
+          "gull": "Gold",
+          "sølv": "Silver",
+          "bronse": "Bronze"
         },
         "days": {
           "day1": "Day 1",
@@ -344,11 +345,14 @@
     },
     "sponsors": {
       "mainSponsor": "Main sponsor",
-      "otherSponsors": "Other sponsors"
+      "otherSponsors": "Other sponsors",
+      "coffeeSponsor": "Coffee Sponsor"
     },
     "contactPersons": "Contact persons",
     "standmap": {
-      "title": "Stand map"
+      "title": "Stand map",
+      "clickToViewDetails": "Click to view details",
+      "tapToViewDetails": "Tap to view details"
     },
     "teamMember": {
         "fullName": "Full name",
@@ -373,12 +377,18 @@
         "positions": {
             "Markedsføringsansvarlig": "Marketing Manager",
             "Sekretær": "Secretary",
-            "Leder": "Leader",
+            "Leder": "Head of Board",
             "Nestleder": "Deputy Leader",
             "Sponsoransvarlig": "Sponsorship Manager",
             "IT-ansvarlig": "IT Manager",
             "Bedriftansvarlig": "Company Manager",
-            "Medlem": "Member"
+            "Medlem": "Member",
+            "IT-leder": "Head of IT",
+            "Bedriftsleder": "Key Account Manager",
+            "Markedsføringsleder": "Head of Marketing",
+            "Sponsorleder": "Head of Sponsorship",
+            "Logistikkleder": "Head of Logistics",
+            "Dugnadsansvarlig": "Voluntary Work Coordinator"
         },
         "successCreated": "Team member has been published to the contact page.",
         "successUpdated": "Team member has been updated.",

@@ -63,14 +63,16 @@ export default {
     'Samarbeidspartner': 'big',
     'Gull': 'big',
     'Sølv': 'medium',
-    'Bronse': 'small'
+    'Bronse': 'small',
+    'Startup': 'small'
   },
   sizesDays: {
     'Hovedsamarbeidspartner': 'medium',
     'Samarbeidspartner': 'medium',
     'Gull': 'medium',
     'Sølv': 'medium',
-    'Bronse': 'medium'
+    'Bronse': 'medium',
+    'Startup': 'small'
   }
 }
 </script>

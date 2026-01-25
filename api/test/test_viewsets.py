@@ -7,7 +7,9 @@ from unittest.mock import patch
 import uuid
 import base64
 
-from nvdagen.models import Participant, Program
+from django.contrib.auth import get_user_model
+
+from nvdagen.models import Participant, Program, FAQ, Infobox
 
 CONFIRMATION_WORD = "bekreftet"
 WAITLIST_WORD     = "venteliste"
@@ -22,6 +24,8 @@ class ViewSetTestCase(APITestCase):
         self.checkin_url           = reverse("participant-checkin")
         self.undo_checkin_url      = reverse("participant-undo-checkin")
         self.attendance_stats_url  = reverse("participant-attendance-stats")
+        self.faq_url = reverse("faq-list")
+        self.infobox_url = reverse("infobox-list")
 
         # Create admin user for authenticated endpoints
         self.admin_user = User.objects.create_user(
@@ -42,6 +46,34 @@ class ViewSetTestCase(APITestCase):
         self.participant = Participant.objects.create(
             event = self.program,
             email = "participant@gmail.com",
+            name = "Test Participant",
+            phone = "12345678",
+            year = "2024",
+            study = "CS",
+            code = "testcode"
+        )
+
+        self.faq1 = FAQ.objects.create(
+            question_nb="Hva er NVD?",
+            question_en="What is NVD?",
+            answer_nb="Nettverksdagen",
+            answer_en="Networking Day",
+            order=1
+        )
+
+        self.faq2 = FAQ.objects.create(
+            question_nb="Når er NVD?",
+            question_en="When is NVD?",
+            answer_nb="Hvert år",
+            answer_en="Every year",
+            order=2
+        )
+
+        self.infobox = Infobox.objects.create(
+            title_nb="Viktig informasjon",
+            title_en="Important information",
+            paragraph_nb="Les dette nøye",
+            paragraph_en="Read this carefully"
         )
 
     def test_participant_count(self):
@@ -59,7 +91,8 @@ class ViewSetTestCase(APITestCase):
             "name" : "Alice",
             "year" : "1918",
             "study": "Kjønnsstudier",
-            "code" :  "0xcafebabe"
+            "code" :  "0xcafebabe",
+            "phone": "12345678"
         }
         bob_data = {
             "email": "bob@hotmail.com",
@@ -67,7 +100,8 @@ class ViewSetTestCase(APITestCase):
             "name" : "Bob",
             "year" : "2021",
             "study": "Prompting",
-            "code" : "0xdeadbeef"
+            "code" : "0xdeadbeef",
+            "phone": "87654321"
         }
 
         # Test registration
@@ -100,7 +134,7 @@ class ViewSetTestCase(APITestCase):
         self.assertEqual(mock_send_mail.call_count, 2)
 
         send_mail_args, _ = mock_send_mail.call_args
-    
+
         self.assertNotIn(CONFIRMATION_WORD, send_mail_args[0].lower())
         self.assertIn(WAITLIST_WORD, send_mail_args[0].lower())
 
@@ -128,7 +162,8 @@ class ViewSetTestCase(APITestCase):
             "year" : "2",
             "study": "Matvitenskap",
             "code" : "0xallergy",
-            "allergies" : "gluten, laktose, vann uten smak"
+            "allergies" : "gluten, laktose, vann uten smak",
+            "phone": "11111111"
         }
 
         non_allergic_participant = {
@@ -137,7 +172,8 @@ class ViewSetTestCase(APITestCase):
             "name" : "Sunn norsk ungdom",
             "year" : "5",
             "study": "Medisin",
-            "code" : "0xnoallergy"
+            "code" : "0xnoallergy",
+            "phone": "22222222"
         }
 
         # Check that allergies are registered
@@ -181,7 +217,8 @@ class ViewSetTestCase(APITestCase):
             "name": "New User",
             "year": "2024",
             "study": "CS",
-            "code": "code123"
+            "code": "code123",
+            "phone": "99999999"
         }
 
         response = self.client.post(self.participant_url, format="json", data=new_participant)
@@ -292,8 +329,8 @@ class ViewSetTestCase(APITestCase):
         )
 
         # Program 1: 3 registered, 2 attended (including existing participant)
-        p1_1 = Participant.objects.create(event=self.program, email="p1_1@test.com", name="P1_1", year="2024", study="CS", code="code1")
-        p1_2 = Participant.objects.create(event=self.program, email="p1_2@test.com", name="P1_2", year="2024", study="CS", code="code2")
+        p1_1 = Participant.objects.create(event=self.program, email="p1_1@test.com", name="P1_1", year="2024", study="CS", code="code1", phone="11111111")
+        p1_2 = Participant.objects.create(event=self.program, email="p1_2@test.com", name="P1_2", year="2024", study="CS", code="code2", phone="22222222")
         p1_1.attended = True
         p1_1.check_in_time = timezone.now()
         p1_1.save()
@@ -302,8 +339,8 @@ class ViewSetTestCase(APITestCase):
         p1_2.save()
 
         # Program 2: 2 registered, 1 attended
-        p2_1 = Participant.objects.create(event=program2, email="p2_1@test.com", name="P2_1", year="2024", study="CS", code="code3")
-        p2_2 = Participant.objects.create(event=program2, email="p2_2@test.com", name="P2_2", year="2024", study="CS", code="code4")
+        p2_1 = Participant.objects.create(event=program2, email="p2_1@test.com", name="P2_1", year="2024", study="CS", code="code3", phone="33333333")
+        p2_2 = Participant.objects.create(event=program2, email="p2_2@test.com", name="P2_2", year="2024", study="CS", code="code4", phone="44444444")
         p2_1.attended = True
         p2_1.check_in_time = timezone.now()
         p2_1.save()
@@ -323,8 +360,8 @@ class ViewSetTestCase(APITestCase):
     def test_attendance_stats_single_program(self):
         """Test statistics for specific program"""
         # Add more participants to existing program
-        p1 = Participant.objects.create(event=self.program, email="p1@test.com", name="P1", year="2024", study="CS", code="code1")
-        p2 = Participant.objects.create(event=self.program, email="p2@test.com", name="P2", year="2024", study="CS", code="code2")
+        p1 = Participant.objects.create(event=self.program, email="p1@test.com", name="P1", year="2024", study="CS", code="code1", phone="11111111")
+        p2 = Participant.objects.create(event=self.program, email="p2@test.com", name="P2", year="2024", study="CS", code="code2", phone="22222222")
 
         # Mark 2 as attended (total 3 participants, 2 attended)
         p1.attended = True
@@ -361,7 +398,8 @@ class ViewSetTestCase(APITestCase):
             "name": "Workflow User",
             "year": "2024",
             "study": "CS",
-            "code": "workflow123"
+            "code": "workflow123",
+            "phone": "55555555"
         }
         response = self.client.post(self.participant_url, data=participant_data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -473,3 +511,55 @@ class ViewSetTestCase(APITestCase):
         # Verify participant was NOT marked as sent
         self.participant.refresh_from_db()
         self.assertFalse(self.participant.qr_email_sent)
+
+    # FAQ Tests
+    def test_list_faqs(self):
+        response = self.client.get(self.faq_url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)
+
+    def test_faqs_ordered(self):
+        response = self.client.get(self.faq_url)
+
+        self.assertEqual(response.data[0]["order"], 1)
+        self.assertEqual(response.data[1]["order"], 2)
+
+    def test_retrieve_faq(self):
+        detail_url = reverse("faq-detail", args=[self.faq1.id])
+        response = self.client.get(detail_url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["question_nb"], "Hva er NVD?")
+        self.assertEqual(response.data["answer_en"], "Networking Day")
+
+    # Infobox Tests
+    def test_retrieve_infobox(self):
+        detail_url = reverse("infobox-detail", args=[self.infobox.id])
+        response = self.client.get(detail_url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["title_nb"], "Viktig informasjon")
+        self.assertEqual(response.data["paragraph_en"], "Read this carefully")
+
+    def test_update_infobox(self):
+        User = get_user_model()
+        superuser = User.objects.create_user(
+            username="admin",
+            password="1234",
+            is_superuser=True
+        )
+
+        self.client.force_authenticate(user=superuser)
+        detail_url = reverse("infobox-detail", args=[self.infobox.id])
+        updated_data = {
+            "title_nb": "Ny tittel",
+            "title_en": "New title",
+            "paragraph_nb": "Ny tekst",
+            "paragraph_en": "New text"
+        }
+        response = self.client.put(detail_url, format="json", data=updated_data)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["title_nb"], "Ny tittel")
+        self.assertEqual(response.data["title_en"], "New title")

@@ -21,3 +21,4 @@ ghost/data/*
 !ghost/data/.gitkeep
 .DS_Store
 postfix/.env
+.env

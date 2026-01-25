@@ -105,7 +105,7 @@ export default {
     // -webkit-position: fixed;
     position: sticky;
     top: 0px;
-    z-index: 10;
+    z-index: 100;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     width: 100%;

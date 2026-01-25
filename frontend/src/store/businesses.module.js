@@ -28,7 +28,8 @@ const getters = {
       { value: 'Samarbeidspartner', label: i18n.t('businesses.levels.partner'), header: i18n.t('businesses.partnersHeader'), businesses: [] },
       { value: 'Gull', label: i18n.t('businesses.levels.gold'), header: i18n.t('businesses.standHeader'), businesses: [] },
       { value: 'Sølv', label: i18n.t('businesses.levels.silver'), header: '', businesses: [] },
-      { value: 'Bronse', label: i18n.t('businesses.levels.bronze'), header: '', businesses: [] }
+      { value: 'Bronse', label: i18n.t('businesses.levels.bronze'), header: '', businesses: [] },
+      { value: 'Startup', label: i18n.t('businesses.levels.startup'), header: '', businesses: [] }
     ]
 
     for (let i = 0; i < state.all.length; i++) {
@@ -54,7 +55,8 @@ const getters = {
         {level: 'Samarbeidspartner', label: i18n.t('businesses.levels.partner'), businesses: []},
         {level: 'Gull', label: i18n.t('businesses.levels.gold'), businesses: []},
         {level: 'Sølv', label: i18n.t('businesses.levels.silver'), businesses: []},
-        {level: 'Bronse', label: i18n.t('businesses.levels.bronze'), businesses: []}
+        {level: 'Bronse', label: i18n.t('businesses.levels.bronze'), businesses: []},
+        {level: 'Startup', label: i18n.t('businesses.levels.startup'), businesses: []}
       ]
     }
     for (let i = 0; i < state.all.length; i++) {

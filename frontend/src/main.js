@@ -12,12 +12,15 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'babel-polyfill'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { i18n } from './translations/translations'
+import ga4 from './services/ga4'
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
 Vue.use(Vuex)
 Vue.use(BootstrapVue)
+
+ga4({ router })
 
 /* eslint-disable no-new */
 new Vue({
@@ -37,6 +40,7 @@ new Vue({
     this.fetchTeamMembers()
     this.fetchProgram()
     this.fetchParticipant()
+    this.fetchInfobox()
   },
   methods: {
     ...Vuex.mapActions('listings', ['fetchListings']),
@@ -44,7 +48,8 @@ new Vue({
     ...Vuex.mapActions('sponsors', ['fetchSponsors']),
     ...Vuex.mapActions('teamMembers', ['fetchTeamMembers']),
     ...Vuex.mapActions('program', ['fetchProgram']),
-    ...Vuex.mapActions('participant', ['fetchParticipant'])
+    ...Vuex.mapActions('participant', ['fetchParticipant']),
+    ...Vuex.mapActions('infobox', ['fetchInfobox'])
   },
   components: { App },
   template: '<App/>'

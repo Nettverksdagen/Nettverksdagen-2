@@ -1,128 +1,134 @@
 <template>
-  <div class="standkart_holder">
-    <svg class="standkart" width="2116" height="2123" viewBox="0 0 2116 2123" fill="none"
+  <div class="standkart_holder" :class="{ 'admin-mode': isAdminPage }">
+    <svg class="standkart" width="2116" height="1723" viewBox="0 850 2116 1723" preserveAspectRatio="xMidYMid meet" fill="none"
       xmlns="http://www.w3.org/2000/svg">
-      <rect width="2116" height="2123" fill="#14403C" />
+      <defs>
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#0F3D3A;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#1A524D;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <rect x="0" y="850" width="2116" height="1723" fill="url(#bgGradient)" />
       <!--<rect y="440" width="2116" height="1683" fill="#14403C"/>-->
-      <line x1="394" y1="1287.5" x2="366" y2="1287.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="481" y1="1287.5" x2="453" y2="1287.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="367.5" y1="1286" x2="367.5" y2="1660" stroke="#778E8A" stroke-width="3" />
-      <line x1="366" y1="1658.5" x2="1335" y2="1658.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1335" y1="1658.5" x2="1357" y2="1658.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1355.5" y1="1660" x2="1355.5" y2="1640" stroke="#778E8A" stroke-width="3" />
-      <line x1="1354" y1="1638.5" x2="1545" y2="1638.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1546.5" y1="1637" x2="1546.5" y2="1763" stroke="#778E8A" stroke-width="3" />
-      <line x1="1548" y1="1764.5" x2="1414" y2="1764.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1412.5" y1="1766" x2="1412.5" y2="1754" stroke="#778E8A" stroke-width="3" />
-      <path d="M1413 1755.5L1341 1755.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1342.5" y1="1756" x2="1342.5" y2="1766" stroke="#778E8A" stroke-width="3" />
-      <line x1="1344" y1="1764.5" x2="545" y2="1764.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="546.5" y1="1765" x2="546.5" y2="1703" stroke="#778E8A" stroke-width="3" />
-      <line x1="545" y1="1701.5" x2="565" y2="1701.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="563.966" y1="1701.91" x2="584.966" y2="1681.91" stroke="#778E8A" stroke-width="3" />
-      <line x1="584" y1="1682.5" x2="610" y2="1682.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="609.5" y1="1660" x2="609.5" y2="1684" stroke="#778E8A" stroke-width="3" />
-      <path d="M609.5 1660L609.5 1763M673.5 1660L673.5 1763" stroke="#778E8A" stroke-width="3" />
-      <path d="M609 1660L609 1763M738 1660L738 1763" stroke="#778E8A" stroke-width="3" />
-      <path d="M866.5 1660L866.5 1763" stroke="#778E8A" stroke-width="3" />
-      <path d="M995 1660L995 1763" stroke="#778E8A" stroke-width="3" />
-      <path d="M1056 1660L1056 1763" stroke="#778E8A" stroke-width="3" />
-      <path d="M1200 1716L1057 1716" stroke="#778E8A" stroke-width="3" />
-      <path d="M1200 1660L1200 1763" stroke="#778E8A" stroke-width="3" />
-      <path d="M1407 1640L1407 1754" stroke="#778E8A" stroke-width="3" />
-      <path d="M1318 1660L1318 1766" stroke="#778E8A" stroke-width="3" />
-      <path d="M1407 1640L1407 1754" stroke="#778E8A" stroke-width="3" />
-      <path d="M481.5 1286L481.5 1499" stroke="#778E8A" stroke-width="3" />
-      <path d="M481 1498C488.833 1509.67 509.6 1526 530 1498" stroke="#778E8A" stroke-width="3" />
-      <line x1="529" y1="1498.5" x2="544" y2="1498.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="543.023" y1="1497.9" x2="601.561" y2="1552.54" stroke="#778E8A" stroke-width="3" />
-      <path d="M601 1552.5H1348" stroke="#778E8A" stroke-width="3" />
-      <line x1="1346.5" y1="1551" x2="1346.5" y2="1571" stroke="#778E8A" stroke-width="3" />
-      <line x1="1346" y1="1569.5" x2="1401" y2="1569.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1399.5" y1="1525" x2="1399.5" y2="1569" stroke="#778E8A" stroke-width="3" />
-      <line x1="1347" y1="1526.5" x2="1398" y2="1526.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1346.5" y1="1501" x2="1346.5" y2="1551" stroke="#778E8A" stroke-width="3" />
-      <line x1="1345" y1="1499.5" x2="1545" y2="1499.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1546.5" y1="1498" x2="1546.5" y2="1515" stroke="#778E8A" stroke-width="3" />
-      <path d="M1546 1513.5C1548.65 1518.17 1555.95 1524.7 1564 1513.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1563.5" y1="1272" x2="1563.5" y2="1515" stroke="#778E8A" stroke-width="3" />
-      <line x1="1549" y1="1270.5" x2="1565" y2="1270.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1550.5" y1="1190" x2="1550.5" y2="1272" stroke="#778E8A" stroke-width="3" />
-      <line x1="1549" y1="1191.5" x2="1584" y2="1191.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1584.5" y1="1171" x2="1584.5" y2="1193" stroke="#778E8A" stroke-width="3" />
-      <path d="M1583 1170.5H1610" stroke="#778E8A" stroke-width="3" />
-      <line y1="-1.5" x2="22" y2="-1.5" transform="matrix(0 1 1 0 1701 1171.5)" stroke="#778E8A" stroke-width="3" />
-      <path d="M1701 1171H1674" stroke="#778E8A" stroke-width="3" />
-      <line x1="1698" y1="1192.5" x2="1729" y2="1192.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1730.5" y1="1191" x2="1730.5" y2="1486" stroke="#778E8A" stroke-width="3" />
-      <line x1="1729" y1="1487.5" x2="1934" y2="1487.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1732" y1="1192.5" x2="1937" y2="1192.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1935.5" y1="1194" x2="1935.5" y2="1489" stroke="#778E8A" stroke-width="3" />
-      <line x1="1732" y1="1224.5" x2="1937" y2="1224.5" stroke="#778E8A" stroke-width="3" />
-      <!-- <line x1="1754.5" y1="1489" x2="1754.5" y2="1513" stroke="#778E8A" stroke-width="3" />
-      <line x1="1756" y1="1511.5" x2="1817" y2="1511.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1818.5" y1="1489" x2="1818.5" y2="1513" stroke="#778E8A" stroke-width="3" />
-      <line x1="1855.5" y1="1489" x2="1855.5" y2="1513" stroke="#778E8A" stroke-width="3" />
-      <line x1="1857" y1="1511.5" x2="1918" y2="1511.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1919.5" y1="1489" x2="1919.5" y2="1513" stroke="#778E8A" stroke-width="3" /> -->
-      <line x1="1942.5" y1="1963" x2="1942.5" y2="1668" stroke="#778E8A" stroke-width="3" />
-      <line x1="1944" y1="1666.5" x2="1739" y2="1666.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1737.5" y1="1960" x2="1737.5" y2="1665" stroke="#778E8A" stroke-width="3" />
-      <line x1="1941" y1="1929.5" x2="1736" y2="1929.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1918.5" y1="1665" x2="1918.5" y2="1641" stroke="#778E8A" stroke-width="3" />
-      <line x1="1917" y1="1642.5" x2="1856" y2="1642.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1854.5" y1="1665" x2="1854.5" y2="1641" stroke="#778E8A" stroke-width="3" />
-      <line x1="1817.5" y1="1665" x2="1817.5" y2="1641" stroke="#778E8A" stroke-width="3" />
-      <line x1="1816" y1="1642.5" x2="1755" y2="1642.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1753.5" y1="1665" x2="1753.5" y2="1641" stroke="#778E8A" stroke-width="3" />
-      <line x1="630.5" y1="1554" x2="630.5" y2="1506" stroke="#778E8A" stroke-width="3" />
-      <line x1="629" y1="1505.5" x2="759" y2="1505.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="757.5" y1="1506" x2="757.5" y2="1476" stroke="#778E8A" stroke-width="3" />
-      <line x1="756" y1="1476.5" x2="1005" y2="1476.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1006.5" y1="1475" x2="1006.5" y2="1506" stroke="#778E8A" stroke-width="3" />
-      <line x1="1006" y1="1504.5" x2="1266" y2="1504.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1264.5" y1="1504" x2="1264.5" y2="1551" stroke="#778E8A" stroke-width="3" />
-      <line x1="1267.5" y1="1156" x2="1267.5" y2="1466" stroke="#778E8A" stroke-width="3" />
-      <line x1="1336" y1="1465.5" x2="1550" y2="1465.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1550.5" y1="1272" x2="1550.5" y2="1467" stroke="#778E8A" stroke-width="3" />
-      <line x1="1549" y1="1270.5" x2="1266" y2="1270.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1336.5" y1="1466" x2="1336.5" y2="1500" stroke="#778E8A" stroke-width="3" />
-      <line x1="1335" y1="1499.5" x2="1358" y2="1499.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1336.5" y1="1330" x2="1336.5" y2="1467" stroke="#778E8A" stroke-width="3" />
-      <line x1="1335" y1="1328.5" x2="1549" y2="1328.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1442.5" y1="1272" x2="1442.5" y2="1330" stroke="#778E8A" stroke-width="3" />
-      <line x1="1336.5" y1="1272" x2="1336.5" y2="1330" stroke="#778E8A" stroke-width="3" />
-      <line x1="1082" y1="1154.5" x2="1269" y2="1154.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1080.5" y1="1082" x2="1080.5" y2="1406" stroke="#778E8A" stroke-width="3" />
-      <line x1="1268" y1="1407.5" x2="994" y2="1407.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="1081" y1="1083.5" x2="698" y2="1083.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="696.5" y1="1082" x2="696.5" y2="1406" stroke="#778E8A" stroke-width="3" />
-      <line x1="695" y1="1404.5" x2="780" y2="1404.5" stroke="#778E8A" stroke-width="3" />
-      <path d="M778.612 1403.92C805.231 1414.9 886.292 1430.93 997.588 1407.16" stroke="#778E8A" stroke-width="3" />
-      <line x1="698" y1="1259.5" x2="506" y2="1259.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="507.5" y1="1259" x2="507.5" y2="1289" stroke="#778E8A" stroke-width="3" />
-      <line x1="479" y1="1287.5" x2="507" y2="1287.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="696.5" y1="1459" x2="696.5" y2="1504" stroke="#778E8A" stroke-width="3" />
-      <line x1="630.5" y1="1261" x2="630.5" y2="1505" stroke="#778E8A" stroke-width="3" />
-      <line x1="116" y1="1316.5" x2="266" y2="1316.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="117.5" y1="1318" x2="117.5" y2="1660" stroke="#778E8A" stroke-width="3" />
-      <line x1="116" y1="1658.5" x2="370" y2="1658.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="307.5" y1="1324" x2="307.5" y2="1658" stroke="#778E8A" stroke-width="3" />
-      <line x1="266" y1="1323.5" x2="309" y2="1323.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="266.5" y1="1315" x2="266.5" y2="1325" stroke="#778E8A" stroke-width="3" />
-      <line x1="376" y1="1287.5" x2="308" y2="1287.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="307.5" y1="1286" x2="307.5" y2="1323" stroke="#778E8A" stroke-width="3" />
-      <line x1="258.5" y1="1660" x2="258.5" y2="1718" stroke="#778E8A" stroke-width="3" />
-      <line x1="259" y1="1716.5" x2="245" y2="1716.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="246.5" y1="1717" x2="246.5" y2="1882" stroke="#778E8A" stroke-width="3" />
-      <line x1="494.5" y1="1660" x2="494.5" y2="1804" stroke="#778E8A" stroke-width="3" />
-      <line x1="487.5" y1="1804" x2="487.5" y2="1886" stroke="#778E8A" stroke-width="3" />
-      <line x1="496" y1="1805.5" x2="486" y2="1805.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="245" y1="1744.5" x2="320" y2="1744.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="474" y1="1769.5" x2="493" y2="1769.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="475.5" y1="1660" x2="475.5" y2="1768" stroke="#778E8A" stroke-width="3" />
-      <line x1="476" y1="1747.5" x2="434" y2="1747.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="435.5" y1="1660" x2="435.5" y2="1746" stroke="#778E8A" stroke-width="3" />
+      <line x1="394" y1="1287.5" x2="366" y2="1287.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="481" y1="1287.5" x2="453" y2="1287.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="367.5" y1="1286" x2="367.5" y2="1660" stroke="#2D6963" stroke-width="3" />
+      <line x1="366" y1="1658.5" x2="1335" y2="1658.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1335" y1="1658.5" x2="1357" y2="1658.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1355.5" y1="1660" x2="1355.5" y2="1640" stroke="#2D6963" stroke-width="3" />
+      <line x1="1354" y1="1638.5" x2="1545" y2="1638.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1546.5" y1="1637" x2="1546.5" y2="1763" stroke="#2D6963" stroke-width="3" />
+      <line x1="1548" y1="1764.5" x2="1414" y2="1764.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1412.5" y1="1766" x2="1412.5" y2="1754" stroke="#2D6963" stroke-width="3" />
+      <path d="M1413 1755.5L1341 1755.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1342.5" y1="1756" x2="1342.5" y2="1766" stroke="#2D6963" stroke-width="3" />
+      <line x1="1344" y1="1764.5" x2="545" y2="1764.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="546.5" y1="1765" x2="546.5" y2="1703" stroke="#2D6963" stroke-width="3" />
+      <line x1="545" y1="1701.5" x2="565" y2="1701.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="563.966" y1="1701.91" x2="584.966" y2="1681.91" stroke="#2D6963" stroke-width="3" />
+      <line x1="584" y1="1682.5" x2="610" y2="1682.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="609.5" y1="1660" x2="609.5" y2="1684" stroke="#2D6963" stroke-width="3" />
+      <path d="M609.5 1660L609.5 1763M673.5 1660L673.5 1763" stroke="#2D6963" stroke-width="3" />
+      <path d="M609 1660L609 1763M738 1660L738 1763" stroke="#2D6963" stroke-width="3" />
+      <path d="M866.5 1660L866.5 1763" stroke="#2D6963" stroke-width="3" />
+      <path d="M995 1660L995 1763" stroke="#2D6963" stroke-width="3" />
+      <path d="M1056 1660L1056 1763" stroke="#2D6963" stroke-width="3" />
+      <path d="M1200 1716L1057 1716" stroke="#2D6963" stroke-width="3" />
+      <path d="M1200 1660L1200 1763" stroke="#2D6963" stroke-width="3" />
+      <path d="M1407 1640L1407 1754" stroke="#2D6963" stroke-width="3" />
+      <path d="M1318 1660L1318 1766" stroke="#2D6963" stroke-width="3" />
+      <path d="M1407 1640L1407 1754" stroke="#2D6963" stroke-width="3" />
+      <path d="M481.5 1286L481.5 1499" stroke="#2D6963" stroke-width="3" />
+      <path d="M481 1498C488.833 1509.67 509.6 1526 530 1498" stroke="#2D6963" stroke-width="3" />
+      <line x1="529" y1="1498.5" x2="544" y2="1498.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="543.023" y1="1497.9" x2="601.561" y2="1552.54" stroke="#2D6963" stroke-width="3" />
+      <path d="M601 1552.5H1348" stroke="#2D6963" stroke-width="3" />
+      <line x1="1346.5" y1="1551" x2="1346.5" y2="1571" stroke="#2D6963" stroke-width="3" />
+      <line x1="1346" y1="1569.5" x2="1401" y2="1569.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1399.5" y1="1525" x2="1399.5" y2="1569" stroke="#2D6963" stroke-width="3" />
+      <line x1="1347" y1="1526.5" x2="1398" y2="1526.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1346.5" y1="1501" x2="1346.5" y2="1551" stroke="#2D6963" stroke-width="3" />
+      <line x1="1345" y1="1499.5" x2="1545" y2="1499.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1546.5" y1="1498" x2="1546.5" y2="1515" stroke="#2D6963" stroke-width="3" />
+      <path d="M1546 1513.5C1548.65 1518.17 1555.95 1524.7 1564 1513.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1563.5" y1="1272" x2="1563.5" y2="1515" stroke="#2D6963" stroke-width="3" />
+      <line x1="1549" y1="1270.5" x2="1565" y2="1270.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1550.5" y1="1190" x2="1550.5" y2="1272" stroke="#2D6963" stroke-width="3" />
+      <line x1="1549" y1="1191.5" x2="1584" y2="1191.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1584.5" y1="1171" x2="1584.5" y2="1193" stroke="#2D6963" stroke-width="3" />
+      <path d="M1583 1170.5H1610" stroke="#2D6963" stroke-width="3" />
+      <line y1="-1.5" x2="22" y2="-1.5" transform="matrix(0 1 1 0 1701 1171.5)" stroke="#2D6963" stroke-width="3" />
+      <path d="M1701 1171H1674" stroke="#2D6963" stroke-width="3" />
+      <line x1="1698" y1="1192.5" x2="1729" y2="1192.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1730.5" y1="1191" x2="1730.5" y2="1486" stroke="#2D6963" stroke-width="3" />
+      <line x1="1729" y1="1487.5" x2="1934" y2="1487.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1732" y1="1192.5" x2="1937" y2="1192.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1935.5" y1="1194" x2="1935.5" y2="1489" stroke="#2D6963" stroke-width="3" />
+      <line x1="1732" y1="1224.5" x2="1937" y2="1224.5" stroke="#2D6963" stroke-width="3" />
+      <!-- <line x1="1754.5" y1="1489" x2="1754.5" y2="1513" stroke="#2D6963" stroke-width="3" />
+      <line x1="1756" y1="1511.5" x2="1817" y2="1511.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1818.5" y1="1489" x2="1818.5" y2="1513" stroke="#2D6963" stroke-width="3" />
+      <line x1="1855.5" y1="1489" x2="1855.5" y2="1513" stroke="#2D6963" stroke-width="3" />
+      <line x1="1857" y1="1511.5" x2="1918" y2="1511.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1919.5" y1="1489" x2="1919.5" y2="1513" stroke="#2D6963" stroke-width="3" /> -->
+      <line x1="1942.5" y1="1963" x2="1942.5" y2="1668" stroke="#2D6963" stroke-width="3" />
+      <line x1="1944" y1="1666.5" x2="1739" y2="1666.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1737.5" y1="1960" x2="1737.5" y2="1665" stroke="#2D6963" stroke-width="3" />
+      <line x1="1941" y1="1929.5" x2="1736" y2="1929.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1918.5" y1="1665" x2="1918.5" y2="1641" stroke="#2D6963" stroke-width="3" />
+      <line x1="1917" y1="1642.5" x2="1856" y2="1642.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1854.5" y1="1665" x2="1854.5" y2="1641" stroke="#2D6963" stroke-width="3" />
+      <line x1="1817.5" y1="1665" x2="1817.5" y2="1641" stroke="#2D6963" stroke-width="3" />
+      <line x1="1816" y1="1642.5" x2="1755" y2="1642.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1753.5" y1="1665" x2="1753.5" y2="1641" stroke="#2D6963" stroke-width="3" />
+      <line x1="630.5" y1="1554" x2="630.5" y2="1506" stroke="#2D6963" stroke-width="3" />
+      <line x1="629" y1="1505.5" x2="759" y2="1505.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="757.5" y1="1506" x2="757.5" y2="1476" stroke="#2D6963" stroke-width="3" />
+      <line x1="756" y1="1476.5" x2="1005" y2="1476.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1006.5" y1="1475" x2="1006.5" y2="1506" stroke="#2D6963" stroke-width="3" />
+      <line x1="1006" y1="1504.5" x2="1266" y2="1504.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1264.5" y1="1504" x2="1264.5" y2="1551" stroke="#2D6963" stroke-width="3" />
+      <line x1="1267.5" y1="1156" x2="1267.5" y2="1466" stroke="#2D6963" stroke-width="3" />
+      <line x1="1336" y1="1465.5" x2="1550" y2="1465.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1550.5" y1="1272" x2="1550.5" y2="1467" stroke="#2D6963" stroke-width="3" />
+      <line x1="1549" y1="1270.5" x2="1266" y2="1270.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1336.5" y1="1466" x2="1336.5" y2="1500" stroke="#2D6963" stroke-width="3" />
+      <line x1="1335" y1="1499.5" x2="1358" y2="1499.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1336.5" y1="1330" x2="1336.5" y2="1467" stroke="#2D6963" stroke-width="3" />
+      <line x1="1335" y1="1328.5" x2="1549" y2="1328.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1442.5" y1="1272" x2="1442.5" y2="1330" stroke="#2D6963" stroke-width="3" />
+      <line x1="1336.5" y1="1272" x2="1336.5" y2="1330" stroke="#2D6963" stroke-width="3" />
+      <line x1="1082" y1="1154.5" x2="1269" y2="1154.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1080.5" y1="1082" x2="1080.5" y2="1406" stroke="#2D6963" stroke-width="3" />
+      <line x1="1268" y1="1407.5" x2="994" y2="1407.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="1081" y1="1083.5" x2="698" y2="1083.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="696.5" y1="1082" x2="696.5" y2="1406" stroke="#2D6963" stroke-width="3" />
+      <line x1="695" y1="1404.5" x2="780" y2="1404.5" stroke="#2D6963" stroke-width="3" />
+      <path d="M778.612 1403.92C805.231 1414.9 886.292 1430.93 997.588 1407.16" stroke="#2D6963" stroke-width="3" />
+      <line x1="698" y1="1259.5" x2="506" y2="1259.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="507.5" y1="1259" x2="507.5" y2="1289" stroke="#2D6963" stroke-width="3" />
+      <line x1="479" y1="1287.5" x2="507" y2="1287.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="696.5" y1="1459" x2="696.5" y2="1504" stroke="#2D6963" stroke-width="3" />
+      <line x1="630.5" y1="1261" x2="630.5" y2="1505" stroke="#2D6963" stroke-width="3" />
+      <line x1="116" y1="1316.5" x2="266" y2="1316.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="117.5" y1="1318" x2="117.5" y2="1660" stroke="#2D6963" stroke-width="3" />
+      <line x1="116" y1="1658.5" x2="370" y2="1658.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="307.5" y1="1324" x2="307.5" y2="1658" stroke="#2D6963" stroke-width="3" />
+      <line x1="266" y1="1323.5" x2="309" y2="1323.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="266.5" y1="1315" x2="266.5" y2="1325" stroke="#2D6963" stroke-width="3" />
+      <line x1="376" y1="1287.5" x2="308" y2="1287.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="307.5" y1="1286" x2="307.5" y2="1323" stroke="#2D6963" stroke-width="3" />
+      <line x1="258.5" y1="1660" x2="258.5" y2="1718" stroke="#2D6963" stroke-width="3" />
+      <line x1="259" y1="1716.5" x2="245" y2="1716.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="246.5" y1="1717" x2="246.5" y2="1882" stroke="#2D6963" stroke-width="3" />
+      <line x1="494.5" y1="1660" x2="494.5" y2="1804" stroke="#2D6963" stroke-width="3" />
+      <line x1="487.5" y1="1804" x2="487.5" y2="1886" stroke="#2D6963" stroke-width="3" />
+      <line x1="496" y1="1805.5" x2="486" y2="1805.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="245" y1="1744.5" x2="320" y2="1744.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="474" y1="1769.5" x2="493" y2="1769.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="475.5" y1="1660" x2="475.5" y2="1768" stroke="#2D6963" stroke-width="3" />
+      <line x1="476" y1="1747.5" x2="434" y2="1747.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="435.5" y1="1660" x2="435.5" y2="1746" stroke="#2D6963" stroke-width="3" />
       <path
         d="M839.284 1266V1222.36H865.619V1227.05H844.568V1241.8H864.256V1246.48H844.568V1261.31H865.96V1266H839.284ZM875.143 1266V1222.36H880.428V1261.31H900.712V1266H875.143ZM921.763 1266.6C919.263 1266.6 917.011 1266.1 915.009 1265.11C913.006 1264.11 911.401 1262.75 910.193 1261.01C908.986 1259.28 908.325 1257.31 908.212 1255.09H913.325C913.524 1257.07 914.419 1258.7 916.01 1259.99C917.615 1261.27 919.533 1261.91 921.763 1261.91C923.553 1261.91 925.143 1261.49 926.536 1260.65C927.942 1259.81 929.043 1258.66 929.838 1257.2C930.648 1255.72 931.053 1254.05 931.053 1252.19C931.053 1250.29 930.634 1248.59 929.795 1247.1C928.972 1245.6 927.835 1244.41 926.386 1243.54C924.938 1242.68 923.283 1242.24 921.422 1242.22C920.087 1242.21 918.716 1242.41 917.31 1242.84C915.903 1243.25 914.746 1243.78 913.837 1244.44L908.893 1243.84L911.536 1222.36H934.206V1227.05H915.967L914.433 1239.92H914.689C915.584 1239.21 916.706 1238.62 918.055 1238.15C919.405 1237.68 920.811 1237.45 922.274 1237.45C924.945 1237.45 927.324 1238.09 929.412 1239.37C931.514 1240.63 933.162 1242.36 934.355 1244.57C935.562 1246.77 936.166 1249.28 936.166 1252.11C936.166 1254.89 935.541 1257.38 934.291 1259.57C933.055 1261.74 931.351 1263.46 929.178 1264.72C927.004 1265.97 924.533 1266.6 921.763 1266.6Z"
         fill="#778E8A" />
@@ -138,29 +144,30 @@
       <path
         d="M353.284 1175.18V1197H350.642V1175.18H353.284ZM360.755 1187.16V1197H358.241V1180.64H360.67V1183.19H360.883C361.266 1182.36 361.849 1181.69 362.63 1181.19C363.411 1180.68 364.42 1180.42 365.655 1180.42C366.763 1180.42 367.733 1180.65 368.564 1181.11C369.395 1181.55 370.041 1182.23 370.503 1183.15C370.964 1184.06 371.195 1185.21 371.195 1186.6V1197H368.681V1186.77C368.681 1185.49 368.347 1184.49 367.68 1183.77C367.012 1183.04 366.096 1182.68 364.931 1182.68C364.128 1182.68 363.411 1182.86 362.779 1183.2C362.154 1183.55 361.66 1184.06 361.298 1184.73C360.936 1185.39 360.755 1186.2 360.755 1187.16ZM378.304 1187.16V1197H375.789V1180.64H378.218V1183.19H378.431C378.815 1182.36 379.397 1181.69 380.179 1181.19C380.96 1180.68 381.968 1180.42 383.204 1180.42C384.312 1180.42 385.282 1180.65 386.113 1181.11C386.944 1181.55 387.59 1182.23 388.051 1183.15C388.513 1184.06 388.744 1185.21 388.744 1186.6V1197H386.23V1186.77C386.23 1185.49 385.896 1184.49 385.228 1183.77C384.561 1183.04 383.645 1182.68 382.48 1182.68C381.677 1182.68 380.96 1182.86 380.328 1183.2C379.703 1183.55 379.209 1184.06 378.847 1184.73C378.485 1185.39 378.304 1186.2 378.304 1187.16ZM399.943 1203.48C398.729 1203.48 397.685 1203.32 396.811 1203.01C395.938 1202.7 395.21 1202.3 394.627 1201.79C394.052 1201.3 393.594 1200.76 393.253 1200.2L395.256 1198.79C395.483 1199.09 395.771 1199.43 396.119 1199.81C396.467 1200.2 396.943 1200.54 397.546 1200.82C398.157 1201.12 398.956 1201.26 399.943 1201.26C401.264 1201.26 402.355 1200.94 403.214 1200.3C404.073 1199.66 404.503 1198.66 404.503 1197.3V1193.97H404.29C404.105 1194.27 403.843 1194.64 403.502 1195.08C403.168 1195.52 402.685 1195.9 402.053 1196.24C401.428 1196.58 400.583 1196.74 399.517 1196.74C398.196 1196.74 397.01 1196.43 395.959 1195.81C394.915 1195.18 394.088 1194.27 393.477 1193.08C392.873 1191.89 392.571 1190.44 392.571 1188.73C392.571 1187.06 392.866 1185.6 393.455 1184.35C394.045 1183.1 394.865 1182.14 395.916 1181.46C396.968 1180.77 398.182 1180.42 399.56 1180.42C400.625 1180.42 401.47 1180.6 402.095 1180.96C402.727 1181.3 403.21 1181.7 403.544 1182.15C403.885 1182.59 404.148 1182.95 404.333 1183.24H404.588V1180.64H407.017V1197.47C407.017 1198.88 406.698 1200.02 406.058 1200.9C405.426 1201.79 404.574 1202.44 403.502 1202.85C402.436 1203.27 401.25 1203.48 399.943 1203.48ZM399.858 1194.49C400.867 1194.49 401.719 1194.25 402.415 1193.79C403.111 1193.33 403.64 1192.67 404.002 1191.8C404.365 1190.93 404.546 1189.9 404.546 1188.69C404.546 1187.51 404.368 1186.47 404.013 1185.57C403.658 1184.67 403.132 1183.96 402.436 1183.45C401.74 1182.94 400.881 1182.68 399.858 1182.68C398.793 1182.68 397.905 1182.95 397.195 1183.49C396.492 1184.03 395.963 1184.76 395.607 1185.66C395.259 1186.57 395.085 1187.58 395.085 1188.69C395.085 1189.83 395.263 1190.83 395.618 1191.71C395.98 1192.57 396.513 1193.25 397.216 1193.75C397.926 1194.24 398.807 1194.49 399.858 1194.49ZM416.435 1197.38C415.398 1197.38 414.457 1197.19 413.612 1196.8C412.767 1196.4 412.095 1195.83 411.598 1195.08C411.101 1194.33 410.852 1193.42 410.852 1192.36C410.852 1191.42 411.037 1190.66 411.406 1190.08C411.776 1189.49 412.269 1189.02 412.887 1188.69C413.505 1188.36 414.187 1188.11 414.933 1187.94C415.686 1187.77 416.442 1187.64 417.202 1187.54C418.196 1187.41 419.002 1187.32 419.62 1187.25C420.245 1187.18 420.7 1187.06 420.984 1186.9C421.275 1186.74 421.421 1186.45 421.421 1186.05V1185.96C421.421 1184.91 421.133 1184.1 420.558 1183.51C419.99 1182.93 419.127 1182.64 417.969 1182.64C416.769 1182.64 415.828 1182.9 415.146 1183.43C414.464 1183.95 413.985 1184.51 413.708 1185.11L411.321 1184.26C411.747 1183.26 412.316 1182.49 413.026 1181.94C413.743 1181.37 414.524 1180.98 415.369 1180.76C416.222 1180.54 417.06 1180.42 417.884 1180.42C418.409 1180.42 419.013 1180.49 419.695 1180.62C420.384 1180.74 421.048 1180.99 421.687 1181.37C422.333 1181.75 422.869 1182.33 423.296 1183.11C423.722 1183.88 423.935 1184.92 423.935 1186.22V1197H421.421V1194.78H421.293C421.122 1195.14 420.838 1195.52 420.441 1195.92C420.043 1196.33 419.514 1196.67 418.853 1196.96C418.193 1197.24 417.387 1197.38 416.435 1197.38ZM416.818 1195.12C417.813 1195.12 418.651 1194.93 419.333 1194.54C420.021 1194.15 420.54 1193.64 420.888 1193.03C421.243 1192.41 421.421 1191.76 421.421 1191.08V1188.78C421.314 1188.9 421.08 1189.02 420.718 1189.13C420.362 1189.23 419.95 1189.32 419.482 1189.39C419.02 1189.46 418.569 1189.53 418.129 1189.59C417.695 1189.63 417.344 1189.68 417.074 1189.71C416.421 1189.8 415.81 1189.94 415.242 1190.13C414.681 1190.31 414.226 1190.59 413.878 1190.97C413.537 1191.34 413.367 1191.84 413.367 1192.48C413.367 1193.36 413.69 1194.02 414.336 1194.46C414.99 1194.9 415.817 1195.12 416.818 1195.12ZM431.038 1187.16V1197H428.524V1180.64H430.953V1183.19H431.166C431.549 1182.36 432.132 1181.69 432.913 1181.19C433.694 1180.68 434.703 1180.42 435.939 1180.42C437.047 1180.42 438.016 1180.65 438.847 1181.11C439.678 1181.55 440.324 1182.23 440.786 1183.15C441.248 1184.06 441.478 1185.21 441.478 1186.6V1197H438.964V1186.77C438.964 1185.49 438.63 1184.49 437.963 1183.77C437.295 1183.04 436.379 1182.68 435.214 1182.68C434.412 1182.68 433.694 1182.86 433.062 1183.2C432.437 1183.55 431.944 1184.06 431.581 1184.73C431.219 1185.39 431.038 1186.2 431.038 1187.16ZM452.678 1203.48C451.463 1203.48 450.419 1203.32 449.546 1203.01C448.672 1202.7 447.944 1202.3 447.362 1201.79C446.786 1201.3 446.328 1200.76 445.987 1200.2L447.99 1198.79C448.218 1199.09 448.505 1199.43 448.853 1199.81C449.201 1200.2 449.677 1200.54 450.281 1200.82C450.892 1201.12 451.691 1201.26 452.678 1201.26C453.999 1201.26 455.089 1200.94 455.948 1200.3C456.808 1199.66 457.237 1198.66 457.237 1197.3V1193.97H457.024C456.84 1194.27 456.577 1194.64 456.236 1195.08C455.902 1195.52 455.419 1195.9 454.787 1196.24C454.162 1196.58 453.317 1196.74 452.252 1196.74C450.931 1196.74 449.744 1196.43 448.693 1195.81C447.649 1195.18 446.822 1194.27 446.211 1193.08C445.607 1191.89 445.306 1190.44 445.306 1188.73C445.306 1187.06 445.6 1185.6 446.19 1184.35C446.779 1183.1 447.6 1182.14 448.651 1181.46C449.702 1180.77 450.916 1180.42 452.294 1180.42C453.36 1180.42 454.205 1180.6 454.83 1180.96C455.462 1181.3 455.945 1181.7 456.279 1182.15C456.619 1182.59 456.882 1182.95 457.067 1183.24H457.323V1180.64H459.752V1197.47C459.752 1198.88 459.432 1200.02 458.793 1200.9C458.161 1201.79 457.308 1202.44 456.236 1202.85C455.171 1203.27 453.985 1203.48 452.678 1203.48ZM452.593 1194.49C453.601 1194.49 454.453 1194.25 455.149 1193.79C455.845 1193.33 456.374 1192.67 456.737 1191.8C457.099 1190.93 457.28 1189.9 457.28 1188.69C457.28 1187.51 457.102 1186.47 456.747 1185.57C456.392 1184.67 455.867 1183.96 455.171 1183.45C454.475 1182.94 453.615 1182.68 452.593 1182.68C451.527 1182.68 450.639 1182.95 449.929 1183.49C449.226 1184.03 448.697 1184.76 448.342 1185.66C447.994 1186.57 447.82 1187.58 447.82 1188.69C447.82 1189.83 447.997 1190.83 448.352 1191.71C448.715 1192.57 449.247 1193.25 449.95 1193.75C450.661 1194.24 451.541 1194.49 452.593 1194.49Z"
         fill="#778E8A" />
-      <line x1="1509.5" y1="1766" x2="1509.5" y2="1972" stroke="#778E8A" stroke-width="3" />
-      <line x1="1508" y1="1970.5" x2="1547" y2="1970.5" stroke="#778E8A" stroke-width="3" />
+      <line x1="1509.5" y1="1766" x2="1509.5" y2="1972" stroke="#2D6963" stroke-width="3" />
+      <line x1="1508" y1="1970.5" x2="1547" y2="1970.5" stroke="#2D6963" stroke-width="3" />
 
-      <line x1="345.5" y1="1289" x2="345.5" y2="1225" stroke="#778E8A" stroke-width="3" />
-      <line x1="344" y1="1224.5" x2="375" y2="1224.5" stroke="#778E8A" stroke-width="3" />
-      <line x1="375.5" y1="1218" x2="375.5" y2="1226" stroke="#778E8A" stroke-width="3" />
-      <line y1="-1.5" x2="31" y2="-1.5" transform="matrix(-1 0 0 1 470 1226)" stroke="#778E8A" stroke-width="3" />
-      <line y1="-1.5" x2="8" y2="-1.5" transform="matrix(0 1 1 0 440 1218)" stroke="#778E8A" stroke-width="3" />
-      <line x1="471.5" y1="1223" x2="471.5" y2="1261" stroke="#778E8A" stroke-width="3" />
-      <line x1="472" y1="1259.5" x2="508" y2="1259.5" stroke="#778E8A" stroke-width="3" />
+      <line x1="345.5" y1="1289" x2="345.5" y2="1225" stroke="#2D6963" stroke-width="3" />
+      <line x1="344" y1="1224.5" x2="375" y2="1224.5" stroke="#2D6963" stroke-width="3" />
+      <line x1="375.5" y1="1218" x2="375.5" y2="1226" stroke="#2D6963" stroke-width="3" />
+      <line y1="-1.5" x2="31" y2="-1.5" transform="matrix(-1 0 0 1 470 1226)" stroke="#2D6963" stroke-width="3" />
+      <line y1="-1.5" x2="8" y2="-1.5" transform="matrix(0 1 1 0 440 1218)" stroke="#2D6963" stroke-width="3" />
+      <line x1="471.5" y1="1223" x2="471.5" y2="1261" stroke="#2D6963" stroke-width="3" />
+      <line x1="472" y1="1259.5" x2="508" y2="1259.5" stroke="#2D6963" stroke-width="3" />
 
-    </svg>
-    <svg class="standkart-text" viewBox="0 0 2116 2123">
-      <text x="100" y="200" dominant-baseline="middle" text-anchor="left" font-size="80px" font-weight="500" fill="#D9D9D9">{{ $t('standmap.title') }}</text>
+      <text x="100" y="950" dominant-baseline="middle" text-anchor="left" font-size="80px" font-weight="700" fill="#FFFFFF" class="standmap-title">{{ $t('standmap.title') }}</text>
       <line v-bind:key="index" v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap" :x1="StandPosition.x"
         :y1="StandPosition.y" :x2="StandPosition.x" :y2="StandPosition.y" stroke="#898989" class="_circle"
         :id="'circle-' + index" @mouseover="handleTextMouseOver(business.standnumber)"
         @mouseout="handleTextMouseOut(business.standnumber)"></line>
       <line v-bind:key="'t0' + business.id" v-for="business in filteredDayBusinesses"
         :x1="StandPositionMap[business.standnumber].x" :y1="StandPositionMap[business.standnumber].y"
-        :x2="StandPositionMap[business.standnumber].x" :y2="StandPositionMap[business.standnumber].y" stroke="#D9D9D9"
-        class="_circle" :id="'circle-' + business.standnumber" @mouseover="handleTextMouseOver(business.standnumber)"
-        @mouseout="handleTextMouseOut(business.standnumber)"></line>
+        :x2="StandPositionMap[business.standnumber].x" :y2="StandPositionMap[business.standnumber].y" stroke="#FFFFFF"
+        :class="['_circle', { 'hovered': hoveredStand === business.standnumber, 'active': selectedStand === business.standnumber }]"
+        :ref="'circle-' + business.standnumber"
+        @mouseenter="handleHover(business.standnumber, true, $event)"
+        @mouseleave="handleHover(business.standnumber, false, $event)"
+        @click="handleClick(business)"></line>
       <!-- <text v-bind:key="index" v-if="isAdminPage" v-for="StandPosition in StandPositionMap"
             dominant-baseline="middle"
             :x="StandPosition.x + ((StandPosition.text_rotation > 90 && StandPosition.text_rotation < 270) ? -30*StandPosition.text_offset_x : 30*StandPosition.text_offset_x)"
@@ -179,8 +186,12 @@
         :y="StandPositionMap[business.standnumber].y"
         :text-anchor="(StandPositionMap[business.standnumber].text_rotation > 90 && StandPositionMap[business.standnumber].text_rotation < 270 ? 'end' : 'start')"
         :transform="'rotate(' + (StandPositionMap[business.standnumber].text_rotation > 90 && StandPositionMap[business.standnumber].text_rotation < 270 ? StandPositionMap[business.standnumber].text_rotation - 180 : StandPositionMap[business.standnumber].text_rotation) + ',' + StandPositionMap[business.standnumber].x + ',' + StandPositionMap[business.standnumber].y + ')'"
-        stroke="#e3e3e1" fill="#e3e3e1" font-size="1.5em" class="_business" :id="'business-' + business.standnumber"
-        @mouseover="handleTextMouseOver(business.standnumber)" @mouseout="handleTextMouseOut(business.standnumber)">{{ displayName(business) }}</text>
+        stroke="#FFFFFF" fill="#FFFFFF" font-size="1.5em" font-weight="500"
+        :class="['_business', { 'hovered': hoveredStand === business.standnumber }]"
+        :ref="'text-' + business.standnumber"
+        @mouseenter="handleHover(business.standnumber, true, $event)"
+        @mouseleave="handleHover(business.standnumber, false, $event)"
+        @click="handleClick(business)">{{ displayName(business) }}</text>
         <!-- dots on admin page -->
       <text v-bind:key="'t3' + index" v-if="isAdminPage" v-for="(StandPosition, index) in StandPositionMap"
         :x="StandPosition.x" :y="StandPosition.y" dominant-baseline="middle" text-anchor="middle" font-size="20px"
@@ -189,31 +200,127 @@
       <text v-bind:key="'t4' + business.id" v-if="!isAdminPage" v-for="(business, index) in filteredDayBusinesses"
         :x="StandPositionMap[business.standnumber].x" :y="StandPositionMap[business.standnumber].y + 2"
         dominant-baseline="middle" text-anchor="middle" font-size="20px" fill="#000000">{{ index + 1 }}</text>
-        <!-- businesses text 1-15 -->
-      <text v-bind:key="'t5' + business.id" v-for="(business, index) in filteredDayBusinesses.slice(0, 15)" :x="1000"
-        :y="200 + index * 50" dominant-baseline="middle" text-anchor="left" font-size="40px" fill="#D9D9D9"
-        @mouseover="handleTextMouseOver(business.standnumber)"
-        @mouseout="handleTextMouseOut(business.standnumber)">{{ index + 1 }}.{{ business.name }}</text>
-        <!-- businesses text 1-15 -->
-      <text v-bind:key="'t6' + business.id" v-for="(business, index) in filteredDayBusinesses.slice(15, filteredDayBusinesses.length)" :x="1600"
-        :y="200 + index * 50" dominant-baseline="middle" text-anchor="left" font-size="40px" fill="#D9D9D9"
-        @mouseover="handleTextMouseOver(business.standnumber)"
-        @mouseout="handleTextMouseOut(business.standnumber)">{{ index + 16 }}. {{ business.name }}</text>
-
+      
+      <!--Businesses first column-->
+      <text v-bind:key="'t5' + business.id" 
+      v-for="(business, index) in filteredDayBusinesses.slice(0,Math.ceil(filteredDayBusinesses.length/3))" 
+      :x="100" :y="2050 + index *50" dominant-baseline="middle" text-anchor="left" font-size="40px" fill="#FFFFFF"
+      @mouseenter="handleHover(business.standnumber, true, $event)"
+      @mouseleave="handleHover(business.standnumber, false, $event)">{{ index + 1 }}.{{ business.name }}
+      </text>
+      <!--Businesses second column-->
+      <text v-bind:key="'t5' + business.id" 
+      v-for="(business, index) in filteredDayBusinesses.slice(Math.ceil(filteredDayBusinesses.length/3),Math.ceil(2*filteredDayBusinesses.length/3))" 
+      :x="850" :y="2050 + index *50" dominant-baseline="middle" text-anchor="left" font-size="40px" fill="#FFFFFF"
+      @mouseenter="handleHover(business.standnumber, true, $event)"
+      @mouseleave="handleHover(business.standnumber, false, $event)">
+      {{ index + Math.ceil(filteredDayBusinesses.length/3) + 1 }}.{{ business.name }}
+      </text>
+      <!--Businesses third column-->
+      <text v-bind:key="'t5' + business.id" 
+      v-for="(business, index) in filteredDayBusinesses.slice(Math.ceil(2*filteredDayBusinesses.length/3), filteredDayBusinesses.length)" 
+      :x="1600" :y="2050 + index *50" dominant-baseline="middle" text-anchor="left" font-size="40px" fill="#FFFFFF"
+      @mouseenter="handleHover(business.standnumber, true, $event)"
+      @mouseleave="handleHover(business.standnumber, false, $event)">
+      {{ index + Math.ceil(2*filteredDayBusinesses.length/3) + 1 }}.{{ business.name }}
+      </text>
     </svg>
     <div class="toggle_holder">
       <VueToggles
         height="30"
-        width="90"
+        width="80"
         :checkedText="$t('businesses.days.day1')"
         :uncheckedText="$t('businesses.days.day2')"
-        checkedBg="#e3e3e1"
-        uncheckedBg="#e3e3e1"
-        checkedColor="#000000"
-        uncheckedColor="#000000"
+        checkedBg="linear-gradient(135deg, #2D7D75 0%, #1A5F58 100%)"
+        uncheckedBg="linear-gradient(135deg, #2D6963 0%, #1A524D 100%)"
+        checkedColor="#FFFFFF"
+        uncheckedColor="#FFFFFF"
         :value="isDayOne"
         @click="isDayOne = !isDayOne" />
     </div>
+
+    <!-- Tooltip (Desktop) -->
+    <transition name="tooltip-fade">
+      <div v-if="tooltipData && !isMobile"
+           class="standmap-tooltip"
+           :style="{ left: tooltipPosition.x + 'px', top: tooltipPosition.y + 'px' }"
+           @mouseenter="cancelTooltipHide"
+           @mouseleave="scheduleTooltipHide">
+        <div class="tooltip-header">
+          <h3>{{ tooltipData.name }}</h3>
+          <span class="tooltip-badge" :class="'badge-' + (tooltipData.level || '').toLowerCase().replace(/\s+/g, '-')">
+            {{ $t('businesses.levels.' + (tooltipData.level || '').toLowerCase()) }}
+          </span>
+        </div>
+        <div class="tooltip-body">
+          <div class="tooltip-info">
+            <svg class="icon-calendar" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M11 2V1H10V2H6V1H5V2H2V16H14V2H11ZM13 15H3V6H13V15ZM13 5H3V3H5V4H6V3H10V4H11V3H13V5Z"/>
+            </svg>
+            <span>{{ tooltipData.days }}</span>
+          </div>
+          <a v-if="tooltipData.website" :href="tooltipData.website" target="_blank" class="tooltip-link">
+            {{ $t('businesses.visitWebsite') }}
+            <svg class="icon-external" width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+              <path d="M10 0H2V2H8.6L0 10.6L1.4 12L10 3.4V10H12V0H10Z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </transition>
+
+    <!-- Modal (Mobile) -->
+    <b-modal
+      v-model="showBusinessModal"
+      :title="selectedBusiness ? displayName(selectedBusiness) : ''"
+      size="lg"
+      centered
+      @hide="selectedBusiness = null">
+
+      <div v-if="selectedBusiness" class="business-modal-content">
+        <b-img
+          v-if="selectedBusiness.logo_uri"
+          :src="$store.state.fileserverHost + '/thumb/512/' + selectedBusiness.logo_uri"
+          fluid
+          class="mb-3"
+          alt="Company logo" />
+
+        <div class="business-details">
+          <div class="detail-row">
+            <strong>{{ $t('businesses.package') }}:</strong>
+            <span class="badge ml-2" :class="'badge-' + (selectedBusiness.level || '').toLowerCase().replace(/\s+/g, '-')">
+              {{ $t('businesses.levels.' + (selectedBusiness.level || '').toLowerCase()) }}
+            </span>
+          </div>
+
+          <div class="detail-row">
+            <strong>{{ $t('businesses.daysAtStand') }}:</strong>
+            <span>{{ selectedBusiness.days }}</span>
+          </div>
+
+          <div class="detail-row">
+            <strong>{{ $t('businesses.standNumber') }}:</strong>
+            <span>#{{ selectedBusiness.standnumber + 1 }}</span>
+          </div>
+        </div>
+
+        <div v-if="selectedBusiness.text"
+             v-html="selectedBusiness.text"
+             class="business-description mt-3" />
+
+        <b-button
+          v-if="selectedBusiness.website_url"
+          :href="selectedBusiness.website_url"
+          target="_blank"
+          variant="primary"
+          size="lg"
+          block
+          class="mt-3">
+          {{ $t('businesses.visitWebsite') }}
+          <font-awesome-icon icon="external-link-alt" />
+        </b-button>
+      </div>
+    </b-modal>
   </div>
 </template>
 
@@ -242,11 +349,27 @@ export default {
     }
   },
   data () {
+    // checks current date and set date, and sets the dayswitch (on load) accordingly
+    const currentDate = Date.now()
+    const switchDate = Date.parse('2026-01-29T00:00:00Z') // TODO: Change next year
+    let setIsDayOne = true
+    if (currentDate > switchDate) {
+      setIsDayOne = false
+    }
+
     return {
       circles: [],
       names: [],
       StandPositionMap: [],
-      isDayOne: true
+      isDayOne: setIsDayOne,
+      hoveredStand: null,
+      selectedStand: null,
+      tooltipData: null,
+      tooltipPosition: { x: 0, y: 0 },
+      isMobile: false,
+      showBusinessModal: false,
+      selectedBusiness: null,
+      tooltipHideTimeout: null
     }
   },
   watch: {
@@ -257,6 +380,16 @@ export default {
   created () {
     this.StandPositionMap = StandPositionData
   },
+  mounted () {
+    this.updateResponsive()
+    window.addEventListener('resize', this.updateResponsive)
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.updateResponsive)
+    if (this.tooltipHideTimeout) {
+      clearTimeout(this.tooltipHideTimeout)
+    }
+  },
   methods: {
     // Display localized business name if available. The UI will pick name_<locale> (e.g. name_en)
     // and fall back to name or other fields.
@@ -266,13 +399,79 @@ export default {
       const key = 'name_' + locale
       return business[key] || business.name || business.name_en || ''
     },
-    handleTextMouseOut (standnumber) {
-      // TODO: Refactor to not use getElementById
-      // const circle = document.getElementById(`circle-${standnumber}`)
-      // const business = document.getElementById(`business-${standnumber}`)
+    updateResponsive () {
+      this.isMobile = window.innerWidth < 768
+    },
+    handleHover (standNumber, isHovering, event) {
+      this.hoveredStand = isHovering ? standNumber : null
 
-      // circle.classList.remove('hovered')
-      // business.classList.remove('hovered')
+      // Clear any pending hide timeout
+      if (this.tooltipHideTimeout) {
+        clearTimeout(this.tooltipHideTimeout)
+        this.tooltipHideTimeout = null
+      }
+
+      // Update tooltip data
+      if (isHovering && !this.isMobile) {
+        const business = this.getBusinessByStandNumber(standNumber)
+        if (business) {
+          this.updateTooltip(business, event)
+        }
+      } else {
+        // Delay hiding tooltip to allow moving mouse to it
+        this.tooltipHideTimeout = setTimeout(() => {
+          this.hideTooltip()
+        }, 200)
+      }
+    },
+    handleTextMouseOver (standNumber) {
+      // Keep for compatibility but redirect to new handler
+      this.hoveredStand = standNumber
+    },
+    handleTextMouseOut (standNumber) {
+      // Keep for compatibility but redirect to new handler
+      this.hoveredStand = null
+    },
+    handleClick (business) {
+      if (this.isMobile) {
+        // Mobile: show modal
+        this.showBusinessModal = true
+        this.selectedBusiness = business
+      } else {
+        // Desktop: toggle selection
+        this.selectedStand = this.selectedStand === business.standnumber ? null : business.standnumber
+      }
+    },
+    getBusinessByStandNumber (standNumber) {
+      return this.filteredDayBusinesses.find(b => b.standnumber === standNumber)
+    },
+    updateTooltip (business, event) {
+      this.tooltipData = {
+        name: this.displayName(business),
+        level: business.level,
+        days: business.days,
+        website: business.website_url
+      }
+      if (event) {
+        this.tooltipPosition = {
+          x: event.clientX,
+          y: event.clientY
+        }
+      }
+    },
+    hideTooltip () {
+      this.tooltipData = null
+    },
+    cancelTooltipHide () {
+      if (this.tooltipHideTimeout) {
+        clearTimeout(this.tooltipHideTimeout)
+        this.tooltipHideTimeout = null
+      }
+    },
+    scheduleTooltipHide () {
+      this.tooltipHideTimeout = setTimeout(() => {
+        this.hideTooltip()
+      }, 200)
     },
     changeInput () {
       this.checked = !this.checked
@@ -285,30 +484,133 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  // Modern color palette
+  :root {
+    --standmap-bg-primary: #0F3D3A;
+    --standmap-bg-gradient-end: #1A524D;
+    --standmap-accent-primary: #4ECDC4;
+    --standmap-accent-hover: #45B7AF;
+    --standmap-accent-selected: #FFD166;
+    --standmap-lines: #2D6963;
+    --standmap-text-primary: #FFFFFF;
+    --standmap-text-secondary: #B8D4D2;
+    --standmap-circle-default: #FFFFFF;
+    --standmap-circle-hover: #4ECDC4;
+    --standmap-circle-active: #FFD166;
+    --standmap-shadow-hover: rgba(78, 205, 196, 0.4);
+  }
+
   .standkart_holder {
-    margin: 0 auto; // Hack for centering
-    width: 100%; // TODO: Dynamic sizing based on screen height (so that the map is always visible)
-    height: 100%;
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
     position: relative;
+    max-width: 1800px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    // Responsive sizing - use aspect ratio instead of min-height
+    @media (max-width: 767px) {
+      aspect-ratio: 2116 / 1723;
+      min-height: unset;
+      // Scale up slightly on mobile for better visibility
+      width: 115%;
+      margin-left: -7.5%;
+      margin-right: -7.5%;
+      overflow: visible;
+    }
+
+    @media (min-width: 768px) and (max-width: 1199px) {
+      aspect-ratio: 2116 / 1723;
+      min-height: unset;
+    }
+
+    @media (min-width: 1200px) {
+      aspect-ratio: 2116 / 1723;
+      min-height: unset;
+    }
+
+    // Admin page specific styling - ensure it fits properly in narrow column
+    &.admin-mode {
+      max-width: 100%;
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+      overflow: hidden;
+
+      @media (min-width: 768px) {
+        aspect-ratio: 2116 / 1723;
+        min-height: unset;
+      }
+    }
   }
 
   .standkart {
     width: 100%;
     height: 100%;
-    // position: absolute;
+    display: block;
+
+    // Improved text rendering
+    text {
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
   }
+
   .standkart-text {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 5;
+    pointer-events: none;
+
+    // Re-enable pointer events on interactive elements
+    text, line {
+      pointer-events: auto;
+    }
+
+    // Smaller title in admin mode
+    .admin-mode & .standmap-title {
+      font-size: 60px !important;
+    }
   }
+
   .toggle_holder {
     position: absolute;
-    top: 12%;
+    top: 10%;
     left: 5%;
-    z-index: 9;
-    // TODO: Her burde størrelsen på knappen også oppdateres med skjermstørrelse
+    z-index: 10;
+
+    // Responsive scaling
+    @media (max-width: 575px) {
+      top: 10%;
+      left: 5%;
+      transform: scale(0.75);
+      transform-origin: top left;
+    }
+
+    @media (min-width: 576px) and (max-width: 767px) {
+      top: 10%;
+      left: 5%;
+      transform: scale(0.85);
+      transform-origin: top left;
+    }
+
+    @media (min-width: 1400px) {
+      transform: scale(1.2);
+      transform-origin: top left;
+    }
+
+    // Smaller toggle in admin mode
+    .admin-mode & {
+      top: 10%;
+      left: 5%;
+      transform: scale(0.7);
+      transform-origin: top left;
+    }
 
     &:hover {
       cursor: pointer;
@@ -318,19 +620,270 @@ export default {
   ._circle {
     stroke-width: 37;
     stroke-linecap: round;
-    transition-duration: 100ms;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    @media (max-width: 767px) {
+      stroke-width: 30;
+    }
+
+    // Smaller circles in admin mode
+    .admin-mode & {
+      stroke-width: 30;
+    }
   }
 
-  ._circle:hover {
+  ._circle:hover, ._circle.hovered {
+    stroke-width: 55;
+    stroke: var(--standmap-circle-hover, #4ECDC4);
+    filter: drop-shadow(0 0 8px var(--standmap-shadow-hover, rgba(78, 205, 196, 0.4)));
+
+    @media (max-width: 767px) {
+      stroke-width: 45;
+    }
+
+    .admin-mode & {
+      stroke-width: 45;
+    }
+  }
+
+  ._circle.active {
+    stroke: var(--standmap-circle-active, #FFD166);
     stroke-width: 60;
+    animation: pulse-circle 2s ease-in-out infinite;
+
+    @media (max-width: 767px) {
+      stroke-width: 48;
+    }
+
+    .admin-mode & {
+      stroke-width: 48;
+    }
   }
 
-  ._circle.hovered {
-    stroke-width: 60;
+  ._business {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+
+    @media (max-width: 767px) {
+      font-size: 1.2em !important;
+    }
+
+    // Smaller text in admin mode
+    .admin-mode & {
+      font-size: 1.2em !important;
+    }
+
+    &:hover, &.hovered {
+      font-size: 2.2em !important;
+      font-weight: 600;
+      fill: var(--standmap-accent-primary, #4ECDC4);
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+
+      @media (max-width: 767px) {
+        font-size: 1.5em !important;
+      }
+
+      // Smaller hover effect in admin mode
+      .admin-mode & {
+        font-size: 1.5em !important;
+      }
+    }
   }
 
-  ._business._business.hovered {
-    font-size: 4em;
+  // Pulse animation for selected stands
+  @keyframes pulse-circle {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  // Tooltip styles
+  .standmap-tooltip {
+    position: fixed;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    padding: 1rem;
+    min-width: 250px;
+    max-width: 320px;
+    z-index: 1000;
+    pointer-events: auto;
+    transform: translate(-50%, calc(-100% - 15px));
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 12px;
+      height: 12px;
+      background: white;
+    }
+
+    .tooltip-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      gap: 0.5rem;
+
+      h3 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--standmap-bg-primary, #0F3D3A);
+        margin: 0;
+        flex: 1;
+      }
+    }
+
+    .tooltip-badge {
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      white-space: nowrap;
+
+      &.badge-hovedsamarbeidspartner, &.badge-main {
+        background: linear-gradient(135deg, #7B3FF2 0%, #5B4EC3 100%);
+        color: white;
+      }
+      &.badge-samarbeidspartner, &.badge-partner {
+        background: linear-gradient(135deg, #4ECDC4 0%, #3BB8B0 100%);
+        color: white;
+      }
+      &.badge-gull, &.badge-gold {
+        background: linear-gradient(135deg, #FFD700 0%, #FFC700 100%);
+        color: #1A1A1A;
+      }
+      &.badge-sølv, &.badge-silver {
+        background: linear-gradient(135deg, #C0C0C0 0%, #A8A8A8 100%);
+        color: #1A1A1A;
+      }
+      &.badge-bronse, &.badge-bronze {
+        background: linear-gradient(135deg, #CD7F32 0%, #B8651E 100%);
+        color: white;
+      }
+      &.badge-startup {
+        background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+        color: white;
+      }
+    }
+
+    .tooltip-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .tooltip-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #666;
+      font-size: 0.9rem;
+
+      svg {
+        flex-shrink: 0;
+      }
+    }
+
+    .tooltip-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--standmap-accent-primary, #4ECDC4);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+      pointer-events: auto;
+
+      &:hover {
+        color: var(--standmap-accent-hover, #45B7AF);
+      }
+
+      svg {
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  // Tooltip fade animation
+  .tooltip-fade-enter-active, .tooltip-fade-leave-active {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .tooltip-fade-enter, .tooltip-fade-leave-to {
+    opacity: 0;
+    transform: translate(-50%, calc(-100% - 15px)) scale(0.95);
+  }
+
+  // Modal styles
+  .business-modal-content {
+    .business-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .detail-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      strong {
+        color: #333;
+      }
+
+      .badge {
+        padding: 0.3rem 0.6rem;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+
+        &.badge-hovedsamarbeidspartner, &.badge-main {
+          background: linear-gradient(135deg, #7B3FF2 0%, #5B4EC3 100%);
+          color: white;
+        }
+        &.badge-samarbeidspartner, &.badge-partner {
+          background: linear-gradient(135deg, #4ECDC4 0%, #3BB8B0 100%);
+          color: white;
+        }
+        &.badge-gull, &.badge-gold {
+          background: linear-gradient(135deg, #FFD700 0%, #FFC700 100%);
+          color: #1A1A1A;
+        }
+        &.badge-sølv, &.badge-silver {
+          background: linear-gradient(135deg, #C0C0C0 0%, #A8A8A8 100%);
+          color: #1A1A1A;
+        }
+        &.badge-bronse, &.badge-bronze {
+          background: linear-gradient(135deg, #CD7F32 0%, #B8651E 100%);
+          color: white;
+        }
+        &.badge-startup {
+          background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+          color: white;
+        }
+      }
+    }
+
+    .business-description {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #555;
+
+      p:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 
   .switch {
