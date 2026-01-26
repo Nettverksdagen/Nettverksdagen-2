@@ -5,7 +5,6 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from unittest.mock import patch
 import uuid
-import base64
 
 from django.contrib.auth import get_user_model
 
@@ -83,8 +82,9 @@ class ViewSetTestCase(APITestCase):
         self.assertIn("participant_count", response.data)
         self.assertEqual(response.data["participant_count"], 1)
 
+    @patch("nvdagen.viewsets.send_email_with_qr")
     @patch("nvdagen.viewsets.send_mail")
-    def test_program_registration(self, mock_send_mail):
+    def test_program_registration(self, mock_send_mail, mock_send_email_with_qr):
         alice_data = {
             "email": "alice@gmail.com",
             "event": self.program.id,
@@ -104,57 +104,54 @@ class ViewSetTestCase(APITestCase):
             "phone": "87654321"
         }
 
-        # Test registration
+        # Test registration (program not full -> QR email)
         response = self.client.post(self.participant_url, format="json", data=alice_data)
 
         self.assertLess(response.status_code, 300)
         self.assertEqual(Participant.objects.count(), 2)
         self.assertEqual(self.program.participant_set.count(), 2)
 
-        mock_send_mail.assert_called_once()
-        send_mail_args, _ = mock_send_mail.call_args
-        self.assertIn(CONFIRMATION_WORD, send_mail_args[0].lower())
+        mock_send_email_with_qr.assert_called_once()
+        call_kwargs = mock_send_email_with_qr.call_args[1]
+        self.assertIn(CONFIRMATION_WORD, call_kwargs['subject'].lower())
 
         # Test registration fails if someone registers twice
         response = self.client.post(self.participant_url, format="json", data=alice_data)
 
         self.assertEquals(response.status_code, 400)
 
-        # No mail should be sent
-        mock_send_mail.assert_called_once()
+        # No additional mail should be sent
+        mock_send_email_with_qr.assert_called_once()
 
-        # Test registration that exceeds maxRegistered
+        # Test registration that exceeds maxRegistered (waitlist -> send_mail)
         response = self.client.post(self.participant_url, format="json", data=bob_data)
 
         self.assertLess(response.status_code, 300)
         self.assertEqual(Participant.objects.count(), 3)
         self.assertEqual(self.program.participant_set.count(), 3)
 
-        # An email should be sent
-        self.assertEqual(mock_send_mail.call_count, 2)
-
+        # Waitlist email should be sent via send_mail
+        mock_send_mail.assert_called_once()
         send_mail_args, _ = mock_send_mail.call_args
-
         self.assertNotIn(CONFIRMATION_WORD, send_mail_args[0].lower())
         self.assertIn(WAITLIST_WORD, send_mail_args[0].lower())
 
-        # Check that if alice unregisters, Bob will get confirmed
+        # Check that if alice unregisters, Bob will get confirmed (QR email)
         alice = Participant.objects.filter(email=alice_data["email"]).get()
         delete_url = reverse("participant-detail", args=[alice.id])
         response = self.client.delete(delete_url, format="json", data={
             "code": alice_data["code"]
         })
 
-        send_mail_args, _ = mock_send_mail.call_args
+        # Bob should get QR email via send_email_with_qr
+        self.assertEqual(mock_send_email_with_qr.call_count, 2)
+        call_kwargs = mock_send_email_with_qr.call_args[1]
+        self.assertIn(CONFIRMATION_WORD, call_kwargs['subject'])
+        self.assertIn(bob_data["name"], call_kwargs['subject'])
+        self.assertEqual(call_kwargs['recipient_email'], bob_data["email"])
 
-        # Now bob should get the mail
-        self.assertEqual(mock_send_mail.call_count, 3)
-        self.assertIn(CONFIRMATION_WORD, send_mail_args[0])
-        self.assertIn(bob_data["name"], send_mail_args[0])
-        self.assertEquals(send_mail_args[-1][0], bob_data["email"])
-
-    @patch("nvdagen.viewsets.send_mail")
-    def test_participant_allergies(self, mock_send_mail):
+    @patch("nvdagen.viewsets.send_email_with_qr")
+    def test_participant_allergies(self, mock_send_email_with_qr):
         allergic_participant = {
             "email": "gluten@free.com",
             "event": self.program.id,
@@ -192,25 +189,20 @@ class ViewSetTestCase(APITestCase):
 
     # QR Code Tests
     def test_qr_code_generation(self):
-        """Test the generate_qr_code utility function"""
-        from nvdagen.viewsets import generate_qr_code
+        """Test the generate_qr_code_bytes utility function"""
+        from nvdagen.viewsets import generate_qr_code_bytes
 
         test_data = "test-uuid-string"
-        qr_code = generate_qr_code(test_data)
+        qr_bytes = generate_qr_code_bytes(test_data)
 
-        self.assertIsNotNone(qr_code)
-        self.assertTrue(qr_code.startswith("data:image/png;base64,"))
+        self.assertIsNotNone(qr_bytes)
+        self.assertIsInstance(qr_bytes, bytes)
+        # PNG files start with these magic bytes
+        self.assertTrue(qr_bytes.startswith(b'\x89PNG'))
 
-        # Verify base64 string can be decoded
-        base64_str = qr_code.split(',')[1]
-        base64.b64decode(base64_str)  # Should not raise exception
-
-    @patch("nvdagen.viewsets.generate_qr_code")
-    @patch("nvdagen.viewsets.send_mail")
-    def test_qr_code_included_in_registration_email(self, mock_send_mail, mock_generate_qr_code):
-        """Verify QR code is generated and included in confirmation email"""
-        mock_generate_qr_code.return_value = "data:image/png;base64,fake_qr_code"
-
+    @patch("nvdagen.viewsets.send_email_with_qr")
+    def test_qr_code_included_in_registration_email(self, mock_send_email_with_qr):
+        """Verify QR code email is sent on registration"""
         new_participant = {
             "email": "newuser@example.com",
             "event": self.program.id,
@@ -224,15 +216,12 @@ class ViewSetTestCase(APITestCase):
         response = self.client.post(self.participant_url, format="json", data=new_participant)
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        mock_generate_qr_code.assert_called_once()
+        mock_send_email_with_qr.assert_called_once()
 
-        # Verify the token passed to generate_qr_code matches the created participant's token
+        # Verify the qr_data passed matches the created participant's token
         created_participant = Participant.objects.get(email="newuser@example.com")
-        call_args = mock_generate_qr_code.call_args[0][0]
-        self.assertEqual(call_args, str(created_participant.attendance_token))
-
-        # Verify email was sent
-        mock_send_mail.assert_called_once()
+        call_kwargs = mock_send_email_with_qr.call_args[1]
+        self.assertEqual(call_kwargs['qr_data'], str(created_participant.attendance_token))
 
     # Verify Endpoint Tests
     def test_verify_valid_token(self):
@@ -385,12 +374,9 @@ class ViewSetTestCase(APITestCase):
         self.assertNotIn('by_program', response.data)
 
     # Integration Test
-    @patch("nvdagen.viewsets.generate_qr_code")
-    @patch("nvdagen.viewsets.send_mail")
-    def test_full_attendance_workflow(self, mock_send_mail, mock_generate_qr_code):
+    @patch("nvdagen.viewsets.send_email_with_qr")
+    def test_full_attendance_workflow(self, mock_send_email_with_qr):
         """Test complete workflow from registration to check-in"""
-        mock_generate_qr_code.return_value = "data:image/png;base64,fake_qr_code"
-
         # 1. Register participant
         participant_data = {
             "email": "workflow@example.com",
@@ -458,8 +444,8 @@ class ViewSetTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     # Send QR Emails Tests
-    @patch("nvdagen.viewsets.send_mail")
-    def test_send_qr_emails_success(self, mock_send_mail):
+    @patch("nvdagen.viewsets.send_email_with_qr")
+    def test_send_qr_emails_success(self, mock_send_email_with_qr):
         """Test sending QR emails marks participants as sent"""
         self.client.force_authenticate(user=self.admin_user)
 
@@ -479,8 +465,8 @@ class ViewSetTestCase(APITestCase):
         self.participant.refresh_from_db()
         self.assertTrue(self.participant.qr_email_sent)
 
-    @patch("nvdagen.viewsets.send_mail")
-    def test_send_qr_emails_skips_already_sent(self, mock_send_mail):
+    @patch("nvdagen.viewsets.send_email_with_qr")
+    def test_send_qr_emails_skips_already_sent(self, mock_send_email_with_qr):
         """Test that participants who already received QR are skipped"""
         self.client.force_authenticate(user=self.admin_user)
 
@@ -497,8 +483,8 @@ class ViewSetTestCase(APITestCase):
         self.assertEqual(response.data['sent'], 0)
         self.assertEqual(response.data['failed'], 0)
 
-        # send_mail should not have been called
-        mock_send_mail.assert_not_called()
+        # send_email_with_qr should not have been called
+        mock_send_email_with_qr.assert_not_called()
 
     def test_send_qr_emails_requires_auth(self):
         """Test send emails endpoint requires authentication"""

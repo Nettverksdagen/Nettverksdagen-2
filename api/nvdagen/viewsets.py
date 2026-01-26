@@ -4,19 +4,19 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from .models import Listing, Business, Sponsor, TeamMember, Form, Participant, Program, Infobox, FAQ
 from .serializers import ListingSerializer, BusinessSerializer, SponsorSerializer, TeamMemberSerializer, FormSerializer, ParticipantSerializer, ProgramSerializer, ParticipantListSerializer, ParticipantAttendanceSerializer, InfoboxSerializer, FAQserializer
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from datetime import datetime, time
 from babel.dates import format_datetime, format_time
 import qrcode
 import io
-import base64
+from email.mime.image import MIMEImage
 from django.utils import timezone
 
 
-def generate_qr_code(data):
-    """Generate QR code as base64 encoded image"""
+def generate_qr_code_bytes(data):
+    """Generate QR code as PNG bytes"""
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
@@ -30,10 +30,30 @@ def generate_qr_code(data):
     buffer = io.BytesIO()
     img.save(buffer, format='PNG')
     buffer.seek(0)
+    return buffer.getvalue()
 
-    # Convert to base64 for embedding in email
-    img_base64 = base64.b64encode(buffer.getvalue()).decode()
-    return f"data:image/png;base64,{img_base64}"
+
+def send_email_with_qr(subject, template_name, context, recipient_email, qr_data):
+    """Send an HTML email with an embedded QR code using CID attachment."""
+    html_message = render_to_string(template_name, context=context)
+    plain_message = strip_tags(html_message)
+
+    email = EmailMessage(
+        subject=subject,
+        body=plain_message,
+        from_email='do-not-reply@nettverksdagene.no',
+        to=[fix_ntnu_email(recipient_email)],
+    )
+    email.content_subtype = 'html'
+    email.body = html_message
+
+    qr_bytes = generate_qr_code_bytes(qr_data)
+    mime_image = MIMEImage(qr_bytes, _subtype='png')
+    mime_image.add_header('Content-ID', '<qr_code>')
+    mime_image.add_header('Content-Disposition', 'inline', filename='qr_code.png')
+    email.attach(mime_image)
+
+    email.send(fail_silently=False)
 
 
 def fix_ntnu_email(email):
@@ -122,18 +142,14 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                     data['allowDeregistration'] = program.allowDeregistration
                     data['current_year'] = datetime.now().year
 
-                    # Generate QR code for attendance
                     qr_data = str(participant.data['attendance_token'])
-                    data['qr_code'] = generate_qr_code(qr_data)
-
-                    html_message = render_to_string('registered_email.html', context=data)
-                    plain_message = strip_tags(html_message)
-                    send_mail('Nettverksdagene - Påmelding bekreftet for ' + data['name'],
-                       plain_message,
-                       'do-not-reply@nettverksdagene.no',
-                       [fix_ntnu_email(data['email'])],
-                       fail_silently=False,
-                       html_message=html_message)
+                    send_email_with_qr(
+                        subject='Nettverksdagene - Påmelding bekreftet for ' + data['name'],
+                        template_name='registered_email.html',
+                        context=data,
+                        recipient_email=data['email'],
+                        qr_data=qr_data
+                    )
 
                     # Mark QR email as sent
                     created_participant = Participant.objects.get(id=participant.data['id'])
@@ -220,18 +236,14 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                         data['timeStart'] = format_datetime(datetime.fromtimestamp(program.timeStart+3600), "EEEE dd. MMMM, 'klokken' HH:mm", locale='nb_NO')
                         data['current_year'] = datetime.now().year
 
-                        # Generate QR code for attendance
                         qr_data = str(lastParticipant.attendance_token)
-                        data['qr_code'] = generate_qr_code(qr_data)
-
-                        html_message = render_to_string('off_waiting_list.html', context=data)
-                        plain_message = strip_tags(html_message)
-                        send_mail('Nettverksdagene - Påmelding bekreftet for ' + lastParticipant.name,
-                            plain_message,
-                            'do-not-reply@nettverksdagene.no',
-                            [fix_ntnu_email(lastParticipant.email)],
-                            fail_silently=False,
-                            html_message=html_message)
+                        send_email_with_qr(
+                            subject='Nettverksdagene - Påmelding bekreftet for ' + lastParticipant.name,
+                            template_name='off_waiting_list.html',
+                            context=data,
+                            recipient_email=lastParticipant.email,
+                            qr_data=qr_data
+                        )
 
                         # Mark QR email as sent
                         lastParticipant.qr_email_sent = True
@@ -435,19 +447,14 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                         locale='nb_NO'
                     ),
                     'current_year': datetime.now().year,
-                    'qr_code': generate_qr_code(str(participant.attendance_token))
                 }
 
-                html_message = render_to_string('registered_email.html', context=data)
-                plain_message = strip_tags(html_message)
-
-                send_mail(
-                    'Nettverksdagene - Din QR-kode for ' + program.header,
-                    plain_message,
-                    'do-not-reply@nettverksdagene.no',
-                    [fix_ntnu_email(participant.email)],
-                    fail_silently=False,
-                    html_message=html_message
+                send_email_with_qr(
+                    subject='Nettverksdagene - Din QR-kode for ' + program.header,
+                    template_name='registered_email.html',
+                    context=data,
+                    recipient_email=participant.email,
+                    qr_data=str(participant.attendance_token)
                 )
 
                 participant.qr_email_sent = True
