@@ -38,8 +38,16 @@
                 <b-form-group :label="$t('admin.listing.deadline')" label-for="listing-deadline">
                   <datepicker v-model="deadlineDateTime" :typeable="true" :required="false" format="yyyy-MM-dd" :placeholder="$t('admin.listing.deadlinePlaceholder')" :bootstrap-styling="true" :monday-first="true" id="listing-deadline"></datepicker>
                 </b-form-group>
-                <b-form-group :label="$t('admin.listing.listingUrl')" label-for="listing-url-input">
-                  <b-form-input type="url" v-model="listing.listing_url" id="listing-url-input" required :placeholder="$t('admin.listing.listingUrlPlaceholder')" @input="validateLink"></b-form-input>
+                <b-form-group :label="$t('admin.listing.listingSource')" label-for="listing-source-type">
+                  <b-form-radio-group v-model="listingSourceType" id="listing-source-type" class="mb-2">
+                    <b-form-radio value="url">{{ $t('admin.listing.useLink') }}</b-form-radio>
+                    <b-form-radio value="pdf">{{ $t('admin.listing.usePdf') }}</b-form-radio>
+                  </b-form-radio-group>
+                  <b-form-input v-if="listingSourceType === 'url'" type="url" v-model="listing.listing_url" id="listing-url-input" required :placeholder="$t('admin.listing.listingUrlPlaceholder')" @input="validateLink"></b-form-input>
+                  <div v-if="listingSourceType === 'pdf'">
+                    <b-form-file v-model="pdfFile" :required="!editing && !listing.pdf_uri" accept=".pdf" :placeholder="$t('admin.listing.selectPdf')" ref="pdfFileInput" @input="uploadPdf"></b-form-file>
+                    <p v-if="listing.pdf_uri" class="text-success mt-1">{{ $t('admin.listing.pdfUploaded') }}: {{ listing.pdf_uri }}</p>
+                  </div>
                 </b-form-group>
                 <div class="d-flex">
                   <b-form-group class="flex-grow-1" :label="$t('admin.listing.logo')" label-for="listing-logo">
@@ -146,7 +154,7 @@ export default {
         { key: 'select', label: '' },
         'id', { key: 'name', label: 'Name' }, { key: 'company_name', label: 'Company Name' },
         { key: 'deadline', label: 'deadline' }, { key: 'logo_uri', label: 'Logo Uri' },
-        { key: 'type', label: 'Type' }, { key: 'listing_url', label: 'Listing Url' },
+        { key: 'type', label: 'Type' }, { key: 'listing_url', label: 'Listing Url' }, { key: 'pdf_uri', label: 'PDF' },
         { key: 'city', label: 'City' }, { key: 'internal_url', label: 'Internal Url' },
         { key: 'contentShort', label: 'Content' }, { key: 'edit', label: '' }
       ],
@@ -159,11 +167,14 @@ export default {
         logo_uri: '',
         type: null,
         listing_url: '',
+        pdf_uri: null,
         city: '',
         internal_url: '',
         content: ''
       },
+      listingSourceType: 'url',
       logoFile: null,
+      pdfFile: null,
       showImgPreview: false,
       deadlineDateTime: null,
       editing: false,
@@ -217,6 +228,11 @@ export default {
         this.$data.listing.deadline = this.$data.deadlineDateTime.toISOString().split('T')[0]
       } else {
         this.$data.listing.deadline = null
+      }
+      if (this.$data.listingSourceType === 'url') {
+        this.$data.listing.pdf_uri = null
+      } else {
+        this.$data.listing.listing_url = null
       }
       axios[this.$data.editing ? 'put' : 'post'](process.env.VUE_APP_API_HOST + '/api/listing/' +
         (this.$data.editing ? this.$data.listing.id + '/' : ''), this.$data.listing).then((response) => {
@@ -282,9 +298,14 @@ export default {
       this.alert.dismissCountDown = dismissCountDown
     },
     resetForm: function () {
-      this.$data.listing = {company_name: '', name: '', deadline: '', logo_uri: '', type: null, listing_url: '', city: ''}
+      this.$data.listing = {company_name: '', name: '', deadline: '', logo_uri: '', type: null, listing_url: '', pdf_uri: null, city: '', internal_url: '', content: ''}
       this.$data.deadlineDateTime = null
+      this.$data.listingSourceType = 'url'
+      this.$data.pdfFile = null
       this.$refs.logoFileInput.reset()
+      if (this.$refs.pdfFileInput) {
+        this.$refs.pdfFileInput.reset()
+      }
       this.$data.editing = false
       this.$data.showImgPreview = false
     },
@@ -317,6 +338,21 @@ export default {
           this.$data.showImgPreview = false
         })
     },
+    uploadPdf: function () {
+      if (this.$data.pdfFile === undefined || this.$data.pdfFile === null) {
+        return
+      }
+      fileUploader.uploadPdf(this.$data.pdfFile)
+        .then((pdfUri) => {
+          this.$data.listing.pdf_uri = pdfUri
+        }).catch((e) => {
+          let errorTitle = 'Error'
+          if (e.response !== undefined) {
+            errorTitle = 'Error ' + e.response.status + ' ' + e.response.statusText
+          }
+          this.showAlert('danger', errorTitle, this.$t('admin.listing.pdfUploadFailed'))
+        })
+    },
     validateLink: function () {
       if (!(this.$data.listing.listing_url.startsWith('https://') || this.$data.listing.listing_url.startsWith('http://'))) {
         this.$data.listing.listing_url = 'https://'.concat(this.$data.listing.listing_url)
@@ -327,6 +363,7 @@ export default {
       this.$data.showImgPreview = true
       this.$data.editing = true
       this.$data.deadlineDateTime = listing.deadline ? new Date(listing.deadline) : null
+      this.$data.listingSourceType = listing.pdf_uri ? 'pdf' : 'url'
       // Scroll to top when editing
       window.scrollTo({top: 0, behavior: 'smooth'})
     },

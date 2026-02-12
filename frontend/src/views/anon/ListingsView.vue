@@ -54,6 +54,7 @@
                      :logo-src="fileserverHost + '/thumb/512/' + listing.logo_uri"
                      :type="listing.type"
                      :listing-url="listing.listing_url"
+                     :pdf-uri="listing.pdf_uri"
                      :cities="listing.cities"
                      :internal-url="listing.internal_url"
                      class="annonser"/>

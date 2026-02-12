@@ -33,6 +33,7 @@ func main() {
 	log.Printf("Starting fileserver on %s", address)
 
 	http.HandleFunc("/upload/image", uploadHandler)
+	http.HandleFunc("/upload/pdf", pdfUploadHandler)
 	fs := http.FileServer(http.Dir(uploadDir))
 	http.Handle("/", fs)
 	log.Fatal(http.ListenAndServe(address, nil))
@@ -170,6 +171,54 @@ func saveThumb(img image.Image, size int, fileName, fileExt string) error {
 		err = errors.New("bad file extension")
 	}
 	return err
+}
+
+func pdfUploadHandler(w http.ResponseWriter, r *http.Request) {
+	addCORSHeader(w)
+	if r.Method == http.MethodOptions {
+		return
+	}
+	if r.Method != http.MethodPost {
+		log.Printf("Rejected request with illegal method %s\n", r.Method)
+		httpError(w, http.StatusMethodNotAllowed)
+		return
+	}
+	file, header, err := r.FormFile("file")
+	if ok := handlePotentialError(w, err); !ok {
+		return
+	}
+	defer file.Close()
+
+	contentType := header.Header.Get("Content-Type")
+	log.Printf("Content-Type: %s\n", contentType)
+
+	if contentType != "application/pdf" {
+		log.Printf("File with illegal content type uploaded to /upload/pdf: %s\n", contentType)
+		httpError(w, http.StatusBadRequest)
+		return
+	}
+
+	bs, err := ioutil.ReadAll(file)
+	if ok := handlePotentialError(w, err); !ok {
+		return
+	}
+
+	fileUUID, err := uuid.NewRandom()
+	if ok := handlePotentialError(w, err); !ok {
+		return
+	}
+
+	fileURI := fileUUID.String() + ".pdf"
+	err = ioutil.WriteFile(uploadDir+"/"+fileURI, bs, 0644)
+	if ok := handlePotentialError(w, err); !ok {
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	_, err = w.Write([]byte(fileURI))
+	if ok := handlePotentialError(w, err); !ok {
+		return
+	}
 }
 
 func httpError(w http.ResponseWriter, errorCode int) {
