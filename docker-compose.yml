@@ -40,14 +40,3 @@ services:
     command: ["./main"]
     volumes:
       - ./fileserver/uploads:/root/uploads
-
-  postfix:
-    build:
-      context: ./postfix
-    ports:
-      - "587:587"
-    env_file:
-      - path: ./postfix/.env.default
-        required: true
-      - path: ./postfix/.env
-        required: false

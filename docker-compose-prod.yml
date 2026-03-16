@@ -1,20 +1,18 @@
 services:
   postgres:
     image: postgres
-    restart: "always"
+    restart: unless-stopped
     container_name: postgres
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: '1234'
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
   api:
     build: ./api
     command: "./django-prod-entrypoint.sh"
     depends_on:
       - postgres
-    restart: "always"
-    ports:
-      - "7001:8000"
+    restart: unless-stopped
     environment:
       - DJANGO_SETTINGS_MODULE=nvdnew.settings.prod
       - EMAIL_HOST=smtp.gmail.com
@@ -27,6 +25,8 @@ services:
     build:
       context: ./frontend
       target: builder
+      args:
+        - DOMAIN=${DOMAIN}
     volumes:
       - frontend-files:/frontend/dist
     command: ["echo", "Successfully created static frontend files"] # No operation
@@ -34,24 +34,22 @@ services:
   fileserver:
     build: ./fileserver
     command: ["./main"]
-    restart: "always"
-    ports:
-      - "7002:9000"
+    restart: unless-stopped
     volumes:
       - ./fileserver/uploads:/root/uploads
 
   nginx:
     image: linuxserver/swag
-    restart: "always"
+    restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
     environment:
       - PUID=1002
       - GUID=1003
-      - EMAIL=it@nettverksdagene.no
-      - URL=nettverksdagene.no
-      - SUBDOMAINS=www
+      - EMAIL=it@${DOMAIN}
+      - URL=${DOMAIN}
+      - SUBDOMAINS=${SUBDOMAINS}
       - TZ=Europe/Oslo
       - VALIDATION=http
       #- STAGING=true # Uncomment this when testing
@@ -62,17 +60,5 @@ services:
       - ./nginx/config:/config # Todo: Can this volume include the below?
       - frontend-files:/frontend
 
-  postfix:
-    build:
-      context: ./postfix
-    ports:
-      - "587:587"
-    env_file:
-      - path: ./postfix/.env
-        required: true
-    volumes:
-      - postfix-spool:/var/spool/postfix # Volume for storing unset postfix emails
-
 volumes:
   frontend-files:
-  postfix-spool:
