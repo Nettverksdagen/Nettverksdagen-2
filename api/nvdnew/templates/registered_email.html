@@ -79,6 +79,14 @@
         width: fit-content;
         margin: auto;
       }
+      .qr-code {
+        text-align: center;
+        margin: 20px 0;
+      }
+      .qr-code img {
+        max-width: 200px;
+        height: auto;
+      }
     </style>
     
 </head>
@@ -106,19 +114,32 @@
             <p>Tid: {{timeStart}}</p>
             <p>Sted: {{place}}</p>
           </td>
+        </tr>
+        <tr>
+          <td class="qr-code">
+            <p><strong>Din inngangsbilett:</strong></p>
+            <img src="cid:qr_code" alt="QR-kode for inngang" />
+            <p style="font-size: 14px; color: #666;">
+              Vis denne QR-koden ved inngang for å registrere oppmøte
+            </p>
+          </td>
         </tr> 
         <tr>
           <td>
             <p>
               Om du har spørsmål, ta kontakt med <a href = "mailto: bedrift@nettverksdagene.no">bedrift@nettverksdagene.no</a>
-              <br> <br>Tusen takk for din interesse i Nettverksdagene 2025!
-              <div class="border-bottom"></div>
-              <a class="subtle-link color" href="https://nettverksdagene.no/program?unregister&email={{email}}&code={{code}}">
-                  Trykk her
-              </a>
-              <a class="subtle-link color no-decoration" href="https://nettverksdagene.no/program?unregister&email={{email}}&code={{code}}">
-                  for å melde deg av arrangementet 
-              </a>
+              <br> <br>Tusen takk for din interesse i Nettverksdagene {{current_year}}!
+              {% if allowDeregistration %}
+                  <div class="border-bottom"></div>
+                  <a class="subtle-link color" href="https://nettverksdagene.no/program?unregister&email={{email}}&code={{code}}">
+                      Trykk her
+                  </a>
+                  <a class="subtle-link color no-decoration" href="https://nettverksdagene.no/program?unregister&email={{email}}&code={{code}}">
+                      for å melde deg av arrangementet
+                  </a>
+            {% else %}
+                <br> Dette arrangementet har ikke avmelding.
+            {% endif %}
             </p>      
           </td>
         </tr> 

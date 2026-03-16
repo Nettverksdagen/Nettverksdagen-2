@@ -46,7 +46,7 @@
         </b-form-input>
       </b-form-group>
     </b-form>
-    <p>Finner du ikke koden? <b-link @click="sendUnregistrationCode">Trykk her for å få sende den på nytt.</b-link></p>
+    <p>{{$t('cannotFindCode')}} <b-link @click="sendUnregistrationCode">{{$t('clickHereToResend')}}</b-link></p>
   </b-modal>
 </template>
 
@@ -67,7 +67,7 @@ export default {
     return {
       form: {
         email: '',
-        code: '',
+        code: ''
       },
       emailState: null,
       codeState: null,
@@ -75,7 +75,7 @@ export default {
       emailInvalidFeedbackString: this.emailInvalidFeedbackDefault,
       codeInvalidFeedbackDefault: this.$t('inputFieldCode') + ' ' + this.$t('is_required'),
       codeInvalidFeedbackString: this.codeInvalidFeedbackDefault,
-      unregistrationCodeSentAlertCountDown: 0,
+      unregistrationCodeSentAlertCountDown: 0
     }
   },
   computed: {
@@ -96,12 +96,12 @@ export default {
 
       // Invalid code
       return this.codeInvalidFeedbackString
-    },
+    }
   },
   mounted () {
     if (this.$route.query.unregister !== undefined) {
       this.$bvModal.show(this.modalId)
-    }    
+    }
   },
   methods: {
     checkFormValidity () {
@@ -110,7 +110,7 @@ export default {
       this.checkEmailValidity()
 
       // Only set code valid when response from server is recieved
-      const codeValid = this.$refs.codeInput.checkValidity() && null 
+      const codeValid = this.$refs.codeInput.checkValidity() && null
       this.codeState = codeValid
 
       return valid
@@ -155,8 +155,8 @@ export default {
       return participants.filter(par => par.email === email && par.event === eventId)[0]
     },
     async handleSubmit () {
-      this.resetInvalidFeedback();
-      
+      this.resetInvalidFeedback()
+
       if (!this.checkFormValidity()) {
         return
       }
@@ -164,15 +164,15 @@ export default {
       const participant = this.getParticipant()
       const code = this.$data.form.code
 
-      axios.delete(process.env.VUE_APP_API_HOST + '/api/participant/' + participant.id + '/', { data: { code, } })
+      axios.delete(process.env.VUE_APP_API_HOST + '/api/participant/' + participant.id + '/', { data: { code } })
         .then(_ => {
           this.$bvModal.hide(this.modalId)
-          
+
           this.$emit('unregistration-success')
         })
         .catch((error) => {
           this.codeState = false
-          
+
           this.codeInvalidFeedbackString = error.response.data.message === 'Invalid code'
             ? this.$t('unregistration_failure_code_invalid')
             : this.$t('unregistration_failure_unknown')
@@ -186,15 +186,15 @@ export default {
       }
 
       const participant = this.getParticipant()
-      
-      axios.get(process.env.VUE_APP_API_HOST + '/api/participant/' +  participant.id + '/')
+
+      axios.get(process.env.VUE_APP_API_HOST + '/api/participant/' + participant.id + '/')
         .then(() => {
           this.showUnregistrationCodeSentAlert()
         })
     },
     showUnregistrationCodeSentAlert () {
       this.unregistrationCodeSentAlertCountDown = 15
-    },
+    }
   }
 }
 </script>

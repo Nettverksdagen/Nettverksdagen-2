@@ -11,26 +11,25 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       windowWidth: window.innerWidth
-    };
-  },
-  computed: {
-    isMobile() {
-      return false;
-      return this.windowWidth <= 768; // Completely arbitrary, should not be hard-coded. Same as breakpoints in CSS in HomeScreen.vue
     }
   },
-  mounted() {
-    window.addEventListener('resize', this.handleResize);
+  computed: {
+    isMobile () {
+      return this.windowWidth <= 768 // Same as breakpoints in CSS in HomeScreen.vue
+    }
   },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.handleResize);
+  mounted () {
+    window.addEventListener('resize', this.handleResize)
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.handleResize)
   },
   methods: {
-    handleResize() {
-      this.windowWidth = window.innerWidth;
+    handleResize () {
+      this.windowWidth = window.innerWidth
     }
   },
   props: ['boxIcon', 'boxIconAlt', 'boxTitle', 'boxText']
@@ -44,7 +43,7 @@ export default {
     background-color: rgb(245, 245, 246);
     border-radius: 1rem;
     padding: 1rem;
-    
+
     // To move the text to the bottom of the box
     display: flex;
     flex-direction: column;
@@ -63,11 +62,10 @@ export default {
 
     width: var(--icon-size); // --icon-size defined in the .boxes class
     height: var(--icon-size); // --icon-size defined in the .boxes class
-    
+
     transition-duration: 400ms;
     filter: invert(20%) sepia(12%) saturate(2012%) hue-rotate(125deg) brightness(94%) contrast(94%);
   }
-
 
   .home-box:hover, .home-box.is_mobile {
     h3, .showme, .fancy-text {

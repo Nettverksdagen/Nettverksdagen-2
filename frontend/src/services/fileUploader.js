@@ -7,6 +7,15 @@ async function uploadImage (imageFile) {
   })
 }
 
+async function uploadPdf (pdfFile) {
+  let formData = new FormData()
+  formData.append('file', pdfFile)
+  return axios.post(process.env.VUE_APP_FILESERVER_HOST + '/upload/pdf', formData).then((response) => {
+    return response.data
+  })
+}
+
 export const fileUploader = {
-  uploadImage
+  uploadImage,
+  uploadPdf
 }

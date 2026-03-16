@@ -1,14 +1,12 @@
 <template>
   <div class="question-card">
-    <h2>{{ question.text }}</h2>
+    <!-- question title -->
+    <h2>{{ $t(question.text_key) }}</h2>
+
+    <!-- options -->
     <ul>
-      <li
-        v-for="option in question.options"
-        :key="option.id"
-        @click="selectOption(option)"
-        class="option"
-      >
-        {{ option.text }}
+      <li v-for="option in question.options" :key="option.id" class="option" @click="$emit('answerSelected', question.id, option)">
+        {{ $t(option.text_key) }}
       </li>
     </ul>
   </div>
@@ -20,12 +18,6 @@ export default {
     question: {
       type: Object,
       required: true
-    }
-  },
-  methods: {
-    selectOption (option) {
-      // Emit the selected option back to the parent
-      this.$emit('answerSelected', this.question.id, option)
     }
   }
 }

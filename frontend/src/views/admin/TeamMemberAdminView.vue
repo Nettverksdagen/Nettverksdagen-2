@@ -13,18 +13,18 @@
     </b-alert>
     <b-row class="my-4">
       <div class="col-12">
-        <b-card header="Legg ut et styremedlem på kontaktsiden" class="h-100">
+        <b-card :header="$t('admin.teamMember.header')" class="h-100">
           <b-form @submit.prevent="handleSubmit">
             <b-row>
               <div class="col-12 col-md-6">
-                <b-form-group label="Fullt navn" label-for="member-name-input">
-                  <b-form-input v-model="teamMember.name" id="member-name-input" required placeholder="Skriv inn fullt navn" ></b-form-input>
+                <b-form-group :label="$t('teamMember.fullName')" label-for="member-name-input">
+                  <b-form-input v-model="teamMember.name" id="member-name-input" required :placeholder="$t('teamMember.placeholder.name')"></b-form-input>
                 </b-form-group>
-                <b-form-group label="Mailadresse" label-for="member-email-input">
-                  <b-form-input type="email" v-model="teamMember.email" id="member-email-input" required placeholder="Skriv inn mailadresse"></b-form-input>
+                <b-form-group :label="$t('teamMember.emailLabel')" label-for="member-email-input">
+                  <b-form-input type="email" v-model="teamMember.email" id="member-email-input" required :placeholder="$t('teamMember.placeholder.email')"></b-form-input>
                 </b-form-group>
-                <b-form-group label="Team" label-for="member-team-input">
-                  <b-form-input v-model="teamMember.team" id="member-team-input" required placeholder="F.eks Styret"></b-form-input>
+                <b-form-group :label="$t('teamMember.teamLabel')" label-for="member-team-input">
+                  <b-form-input v-model="teamMember.team" id="member-team-input" required :placeholder="$t('teamMember.placeholder.team')"></b-form-input>
                   <p class="text-black-50 mt-2">
                     <span class="font-weight-bold">{{$t('merk')}}</span>:
                     {{$t('medlemgruppe')}}
@@ -32,14 +32,14 @@
                 </b-form-group>
               </div>
               <div class="col-12 col-md-6">
-                <b-form-group label="Stilling" label-for="member-position-input">
-                  <b-form-input v-model="teamMember.position" id="member-position-input" required placeholder="Skriv inn stilling"></b-form-input>
+                <b-form-group :label="$t('teamMember.positionLabel')" label-for="member-position-input">
+                  <b-form-input v-model="teamMember.position" id="member-position-input" required :placeholder="$t('teamMember.placeholder.position')"></b-form-input>
                 </b-form-group>
                 <div class="d-flex">
-                  <b-form-group class="flex-grow-1" label="Bilde" label-for="member-photo">
-                    <b-form-file v-model="photoFile" placeholder="Velg et bilde" id="member-photo" ref="photoFileInput" @input="uploadPhoto"></b-form-file>
+                  <b-form-group class="flex-grow-1" :label="$t('teamMember.photoLabel')" label-for="member-photo">
+                    <b-form-file v-model="photoFile" :placeholder="$t('teamMember.placeholder.photo')" id="member-photo" ref="photoFileInput" @input="uploadPhoto"></b-form-file>
                     <p class="text-black-50 mt-2">
-                      <span class="font-weight-bold">NB!</span>:
+                      <span class="font-weight-bold">{{$t('nbLabel')}}</span>:
                       {{$t('squarephoto')}}
                     </p>
                   </b-form-group>
@@ -56,17 +56,23 @@
     </b-row>
     <b-row>
       <div class="col-12">
-        <b-card header="Teammedlemmer">
+        <b-card :header="$t('admin.teamMember.listHeader')">
           <b-table class="d-none d-md-table" hover :fields="fields" :items="teamMembers">
-            <template v-slot:cell(edit)="teamMembers">
-              <edit-button class="mx-3" @click.native="edit(teamMembers.item)"></edit-button>
-              <delete-button class="mx-3" @click.native="destroy(teamMembers.item)"></delete-button>
+            <template v-slot:cell(edit)="row">
+              <edit-button class="mx-3" @click.native="edit(row.item)"></edit-button>
+              <delete-button class="mx-3" @click.native="destroy(row.item)"></delete-button>
+            </template>
+            <template v-slot:cell(position)="row">
+              {{ translatePosition(row.item.position) }}
             </template>
           </b-table>
           <b-table class="d-block d-md-none" stacked :fields="fields" :items="teamMembers">
-            <template v-slot:cell(edit)="teamMembers">
-              <edit-button class="mx-3" @click.native="edit(teamMembers.item)"></edit-button>
-              <delete-button class="mx-3" @click.native="destroy(teamMembers.item)"></delete-button>
+            <template v-slot:cell(edit)="row">
+              <edit-button class="mx-3" @click.native="edit(row.item)"></edit-button>
+              <delete-button class="mx-3" @click.native="destroy(row.item)"></delete-button>
+            </template>
+            <template v-slot:cell(position)="row">
+              {{ translatePosition(row.item.position) }}
             </template>
           </b-table>
         </b-card>
@@ -91,11 +97,6 @@ export default {
   },
   data: function () {
     return {
-      fields: [
-        'id', { key: 'name', label: 'Name' }, { key: 'email', label: 'Email' },
-        { key: 'photo_uri', label: 'Photo Uri' }, { key: 'team', label: 'Team' },
-        { key: 'position', label: 'Position' }, { key: 'edit', label: '' }
-      ],
       teamMember: {
         name: '',
         email: '',
@@ -116,6 +117,18 @@ export default {
     }
   },
   computed: {
+    // translated table column labels
+    fields: function () {
+      return [
+        'id',
+        { key: 'name', label: this.$t('teamMember.column.name') },
+        { key: 'email', label: this.$t('teamMember.column.email') },
+        { key: 'photo_uri', label: this.$t('teamMember.column.photo') },
+        { key: 'team', label: this.$t('teamMember.column.team') },
+        { key: 'position', label: this.$t('teamMember.column.position') },
+        { key: 'edit', label: '' }
+      ]
+    },
     teamMembers: function () {
       return this.$store.state.teamMembers.all
     },
@@ -128,32 +141,47 @@ export default {
     }
   },
   methods: {
+    translatePosition: function (pos) {
+      if (!pos) return ''
+      const map = {
+        'Markedsføringsansvarlig': this.$t('teamMember.positions.Markedsføringsansvarlig'),
+        'Sekretær': this.$t('teamMember.positions.Sekretær'),
+        'Leder': this.$t('teamMember.positions.Leder'),
+        'Nestleder': this.$t('teamMember.positions.Nestleder'),
+        'Sponsoransvarlig': this.$t('teamMember.positions.Sponsoransvarlig'),
+        'IT-ansvarlig': this.$t('teamMember.positions.IT-ansvarlig'),
+        'Bedriftansvarlig': this.$t('teamMember.positions.Bedriftansvarlig'),
+        'Medlem': this.$t('teamMember.positions.Medlem')
+      }
+      return map[pos] || pos
+    },
     handleSubmit: function () {
       axios[(this.$data.editing ? 'put' : 'post')](process.env.VUE_APP_API_HOST +
         '/api/teammember/' + (this.$data.editing ? this.$data.teamMember.id + '/' : ''),
       this.$data.teamMember).then((response) => {
-        this.showAlert('success', 'Suksess!', 'Teammedlemmet er blitt ' +
-          (this.$data.editing ? 'endret.' : 'lagt ut på forsiden.'))
+        this.showAlert('success',
+          this.$t('success'),
+          this.$t(this.$data.editing ? 'teamMember.successUpdated' : 'teamMember.successCreated', {name: response.data.name}))
         this['teamMembers/' + (this.$data.editing ? 'updateTeamMember' : 'addTeamMember')](response.data)
         this.resetForm()
       }).catch((e) => {
         this.showAlert('danger',
-          'Error ' + e.response.status + ' ' + e.response.statusText,
-          'Teammedlemmet kunne ikke legges ut.')
+          this.$t('error') + (e.response ? ' ' + e.response.status + ' ' + e.response.statusText : ''),
+          this.$t('teamMember.createError'))
       })
     },
     destroy: function (teamMember) {
-      if (!confirm('Er du sikker på at du vil slette ' + teamMember.name + '?')) {
+      if (!confirm(this.$t('teamMember.deleteConfirm', {name: teamMember.name}))) {
         return
       }
       axios.delete(process.env.VUE_APP_API_HOST + '/api/teammember/' +
         teamMember.id + '/').then((response) => {
-        this.showAlert('success', 'Suksess!', 'Teammedlemmet er blitt slettet')
+        this.showAlert('success', this.$t('success'), this.$t('teamMember.deleteSuccess', {name: teamMember.name}))
         this['teamMembers/deleteTeamMember'](teamMember)
       }).catch((e) => {
         this.showAlert('danger',
-          'Error ' + e.response.status + ' ' + e.response.statusText,
-          'Teammedlemmet kunne ikke slettes.')
+          this.$t('error') + (e.response ? ' ' + e.response.status + ' ' + e.response.statusText : ''),
+          this.$t('teamMember.deleteError'))
       })
       this.resetForm()
     },
@@ -183,16 +211,16 @@ export default {
           this.$data.teamMember.photo_uri = photoUri
           setTimeout(() => {
             this.$data.showImgPreview = true
-          }, 30) // The image src can't be set at the same time as the img opacity or it will lose its transition
+          }, 30)
         })
         .catch((e) => {
-          let errorTitle = 'Error'
+          let errorTitle = this.$t('error')
           if (e.response !== undefined) {
-            errorTitle = 'Error ' + e.response.status + ' ' + e.response.statusText
+            errorTitle = this.$t('error') + ' ' + e.response.status + ' ' + e.response.statusText
           }
           this.showAlert('danger',
             errorTitle,
-            'Bildeopplastning feilet, prøv igjen. Kontakt IT om problemet vedvarer. IT: Prøv å restart serveren.')
+            this.$t('teamMember.uploadError'))
           this.$data.showImgPreview = false
         })
     },

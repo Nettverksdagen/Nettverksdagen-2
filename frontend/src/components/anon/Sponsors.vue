@@ -1,56 +1,36 @@
 <template>
     <div class="sponsors mt-5">
       <Content>
-      <!--
-        <div class="sponsor-banner poption-banner">
-          <a href="https://www.poption.com/speedintervju/nettverksdagene-2021" target="_blank" rel="noopener noreferrer">
-            <b-row>
-              <b-col cols="12" class="sponsor-banner-text align-middle">
-                <h3 class="font-weight-bold">Nettverksdagene 2021 ble arrangert i samarbeid med Poption!</h3>
-              </b-col>
-              <b-col cols="12" lg="6" class="sponsor-banner-text align-middle no-padding-top">
-                <span>Poption setter deg i kontakt med de mest interessante bedriftene &mdash; fra startups til veletablerte selskaper. Trykk på banneret for å se årets speedintervjuer i samarbeid med Poption!</span>
-              </b-col>
-              <b-col cols="12" lg="6" class="text-center no-padding-top">
-                <img class="logo-poption float-lg-right" src="@/assets/poption.png">
-              </b-col>
-            </b-row>
-          </a>
-        </div>
-        -->
-        <!--<div class="sponsor-banner bunnpris-banner">
-            <a href="https://bunnpris.no/" target="_blank" rel="noopener noreferrer">
-                <b-row>
-                    <b-col cols="12" md="6" class="sponsor-banner-text align-middle">
-                        <h3 class="font-weight-bold">{{$t('thanksbunn')}}</h3>
-                        <span>{{$t('thanksbunntext')}}</span>
-                    </b-col>
-                    <b-col cols="12" md="6" class="text-center">
-                        <img class="logo-bunnpris float-md-right" src="@/assets/bunnpris.png">
-                    </b-col>
-                </b-row>
-            </a>
-        </div> -->
-        <h2 class="text-center font-weight-bold">Hovedsponsor</h2>
-        <div class="sponsor col-5">
-          <a href="https://nfea.no/" target="_blank" rel="noopener noreferrer">
-            <b-img fluid src="@/assets/nfea.png"></b-img>
-          </a>
-        </div>
-        <h2 class="text-center font-weight-bold">{{ $t('coffeesponsor') }}</h2>
-        <div class="sponsor col-5 text-center">
-            <a href="https://www.kaffeknappen.no/" target="_blank" rel="noopener noreferrer">
-                <b-img fluid src="@/assets/kaffeknappen.svg"></b-img>
-            </a>
-        </div>
-        <h2 class="text-center font-weight-bold" style="margin-top: 4rem;">Øvrige sponsorer</h2>
-        <b-row>
-          <Sponsor  v-for="(sponsor, index) in sponsors"
-          :key="index"
-          :logo_src="sponsor.logo_uri"
-          :href="sponsor.website_url">
-          </Sponsor>
-        </b-row>
+        <template v-if="mainSponsors.length > 0">
+          <h2 class="text-center font-weight-bold">{{ $t('sponsors.mainSponsor') }}</h2>
+          <b-row>
+            <Sponsor v-for="(sponsor, index) in mainSponsors"
+              :key="'main-' + index"
+              :logo_src="sponsor.logo_uri"
+              :href="sponsor.website_url">
+            </Sponsor>
+          </b-row>
+        </template>
+        <template v-if="coffeeSponsors.length > 0">
+          <h2 class="text-center font-weight-bold">{{ $t('coffeesponsor') }}</h2>
+          <b-row>
+            <Sponsor v-for="(sponsor, index) in coffeeSponsors"
+              :key="'coffee-' + index"
+              :logo_src="sponsor.logo_uri"
+              :href="sponsor.website_url">
+            </Sponsor>
+          </b-row>
+        </template>
+        <template v-if="otherSponsors.length > 0">
+          <h2 class="text-center font-weight-bold" style="margin-top: 4rem;">{{ $t('sponsors.otherSponsors') }}</h2>
+          <b-row>
+            <Sponsor v-for="(sponsor, index) in otherSponsors"
+              :key="'other-' + index"
+              :logo_src="sponsor.logo_uri"
+              :href="sponsor.website_url">
+            </Sponsor>
+          </b-row>
+        </template>
       </Content>
     </div>
 </template>
@@ -64,6 +44,15 @@ export default {
   computed: {
     sponsors: function () {
       return this.$store.state.sponsors.all
+    },
+    mainSponsors: function () {
+      return this.sponsors.filter(s => s.type === 'Hovedsponsor')
+    },
+    coffeeSponsors: function () {
+      return this.sponsors.filter(s => s.type === 'Kaffesponsor')
+    },
+    otherSponsors: function () {
+      return this.sponsors.filter(s => s.type === 'Annen sponsor' || !s.type)
     }
   }
 }
@@ -89,7 +78,7 @@ export default {
   .sponsor {
     position: relative;
     margin: auto;
-    transition: transform 300ms, filter 500ms;
+    transition: transform 0.2s;
     padding: 1rem 1rem;
       @media(min-width: 576px) {
         padding: 0rem 3rem;
@@ -99,9 +88,8 @@ export default {
       }
   }
   .sponsor:hover {
-    transition: filter 0.5s, transform 0.3s;
-    @media(min-width: 1200px) {
-      filter: none;
+    @media(min-width: 768px) {
+      transform: scale(1.15);
     }
   }
   .sponsor-banner {

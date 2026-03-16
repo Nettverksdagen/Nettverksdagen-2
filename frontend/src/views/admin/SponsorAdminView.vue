@@ -13,40 +13,43 @@
     </b-alert>
     <b-row class="my-4">
       <div class="col-12 col-md-8">
-        <b-card header="Legg til en ny sponsor på forsiden" class="h-100">
+        <b-card :header="$t('admin.sponsor.header')" class="h-100">
           <b-form @submit.prevent="handleSubmit">
             <b-row>
               <div class="col-12 col-md-6">
-                <b-form-group label="Sponsornavn" label-for="sponsor-name-input">
-                  <b-form-input v-model="sponsor.name" id="sponsor-name-input" required placeholder="Skriv inn sponsornavn" ></b-form-input>
+                <b-form-group :label="$t('admin.sponsor.sponsorName')" label-for="sponsor-name-input">
+                  <b-form-input v-model="sponsor.name" id="sponsor-name-input" required :placeholder="$t('admin.sponsor.sponsorNamePlaceholder')" ></b-form-input>
                 </b-form-group>
-                <b-form-group label="Link til nettside (må starte med https://)" label-for="website-url-input">
-                  <b-form-input type="url" v-model="sponsor.website_url" id="website-url-input" required placeholder="Skriv inn link" @input="validateWebsiteUrl"></b-form-input>
+                <b-form-group :label="$t('admin.sponsor.websiteUrl')" label-for="website-url-input">
+                  <b-form-input type="url" v-model="sponsor.website_url" id="website-url-input" required :placeholder="$t('admin.sponsor.websiteUrlPlaceholder')" @input="validateWebsiteUrl"></b-form-input>
+                </b-form-group>
+                <b-form-group :label="$t('admin.sponsor.sponsorType')" label-for="sponsor-type-input">
+                  <b-form-select v-model="sponsor.type" id="sponsor-type-input" :options="sponsorTypes" required></b-form-select>
                 </b-form-group>
               </div>
               <div class="col-12 col-md-6">
                 <div class="d-flex">
-                  <b-form-group class="flex-grow-1" label="Logo" label-for="sponsor-logo">
-                    <b-form-file v-model="logoFile" :required="!editing" placeholder="Velg et bilde" id="sponsor-logo" ref="logoFileInput" @input="uploadLogo"></b-form-file>
+                  <b-form-group class="flex-grow-1" :label="$t('admin.sponsor.logo')" label-for="sponsor-logo">
+                    <b-form-file v-model="logoFile" :required="!editing" :placeholder="$t('admin.sponsor.selectImage')" id="sponsor-logo" ref="logoFileInput" @input="uploadLogo"></b-form-file>
                   </b-form-group>
                   <image-preview :imgPreviewSrc="logoSrc" :showImgPreview="showImgPreview"></image-preview>
                 </div>
               </div>
             </b-row>
-            <b-button type="submit" size="md" variant="success" v-if="!editing">{{('leggut')}}</b-button>
-            <b-button type="submit" size="md" variant="primary" v-if="editing">{{$t('edit') + ' sponsor'}}</b-button>
+            <b-button type="submit" size="md" variant="success" v-if="!editing">{{$t('leggut')}}</b-button>
+            <b-button type="submit" size="md" variant="primary" v-if="editing">{{$t('admin.sponsor.updateSponsor')}}</b-button>
             <b-button v-on:click="abortEdit()" size="md" variant="secondary" v-if="editing">{{$t('abort')}}</b-button>
           </b-form>
         </b-card>
       </div>
       <div class="d-none d-md-block col-4">
-        <b-jumbotron bg-variant="primary" text-variant="white" :header="numSponsors + ' sponsorer'" lead="lagt ut så langt." class="h-100">
+        <b-jumbotron bg-variant="primary" text-variant="white" :header="numSponsors + ' ' + $t('admin.sponsor.sponsors')" :lead="$t('admin.sponsor.publishedSoFar')" class="h-100">
         </b-jumbotron>
       </div>
     </b-row>
     <b-row>
       <div class="col-12">
-        <b-card header="Sponsorer">
+        <b-card :header="$t('admin.sponsor.listHeader')">
           <b-table class="d-none d-md-table" hover :fields="fields" :items="sponsors">
             <template v-slot:cell(edit)="sponsors">
               <edit-button class="mx-3" @click.native="edit(sponsors.item)"></edit-button>
@@ -81,13 +84,19 @@ export default {
   data: function () {
     return {
       fields: [
-        'id', { key: 'name', label: 'Name' }, { key: 'logo_uri', label: 'Logo Uri' },
+        'id', { key: 'name', label: 'Name' }, { key: 'type', label: 'Type' }, { key: 'logo_uri', label: 'Logo Uri' },
         { key: 'website_url', label: 'Website Url' }, { key: 'edit', label: '' }
+      ],
+      sponsorTypes: [
+        { value: 'Hovedsponsor', text: 'Hovedsponsor' },
+        { value: 'Kaffesponsor', text: 'Kaffesponsor' },
+        { value: 'Annen sponsor', text: 'Annen sponsor' }
       ],
       sponsor: {
         name: '',
         logo_uri: '',
-        website_url: ''
+        website_url: '',
+        type: 'Annen sponsor'
       },
       logoFile: null,
       showImgPreview: false,
@@ -116,28 +125,28 @@ export default {
     handleSubmit: function () {
       axios[this.$data.editing ? 'put' : 'post'](process.env.VUE_APP_API_HOST + '/api/sponsor/' +
         (this.$data.editing ? this.$data.sponsor.id + '/' : ''), this.$data.sponsor).then((response) => {
-        this.showAlert('success', 'Suksess!', 'Sponsoren er blitt ' +
-            (this.$data.editing ? 'endret.' : 'lagt ut på forsiden.'))
+        this.showAlert('success', this.$t('admin.success'), this.$t('admin.sponsor.listHeader') + ' ' +
+            (this.$data.editing ? this.$t('admin.updated') : this.$t('admin.published')))
         this['sponsors/' + (this.$data.editing ? 'updateSponsor' : 'addSponsor')](response.data)
         this.resetForm()
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
-          'Sponsoren kunne ikke legges ut.')
+          this.$t('admin.sponsor.listHeader') + ' ' + this.$t('admin.couldNotPublish'))
       })
     },
     destroy: function (sponsor) {
-      if (!confirm('Er du sikker på at du vil slette ' + sponsor.name + '?')) {
+      if (!confirm(this.$t('admin.confirmDelete') + ' ' + sponsor.name + '?')) {
         return
       }
       axios.delete(process.env.VUE_APP_API_HOST + '/api/sponsor/' +
         sponsor.id + '/').then((response) => {
-        this.showAlert('success', 'Suksess!', 'Sponsoren er blitt slettet')
+        this.showAlert('success', this.$t('admin.success'), this.$t('admin.sponsor.listHeader') + ' ' + this.$t('admin.deleted'))
         this['sponsors/deleteSponsor'](sponsor)
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
-          'Sponsoren kunne ikke slettes.')
+          this.$t('admin.sponsor.listHeader') + ' ' + this.$t('admin.couldNotDelete'))
       })
       this.resetForm()
     },
@@ -152,7 +161,7 @@ export default {
       }
     },
     resetForm: function () {
-      this.$data.sponsor = {name: '', logo_uri: '', website_url: ''}
+      this.$data.sponsor = {name: '', logo_uri: '', website_url: '', type: 'Annen sponsor'}
       this.$refs.logoFileInput.reset()
       this.$data.editing = false
       this.$data.showImgPreview = false
@@ -186,7 +195,7 @@ export default {
           }
           this.showAlert('danger',
             errorTitle,
-            'Bildeopplastning feilet, prøv igjen. Kontakt IT om problemet vedvarer.')
+            this.$t('admin.imageUploadFailed'))
           this.$data.showImgPreview = false
         })
     },

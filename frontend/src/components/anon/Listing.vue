@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  props: ['company', 'title', 'deadline', 'logoSrc', 'type', 'listingUrl', 'cities', 'internalUrl'],
+  props: ['company', 'title', 'deadline', 'logoSrc', 'type', 'listingUrl', 'cities', 'internalUrl', 'pdfUri'],
   computed: {
     formattedDeadline: function () {
       let deadDate = new Date(this.deadline)
@@ -37,10 +37,18 @@ export default {
         month: 'short'
       })
     },
+    pdfUrl: function () {
+      if (this.pdfUri) {
+        return process.env.VUE_APP_FILESERVER_HOST + '/' + this.pdfUri
+      }
+      return null
+    },
     shownUrl: function () {
       let useInternalUrl = (this.internalUrl !== '' && this.internalUrl !== null)
       if (useInternalUrl) {
         return '/stillinger/' + this.internalUrl
+      } else if (this.pdfUrl) {
+        return this.pdfUrl
       } else {
         return this.listingUrl
       }
@@ -51,6 +59,8 @@ export default {
       let useInternalUrl = (this.internalUrl !== '' && this.internalUrl !== null)
       if (useInternalUrl) {
         this.$router.push('/stillinger/' + internalUrl)
+      } else if (this.pdfUrl) {
+        window.open(this.pdfUrl, '_blank')
       } else {
         window.location.href = listingUrl
       }

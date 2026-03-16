@@ -16,9 +16,9 @@
               <b-col cols="12" sm="5" class="form-container">
                 <div class="padder">
                   <b-form-group>
-                    <b-form-input class="my-2" type="text" v-model="credentials.username" placeholder="Brukernavn"></b-form-input>
-                    <b-form-input class="my-2 mb-4" type="password" v-model="credentials.password" placeholder="Passord"></b-form-input>
-                    <b-button size="lg" variant="success" @click="login" class="login-button">Logg inn</b-button>
+                    <b-form-input class="my-2" type="text" v-model="credentials.username" :placeholder="$t('username')"></b-form-input>
+                    <b-form-input class="my-2 mb-4" type="password" v-model="credentials.password" :placeholder="$t('password')"></b-form-input>
+                    <b-button size="lg" variant="success" @click="login" class="login-button">{{$t('loginButton')}}</b-button>
                   </b-form-group>
                   <b-link class="forgot-password-link" href="#">{{$t('glemtpassord')}}</b-link>
                 </div>

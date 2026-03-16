@@ -1,19 +1,78 @@
 from rest_framework import viewsets, status
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from .models import Listing, Business, Sponsor, TeamMember, Form, Participant, Program
-from .serializers import ListingSerializer, BusinessSerializer, SponsorSerializer, TeamMemberSerializer, FormSerializer, ParticipantSerializer, ProgramSerializer, ParticipantListSerializer
-from django.core.mail import send_mail
+from .models import Listing, Business, Sponsor, TeamMember, Form, Participant, Program, Infobox, FAQ
+from .serializers import ListingSerializer, BusinessSerializer, SponsorSerializer, TeamMemberSerializer, FormSerializer, ParticipantSerializer, ProgramSerializer, ParticipantListSerializer, ParticipantAttendanceSerializer, InfoboxSerializer, FAQserializer
+from django.core.mail import send_mail, EmailMessage
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from datetime import datetime, time
 from babel.dates import format_datetime, format_time
+import qrcode
+import io
+from email.mime.image import MIMEImage
+from django.utils import timezone
+
+
+def generate_qr_code_bytes(data):
+    """Generate QR code as PNG bytes"""
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+    qr.add_data(data)
+    qr.make(fit=True)
+
+    img = qr.make_image(fill_color="black", back_color="white")
+    buffer = io.BytesIO()
+    img.save(buffer, format='PNG')
+    buffer.seek(0)
+    return buffer.getvalue()
+
+
+def send_email_with_qr(subject, template_name, context, recipient_email, qr_data):
+    """Send an HTML email with an embedded QR code using CID attachment."""
+    html_message = render_to_string(template_name, context=context)
+    plain_message = strip_tags(html_message)
+
+    email = EmailMessage(
+        subject=subject,
+        body=plain_message,
+        from_email='do-not-reply@nettverksdagene.no',
+        to=[fix_ntnu_email(recipient_email)],
+    )
+    email.content_subtype = 'html'
+    email.body = html_message
+
+    qr_bytes = generate_qr_code_bytes(qr_data)
+    mime_image = MIMEImage(qr_bytes, _subtype='png')
+    mime_image.add_header('Content-ID', '<qr_code>')
+    mime_image.add_header('Content-Disposition', 'inline', filename='qr_code.png')
+    email.attach(mime_image)
+
+    email.send(fail_silently=False)
+
+
+def fix_ntnu_email(email):
+    """Replace @ntnu.no with @stud.ntnu.no so emails are actually delivered."""
+    return email.replace('@ntnu.no', '@stud.ntnu.no')
 
 
 class ListingViewSet(viewsets.ModelViewSet):
     queryset = Listing.objects.all()
     serializer_class = ListingSerializer
+
+    @action(detail=False, methods=['post'])
+    def bulk_delete(self, request):
+        ids = request.data.get('ids', [])
+        if not ids:
+            return Response({'message': 'No IDs provided'}, status=status.HTTP_400_BAD_REQUEST)
+
+        deleted_count, _ = Listing.objects.filter(id__in=ids).delete()
+        return Response({'message': f'{deleted_count} listings deleted successfully', 'deleted_count': deleted_count}, status=status.HTTP_200_OK)
 
 
 class TeamMemberViewSet(viewsets.ModelViewSet):
@@ -61,36 +120,49 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                 if (currentlyRegistered >= program.maxRegistered):
                     waitingListIndex = currentlyRegistered - program.maxRegistered + 1
                     data['waitingListIndex'] = waitingListIndex
-                    data['place'] = program.place                    
+                    data['place'] = program.place
                     data['header'] = program.header
+                    data['current_year'] = datetime.now().year
                     html_message = render_to_string('on_waiting_list.html', context=data)
                     plain_message = strip_tags(html_message)
                     send_mail('Nettverksdagene - Du står på venteliste',
                         plain_message,
                         'do-not-reply@nettverksdagene.no',
-                        [data['email']],
+                        [fix_ntnu_email(data['email'])],
                         fail_silently=False,
                         html_message=html_message)
                 # If program not full, send confirmation email
                 else:
+                    # Create participant first to get attendance_token
+                    participant = super().create(request)
+
                     data['place'] = program.place
-                    #data['timeStart'] = strftime('%d. %b klokken %H:%M', gmtime(program.timeStart+3600))
-                    #Ny formatering av dato
-                    data['timeStart'] = format_datetime(datetime.fromtimestamp(program.timeStart+3600), "EEEE dd. MMMM, 'klokken' H:MM ", locale='nb_NO')
+                    data['timeStart'] = format_datetime(datetime.fromtimestamp(program.timeStart+3600), "EEEE dd. MMMM, 'klokken' HH:mm", locale='nb_NO')
                     data['header'] = program.header
-                    html_message = render_to_string('registered_email.html', context=data)
-                    plain_message = strip_tags(html_message)
-                    send_mail('Nettverksdagene - Påmelding bekreftet for ' + data['name'],
-                       plain_message,
-                       'do-not-reply@nettverksdagene.no',
-                       [data['email']],
-                       fail_silently=False,
-                       html_message=html_message)
+                    data['allowDeregistration'] = program.allowDeregistration
+                    data['current_year'] = datetime.now().year
+
+                    qr_data = str(participant.data['attendance_token'])
+                    send_email_with_qr(
+                        subject='Nettverksdagene - Påmelding bekreftet for ' + data['name'],
+                        template_name='registered_email.html',
+                        context=data,
+                        recipient_email=data['email'],
+                        qr_data=qr_data
+                    )
+
+                    # Mark QR email as sent
+                    created_participant = Participant.objects.get(id=participant.data['id'])
+                    created_participant.qr_email_sent = True
+                    created_participant.save()
+
+                    return participant
             except Exception as e:
                 print("ERROR: Could not send email. Is mail_settings.py correct?", e)
                 response = {'message': 'Could not send email'}
-                return Response(response, status = status.HTTP_500_INTERNAL_SERVER_ERROR)                
+                return Response(response, status = status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+            # Create participant for waiting list too
             return super().create(request)
 
         else:
@@ -101,17 +173,21 @@ class ParticipantViewSet(viewsets.ModelViewSet):
         participant = Participant.objects.get(id=pk)
         program = participant.event
 
+        if not program.allowDeregistration:
+            return Response({'message': 'This program does not allow deregistration'}, status=status.HTTP_400_BAD_REQUEST)
+
         try:
             data = {}
             data['name'] = participant.name
             data['header'] = program.header
             data['code'] = participant.code
+            data['current_year'] = datetime.now().year
             html_message = render_to_string('deregister_code.html', context=data)
             plain_message = strip_tags(html_message)
             send_mail('Nettverksdagene - Avmeldingskode for ' + participant.name,
                 plain_message,
                 'do-not-reply@nettverksdagene.no',
-                [participant.email],
+                [fix_ntnu_email(participant.email)],
                 fail_silently=False,
                 html_message=html_message)
         except Exception as e:
@@ -130,12 +206,16 @@ class ParticipantViewSet(viewsets.ModelViewSet):
             return Response(response, status = status.HTTP_404_NOT_FOUND)
 
         code = request.data.get('code', None)
+        program = participant.event
 
-        # The request is authorized if either a matching code is provided or
-        # the user making the request is logged as the admin and no code is provided.
-        if not (participant.code == code or code == None and request.user.is_staff):
-            response = {'message': 'Invalid code'}
-            return Response(response, status = status.HTTP_400_BAD_REQUEST)
+        # We only override validity as staff if the code is not provided
+        valid_as_staff = request.user.is_staff and code is None
+        valid_as_anon  = program.allowDeregistration and participant.code == code
+        request_valid = valid_as_staff or valid_as_anon
+
+        if not request_valid:
+            msg = 'Program does not allow deregistration' if not program.allowDeregistration else 'Invalid code'
+            return Response({'message': msg}, status = status.HTTP_400_BAD_REQUEST)
 
         response = super().destroy(request)
 
@@ -150,30 +230,269 @@ class ParticipantViewSet(viewsets.ModelViewSet):
                         data = {}
                         data['name'] = lastParticipant.name
                         data['code'] = lastParticipant.code
+                        data['email'] = lastParticipant.email
                         data['header'] = program.header
                         data['place'] = program.place
-                        html_message = render_to_string('off_waiting_list.html', context=data)
-                        plain_message = strip_tags(html_message)
-                        send_mail('Nettverksdagene - Påmelding bekreftet for ' + lastParticipant.name,
-                            plain_message,
-                            'do-not-reply@nettverksdagene.no',
-                            [lastParticipant.email],
-                            fail_silently=False,
-                            html_message=html_message)
+                        data['timeStart'] = format_datetime(datetime.fromtimestamp(program.timeStart+3600), "EEEE dd. MMMM, 'klokken' HH:mm", locale='nb_NO')
+                        data['current_year'] = datetime.now().year
+
+                        qr_data = str(lastParticipant.attendance_token)
+                        send_email_with_qr(
+                            subject='Nettverksdagene - Påmelding bekreftet for ' + lastParticipant.name,
+                            template_name='off_waiting_list.html',
+                            context=data,
+                            recipient_email=lastParticipant.email,
+                            qr_data=qr_data
+                        )
+
+                        # Mark QR email as sent
+                        lastParticipant.qr_email_sent = True
+                        lastParticipant.save()
                     except Exception as e:
                         print("ERROR: Could not send email. Is mail_settings.py correct?", e)
                         response = {'message': 'Could not send email'}
                         return Response(response, status = status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         return response
-    
+
     @action(detail=False, methods=['get'])
     def count(self, request):
         participant_count = Participant.objects.all().count()
-        print(participant_count)
         return Response({'participant_count': participant_count})
-    #Not tested and not implemented properly in /api
-    def get_participant(self, request, email):
-        participant = Participant.objects.get(email=email)
-        return Response({'participant:', participant})
 
+    @action(detail=False, methods=['post'], permission_classes=[IsAuthenticated])
+    def checkin(self, request):
+        """Check in a participant using their attendance token"""
+        token = request.data.get('token')
+        if not token:
+            return Response({'message': 'Token is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            participant = Participant.objects.get(attendance_token=token)
+
+            if participant.attended:
+                return Response({
+                    'message': 'Participant already checked in',
+                    'participant': ParticipantAttendanceSerializer(participant).data
+                }, status=status.HTTP_200_OK)
+
+            participant.attended = True
+            participant.check_in_time = timezone.now()
+            participant.save()
+
+            return Response({
+                'message': 'Check-in successful',
+                'participant': ParticipantAttendanceSerializer(participant).data
+            }, status=status.HTTP_200_OK)
+
+        except Participant.DoesNotExist:
+            return Response({'message': 'Invalid token'}, status=status.HTTP_404_NOT_FOUND)
+
+    @action(detail=False, methods=['post'], permission_classes=[IsAuthenticated])
+    def undo_checkin(self, request):
+        """Undo check-in for a participant"""
+        token = request.data.get('token')
+        if not token:
+            return Response({'message': 'Token is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            participant = Participant.objects.get(attendance_token=token)
+
+            if not participant.attended:
+                return Response({
+                    'message': 'Participant was not checked in',
+                    'participant': ParticipantAttendanceSerializer(participant).data
+                }, status=status.HTTP_200_OK)
+
+            participant.attended = False
+            participant.check_in_time = None
+            participant.save()
+
+            return Response({
+                'message': 'Check-in undone successfully',
+                'participant': ParticipantAttendanceSerializer(participant).data
+            }, status=status.HTTP_200_OK)
+
+        except Participant.DoesNotExist:
+            return Response({'message': 'Invalid token'}, status=status.HTTP_404_NOT_FOUND)
+
+    @action(detail=False, methods=['get'])
+    def verify(self, request):
+        """Verify an attendance token and return participant info"""
+        token = request.query_params.get('token')
+        if not token:
+            return Response({'message': 'Token is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            participant = Participant.objects.get(attendance_token=token)
+            return Response({
+                'valid': True,
+                'participant': ParticipantAttendanceSerializer(participant).data
+            }, status=status.HTTP_200_OK)
+
+        except Participant.DoesNotExist:
+            return Response({'valid': False, 'message': 'Invalid token'}, status=status.HTTP_404_NOT_FOUND)
+
+    @action(detail=False, methods=['get'])
+    def attendance_stats(self, request):
+        """Get attendance statistics for all events"""
+        program_id = request.query_params.get('program_id')
+
+        if program_id:
+            # Statistics for specific program
+            participants = Participant.objects.filter(event=program_id)
+            total = participants.count()
+            attended = participants.filter(attended=True).count()
+            not_attended = total - attended
+
+            return Response({
+                'program_id': program_id,
+                'total_registered': total,
+                'attended': attended,
+                'not_attended': not_attended,
+                'attendance_rate': (attended / total * 100) if total > 0 else 0
+            })
+        else:
+            # Overall statistics
+            all_participants = Participant.objects.all()
+            total = all_participants.count()
+            attended = all_participants.filter(attended=True).count()
+
+            # Per-program breakdown
+            programs = Program.objects.all()
+            program_stats = []
+            for program in programs:
+                program_participants = all_participants.filter(event=program)
+                program_total = program_participants.count()
+                program_attended = program_participants.filter(attended=True).count()
+
+                program_stats.append({
+                    'program_id': program.id,
+                    'program_name': program.header,
+                    'total_registered': program_total,
+                    'attended': program_attended,
+                    'not_attended': program_total - program_attended,
+                    'attendance_rate': (program_attended / program_total * 100) if program_total > 0 else 0
+                })
+
+            return Response({
+                'overall': {
+                    'total_registered': total,
+                    'attended': attended,
+                    'not_attended': total - attended,
+                    'attendance_rate': (attended / total * 100) if total > 0 else 0
+                },
+                'by_program': program_stats
+            })
+
+    @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
+    def send_qr_preview(self, request):
+        """Preview how many QR code emails would be sent for an event"""
+        program_id = request.query_params.get('program_id')
+        if not program_id:
+            return Response({'message': 'program_id is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            program = Program.objects.get(id=program_id)
+        except Program.DoesNotExist:
+            return Response({'message': 'Program not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Get confirmed participants (first maxRegistered by id order)
+        all_participants = list(program.participant_set.all().order_by('id'))
+        confirmed_participants = all_participants[:program.maxRegistered] if program.maxRegistered else all_participants
+
+        # Filter to those who haven't received QR email
+        pending_qr = [p for p in confirmed_participants if not p.qr_email_sent]
+
+        return Response({
+            'program_id': program_id,
+            'program_name': program.header,
+            'total_confirmed': len(confirmed_participants),
+            'pending_qr_count': len(pending_qr),
+            'already_sent_count': len(confirmed_participants) - len(pending_qr)
+        })
+
+    @action(detail=False, methods=['post'], permission_classes=[IsAuthenticated])
+    def send_qr_emails(self, request):
+        """Send QR code emails to confirmed participants who haven't received them"""
+        program_id = request.data.get('program_id')
+        if not program_id:
+            return Response({'message': 'program_id is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            program = Program.objects.get(id=program_id)
+        except Program.DoesNotExist:
+            return Response({'message': 'Program not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Get confirmed participants who need QR emails
+        all_participants = list(program.participant_set.all().order_by('id'))
+        confirmed_participants = all_participants[:program.maxRegistered] if program.maxRegistered else all_participants
+        pending_qr = [p for p in confirmed_participants if not p.qr_email_sent]
+
+        sent_count = 0
+        failed_count = 0
+        errors = []
+
+        for participant in pending_qr:
+            try:
+                data = {
+                    'name': participant.name,
+                    'email': participant.email,
+                    'code': participant.code,
+                    'header': program.header,
+                    'place': program.place,
+                    'timeStart': format_datetime(
+                        datetime.fromtimestamp(program.timeStart + 3600),
+                        "EEEE dd. MMMM, 'klokken' HH:mm",
+                        locale='nb_NO'
+                    ),
+                    'current_year': datetime.now().year,
+                }
+
+                send_email_with_qr(
+                    subject='Nettverksdagene - Din QR-kode for ' + program.header,
+                    template_name='registered_email.html',
+                    context=data,
+                    recipient_email=participant.email,
+                    qr_data=str(participant.attendance_token)
+                )
+
+                participant.qr_email_sent = True
+                participant.save()
+                sent_count += 1
+
+            except Exception as e:
+                failed_count += 1
+                errors.append({
+                    'participant_id': participant.id,
+                    'email': participant.email,
+                    'error': str(e)
+                })
+
+        return Response({
+            'sent': sent_count,
+            'failed': failed_count,
+            'errors': errors if errors else None
+        }, status=status.HTTP_200_OK if failed_count == 0 else status.HTTP_207_MULTI_STATUS)
+
+
+class InfoboxViewSet(viewsets.ModelViewSet):
+    serializer_class = InfoboxSerializer
+    queryset = Infobox.objects.all()
+
+    def create(self, request, *args, **kwargs):
+        # If there's already one infobox, update it instead of creating a new
+        existing = Infobox.objects.first()
+        if existing:
+            serializer = self.get_serializer(existing, data=request.data, partial=True)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        # Otherwise, fall back to normal create (first time only)
+        return super().create(request, *args, **kwargs)
+
+
+class FAQViewSet(viewsets.ModelViewSet):
+    queryset = FAQ.objects.all()
+    serializer_class = FAQserializer

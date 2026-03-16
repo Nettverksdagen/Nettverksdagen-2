@@ -15,3 +15,15 @@ services:
       - postgres
     volumes:
       - ./api:/api
+
+  frontend:
+    build:
+      context: ./frontend
+      target: base
+    ports:
+      - "8080:8080"
+    command: ["npm", "run", "test"]
+    volumes:
+      - ./frontend/src:/frontend/src
+      - ./frontend/static:/frontend/static
+      - ./frontend/test:/frontend/test

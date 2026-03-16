@@ -2,6 +2,7 @@ from django.db import models
 from django.core.mail import send_mail
 from rest_framework.response import Response
 from rest_framework import status
+import uuid
 
 SUMMER_INTERNSHIP = 'Sommerjobb'
 FULL_TIME_POSITION = 'Fast stilling'
@@ -24,13 +25,25 @@ PARTNER = 'Samarbeidspartner'
 GOLD = 'Gull'
 SILVER = 'Sølv'
 BRONZE = 'Bronse'
+STARTUP = 'Startup'
 
 LEVELTYPECHOICE = (
     (MAIN_PARTNER, MAIN_PARTNER),
     (PARTNER, PARTNER),
     (GOLD, GOLD),
     (SILVER, SILVER),
-    (BRONZE, BRONZE)
+    (BRONZE, BRONZE),
+    (STARTUP, STARTUP)
+)
+
+SPONSOR_MAIN = 'Hovedsponsor'
+SPONSOR_COFFEE = 'Kaffesponsor'
+SPONSOR_OTHER = 'Annen sponsor'
+
+SPONSORTYPECHOICE = (
+    (SPONSOR_MAIN, SPONSOR_MAIN),
+    (SPONSOR_COFFEE, SPONSOR_COFFEE),
+    (SPONSOR_OTHER, SPONSOR_OTHER)
 )
 
 DAYS_NONE = 'Ingen dager'
@@ -53,7 +66,8 @@ class Listing(models.Model):
     deadline = models.DateField(default=None, blank=True, null=True)
     logo_uri = models.CharField(max_length=250)
     type = models.CharField(max_length=250, choices=LISTINGTYPECHOICE, default=OTHER_POSITION)
-    listing_url = models.CharField(max_length=250)
+    listing_url = models.CharField(max_length=250, blank=True, null=True)
+    pdf_uri = models.CharField(max_length=250, blank=True, null=True)
     city = models.CharField(max_length=250)
     internal_url = models.CharField(max_length=250, blank=True, null=True)
     content = models.TextField(blank=True, null=True, default='')
@@ -87,6 +101,7 @@ class Business(BusinessWithLogo):
 
 class Sponsor(BusinessWithLogo):
     id = models.AutoField(primary_key=True)
+    type = models.CharField(max_length=250, choices=SPONSORTYPECHOICE, default=SPONSOR_OTHER)
 
 class Form(models.Model):
     id = models.AutoField(primary_key=True)
@@ -107,6 +122,7 @@ class Program(models.Model):
     cancelEmail = models.CharField(max_length=250, blank=True, null=True)
     registrationStart = models.IntegerField(blank=True, null=True)
     registrationEnd = models.IntegerField(blank=True, null=True)
+    allowDeregistration = models.BooleanField(default=True)
 
 
 class Participant(models.Model):
@@ -114,7 +130,32 @@ class Participant(models.Model):
     event = models.ForeignKey(Program, on_delete=models.CASCADE)
     email = models.CharField(max_length=250)
     name = models.CharField(max_length=250)
+    phone = models.CharField(max_length=50)
     year = models.CharField(max_length=250)
     study = models.CharField(max_length=250)
     code = models.CharField(max_length=250)
     allergies = models.CharField(max_length=250, blank=True, default="")
+    attendance_token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    attended = models.BooleanField(default=False)
+    check_in_time = models.DateTimeField(null=True, blank=True)
+    qr_email_sent = models.BooleanField(default=False)
+
+
+class Infobox(models.Model):
+    id = models.AutoField(primary_key=True)
+    title_nb = models.CharField(max_length=250,blank=True, null=True)
+    title_en = models.CharField(max_length=250,blank=True, null=True)
+    paragraph_nb = models.CharField(max_length=10000,blank=True, null=True)
+    paragraph_en = models.CharField(max_length=10000,blank=True, null=True)
+
+
+class FAQ(models.Model):
+    id = models.AutoField(primary_key=True)
+    question_nb = models.CharField(max_length=10000)
+    question_en = models.CharField(max_length=10000)
+    answer_nb = models.CharField(max_length=10000)
+    answer_en = models.CharField(max_length=10000)
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']

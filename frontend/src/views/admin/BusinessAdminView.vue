@@ -13,30 +13,30 @@
     </b-alert>
     <b-row class="my-4">
       <div class="col-12 col-md-8">
-        <b-card header="Legg til en ny bedrift på forsiden" class="h-100">
+        <b-card :header="$t('admin.business.header')" class="h-100">
           <b-form @submit.prevent="handleSubmit">
             <b-row>
               <div class="col-12 col-md-6">
-                <b-form-group label="Firmanavn" label-for="business-name-input">
-                  <b-form-input v-model="business.name" id="business-name-input" required placeholder="Skriv inn firmanavn" ></b-form-input>
+                <b-form-group :label="$t('admin.business.companyName')" label-for="business-name-input">
+                  <b-form-input v-model="business.name" id="business-name-input" required :placeholder="$t('admin.business.companyNamePlaceholder')" ></b-form-input>
                 </b-form-group>
-                <b-form-group label="Link til nettside (må starte med https://)" label-for="website-url-input">
-                  <b-form-input type="url" v-model="business.website_url" id="website-url-input" required placeholder="Skriv inn link" @input="validateWebsiteUrl"></b-form-input>
+                <b-form-group :label="$t('admin.business.websiteUrl')" label-for="website-url-input">
+                  <b-form-input type="url" v-model="business.website_url" id="website-url-input" required :placeholder="$t('admin.business.websiteUrlPlaceholder')" @input="validateWebsiteUrl"></b-form-input>
                 </b-form-group>
-                <b-form-group label="Dager på stand" label-for="business-days-input">
+                <b-form-group :label="$t('admin.business.daysAtStand')" label-for="business-days-input">
                   <b-form-select v-model="business.days" :options="businessDays" id="business-days-input" required></b-form-select>
                 </b-form-group>
-                <b-form-group label="Standnummer" label-for="standnummer">
+                <b-form-group :label="$t('admin.business.standNumber')" label-for="standnummer">
                   <b-form-input v-model="business.standnumber" id="standnummer" type="number" required></b-form-input>
                 </b-form-group>
               </div>
               <div class="col-12 col-md-6">
-                <b-form-group label="Pakke" label-for="business-level-input">
+                <b-form-group :label="$t('admin.business.package')" label-for="business-level-input">
                   <b-form-select v-model="business.level" :options="businessLevels" id="business-level-input" required></b-form-select>
                 </b-form-group>
                 <div class="d-flex">
-                  <b-form-group class="flex-grow-1" label="Logo" label-for="business-logo">
-                    <b-form-file v-model="logoFile" :required="!editing" placeholder="Velg et bilde" id="business-logo" ref="logoFileInput" @input="uploadLogo"></b-form-file>
+                  <b-form-group class="flex-grow-1" :label="$t('admin.business.logo')" label-for="business-logo">
+                    <b-form-file v-model="logoFile" :required="!editing" :placeholder="$t('admin.business.selectImage')" id="business-logo" ref="logoFileInput" @input="uploadLogo"></b-form-file>
                   </b-form-group>
                   <image-preview :imgPreviewSrc="logoSrc" :showImgPreview="showImgPreview"></image-preview>
                 </div>
@@ -44,8 +44,8 @@
             </b-row>
             <b-row>
               <div class="col-12">
-                <b-form-group label="Tekst/info om bedrift (kan inneholde html)" label-for="business-name-input">
-                  <b-form-textarea v-model="business.text" id="business-text-textarea" required placeholder="Tekst for å presentere bedriften :)" ></b-form-textarea>
+                <b-form-group :label="$t('admin.business.textAbout')" label-for="business-name-input">
+                  <b-form-textarea v-model="business.text" id="business-text-textarea" required :placeholder="$t('admin.business.textPlaceholder')" ></b-form-textarea>
                 </b-form-group>
               </div>
               </b-row>
@@ -63,7 +63,7 @@
     </b-row>
     <b-row>
       <div class="col-12">
-        <b-card header="Bedrifter">
+        <b-card :header="$t('admin.business.listHeader')">
           <b-table class="d-none d-md-table" hover :fields="fields" :items="businesses">
             <template v-slot:cell(edit)="businesses">
               <edit-button class="mx-3" @click.native="edit(businesses.item)"></edit-button>
@@ -112,7 +112,7 @@ export default {
         logo_uri: '',
         website_url: '',
         level: null,
-        days: 'Ingen dager'
+        days: this.$t('admin.business.noDays')
       },
       logoFile: null,
       showImgPreview: false,
@@ -124,7 +124,7 @@ export default {
         heading: '',
         message: ''
       },
-      businessLevels: [{value: null, text: 'Velg en pakke'}],
+      businessLevels: [{value: null, text: this.$t('admin.business.selectPackage')}],
       businessDays: []
     }
   },
@@ -155,7 +155,7 @@ export default {
     }).catch((e) => {
       this.showAlert('error',
         'Error ' + e.response.status + ' ' + e.response.statusText,
-        'Kunne ikke lese skjema fra tjeneren. Prøv å laste siden på nytt.')
+        this.$t('admin.couldNotLoadForm'))
     })
     axios.options(process.env.VUE_APP_API_HOST + '/api/business/').then((response) => {
       this.$data.businessDays = this.$data.businessDays.concat(response.data.actions.POST.days.choices.map(
@@ -164,35 +164,35 @@ export default {
     }).catch((e) => {
       this.showAlert('error',
         'Error ' + e.response.status + ' ' + e.response.statusText,
-        'Kunne ikke lese skjema fra tjeneren. Prøv å laste siden på nytt.')
+        this.$t('admin.couldNotLoadForm'))
     })
   },
   methods: {
     handleSubmit: function () {
       axios[(this.$data.editing ? 'put' : 'post')](process.env.VUE_APP_API_HOST + '/api/business/' +
             (this.$data.editing ? this.$data.business.id + '/' : ''), this.$data.business).then((response) => {
-        this.showAlert('success', 'Suksess!', 'Bedriften er blitt ' +
-           (this.$data.editing ? 'endret.' : 'lagt ut på forsiden.'))
+        this.showAlert('success', this.$t('admin.success'), this.$t('admin.business.listHeader') + ' ' +
+           (this.$data.editing ? this.$t('admin.updated') : this.$t('admin.published')))
         this['businesses/' + (this.$data.editing ? 'updateBusiness' : 'addBusiness')](response.data)
         this.resetForm()
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
-          'Bedriften kunne ikke legges ut.')
+          this.$t('admin.business.listHeader') + ' ' + this.$t('admin.couldNotPublish'))
       })
     },
     destroy: function (business) {
-      if (!confirm('Er du sikker på at du vil slette ' + business.name + '?')) {
+      if (!confirm(this.$t('admin.confirmDelete') + ' ' + business.name + '?')) {
         return
       }
       axios.delete(process.env.VUE_APP_API_HOST + '/api/business/' +
         business.id + '/').then((response) => {
-        this.showAlert('success', 'Suksess!', 'Bedriften er blitt slettet')
+        this.showAlert('success', this.$t('admin.success'), this.$t('admin.business.listHeader') + ' ' + this.$t('admin.deleted'))
         this['businesses/deleteBusiness'](business)
       }).catch((e) => {
         this.showAlert('danger',
           'Error ' + e.response.status + ' ' + e.response.statusText,
-          'Bedriften kunne ikke slettes.')
+          this.$t('admin.business.listHeader') + ' ' + this.$t('admin.couldNotDelete'))
       })
       this.resetForm()
     },
@@ -241,7 +241,7 @@ export default {
           }
           this.showAlert('danger',
             errorTitle,
-            'Bildeopplastning feilet, prøv igjen. Kontakt IT om problemet vedvarer.')
+            this.$t('admin.imageUploadFailed'))
           this.$data.showImgPreview = false
         })
     },

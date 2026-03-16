@@ -4,7 +4,7 @@
       <div class="listingText">
         <p v-html="listing.content"></p>
         <div class="button">
-          <b-button :href="listing.listing_url" size="lg" variant="primary">{{$t('sokher')}}</b-button>
+          <b-button :href="listingHref" :target="listing.pdf_uri ? '_blank' : '_self'" size="lg" variant="primary">{{$t('sokher')}}</b-button>
         </div>
       </div>
     </b-modal>
@@ -42,6 +42,12 @@ export default {
         }
       }
       return false
+    },
+    listingHref: function () {
+      if (this.listing.pdf_uri) {
+        return this.fileserverHost + '/' + this.listing.pdf_uri
+      }
+      return this.listing.listing_url
     }
   }
 }

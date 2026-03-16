@@ -1,3 +1,4 @@
+.claude/
 .idea/
 .vscode/
 bin/
@@ -21,4 +22,3 @@ ghost/data/*
 .DS_Store
 postfix/.env
 .env
-

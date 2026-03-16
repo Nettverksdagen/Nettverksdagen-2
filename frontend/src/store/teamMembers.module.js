@@ -19,17 +19,23 @@ const actions = {
 }
 
 const getters = {
-  // Get an object of teams with their members
+  // Get an object of teams with their members, with leaders first
   teams: state => {
     let teams = {}
     for (let i = 0; i < state.all.length; i++) {
-      if (!(state.all[i].team in teams)) {
-        teams[state.all[i].team] = {
-          name: state.all[i].team,
-          members: [state.all[i]]
+      const member = state.all[i]
+
+      if (!(member.team in teams)) {
+        teams[member.team] = {
+          name: member.team,
+          members: [member]
         }
       } else {
-        teams[state.all[i].team]['members'].push(state.all[i])
+        if (member.position === 'Leder') {
+          teams[member.team]['members'].unshift(member)
+        } else {
+          teams[member.team]['members'].push(member)
+        }
       }
     }
     return teams
