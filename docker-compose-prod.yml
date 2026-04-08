@@ -50,6 +50,7 @@ services:
       - EMAIL=it@${DOMAIN}
       - URL=${DOMAIN}
       - SUBDOMAINS=${SUBDOMAINS}
+      - EXTRA_DOMAINS=studorg-nettverksdagene.iaas.ntnu.no
       - TZ=Europe/Oslo
       - VALIDATION=http
       #- STAGING=true # Uncomment this when testing
