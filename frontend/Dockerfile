@@ -9,6 +9,7 @@ RUN ["npm", "install"]
 COPY . /frontend/
 
 FROM base AS builder
+ARG DOMAIN
 ENV NODE_ENV production
 ENV VUE_APP_DOMAIN=$DOMAIN
 COPY --from=base /frontend /frontend
