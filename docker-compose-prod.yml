@@ -47,6 +47,7 @@ services:
     environment:
       - PUID=1002
       - GUID=1003
+      - DOMAIN=${DOMAIN}
       - EMAIL=it@${DOMAIN}
       - URL=${DOMAIN}
       - SUBDOMAINS=${SUBDOMAINS}
