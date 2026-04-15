@@ -277,9 +277,8 @@ export default {
         this.showAlert('success', this.$t('admin.success'), 'ProgramItem ' + this.$t('admin.deleted'))
         this['program/deleteProgramItem'](programItem)
       }).catch((e) => {
-        this.showAlert('danger',
-          'Error ' + e.response.status + ' ' + e.response.statusText,
-          'ProgramItem ' + this.$t('admin.couldNotDelete'))
+        const status = e.response ? e.response.status + ' ' + e.response.statusText : 'Network error'
+        this.showAlert('danger', 'Error ' + status, 'ProgramItem ' + this.$t('admin.couldNotDelete'))
       })
       this.resetForm()
       setTimeout(() => {
