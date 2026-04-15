@@ -22,22 +22,22 @@ restore() {
 start() {
 	#git reset --hard origin/master
 	git pull --ff-only
-	docker compose -f docker-compose-prod.yml up --build --detach
+	docker compose -f docker-compose-test.yml up --build --detach
 }
 
 stop() {
 	local backup_time="$(backup)"
-	docker compose -f docker-compose-prod.yml down --volumes &> /dev/null
+	docker compose -f docker-compose-test.yml down --volumes &> /dev/null
 	echo "$backup_time"
 }
 
 restart() {
 	#git reset --hard origin/master
 	git pull --ff-only
-	docker compose -f docker-compose-prod.yml build --pull
+	docker compose -f docker-compose-test.yml build --pull
 	local backup_time="$(backup)"
-	docker compose -f docker-compose-prod.yml down --volumes
-	docker compose -f docker-compose-prod.yml up --build --detach
+	docker compose -f docker-compose-test.yml down --volumes
+	docker compose -f docker-compose-test.yml up --build --detach
 	sleep 10
 	restore "$backup_time"
 }
